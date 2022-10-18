@@ -1,14 +1,14 @@
 ---
 layout: post
 title:  "The Quest"
-date:   2022-10-19 11:30:00 -0700
+date:   2022-10-18 11:30:00 -0700
 categories: poetry the-ring-and-the-cup
 ---
 
 This is an excerpt from an epic poem I was working on years ago.
 You can probably find it elsewhere online.
 
-<pre class="poetry">
+{% highlight poetry %}
 war lost, Two was exiled and turned to banditry
 where he assailed souls from all sides
 
@@ -40,4 +40,4 @@ the weighty load you carry, wealth or burning coal
 
 all sorrow then - just dust of men, thunder
 the beating of the heart and - the singing soul
-</pre>
+{% endhighlight %}

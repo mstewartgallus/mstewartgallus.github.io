@@ -1,1 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-18T11:57:12-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Molossus Spondee</title><subtitle>estoric poetry, occultism, weird trans category theory software stuff</subtitle><entry><title type="html">First post</title><link href="http://localhost:4000/other/2022/10/17/welcome-to-jekyll.html" rel="alternate" type="text/html" title="First post" /><published>2022-10-17T19:13:05-07:00</published><updated>2022-10-17T19:13:05-07:00</updated><id>http://localhost:4000/other/2022/10/17/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/other/2022/10/17/welcome-to-jekyll.html">&lt;p&gt;Hello, this is my first post&lt;/p&gt;</content><author><name></name></author><category term="other" /><summary type="html">Hello, this is my first post</summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-18T15:14:42-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Molossus Spondee</title><subtitle>estoric poetry, occultism, weird trans category theory software stuff</subtitle><entry><title type="html">The Quest</title><link href="http://localhost:4000/poetry/the-ring-and-the-cup/2022/10/18/the-quest.html" rel="alternate" type="text/html" title="The Quest" /><published>2022-10-18T11:30:00-07:00</published><updated>2022-10-18T11:30:00-07:00</updated><id>http://localhost:4000/poetry/the-ring-and-the-cup/2022/10/18/the-quest</id><content type="html" xml:base="http://localhost:4000/poetry/the-ring-and-the-cup/2022/10/18/the-quest.html">&lt;p&gt;This is an excerpt from an epic poem I was working on years ago.
+You can probably find it elsewhere online.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-poetry&quot; data-lang=&quot;poetry&quot;&gt;war lost, Two was exiled and turned to banditry
+where he assailed souls from all sides
+
+till one day dreaming Two&apos;s heart rose up
+and sleeping in a cave he had a dream
+
+lift up, take up, stand up, young son, lost one, lost son
+
+go seek the ring - find the cup, rise up young son
+you live today - your heart beats still - and still sings on
+
+for none can harm but what you sing, the heart you give
+for bliss or ill this is your life _
+
+and you choose how your story ends - not the knife
+for hell or heaven, judgement day or angel&apos;s song 
+
+no prison gate nor plague nor pain shall bar
+the mercy of the court - stands uncontested
+
+Two find the cup and ring, the treasure that I sing
+and keep on - and on and on, for me, for you
+
+all men die, all churches crumble - all this shall fall
+the weight and measure of so much dross - this all 
+
+just heart and soul - song and word and breath redeem
+the weighty load you carry, wealth or burning coal
+
+all sorrow then - just dust of men, thunder
+the beating of the heart and - the singing soul&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name></name></author><category term="poetry" /><category term="the-ring-and-the-cup" /><summary type="html">This is an excerpt from an epic poem I was working on years ago. You can probably find it elsewhere online.</summary></entry><entry><title type="html">First post</title><link href="http://localhost:4000/other/2022/10/17/welcome-to-jekyll.html" rel="alternate" type="text/html" title="First post" /><published>2022-10-17T19:13:05-07:00</published><updated>2022-10-17T19:13:05-07:00</updated><id>http://localhost:4000/other/2022/10/17/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/other/2022/10/17/welcome-to-jekyll.html">&lt;p&gt;Hello, this is my first post&lt;/p&gt;</content><author><name></name></author><category term="other" /><summary type="html">Hello, this is my first post</summary></entry></feed>
