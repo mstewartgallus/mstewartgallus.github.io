@@ -1,16 +1,15 @@
 ---
 layout: post
 title:  "The Slow Rot"
-date:   2022-10-19 10:00:00 -0700
+date:   2022-10-18 18:32:00 -0700
 categories: poetry the-slow-rot 2019
 ---
 
 Very old old poem I made from 2019. You can find it online probably
 elsewhere.
 
-<article class="poetry">
+{% poetry %}
 <h2>The Slow Rot</h2>
-
 The slow rot
 lived or died, it's hard to tell
 And fires lost away / down to hell
@@ -42,4 +41,5 @@ Hands deep pocketed inside his guts
 The thief struck with cuts and cuts
 And heart in hand took torch to scour
 So doctor kills doctor kills doctor's power!
-</article>
+{% endpoetry %}
+
