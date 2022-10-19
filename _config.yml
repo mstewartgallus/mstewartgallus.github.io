@@ -26,6 +26,7 @@ baseurl: ""
 url: "https://mstewartgallus.github.io"
 twitter_username: MSpondee
 github_username: mstewartgallus
+destination: docs
 
 # Build settings
 theme: minima
