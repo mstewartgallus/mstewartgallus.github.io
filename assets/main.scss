@@ -3,6 +3,8 @@
 
 @import "{{ site.theme }}";
 
-.post-title {
-    text-transform: uppercase ;
-}
+.site-header { border-bottom: initial ; }
+.site-footer { border-top: initial ; }
+.site-header { text-transform: lowercase ; }
+.post-link, .post-title { text-transform: uppercase ; }
+.post-list-heading, .footer-heading , .contact-list .p-name { display: none ; }
