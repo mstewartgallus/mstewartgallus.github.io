@@ -23,9 +23,9 @@ module Jekyll
       stanzas
     end
 
-    def convert(content)
+    def tohtml(stanzas)
       output = ""
-      parse(content).each do |stanza|
+      stanzas.each do |stanza|
         output << "<p>"
 
         start = true
@@ -39,6 +39,10 @@ module Jekyll
         output << "</p>"
       end
       output
+    end
+
+    def convert(content)
+      tohtml(parse(content))
     end
   end
 end
