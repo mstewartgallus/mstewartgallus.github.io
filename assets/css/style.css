@@ -1,8 +1,0 @@
----
----
-
-@import "{{ site.theme }}";
-
-pre .poetry {
-    font-family: inherit ;
-}

@@ -8,7 +8,9 @@ categories: poetry the-slow-rot 2019
 Very old old poem I made from 2019. You can find it online probably
 elsewhere.
 
-{% highlight poetry %}
+<article class="poetry">
+<h2>The Slow Rot</h2>
+
 The slow rot
 lived or died, it's hard to tell
 And fires lost away / down to hell
@@ -40,4 +42,4 @@ Hands deep pocketed inside his guts
 The thief struck with cuts and cuts
 And heart in hand took torch to scour
 So doctor kills doctor kills doctor's power!
-{% endhighlight %}
+</article>
