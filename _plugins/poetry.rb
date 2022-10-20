@@ -26,17 +26,13 @@ module Jekyll
     def tohtml(stanzas)
       output = ""
       stanzas.each do |stanza|
-        output << "<p>"
+        output << '<ol class="stanza">'
 
-        start = true
         stanza.each do |line|
-          if not start then
-            output << "<br />"
-          end
-          start = false
-          output << line
+          output << '<li class="line">' << line << '</li>'
         end
-        output << "</p>"
+
+        output << '</ol>'
       end
       output
     end

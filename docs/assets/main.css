@@ -284,4 +284,6 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-list-heading, .footer-heading { display: none; }
 
+.stanza { margin-left: 0; list-style-type: none; text-indent: -20px; padding-left: 20px; }
+
 /*# sourceMappingURL=main.css.map */
