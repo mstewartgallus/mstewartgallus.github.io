@@ -1,0 +1,48 @@
+---
+layout: poem
+title: Gacc/Gock
+date: 2022-10-19 21:40 -0700
+categories: prose 2022
+---
+
+So I was idly browsing social media and hugging my blahaj in bed when
+I saw my mutuals' post doing numbers on gacc/gock.
+
+gacc/gock
+
+The social media app for transbians by transbians. Clone an existing
+app but for a niche subgroup like college students or mentally ill men
+in dresses. Then expand. Or given the predilections of those on the
+platform inflate.
+
+The eternal recurrence. If a demon appeared before you and told you
+"all that was shall be again" would you cringe or declare yourself a
+God? The Nietzschean ubermensch is here and she is a lolcow.
+
+So I was staring at a time lapse of my friend's supernumerary butt
+hole, an abscess drained last month ago. I suppose this was what
+Zhaungzhi meant by the pipes of heaven and earth. I had sworn a blood
+oath to stay off the chats but I suppose one little peek couldn't
+hurt. The familiar cacophony overcame me as a vortex of fuck sucked me
+in.
+
+Typically I used a katana but the current meta favored a Mosin
+Nagant. The dueling subprogram of the network was old, elegant and
+endlessly broken. The latest patches only try to contain the worst of
+the chaos. I should know as the maintainer.
+
+The easiest way to find information is to get dirty. I hit the streets
+and greedily scarfed down the cigarette butts and needles littered
+about. Hey it's VR they're just bytes! Gradually I picked up an acrid
+trail.
+
+Amongst the usual forums I found a black mass with a leaking
+stoma. Wendigo. I walked in chewing on one last cigarette butt.
+
+"Hey it's a genuine exploit!" I explained. "They never intended you to
+use cigarettes like this so it leaks metadata like crazy."
+
+I took another drink of coffee. It didn't wash the taste out of my
+mouth but it helped to pretend it did.
+
+Anon noted "uhuh I understood a bit of that."

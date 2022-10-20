@@ -1,0 +1,47 @@
+---
+layout: poem
+title: Good Boy
+date: 2022-10-19 21:41 -0700
+categories: prose 2022
+---
+
+I was flush with good boy points from a recent contract with mama so I
+decided to treat myself. Mama said if I do well with a practice gf I
+could even get a real girl sometime!
+
+Chrome display cryocases of black hoodied models lined the room.
+
+At the depot running the counter was a lateshit twinkhon sales model
+in a black suit. I estimated about two more years of viable use. One
+more year if used roughly.
+
+"We have a wide variety of models available dear"
+
+"I don't care. I want a youngshit BDD passoid boymoder!"
+
+"Quite the popular option lately but have you considered other models?
+The lateshit gigahon roastie has quite a dedicated following."
+
+"I want a smol pp girl boymoder not a toastie roastie!"
+
+"Not every BDD passoid is a youngshit you know? We have quite a few
+luckshit twinkhon futchboys waiting for a good home. How many good boy
+points do you even have dear? You're looking for quite the expensive
+option you know?"
+
+I leaned my big boned man padding over the counter.
+
+"I WANT A BDD BOYMODER PASSOID SMALL PP GIRL" I said through gritted
+teeth.
+
+Omae was getting unwise.
+
+I pulled out a bag of McDonald's takeout from my voluminous
+trenchcoat. All around the room models in their cryocases turned their
+heads to look.
+
+"Oh honey, you're a big boy! You wouldn't dare cause an incident would
+you?"
+
+"You try me and these chicken nuggies show just how much of a big boy
+I am"
