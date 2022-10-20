@@ -43,7 +43,138 @@
   </header>
 
   <div class="post-content">
-    <p>estoric poetry, occultism, weird trans category theory software stuff</p>
+    <h3 id="hi-there">Hi there</h3>
+
+<p>My name is Molly Stewart-Gallus but my pen name is Molossus Spondee.
+This is my personal blog mostly for posting silly poetry.</p>
+
+<p>I guess right now I’m just working on my portfolio.</p>
+
+<p>I have personal interests in formal methods but mostly have
+professional experience in web development. I’m most looking for
+stability and flexible work hours in job positions.</p>
+
+<h3 id="im-looking-for">I’m looking for</h3>
+
+<p>I have a personal interest in formal methods but mostly have
+professional experience in web development, system administration,
+advertising and analytics.  I would strongly value flexible work hours
+or part time positions and would also prioritise stability and
+work-life balance.  I don’t want to go home on Friday and get a call
+on the weekend that something is broken.</p>
+
+<h3 id="im-currently-learning">I’m currently learning</h3>
+
+<p>Lately I’ve been working on <a href="https://github.com/mstewartgallus/category-fun">formalizing a small amount of category
+theory</a> in
+<a href="https://coq.inria.fr/">Coq</a>.</p>
+
+<p>I’m playing around with type systems and formal methods right now and
+I’m hopeful category theory can help with this.  I’ve been trying to
+figure out how to make internal languages for many types of
+categories. <a href="https://github.com/mstewartgallus/doublecatrel">I’ve
+started</a> on some ideas
+to work within double categories like Rel.</p>
+
+<p>I have a hunch you can generalize graded monads and adjoint functors
+for a sort of graded <a href="https://en.wikipedia.org/wiki/Call-by-push-value">Call By Push
+Value</a> which ought
+to be useful for a compiler IR to simplify optimization.</p>
+
+<p>I got heavily into <a href="http://nlab-pages.s3.us-east-2.amazonaws.com/nlab/show/category+theory#idea">category
+theory</a>
+for a while. I am no longer convinced it is so simple to compile
+computer programs to a categorical intermediate representation.  But a
+start of an effort towards this might be <a href="https://github.com/mstewartgallus/prologish">this
+project</a> which compiles a
+continuations based language to co-closed categories in a manner dual
+to compiling the STLC to closed categories.  Basically it’s dual to
+the paper <a href="http://conal.net/papers/compiling-to-categories/">Compiling to
+categories</a> by Conal
+Elliott.  I also found tagless final style is very clean for
+parametric higher order abstract syntax.</p>
+
+<p>I have found category theory very interesting although it does have
+some weaknesses with respect to variable binding and higher category
+theory.  Category theory tends towards a very combinatorial sort of
+style which makes some things very verbose that would be much clearer
+with name binders.  Unfortunately parametric foundations allowing
+manipulation of name binders are kind of complicated.  The other big
+hurdle with category theory is higher categories: categories of
+categories.  Very quickly higher category theory gets messy to play
+around with in an actual theorem prover.  I’m not sure if these
+problems are fundamental or someone smarter than me can come up with
+solutions.</p>
+
+<h3 id="in-the-past">In the past</h3>
+
+<p>I’ve also been playing with technologies like <a href="https://redex.racket-lang.org/">PLT
+Redex</a> and
+<a href="http://astampoulis.github.io/makam/">Makam</a> (a dialect of <a href="https://www.lix.polytechnique.fr/~dale/lProlog/">Lambda
+Prolog</a>) for rapid
+prototyping of programming language interpreters.</p>
+
+<p>You can see a tiny demo language in PLT Redex
+<a href="https://github.com/mstewartgallus/playground/blob/master/coexp.rkt">here</a></p>
+
+<p>A little language in Makam
+<a href="https://github.com/mstewartgallus/coc-makam">here</a> . Makam works
+great for simply typed languages but full dependent types are <strong>way
+too</strong> complicated in any implementation.</p>
+
+<p>I got interested in compilers and interpreters for a while. I played a
+bit with effect systems like Call-By-Push-Value (basically ANF) and
+simple functional optimizations:
+<a href="https://github.com/mstewartgallus/hs-callbypushvalue">https://github.com/mstewartgallus/hs-callbypushvalue</a>
+<a href="https://github.com/mstewartgallus/compiler-2">https://github.com/mstewartgallus/compiler-2</a></p>
+
+<p>I also played a <a href="https://github.com/mstewartgallus/peacod">little bit</a>
+with <a href="https://www.graalvm.org/">GraalVM</a> but I found it too
+complicated for initial experimentation.  Also GraalVM had troubles
+with tail recursion at the time which made it hard to implement
+functional languages.  <a href="https://github.com/ekmett/cadenza">Cadenza</a>
+for example went through hoops I didn’t want to bother with to
+optimize tail calls.</p>
+
+<p>I got heavily into low-level details of the JVM for a while.  I
+learned to <a href="https://github.com/mstewartgallus/heaps">use</a>
+<a href="https://bytebuddy.net/">ByteBuddy</a> and
+<a href="https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic">invokedynamic</a>
+to insert dynamically optimizable spots into a Java program.</p>
+
+<p>I got heavily into lock-free programming for a while and
+<a href="https://github.com/mstewartgallus/stacklock">played</a> with making a
+more efficient unfair lock implementation based on MCS Locks that uses
+a stack instead of a queue. I also tried formalizing a little bit of
+it in <a href="https://lamport.azurewebsites.net/tla/high-level-view.html">TLA+</a>.</p>
+
+<p>In the past I got into hard real-time and safety critical stuff for a
+while. I
+<a href="https://github.com/mstewartgallus/linted/tree/master">experimented</a>
+with breaking a program into separate processes some of which are
+verifiable in a safe dialect of <a href="https://www.adacore.com/about-spark">Ada
+SPARK</a>. The lock-free queue is
+probably broken.  I didn’t really get how Ada SPARK was meant to
+handle concurrency.</p>
+
+<h3 id="contact-me">Contact Me</h3>
+
+<p>Please reach me at mollystewartgallus@gmail.com .</p>
+
+<h3 id="see-also">See Also</h3>
+
+<p>You may want to look into:</p>
+
+<ul>
+  <li><a href="https://www.linkedin.com/in/mstewartgallus/">LinkedIn</a></li>
+  <li><a href="https://github.com/mstewartgallus">GitHub</a></li>
+</ul>
+
+<h3 id="addendum">Addendum</h3>
+
+<p>I am a trans woman. I used to use a different name and email. These
+details may pop up in older work.  I do not use the name or email
+anymore.</p>
 
   </div>
 
