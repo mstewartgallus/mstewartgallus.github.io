@@ -35,3 +35,5 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 gem "webrick", "~> 1.7"
 
 gem "jekyll-compose", "~> 0.12.0"
+
+gem "io-wait", "~> 0.2.3"
