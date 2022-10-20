@@ -284,6 +284,10 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-list-heading, .footer-heading { display: none; }
 
-.stanza { margin-left: 0; list-style-type: none; text-indent: -20px; padding-left: 20px; }
+.poem { text-align: center; }
+
+.stanzas { display: inline-block; text-align: left; }
+
+.stanza { margin-left: 0; list-style-type: none; text-indent: -4em; padding-left: 4em; }
 
 /*# sourceMappingURL=main.css.map */

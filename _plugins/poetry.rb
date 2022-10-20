@@ -24,7 +24,7 @@ module Jekyll
     end
 
     def tohtml(stanzas)
-      output = ""
+      output = '<div class="poem"><div class="stanzas">'
       stanzas.each do |stanza|
         output << '<ol class="stanza">'
 
@@ -34,6 +34,7 @@ module Jekyll
 
         output << '</ol>'
       end
+      output << '</div></div>'
       output
     end
 
