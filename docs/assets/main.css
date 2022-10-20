@@ -282,6 +282,6 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-link, .post-title { text-transform: uppercase; }
 
-.post-list-heading, .footer-heading, .contact-list .p-name { display: none; }
+.post-list-heading, .footer-heading { display: none; }
 
 /*# sourceMappingURL=main.css.map */
