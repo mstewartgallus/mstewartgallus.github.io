@@ -280,7 +280,7 @@ table td { border: 1px solid #e8e8e8; }
 
 .site-header { text-transform: lowercase; }
 
-.post-link, .post-title { text-transform: uppercase; }
+.post-link, .post-title { font-variant: small-caps; }
 
 .post-list-heading, .footer-heading { display: none; }
 
