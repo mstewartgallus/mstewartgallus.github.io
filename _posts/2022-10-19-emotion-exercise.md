@@ -1,5 +1,5 @@
 ---
-layout: poem
+layout: prose
 title: Emotion Exercise
 date: 2022-10-19 17:14 -0700
 categories: prose 2019
