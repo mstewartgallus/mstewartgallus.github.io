@@ -10,19 +10,26 @@
 
 .post-list-heading, .footer-heading { display: none ; }
 
+.stanzas, .stanza {
+    // deformat ordered lists
+    margin: 0 ;
+    list-style-type: none ;
+}
+
 // center poems
-.poem { text-align: center ; }
+.poem {
+    text-align: center;
+}
+
 .stanzas {
     display: inline-block ;
-    text-align: left ;
+    text-align: left;
 }
 
 .stanza {
-    // deformat ordered lists
-    margin-left: 0 ;
-    list-style-type: none ;
-
     // Tab indent hanging lines
     text-indent: -4em ;
     padding-left: 4em ;
 }
+
+.stanza { margin-bottom: 15px; }
