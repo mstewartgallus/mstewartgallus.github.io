@@ -10,6 +10,11 @@
 
 .post-list-heading, .footer-heading { display: none ; }
 
+.post-list {
+    max-height: 70vh ;
+    overflow-y: scroll ;
+}
+
 .stanzas, .stanza {
     // deformat ordered lists
     margin: 0 ;
