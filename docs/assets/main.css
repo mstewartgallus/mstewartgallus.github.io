@@ -275,11 +275,17 @@ table td { border: 1px solid #e8e8e8; }
 
 .highlight .il { color: #099; }
 
-.site-header { border-bottom: initial; }
-
-.site-footer { border-top: initial; }
+.site-header, .site-footer, .site-nav { border: initial; }
 
 .site-header { text-transform: lowercase; }
+
+.site-header { min-height: 30px; }
+
+.site-header .wrapper { position: absolute; top: 0; left: 0; right: 0; }
+
+.site-nav { text-align: left; }
+
+.page-content { padding: 0; }
 
 .post-link, .post-title { font-variant: small-caps; }
 
@@ -288,8 +294,6 @@ table td { border: 1px solid #e8e8e8; }
 .post-content { margin-bottom: 0; }
 
 .post-nav { margin-top: 30px; }
-
-.rss-subscribe { display: block; float: right; }
 
 .prev { float: left; }
 
