@@ -285,17 +285,23 @@ table td { border: 1px solid #e8e8e8; }
 
 .post-list-heading, .footer-heading { display: none; }
 
+.post-content { margin-bottom: 0; }
+
+.post-nav { margin-top: 30px; }
+
 .rss-subscribe { display: block; float: right; }
 
 .prev { float: left; }
 
 .next { float: right; }
 
-.post-meta { text-align: right; }
+.poem .post-content { display: inline-block; }
 
-.post-header .post-meta { text-align: initial; }
+.post-meta { text-align: left; }
 
 .p-author::before { content: "• "; }
+
+.poem .p-author::before { content: "– "; }
 
 .stanzas, .stanza { margin: 0; list-style-type: none; }
 
