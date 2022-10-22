@@ -10,10 +10,10 @@
 
 .post-list-heading, .footer-heading { display: none ; }
 
-.post-list {
-    max-height: 70vh ;
-    overflow-y: scroll ;
-}
+.rss-subscribe { display: block ; float: right ; }
+
+.prev { float: left }
+.next { float: right }
 
 .stanzas, .stanza {
     // deformat ordered lists
