@@ -294,4 +294,8 @@ table td { border: 1px solid #e8e8e8; }
 
 .stanza { margin-bottom: 15px; }
 
+hr { text-align: center; border: none; }
+
+hr::before { content: "***"; }
+
 /*# sourceMappingURL=main.css.map */

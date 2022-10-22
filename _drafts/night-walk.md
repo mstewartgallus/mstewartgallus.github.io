@@ -1,13 +1,12 @@
 ---
-layout: poem
+layout: prose
 title: Night Walk
-date: 2022-10-19 21:41 -0700
 categories: prose
 ---
-
 Ollie pulled down his long sleeved shirt and stared at his pasty dry
 arms in the bathroom mirror. The moles were climbing along his
 arm. One mole in particular was cracked and infected.
+
 
 Ollie plugged the bathtub and turned off the lights. Ollie slowly
 pulled himself into the bathtub and once seated turned on the

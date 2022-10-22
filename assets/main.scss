@@ -18,12 +18,12 @@
 
 // center poems
 .poem {
-    text-align: center;
+    text-align: center ;
 }
 
 .stanzas {
     display: inline-block ;
-    text-align: left;
+    text-align: left ;
 }
 
 .stanza {
@@ -32,4 +32,12 @@
     padding-left: 4em ;
 }
 
-.stanza { margin-bottom: 15px; }
+.stanza { margin-bottom: 15px ; }
+
+hr {
+    text-align: center ;
+    border: none ;
+}
+hr::before {
+    content: "***" ;
+}
