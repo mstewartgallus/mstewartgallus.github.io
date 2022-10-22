@@ -25,7 +25,6 @@ description: >-
   mostly poetry right now
 baseurl: ""
 url: "https://mstewartgallus.github.io"
-destination: docs
 
 theme: minima
 plugins:
