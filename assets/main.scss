@@ -15,6 +15,10 @@
 .prev { float: left }
 .next { float: right }
 
+.post-meta { text-align: right ; }
+.post-header .post-meta { text-align: initial ; }
+.p-author::before { content: "• " ; }
+
 .stanzas, .stanza {
     // deformat ordered lists
     margin: 0 ;
@@ -22,9 +26,7 @@
 }
 
 // center poems
-.poem {
-    text-align: center ;
-}
+.poem { text-align: center ; }
 
 .stanzas {
     display: inline-block ;
@@ -45,4 +47,5 @@ hr {
 }
 hr::before {
     content: "***" ;
+    color: #828282 ;
 }
