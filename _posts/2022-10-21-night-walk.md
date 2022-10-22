@@ -33,9 +33,9 @@ scissors away in the drawer beneath the countertop.
 ***
 
 Downtown, I sip a cup of coffee comatose in a chain coffee shop until
-near midnight. It's very quiet and there no traffic on the street. You
-can walk across the road pretty freely and there's a pleasant feeling
-like soft cotton in your head.
+near midnight. It's very quiet and there's no traffic on the
+street. You can walk across the road pretty freely and there's a
+pleasant feeling like soft cotton in your head.
 
 In the dark in the bad parts of town out among the street people I
 start to feel a little alive.
