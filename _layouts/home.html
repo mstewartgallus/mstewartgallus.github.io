@@ -16,7 +16,10 @@ layout: default
 
     <ul class="post-list">
       {%- for post in site.posts -%}
-      <li>
+      {% assign categories = post.categories %}
+      <li class="{%- for category in categories -%}
+                 {{ category | prepend: " category-" }}
+                 {%- endfor -%}">
         {%- assign date_id_format = "%Y-%m-%d" -%}
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <a href="#{{ post.date | date: date_id_format }}">
