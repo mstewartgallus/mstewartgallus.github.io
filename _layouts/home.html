@@ -33,6 +33,9 @@ layout: default
           {% for category in post.categories %}
           • <span>{{ category }}</span>
           {% endfor %}
+          {% for tag in post.tags %}
+          • <span>{{ tag }}</span>
+          {% endfor %}
         </p>
         </small>
 

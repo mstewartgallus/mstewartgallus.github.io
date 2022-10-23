@@ -1,7 +1,7 @@
 ---
 title: Emotion Exercise
 date: 2022-10-19 17:14 -0700
-categories: prose 2019
+tags: "2019"
 ---
 
 I feel a great heaviness about my eyes and tension is jamming needles in my jaw.
