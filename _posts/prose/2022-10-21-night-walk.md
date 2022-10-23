@@ -1,7 +1,5 @@
 ---
-layout: prose
 title: Night Walk
-categories: prose
 date: 2022-10-21 19:00 -0700
 ---
 Ollie pulled down his long sleeved shirt and stared at his pasty dry

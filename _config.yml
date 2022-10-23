@@ -19,7 +19,6 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Molossus Spondee
-author: Molossus Spondee
 email: molossusspondee@gmail.com
 description: >-
   mostly poetry right now
@@ -39,3 +38,30 @@ minima:
     github: mstewartgallus
     stackoverflow: "Molossus Spondee"
     linkedin: mstewartgallus
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      author: "Molly Stewart-Gallus"
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  -
+    scope:
+      path: "_posts/poem"
+      type: "posts"
+    values:
+      layout: "poem"
+      categories: "poetry"
+  -
+    scope:
+      path: "_posts/prose"
+      type: "posts"
+    values:
+      layout: "prose"
+      categories: "prose"

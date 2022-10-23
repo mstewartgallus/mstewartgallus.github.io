@@ -13,7 +13,7 @@ layout: default
       {{ page.date | date: date_format }}
     </time>
     </a>
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author | default: site.author }}</span></span>
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
     {% for category in page.categories %}
     •
     <span>{{ category }}</span>
