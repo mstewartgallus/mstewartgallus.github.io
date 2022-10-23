@@ -16,21 +16,27 @@ layout: default
 
     <ul class="post-list">
       {%- for post in site.posts -%}
-      {% assign categories = post.categories %}
-      <li class="{%- for category in categories -%}
+      <li class="{%- for category in post.categories -%}
                  {{ category | prepend: " category-" }}
                  {%- endfor -%}">
         {%- assign date_id_format = "%Y-%m-%d" -%}
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        <a href="#{{ post.date | date: date_id_format }}">
-          <span class="post-meta" id="{{ post.date | date: date_id_format }}">{{ post.date | date: date_format }}</span>
-        </a>
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h3>
-        {%- if site.show_excerpts -%}
-        {{ post.excerpt }}
-        {%- endif -%}
+
+        <small>
+        <p class="post-meta">
+          <a href="#{{ post.date | date: date_id_format }}">
+            <span id="{{ post.date | date: date_id_format }}">{{ post.date | date: date_format }}</span>
+          </a>
+          {% for category in post.categories %}
+          • <span>{{ category }}</span>
+          {% endfor %}
+        </p>
+        </small>
+
+        <div class="post-excerpt">{{ post.excerpt }}</div>
       </li>
       {%- endfor -%}
     </ul>
