@@ -44,7 +44,7 @@ defaults:
     scope:
       path: ""
     values:
-      author: "Molly Stewart-Gallus"
+      author: "Molossus Spondee"
   -
     scope:
       path: ""
