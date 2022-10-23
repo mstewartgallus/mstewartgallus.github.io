@@ -57,7 +57,7 @@ defaults:
       type: "posts"
     values:
       layout: "poem"
-      categories: "poetry"
+      categories: "poem"
   -
     scope:
       path: "_posts/prose"
