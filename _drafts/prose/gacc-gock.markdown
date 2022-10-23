@@ -1,8 +1,6 @@
 ---
-layout: poem
 title: Gacc/Gock
 date: 2022-10-19 21:40 -0700
-categories: prose 2022
 ---
 
 So I was idly browsing social media and hugging my blahaj in bed when
