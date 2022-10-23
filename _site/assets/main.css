@@ -281,7 +281,9 @@ table td { border: 1px solid #e8e8e8; }
 
 .site-header { min-height: 30px; }
 
-.site-header .wrapper { position: absolute; top: 0; left: 0; right: 0; }
+.site-header .wrapper div { position: relative; }
+
+.site-nav { position: absolute; top: 0; right: 0; }
 
 .site-nav { text-align: left; }
 

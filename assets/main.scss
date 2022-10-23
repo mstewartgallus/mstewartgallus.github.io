@@ -5,14 +5,13 @@
 
 .site-header, .site-footer, .site-nav { border: initial ; }
 .site-header { text-transform: lowercase ; }
-.site-header {
-    min-height: 30px ;
-}
 
-.site-header .wrapper {
+.site-header { min-height: 30px ; }
+.site-header .wrapper div { position: relative ; }
+
+.site-nav {
     position: absolute ;
     top: 0 ;
-    left: 0 ;
     right: 0 ;
 }
 .site-nav { text-align: left ; }
