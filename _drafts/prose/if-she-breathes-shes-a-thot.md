@@ -1,6 +1,6 @@
 ---
 title: If she breathes she's a thot OR I was a teenage incel force femmed by a vampire
-date: 2022-10-19 18:32 -0700
+date: 2022-10-23 18:32 -0700
 ---
 
 Like a pug in an oxygen mask I lied down on the carpet by the air
@@ -129,7 +129,8 @@ I do not need to spell the content out to you do I?
 ***
 
 To cope with the pain and suicidal ideations I developed an intense
-practise of meditation.
+practise of meditation.  I was a hobbyist alchemist and found
+meditation perfectly in keeping with the great work.
 
 I found it easiest to get started with the book Meditation in Plain
 English and meditating lying down on the ground. 
@@ -138,13 +139,13 @@ I soon bought a zafu, a meditation mat, a meditation bench, a mala
 bead braclet and necklace and a small Buddha statue for a personal
 altar.
 
-My usual practice consisted of a small amount of yoga such a standing
-position to wake myself up and then proceeded to basic box breathing
+My usual practice consisted of a small amount of yoga such as standing
+tree pose to wake myself up and then proceeded to basic box breathing
 for a few minutes to calm myself down. Once sufficiently both
-energized and rested I meditated on my solar practice while in rhythm
-subvocalizing a dharani (I preferred Om Shanti Shanti Shanti.) My
-preferred meditation position being easy pose although sometimes I
-found using a meditation bench easier.
+energized and rested I meditated on my solar plexus while in rhythm
+subvocalized a dharani (I preferred Om Shanti Shanti Shanti.)  My
+preferred meditation position for my back being easy pose although
+sometimes I found using a meditation bench easier.
 
 None of this is really necessary of course. If you remember summer
 break lying on bed doing nothing just watching the blanket rise and
@@ -152,10 +153,10 @@ fall with your breath then that is meditation.
 
 The numinal is hard to explain in words.  Sometimes I felt as if I was
 moving like I was falling through a storm or a vast pressure on top of
-me as if I was buried beneath the earth.  Or there was a flickering
-red, black, yellow vast expanse behind my closed eyelids.
+me as if I was buried beneath the earth or there was a flickering red,
+black, yellow vast expanse behind my closed eyelids.
 
-Anyhow I thought for a while I was free of Must.
+I thought for a while I was free of Must.
 
 ***
 
@@ -191,9 +192,39 @@ More than once I recall I made it to a clothing store and then having
 spent the last hour in transit to the location I suddenly turned
 around and walked back home.
 
+***
+
+Another punishment of hers was an illusion. Moles expanding, decay
+creeping across the skin.
+
+***
+
 ...
 
-**
+***
+
+The other way I coped with the pain was to distract myself in the dry
+and logical. A small reprieve in the world of
+`refine (match A with | fn a B => _ end).` did a world of good.
+
+***
+
+...
+
+***
+
+Thoughts of self harm flooded me: to bang my head aginst the ground
+again and again until it exploded like a grapefruit hit with a hammer.
+
+***
+
+I did not have the strength to kill myself so I concocted a plan to
+achieve the next best thing.  I would find a homeless man, kill him
+and then turn myself in.
+
+...
+
+***
 
 ...
 
