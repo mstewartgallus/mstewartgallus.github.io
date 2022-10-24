@@ -128,6 +128,46 @@ I do not need to spell the content out to you do I?
 
 ***
 
+To cope with the pain and suicidal ideations I developed an intense
+practise of meditation.
+
+I found it easiest to get started with the book Meditation in Plain
+English and meditating lying down on the ground. 
+
+I soon bought a zafu, a meditation mat, a meditation bench, a mala
+bead braclet and necklace and a small Buddha statue for a personal
+altar.
+
+My usual practice consisted of a small amount of yoga such a standing
+position to wake myself up and then proceeded to basic box breathing
+for a few minutes to calm myself down. Once sufficiently both
+energized and rested I meditated on my solar practice while in rhythm
+subvocalizing a dharani (I preferred Om Shanti Shanti Shanti.) My
+preferred meditation position being easy pose although sometimes I
+found using a meditation bench easier.
+
+None of this is really necessary of course. If you remember summer
+break lying on bed doing nothing just watching the blanket rise and
+fall with your breath then that is meditation.
+
+The numinal is hard to explain in words.  Sometimes I felt as if I was
+moving like I was falling through a storm or a vast pressure on top of
+me as if I was buried beneath the earth.  Or there was a flickering
+red, black, yellow vast expanse behind my closed eyelids.
+
+Anyhow I thought for a while I was free of Must.
+
+***
+
+In contrary to my intent Must was delighted I engaged in meditation
+and even complimented my Mala bead bracelet and necklace.  Must said
+"They make for a pretty bitch."
+
+...
+
+
+***
+
 Must's control over my internet usage further tightened and she urged
 me to no longer see political online forums like I used to browse.  In
 her words "I was her bitch alone."  The punishment for disobeying here
@@ -150,6 +190,8 @@ agitation and trepidation.
 More than once I recall I made it to a clothing store and then having
 spent the last hour in transit to the location I suddenly turned
 around and walked back home.
+
+...
 
 **
 
