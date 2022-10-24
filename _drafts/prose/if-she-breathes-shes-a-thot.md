@@ -88,9 +88,70 @@ myself in public. Fear of this public humiliation alienated myself
 further and I no longer attended events hosted by my friends.
 
 I soon remained covered up at all times in long baggy sweaters and
-pants.
+pants. I went to great lengths to avoid my appearance and even took
+baths in the dark.
 
 ***
+
+For a few months there were no further demands. Still the pain
+continued and I fell even further into a state of fog.
+
+As a result of the constant pains administered by Must I had grown
+desensitized in the nether regions. A curious numbness had developed
+down there much like a newly killed tooth.
+
+Among other punishments Must had started to insert needles into my
+arms during the night. Shaving my arms near raw seemed to blunt the
+pain a little somehow.  So I folded shaving my body hair into my daily
+routine.
+
+***
+
+The second demand of Must was a change in the consumption of my
+internet content.  Despite the insinuations by some otherwise I had
+never been particularly interested in men.  To my eyes the average
+male porn star had always seemed rather orcish, fat and ugly in
+appearance.  So I was not discomfited at all in Must's demand I browse
+lesbian pornography.  However, I objected to the other sort of content
+Must made me peruse.
+
+Must's preferred punishment over this period of time became a sort of
+intrusive thought: a psychic repetition of Must's demands throughout
+the day at the worst moments and times. The more I tried to ignore
+Must's assertions the more demands and unbiddened images came to mind.
+
+So I developed a regular cycle of habits. I masturbated to the most
+deplorable type of content late at night over the weekend and over the
+work week suffered through a barrage of laviscious images and phrases.
+
+I do not need to spell the content out to you do I?
+
+***
+
+Must's control over my internet usage further tightened and she urged
+me to no longer see political online forums like I used to browse.  In
+her words "I was her bitch alone."  The punishment for disobeying here
+being I fell into a spiral of self-loathing and negativity. Weeks
+where I browsed my usual content sparked in me a curious rage.  I fell
+further into isolation from my friend group as I lashed out at them
+with sarcastic jibes.
+
+I think it may have been a few months later Must started ordering me
+to buy clothing.
+
+***
+
+Though I was an entirely typical man I had no particular aversion to
+crossdressing. As a matter of fact I had no real interest in clothing
+at all and saw the matter mostly as shelter from the cold.  However, I
+did find the prospect of buying clothing to set me off in nervous
+agitation and trepidation.
+
+More than once I recall I made it to a clothing store and then having
+spent the last hour in transit to the location I suddenly turned
+around and walked back home.
+
+**
 
 ...
 
