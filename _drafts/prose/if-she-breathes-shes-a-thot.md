@@ -11,7 +11,7 @@ frequented and I had to see the madness through.
 
 Besides some social justice warrior had got bent into a rant.
 
-"You have no power here" I replied. And then again "I'm already dead
+"You have no power here" I replied.  And then again "I'm already dead
 anyway pretty much"
 
 She replied "ok".
@@ -33,7 +33,7 @@ The first night when I was wanking away at 12 AM imagining my ass
 being penetrated I heard a loud buzzing sound like wasps.  I put it
 down to nerves.
 
-Steadily the phenomenon added up. A loud hum at the midnight hours.
+Steadily the phenomenon added up.  A loud hum at the midnight hours.
 When I rested before bed a sound like bells.  When I looked out one
 eye a hue of colors different from the other.
 
@@ -49,14 +49,14 @@ bridges.
 She sent me a message during the night.
 
 I woke up with a heavy weight pinning me in place.  A roiling darkness
-sat on my chest sapping all my strength away.  I tried to move or call
-for help but could not.
+sat on my chest sapping my strength away.  I tried to move or call for
+help but could not.
 
 The darkness said her name was Must.
 
-Must said she had planned to kill me but upon seeing how pathetic I
-was decided to spare me.  She had deciced to make my life a living
-hell instead.
+She said she had planned to kill me but upon seeing how pathetic I was
+decided to spare me and had decided to make my life a living hell
+instead.
 
 She explained I was her thrall now and that hell was both a physical
 place and a state of mind.  Identity was a matter of perspective.  If
@@ -74,7 +74,7 @@ or rest.  Moreover, as if by some illusion stripped away the people
 around me had transformed into puppeted corpses.  Every trivial
 interaction became an ordeal and I could no longer draw strength or
 comfort from those who I had considered friends.  I could not bear to
-meet the gazes of those around me.
+meet the hideous gazes of those around me.
 
 During the night I was compelled to roam by a manic energy.  I felt
 hot ash drawnn into my chest when I was trying to sleep and cool
@@ -88,12 +88,12 @@ The first task Must demanded of me was to hide the vanity of my flesh.
 If I was good the pain would lessen although never go away entirely.
 If I was bad the pain would increase.
 
-One of the numerous punishments Must meted out to me was a sudden
-stabbing pain in a mole on my scrotum.  By this sudden intrusion into
-my life I was made to rush to the bathroom to check if my junk was
-alright or at urgent times to fondle myself in public.  Fear of this
-public humiliation alienated myself further and I no longer attended
-events hosted by my friends.
+One of the numerous punishments meted out to me was a sudden stabbing
+pain in a mole on my scrotum.  By this sudden intrusion into my life I
+was made to rush to the bathroom to check if my junk was ok or at
+urgent times to fondle myself in public.  Fear of this public
+humiliation alienated myself further and I no longer attended events
+hosted by my friends.
 
 I soon remained covered up at all times in long baggy sweaters and
 pants.  I went to great lengths to avoid my appearance and even took
@@ -104,7 +104,7 @@ baths in the dark.
 For a few months there were no further demands.  Still the pain
 continued and I fell even further into a state of fog.
 
-As a result of the constant pains administered by Must I had grown
+As a result of the constant pains administered to me I had grown
 desensitized in my crotch.  A curious numbness developed much like a
 newly killed tooth.
 
@@ -116,11 +116,8 @@ daily routine.
 ***
 
 To cope with the pain and suicidal ideations I developed an intense
-practise of meditation.
-
-I found it easiest to get started with the book Meditation in Plain
-English and meditating lying down on the ground. 
-
+practise of meditation.  I found it easiest to get started with the
+book Meditation in Plain English and meditating lying on the ground.
 I soon bought a zafu, a meditation mat, a meditation bench, a mala
 bead braclet and necklace and a small Buddha statue for a personal
 altar.
@@ -131,9 +128,9 @@ for a few minutes to calm myself down.  Once sufficiently energized
 and rested I meditated on my solar plexus and in rhythm subvocalized a
 dharani (I preferred Om Shanti Shanti Shanti.)  My preferred
 meditation position being easy pose although sometimes I found using a
-meditation bench easier.
+meditation bench less straining.
 
-None of these accoutrements were really necessary of course.  If you
+None of these trappings were really necessary of course.  If you
 remember summer break lying on bed doing nothing just watching the
 blanket rise and fall with your breath then that is meditation.
 
