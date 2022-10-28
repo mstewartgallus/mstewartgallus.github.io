@@ -36,7 +36,7 @@ Steadily the phenomenon added up.  A loud hum at the midnight hours.
 When I rested before bed a sound like bells.  When I looked out one
 eye a hue of colors different from the other.
 
-On Thursday, during my morning commute to the library where I do
+On Thursday during my morning commute to the library where I do
 nothing in particular I was met with the sudden urge to fling myself
 off a highway overpass into the traffic below.  It was as if some worm
 wrapped around my brain had contracted and struck me with itching pain
@@ -75,9 +75,9 @@ comfort from those who I had considered friends.  I could not bear to
 meet the hideous gazes of those around me.
 
 During the night I was compelled to roam by a manic energy.  I felt
-hot ash drawnn into my chest when I was trying to sleep and cool
-relief when I walked the night.  It is oddly calming during the
-midnight hours when there is no traffic or human face to fear.
+hot ash drawn into my chest when I was trying to sleep and cool relief
+when I walked the night.  It is oddly calming during the midnight
+hours when there is no traffic or human face to fear.
 
 ***
 
