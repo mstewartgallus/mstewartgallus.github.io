@@ -307,7 +307,7 @@ table td { border: 1px solid #e8e8e8; }
 
 .p-author::before { content: "• "; }
 
-.poem .p-author::before { content: "– "; }
+.poem .p-author::before { content: none; }
 
 .stanzas, .stanza { margin: 0; list-style-type: none; }
 

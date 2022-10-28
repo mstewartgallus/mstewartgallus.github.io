@@ -33,7 +33,7 @@
 
 .post-meta { text-align: left ; }
 .p-author::before { content: "• " ; }
-.poem .p-author::before { content: "– " ; }
+.poem .p-author::before { content: none ; }
 
 .stanzas, .stanza {
     // deformat ordered lists

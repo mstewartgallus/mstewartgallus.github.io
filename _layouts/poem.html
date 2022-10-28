@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="poem post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   {%- assign date_id_format = "%Y-%m-%d" -%}
   {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 
@@ -16,7 +16,7 @@ layout: default
       </div>
 
       <p class="post-meta">
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span><br />
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">– <span class="p-author h-card" itemprop="name">{{ page.author }}</span></span><br />
       </p>
     </div>
   </div>
