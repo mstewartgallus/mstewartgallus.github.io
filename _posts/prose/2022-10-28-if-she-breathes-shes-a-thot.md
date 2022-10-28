@@ -1,15 +1,14 @@
 ---
 title: If she breathes she's a thot OR I was a teenage incel force femmed by a vampire
-date: 2022-10-23 18:32 -0700
+date: 2022-10-28 13:17 -0700
 tags: if-she-breathes
 ---
-
 Like a pug in an oxygen mask I lied down on the carpet by the air
 purifier and shitposted away on the internet.  My Saint Sebastian
 ex-gay thread had sparked an 80 page debate on the political forum I
 frequented and I had to see the madness through.
 
-Besides some social justice warrior had got bent into a rant.
+Besides some idiot had got bent into a rant.
 
 "You have no power here" I replied.  And then again "I'm already dead
 anyway pretty much"
@@ -49,8 +48,7 @@ bridges.
 She sent me a message during the night.
 
 I woke up with a heavy weight pinning me in place.  A roiling darkness
-sat on my chest sapping my strength away.  I tried to move or call for
-help but could not.
+sat on my chest.  I tried to move or call for help but could not.
 
 The darkness said her name was Must.
 
