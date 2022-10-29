@@ -275,6 +275,18 @@ table td { border: 1px solid #e8e8e8; }
 
 .highlight .il { color: #099; }
 
+select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+
+select::-ms-expand { display: none; }
+
+select { background-color: transparent; border: none; padding: 0; margin: 0; font-family: inherit; font-size: inherit; cursor: inherit; line-height: inherit; outline: none; }
+
+select { border-style: solid; text-align: center; }
+
+select { border-width: 1px; padding: 3px; }
+
+select:focus { border-width: 2px; padding: 2px; }
+
 .site-header, .site-footer, .site-nav { border: initial; }
 
 .site-header { text-transform: lowercase; }
@@ -290,6 +302,16 @@ table td { border: 1px solid #e8e8e8; }
 .post-link, .post-title { font-variant: small-caps; }
 
 .post-list-heading, .footer-heading { display: none; }
+
+.post-list[data-category] > li { display: none; }
+
+.post-list[data-category=""] > li { display: initial; }
+
+.post-list[data-category="poem"] li[data-category~="poem"] { display: initial; }
+
+.post-list[data-category="prose"] li[data-category~="prose"] { display: initial; }
+
+.post-filter { margin-top: 10px; margin-bottom: 10px; }
 
 .post-content { margin-bottom: 0; }
 

@@ -2,6 +2,9 @@
 layout: default
 ---
 
+{%- assign date_id_format = "%Y-%m-%d" -%}
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+
 <div class="home">
   {%- if page.title -%}
     <h1 class="page-heading">{{ page.title }}</h1>
@@ -12,15 +15,19 @@ layout: default
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
 
   {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+  <form class="post-filter" action="" method="get">
+    <label for="category">Category:
+      <select name="category">
+        <option value="">All</option>
+        <option value="poem">Poem</option>
+        <option value="prose">Prose</option>
+      </select>
+    </label>
+  </form>
 
     <ul class="post-list">
       {%- for post in site.posts -%}
-      <li class="{%- for category in post.categories -%}
-                 {{ category | prepend: " category-" }}
-                 {%- endfor -%}">
-        {%- assign date_id_format = "%Y-%m-%d" -%}
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+      <li data-category="{%- for category in post.categories -%}{{ category | prepend: " " }}{%- endfor -%}">
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h3>
@@ -46,3 +53,13 @@ layout: default
   {%- endif -%}
 
 </div>
+
+<script type="text/javascript">
+  const category = document.querySelector('.post-filter [name="category"]');
+  const postList = document.querySelector('.post-list');
+
+  category.addEventListener('change', (event) => {
+      const value = event.target.value;
+      postList.dataset.category = value;
+  });
+</script>

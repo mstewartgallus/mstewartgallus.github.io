@@ -3,6 +3,36 @@
 
 @import "{{ site.theme }}";
 
+// Hide select arrow
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+select::-ms-expand { display: none ; }
+
+// Reset
+select {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+}
+
+// Style select
+select {
+    border-style: solid ;
+    text-align: center ;
+}
+
+select { border-width: 1px ; padding: 3px ; }
+select:focus { border-width: 2px ; padding: 2px }
+
 .site-header, .site-footer, .site-nav { border: initial ; }
 .site-header { text-transform: lowercase ; }
 
@@ -17,6 +47,13 @@
 
 .post-list-heading, .footer-heading { display: none ; }
 
+// FIXME seems awkward
+.post-list[data-category] > li { display: none ; }
+.post-list[data-category=""] > li { display: initial ; }
+.post-list[data-category="poem"] li[data-category~="poem"] { display: initial ; }
+.post-list[data-category="prose"] li[data-category~="prose"] { display: initial ; }
+
+.post-filter { margin-top: 10px ; margin-bottom: 10px ; }
 
 .post-content { margin-bottom: 0 ; }
 .post-nav { margin-top: 30px ; }
