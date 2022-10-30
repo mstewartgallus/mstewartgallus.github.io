@@ -281,11 +281,15 @@ select::-ms-expand { display: none; }
 
 select { background-color: transparent; border: none; padding: 0; margin: 0; font-family: inherit; font-size: inherit; cursor: inherit; line-height: inherit; outline: none; }
 
-select { margin-top: 2px; margin-bottom: 5px; border-style: solid; text-align: center; }
+select { margin-top: 2px; margin-bottom: 5px; border-style: solid; text-align: center; min-width: 9em; }
 
 select { border-width: 1px; padding: 3px; }
 
 select:focus { border-width: 2px; padding: 2px; }
+
+fieldset { display: inline-block; border: none; }
+
+.label { display: inline-block; margin-bottom: 8px; }
 
 .site-header, .site-footer, .site-nav { border: initial; }
 

@@ -5,6 +5,9 @@ layout: default
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 
+{% assign categories = site.categories | sort %}
+{% assign tags = site.tags | sort %}
+
 <div class="home">
   {%- if page.title -%}
     <h1 class="page-heading">{{ page.title }}</h1>
@@ -16,31 +19,40 @@ layout: default
 
   {%- if site.posts.size > 0 -%}
   <form class="post-filter" action="" method="get">
-    <label for="category">Category:
-      <select name="category">
-        <option value="">all</option>
-        {%- for category in site.categories -%}
-        <option value="{{ category[0] | escape }}">{{ category[0] | escape }}</option>
-        {%- endfor -%}">
-      </select>
-    </label>
-    <br />
-    <label for="tag">Tag:
-      <!-- FIXME: add support for multiple -->
-      <select name="tag">
-        <option value="">all</option>
-        {%- for tag in site.tags -%}
-        <option value="{{ tag[0] | escape }}">{{ tag[0] | escape }}</option>
-        {%- endfor -%}">
-      </select>
-    </label>
+      <fieldset>
+        <label for="category">
+          <span class="label">Category:</span>
+          <div>
+            <select name="category" multiple="multiple" size="2">
+              {% for category in categories %}
+              {% assign cat = category[0] | escape %}
+              <option selected="selected" value="{{ cat }}">{{ cat }}</option>
+              {% endfor %}">
+            </select>
+          </div>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <label for="tag">
+          <span class="label">Tag:</span>
+          <div>
+            <select name="tag" multiple="multiple" size="5">
+              {% for tag in tags %}
+              {% assign tg = tag[0] | escape %}
+              <option selected="selected" value="{{ tg }}">{{ tg }}</option>
+              {% endfor %}">
+            </select>
+        </div>
+      </label>
+      </fieldset>
   </form>
 
     <ul class="post-list">
       {%- for post in site.posts -%}
       <li
-        data-category="{%- for category in post.categories -%}{{ category | escape | prepend: " " }}{%- endfor -%}"
-        data-tag="{%- for tag in post.tags -%}{{ tag | escape | prepend: " " }}{%- endfor -%}"
+        data-category="{{ post.categories | join: " " | escape }}"
+        data-tag="{{ post.tags | join: " " | escape }}"
         >
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
@@ -69,28 +81,48 @@ layout: default
 </div>
 
 <script type="text/javascript">
+  const values = (target) =>
+        Array.from(target.options)
+        .filter(o => o.selected)
+        .map(o => o.value);
+
   const category = document.querySelector('.post-filter [name="category"]');
   const tag = document.querySelector('.post-filter [name="tag"]');
   const postList = document.querySelector('.post-list');
 
+  const c = {
+      categories: values(category),
+      tags: values(tag)
+  };
+
+  const redisplay = () => {
+      const catList = c
+            .categories
+            .map(cat => `[data-category~="${cat}"]`)
+            .join(',');
+      const tagList = c
+            .tags
+            .map(tag => `[data-tag~="${tag}"]`)
+            .join(',');
+      const query = `.post-list > li:where(${catList}):where(${tagList})`;
+      document
+          .querySelectorAll('.post-list > li')
+          .forEach(post => {
+              post.style.display = 'none';
+          });
+      document
+          .querySelectorAll(query)
+          .forEach(post => {
+              post.style.display = 'initial';
+          });
+  };
+
   category.addEventListener('change', (event) => {
-      const value = event.target.value;
-      postList.dataset.category = value;
+      c.categories = values(event.target);
+      redisplay();
   });
   tag.addEventListener('change', (event) => {
-      const value = event.target.value;
-      postList.dataset.tag = value;
+      c.tags = values(event.target);
+      redisplay();
   });
 </script>
-<!-- FIXME show categories/tags in a better way -->
-<style type="text/css">
-  {%- for category in site.categories -%}
-  .post-list[data-category~="{{ category[0] | escape }}"] > li:not([data-category~="{{ category[0] | escape }}"]) ,
-  {%- endfor -%}
-  {%- for tag in site.tags -%}
-  .post-list[data-tag~="{{ tag[0] | escape }}"] > li:not([data-tag~="{{ tag[0] | escape }}"]) ,
-  {%- endfor -%}
-  .notused {
-    display: none ;
-  }
-</style>
