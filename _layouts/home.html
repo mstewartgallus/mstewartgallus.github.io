@@ -18,16 +18,29 @@ layout: default
   <form class="post-filter" action="" method="get">
     <label for="category">Category:
       <select name="category">
-        <option value="">All</option>
-        <option value="poem">Poem</option>
-        <option value="prose">Prose</option>
+        <option value="">all</option>
+        {%- for category in site.categories -%}
+        <option value="{{ category[0] | escape }}">{{ category[0] | escape }}</option>
+        {%- endfor -%}">
+      </select>
+    </label>
+    <label for="tag">Tag:
+      <!-- FIXME: add support for multiple -->
+      <select name="tag">
+        <option value="">all</option>
+        {%- for tag in site.tags -%}
+        <option value="{{ tag[0] | escape }}">{{ tag[0] | escape }}</option>
+        {%- endfor -%}">
       </select>
     </label>
   </form>
 
     <ul class="post-list">
       {%- for post in site.posts -%}
-      <li data-category="{%- for category in post.categories -%}{{ category | prepend: " " }}{%- endfor -%}">
+      <li
+        data-category="{%- for category in post.categories -%}{{ category | escape | prepend: " " }}{%- endfor -%}"
+        data-tag="{%- for tag in post.tags -%}{{ tag | escape | prepend: " " }}{%- endfor -%}"
+        >
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h3>
@@ -38,7 +51,7 @@ layout: default
             <span id="{{ post.date | date: date_id_format }}">{{ post.date | date: date_format }}</span>
           </a>
           {% for category in post.categories %}
-          • <span>{{ category }}</span>
+          • <span>{{ category | escape }}</span>
           {% endfor %}
           {% for tag in post.tags %}
           • <span>{{ tag }}</span>
@@ -56,10 +69,27 @@ layout: default
 
 <script type="text/javascript">
   const category = document.querySelector('.post-filter [name="category"]');
+  const tag = document.querySelector('.post-filter [name="tag"]');
   const postList = document.querySelector('.post-list');
 
   category.addEventListener('change', (event) => {
       const value = event.target.value;
       postList.dataset.category = value;
   });
+  tag.addEventListener('change', (event) => {
+      const value = event.target.value;
+      postList.dataset.tag = value;
+  });
 </script>
+<!-- FIXME show categories/tags in a better way -->
+<style type="text/css">
+  {%- for category in site.categories -%}
+  .post-list[data-category~="{{ category[0] | escape }}"] > li:not([data-category~="{{ category[0] | escape }}"]) ,
+  {%- endfor -%}
+  {%- for tag in site.tags -%}
+  .post-list[data-tag~="{{ tag[0] | escape }}"] > li:not([data-tag~="{{ tag[0] | escape }}"]) ,
+  {%- endfor -%}
+  .notused {
+    display: none ;
+  }
+</style>

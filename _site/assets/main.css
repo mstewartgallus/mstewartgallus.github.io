@@ -303,14 +303,6 @@ select:focus { border-width: 2px; padding: 2px; }
 
 .post-list-heading, .footer-heading { display: none; }
 
-.post-list[data-category] > li { display: none; }
-
-.post-list[data-category=""] > li { display: initial; }
-
-.post-list[data-category="poem"] li[data-category~="poem"] { display: initial; }
-
-.post-list[data-category="prose"] li[data-category~="prose"] { display: initial; }
-
 .post-filter { margin-top: 10px; margin-bottom: 10px; }
 
 .post-content { margin-bottom: 0; }
