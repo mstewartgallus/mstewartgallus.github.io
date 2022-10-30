@@ -18,7 +18,9 @@ layout: default
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
 
   {%- if site.posts.size > 0 -%}
-  <form class="post-filter" action="" method="get">
+  <details class="post-filter">
+    <summary>Filter Posts</summary>
+    <form name="post-filter" action="" method="get">
       <fieldset>
         <label for="category">
           <span class="label">Category:</span>
@@ -43,10 +45,11 @@ layout: default
               <option selected="selected" value="{{ tg }}">{{ tg }}</option>
               {% endfor %}">
             </select>
-        </div>
-      </label>
+          </div>
+        </label>
       </fieldset>
-  </form>
+    </form>
+  </details>
 
     <ul class="post-list">
       {%- for post in site.posts -%}
@@ -86,8 +89,8 @@ layout: default
         .filter(o => o.selected)
         .map(o => o.value);
 
-  const category = document.querySelector('.post-filter [name="category"]');
-  const tag = document.querySelector('.post-filter [name="tag"]');
+  const category = document.querySelector('[name="post-filter"] [name="category"]');
+  const tag = document.querySelector('[name="post-filter"] [name="tag"]');
   const postList = document.querySelector('.post-list');
 
   const c = {

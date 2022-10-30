@@ -46,7 +46,9 @@
 
 <div class="home">
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p><form class="post-filter" action="" method="get">
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p><details class="post-filter">
+    <summary>Filter Posts</summary>
+    <form name="post-filter" action="" method="get">
       <fieldset>
         <label for="category">
           <span class="label">Category:</span>
@@ -92,10 +94,11 @@
               <option selected="selected" value="the-ring-and-the-cup">the-ring-and-the-cup</option>
               ">
             </select>
-        </div>
-      </label>
+          </div>
+        </label>
       </fieldset>
-  </form>
+    </form>
+  </details>
 
     <ul class="post-list"><li
         data-category="poem"
@@ -692,8 +695,8 @@ My gut grinds together and my burning parched throat chokes itself.</p>
         .filter(o => o.selected)
         .map(o => o.value);
 
-  const category = document.querySelector('.post-filter [name="category"]');
-  const tag = document.querySelector('.post-filter [name="tag"]');
+  const category = document.querySelector('[name="post-filter"] [name="category"]');
+  const tag = document.querySelector('[name="post-filter"] [name="tag"]');
   const postList = document.querySelector('.post-list');
 
   const c = {
