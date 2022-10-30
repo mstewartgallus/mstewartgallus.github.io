@@ -22,11 +22,9 @@ layout: default
   </div>
 
   <p class="post-meta">
-    <a href="{{ "/index.html" | relative_url }}#{{ page.date | date: date_id_format }}">
     <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
       {{ page.date | date: date_format }}
     </time>
-    </a>
     {% for category in page.categories %}
     • <span>{{ category }}</span>
     {% endfor %}

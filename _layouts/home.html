@@ -62,9 +62,7 @@ layout: default
         </h3>
 
         <small class="post-meta">
-          <a href="#{{ post.date | date: date_id_format }}">
-            <span id="{{ post.date | date: date_id_format }}">{{ post.date | date: date_format }}</span>
-          </a>
+          <span>{{ post.date | date: date_format }}</span>
           {% for category in post.categories %}
           • <span>{{ category | escape }}</span>
           {% endfor %}
