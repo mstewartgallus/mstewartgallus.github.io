@@ -70,14 +70,40 @@ fieldset {
     margin-bottom: 8px ;
 }
 
-.site-header, .site-footer, .site-nav { border: initial ; }
+.site-header, .site-footer { border: initial ; }
 .site-header { text-transform: lowercase ; }
 
 .site-header { min-height: 30px ; }
 .site-header .wrapper div { position: relative ; }
 
-.site-nav { text-align: left ; }
+.site-nav {
+    position:absolute;
+    top: 1.5em ;
+    right: 0.2em ;
+    background-color: white;
+    border: 1px solid $grey-color-light;
+}
+.site-nav {
+    min-width: 6em ;
+    min-height: 3em ;
+    text-align: right ;
+    line-height: initial ;
+    border-style: solid;
+    border-width: 1px;
+    border-radius:2px;
+    padding: 5px;
+}
 
+.site-nav > ol {
+    margin: 0 ;
+    list-style-type: none ;
+}
+.nav-details {
+    float: right ;
+}
+.nav-details > summary {
+    display: block ;
+}
 .page-content { padding: 0 ; }
 
 .post-link, .post-title { font-variant: small-caps ; }
