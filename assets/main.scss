@@ -5,13 +5,13 @@ $text-color:       black ;
 $background-color: white ;
 $brand-color:      #60a ;
 
-$grey-color:       #747 ;
+$grey-color:       #657 ;
 $grey-color-light: lighten($grey-color, 40%) ;
 $grey-color-dark:  darken($grey-color, 25%) ;
 
 @import "{{ site.theme }}";
 
-$brand-color-light:  lighten($brand-color, 54%) ;
+$brand-color-light: lighten($brand-color, 54%) ;
 
 // Hide select arrow
 select {
@@ -84,9 +84,9 @@ fieldset {
     border: 1px solid $grey-color-light;
 }
 .site-nav {
-    min-width: 6em ;
+    min-width: 5em ;
     min-height: 3em ;
-    text-align: right ;
+    text-align: left ;
     line-height: initial ;
     border-style: solid;
     border-width: 1px;
@@ -95,6 +95,7 @@ fieldset {
 }
 
 .site-nav > menu {
+    padding: 0;
     margin: 0 ;
     list-style-type: none ;
 }
@@ -103,6 +104,19 @@ fieldset {
 }
 .nav-details > summary {
     display: block ;
+    border-color: $grey-color ;
+    border-style: solid ;
+    border-width: 1px ;
+    border-radius: 1px;
+    margin: 2px ;
+    padding: 2px 4px 2px 4px ;
+}
+
+.nav-details[open] > summary {
+    background-color: white ;
+}
+.nav-details[open] > summary {
+    background-color: $grey-color-light ;
 }
 .page-content { padding: 0 ; }
 

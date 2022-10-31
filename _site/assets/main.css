@@ -39,12 +39,12 @@ a:hover { color: black; text-decoration: underline; }
 .social-media-list a:hover .username { text-decoration: underline; }
 
 /** Blockquotes */
-blockquote { color: #747; border-left: 4px solid #d4b3d4; padding-left: 15px; font-size: 18px; letter-spacing: -1px; font-style: italic; }
+blockquote { color: #657; border-left: 4px solid #ccc4d5; padding-left: 15px; font-size: 18px; letter-spacing: -1px; font-style: italic; }
 
 blockquote > :last-child { margin-bottom: 0; }
 
 /** Code formatting */
-pre, code { font-size: 15px; border: 1px solid #d4b3d4; border-radius: 3px; background-color: #eef; }
+pre, code { font-size: 15px; border: 1px solid #ccc4d5; border-radius: 3px; background-color: #eef; }
 
 code { padding: 1px 5px; }
 
@@ -61,27 +61,27 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 .footer-col-wrapper:after, .wrapper:after { content: ""; display: table; clear: both; }
 
 /** Icons */
-.svg-icon { width: 16px; height: 16px; display: inline-block; fill: #747; padding-right: 5px; vertical-align: text-top; }
+.svg-icon { width: 16px; height: 16px; display: inline-block; fill: #657; padding-right: 5px; vertical-align: text-top; }
 
 .social-media-list li + li { padding-top: 5px; }
 
 /** Tables */
-table { margin-bottom: 30px; width: 100%; text-align: left; color: #2e2e2e; border-collapse: collapse; border: 1px solid #d4b3d4; }
+table { margin-bottom: 30px; width: 100%; text-align: left; color: #2e2e2e; border-collapse: collapse; border: 1px solid #ccc4d5; }
 
-table tr:nth-child(even) { background-color: #dfc7df; }
+table tr:nth-child(even) { background-color: #dbd5e1; }
 
 table th, table td { padding: 10px 15px; }
 
-table th { background-color: #d9bdd9; border: 1px solid #cca6cc; border-bottom-color: #bd8cbd; }
+table th { background-color: #d4ccdb; border: 1px solid #c2b8cc; border-bottom-color: #ada0bb; }
 
-table td { border: 1px solid #d4b3d4; }
+table td { border: 1px solid #ccc4d5; }
 
 /** Site header */
-.site-header { border-top: 5px solid #261626; border-bottom: 1px solid #d4b3d4; min-height: 55.95px; position: relative; }
+.site-header { border-top: 5px solid #26202d; border-bottom: 1px solid #ccc4d5; min-height: 55.95px; position: relative; }
 
 .site-title { font-size: 26px; font-weight: 300; line-height: 54px; letter-spacing: -1px; margin-bottom: 0; float: left; }
 
-.site-title, .site-title:visited { color: #261626; }
+.site-title, .site-title:visited { color: #26202d; }
 
 .site-nav { float: right; line-height: 54px; }
 
@@ -93,16 +93,16 @@ table td { border: 1px solid #d4b3d4; }
 
 .site-nav .page-link:not(:last-child) { margin-right: 20px; }
 
-@media screen and (max-width: 600px) { .site-nav { position: absolute; top: 9px; right: 15px; background-color: white; border: 1px solid #d4b3d4; border-radius: 5px; text-align: right; } .site-nav label[for="nav-trigger"] { display: block; float: right; width: 36px; height: 36px; z-index: 2; cursor: pointer; } .site-nav .menu-icon { display: block; float: right; width: 36px; height: 26px; line-height: 0; padding-top: 10px; text-align: center; } .site-nav .menu-icon > svg { fill: #261626; } .site-nav input ~ .trigger { clear: both; display: none; } .site-nav input:checked ~ .trigger { display: block; padding-bottom: 5px; } .site-nav .page-link { display: block; padding: 5px 10px; margin-left: 20px; } .site-nav .page-link:not(:last-child) { margin-right: 0; } }
+@media screen and (max-width: 600px) { .site-nav { position: absolute; top: 9px; right: 15px; background-color: white; border: 1px solid #ccc4d5; border-radius: 5px; text-align: right; } .site-nav label[for="nav-trigger"] { display: block; float: right; width: 36px; height: 36px; z-index: 2; cursor: pointer; } .site-nav .menu-icon { display: block; float: right; width: 36px; height: 26px; line-height: 0; padding-top: 10px; text-align: center; } .site-nav .menu-icon > svg { fill: #26202d; } .site-nav input ~ .trigger { clear: both; display: none; } .site-nav input:checked ~ .trigger { display: block; padding-bottom: 5px; } .site-nav .page-link { display: block; padding: 5px 10px; margin-left: 20px; } .site-nav .page-link:not(:last-child) { margin-right: 0; } }
 
 /** Site footer */
-.site-footer { border-top: 1px solid #d4b3d4; padding: 30px 0; }
+.site-footer { border-top: 1px solid #ccc4d5; padding: 30px 0; }
 
 .footer-heading { font-size: 18px; margin-bottom: 15px; }
 
 .contact-list, .social-media-list { list-style: none; margin-left: 0; }
 
-.footer-col-wrapper { font-size: 15px; color: #747; margin-left: -15px; }
+.footer-col-wrapper { font-size: 15px; color: #657; margin-left: -15px; }
 
 .footer-col { float: left; margin-bottom: 15px; padding-left: 15px; }
 
@@ -127,7 +127,7 @@ table td { border: 1px solid #d4b3d4; }
 
 .post-list > li { margin-bottom: 30px; }
 
-.post-meta { font-size: 14px; color: #747; }
+.post-meta { font-size: 14px; color: #657; }
 
 .post-link { display: block; font-size: 24px; }
 
@@ -307,15 +307,19 @@ fieldset { display: inline-block; border: none; }
 
 .site-header .wrapper div { position: relative; }
 
-.site-nav { position: absolute; top: 1.5em; right: 0.2em; background-color: white; border: 1px solid #d4b3d4; }
+.site-nav { position: absolute; top: 1.5em; right: 0.2em; background-color: white; border: 1px solid #ccc4d5; }
 
-.site-nav { min-width: 6em; min-height: 3em; text-align: right; line-height: initial; border-style: solid; border-width: 1px; border-radius: 2px; padding: 5px; }
+.site-nav { min-width: 5em; min-height: 3em; text-align: left; line-height: initial; border-style: solid; border-width: 1px; border-radius: 2px; padding: 5px; }
 
-.site-nav > menu { margin: 0; list-style-type: none; }
+.site-nav > menu { padding: 0; margin: 0; list-style-type: none; }
 
 .nav-details { float: right; }
 
-.nav-details > summary { display: block; }
+.nav-details > summary { display: block; border-color: #657; border-style: solid; border-width: 1px; border-radius: 1px; margin: 2px; padding: 2px 4px 2px 4px; }
+
+.nav-details[open] > summary { background-color: white; }
+
+.nav-details[open] > summary { background-color: #ccc4d5; }
 
 .page-content { padding: 0; }
 
@@ -353,6 +357,6 @@ fieldset { display: inline-block; border: none; }
 
 hr { text-align: center; border: none; }
 
-hr::before { content: "***"; color: #747; }
+hr::before { content: "***"; color: #657; }
 
 /*# sourceMappingURL=main.css.map */
