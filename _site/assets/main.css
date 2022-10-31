@@ -311,7 +311,7 @@ fieldset { display: inline-block; border: none; }
 
 .site-nav { min-width: 6em; min-height: 3em; text-align: right; line-height: initial; border-style: solid; border-width: 1px; border-radius: 2px; padding: 5px; }
 
-.site-nav > ol { margin: 0; list-style-type: none; }
+.site-nav > menu { margin: 0; list-style-type: none; }
 
 .nav-details { float: right; }
 

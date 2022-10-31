@@ -7,7 +7,7 @@
         <summary>Menu</summary>
 
         <nav class="site-nav">
-          <ol>
+          <menu>
             <li><a class="page-link" rel="author" href="{{ "/" | relative_url }}">~</a></li>
 
             {%- for path in page_paths -%}
@@ -16,7 +16,7 @@
             <li><a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
             {%- endif -%}
             {%- endfor -%}
-          </ol>
+          </menu>
         </nav>
         </details>
     </div>
