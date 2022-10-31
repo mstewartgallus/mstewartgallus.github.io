@@ -3,13 +3,15 @@
 
 $text-color:       black ;
 $background-color: white ;
-$brand-color:      #0a5ac2 ;
+$brand-color:      #60a ;
 
-$grey-color:       #626262 ;
+$grey-color:       #747 ;
 $grey-color-light: lighten($grey-color, 40%) ;
 $grey-color-dark:  darken($grey-color, 25%) ;
 
 @import "{{ site.theme }}";
+
+$brand-color-light:  lighten($brand-color, 54%) ;
 
 // Hide select arrow
 select {
@@ -45,6 +47,7 @@ option:first-child {
 }
 option:checked {
     background: #F0F0FF ;
+    background: $brand-color-light ;
 }
 select {
     margin-top: 2px ;
