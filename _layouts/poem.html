@@ -25,12 +25,14 @@ layout: default
     <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
       {{ page.date | date: date_format }}
     </time>
-    {% for category in page.categories %}
-    • <span>{{ category }}</span>
-    {% endfor %}
-    {% for tag in page.tags %}
-    • <span>{{ tag }}</span>
-    {% endfor %}
+    <span itemprop="keywords" itemtype="http://schema.org/Text">
+      {% for category in page.categories %}
+      • <span>{{ category }}</span>
+      {% endfor %}
+      {% for tag in page.tags %}
+      • <span>{{ tag }}</span>
+      {% endfor %}
+    </span>
   </p>
 
   {%- if site.disqus.shortname -%}
