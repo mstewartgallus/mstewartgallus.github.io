@@ -51,14 +51,18 @@ layout: default
     </form>
   </details>
 
-    <ul class="post-list">
+  <ol class="post-list" itemscope itemtype="https://schema.org/BreadcrumbList">
       {%- for post in site.posts -%}
       <li
         data-category="{{ post.categories | join: " " | escape }}"
         data-tag="{{ post.tags | join: " " | escape }}"
+        itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
         >
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        <h3 itemprop="item"
+            itemscope itemtype="https://schema.org/WebPage"
+            itemid="{{ post.url | relative_url }}"
+            >
+          <a itemprop="name" class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h3>
 
         <small class="post-meta">
@@ -71,10 +75,10 @@ layout: default
           {% endfor %}
         </small>
 
-        <div class="post-excerpt">{{ post.excerpt }}</div>
+        <div class="post-excerpt" itemprop="description">{{ post.excerpt }}</div>
       </li>
       {%- endfor -%}
-    </ul>
+    </ol>
   {%- endif -%}
 
 </div>
