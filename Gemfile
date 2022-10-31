@@ -37,3 +37,5 @@ gem "webrick", "~> 1.7"
 gem "jekyll-compose", "~> 0.12.0"
 
 gem "io-wait", "~> 0.2.3"
+
+gem "jekyll-sitemap", "~> 1.4"

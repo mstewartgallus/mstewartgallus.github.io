@@ -29,6 +29,7 @@ url: "https://mstewartgallus.github.io"
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 twitter_username: MSpondee
 github_username: mstewartgallus
