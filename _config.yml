@@ -18,8 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Molossus Spondee
+title: Words to Kick Your Teeth Out
 email: molossusspondee@gmail.com
+author: "Molossus Spondee"
 description: >-
   mostly poetry right now
 baseurl: ""
