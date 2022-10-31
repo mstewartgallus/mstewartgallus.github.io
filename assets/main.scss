@@ -1,6 +1,14 @@
 ---
 ---
 
+$text-color:       black ;
+$background-color: white ;
+$brand-color:      #0a5ac2 ;
+
+$grey-color:       #626262 ;
+$grey-color-light: lighten($grey-color, 40%) ;
+$grey-color-dark:  darken($grey-color, 25%) ;
+
 @import "{{ site.theme }}";
 
 // Hide select arrow
@@ -115,5 +123,5 @@ hr {
 }
 hr::before {
     content: "***" ;
-    color: #828282 ;
+    color: $grey-color ;
 }
