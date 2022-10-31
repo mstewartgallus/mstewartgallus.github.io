@@ -57,14 +57,14 @@ layout: default
       <li
         data-category="{{ post.categories | join: " " | escape }}"
         data-tag="{{ post.tags | join: " " | escape }}"
-        itemscope itemtype="https://schema.org/WebPage"
-        itemid="{{ post.url | relative_url }}"
+        itemscope itemtype="http://schema.org/BlogPosting"
+        itemid="{{ post.url | absolute_url }}"
         >
         <h3 itemprop="name">
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h3>
 
-        <small class="post-meta">
+        <small class="post-meta" itemprop="keywords">
           <span>{{ post.date | date: date_format }}</span>
           {% for category in post.categories %}
           • <span>{{ category | escape }}</span>
