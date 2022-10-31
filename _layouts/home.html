@@ -51,18 +51,17 @@ layout: default
     </form>
   </details>
 
-  <ol class="post-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <nav>
+    <ol class="post-list">
       {%- for post in site.posts -%}
       <li
         data-category="{{ post.categories | join: " " | escape }}"
         data-tag="{{ post.tags | join: " " | escape }}"
-        itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
+        itemscope itemtype="https://schema.org/WebPage"
+        itemid="{{ post.url | relative_url }}"
         >
-        <h3 itemprop="item"
-            itemscope itemtype="https://schema.org/WebPage"
-            itemid="{{ post.url | relative_url }}"
-            >
-          <a itemprop="name" class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        <h3 itemprop="name">
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h3>
 
         <small class="post-meta">
@@ -79,6 +78,7 @@ layout: default
       </li>
       {%- endfor -%}
     </ol>
+  </nav>
   {%- endif -%}
 
 </div>
