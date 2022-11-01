@@ -1,10 +1,10 @@
 ---
 layout: default
 ---
-<article class="poem post h-entry" itemscope itemtype="http://schema.org/BlogPosting"
+{%- assign date_id_format = "%Y-%m-%d" -%}
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+<article class="poem post h-entry" itemscope itemprop="blogPost"
          itemid="{{ page.url | absolute_url }}">
-  {%- assign date_id_format = "%Y-%m-%d" -%}
-  {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 
   <div style="text-align: center">
     <header class="post-header">
@@ -26,14 +26,12 @@ layout: default
     <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
       {{ page.date | date: date_format }}
     </time>
-    <span itemprop="keywords" itemtype="http://schema.org/Text">
-      {% for category in page.categories %}
-      • <span>{{ category }}</span>
-      {% endfor %}
-      {% for tag in page.tags %}
-      • <span>{{ tag }}</span>
-      {% endfor %}
-    </span>
+    {% for category in page.categories %}
+    • <span itemprop="keywords">{{ category }}</span>
+    {% endfor %}
+    {% for tag in page.tags %}
+    • <span itemprop="keywords">{{ tag }}</span>
+    {% endfor %}
   </p>
 
   {%- if site.disqus.shortname -%}
@@ -44,10 +42,10 @@ layout: default
 
   <nav class="post-nav">
     {% if page.previous.url %}
-    <a class="prev" href="{{page.previous.url}}">{{page.previous.title}}</a>
+    <a class="prev" href="{{page.previous.url}}" rel="prev">{{page.previous.title}}</a>
     {% endif %}
     {% if page.next.url %}
-    <a class="next" href="{{page.next.url}}">{{page.next.title}}</a>
+    <a class="next" href="{{page.next.url}}" rel="next">{{page.next.title}}</a>
     {% endif %}
   </nav>
 </article>

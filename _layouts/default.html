@@ -3,11 +3,11 @@
 
   {%- include head.html -%}
 
-  <body>
+  <body itemtype="http://schema.org/Website" itemscope itemid="{{ "/" | absolute_url }}">
 
     {%- include header.html -%}
 
-    <main class="page-content" aria-label="Content">
+    <main class="page-content" aria-label="Content" itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
       <div class="wrapper">
         {{ content }}
       </div>

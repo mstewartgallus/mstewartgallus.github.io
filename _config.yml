@@ -31,15 +31,11 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
 
-twitter_username: MSpondee
-github_username: mstewartgallus
-
-minima:
-  social_links:
-    twitter: MSpondee
-    github: mstewartgallus
-    stackoverflow: "Molossus Spondee"
-    linkedin: mstewartgallus
+rss: "Feed"
+twitter: MSpondee
+github: mstewartgallus
+linkedin: mstewartgallus
+stackoverflow: "Molossus Spondee"
 
 defaults:
   -
