@@ -57,7 +57,9 @@ layout: default
       <li itemprop="blogPost"
         data-category="{{ post.categories | join: " " | escape }}"
         data-tag="{{ post.tags | join: " " | escape }}"
-        itemscope
+          itemscope
+          itemtype="http://schema.org/BlogPosting"
+          itemid="{{ post.url | absolute_url }}">
         >
         <h3>
           <a itemprop="url" class="post-link" href="{{ post.url | relative_url }}">
