@@ -1,24 +1,31 @@
+{%- assign icon = "/assets/favicon.svg" | relative_url -%}
+{%- assign css = "/assets/main.css" | relative_url -%}
+{%- assign feed = "/feed.xml" | relative_url -%}
 {%- assign site_title = site.title -%}
-{%- assign title = page.title | default: site.title -%}
-{%- assign description = page.excerpt | strip_html | default: site.description -%}
-{%- assign author = page.author.name | default: site.author.name -%}
-{%- assign author_url = page.author.url | default: site.author.url -%}
-{%- capture og_type -%}
+{%- assign title = page.title | default: site_title -%}
+{%- assign description = page.description | default: page.excerpt | strip_html | default: site.description -%}
+{%- assign url = page.url | relative_url -%}
+{%- assign author = page.author | default: site.author -%}
+{%- assign author_name = author.name -%}
+{%- assign author_url = author.url | relative_url -%}
+{%- capture type -%}
 {%- if page.date -%}article{%- else -%}website{%- endif -%}
 {%- endcapture -%}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  <link rel="icon" href="{{ "/assets/favicon.svg" | relative_url }}">
   <title>{{ title }}</title>
-  <link rel="author" href="{{ author_url | relative_url }}">
-  <link type="application/atom+xml" rel="alternate" href="{{ "/feed.xml" | relative_url }}" title="{{ site_title }}">
-  <meta name="author" content="{{ author }}" />
+  <link rel="icon" href="{{ icon }}">
+  <link rel="stylesheet" href="{{ css }}">
+  <link rel="author" href="{{ author_url }}">
+  <link rel="canonical" href="{{ url }}">
+  <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}">
+  <meta name="author" content="{{ author_name }}" />
   <meta name="description" content="{{ description }}">
   <meta property="og:title" content="{{ title }}">
-  <meta property="og:type" content="{{ og_type }}">
+  <meta property="og:url" content="{{ url }}">
+  <meta property="og:type" content="{{ type }}">
   <meta name="og:site_name" content="{{ site_title }}">
   <meta property="og:description" content="{{ description }}">
 </head>
