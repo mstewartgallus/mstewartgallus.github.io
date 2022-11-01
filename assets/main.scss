@@ -120,9 +120,13 @@ fieldset {
 }
 .page-content { padding: 0 ; }
 
-.post-link, .post-title { font-variant: small-caps ; }
+.home {
+    text-align: center ;
+    margin-bottom: 2em ;
+}
 
-.post-list-heading { display: none ; }
+.post-list-heading { text-align: center }
+.post-link, .post-title { font-variant: small-caps ; }
 
 .post-filter { margin-top: 10px ; margin-bottom: 10px ; }
 

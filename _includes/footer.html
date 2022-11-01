@@ -1,29 +1,14 @@
 <footer class="site-footer h-card">
   <div class="wrapper">
 
-    <h2 class="footer-heading" itemprop="headline name">{{ site.title | escape }}</h2>
-
     <div class="footer-col-wrapper">
-      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-        <div class="footer-col footer-col-1">
-          <ul class="contact-list">
-            {%- if site.author -%}
-            <li class="p-name" itemprop="name">
-              {{ site.author | escape }}
-              {%- endif -%}
-            </li>
-            {%- if site.email -%}
-            <li itemprop="email"><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-            {%- endif -%}
-          </ul>
-        </div>
-
-        <div class="footer-col footer-col-2">
-          {%- include social.html -%}
-        </div>
+      <div class="footer-col footer-col-1">
       </div>
-      <div class="footer-col footer-col-3" itemprop="description">
-        <p>{{- site.description | escape -}}</p>
+
+      <div class="footer-col footer-col-2">
+      </div>
+
+      <div class="footer-col footer-col-3">
       </div>
     </div>
 

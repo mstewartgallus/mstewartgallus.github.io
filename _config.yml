@@ -20,7 +20,9 @@
 
 title: Words to Kick Your Teeth Out
 email: molossusspondee@gmail.com
-author: "Molossus Spondee"
+author:
+  name: "Molossus Spondee"
+  url: "/about"
 description: >-
   mostly poetry right now
 baseurl: ""
