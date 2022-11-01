@@ -29,19 +29,19 @@ layout: default
     </div>
   </div>
 
-  <p>
-    <small class="post-meta">
+  <ul class="metadata">
+    <li>
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: date_format }}
       </time>
-      {%- for category in page.categories -%}
-      • <span itemprop="keywords">{{ category }}</span>
-      {%- endfor -%}
-      {%- for tag in page.tags -%}
-      • <span itemprop="keywords">{{ tag }}</span>
-      {%- endfor -%}
-    </small>
-  </p>
+    </li>
+    {%- for category in page.categories -%}
+    <li itemprop="keywords">{{ category }}</li>
+    {%- endfor -%}
+    {%- for tag in page.tags -%}
+    <li itemprop="keywords">{{ tag }}</li>
+    {%- endfor -%}
+  </ul>
 </article>
 
 <nav class="post-nav">
