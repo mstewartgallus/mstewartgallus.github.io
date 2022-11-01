@@ -34,13 +34,13 @@ layout: default
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
-
-  <nav class="post-nav">
-    {%- if page.previous.url -%}
-    <a class="prev" href="{{page.previous.url}}" rel="prev">{{page.previous.title}}</a>
-    {%- endif -%}
-    {%- if page.next.url -%}
-    <a class="next" href="{{page.next.url}}" rel="next">{{page.next.title}}</a>
-    {%- endif -%}
-  </nav>
 </article>
+
+<nav class="post-nav">
+  {%- if page.previous.url -%}
+  <a class="prev" href="{{page.previous.url}}" rel="prev">{{page.previous.title}}</a>
+  {%- endif -%}
+  {%- if page.next.url -%}
+  <a class="next" href="{{page.next.url}}" rel="next">{{page.next.title}}</a>
+  {%- endif -%}
+</nav>
