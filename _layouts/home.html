@@ -59,8 +59,10 @@ layout: default
         data-tag="{{ post.tags | join: " " | escape }}"
         itemscope
         >
-        <h3 itemprop="name headline">
-          <a itemprop="url" class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        <h3>
+          <a itemprop="url" class="post-link" href="{{ post.url | relative_url }}">
+            <span itemprop="name headline">{{ post.title | escape }}</span>
+          </a>
         </h3>
 
         <small class="post-meta">
