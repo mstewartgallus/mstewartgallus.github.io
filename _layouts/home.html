@@ -8,31 +8,31 @@
   <body itemtype="http://schema.org/WebPage" itemscope itemid="{{ page.url | absolute_url }}">
 
     <div itemprop="mainEntityOfPage" itemtype="http://schema.org/WebSite" itemscope itemid="{{ "/" | absolute_url }}">
-      <meta itemprop="url" content="{{ "/" | absolute_url }}">
+      <meta itemprop="url" content="{{ page.url | absolute_url }}">
       <meta itemprop="name" content="{{ site.title }}">
     </div>
 
     <main class="page-content" aria-label="Content" itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
       <div class="wrapper">
 
-        <div >
-          <article class="home">
-            {%- if page.title -%}
-            <h1 class="page-heading" itemprop="name headline">{{ page.title }}</h1>
-            {%- endif -%}
+        <article class="home">
+          {%- if page.title -%}
+          <a itemprop="url" rel="canonical" href="{{ page.url | relative_url }}"><h1 class="page-heading" itemprop="name headline">{{ page.title | escape }}</h1></a>
+          {%- endif -%}
 
-            <div>
-              {{ content }}
-            </div>
+          <div>
+            {{ content }}
+          </div>
 
-            <div>
-              <a itemscope itemprop="author" rel="author" href="{{ page.author.url | relative_url}}">
-                <span itemprop="name">{{ page.author.name }}</span>
-              </a>
-            </div>
-          </article>
+          <div>
+            <a itemscope itemprop="author" rel="author" href="{{ page.author.url | relative_url}}">
+              <span itemprop="name">{{ page.author.name }}</span>
+            </a>
+          </div>
+        </article>
 
-          {%- if site.posts.size > 0 -%}
+        {%- if site.posts.size > 0 -%}
+        <article>
           <h2 class="post-list-heading">Contents</h2>
 
           <details class="post-filter">
@@ -105,7 +105,7 @@
           </nav>
           {%- endif -%}
 
-        </div>
+        </article>
       </div>
     </main>
 
