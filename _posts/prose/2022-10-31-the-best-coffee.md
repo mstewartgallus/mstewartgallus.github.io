@@ -1,16 +1,15 @@
 ---
 title: The Best Coffee
-date: 2022-10-30 13:49 -0700
+date: 2022-10-31 20:06 -0700
 tags: coffee
 ---
-
 The best coffee in Vancouver is a matter of taste. However, the best
 coffee per dollar is objective fact.
 
 The problem with chain fast food coffee is not poor quality but rather
-inconsistency. Despite guidelines otherwise I assume it is likely many
-coffee machines are unwashed for days or many pots of coffee are kept
-stale on warm for hours.
+inconsistency.  Despite guidelines otherwise I assume it is likely
+many coffee machines are unwashed for days or many pots of coffee are
+kept stale on warm for hours.
 
 So timing and location are key. Depending on the shift and the volume
 of customers you may or may not obtain a fresh cup of coffee. Never
@@ -44,6 +43,3 @@ hate you and wish you a bad day.
 
 If you really must try circling out from some skate parks or
 underneath highway overpasses.
-
-With love and kindness
-- Mollosus Spondee
