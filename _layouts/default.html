@@ -3,7 +3,7 @@
 
   {%- include head.html -%}
 
-  <body itemtype="http://schema.org/WebPage" itemscope>
+  <body itemtype="http://schema.org/WebPage" itemscope itemid="{{ page.url | absolute_url }}">
     {%- include header.html -%}
 
     <main class="page-content" aria-label="Content" itemprop="mainEntity"  itemtype="http://schema.org/Blog" itemscope>
