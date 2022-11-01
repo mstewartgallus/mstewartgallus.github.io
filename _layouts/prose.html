@@ -11,22 +11,24 @@ layout: default
     <a itemprop="url" rel="canonical" href="{{ page.url | relative_url }}">
       <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     </a>
-    <small class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }}
-      </time>
-      <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
-          <span class="p-author h-card" itemprop="name">{{ page.author.name }}</span>
-        </a>
-      </span>
-      {%- for category in page.categories -%}
-      • <span itemprop="keywords">{{ category }}</span>
-      {%- endfor -%}
-      {%- for tag in page.tags -%}
-      • <span itemprop="keywords">{{ tag }}</span>
-      {%- endfor -%}
-    </small>
+    <p>
+      <small class="post-meta">
+        <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+          {{ page.date | date: date_format }}
+        </time>
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
+            <span class="p-author h-card" itemprop="name">{{ page.author.name }}</span>
+          </a>
+        </span>
+        {%- for category in page.categories -%}
+        • <span itemprop="keywords">{{ category }}</span>
+        {%- endfor -%}
+        {%- for tag in page.tags -%}
+        • <span itemprop="keywords">{{ tag }}</span>
+        {%- endfor -%}
+      </small>
+    </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">

@@ -18,26 +18,30 @@ layout: default
         {{ content }}
       </div>
 
-      <small class="post-meta">
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person">– <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
-            <span class="p-author h-card" itemprop="name">{{ page.author.name }}</span>
-          </a>
-        </span><br />
-      </small>
+      <p>
+        <small class="post-meta">
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">– <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
+              <span class="p-author h-card" itemprop="name">{{ page.author.name }}</span>
+            </a>
+          </span>
+        </small>
+      </p>
     </div>
   </div>
 
-  <small class="post-meta">
-    <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-      {{ page.date | date: date_format }}
-    </time>
-    {%- for category in page.categories -%}
-    • <span itemprop="keywords">{{ category }}</span>
-    {%- endfor -%}
-    {%- for tag in page.tags -%}
-    • <span itemprop="keywords">{{ tag }}</span>
-    {%- endfor -%}
-  </small>
+  <p>
+    <small class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: date_format }}
+      </time>
+      {%- for category in page.categories -%}
+      • <span itemprop="keywords">{{ category }}</span>
+      {%- endfor -%}
+      {%- for tag in page.tags -%}
+      • <span itemprop="keywords">{{ tag }}</span>
+      {%- endfor -%}
+    </small>
+  </p>
 
   <nav class="post-nav">
     {%- if page.previous.url -%}
