@@ -68,10 +68,10 @@
             </form>
           </details>
 
-          <nav>
+          <nav itemprop="mainEntity" itemtype="http://schema.org/ItemList" itemscope>
             <ol class="post-list">
               {%- for post in site.posts -%}
-              <li itemprop="blogPost"
+              <li itemprop="itemListElement"
                   data-category="{{ post.categories | join: " " | escape }}"
                   data-tag="{{ post.tags | join: " " | escape }}"
                   itemscope
