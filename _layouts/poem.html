@@ -14,16 +14,15 @@ layout: default
     </header>
 
     <div style="display:inline-block;text-align: left">
-      <main class="post-content e-content" itemprop="articleBody">
+      <div class="post-content e-content" itemprop="articleBody">
         {{ content }}
-      </main>
+      </div>
 
       <p>
         <small class="post-meta">
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">– <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
-              <span class="p-author h-card" itemprop="name">{{ page.author.name }}</span>
-            </a>
-          </span>
+          <address>
+            – <a rel="author" itemprop="author" href="{{ page.author.url | relative_url }}">{{ page.author.name }}</a>
+          </address>
         </small>
       </p>
     </div>

@@ -17,10 +17,11 @@ layout: default
           {{ page.date | date: date_format }}
         </time>
       </li>
-      <li itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
-            <span itemprop="name">{{ page.author.name }}</span>
-          </a>
+      <li>
+        <address>
+          <a rel="author" href="{{ page.author.url | relative_url }}"
+              itemprop="author">{{ page.author.name }}</a>
+        </address>
       </li>
       {%- for category in page.categories -%}
       <li itemprop="keywords">{{ category }}</li>
@@ -31,9 +32,9 @@ layout: default
     </ul>
   </header>
 
-  <main class="post-content e-content" itemprop="articleBody">
+  <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
-  </main>
+  </div>
 </article>
 
 <nav class="post-nav">
