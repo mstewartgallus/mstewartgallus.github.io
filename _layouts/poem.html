@@ -17,7 +17,7 @@ layout: default
       </div>
 
       <p class="post-meta">
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person">– <span class="p-author h-card" itemprop="name">{{ page.author }}</span></span><br />
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">– <a rel="author" itemProp="url" href="{{ page.author_url | relative_url }}"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></a></span><br />
       </p>
     </div>
   </div>

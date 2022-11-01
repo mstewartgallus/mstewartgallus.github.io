@@ -12,7 +12,7 @@ layout: default
     <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
       {{ page.date | date: date_format }}
     </time>
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a rel="author" itemProp="url" href="{{ page.author_url | relative_url }}"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></a></span>
 
     {% for category in page.categories %}
     • <span itemprop="keywords">{{ category }}</span>

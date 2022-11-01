@@ -43,6 +43,7 @@ defaults:
       path: ""
     values:
       author: "Molossus Spondee"
+      author_url: "/about"
   -
     scope:
       path: ""

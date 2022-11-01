@@ -2,17 +2,8 @@
   <div class="wrapper">
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <div>
-      <details class="nav-details">
-        <summary>Menu</summary>
-
-        <nav class="site-nav">
-          <menu>
-            <li><a itemprop="url" class="page-link" href="{{ "/" | relative_url }}">~</a></li>
-            <li><a itemtype="https://schema.org/Person" itemprop="author" rel="author" class="page-link" href="{{ "/about" | relative_url }}">About</a></li>
-          </menu>
-        </nav>
-        </details>
+    <div style="text-align:right">
+      <a itemprop="url" class="page-link" href="{{ "/" | relative_url }}">~</a>
     </div>
   </div>
 </header>
