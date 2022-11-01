@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
-
   {%- include head.html -%}
-
   <body itemtype="http://schema.org/WebPage" itemscope itemid="{{ page.url | absolute_url }}">
     {%- include header.html -%}
 
@@ -11,9 +9,5 @@
         {{ content }}
       </div>
     </main>
-
-    {%- include footer.html -%}
-
   </body>
-
 </html>

@@ -18,12 +18,12 @@ layout: default
       </a>
     </span>
 
-    {% for category in page.categories %}
+    {%- for category in page.categories -%}
     • <span itemprop="keywords">{{ category }}</span>
-    {% endfor %}
-    {% for tag in page.tags %}
+    {%- endfor -%}
+    {%- for tag in page.tags -%}
     • <span itemprop="keywords">{{ tag }}</span>
-    {% endfor %}
+    {%- endfor -%}
     </p>
   </header>
 
@@ -38,11 +38,11 @@ layout: default
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 
   <nav class="post-nav">
-    {% if page.previous.url %}
+    {%- if page.previous.url -%}
     <a class="prev" href="{{page.previous.url}}" rel="prev">{{page.previous.title}}</a>
-    {% endif %}
-    {% if page.next.url %}
+    {%- endif -%}
+    {%- if page.next.url -%}
     <a class="next" href="{{page.next.url}}" rel="next">{{page.next.title}}</a>
-    {% endif %}
+    {%- endif -%}
   </nav>
 </article>

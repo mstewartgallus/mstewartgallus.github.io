@@ -1,5 +1,5 @@
 ---
-title: If she breathes she's a thot OR I was a teenage incel force femmed by a vampire
+title: If She Breathes She's a Thot OR I Was a Teenage Incel Force Femmed by a Vampire
 date: 2022-10-28 13:17 -0700
 tags: if-she-breathes
 ---

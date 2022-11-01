@@ -1,10 +1,24 @@
+{%- assign site_title = site.title -%}
+{%- assign title = page.title | default: site.title -%}
+{%- assign description = page.excerpt | strip_html | default: site.description -%}
+{%- assign author = page.author.name | default: site.author.name -%}
+{%- assign author_url = page.author.url | default: site.author.url -%}
+{%- capture og_type -%}
+{%- if page.date -%}article{%- else -%}website{%- endif -%}
+{%- endcapture -%}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <link rel="icon" href="{{ "/assets/favicon.svg" | relative_url }}">
-  <link rel="author" href="{{ page.author.url | default: site.author.url | relative_url }}">
-  <title>{{ page.title | default: site.title }}</title>
-  {%- feed_meta -%}
+  <title>{{ title }}</title>
+  <link rel="author" href="{{ author_url | relative_url }}">
+  <link type="application/atom+xml" rel="alternate" href="{{ "/feed.xml" | relative_url }}" title="{{ site_title }}">
+  <meta name="author" content="{{ author }}" />
+  <meta name="description" content="{{ description }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:type" content="{{ og_type }}">
+  <meta name="og:site_name" content="{{ site_title }}">
+  <meta property="og:description" content="{{ description }}">
 </head>

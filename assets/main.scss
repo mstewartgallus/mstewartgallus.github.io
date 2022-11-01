@@ -71,7 +71,7 @@ fieldset {
 }
 
 .site-header, .site-footer { border: initial ; }
-.site-header { text-transform: lowercase ; }
+// .site-header { text-transform: lowercase ; }
 
 .site-header { min-height: 30px ; }
 .site-header .wrapper div { position: relative ; }
@@ -122,11 +122,14 @@ fieldset {
 
 .home {
     text-align: center ;
+    padding-bottom: 2em ;
     margin-bottom: 2em ;
+    border-style: none none solid none ;
+    border-width: 1px ;
 }
 
 .post-list-heading { text-align: center }
-.post-link, .post-title { font-variant: small-caps ; }
+// .post-link, .post-title { font-variant: small-caps ; }
 
 .post-filter { margin-top: 10px ; margin-bottom: 10px ; }
 
