@@ -58,7 +58,6 @@ layout: default
         data-category="{{ post.categories | join: " " | escape }}"
         data-tag="{{ post.tags | join: " " | escape }}"
         itemscope
-        itemid="{{ post.url | absolute_url }}"
         >
         <h3 itemprop="name headline">
           <a itemprop="url" class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
