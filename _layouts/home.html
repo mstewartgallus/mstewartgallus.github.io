@@ -12,7 +12,7 @@
       <meta itemprop="name" content="{{ site.title }}">
     </div>
 
-    <main class="page-content" aria-label="Content" itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
+    <div class="page-content" aria-label="Content" itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
       <div class="wrapper">
 
         <article class="home">
@@ -20,9 +20,9 @@
           <a itemprop="url" rel="canonical" href="{{ page.url | relative_url }}"><h1 class="page-heading" itemprop="name headline">{{ page.title | escape }}</h1></a>
           {%- endif -%}
 
-          <div>
+          <main>
             {{ content }}
-          </div>
+          </main>
 
           <div>
             <a itemscope itemprop="author" rel="author" href="{{ page.author.url | relative_url}}">
@@ -109,7 +109,7 @@
 
         </article>
       </div>
-    </main>
+    </div>
 
     <script>
       const values = (target) =>
