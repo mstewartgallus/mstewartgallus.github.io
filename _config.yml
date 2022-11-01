@@ -32,7 +32,15 @@ plugins:
   - jekyll-sitemap
 
 rss: "Feed"
-twitter: MSpondee
+social:
+  name: "Molossus Spondee"
+  links:
+    - https://twitter.com/MSpondee
+    - https://www.linkedin.com/in/mstewartgallus
+    - https://github.com/mstewartgallus
+twitter:
+  username: MSpondee
+  card: summary
 github: mstewartgallus
 linkedin: mstewartgallus
 stackoverflow: "Molossus Spondee"
@@ -42,8 +50,10 @@ defaults:
     scope:
       path: ""
     values:
-      author: "Molossus Spondee"
-      author_url: "/about"
+      author:
+        name: "Molossus Spondee"
+        twitter: MSpondee
+        url: "/about"
   -
     scope:
       path: ""
