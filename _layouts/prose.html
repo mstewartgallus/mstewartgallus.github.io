@@ -3,41 +3,35 @@ layout: default
 ---
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-<article class="post h-entry" itemscope itemprop="blogPost" itemtype="https://schema.org/BlogPosting"
+<article class="post h-entry"
+         itemscope itemprop="blogPost" itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
 
   <header class="post-header">
     <a itemprop="url" rel="canonical" href="{{ page.url | relative_url }}">
       <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     </a>
-    <p class="post-meta">
-    <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-      {{ page.date | date: date_format }}
-    </time>
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
-        <span class="p-author h-card" itemprop="name">{{ page.author.name }}</span>
-      </a>
-    </span>
-
-    {%- for category in page.categories -%}
-    • <span itemprop="keywords">{{ category }}</span>
-    {%- endfor -%}
-    {%- for tag in page.tags -%}
-    • <span itemprop="keywords">{{ tag }}</span>
-    {%- endfor -%}
-    </p>
+    <small class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: date_format }}
+      </time>
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
+          <span class="p-author h-card" itemprop="name">{{ page.author.name }}</span>
+        </a>
+      </span>
+      {%- for category in page.categories -%}
+      • <span itemprop="keywords">{{ category }}</span>
+      {%- endfor -%}
+      {%- for tag in page.tags -%}
+      • <span itemprop="keywords">{{ tag }}</span>
+      {%- endfor -%}
+    </small>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
-
-  {%- if site.disqus.shortname -%}
-    {%- include disqus_comments.html -%}
-  {%- endif -%}
-
-  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 
   <nav class="post-nav">
     {%- if page.previous.url -%}

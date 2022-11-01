@@ -18,16 +18,16 @@ layout: default
         {{ content }}
       </div>
 
-      <p class="post-meta">
+      <small class="post-meta">
         <span itemprop="author" itemscope itemtype="http://schema.org/Person">– <a rel="author" itemProp="url" href="{{ page.author.url | relative_url }}">
             <span class="p-author h-card" itemprop="name">{{ page.author.name }}</span>
           </a>
         </span><br />
-      </p>
+      </small>
     </div>
   </div>
 
-  <p class="post-meta">
+  <small class="post-meta">
     <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
       {{ page.date | date: date_format }}
     </time>
@@ -37,13 +37,7 @@ layout: default
     {%- for tag in page.tags -%}
     • <span itemprop="keywords">{{ tag }}</span>
     {%- endfor -%}
-  </p>
-
-  {%- if site.disqus.shortname -%}
-    {%- include disqus_comments.html -%}
-  {%- endif -%}
-
-  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+  </small>
 
   <nav class="post-nav">
     {%- if page.previous.url -%}
