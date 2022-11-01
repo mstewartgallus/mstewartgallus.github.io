@@ -18,10 +18,8 @@ layout: default
         </time>
       </li>
       <li>
-        <address>
           <a rel="author" href="{{ page.author.url | relative_url }}"
               itemprop="author">{{ page.author.name }}</a>
-        </address>
       </li>
       {%- for category in page.categories -%}
       <li itemprop="keywords">{{ category }}</li>
