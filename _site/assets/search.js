@@ -1,48 +1,43 @@
 (() => {
     'use strict';
 
-    const values = (target) =>
-          Array.from(target.options)
-          .filter(o => o.selected)
-          .map(o => o.value);
+    const params = (new URL(document.location)).searchParams;
 
+    const tags = params.getAll('tag');
+    const categories = params.getAll('category');
+
+    if (tags.length === 0 && categories.length === 0) {
+        return;
+    }
+
+    const queryBuilder = ['[itemProp="blogPost"]'];
+    if (categories.length != 0) {
+        const catList =
+              categories
+              .map(cat => `[data-category~="${cat}"]`)
+              .join(',');
+        queryBuilder.push(`:where(${catList})`);
+    }
+    if (tags.length != 0) {
+        const tagList =
+          tags
+          .map(tag => `[data-tag~="${tag}"]`)
+          .join(',');
+        queryBuilder.push(`:where(${tagList})`);
+    }
+
+    const query = queryBuilder.join('');
     window.addEventListener('DOMContentLoaded', (event) => {
-        const category = document.querySelector('[name="post-filter"] [name="category"]');
-        const tag = document.querySelector('[name="post-filter"] [name="tag"]');
-        const posts = document.querySelectorAll('[itemProp="blogPost"]');
+        document
+            .querySelectorAll('[itemProp="blogPost"]')
+            .forEach(post => {
+            post.style.display = 'none';
+        });
 
-        const c = {
-            categories: values(category),
-            tags: values(tag)
-        };
-
-        const redisplay = () => {
-            const catList = c
-                  .categories
-                  .map(cat => `[data-category~="${cat}"]`)
-                  .join(',');
-            const tagList = c
-                  .tags
-                  .map(tag => `[data-tag~="${tag}"]`)
-                  .join(',');
-            const query = `[itemProp="blogPost"]:where(${catList}):where(${tagList})`;
-            posts.forEach(post => {
-                post.style.display = 'none';
+        document
+            .querySelectorAll(query)
+            .forEach(post => {
+                post.style.display = 'initial';
             });
-            document
-                .querySelectorAll(query)
-                .forEach(post => {
-                    post.style.display = 'initial';
-                });
-        };
-
-        category.addEventListener('change', (event) => {
-            c.categories = values(event.target);
-            redisplay();
-        });
-        tag.addEventListener('change', (event) => {
-            c.tags = values(event.target);
-            redisplay();
-        });
     });
 })();

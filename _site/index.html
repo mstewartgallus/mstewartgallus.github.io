@@ -44,7 +44,7 @@
 
             <details class="post-filter">
               <summary>Filter Posts</summary>
-              <form rel="search" role="search" name="post-filter" onsubmit="void()"  method="get">
+              <form rel="search" role="search" name="post-filter" formaction="#search" method="get">
                 <fieldset>
                   <label for="category">
                     <span class="label">Category:</span>
@@ -52,10 +52,10 @@
                       <select id="category" name="category" multiple="multiple" size="2">
                         
                         
-                        <option selected="selected" value="poem">poem</option>
+                        <option value="poem">poem</option>
                         
                         
-                        <option selected="selected" value="prose">prose</option>
+                        <option value="prose">prose</option>
                         
                       </select>
                     </span>
@@ -69,30 +69,34 @@
                       <select id="tag" name="tag" multiple="multiple" size="5">
                         
                         
-                        <option selected="selected" value="2018">2018</option>
+                        <option value="2018">2018</option>
                         
                         
-                        <option selected="selected" value="2019">2019</option>
+                        <option value="2019">2019</option>
                         
                         
-                        <option selected="selected" value="2022">2022</option>
+                        <option value="2022">2022</option>
                         
                         
-                        <option selected="selected" value="coffee">coffee</option>
+                        <option value="coffee">coffee</option>
                         
                         
-                        <option selected="selected" value="if-she-breathes">if-she-breathes</option>
+                        <option value="if-she-breathes">if-she-breathes</option>
                         
                         
-                        <option selected="selected" value="the-night-ghost">the-night-ghost</option>
+                        <option value="the-night-ghost">the-night-ghost</option>
                         
                         
-                        <option selected="selected" value="the-ring-and-the-cup">the-ring-and-the-cup</option>
+                        <option value="the-ring-and-the-cup">the-ring-and-the-cup</option>
                         
                       </select>
                     </span>
                   </label>
                 </fieldset>
+
+                <span style="display:block; text-align:center">
+                  <button>Submit</button>
+                </span>
               </form>
             </details><article
               data-category="poem"

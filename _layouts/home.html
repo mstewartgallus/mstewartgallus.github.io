@@ -48,7 +48,7 @@
 
             <details class="post-filter">
               <summary>Filter Posts</summary>
-              <form rel="search" role="search" name="post-filter" onsubmit="void()"  method="get">
+              <form rel="search" role="search" name="post-filter" formaction="#search" method="get">
                 <fieldset>
                   <label for="category">
                     <span class="label">Category:</span>
@@ -56,7 +56,7 @@
                       <select id="category" name="category" multiple="multiple" size="2">
                         {% for category in categories %}
                         {% assign cat = category[0] | escape %}
-                        <option selected="selected" value="{{ cat }}">{{ cat }}</option>
+                        <option value="{{ cat }}">{{ cat }}</option>
                         {% endfor %}
                       </select>
                     </span>
@@ -70,12 +70,16 @@
                       <select id="tag" name="tag" multiple="multiple" size="5">
                         {% for tag in tags %}
                         {% assign tg = tag[0] | escape %}
-                        <option selected="selected" value="{{ tg }}">{{ tg }}</option>
+                        <option value="{{ tg }}">{{ tg }}</option>
                         {% endfor %}
                       </select>
                     </span>
                   </label>
                 </fieldset>
+
+                <span style="display:block; text-align:center">
+                  <button>Submit</button>
+                </span>
               </form>
             </details>
 
