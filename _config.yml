@@ -27,6 +27,8 @@ github: mstewartgallus
 linkedin: mstewartgallus
 stackoverflow: "Molossus Spondee"
 
+source: src
+
 defaults:
   -
     scope:

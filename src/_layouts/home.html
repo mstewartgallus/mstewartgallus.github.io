@@ -13,7 +13,9 @@
         <article class="home" itemprop="mainEntityOfPage" itemtype="http://schema.org/WebSite" itemscope itemid="{{ "/" | absolute_url }}">
           <header>
             {%- if site.title -%}
-            <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url"><h1 class="page-heading" itemprop="name">{{ site.title | escape }}</h1></a>
+            <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+              <h1 class="page-heading" itemprop="name">{{ site.title | escape }}</h1>
+            </a>
             {%- endif -%}
           </header>
 
@@ -44,7 +46,9 @@
           {%- if site.posts.size > 0 -%}
           <main aria-label="Content">
             <header>
-              <a href="#contents"><h2 id="contents" class="post-list-heading">Contents</h2></a>
+              <a href="#contents">
+                <h2 id="contents" class="post-list-heading">Contents</h2>
+              </a>
             </header>
 
             <div style="text-align:center">
