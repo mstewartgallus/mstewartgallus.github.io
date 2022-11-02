@@ -16,7 +16,8 @@
 <meta property="og:type" content="website">
 <meta name="og:site_name" content="Words to Kick Your Teeth Out">
 <meta property="og:description" content="lol, lmao">
-</head>
+<script defer async src="/assets/search.js"></script>
+  </head>
   <body itemtype="http://schema.org/WebPage" itemscope itemid="https://mstewartgallus.github.io/">
     <div class="page-content">
       <div class="wrapper">
@@ -769,52 +770,5 @@ My gut grinds together and my burning parched throat chokes itself.</p>
             </article></main></div>
       </div>
     </div>
-
-    <script>
-      const values = (target) =>
-            Array.from(target.options)
-            .filter(o => o.selected)
-            .map(o => o.value);
-
-      const category = document.querySelector('[name="post-filter"] [name="category"]');
-      const tag = document.querySelector('[name="post-filter"] [name="tag"]');
-      const postList = document.querySelector('.post-list');
-
-      const c = {
-          categories: values(category),
-          tags: values(tag)
-      };
-
-      const redisplay = () => {
-          const catList = c
-                .categories
-                .map(cat => `[data-category~="${cat}"]`)
-                .join(',');
-          const tagList = c
-                .tags
-                .map(tag => `[data-tag~="${tag}"]`)
-                .join(',');
-          const query = `.post-list > li:where(${catList}):where(${tagList})`;
-          document
-              .querySelectorAll('.post-list > li')
-              .forEach(post => {
-                  post.style.display = 'none';
-              });
-          document
-              .querySelectorAll(query)
-              .forEach(post => {
-                  post.style.display = 'initial';
-              });
-      };
-
-      category.addEventListener('change', (event) => {
-          c.categories = values(event.target);
-          redisplay();
-      });
-      tag.addEventListener('change', (event) => {
-          c.tags = values(event.target);
-          redisplay();
-      });
-    </script>
   </body>
 </html>
