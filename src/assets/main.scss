@@ -12,6 +12,7 @@ $grey-color-dark:  darken($grey-color, 25%) ;
 @import "{{ site.theme }}";
 
 $brand-color-light: lighten($brand-color, 54%) ;
+$brand-color-dark:  darken($brand-color, 25%) ;
 
 // Hide select arrow
 select {
@@ -22,43 +23,40 @@ select {
 select::-ms-expand { display: none ; }
 
 // Reset
-select {
+select, option, button {
+    cursor: none;
     background-color: transparent;
     border: none;
     padding: 0;
     margin: 0;
     font-family: inherit;
     font-size: inherit;
-    cursor: inherit;
     line-height: inherit;
     outline: none;
 }
 
+select, option, button { cursor: pointer }
+select, button { border-style: solid; }
+select, button { border-width: 1px ; padding: 3px ; }
+select:focus, button:focus { border-width: 2px ; padding: 2px }
+
+option:hover, button:hover { background-color: $brand-color-light }
+option:active, button:active { background-color: $brand-color-dark }
+
 // Style select
-option {
-    background: transparent ;
-    border-width: 1px ;
-}
-option {
-    border-style: dashed none none none ;
-}
-option:first-child {
-    border-style: none ;
-}
+option { border-width: 1px ; }
+option { border-style: dashed none none none ; }
+option:first-child { border-style: none ; }
+
 option:checked {
-    background: #F0F0FF ;
     background: $brand-color-light ;
 }
 select {
     margin-top: 2px ;
     margin-bottom: 5px ;
-    border-style: solid ;
     text-align: center ;
     min-width: 9em ;
 }
-
-select { border-width: 1px ; padding: 3px ; }
-select:focus { border-width: 2px ; padding: 2px }
 
 fieldset {
     display: inline-block ;
