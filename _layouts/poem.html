@@ -3,7 +3,7 @@ layout: default
 ---
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-<article class="poem post h-entry" itemscope itemprop="blogPost" itemtype="https://schema.org/BlogPosting"
+<div class="poem post h-entry" itemscope itemprop="blogPost" itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
 
   <div style="text-align: center">
@@ -14,9 +14,9 @@ layout: default
     </header>
 
     <div style="display:inline-block;text-align: left">
-      <div class="post-content e-content" itemprop="articleBody">
+      <main aria-label="Content" class="post-content e-content" itemprop="articleBody">
         {{ content }}
-      </div>
+      </main>
 
       <p>
         <small class="post-meta">
@@ -28,20 +28,22 @@ layout: default
     </div>
   </div>
 
-  <ul class="metadata">
-    <li>
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }}
-      </time>
-    </li>
-    {%- for category in page.categories -%}
-    <li itemprop="keywords">{{ category }}</li>
-    {%- endfor -%}
-    {%- for tag in page.tags -%}
-    <li itemprop="keywords">{{ tag }}</li>
-    {%- endfor -%}
-  </ul>
-</article>
+  <footer>
+    <ul class="metadata">
+      <li>
+        <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+          {{ page.date | date: date_format }}
+        </time>
+      </li>
+      {%- for category in page.categories -%}
+      <li itemprop="keywords">{{ category }}</li>
+      {%- endfor -%}
+      {%- for tag in page.tags -%}
+      <li itemprop="keywords">{{ tag }}</li>
+      {%- endfor -%}
+    </ul>
+  </footer>
+</div>
 
 <nav class="post-nav">
   {%- if page.previous.url -%}

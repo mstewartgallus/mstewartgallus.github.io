@@ -3,7 +3,7 @@ layout: default
 ---
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-<article class="post h-entry"
+<div class="post h-entry"
          itemscope itemprop="blogPost" itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
 
@@ -30,10 +30,10 @@ layout: default
     </ul>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
+  <main aria-label="Content" class="post-content e-content" itemprop="articleBody">
     {{ content }}
-  </div>
-</article>
+  </main>
+</div>
 
 <nav class="post-nav">
   {%- if page.previous.url -%}
