@@ -1,3 +1,5 @@
+{%- assign date_id_format = "%Y-%m-%d" -%}
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 <div class="post-meta">
   <address>
     – <a rel="author" itemprop="author" href="{{ page.author.url | relative_url }}">{{ page.author.name | escape }}</a>
