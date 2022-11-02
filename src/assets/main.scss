@@ -15,15 +15,13 @@ $brand-color-light: lighten($brand-color, 40%) ;
 $brand-color-ultralight: lighten($brand-color, 54%) ;
 
 // Hide select arrow
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
 select::-ms-expand { display: none ; }
 
 // Reset
 select, option, button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     cursor: none;
     background-color: transparent;
     border: none;
