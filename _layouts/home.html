@@ -6,7 +6,6 @@
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
   <head>
     {%- include head.html -%}
-    <script defer async src="{{ "/assets/search.js" | relative_url }}"></script>
   </head>
   <body itemtype="http://schema.org/WebPage" itemscope itemid="{{ page.url | absolute_url }}">
     <div class="page-content">
@@ -31,7 +30,9 @@
           <article>
             {%- if page.title -%}
             <header>
-              <a itemprop="url" rel="bookmark" href="{{ page.url | relative_url }}"><h2 class="page-heading" itemprop="name headline">{{ page.title | escape }}</h2></a>
+              <a itemprop="url" rel="bookmark" href="{{ page.url | relative_url }}">
+                <h2 class="page-heading" itemprop="name headline">{{ page.title | escape }}</h2>
+              </a>
             </header>
             {%- endif -%}
 
@@ -43,50 +44,15 @@
           {%- if site.posts.size > 0 -%}
           <main aria-label="Content">
             <header>
-              <a rel="search" href="{{ "/#search" | relative_url }}"><h2 id="search" class="post-list-heading">Contents</h2></a>
+              <a href="#contents"><h2 id="contents" class="post-list-heading">Contents</h2></a>
             </header>
 
-            <details class="post-filter">
-              <summary>Filter Posts</summary>
-              <form rel="search" role="search" name="post-filter" formaction="#search" method="get">
-                <fieldset>
-                  <label for="category">
-                    <span class="label">Category:</span>
-                    <span style="display:block">
-                      <select id="category" name="category" multiple="multiple" size="2">
-                        {% for category in categories %}
-                        {% assign cat = category[0] | escape %}
-                        <option value="{{ cat }}">{{ cat }}</option>
-                        {% endfor %}
-                      </select>
-                    </span>
-                  </label>
-                </fieldset>
-
-                <fieldset>
-                  <label for="tag">
-                    <span class="label">Tag:</span>
-                    <span style="display:block">
-                      <select id="tag" name="tag" multiple="multiple" size="5">
-                        {% for tag in tags %}
-                        {% assign tg = tag[0] | escape %}
-                        <option value="{{ tg }}">{{ tg }}</option>
-                        {% endfor %}
-                      </select>
-                    </span>
-                  </label>
-                </fieldset>
-
-                <span style="display:block; text-align:center">
-                  <button>Search</button>
-                </span>
-              </form>
-            </details>
+            <div style="text-align:center">
+              <a href="{{ "search" | relative_url }}" rel="search">Search</a>
+            </div>
 
             {%- for post in site.posts -%}
             <article
-              data-category="{{ post.categories | join: " " | escape }}"
-              data-tag="{{ post.tags | join: " " | escape }}"
               itemprop="blogPost"
               itemscope
               itemtype="http://schema.org/BlogPosting"
@@ -113,8 +79,6 @@
               <span itemprop="author" itemscope itemtype="http://schema.org/Person">
                 <link rel="author" itemprop="url" href="{{ post.author.url | relative_url }}">
               </span>
-
-              <div class="post-excerpt" itemprop="description">{{ post.excerpt }}</div>
             </article>
             {%- endfor -%}
           </main>
