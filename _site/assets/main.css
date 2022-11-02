@@ -321,6 +321,8 @@ fieldset { display: inline-block; border: none; }
 
 .page-content { padding: 0; }
 
+.page-content { flex: initial; }
+
 .home { text-align: center; padding-bottom: 2em; margin-bottom: 2em; border-style: none none solid none; border-width: 1px; }
 
 .post-list-heading { text-align: center; }

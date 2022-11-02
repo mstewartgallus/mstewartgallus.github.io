@@ -11,7 +11,7 @@
         <article class="home" itemprop="mainEntityOfPage" itemtype="http://schema.org/WebSite" itemscope itemid="{{ "/" | absolute_url }}">
           <header>
             {%- if site.title -%}
-            <a itemprop="url" rel="bookmark" href="{{ page.url | relative_url }}"><h1 class="page-heading" itemprop="name">{{ site.title | escape }}</h1></a>
+            <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url"><h1 class="page-heading" itemprop="name">{{ site.title | escape }}</h1></a>
             {%- endif -%}
           </header>
 
@@ -26,11 +26,11 @@
 
         <div itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
           <article>
+            {%- if page.title -%}
             <header>
-              {%- if page.title -%}
               <a itemprop="url" rel="bookmark" href="{{ page.url | relative_url }}"><h2 class="page-heading" itemprop="name headline">{{ page.title | escape }}</h2></a>
-              {%- endif -%}
             </header>
+            {%- endif -%}
 
             <div>
               {{ content }}

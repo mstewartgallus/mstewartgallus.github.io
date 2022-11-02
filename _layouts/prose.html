@@ -3,43 +3,15 @@ layout: default
 ---
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-<div class="post h-entry"
-         itemscope itemprop="blogPost" itemtype="https://schema.org/BlogPosting"
-         itemid="{{ page.url | absolute_url }}">
+<header class="post-header">
+  <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+  </a>
+  {%- include metadata.html -%}
+</header>
 
-  <header class="post-header">
-    <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-      <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    </a>
-    <ul class="metadata">
-      <li>
-        <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-          {{ page.date | date: date_format }}
-        </time>
-      </li>
-      <li>
-          <a rel="author" href="{{ page.author.url | relative_url }}"
-              itemprop="author">{{ page.author.name }}</a>
-      </li>
-      {%- for category in page.categories -%}
-      <li itemprop="keywords">{{ category }}</li>
-      {%- endfor -%}
-      {%- for tag in page.tags -%}
-      <li itemprop="keywords">{{ tag }}</li>
-      {%- endfor -%}
-    </ul>
-  </header>
-
+<div class="post h-entry">
   <main aria-label="Content" class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </main>
 </div>
-
-<nav class="post-nav">
-  {%- if page.previous.url -%}
-  <a class="prev" href="{{page.previous.url}}" rel="prev">{{page.previous.title}}</a>
-  {%- endif -%}
-  {%- if page.next.url -%}
-  <a class="next" href="{{page.next.url}}" rel="next">{{page.next.title}}</a>
-  {%- endif -%}
-</nav>

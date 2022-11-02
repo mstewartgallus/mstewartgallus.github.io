@@ -3,53 +3,22 @@ layout: default
 ---
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-<div class="poem post h-entry" itemscope itemprop="blogPost" itemtype="https://schema.org/BlogPosting"
-         itemid="{{ page.url | absolute_url }}">
-
-  <div style="text-align: center">
-    <header class="post-header">
-      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-        <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-      </a>
-    </header>
-
-    <div style="display:inline-block;text-align: left">
-      <main aria-label="Content" class="post-content e-content" itemprop="articleBody">
-        {{ content }}
-      </main>
-
-      <p>
-        <small class="post-meta">
-          <address>
-            – <a rel="author" itemprop="author" href="{{ page.author.url | relative_url }}">{{ page.author.name }}</a>
-          </address>
-        </small>
-      </p>
-    </div>
+<header style="text-align:center">
+  <div>
+    <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+      <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    </a>
   </div>
+</header>
 
-  <footer>
-    <ul class="metadata">
-      <li>
-        <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-          {{ page.date | date: date_format }}
-        </time>
-      </li>
-      {%- for category in page.categories -%}
-      <li itemprop="keywords">{{ category }}</li>
-      {%- endfor -%}
-      {%- for tag in page.tags -%}
-      <li itemprop="keywords">{{ tag }}</li>
-      {%- endfor -%}
-    </ul>
-  </footer>
+<div class="poem post h-entry" style="text-align: center">
+  <div style="display:inline-block;text-align: left">
+    <main aria-label="Content" class="post-content e-content" itemprop="articleBody">
+      {{ content }}
+    </main>
+
+    <footer>
+      {%- include metadata.html -%}
+    </footer>
+  </div>
 </div>
-
-<nav class="post-nav">
-  {%- if page.previous.url -%}
-  <a class="prev" href="{{page.previous.url}}" rel="prev">{{page.previous.title}}</a>
-  {%- endif -%}
-  {%- if page.next.url -%}
-  <a class="next" href="{{page.next.url}}" rel="next">{{page.next.title}}</a>
-  {%- endif -%}
-</nav>

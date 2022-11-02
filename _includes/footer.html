@@ -1,17 +1,12 @@
 <footer class="site-footer h-card">
   <div class="wrapper">
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-      </div>
-
-      <div class="footer-col footer-col-2">
-      </div>
-
-      <div class="footer-col footer-col-3">
-      </div>
+    <div class="post-nav">
+      {%- if page.previous.url -%}
+      <a class="prev" href="{{page.previous.url}}" rel="prev">{{page.previous.title | escape}}</a>
+      {%- endif -%}
+      {%- if page.next.url -%}
+      <a class="next" href="{{page.next.url}}" rel="next">{{page.next.title | escape}}</a>
+      {%- endif -%}
     </div>
-
   </div>
-
 </footer>

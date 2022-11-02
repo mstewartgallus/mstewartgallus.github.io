@@ -1,0 +1,18 @@
+<small class="post-meta">
+  <address>
+    – <a rel="author" itemprop="author" href="{{ page.author.url | relative_url }}">{{ page.author.name | escape }}</a>
+  </address>
+  <ul class="metadata">
+    <li>
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: date_format }}
+      </time>
+    </li>
+    {%- for category in page.categories -%}
+    <li itemprop="keywords">{{ category }}</li>
+    {%- endfor -%}
+    {%- for tag in page.tags -%}
+    <li itemprop="keywords">{{ tag }}</li>
+    {%- endfor -%}
+  </ul>
+</small>
