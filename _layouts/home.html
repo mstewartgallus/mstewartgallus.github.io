@@ -4,7 +4,9 @@
 {%- assign tags = site.tags | sort -%}
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
-  {%- include head.html -%}
+  <head>
+    {%- include head.html -%}
+  </head>
   <body itemtype="http://schema.org/WebPage" itemscope itemid="{{ page.url | absolute_url }}">
     <div class="page-content">
       <div class="wrapper">
