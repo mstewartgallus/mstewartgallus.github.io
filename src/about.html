@@ -11,10 +11,36 @@ permalink: /about/
   <address>
     <ul class="social-media-list">
       <li itemProp="name">Molossus Spondee</li>
-      <li><a itemprop="email" href="mailto:{{site.email}}">{{site.email}}</a></li>
-      {%- if site.github -%}<li><a itemProp="sameAs" href="https://github.com/{{ site.github| cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg> <span class="username">{{ site.github| escape }}</span></a></li>{%- endif -%}
-      {%- if site.linkedin -%}<li><a itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin| cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg> <span class="username">{{ site.linkedin| escape }}</span></a></li>{%- endif -%}
-      {%- if site.twitter -%}<li><a itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#twitter' | relative_url }}"></use></svg> <span class="username">{{ site.twitter.username | escape }}</span></a></li>{%- endif -%}
+      <li>
+        <a href="mailto:{{site.email}}">
+          <span itemprop="email">{{site.email}}</span>
+        </a>
+      </li>
+      <li>
+        <a itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
+          <svg class="svg-icon">
+            <use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}">
+            </use>
+          </svg>
+          <span class="username">{{ site.github| escape }}</span>
+        </a>
+      </li>
+      <li>
+        <a itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
+          <svg class="svg-icon">
+            <use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg>
+          <span class="username">{{ site.linkedin | escape }}</span>
+        </a>
+      </li>
+      <li>
+        <a itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
+          <svg class="svg-icon">
+            <use xlink:href="{{ '/assets/minima-social-icons.svg#twitter' | relative_url }}">
+            </use>
+          </svg>
+          <span class="username">{{ site.twitter.username | escape }}</span>
+        </a>
+      </li>
     </ul>
   </address>
 </article>
