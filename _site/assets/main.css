@@ -289,9 +289,9 @@ select, button { border-width: 1px; padding: 3px; }
 
 select:focus, button:focus { border-width: 2px; padding: 2px; }
 
-option:hover, button:hover { background-color: #e5beff; }
+option:hover, button:hover { background-color: #c977ff; }
 
-option:active, button:active { background-color: #1a002b; }
+option:active, button:active { background-color: #60a; }
 
 option { border-width: 1px; }
 
