@@ -4,7 +4,7 @@
 {%- assign site_title = site.title -%}
 {%- assign title = page.title | default: site_title -%}
 {%- assign description = page.description | default: page.excerpt | strip_html | default: site.description -%}
-{%- assign url = page.url | relative_url -%}
+{%- assign url = page.url | absolute_url -%}
 {%- assign author = page.author | default: site.author -%}
 {%- assign author_name = author.name -%}
 {%- assign author_url = author.url | relative_url -%}
