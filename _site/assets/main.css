@@ -1,5 +1,26 @@
 @charset "UTF-8";
-@use "sass:map";
+body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", Roboto, Helvetica, Arial, sans-serif; }
+
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { margin: 0; padding: 0; }
+
+select::-ms-expand { display: none; }
+
+select, option, button, input { -webkit-appearance: none; -moz-appearance: none; appearance: none; cursor: none; background-color: transparent; border: none; padding: 0; margin: 0; font-family: inherit; font-size: inherit; line-height: inherit; outline: none; }
+
+select, option, button { cursor: pointer; }
+
+select, button { border-style: solid; }
+
+select, button { border-width: 1px; padding: 3px; }
+
+select:focus, button:focus { border-width: 2px; padding: 2px; }
+
+option { border-width: 1px; }
+
+option { border-style: dashed none none none; }
+
+option:first-child { border-style: none; }
+
 /** Reset some basic elements */
 body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { margin: 0; padding: 0; }
 
@@ -276,35 +297,11 @@ table td { border: 1px solid #ccc4d5; }
 
 .highlight .il { color: #099; }
 
-select::-ms-expand { display: none; }
+h1 { text-align: center; }
 
-select, option, button { -webkit-appearance: none; -moz-appearance: none; appearance: none; cursor: none; background-color: transparent; border: none; padding: 0; margin: 0; font-family: inherit; font-size: inherit; line-height: inherit; outline: none; }
+.post-list { list-style-type: none; margin: 0; padding: 0; }
 
-select, option, button { cursor: pointer; }
-
-select, button { border-style: solid; }
-
-select, button { border-width: 1px; padding: 3px; }
-
-select:focus, button:focus { border-width: 2px; padding: 2px; }
-
-option:hover, button:hover { background-color: #BB60D2; }
-
-option:active, button:active { background-color: #9D01BE; }
-
-option { border-width: 1px; }
-
-option { border-style: dashed none none none; }
-
-option:first-child { border-style: none; }
-
-option:checked { background: #BB60D2; }
-
-select { margin-top: 2px; margin-bottom: 5px; text-align: center; min-width: 9em; }
-
-fieldset { display: inline-block; border: none; }
-
-.label { display: inline-block; margin-bottom: 8px; }
+.post-list > li { margin-top: 0.5em; margin-bottom: 0.5em; }
 
 .site-header, .site-footer { border: initial; }
 
@@ -338,9 +335,9 @@ fieldset { display: inline-block; border: none; }
 
 .poem .p-author::before { content: none; }
 
-.stanzas, .stanza { margin: 0; list-style-type: none; }
-
 .poem { text-align: center; }
+
+.stanzas, .stanza { margin: 0; list-style-type: none; }
 
 .stanzas { display: inline-block; text-align: left; }
 
@@ -348,14 +345,30 @@ fieldset { display: inline-block; border: none; }
 
 .stanza { margin-bottom: 15px; }
 
-hr { text-align: center; border: none; }
-
-hr::before { content: "***"; color: #BB60D2; }
-
 .metadata { margin: 0; padding: 0; list-style-type: none; color: #657; font-size: 14px; display: flex; gap: 0.2em; }
 
 .metadata > li::before { content: "• "; }
 
 .metadata > li:first-child::before { content: none; }
+
+option:hover, button:hover { background-color: #BB60D2; }
+
+option:active, button:active { background-color: #9D01BE; }
+
+option { border-width: 1px; }
+
+option { border-style: dashed none none none; }
+
+option:first-child { border-style: none; }
+
+option:checked { background: #BB60D2; }
+
+fieldset { display: inline-block; border: none; }
+
+.label { display: inline-block; margin-bottom: 8px; }
+
+hr { text-align: center; border: none; }
+
+hr::before { content: "***"; color: #BB60D2; }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,19 @@
+.poem { text-align: center ; }
+
+.stanzas, .stanza {
+    margin: 0 ;
+    list-style-type: none ;
+}
+
+.stanzas {
+    display: inline-block ;
+    text-align: left ;
+}
+
+.stanza {
+    // Tab indent hanging lines
+    text-indent: -4em ;
+    padding-left: 4em ;
+}
+
+.stanza { margin-bottom: 15px ; }
