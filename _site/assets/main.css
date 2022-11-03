@@ -305,7 +305,7 @@ body > * { min-width: 10em; width: 100%; max-width: 50em; }
 
 @media only screen and (min-width: 40em) { body { padding-left: 5em; padding-right: 5em; } }
 
-@media only screen and (min-height: 40em) { body { padding-top: 3em; padding-bottom: 3em; } }
+@media only screen and (min-height: 40em) { body { padding-top: 2em; padding-bottom: 3em; } }
 
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
@@ -361,7 +361,9 @@ body > * { min-width: 10em; width: 100%; max-width: 50em; }
 
 body { background-color: white; color: black; }
 
-h1 { font-size: 2.5em; line-height: 1.15em; margin-bottom: 0; }
+h1, h2, h3, h4, h5, h6 { font-weight: 400; }
+
+h1 { font-size: 2.5em; line-height: 1.15em; margin-top: 0; margin-bottom: 0; }
 
 a { text-decoration: none; }
 
