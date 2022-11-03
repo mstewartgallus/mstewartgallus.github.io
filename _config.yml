@@ -8,7 +8,6 @@ description: >-
 baseurl: ""
 url: "https://mstewartgallus.github.io"
 
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
