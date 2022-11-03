@@ -1,11 +1,13 @@
 @charset "UTF-8";
-body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", Roboto, Helvetica, Arial, sans-serif; }
+html, body, blockquote, pre, dl, dd, figure, select, option, button, input { margin: 0; padding: 0; }
 
-body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { margin: 0; padding: 0; }
+html, body, blockquote, pre, dl, dd, figure, h1, h2, h3, h4, h5, h6, p, hr select, option, button, input { border: none; font-family: inherit; vertical-align: baseline; }
+
+body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", Roboto, Helvetica, Arial, sans-serif; }
 
 select::-ms-expand { display: none; }
 
-select, option, button, input { -webkit-appearance: none; -moz-appearance: none; appearance: none; cursor: none; background-color: transparent; border: none; padding: 0; margin: 0; font-family: inherit; font-size: inherit; line-height: inherit; outline: none; }
+select, option, button, input { -webkit-appearance: none; -moz-appearance: none; appearance: none; cursor: none; background-color: transparent; border: none; font-family: inherit; font-size: inherit; line-height: inherit; outline: none; }
 
 select, option, button { cursor: pointer; }
 
@@ -297,6 +299,12 @@ table td { border: 1px solid #ccc4d5; }
 
 .highlight .il { color: #099; }
 
+body { display: flex; flex-direction: column; align-items: center; }
+
+.site-header, .site-footer { width: 100%; }
+
+body > * { width: 50em; max-width: 50em; }
+
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
 .post-list > li { margin-top: 0.5em; margin-bottom: 0.5em; }
@@ -335,7 +343,7 @@ table td { border: 1px solid #ccc4d5; }
 
 .poem { text-align: center; }
 
-.stanzas, .stanza { margin: 0; list-style-type: none; }
+.stanzas, .stanza { margin: 0; padding: 0; list-style-type: none; }
 
 .stanzas { display: inline-block; text-align: left; }
 
@@ -343,9 +351,9 @@ table td { border: 1px solid #ccc4d5; }
 
 .stanza { margin-bottom: 15px; }
 
-.metadata { margin: 0; padding: 0; list-style-type: none; color: #657; font-size: 14px; display: flex; gap: 0.2em; }
+.metadata { margin: 0; padding: 0; list-style-type: none; color: #26202d; font-size: 14px; display: flex; gap: 0.2em; }
 
-.metadata > li::before { content: "• "; }
+.metadata > li::before { content: "• "; color: #ccc4d5; }
 
 .metadata > li:first-child::before { content: none; }
 
@@ -368,5 +376,9 @@ fieldset { display: inline-block; border: none; }
 hr { text-align: center; border: none; }
 
 hr::before { content: "***"; color: #BB60D2; }
+
+.post-list > li { border-width: 1px; border-style: dotted none none none; padding: 0.2em; border-color: #BB60D2; }
+
+.post-list > li:first-child { border-style: none; }
 
 /*# sourceMappingURL=main.css.map */

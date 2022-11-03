@@ -1,17 +1,31 @@
+html, body,
+blockquote, pre,
+dl, dd, figure,
+select, option, button, input {
+  margin: 0;
+  padding: 0;
+}
+
+html, body,
+blockquote, pre,
+dl, dd, figure,
+h1, h2, h3, h4, h5, h6, p, hr
+select, option, button, input {
+  border: none ;
+  font-family: inherit ;
+  vertical-align: baseline ;
+}
+
+// body {
+//     line-height: 1.2em ;
+// }
+
 body {
     font-family: -apple-system,
                  system-ui,
                  BlinkMacSystemFont,
                  "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji",
                  Roboto, Helvetica, Arial, sans-serif ;
-}
-
-body,
-h1, h2, h3, h4, h5, h6,
-p, blockquote, pre, hr,
-dl, dd, ol, ul, figure {
-  margin: 0;
-  padding: 0;
 }
 
 // Hide select arrow
@@ -24,8 +38,6 @@ select, option, button, input {
     cursor: none;
     background-color: transparent;
     border: none;
-    padding: 0;
-    margin: 0;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;

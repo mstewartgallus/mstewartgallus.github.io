@@ -29,3 +29,14 @@ hr::before {
     content: "***" ;
     color: color(primary, lighter) ;
 }
+
+.post-list > li {
+    border-width: 1px ;
+    border-style: dotted none none none ;
+    padding: 0.2em ;
+    border-color: color(primary, lighter) ;
+}
+
+.post-list > li:first-child {
+    border-style: none ;
+}

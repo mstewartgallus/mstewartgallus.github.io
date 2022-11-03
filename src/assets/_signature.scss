@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     list-style-type: none ;
-    color: $grey-color ;
+    color: $grey-color-dark ;
     font-size: 14px ;
     display: flex ;
     gap: 0.2em ;
@@ -10,6 +10,7 @@
 
 .metadata > li::before {
     content: "• " ;
+    color: $grey-color-light ;
 }
 .metadata > li:first-child::before {
     content: none ;
