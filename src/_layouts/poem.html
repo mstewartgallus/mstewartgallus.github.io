@@ -4,7 +4,9 @@
     {%- include head.html -%}
   </head>
   <body itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    {%- include header.html -%}
+    <nav>
+      {%- include nav.html -%}
+    </nav>
     <header style="text-align:center">
       <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
         <h1>{{ page.title | escape }}</h1>
@@ -12,7 +14,7 @@
     </header>
 
     <div style="text-align:center"
-          itemscope
+         itemscope
          itemprop="blogPost"
          itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
@@ -27,6 +29,8 @@
         </footer>
       </div>
     </div>
-    {%- include footer.html -%}
+    <footer>
+      {%- include footer.html -%}
+    </footer>
   </body>
 </html>

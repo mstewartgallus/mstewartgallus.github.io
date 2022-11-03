@@ -1,0 +1,21 @@
+option:hover, button:hover { background-color: color(primary, lighter) ; }
+option:active, button:active { background-color: color(primary, default) ; }
+
+// Style select
+option { border-width: 1px ; }
+option { border-style: dashed none none none ; }
+option:first-child { border-style: none ; }
+
+option:checked {
+    background: color(primary, lighter) ;
+}
+
+fieldset {
+    display: inline-block ;
+    border: none ;
+}
+
+.label {
+    display: inline-block ;
+    margin-bottom: 8px ;
+}

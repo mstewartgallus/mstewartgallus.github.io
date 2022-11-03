@@ -4,7 +4,9 @@
     {%- include head.html -%}
   </head>
   <body itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    {%- include header.html -%}
+    <nav>
+      {%- include nav.html -%}
+    </nav>
     <div itemscope
          itemprop="blogPost"
          itemtype="https://schema.org/BlogPosting"
@@ -20,6 +22,8 @@
         {{ content }}
       </main>
     </div>
-    {%- include footer.html -%}
+    <footer>
+      {%- include footer.html -%}
+    </footer>
   </body>
 </html>

@@ -1,13 +1,8 @@
-body {
-    background-color: white ;
-    color: black ;
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400 ;
 }
 h1 {
-    font-size: 2.4em ;
+    font-size: 2.2em ;
     line-height: 1.15em ;
     margin-top: 0 ;
     margin-bottom: 0.1em;
@@ -22,30 +17,6 @@ a:hover {
     text-decoration: underline ;
 }
 
-
-option:hover, button:hover { background-color: color(primary, lighter) ; }
-option:active, button:active { background-color: color(primary, default) ; }
-
-// Style select
-option { border-width: 1px ; }
-option { border-style: dashed none none none ; }
-option:first-child { border-style: none ; }
-
-option:checked {
-    background: color(primary, lighter) ;
-}
-
-fieldset {
-    display: inline-block ;
-    border: none ;
-}
-
-.label {
-    display: inline-block ;
-    margin-bottom: 8px ;
-}
-
-
 hr {
     text-align: center ;
     border: none ;
@@ -58,7 +29,10 @@ hr::before {
 .post-list > li {
     border-width: 1px ;
     border-style: dotted none none none ;
-    padding: 0.2em ;
+    padding-top: 0.3em ;
+    padding-bottom: 0.1em ;
+    margin-top: 0.2em ;
+    margin-bottom: 0.2em ;
     border-color: color(primary, lighter) ;
 }
 
