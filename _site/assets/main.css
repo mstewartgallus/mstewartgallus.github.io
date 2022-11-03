@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@use "sass:map";
 /** Reset some basic elements */
 body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure { margin: 0; padding: 0; }
 
@@ -28,9 +29,9 @@ li > ul, li > ol { margin-bottom: 0; }
 h1, h2, h3, h4, h5, h6 { font-weight: 400; }
 
 /** Links */
-a { color: #60a; text-decoration: none; }
+a { color: #9D01BE; text-decoration: none; }
 
-a:visited { color: #38005e; }
+a:visited { color: #5e0172; }
 
 a:hover { color: black; text-decoration: underline; }
 
@@ -287,9 +288,9 @@ select, button { border-width: 1px; padding: 3px; }
 
 select:focus, button:focus { border-width: 2px; padding: 2px; }
 
-option:hover, button:hover { background-color: #c977ff; }
+option:hover, button:hover { background-color: #BB60D2; }
 
-option:active, button:active { background-color: #60a; }
+option:active, button:active { background-color: #9D01BE; }
 
 option { border-width: 1px; }
 
@@ -297,7 +298,7 @@ option { border-style: dashed none none none; }
 
 option:first-child { border-style: none; }
 
-option:checked { background: #e5beff; }
+option:checked { background: #BB60D2; }
 
 select { margin-top: 2px; margin-bottom: 5px; text-align: center; min-width: 9em; }
 
@@ -310,20 +311,6 @@ fieldset { display: inline-block; border: none; }
 .site-header { min-height: 30px; }
 
 .site-header .wrapper div { position: relative; }
-
-.site-nav { position: absolute; top: 1.5em; right: 0.2em; background-color: white; border: 1px solid #ccc4d5; }
-
-.site-nav { min-width: 5em; min-height: 3em; text-align: left; line-height: initial; border-style: solid; border-width: 1px; border-radius: 2px; padding: 5px; }
-
-.site-nav > menu { padding: 0; margin: 0; list-style-type: none; }
-
-.nav-details { float: right; }
-
-.nav-details > summary { display: block; border-color: #657; border-style: solid; border-width: 1px; border-radius: 1px; margin: 2px; padding: 2px 4px 2px 4px; }
-
-.nav-details[open] > summary { background-color: white; }
-
-.nav-details[open] > summary { background-color: #ccc4d5; }
 
 .page-content { padding: 0; }
 
@@ -363,7 +350,7 @@ fieldset { display: inline-block; border: none; }
 
 hr { text-align: center; border: none; }
 
-hr::before { content: "***"; color: #657; }
+hr::before { content: "***"; color: #BB60D2; }
 
 .metadata { margin: 0; padding: 0; list-style-type: none; color: #657; font-size: 14px; display: flex; gap: 0.2em; }
 
