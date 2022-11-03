@@ -65,3 +65,14 @@ hr::before {
 .post-list > li:first-child {
     border-style: none ;
 }
+
+.social-media-list {
+    list-style-type: none ;
+    margin: 0 ;
+    padding: 0 ;
+}
+
+.svg-icon {
+    width: 15px ;
+    height: 15px ;
+}

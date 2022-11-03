@@ -13,32 +13,22 @@ permalink: /about/
       <li itemProp="name">Molossus Spondee</li>
       <li>
         <a href="mailto:{{site.email}}">
-          <span itemprop="email">{{site.email}}</span>
+          email: <span itemprop="email">{{site.email}}</span>
         </a>
       </li>
       <li>
         <a itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
-          <svg class="svg-icon">
-            <use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}">
-            </use>
-          </svg>
-          <span class="username">{{ site.github| escape }}</span>
+          GitHub: {{ site.github| escape }}
         </a>
       </li>
       <li>
         <a itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
-          <svg class="svg-icon">
-            <use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg>
-          <span class="username">{{ site.linkedin | escape }}</span>
+          LinkedIn: {{ site.linkedin | escape }}
         </a>
       </li>
       <li>
         <a itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
-          <svg class="svg-icon">
-            <use xlink:href="{{ '/assets/minima-social-icons.svg#twitter' | relative_url }}">
-            </use>
-          </svg>
-          <span class="username">{{ site.twitter.username | escape }}</span>
+          Twitter: {{ site.twitter.username | escape }}
         </a>
       </li>
     </ul>
