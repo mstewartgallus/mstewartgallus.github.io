@@ -62,11 +62,9 @@
                 itemscope
                 itemtype="http://schema.org/BlogPosting"
                 itemid="{{ post.url | absolute_url }}">
-                <header>
                   <a itemprop="url" href="{{ post.url | relative_url }}">
                     <span itemprop="name headline">{{ post.title | escape }}</span>
                   </a>
-                </header>
 
                 <ul class="metadata">
                   <li>

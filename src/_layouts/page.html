@@ -5,13 +5,12 @@
   </head>
   <body itemprop="mainEntity" itemtype="http://schema.org/WebPage" itemscope>
     {%- include header.html -%}
-    <main class="wrapper">
-      <!-- FIXME move out ? -->
-      <header>
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-        </a>
-      </header>
+    <header>
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        <h1 itemprop="name headline">{{ page.title | escape }}</h1>
+      </a>
+    </header>
+    <main>
       {{ content }}
     </main>
   </body>

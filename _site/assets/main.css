@@ -363,7 +363,9 @@ body { background-color: white; color: black; }
 
 h1, h2, h3, h4, h5, h6 { font-weight: 400; }
 
-h1 { font-size: 2.5em; line-height: 1.15em; margin-top: 0; margin-bottom: 0; }
+h1 { font-size: 2.5em; line-height: 1.15em; margin-top: 0; margin-bottom: 0.1em; }
+
+header { margin-bottom: 1.1em; }
 
 a { text-decoration: none; }
 
