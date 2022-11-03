@@ -301,9 +301,9 @@ table td { border: 1px solid #ccc4d5; }
 
 body { display: flex; flex-direction: column; align-items: center; }
 
-.site-header, .site-footer { width: 100%; }
+body { padding-left: 0.3em; padding-right: 0.3em; }
 
-body > * { width: 50em; max-width: 50em; }
+body > * { min-width: 10em; width: 100%; max-width: 50em; }
 
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
