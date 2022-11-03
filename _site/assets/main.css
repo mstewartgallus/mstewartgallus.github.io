@@ -357,6 +357,10 @@ body > * { width: 50em; max-width: 50em; }
 
 .metadata > li:first-child::before { content: none; }
 
+a { text-decoration: none; }
+
+a:hover { text-decoration: underline; }
+
 option:hover, button:hover { background-color: #BB60D2; }
 
 option:active, button:active { background-color: #9D01BE; }

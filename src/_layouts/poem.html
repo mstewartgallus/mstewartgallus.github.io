@@ -11,19 +11,21 @@
       </a>
     </header>
 
-    <div class="wrapper"
-         itemscope
+    <div style="text-align:center"
+          itemscope
          itemprop="blogPost"
          itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
 
-      <main aria-label="Content" itemprop="articleBody">
-        {{ content }}
-      </main>
+      <div style="display:inline-block">
+        <main aria-label="Content" itemprop="articleBody">
+          {{ content }}
+        </main>
 
-      <footer>
-        {%- include metadata.html -%}
-      </footer>
+        <footer>
+          {%- include metadata.html -%}
+        </footer>
+      </div>
     </div>
     {%- include footer.html -%}
   </body>

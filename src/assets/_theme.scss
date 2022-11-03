@@ -1,3 +1,11 @@
+a {
+    text-decoration: none ;
+}
+a:hover {
+    text-decoration: underline   ;
+}
+
+
 option:hover, button:hover { background-color: color(primary, lighter) ; }
 option:active, button:active { background-color: color(primary, default) ; }
 
