@@ -1,15 +1,26 @@
----
-layout: post
----
-<header class="post-header">
-  <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-  </a>
-  {%- include metadata.html -%}
-</header>
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    {%- include head.html -%}
+  </head>
+  <body itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
+    {%- include header.html -%}
+    <div class="wrapper"
+         itemscope
+         itemprop="blogPost"
+         itemtype="https://schema.org/BlogPosting"
+         itemid="{{ page.url | absolute_url }}">
+      <header class="post-header">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+        </a>
+        {%- include metadata.html -%}
+      </header>
 
-<div class="post h-entry">
-  <main aria-label="Content" class="post-content e-content" itemprop="articleBody">
-    {{ content }}
-  </main>
-</div>
+      <main aria-label="Content" itemprop="articleBody">
+        {{ content }}
+      </main>
+    </div>
+    {%- include footer.html -%}
+  </body>
+</html>

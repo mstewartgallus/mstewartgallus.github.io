@@ -1,22 +1,30 @@
----
-layout: post
----
-<header style="text-align:center">
-  <div>
-    <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-      <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    </a>
-  </div>
-</header>
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    {%- include head.html -%}
+  </head>
+  <body itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
+    {%- include header.html -%}
+    <header style="text-align:center">
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        <h1 itemprop="name headline">{{ page.title | escape }}</h1>
+      </a>
+    </header>
 
-<div class="poem post h-entry" style="text-align: center">
-  <div style="display:inline-block;text-align: left">
-    <main aria-label="Content" class="post-content e-content" itemprop="articleBody">
-      {{ content }}
-    </main>
+    <div class="wrapper"
+         itemscope
+         itemprop="blogPost"
+         itemtype="https://schema.org/BlogPosting"
+         itemid="{{ page.url | absolute_url }}">
 
-    <footer>
-      {%- include metadata.html -%}
-    </footer>
-  </div>
-</div>
+      <main aria-label="Content" itemprop="articleBody">
+        {{ content }}
+      </main>
+
+      <footer>
+        {%- include metadata.html -%}
+      </footer>
+    </div>
+    {%- include footer.html -%}
+  </body>
+</html>

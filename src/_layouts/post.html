@@ -1,9 +1,17 @@
----
-layout: default
----
-<div itemscope
-     itemprop="blogPost"
-     itemtype="https://schema.org/BlogPosting"
-     itemid="{{ page.url | absolute_url }}">
-{{ content }}
-</div>
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    {%- include head.html -%}
+  </head>
+  <body itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
+    {%- include header.html -%}
+    <div class="wrapper"
+         itemscope
+         itemprop="blogPost"
+         itemtype="https://schema.org/BlogPosting"
+         itemid="{{ page.url | absolute_url }}">
+      {{ content }}
+    </div>
+    {%- include footer.html -%}
+  </body>
+</html>
