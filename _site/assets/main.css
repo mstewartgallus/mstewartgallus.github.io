@@ -299,11 +299,13 @@ table td { border: 1px solid #ccc4d5; }
 
 .highlight .il { color: #099; }
 
-body { display: flex; flex-direction: column; align-items: center; }
-
-body { padding-left: 0.3em; padding-right: 0.3em; }
+body { display: block; padding-top: 0.2em; padding-bottom: 0.2em; padding-left: 0.3em; padding-right: 0.3em; }
 
 body > * { min-width: 10em; width: 100%; max-width: 50em; }
+
+@media only screen and (min-width: 40em) { body { padding-left: 5em; padding-right: 5em; } }
+
+@media only screen and (min-height: 40em) { body { padding-top: 3em; padding-bottom: 3em; } }
 
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
