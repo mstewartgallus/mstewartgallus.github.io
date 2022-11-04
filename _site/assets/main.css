@@ -63,6 +63,8 @@ body > * { min-width: 10em; width: 100%; max-width: 5.4in; }
 
 .home { text-align: center; border-width: 1px; border-style: none none solid none; padding-bottom: 2em; margin-bottom: 2em; }
 
+footer { margin-top: 2em; }
+
 .poem { text-align: center; }
 
 .stanzas, .stanza { margin: 0; padding: 0; list-style-type: none; }

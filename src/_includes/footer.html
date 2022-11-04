@@ -1,6 +1,6 @@
 {%- if page.previous.url -%}
-<a class="prev" href="{{page.previous.url}}" rel="prev">{{page.previous.title | escape}}</a>
+<a class="prev" href="{{page.previous.url}}" rel="prev">Previous: {{page.previous.title | escape}}</a>
 {%- endif -%}
 {%- if page.next.url -%}
-<a class="next" href="{{page.next.url}}" rel="next">{{page.next.title | escape}}</a>
+<a class="next" href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
 {%- endif -%}
