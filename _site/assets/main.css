@@ -45,13 +45,13 @@ option { border-style: dashed none none none; }
 
 option:first-child { border-style: none; }
 
-body { padding-top: 0.2em; padding-bottom: 0.2em; padding-left: 0.3em; padding-right: 0.3em; }
+body { padding-top: 0.5in; padding-bottom: 0.5in; padding-left: 1in; padding-right: 1in; }
 
-body > * { min-width: 10em; width: 100%; max-width: 45em; }
+body > * { min-width: 10em; width: 100%; max-width: 5.4in; }
 
-@media only screen and (min-width: 40em) { body { padding-left: 5em; padding-right: 5em; } }
+@media only screen and (max-width: 40em) { body { padding-left: 0.3em; padding-right: 0.3em; } }
 
-@media only screen and (min-height: 30em) { body { padding-top: 2em; padding-bottom: 3em; } }
+@media only screen and (max-height: 30em) { body { padding-top: 0.2em; padding-bottom: 0.2em; } }
 
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
