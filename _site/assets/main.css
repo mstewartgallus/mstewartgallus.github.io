@@ -3,6 +3,8 @@ html, body, blockquote, pre, dl, dd, figure, select, option, button, input { mar
 
 html, body, blockquote, pre, dl, dd, figure, h1, h2, h3, h4, h5, h6, p, hr select, option, button, input { border: none; font-family: inherit; vertical-align: baseline; }
 
+h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
+
 body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", Roboto, Helvetica, Arial, sans-serif; }
 
 select::-ms-expand { display: none; }
@@ -51,7 +53,7 @@ body > * { min-width: 10em; max-width: 5.4in; }
 
 nav { margin-top: -0.1in; margin-bottom: 0.1in; }
 
-@media only screen and (max-width: 40em) { body { padding: 1em; } nav { margin-top: -0.6em; margin-bottom: 0.6em; } }
+@media only screen and (max-width: 40em) { body { padding: 0.9em; } nav { margin-top: -0.4em; margin-bottom: 0.4em; } }
 
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
@@ -77,7 +79,7 @@ footer { margin-top: 1.5em; }
 
 .stanza { margin-bottom: 15px; }
 
-.metadata { margin: 0; padding: 0; list-style-type: none; color: #26202d; font-size: 14px; display: flex; gap: 0.2em; }
+.metadata { margin: 0; padding: 0; list-style-type: none; color: #26202d; font-size: 14px; display: flex; flex-wrap: wrap; gap: 0.2em; }
 
 .metadata > li::before { content: "• "; color: #ccc4d5; }
 
@@ -105,7 +107,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 400; }
 
 h1 { font-size: 2.2em; line-height: 1.15em; margin-top: 0; margin-bottom: 0.1em; }
 
-header { margin-bottom: 1.1em; }
+@media only screen and (max-width: 40em) { h1 { font-size: 1.5em; line-height: 1em; } }
 
 a { text-decoration: none; }
 

@@ -7,78 +7,78 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body itemtype="http://schema.org/WebPage" itemscope itemid="{{ page.url | absolute_url }}">
-    <article class="home" itemprop="mainEntityOfPage" itemtype="http://schema.org/WebSite" itemscope itemid="{{ "/" | absolute_url }}">
+  <body itemtype="http://schema.org/Blog" itemscope itemid="{{ page.url | absolute_url }}">
+    <div itemprop="mainEntityOfPage" itemscope itemtype="http://schema.org/WebPage"  itemid="{{ page.url | absolute_url }}">
+      <article class="home" itemprop="mainEntityOfPage" itemtype="http://schema.org/WebSite" itemscope itemid="{{ "/" | absolute_url }}">
+        <header>
+          {%- if site.title -%}
+          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+            <h1 itemprop="name">{{ site.title | escape }}</h1>
+          </a>
+          {%- endif -%}
+        </header>
+
+        <div itemprop="description">
+          {{ site.description | escape }}
+        </div>
+
+        <address>
+          <a itemprop="author" rel="author" href="{{ page.author.url | relative_url}}">{{ site.author.name | escape }}</a>
+        </address>
+      </article>
+    </div>
+
+    <article>
+      {%- if page.title -%}
       <header>
-        {%- if site.title -%}
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h1 itemprop="name">{{ site.title | escape }}</h1>
+        <a itemprop="url" rel="bookmark" href="{{ page.url | relative_url }}">
+          <h2 class="page-heading" itemprop="name headline">{{ page.title | escape }}</h2>
         </a>
-        {%- endif -%}
       </header>
+      {%- endif -%}
 
-      <div itemprop="description">
-        {{ site.description | escape }}
-      </div>
-
-      <address>
-        <a itemprop="author" rel="author" href="{{ page.author.url | relative_url}}">{{ site.author.name | escape }}</a>
-      </address>
+      {{ content }}
     </article>
 
-    <div itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
-      <article>
-        {%- if page.title -%}
-        <header>
-          <a itemprop="url" rel="bookmark" href="{{ page.url | relative_url }}">
-            <h2 class="page-heading" itemprop="name headline">{{ page.title | escape }}</h2>
+    {%- if site.posts.size > 0 -%}
+    <header>
+      <a href="#contents">
+        <h2 id="contents" class="post-list-heading">Contents</h2>
+      </a>
+    </header>
+
+    <main aria-label="Content">
+      <ol class="post-list">
+        {%- for post in site.posts -%}
+        <li
+          itemprop="blogPost"
+          itemscope
+          itemtype="http://schema.org/BlogPosting"
+          itemid="{{ post.url | absolute_url }}">
+          <a itemprop="url" href="{{ post.url | relative_url }}">
+            <span itemprop="name headline">{{ post.title | escape }}</span>
           </a>
-        </header>
-        {%- endif -%}
 
-        {{ content }}
-      </article>
-
-      {%- if site.posts.size > 0 -%}
-      <header>
-        <a href="#contents">
-          <h2 id="contents" class="post-list-heading">Contents</h2>
-        </a>
-      </header>
-
-      <main aria-label="Content">
-        <ol class="post-list">
-          {%- for post in site.posts -%}
-          <li
-            itemprop="blogPost"
-            itemscope
-            itemtype="http://schema.org/BlogPosting"
-            itemid="{{ post.url | absolute_url }}">
-            <a itemprop="url" href="{{ post.url | relative_url }}">
-              <span itemprop="name headline">{{ post.title | escape }}</span>
-            </a>
-
-            <ul class="metadata">
-              <li>
-                <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
-                  {{ post.date | date: date_format }}
-                </time>
-              </li>
-              {%- for category in post.categories -%}
-              <li itemprop="keywords">{{ category | escape }}</li>
-              {%- endfor -%}
-              {%- for tag in post.tags -%}
-              <li itemprop="keywords">{{ tag | escape }}</li>
-              {%- endfor -%}
-            </ul>
-            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-              <link rel="author" itemprop="url" href="{{ post.author.url | relative_url }}">
-            </span>
-          </li>
-          {%- endfor -%}
-        </ol>
-      </main>
-      {%- endif -%}
-    </div>
+          <ul class="metadata">
+            <li>
+              <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                {{ post.date | date: date_format }}
+              </time>
+            </li>
+            {%- for category in post.categories -%}
+            <li itemprop="keywords">{{ category | escape }}</li>
+            {%- endfor -%}
+            {%- for tag in post.tags -%}
+            <li itemprop="keywords">{{ tag | escape }}</li>
+            {%- endfor -%}
+          </ul>
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <link rel="author" itemprop="url" href="{{ post.author.url | relative_url }}">
+          </span>
+        </li>
+        {%- endfor -%}
+      </ol>
+    </main>
+    {%- endif -%}
   </body>
 </html>
