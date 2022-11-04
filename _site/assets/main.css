@@ -45,13 +45,13 @@ option { border-style: dashed none none none; }
 
 option:first-child { border-style: none; }
 
-body { padding: 1in; }
+body { display: flex; flex-direction: column; padding: 1in; }
 
 body > * { min-width: 10em; max-width: 5.4in; }
 
 nav { margin-top: -0.1in; margin-bottom: 0.1in; }
 
-@media only screen and (max-width: 40em) { body { padding: 1em; } nav { margin-top: -0.8em; margin-bottom: 0.8em; } }
+@media only screen and (max-width: 40em) { body { padding: 1em; } nav { margin-top: -0.6em; margin-bottom: 0.6em; } }
 
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
@@ -65,7 +65,7 @@ nav { margin-top: -0.1in; margin-bottom: 0.1in; }
 
 nav { text-align: right; }
 
-footer { margin-top: 2em; }
+footer { margin-top: 1.5em; }
 
 .poem { text-align: center; }
 

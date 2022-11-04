@@ -1,4 +1,6 @@
 body {
+    display: flex ;
+    flex-direction: column ;
     padding: 1in ;
 }
 
@@ -18,8 +20,8 @@ nav {
         padding: 1em ;
     }
     nav {
-        margin-top: -0.8em ;
-        margin-bottom: 0.8em ;
+        margin-top: -0.6em ;
+        margin-bottom: 0.6em ;
     }
 }
 
@@ -48,5 +50,5 @@ nav {
     text-align: right ;
 }
 footer {
-    margin-top: 2em ;
+    margin-top: 1.5em ;
 }
