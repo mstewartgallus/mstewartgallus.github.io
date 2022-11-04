@@ -31,13 +31,13 @@
         document
             .querySelectorAll('[itemProp="blogPost"]')
             .forEach(post => {
-            post.style.display = 'none';
+            post.hidden = true;
         });
 
         document
             .querySelectorAll(query)
             .forEach(post => {
-                post.style.display = 'initial';
+                post.hidden = false ;
             });
     });
 })();
