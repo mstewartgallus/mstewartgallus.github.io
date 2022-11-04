@@ -43,32 +43,37 @@ permalink: /search/
   </span>
 </form>
 
-<ol class="post-list">
-  {%- for post in site.posts -%}
-  <li
-    data-category="{{ post.categories | join: " " | escape }}"
-    data-tag="{{ post.tags | join: " " | escape }}"
-    itemprop="blogPost"
-    itemscope
-    itemtype="http://schema.org/BlogPosting"
-    itemid="{{ post.url | absolute_url }}">
-    <a itemprop="url" href="{{ post.url | relative_url }}">
-      <span itemprop="name headline">{{ post.title | escape }}</span>
-    </a>
+<output>
+  <ol class="post-list">
+    {%- for post in site.posts -%}
+    <li
+      data-category="{{ post.categories | join: " " | escape }}"
+      data-tag="{{ post.tags | join: " " | escape }}"
+      itemprop="blogPost"
+      itemscope
+      itemtype="http://schema.org/BlogPosting"
+      itemid="{{ post.url | absolute_url }}"
 
-    <ul class="metadata">
-      <li>
-        <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
-          {{ post.date | date: date_format }}
-        </time>
-      </li>
-      {%- for category in post.categories -%}
-      <li itemprop="keywords">{{ category | escape }}</li>
-      {%- endfor -%}
-      {%- for tag in post.tags -%}
-      <li itemprop="keywords">{{ tag | escape }}</li>
-      {%- endfor -%}
-    </ul>
-  </li>
-  {%- endfor -%}
-</ol>
+      hidden="true">
+
+      <a itemprop="url" href="{{ post.url | relative_url }}">
+        <span itemprop="name headline">{{ post.title | escape }}</span>
+      </a>
+
+      <ul class="metadata">
+        <li>
+          <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+            {{ post.date | date: date_format }}
+          </time>
+        </li>
+        {%- for category in post.categories -%}
+        <li itemprop="keywords">{{ category | escape }}</li>
+        {%- endfor -%}
+        {%- for tag in post.tags -%}
+        <li itemprop="keywords">{{ tag | escape }}</li>
+        {%- endfor -%}
+      </ul>
+    </li>
+    {%- endfor -%}
+  </ol>
+</output>

@@ -9,14 +9,12 @@
 }
 
 .stanzas {
-    display: inline-block ;
     text-align: left ;
 }
 
-.stanza {
+.stanza > li {
     // Tab indent hanging lines
     text-indent: -4em ;
-    padding-left: 4em ;
+    margin-left: 4em ;
+    text-align-last: justify ;
 }
-
-.stanza { margin-bottom: 15px ; }

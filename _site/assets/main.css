@@ -73,11 +73,9 @@ footer { margin-top: 1.5em; }
 
 .stanzas, .stanza { margin: 0; padding: 0; list-style-type: none; }
 
-.stanzas { display: inline-block; text-align: left; }
+.stanzas { text-align: left; }
 
-.stanza { text-indent: -4em; padding-left: 4em; }
-
-.stanza { margin-bottom: 15px; }
+.stanza > li { text-indent: -4em; margin-left: 4em; text-align-last: justify; }
 
 .metadata { margin: 0; padding: 0; list-style-type: none; color: #26202d; font-size: 14px; display: flex; flex-wrap: wrap; gap: 0.2em; }
 
