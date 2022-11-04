@@ -13,18 +13,19 @@
       </a>
     </header>
 
-    <div style="text-align:center"
+    <main style="text-align:center"
          itemscope
          itemprop="blogPost"
          itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
 
-      <main style="display:inline-block" aria-label="Content" itemprop="articleBody">
+      <div style="display:inline-block" aria-label="Content" itemprop="articleBody">
         {{ content }}
 
         {%- include metadata.html -%}
-      </main>
-    </div>
+      </div>
+    </main>
+
     <footer>
       {%- include footer.html -%}
     </footer>
