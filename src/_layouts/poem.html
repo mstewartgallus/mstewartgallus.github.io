@@ -19,15 +19,11 @@
          itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
 
-      <div style="display:inline-block">
-        <main aria-label="Content" itemprop="articleBody">
-          {{ content }}
-        </main>
+      <main style="display:inline-block" aria-label="Content" itemprop="articleBody">
+        {{ content }}
 
-        <footer>
-          {%- include metadata.html -%}
-        </footer>
-      </div>
+        {%- include metadata.html -%}
+      </main>
     </div>
     <footer>
       {%- include footer.html -%}

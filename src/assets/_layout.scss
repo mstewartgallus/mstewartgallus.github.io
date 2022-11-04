@@ -1,5 +1,4 @@
 body {
-    padding-top: 0.5in ;
     padding-bottom: 0.5in ;
     padding-left: 1in ;
     padding-right: 1in ;
@@ -12,6 +11,14 @@ body > * {
     max-width: 5.4in ;
 }
 
+body {
+    padding-top: 0.5in ;
+}
+nav {
+    margin-top: -0.1in ;
+    margin-bottom: 0.1in ;
+}
+
 @media only screen and (max-width: 40em) {
     body {
         padding-left: 0.3em ;
@@ -19,10 +26,14 @@ body > * {
     }
 }
 
-@media only screen and (max-height: 30em) {
+@media only screen and (max-width: 40em) {
     body {
         padding-top: 0.2em ;
         padding-bottom: 0.2em ;
+    }
+    nav {
+        margin-top: -0.1em ;
+        margin-bottom: 0.2em ;
     }
 }
 
@@ -47,6 +58,9 @@ body > * {
     margin-bottom: 2em ;
 }
 
+nav {
+    text-align: right ;
+}
 footer {
     margin-top: 2em ;
 }

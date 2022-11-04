@@ -45,13 +45,17 @@ option { border-style: dashed none none none; }
 
 option:first-child { border-style: none; }
 
-body { padding-top: 0.5in; padding-bottom: 0.5in; padding-left: 1in; padding-right: 1in; }
+body { padding-bottom: 0.5in; padding-left: 1in; padding-right: 1in; }
 
 body > * { min-width: 10em; width: 100%; max-width: 5.4in; }
 
+body { padding-top: 0.5in; }
+
+nav { margin-top: -0.1in; margin-bottom: 0.1in; }
+
 @media only screen and (max-width: 40em) { body { padding-left: 0.3em; padding-right: 0.3em; } }
 
-@media only screen and (max-height: 30em) { body { padding-top: 0.2em; padding-bottom: 0.2em; } }
+@media only screen and (max-width: 40em) { body { padding-top: 0.2em; padding-bottom: 0.2em; } nav { margin-top: -0.1em; margin-bottom: 0.2em; } }
 
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
@@ -62,6 +66,8 @@ body > * { min-width: 10em; width: 100%; max-width: 5.4in; }
 .next { float: right; }
 
 .home { text-align: center; border-width: 1px; border-style: none none solid none; padding-bottom: 2em; margin-bottom: 2em; }
+
+nav { text-align: right; }
 
 footer { margin-top: 2em; }
 
