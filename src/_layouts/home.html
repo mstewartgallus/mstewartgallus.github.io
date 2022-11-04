@@ -36,14 +36,8 @@
         </header>
         {%- endif -%}
 
-        <div>
-          {{ content }}
-        </div>
+        {{ content }}
       </article>
-
-      <div>
-        <a href="{{ "search" | relative_url }}" rel="search">Search</a>
-      </div>
 
       {%- if site.posts.size > 0 -%}
       <header>
