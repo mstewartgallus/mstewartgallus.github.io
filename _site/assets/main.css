@@ -119,6 +119,8 @@ hr { text-align: center; border: none; }
 
 hr::before { content: "***"; color: #BB60D2; }
 
+blockquote { border-style: none none none dashed; border-width: 1px; margin-left: 0.3em; padding-left: 0.6em; border-color: #7901B1; }
+
 .post-list > li { border-width: 1px; border-style: dotted none none none; padding-top: 0.3em; padding-bottom: 0.1em; margin-top: 0.2em; margin-bottom: 0.2em; border-color: #BB60D2; }
 
 .post-list > li:first-child { border-style: none; }

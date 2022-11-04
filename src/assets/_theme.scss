@@ -26,6 +26,14 @@ hr::before {
     color: color(primary, lighter) ;
 }
 
+blockquote {
+    border-style: none none none dashed ;
+    border-width: 1px;
+    margin-left: 0.3em;
+    padding-left: 0.6em;
+    border-color: color(primary, darker) ;
+}
+
 .post-list > li {
     border-width: 1px ;
     border-style: dotted none none none ;
