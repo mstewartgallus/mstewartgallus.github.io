@@ -30,17 +30,40 @@ const parseForm = (formData) => {
 const location = new URL(document.location);
 const base = location.href + ':' + location.port;
 
-const mainLoop = function *(posts, template, search) {
-    while (true) {
-        const event = yield;
+const posts = { value: null };
 
+(async () => {
+    const response = await fetch('{{ "./assets/search.json" | relative_url }}');
+    const json = await response.json();
+    posts.value = json
+          .map((post) => {
+              return {
+                  title: post.title,
+                  url: new URL(post.url, base),
+                  tags: new Set(post.tags),
+                  categories: new Set(post.categories),
+                  date: new Date(post.date)
+              }
+          });
+
+})();
+
+const mainLoop = function *(template, output) {
+    // ignore events until we load everything
+    let event = null;
+    while (posts.value === null) {
+        event = yield;
+    }
+    const db = posts.value;
+
+    while (true) {
         const [tags, categories] = parseForm(new FormData(event.target));
 
-        const filtered = posts.filter((post) =>
+        const filtered = db.filter((post) =>
             (tags.size === 0 || overlaps(tags, post.tags)) &&
                 (categories.size === 0 || overlaps(categories, post.categories)));
 
-        const elems = posts
+        const elems = filtered
               .map(post => {
                   const keywords = [];
                   for (const category of post.categories) {
@@ -78,37 +101,22 @@ const mainLoop = function *(posts, template, search) {
         postList.classList = ["post-list"];
         postList.append(...elems);
         output.replaceChildren(postList);
+
+        event = yield;
     }
 };
 
-await new Promise(res => window.addEventListener('DOMContentLoaded', res));
+window.addEventListener('DOMContentLoaded', (event) => {
+    const template = document.querySelector('#search-result').content;
+    const output = document.querySelector('#search-output');
+    const search = document.querySelector('#search');
 
-const template = document.querySelector('#search-result').content;
-const output = document.querySelector('#search-output');
-const search = document.querySelector('#search');
+    const loop = mainLoop(template, output);
+    // lose first value ?
+    loop.next();
 
-search.addEventListener('submit', event => {
-    event.preventDefault();
-});
-
-const response = await fetch('{{ "./assets/search.json" | relative_url }}');
-const json = await response.json();
-const posts = json
-      .map((post) => {
-          return {
-              title: post.title,
-              url: new URL(post.url, base),
-              tags: new Set(post.tags),
-              categories: new Set(post.categories),
-              date: new Date(post.date)
-          }
-      });
-
-const loop = mainLoop(posts, template, output);
-// lose first value ?
-loop.next();
-
-search.addEventListener('submit', event => {
-    event.preventDefault();
-    loop.next(event);
+    search.addEventListener('submit', event => {
+        event.preventDefault();
+        loop.next(event);
+    });
 });
