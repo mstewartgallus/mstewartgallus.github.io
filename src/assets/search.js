@@ -3,18 +3,24 @@
 
 (function (){
     'use strict';
-    const domload = new Promise(res => window.addEventListener('DOMContentLoaded', res));
+    const onload = new Promise(res => window.addEventListener('DOMContentLoaded', res));
+
+    const getTemplate = async function() {
+        await onload;
+        return document.querySelector('#search-result').content;
+    }
+    const getOutput = async function() {
+        await onload;
+        return document.querySelector('#search-output');
+    }
+    const getSearch = async function() {
+        await onload;
+        return document.querySelector('#search');
+    }
 
     const jsonurl = '{{ "./assets/search.json" | relative_url }}' ;
 
     const params = (new URL(document.location)).searchParams;
-
-    // const tags = new Set(params.getAll('tag'));
-    // const categories = new Set(params.getAll('category'));
-
-    // if (tags.size === 0 && categories.size === 0) {
-    //     return;
-    // }
 
     const location = new URL(window.location);
     const base = location.href + ':' + location.port;
@@ -27,7 +33,8 @@
         }
         return false;
     };
-    const database = async function() {
+
+    const getDatabase = async () => {
         const response = await fetch(jsonurl);
         const json = await response.json();
 
@@ -43,7 +50,7 @@
               });
     };
 
-    const onForm = (posts, template, output, search, formData) => {
+    const parseForm = (formData) => {
         const tags = new Set();
         const categories = new Set();
 
@@ -57,6 +64,14 @@
                 break;
             }
         }
+        return [tags, categories];
+    };
+
+    const onForm = async formData => {
+        const [tags, categories] = parseForm(formData);
+
+        const posts = await getDatabase();
+        const template = await getTemplate();
 
         const filtered =
               posts
@@ -90,6 +105,8 @@
                   return clone;
               });
 
+        const output = await getOutput();
+
         const postList = document.createElement('ol');
         postList.classList = ["post-list"];
         postList.append(...filtered);
@@ -97,19 +114,11 @@
     };
 
     (async function() {
-        await domload;
-
-        const posts = await database();
-
-        const template = document.querySelector('#search-result').content;
-        const output = document.querySelector('#search-output');
-
-        const search = document.querySelector('#search');
-
-        search.addEventListener('submit', (event) => {
+        const search = await getSearch();
+        search.addEventListener('submit', async event => {
             event.preventDefault();
 
-            onForm(posts, template, output, search, new FormData(event.target));
+            await onForm(new FormData(event.target));
         });
     })();
 })();
