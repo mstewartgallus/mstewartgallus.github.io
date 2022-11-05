@@ -10,7 +10,6 @@ permalink: /search/
 
 <template id="search-result">
   <li>
-
     <a class="search-url">
       <span class="search-title">Title</span>
     </a>
@@ -27,7 +26,7 @@ permalink: /search/
 
 <script type="module" defer async src="{{ "/assets/search.js" | relative_url }}"></script>
 
-<form id="search" rel="search" role="search" name="search-form" method="get">
+<form id="search" rel="search" role="search" name="search-form" method="get" action="">
   <fieldset>
     <label for="category">
       <span class="label">Category:</span>

@@ -103,7 +103,7 @@ const mainLoop = function *(template, output) {
     }
 };
 
-window.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', (event) => {
     const template = document.querySelector('#search-result').content;
     const output = document.querySelector('#search-output');
     const search = document.querySelector('#search');
