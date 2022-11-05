@@ -87,6 +87,10 @@ const template = document.querySelector('#search-result').content;
 const output = document.querySelector('#search-output');
 const search = document.querySelector('#search');
 
+search.addEventListener('submit', event => {
+    event.preventDefault();
+});
+
 const response = await fetch('{{ "./assets/search.json" | relative_url }}');
 const json = await response.json();
 const posts = json
