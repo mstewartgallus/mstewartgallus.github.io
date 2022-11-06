@@ -3,29 +3,27 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <nav>
+  <body class="poem"
+          itemscope
+          itemprop="blogPost"
+          itemtype="https://schema.org/BlogPosting"
+          itemid="{{ page.url | absolute_url }}">
+    <nav itemprop="mainEntityOf" itemtype="http://schema.org/Blog" itemscope>
       {%- include nav.html -%}
     </nav>
-    <header style="text-align:center">
+
+    <header>
       <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
         <h1 itemprop="name headline">{{ page.title | escape }}</h1>
       </a>
     </header>
 
-    <main style="text-align:center"
-         itemscope
-         itemprop="blogPost"
-         itemtype="https://schema.org/BlogPosting"
-         itemid="{{ page.url | absolute_url }}">
-
-      <div style="display:inline-block" aria-label="Content">
-        <div itemprop="articleBody">
-          {{ content }}
-        </div>
-
-        {%- include metadata.html -%}
+    <main aria-label="Content">
+      <div itemprop="articleBody">
+        {{ content }}
       </div>
+
+      {%- include metadata.html -%}
     </main>
 
     <footer aria-label="pagination">

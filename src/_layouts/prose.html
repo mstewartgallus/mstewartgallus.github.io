@@ -3,25 +3,25 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <nav>
-      {%- include nav.html -%}
-    </nav>
-    <div itemscope
+  <body itemscope
          itemprop="blogPost"
          itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
-      <header>
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-        </a>
-        {%- include metadata.html -%}
-      </header>
+    <nav itemprop="mainEntityOf" itemtype="http://schema.org/Blog" itemscope>
+      {%- include nav.html -%}
+    </nav>
 
-      <main aria-label="Content" itemprop="articleBody">
-        {{ content }}
-      </main>
-    </div>
+    <header>
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        <h1 itemprop="name headline">{{ page.title | escape }}</h1>
+      </a>
+      {%- include metadata.html -%}
+    </header>
+
+    <main aria-label="Content" itemprop="articleBody">
+      {{ content }}
+    </main>
+
     <footer aria-label="pagination">
       {%- include footer.html -%}
     </footer>

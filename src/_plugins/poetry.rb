@@ -13,7 +13,6 @@ module MSG
 
   def tohtml(stanzas)
     output = ""
-    output << '<div class="poem">'
     output << '<ol class="stanzas">'
     output << "\n"
     stanzas.each do |stanza|
@@ -30,7 +29,6 @@ module MSG
       output << "\n"
     end
     output << '</ol>'
-    output << '</div>'
     output.freeze
   end
 

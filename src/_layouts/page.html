@@ -3,8 +3,8 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body itemprop="mainEntity" itemtype="http://schema.org/WebPage" itemscope>
-    <nav>
+  <body itemtype="http://schema.org/WebPage" itemscope>
+    <nav itemprop="mainEntityOf" itemtype="http://schema.org/Blog" itemscope>
       {%- include nav.html -%}
     </nav>
     <header>
@@ -12,7 +12,7 @@
         <h1 itemprop="name headline">{{ page.title | escape }}</h1>
       </a>
     </header>
-    <main>
+    <main itemprop="mainEntity">
       {{ content }}
     </main>
   </body>
