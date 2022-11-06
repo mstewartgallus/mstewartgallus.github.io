@@ -53,7 +53,7 @@ body > * { min-width: 10em; max-width: 5.4in; }
 
 nav { margin-top: -0.1in; margin-bottom: 0.1in; }
 
-@media only screen and (max-width: 40em) { body { padding: 0.9em; } nav { margin-top: -0.4em; margin-bottom: 0.4em; } }
+@media only screen and (max-width: 40em) { body { padding: 0.8em; } nav { margin-top: -0.4em; margin-bottom: 0.4em; } }
 
 .post-list { list-style-type: none; margin: 0; padding: 0; }
 
