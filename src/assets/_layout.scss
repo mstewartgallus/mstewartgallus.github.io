@@ -1,20 +1,29 @@
 body {
     display: flex ;
     flex-direction: column ;
-    padding: 1.5in ;
-
     // FIXME kind of fragile ?
     max-width: 8.4in ;
-    border-style: none solid none solid ;
-    border-width: 2px ;
-    margin-left: 1in ;
-    min-height: 100vh ;
+    padding: 1.5in ;
+    margin-left: auto ;
+    margin-right: auto;
+}
+
+@media screen {
+    body {
+        border-style: none solid none solid ;
+        border-width: 2px ;
+        margin-left: 1in ;
+        min-height: 100vh ;
+    }
 }
 
 body > * {
     min-width: 10em ;
+    width: 100% ;
     // 8.4 inches A4 width - 2 * 1.5 inches margins
     max-width: 5.4in ;
+    margin-left: auto ;
+    margin-right: auto;
 }
 
 nav {
