@@ -49,7 +49,7 @@ option { border-style: dashed none none none; }
 
 option:first-child { border-style: none; }
 
-body { display: flex; flex-direction: column; padding: 1.5in; max-width: 8.4in; border-style: none dashed none dashed; border-width: 3px; margin-left: 1in; }
+body { display: flex; flex-direction: column; padding: 1.5in; max-width: 8.4in; border-style: none solid none solid; border-width: 2px; margin-left: 1in; min-height: 100vh; }
 
 body > * { min-width: 10em; max-width: 5.4in; }
 

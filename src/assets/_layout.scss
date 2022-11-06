@@ -5,9 +5,10 @@ body {
 
     // FIXME kind of fragile ?
     max-width: 8.4in ;
-    border-style: none dashed none dashed ;
-    border-width: 3px ;
+    border-style: none solid none solid ;
+    border-width: 2px ;
     margin-left: 1in ;
+    min-height: 100vh ;
 }
 
 body > * {
