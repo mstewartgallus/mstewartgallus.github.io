@@ -19,8 +19,10 @@
          itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
 
-      <div style="display:inline-block" aria-label="Content" itemprop="articleBody">
-        {{ content }}
+      <div style="display:inline-block" aria-label="Content">
+        <div itemprop="articleBody">
+          {{ content }}
+        </div>
 
         {%- include metadata.html -%}
       </div>
