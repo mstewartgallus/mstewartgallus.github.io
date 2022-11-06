@@ -1,4 +1,6 @@
 @charset "UTF-8";
+* { box-sizing: border-box; }
+
 html, body, blockquote, pre, dl, dd, figure, select, option, button, input { margin: 0; padding: 0; }
 
 html, body, blockquote, pre, dl, dd, figure, h1, h2, h3, h4, h5, h6, p, hr select, option, button, input { border: none; font-family: inherit; vertical-align: baseline; }
@@ -47,11 +49,13 @@ option { border-style: dashed none none none; }
 
 option:first-child { border-style: none; }
 
-body { display: flex; flex-direction: column; padding: 1in; }
+body { display: flex; flex-direction: column; padding: 1.5in; max-width: 8.4in; border-style: none solid none solid; border-width: 2px; border-color: #888; margin-left: 1in; }
 
 body > * { min-width: 10em; max-width: 5.4in; }
 
 nav { margin-top: -0.1in; margin-bottom: 0.1in; }
+
+@media only screen and (max-width: 60em) { body { margin-left: auto; margin-right: auto; border: none; } }
 
 @media only screen and (max-width: 40em) { body { padding: 0.8em; } nav { margin-top: -0.4em; margin-bottom: 0.4em; } }
 
