@@ -26,5 +26,17 @@
 <meta property="og:url" content="{{ url }}">
 <meta property="og:type" content="{{ type }}">
 <meta name="og:site_name" content="{{ site_title }}">
+<meta property="og:image" content="{{ icon }}" >
 <meta property="og:description" content="{{ description }}">
-<meta name="theme-color" content="#60a" >
+{%- if page.date -%}
+<meta property="og:article:author" content="{{ author_name }}">
+<meta property="og:article:publishted_time" content="{{ page.date | date: "%Y-%m-%d" }}">
+{%- for tag in page.tags -%}
+<meta property="og:article:tag" content="{{ tag | escape }}">
+{%- endfor -%}
+{%- for cat in page.category -%}
+<meta property="og:article:tag" content="{{ cat | escape }}">
+{%- endfor -%}
+{%- endif -%}
+<meta property="og:profile" content="{{ author_name }}">
+<meta property="og:profile:username" content="{{ author_name }}">
