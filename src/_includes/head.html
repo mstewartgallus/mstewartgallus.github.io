@@ -1,4 +1,5 @@
 {%- assign icon = "/assets/favicon.svg" | relative_url -%}
+{%- assign abs_icon = "/assets/favicon.svg" | absolute_url -%}
 {%- assign css = "/assets/main.css" | relative_url -%}
 {%- assign feed = "/feed.xml" | relative_url -%}
 {%- assign site_title = site.title -%}
@@ -26,7 +27,7 @@
 <meta property="og:url" content="{{ url }}">
 <meta property="og:type" content="{{ type }}">
 <meta name="og:site_name" content="{{ site_title }}">
-<meta property="og:image" content="{{ icon }}" >
+<meta property="og:image" content="{{ abs_icon }}" >
 <meta property="og:description" content="{{ description }}">
 {%- if page.date -%}
 <meta property="og:article:author" content="{{ author_name }}">
