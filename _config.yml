@@ -28,6 +28,9 @@ stackoverflow: "Molossus Spondee"
 
 source: src
 
+sass:
+  style: compressed
+
 defaults:
   -
     scope:
