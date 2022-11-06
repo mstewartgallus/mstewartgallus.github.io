@@ -41,7 +41,7 @@ select, button { border-style: solid; }
 
 select, button { border-width: 1px; padding: 3px; }
 
-select:focus, button:focus { border-width: 2px; padding: 2px; }
+select:focus, button:focus { outline: solid; outline-width: 1px; }
 
 option { border-width: 1px; }
 
