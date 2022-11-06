@@ -1,15 +1,29 @@
+$A4-width: 8.3in ;
+$A4-height: 11.7in ;
+$A4-margin: 1.5in ;
+
 body {
     display: flex ;
     flex-direction: column ;
     // FIXME kind of fragile ?
-    max-width: 8.4in ;
-    padding: 1.5in ;
+    max-width: $A4-width ;
     margin-left: auto ;
     margin-right: auto;
 }
 
+@media print {
+    @page {
+        size: $A4-width $A4-height ;
+        margin: $A4-margin ;
+    }
+    nav, footer {
+        display: none ;
+    }
+}
+
 @media screen {
     body {
+        padding: $A4-margin ;
         border-style: none solid none solid ;
         border-width: 2px ;
         margin-left: 1in ;
@@ -20,8 +34,7 @@ body {
 body > * {
     min-width: 10em ;
     width: 100% ;
-    // 8.4 inches A4 width - 2 * 1.5 inches margins
-    max-width: 5.4in ;
+    max-width: calc($A4-width - 2 * $A4-margin) ;
     margin-left: auto ;
     margin-right: auto;
 }
