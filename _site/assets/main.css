@@ -51,9 +51,6 @@ option:first-child { border-style: none; }
 
 body { display: flex; flex-direction: column; max-width: 8.3in; margin-left: auto; margin-right: auto; }
 
-@media print { @page { size: 8.3in 11.7in;
-    margin: 1.5in; } nav, footer { display: none; } }
-
 @media screen { body { padding: 1.5in; outline-style: solid; outline-width: 2px; margin-left: 1in; min-height: 100vh; } }
 
 body > * { min-width: 10em; width: 100%; max-width: calc($A4-width - 2 * $A4-margin); margin-left: auto; margin-right: auto; }
@@ -128,12 +125,15 @@ hr::before { content: "***"; color: #BB60D2; }
 
 blockquote { border-style: none none none dashed; border-width: 1px; margin-left: 0.3em; padding-left: 0.6em; border-color: #7901B1; }
 
-.post-list > li { border-width: 1px; border-style: dotted none none none; padding-top: 0.3em; padding-bottom: 0.1em; margin-top: 0.2em; margin-bottom: 0.2em; border-color: #BB60D2; }
+.post-list > li { border-width: 1px; border-style: dotted none none none; border-color: #BB60D2; padding-top: 0.3em; padding-bottom: 0.1em; margin-top: 0.2em; margin-bottom: 0.2em; }
 
 .post-list > li:first-child { border-style: none; }
 
 .social-media-list { list-style-type: none; margin: 0; padding: 0; }
 
 .svg-icon { width: 15px; height: 15px; }
+
+@media print { @page { size: A4 portrait;
+    margin: 1.5in; } nav, footer { display: none; } }
 
 /*# sourceMappingURL=main.css.map */

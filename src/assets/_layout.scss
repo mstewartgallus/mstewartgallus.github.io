@@ -11,16 +11,6 @@ body {
     margin-right: auto;
 }
 
-@media print {
-    @page {
-        size: $A4-width $A4-height ;
-        margin: $A4-margin ;
-    }
-    nav, footer {
-        display: none ;
-    }
-}
-
 @media screen {
     body {
         padding: $A4-margin ;

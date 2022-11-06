@@ -42,11 +42,12 @@ blockquote {
 .post-list > li {
     border-width: 1px ;
     border-style: dotted none none none ;
+    border-color: color(primary, lighter) ;
+
     padding-top: 0.3em ;
     padding-bottom: 0.1em ;
     margin-top: 0.2em ;
     margin-bottom: 0.2em ;
-    border-color: color(primary, lighter) ;
 }
 
 .post-list > li:first-child {
