@@ -33,10 +33,10 @@
 <meta property="og:article:author" content="{{ author_name }}">
 <meta property="og:article:published_time" content="{{ page.date | date: "%Y-%m-%d" }}">
 {%- for tag in page.tags -%}
-<meta property="og:article:tag" content="{{ tag | escape }}" itemprop="keyword">
+<meta property="og:article:tag" content="{{ tag | escape }}" itemprop="keywords">
 {%- endfor -%}
 {%- for cat in page.category -%}
-<meta property="og:article:tag" content="{{ cat | escape }}" itemprop="keyword">
+<meta property="og:article:tag" content="{{ cat | escape }}" itemprop="keywords">
 {%- endfor -%}
 {%- endif -%}
 <meta property="og:profile" content="{{ author_name }}">
