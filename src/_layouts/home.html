@@ -35,8 +35,8 @@
     <article>
       {%- if page.title -%}
       <header>
-        <a itemprop="url" rel="bookmark" href="{{ page.url | relative_url }}">
-          <h2 class="page-heading" itemprop="name headline">{{ page.title | escape }}</h2>
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          <h2 itemprop="name headline">{{ page.title | escape }}</h2>
         </a>
       </header>
       {%- endif -%}
@@ -55,7 +55,7 @@
       <ol class="post-list">
         {%- for post in site.posts -%}
         <li
-          itemprop="blogPost"
+          itemprop="hasPart blogPost"
           itemscope
           itemtype="http://schema.org/BlogPosting"
           itemid="{{ post.url | absolute_url }}">
@@ -77,7 +77,8 @@
             {%- endfor -%}
           </ul>
           <span itemprop="creator author" itemscope itemtype="http://schema.org/Person">
-            <link rel="author" itemprop="url" href="{{ post.author.url | relative_url }}">
+            <link itemprop="url" href="{{ post.author.url | relative_url }}">
+            <meta itemprop="name" contents="{{ post.author.name | escape }}">
           </span>
         </li>
         {%- endfor -%}
