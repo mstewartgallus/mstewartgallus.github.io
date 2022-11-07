@@ -3,9 +3,8 @@ layout: home
 title: Things
 ---
 
-<div>
-  <a href="{{ "search" | relative_url }}" rel="search">Search</a>
-</div>
-<div>
-  <a href="{{ "feed.xml" | relative_url }}" rel="alternate">RSS Feed</a>
-</div>
+
+<menu class="home-menu">
+  <li><a href="{{ "search" | relative_url }}" rel="search">Search</a></li>
+  <li><a href="{{ "feed.xml" | relative_url }}" rel="alternate">RSS Feed</a></li>
+</menu>
