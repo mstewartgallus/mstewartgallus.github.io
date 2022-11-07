@@ -1,8 +1,10 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 <div class="post-meta">
-  <address>
-    – <a rel="author" itemprop="author" href="{{ page.author.url | relative_url }}">{{ page.author.name | escape }}</a>
+  <address itemprop="author" itemscope itemtype="https://schema.org/Person">
+    – <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
+      <span itemprop="name">{{ page.author.name | escape }}</span>
+    </a>
   </address>
   <ul class="metadata">
     <li>
