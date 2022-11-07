@@ -3,11 +3,13 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body itemscope
-         itemprop="blogPost"
-         itemtype="https://schema.org/BlogPosting"
-         itemid="{{ page.url | absolute_url }}">
-    <nav itemprop="mainEntityOf" itemtype="http://schema.org/Blog" itemscope>
+  <body id="post"
+        itemprop="blogPost"
+        itemscope
+        itemtype="https://schema.org/BlogPosting"
+        itemid="{{ page.url | absolute_url }}">
+    <nav itemref="post"
+         itemtype="http://schema.org/Blog" itemscope>
       {%- include nav.html -%}
     </nav>
     <main>
