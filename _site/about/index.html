@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      itemtype="https://schema.org/WebPage" itemscope>
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,18 +20,19 @@
 <meta property="og:description" content="lol, lmao"><meta property="og:profile" content="Molossus Spondee">
 <meta property="og:profile:username" content="Molossus Spondee">
 </head>
-  <body itemtype="http://schema.org/WebPage" itemscope>
-    <nav itemprop="mainEntityOf" itemtype="http://schema.org/Blog" itemscope><a itemprop="url" href="/">
+  <body>
+    <nav itemtype="http://schema.org/Blog" itemscope><a itemprop="url" href="/">
   <span itemprop="name headline">Words to Kick Your Teeth Out</span>
 </a>
 </nav>
-    <header>
-      <a rel="bookmark" href="/about/" itemprop="url">
-        <h1 itemprop="name headline">About the Author</h1>
-      </a>
-    </header>
-    <main itemprop="mainEntity">
-      <article itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
+    <div itemprop="text">
+      <header>
+        <a rel="bookmark" href="/about/" itemprop="url">
+          <h1 itemprop="name headline">About the Author</h1>
+        </a>
+      </header>
+      <main itemprop="mainEntity">
+        <article itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
   <p>My pen name is Molossus Spondee. This is my personal blog mostly
   for posting silly poetry.</p>
   <p>I guess right now I'm just working on my portfolio.</p>
@@ -62,6 +64,7 @@
   </address>
 </article>
 
-    </main>
+      </main>
+    </div>
   </body>
 </html>

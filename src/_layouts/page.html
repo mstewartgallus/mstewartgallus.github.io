@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}"
+      itemtype="https://schema.org/WebPage" itemscope>
   <head>
     {%- include head.html -%}
   </head>
-  <body itemtype="http://schema.org/WebPage" itemscope>
-    <nav itemprop="mainEntityOf" itemtype="http://schema.org/Blog" itemscope>
+  <body>
+    <nav itemtype="http://schema.org/Blog" itemscope>
       {%- include nav.html -%}
     </nav>
-    <header>
-      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-        <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-      </a>
-    </header>
-    <main itemprop="mainEntity">
-      {{ content }}
-    </main>
+    <div itemprop="text">
+      <header>
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          <h1 itemprop="name headline">{{ page.title | escape }}</h1>
+        </a>
+      </header>
+      <main itemprop="mainEntity">
+        {{ content }}
+      </main>
+    </div>
   </body>
 </html>
