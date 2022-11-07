@@ -26,8 +26,10 @@
         {{ site.description | escape }}
       </div>
 
-      <address>
-        <a itemprop="author" rel="author" href="{{ page.author.url | relative_url}}">{{ site.author.name | escape }}</a>
+      <address itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <a itemprop="url" rel="author" href="{{ page.author.url | relative_url}}">
+          <span itemprop="name">{{ site.author.name | escape }}</span>
+        </a>
       </address>
     </article>
 
