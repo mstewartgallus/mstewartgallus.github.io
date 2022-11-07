@@ -1,19 +1,19 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 <div class="post-meta">
-  <address itemprop="author" itemscope itemtype="https://schema.org/Person">
+  <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
     – <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
       <span itemprop="name">{{ page.author.name | escape }}</span>
     </a>
   </address>
   <ul class="metadata">
     <li>
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="dateCreated">
         {{ page.date | date: date_format }}
       </time>
     </li>
     {%- for category in page.categories -%}
-    <li itemprop="keywords">{{ category }}</li>
+    <li itemprop="articleSection">{{ category }}</li>
     {%- endfor -%}
     {%- for tag in page.tags -%}
     <li itemprop="keywords">{{ tag }}</li>

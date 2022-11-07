@@ -13,19 +13,19 @@
       {%- include nav.html -%}
     </nav>
 
-    <header>
-      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-        <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-      </a>
-    </header>
+    <div itemprop="text">
+      <header>
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          <h1 itemprop="name headline">{{ page.title | escape }}</h1>
+        </a>
+      </header>
 
-    <main aria-label="Content">
-      <div itemprop="articleBody">
+      <main aria-label="Content" itemprop="articleBody">
         {{ content }}
-      </div>
+      </main>
 
       {%- include metadata.html -%}
-    </main>
+    </div>
 
     <footer aria-label="pagination">
       {%- include footer.html -%}

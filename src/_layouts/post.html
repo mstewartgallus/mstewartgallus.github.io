@@ -12,9 +12,20 @@
          itemtype="http://schema.org/Blog" itemscope>
       {%- include nav.html -%}
     </nav>
-    <main>
-      {{ content }}
-    </main>
+
+    <div itemprop="text">
+      <header>
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          <h1 itemprop="name headline">{{ page.title | escape }}</h1>
+        </a>
+        {%- include metadata.html -%}
+      </header>
+
+      <main aria-label="Content" itemprop="articleBody">
+        {{ content }}
+      </main>
+    </div>
+
     <footer aria-label="pagination">
       {%- include footer.html -%}
     </footer>
