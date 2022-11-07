@@ -7,26 +7,29 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body itemtype="http://schema.org/Blog" itemscope itemid="{{ page.url | absolute_url }}">
-    <div itemprop="mainEntityOfPage" itemscope itemtype="http://schema.org/WebPage"  itemid="{{ page.url | absolute_url }}">
-      <article class="home" itemprop="mainEntityOfPage" itemtype="http://schema.org/WebSite" itemscope itemid="{{ "/" | absolute_url }}">
-        <header>
-          {%- if site.title -%}
-          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-            <h1 itemprop="name">{{ site.title | escape }}</h1>
-          </a>
-          {%- endif -%}
-        </header>
+  <body id="blog"
+        itemprop="mainEntity" itemtype="http://schema.org/Blog" itemscope itemid="{{ page.url | absolute_url }}">
+    <article class="home"
+             itemref="blog"
+             itemtype="http://schema.org/WebSite"
+             itemscope
+             itemid="{{ "/" | absolute_url }}">
+      <header>
+        {%- if site.title -%}
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          <h1 itemprop="name">{{ site.title | escape }}</h1>
+        </a>
+        {%- endif -%}
+      </header>
 
-        <div itemprop="description">
-          {{ site.description | escape }}
-        </div>
+      <div itemprop="description">
+        {{ site.description | escape }}
+      </div>
 
-        <address>
-          <a itemprop="author" rel="author" href="{{ page.author.url | relative_url}}">{{ site.author.name | escape }}</a>
-        </address>
-      </article>
-    </div>
+      <address>
+        <a itemprop="author" rel="author" href="{{ page.author.url | relative_url}}">{{ site.author.name | escape }}</a>
+      </address>
+    </article>
 
     <article>
       {%- if page.title -%}
