@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}"
+      itemtype="https://schema.org/WebPage" itemscope>
   <head>
     {%- include head.html -%}
   </head>
-  <body id="post"
-        itemprop="blogPost"
-        itemscope
-        itemtype="https://schema.org/BlogPosting"
-        itemid="{{ page.url | absolute_url }}">
-    <nav itemref="post"
-         itemtype="http://schema.org/Blog" itemscope>
+  <body itemprop="mainEntity hasPart"
+        itemtype="https://schema.org/Blog" itemscope>
+    <nav>
       {%- include nav.html -%}
     </nav>
 
-    <div itemprop="text">
-      <header>
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-        </a>
-        {%- include metadata.html -%}
-      </header>
+    <div itemscope
+         itemprop="blogPost hasPart"
+         itemtype="https://schema.org/BlogPosting"
+         itemid="{{ page.url | absolute_url }}">
+      <div itemprop="text">
+        <header>
+          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+            <h1 itemprop="name headline">{{ page.title | escape }}</h1>
+          </a>
+          {%- include metadata.html -%}
+        </header>
 
-      <main aria-label="Content" itemprop="articleBody">
-        {{ content }}
-      </main>
+        <main aria-label="Content" itemprop="articleBody">
+          {{ content }}
+        </main>
+      </div>
     </div>
 
     <footer aria-label="pagination">

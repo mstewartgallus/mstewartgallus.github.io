@@ -1,6 +1,18 @@
 {%- if page.previous.url -%}
-<a class="prev" href="{{page.previous.url}}" rel="prev">Previous: {{page.previous.title | escape}}</a>
+<span itemscope
+      itemprop="blogPost hasPart"
+      itemtype="https://schema.org/BlogPosting">
+  <a class="prev" href="{{page.previous.url}}" rel="prev" itemprop="url">
+    Previous: <span itemprop="name headline">{{page.previous.title | escape}}</span>
+  </a>
+</span>
 {%- endif -%}
 {%- if page.next.url -%}
-<a class="next" href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
+<span itemscope
+      itemprop="blogPost hasPart"
+      itemtype="https://schema.org/BlogPosting">
+  <a class="next" href="{{page.next.url}}" rel="next" itemprop="url">
+    Next: <span itemprop="name headline">{{page.next.title | escape}}</span>
+  </a>
+</span>
 {%- endif -%}
