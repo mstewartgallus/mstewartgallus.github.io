@@ -78,7 +78,7 @@
           </ul>
           <span itemprop="creator author" itemscope itemtype="http://schema.org/Person">
             <link itemprop="url" href="{{ post.author.url | relative_url }}">
-            <meta itemprop="name" contents="{{ post.author.name | escape }}">
+            <meta itemprop="name" content="{{ post.author.name | escape }}">
           </span>
         </li>
         {%- endfor -%}
