@@ -65,7 +65,7 @@
 
           <ul class="metadata">
             <li>
-              <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="dateCreated">
+              <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
                 {{ post.date | date: date_format }}
               </time>
             </li>
