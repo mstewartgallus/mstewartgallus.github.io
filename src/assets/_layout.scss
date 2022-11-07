@@ -3,6 +3,7 @@ $A4-height: 11.7in ;
 $A4-margin: 1.5in ;
 
 body {
+    position: relative ;
     display: flex ;
     flex-direction: column ;
     // FIXME kind of fragile ?
@@ -27,12 +28,21 @@ body > * {
 }
 
 nav {
-    margin-top: -3em ;
-
     width: 100% ;
     display: flex ;
     justify-content: flex-end ;
 }
+
+@media (min-width: 40em) {
+    nav {
+        position: absolute ;
+        right: $A4-margin;
+        top: $A4-margin;
+        margin-top: -2em ;
+        margin-right: -2em ;
+    }
+}
+
 
 header {
     width: 100% ;
@@ -59,10 +69,8 @@ footer {
 
 @media only screen and (max-width: 40em) {
     body {
-        padding: 0.8em ;
-    }
-    nav {
-        margin-top: -0.4em ;
+        padding: 0.7em ;
+        padding-top: 0.2em ;
     }
 }
 
