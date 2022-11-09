@@ -9,12 +9,15 @@
     gap: 0.2em ;
 }
 
-.metadata > li::before {
-    content: "• " ;
-    color: $grey-color-light ;
+.metadata > li {
+    border-left: solid ;
+    border-width: 2px ;
+    border-color: $grey-color-light ;
+    padding-left: 0.2em ;
+    // content: "• " ;
 }
-.metadata > li:first-child::before {
-    content: none ;
+.metadata > li:first-child {
+    border: none ;
 }
 
 .post-meta { text-align: left ; }
