@@ -1,7 +1,5 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-{%- assign categories = site.categories | sort -%}
-{%- assign tags = site.tags | sort -%}
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}"
       id="page" itemprop="hasPart mainEntity" itemtype="http://schema.org/WebPage" itemscope>
@@ -25,11 +23,12 @@
       {{ content }}
     </article>
 
-    {%- if site.posts.size > 0 -%}
+    {%- assign posts = site.posts | where: "categories", page.category -%}
+    {%- if posts.size > 0 -%}
 
     <main aria-label="Content">
       <ol class="post-list" reversed="true" role="list">
-        {%- for post in paginator.posts -%}
+        {%- for post in posts -%}
         <li
           itemprop="hasPart blogPost"
           itemscope

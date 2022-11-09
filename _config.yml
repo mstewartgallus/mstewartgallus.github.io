@@ -9,7 +9,6 @@ baseurl: ""
 url: "https://mstewartgallus.github.io"
 
 plugins:
-  - jekyll-paginate-v2
   - jekyll-feed
   - jekyll-sitemap
 
@@ -31,11 +30,6 @@ source: src
 
 sass:
   style: compressed
-
-pagination:
-  enabled: true
-  per_page: 1000
-  sort_reverse: true
 
 defaults:
   -
