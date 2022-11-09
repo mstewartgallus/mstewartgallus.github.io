@@ -8,35 +8,16 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <article class="home"
-             itemref="page"
-             itemtype="http://schema.org/WebSite"
-             itemscope>
-      <header>
-        {%- if site.title -%}
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h1 itemprop="name">{{ site.title | escape }}</h1>
-        </a>
-        {%- endif -%}
-      </header>
-
-      <div itemprop="description">
-        {{ site.description | escape }}
-      </div>
-
-      <address itemprop="author" itemscope itemtype="https://schema.org/Person">
-        <a itemprop="url" rel="author" href="{{ page.author.url | relative_url}}">
-          <span itemprop="name">{{ site.author.name | escape }}</span>
-        </a>
-      </address>
-    </article>
+  <body itemtype="http://schema.org/Blog" itemscope>
+    <nav itemtype="http://schema.org/Blog" itemscope>
+      {%- include nav.html -%}
+    </nav>
 
     <article>
       {%- if page.title -%}
       <header>
         <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h2 itemprop="name headline">{{ page.title | escape }}</h2>
+          <h1 itemprop="name headline">{{ page.title | escape }}</h1>
         </a>
       </header>
       {%- endif -%}
@@ -45,15 +26,10 @@
     </article>
 
     {%- if site.posts.size > 0 -%}
-    <header>
-      <a href="#contents">
-        <h2 id="contents" class="post-list-heading">Contents</h2>
-      </a>
-    </header>
 
     <main aria-label="Content">
       <ol class="post-list" reversed="true" role="list">
-        {%- for post in site.posts -%}
+        {%- for post in paginator.posts -%}
         <li
           itemprop="hasPart blogPost"
           itemscope
