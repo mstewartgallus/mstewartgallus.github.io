@@ -1,30 +1,51 @@
 $A4-width: 8.3in ;
 $A4-height: 11.7in ;
 $A4-margin: 1.5in ;
+$body-width: 5.3in ;
 
-body {
-    position: relative ;
-    display: flex ;
-    flex-direction: column ;
-    // FIXME kind of fragile ?
-    max-width: $A4-width ;
+
+html {
     margin-left: auto ;
-    margin-right: auto;
+    margin-right: auto ;
+    max-width: $A4-width ;
+    min-height: 100vh ;
+
+    display: flex ;
     align-items: center ;
 }
 
-@media screen {
-    body {
-        padding: $A4-margin ;
+body {
+    margin-left: auto ;
+    margin-right: auto ;
+    max-width: $body-width ;
+
+    position: relative ;
+    display: flex ;
+    flex-direction: column ;
+    align-items: center ;
+}
+
+@media screen and (min-width: 50em) {
+    html {
         outline-style: solid ;
         outline-width: 2px ;
+    }
+
+    body {
+        margin: $A4-margin ;
+    }
+}
+@media screen and (min-width: 70em) {
+    html {
         margin-left: 1in ;
-        min-height: 100vh ;
     }
 }
 
-body > * {
-    min-width: 10em ;
+@media only screen and (max-width: 40em) {
+    body {
+        margin: 0.7em ;
+        margin-top: 0.2em ;
+    }
 }
 
 nav {
@@ -33,11 +54,12 @@ nav {
     justify-content: flex-end ;
 }
 
+
 @media (min-width: 40em) {
     nav {
         position: absolute ;
-        right: $A4-margin;
-        top: $A4-margin;
+        right: 0;
+        top: 0;
         margin-top: -2em ;
         margin-right: -2em ;
     }
@@ -58,21 +80,6 @@ footer {
     justify-content: space-between ;
 }
 
-
-@media only screen and (max-width: 60em) {
-    body {
-        margin-left: auto ;
-        margin-right: auto;
-        outline: none ;
-    }
-}
-
-@media only screen and (max-width: 40em) {
-    body {
-        padding: 0.7em ;
-        padding-top: 0.2em ;
-    }
-}
 
 .post-list {
     display: flex;
