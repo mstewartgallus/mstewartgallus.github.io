@@ -106,23 +106,14 @@ const mainLoop = function *(template, output) {
     }
 };
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    console.log('dum');
-    const template = document.getElementById('search-result').content;
-    const output = document.getElementById('search-output');
-    console.log('gar');
+const template = document.getElementById('search-result').content;
+const output = document.getElementById('search-output');
+const search = document.getElementById('search');
 
-    const loop = mainLoop(template, output);
-    console.log('bar');
+const loop = mainLoop(template, output);
+loop.next();
 
-    const search = document.getElementById('search');
-
-    console.log('foo');
-    search.addEventListener('submit', event => {
-        event.preventDefault();
-        loop.next(event);
-    });
-
-    // lose first value ?
-    loop.next();
+search.addEventListener('submit', event => {
+    event.preventDefault();
+    loop.next(event);
 });
