@@ -68,10 +68,14 @@
               </time>
             </li>
             {%- for category in post.categories -%}
-            <li itemprop="articleSection"><a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a></li>
+            <li itemprop="articleSection">
+              <a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a>
+            </li>
             {%- endfor -%}
             {%- for tag in post.tags -%}
-            <li itemprop="keywords">{{ tag | escape }}</li>
+            <li itemprop="keywords">
+              <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">{{ tag | escape }}</a>
+            </li>
             {%- endfor -%}
           </ul>
           <span itemprop="creator author" itemscope itemtype="http://schema.org/Person">
