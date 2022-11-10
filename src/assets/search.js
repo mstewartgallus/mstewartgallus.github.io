@@ -6,13 +6,14 @@ const outputId = meta.get('output');
 const templateId = meta.get('template');
 const searchId = meta.get('search');
 
-function overlaps(X, Y) {
+function intersect(X, Y) {
+    const Z = new Set();
     for (const x of X) {
         if (Y.has(x)) {
-            return x;
+            Z.add(x);
         }
     }
-    return false;
+    return Z;
 };
 
 function parseForm(formData) {
@@ -39,23 +40,28 @@ const base = location.href + ':' + location.port;
 const getDB = (async () => {
     const response = await fetch('{{ "./assets/search.json" | relative_url }}');
     const json = await response.json();
-    return json
-        .map((post) => {
-            return {
-                title: post.title,
-                url: new URL(post.url, base),
-                tags: new Set(post.tags),
-                categories: new Set(post.categories),
-                date: new Date(post.date)
-            }
-        });
-
+    return json;
 })();
 
 function findPosts(db, tags, categories) {
-    return db.filter((post) =>
-        (tags.size === 0 || overlaps(tags, post.tags)) &&
-            (categories.size === 0 || overlaps(categories, post.categories)));
+    const category = db.category;
+    const tag = db.tag;
+    const posts = db.post;
+
+    // FIXME process sets lazily somehow?
+    let cs = new Set(Array.from(categories)
+                       .flatMap(c => category[c]));
+    let ts = new Set(Array.from(tags)
+                       .flatMap(t => tag[t]));
+
+    if (tags.size === 0) {
+        ts = cs;
+    }
+    if (categories.size === 0) {
+        cs = ts;
+    }
+
+    return Array.from(intersect(cs, ts)).map(id => posts[id]);
 }
 
 function render(template, output, posts) {
