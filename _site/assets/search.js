@@ -34,22 +34,33 @@ const location = new URL(document.location);
 const params = location.searchParams;
 const base = location.href + ':' + location.port;
 
-const getDB = (async () => {
+function reviver(key, value) {
+    if (typeof value === 'object'
+        && !Array.isArray(value)
+        && value !== null) {
+        value = new Map(Object.entries(value));
+    }
+    return Object.freeze(value);
+}
+
+async function fetchDB() {
     const response = await fetch('/assets/search.json');
-    const json = await response.json();
-    return json;
-})();
+    const text = await response.text();
+    return JSON.parse(text, reviver);
+}
+
+const getDB = fetchDB();
 
 function findPosts(db, tags, categories) {
-    const category = db.category;
-    const tag = db.tag;
-    const posts = db.post;
+    const category = db.get('category');
+    const tag = db.get('tag');
+    const posts = db.get('post');
 
     // FIXME process sets lazily somehow?
     let cs = new Set(Array.from(categories)
-                       .flatMap(c => category[c]));
+                     .flatMap(c => category.get(c)));
     let ts = new Set(Array.from(tags)
-                       .flatMap(t => tag[t]));
+                     .flatMap(t => tag.get(t)));
 
     if (tags.size === 0) {
         ts = cs;
@@ -58,22 +69,22 @@ function findPosts(db, tags, categories) {
         cs = ts;
     }
 
-    return Array.from(intersect(cs, ts)).map(id => posts[id]);
+    return Array.from(intersect(cs, ts)).map(id => posts.get(id));
 }
 
 function render(template, output, posts) {
     const elems = posts.map((post) => {
-        const title = post.title;
-        const date = post.date;
-        const url = post.url;
+        const title = post.get('title');
+        const date = post.get('date');
+        const url = post.get('url');
 
         const keywords = [];
-        for (const category of post.categories) {
+        for (const category of post.get('categories')) {
             const listEntry = document.createElement('li');
             listEntry.textContent = category;
             keywords.push(listEntry);
         }
-        for (const tag of post.tags) {
+        for (const tag of post.get('tags')) {
             const listEntry = document.createElement('li');
             listEntry.textContent = tag;
             keywords.push(listEntry);
@@ -81,7 +92,7 @@ function render(template, output, posts) {
 
         const clone = template.cloneNode(true);
         clone.querySelector('.search-title').textContent = title;
-        clone.querySelector('.search-url').href = url.href;
+        clone.querySelector('.search-url').href = url;
         clone.querySelector('.search-date').textContent = date;
         clone.querySelector('.search-keywords').replaceChildren(...keywords);
         return clone;
