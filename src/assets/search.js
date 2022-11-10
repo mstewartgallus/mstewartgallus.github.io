@@ -1,6 +1,11 @@
 ---
 ---
 
+const meta = new URL(import.meta.url).searchParams;
+const outputId = meta.get('output');
+const templateId = meta.get('template');
+const searchId = meta.get('search');
+
 function overlaps(X, Y) {
     for (const x of X) {
         if (Y.has(x)) {
@@ -28,7 +33,7 @@ function parseForm(formData) {
 };
 
 const location = new URL(document.location);
-const params = new URLSearchParams(location.search);
+const params = location.searchParams;
 const base = location.href + ':' + location.port;
 
 const getDB = (async () => {
@@ -103,9 +108,9 @@ function parseParams(params) {
 
 const [tagParams, categoryParams] = parseParams(params);
 
-const template = document.getElementById('search-result').content;
-const output = document.getElementById('search-output');
-const search = document.getElementById('search');
+const template = document.getElementById(templateId).content;
+const output = document.getElementById(outputId);
+const search = document.getElementById(searchId);
 
 const db = await getDB;
 

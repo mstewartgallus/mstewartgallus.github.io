@@ -27,7 +27,9 @@ permalink: /search/
 <link href="{{ "/assets/search.json" | relative_url }}"
       rel="preload" as="fetch"
       type="application/json" crossorigin>
-<script type="module" defer async src="{{ "/assets/search.js" | relative_url }}"></script>
+<script type="module" defer async
+        src="{{ "/assets/search.js" | relative_url }}?output=search-output&template=search-result&search=search"
+        ></script>
 
 <form id="search" rel="search" role="search" name="search-form" method="get">
   <fieldset>
