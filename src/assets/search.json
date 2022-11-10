@@ -2,11 +2,11 @@
 layout: none
 ---
 {
-    "post": {
+    "post": [
         {%- for post in site.posts -%}
         {%- assign tags = post.tags | sort -%}
         {%- assign categories = post.categories | sort -%}
-        "{{ post.url | json }}": {
+        {
             "title": "{{ post.title | json }}",
             "url": "{{ post.url | json }}",
             "tags": [
@@ -25,12 +25,12 @@ layout: none
         }
         {% unless forloop.last %},{% endunless -%}
         {%- endfor -%}
-    },
+    ],
     "category": {
         {%- for category in site.categories -%}
         "{{ category[0] | json }}": [
             {%- for post in category[1] -%}
-            "{{ post.url | json }}"
+            {{ post.index | json }}
             {% unless forloop.last %},{% endunless -%}
             {%- endfor -%}
         ]
@@ -41,7 +41,7 @@ layout: none
         {%- for tag in site.tags -%}
         "{{ tag[0] | json }}": [
             {%- for post in tag[1] -%}
-            "{{ post.url | json }}"
+            {{ post.index | json }}
             {% unless forloop.last %},{% endunless -%}
             {%- endfor -%}
         ]

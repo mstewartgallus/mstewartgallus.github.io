@@ -69,7 +69,7 @@ function findPosts(db, tags, categories) {
         cs = ts;
     }
 
-    return Array.from(intersect(cs, ts)).map(id => posts.get(id));
+    return Array.from(intersect(cs, ts)).map(index => posts[index]);
 }
 
 function render(template, output, posts) {
