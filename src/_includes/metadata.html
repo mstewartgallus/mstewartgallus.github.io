@@ -13,7 +13,7 @@
       </time>
     </li>
     {%- for category in page.categories -%}
-    <li itemprop="articleSection"><a rel="tag" href="{{ category | relative_url }}">{{ category | escape }}</a></li>
+    <li itemprop="articleSection"><a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a></li>
     {%- endfor -%}
     {%- for tag in page.tags -%}
     <li itemprop="keywords">{{ tag }}</li>

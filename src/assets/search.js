@@ -1,7 +1,7 @@
 ---
 ---
 
-const overlaps = (X, Y) => {
+function overlaps(X, Y) {
     for (const x of X) {
         if (Y.has(x)) {
             return x;
@@ -10,7 +10,7 @@ const overlaps = (X, Y) => {
     return false;
 };
 
-const parseForm = (formData) => {
+function parseForm(formData) {
     const tags = new Set();
     const categories = new Set();
 
@@ -28,87 +28,97 @@ const parseForm = (formData) => {
 };
 
 const location = new URL(document.location);
+const params = new URLSearchParams(location.search);
 const base = location.href + ':' + location.port;
 
-const posts = { value: null };
-
-(async () => {
+const getDB = (async () => {
     const response = await fetch('{{ "./assets/search.json" | relative_url }}');
     const json = await response.json();
-    posts.value = json
-          .map((post) => {
-              return {
-                  title: post.title,
-                  url: new URL(post.url, base),
-                  tags: new Set(post.tags),
-                  categories: new Set(post.categories),
-                  date: new Date(post.date)
-              }
-          });
+    return json
+        .map((post) => {
+            return {
+                title: post.title,
+                url: new URL(post.url, base),
+                tags: new Set(post.tags),
+                categories: new Set(post.categories),
+                date: new Date(post.date)
+            }
+        });
 
 })();
 
-const mainLoop = function *(template, output) {
-    // ignore events until we load everything
-    let event = null;
-    while (posts.value === null) {
-        event = yield;
-    }
-    const db = posts.value;
+function findPosts(db, tags, categories) {
+    return db.filter((post) =>
+        (tags.size === 0 || overlaps(tags, post.tags)) &&
+            (categories.size === 0 || overlaps(categories, post.categories)));
+}
 
-    while (true) {
-        const [tags, categories] = parseForm(new FormData(event.target));
+function render(template, output, posts) {
+    const elems = posts.map((post) => {
+        const title = post.title;
+        const date = post.date;
+        const url = post.url;
 
-        const filtered = db.filter((post) =>
-            (tags.size === 0 || overlaps(tags, post.tags)) &&
-                (categories.size === 0 || overlaps(categories, post.categories)));
+        const keywords = [];
+        for (const category of post.categories) {
+            const listEntry = document.createElement('li');
+            listEntry.textContent = category;
+            keywords.push(listEntry);
+        }
+        for (const tag of post.tags) {
+            const listEntry = document.createElement('li');
+            listEntry.textContent = tag;
+            keywords.push(listEntry);
+        }
 
-        const elems = filtered
-              .map(post => {
-                  const keywords = [];
-                  for (const category of post.categories) {
-                      const listEntry = document.createElement('li');
-                      listEntry.textContent = category;
-                      keywords.push(listEntry);
-                  }
-                  for (const tag of post.tags) {
-                      const listEntry = document.createElement('li');
-                      listEntry.textContent = tag;
-                      keywords.push(listEntry);
-                  }
-                  return {
-                      title: post.title,
-                      date: post.date,
-                      url: post.url,
-                      keywords: keywords
-                  };
-              })
-              .map((post) => {
-                  const title = post.title;
-                  const date = post.date;
-                  const url = post.url;
-                  const keywords = post.keywords;
+        const clone = template.cloneNode(true);
+        clone.querySelector('.search-title').textContent = title;
+        clone.querySelector('.search-url').href = url.href;
+        clone.querySelector('.search-date').textContent = date;
+        clone.querySelector('.search-keywords').replaceChildren(...keywords);
+        return clone;
+    });
 
-                  const clone = template.cloneNode(true);
-                  clone.querySelector('.search-title').textContent = title;
-                  clone.querySelector('.search-url').href = url.href;
-                  clone.querySelector('.search-date').textContent = date;
-                  clone.querySelector('.search-keywords').replaceChildren(...keywords);
-                  return clone;
-              });
-
-        const postList = document.createElement('ol');
-        postList.classList = ["post-list"];
-        postList.append(...elems);
-        output.replaceChildren(postList);
-
-        event = yield;
-    }
+    const postList = document.createElement('ol');
+    postList.classList = ["post-list"];
+    postList.append(...elems);
+    output.replaceChildren(postList);
 };
+
+function parseParams(params) {
+    const tags = new Set();
+    const cats = new Set();
+    for (const [key, value] of params) {
+        switch (key) {
+        case 'tag':
+            tags.add(value);
+            break;
+        case 'category':
+            cats.add(value);
+            break;
+        }
+    }
+    return [tags, cats];
+}
+
+const [tagParams, categoryParams] = parseParams(params);
 
 const template = document.getElementById('search-result').content;
 const output = document.getElementById('search-output');
 const search = document.getElementById('search');
+
+const db = await getDB;
+
+render(template, output, findPosts(db, tagParams, categoryParams));
+
+function* mainLoop(template, output) {
+    while (true) {
+        const event = yield;
+        const [tags, categories] = parseForm(new FormData(event.target));
+        const filtered = findPosts(db, tags, categories);
+        render(template, output, filtered);
+    }
+};
 
 const loop = mainLoop(template, output);
 loop.next();
