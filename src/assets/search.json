@@ -12,18 +12,18 @@ layout: none
             "tags": [
                 {%- for tag in tags -%}
                 "{{ tag | json }}"
-                {% unless forloop.last %},{% endunless -%}
+                {%- unless forloop.last -%},{%- endunless -%}
                 {%- endfor -%}
             ],
             "categories": [
                 {%- for category in categories -%}
                 "{{ category | json }}"
-                {% unless forloop.last %},{% endunless -%}
+                {%- unless forloop.last -%},{%- endunless -%}
                 {%- endfor -%}
             ],
             "date": "{{ post.date | date: "%Y-%m-%d" }}"
         }
-        {% unless forloop.last %},{% endunless -%}
+        {%- unless forloop.last -%},{%- endunless -%}
         {%- endfor -%}
     ],
     "category": {
@@ -31,10 +31,10 @@ layout: none
         "{{ category[0] | json }}": [
             {%- for post in category[1] -%}
             {{ post.index | json }}
-            {% unless forloop.last %},{% endunless -%}
+            {%- unless forloop.last -%},{%- endunless -%}
             {%- endfor -%}
         ]
-        {% unless forloop.last %},{% endunless -%}
+        {%- unless forloop.last -%},{% endunless -%}
         {%- endfor -%}
     },
     "tag": {
@@ -42,10 +42,10 @@ layout: none
         "{{ tag[0] | json }}": [
             {%- for post in tag[1] -%}
             {{ post.index | json }}
-            {% unless forloop.last %},{% endunless -%}
+            {%- unless forloop.last -%},{%- endunless -%}
             {%- endfor -%}
         ]
-        {% unless forloop.last %},{% endunless -%}
+        {%- unless forloop.last -%},{%- endunless -%}
         {%- endfor -%}
     }
 }
