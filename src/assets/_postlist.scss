@@ -1,0 +1,22 @@
+.post-list {
+    display: flex;
+    flex-direction: column ;
+    list-style-type: none ;
+    margin: 0 ;
+    padding: 0 ;
+}
+
+.post-list > li {
+    border-width: 1px ;
+    border-style: dashed none none none ;
+    border-color: color(primary, lighter) ;
+
+    padding-top: 1em ;
+    padding-bottom: 0.5em ;
+    margin-top: 0.2em ;
+    margin-bottom: 0.2em ;
+}
+
+.post-list > li:first-child {
+    border-style: none ;
+}

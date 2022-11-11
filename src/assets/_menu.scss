@@ -1,0 +1,14 @@
+.home-menu {
+    list-style-type: none ;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column ;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.home-menu > li {
+    margin-top: 0.3em ;
+    margin-bottom: 0.3em ;
+}
