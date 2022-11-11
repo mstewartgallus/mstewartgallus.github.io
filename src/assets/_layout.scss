@@ -32,9 +32,7 @@ body {
 
 @media screen and (min-width: 50em) {
     html {
-        outline-color: $grey-color ;
-        outline-style: solid ;
-        outline-width: 2px ;
+        box-shadow: 0.04em -0.01em 0.2em $grey-color ;
     }
 
     body {
