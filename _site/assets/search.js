@@ -98,8 +98,7 @@ function render(template, output, posts) {
         return clone;
     });
 
-    const postList = document.createElement('ol');
-    postList.classList = ["post-list"];
+    const postList = document.createElement('ul');
     postList.append(...elems);
     output.replaceChildren(postList);
 };

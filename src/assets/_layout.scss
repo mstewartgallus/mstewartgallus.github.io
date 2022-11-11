@@ -102,8 +102,11 @@ footer {
 .poem header { text-align: center ; }
 .poem main { width: initial ; }
 
-menu, ol, ul {
+menu, ul {
     padding-left: 1.3em ;
+}
+ol {
+    padding-left: 1.9em ;
 }
 li {
     margin-top: 0.5em ;

@@ -47,3 +47,13 @@ blockquote {
 ul, menu {
     list-style-type: typewriter ;
 }
+
+@counter-style typewriter-ordered {
+  system: numeric;
+  symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
+  suffix: ". " ;
+}
+
+ol {
+    list-style-type: typewriter-ordered;
+}
