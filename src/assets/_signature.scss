@@ -4,12 +4,15 @@
   suffix: "  ";
 }
 
+.metadata, .metadata > li {
+    margin: 0;
+    padding: 0;
+    line-height: inherit ;
+}
+
 .metadata {
     // FIXME awkward
     font-size: 14px ;
-
-    margin: 0;
-    padding: 0;
     display: flex ;
     flex-wrap: wrap ;
     gap: 1.4em ;

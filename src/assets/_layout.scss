@@ -101,3 +101,14 @@ footer {
 
 .poem header { text-align: center ; }
 .poem main { width: initial ; }
+
+li {
+    margin-top: 1em ;
+    margin-bottom: 1em ;
+}
+li:first-child {
+    margin-top: 0 ;
+}
+li:last-child {
+    margin-bottom: 0 ;
+}
