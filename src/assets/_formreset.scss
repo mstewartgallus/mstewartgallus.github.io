@@ -1,3 +1,6 @@
+// Hide select arrow
+select::-ms-expand { display: none ; }
+
 select, option, button, input,
 select:focus, option:focus, button:focus, input:focus {
   margin: 0;
@@ -6,22 +9,17 @@ select:focus, option:focus, button:focus, input:focus {
   border: none ;
   font-family: inherit ;
   vertical-align: baseline ;
-}
 
-// Hide select arrow
-select::-ms-expand { display: none ; }
-
-select, option, button, input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    cursor: none;
-    background-color: transparent;
-    border: none;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: none;
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  outline: none;
 }
 
 select, option, button { cursor: pointer }
@@ -39,14 +37,16 @@ option, option:focus {
 
 button, button:focus {
     padding: 0.3em 0.8em 0.3em 0.8em ;
+    margin-top: 0.4em ;
+    margin-bottom: 0.4em ;
 }
+
+option { border-width: 1px ; }
+option { border-style: dashed none none none ; }
+option:first-child { border-style: none ; }
 
 select:focus, button:focus {
     outline: dashed ;
     outline-offset: 3px ;
     outline-width: 1px ;
 }
-
-option { border-width: 1px ; }
-option { border-style: dashed none none none ; }
-option:first-child { border-style: none ; }
