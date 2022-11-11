@@ -129,6 +129,19 @@ function parseParams(params) {
 
 const [tagParams, categoryParams] = parseParams(params);
 
+const category = document.getElementById('category');
+const tag = document.getElementById('tag');
+for (const option of category.options) {
+    if (categoryParams.has(option.value)) {
+        option.selected = true;
+    }
+}
+for (const option of tag.options) {
+    if (tagParams.has(option.value)) {
+        option.selected = true;
+    }
+}
+
 const template = document.getElementById(templateId).content;
 const output = document.getElementById(outputId);
 const search = document.getElementById(searchId);
