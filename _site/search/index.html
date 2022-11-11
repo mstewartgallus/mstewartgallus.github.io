@@ -19,7 +19,29 @@
 <meta property="og:image" content="https://mstewartgallus.github.io/assets/favicon.svg" >
 <meta property="og:description" content="lol, lmao"><meta property="og:profile" content="Molossus Spondee">
 <meta property="og:profile:username" content="Molossus Spondee">
-</head>
+<link href="/assets/search.json"
+          rel="preload" as="fetch"
+          type="application/json" crossorigin>
+    <script type="module" defer async
+            src="/assets/search.js?output=search-output&template=search-result&search=search"
+            ></script>
+
+    <template id="search-result">
+      <li>
+        <a class="search-url">
+          <span class="search-title">Title</span>
+        </a>
+
+        <ul class="search-keywords metadata">
+          <li>
+            <time class="search-date">
+              Date
+            </time>
+          </li>
+        </ul>
+      </li>
+    </template>
+  </head>
   <body>
     <nav itemtype="http://schema.org/Blog" itemscope><a itemprop="url" href="/">
   <span itemprop="name headline">Words to Kick Your Teeth Out</span>
@@ -31,31 +53,10 @@
           <h1 itemprop="name headline">Search</h1>
         </a>
       </header>
+
       <main itemprop="mainEntity">
-        <template id="search-result">
-  <li>
-    <a class="search-url">
-      <span class="search-title">Title</span>
-    </a>
-
-    <ul class="search-keywords metadata">
-      <li>
-        <time class="search-date">
-          Date
-        </time>
-      </li>
-    </ul>
-  </li>
-</template>
-
-<link href="/assets/search.json"
-      rel="preload" as="fetch"
-      type="application/json" crossorigin>
-<script type="module" defer async
-        src="/assets/search.js?output=search-output&template=search-result&search=search"
-        ></script>
-
-<form id="search" rel="search" role="search" name="search-form" method="get">
+        
+      </main><form id="search" rel="search" role="search" name="search-form" method="get">
   <fieldset>
     <label for="category">
       <span class="label">Category:</span>
@@ -110,8 +111,6 @@
   <output id="search-output">
   </output>
 </form>
-
-      </main>
     </div>
   </body>
 </html>

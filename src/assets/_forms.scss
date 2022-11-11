@@ -19,9 +19,9 @@ fieldset {
     border-radius: 1px ;
     border-color: color(primary, lighter);
     display: flex ;
-    flex-direction: column ;
+    flex-direction: row ;
     flex-wrap: wrap ;
-    gap: 1em ;
+    gap: 1.5em ;
 }
 
 .label {
