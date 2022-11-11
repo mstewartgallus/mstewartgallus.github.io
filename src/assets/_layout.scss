@@ -17,7 +17,7 @@ body {
     position: relative ;
     display: flex ;
     flex-direction: column ;
-    align-items: center ;
+    align-items: stretch ;
     justify-content: center ;
 }
 
@@ -70,15 +70,7 @@ nav {
 }
 
 
-header {
-    width: 100% ;
-}
-
-article { width: 100% ; }
-main { width: 100% ; }
-
 footer {
-    width: 100% ;
     display: flex ;
     flex-wrap: wrap ;
     justify-content: space-between ;
@@ -98,6 +90,8 @@ footer {
     margin-top: 1.5em ;
 }
 
-
-.poem header { text-align: center ; }
-.poem main { width: initial ; }
+.poem {
+    display: flex ;
+    flex-direction: column ;
+    align-items: center ;
+}

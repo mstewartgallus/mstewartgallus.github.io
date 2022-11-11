@@ -4,8 +4,7 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body class="poem"
-        itemprop="mainEntity hasPart"
+  <body itemprop="mainEntity hasPart"
         itemtype="https://schema.org/Blog" itemscope>
     <nav>
       {%- include nav.html -%}
@@ -15,7 +14,7 @@
          itemprop="blogPost hasPart"
          itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
-      <div itemprop="text">
+      <div class="poem" itemprop="text">
         <header>
           <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
             <h1 itemprop="name headline">{{ page.title | escape }}</h1>
@@ -24,9 +23,9 @@
 
         <main aria-label="Content" itemprop="articleBody">
           {{ content }}
-        </main>
 
-        {%- include metadata.html -%}
+          {%- include metadata.html -%}
+        </main>
       </div>
     </div>
 

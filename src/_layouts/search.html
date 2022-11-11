@@ -30,13 +30,14 @@
     <nav itemtype="http://schema.org/Blog" itemscope>
       {%- include nav.html -%}
     </nav>
-    <div itemprop="text">
-      <header>
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-        </a>
-      </header>
 
+    <header>
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        <h1 itemprop="name headline">{{ page.title | escape }}</h1>
+      </a>
+    </header>
+
+    <div itemprop="text">
       <main itemprop="mainEntity">
         {{ content }}
       </main>
