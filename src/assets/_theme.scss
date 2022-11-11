@@ -1,16 +1,21 @@
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400 ;
     line-height: 1.1em ;
-    margin-top: 0.6em ;
-    margin-bottom: 0.6em ;
+    margin-top: 0.2em ;
+    margin-bottom: 0.2em ;
     display: inline-block ;
 }
 
 h1 {
     font-size: 2.2em ;
+    margin-top: 0.6em ;
+    margin-bottom: 0.6em ;
 }
-
-h3, h4, h5, h6 {
+h2 {
+    margin-top: 0.4em ;
+    margin-bottom: 0.4em ;
+}
+h3 {
     margin-top: 0.3em ;
     margin-bottom: 0.3em ;
 }
@@ -44,6 +49,24 @@ blockquote {
     margin-left: 0.3em;
     padding-left: 0.6em;
     border-color: color(primary, darker) ;
+}
+
+
+menu, ul {
+    padding-left: 1.3em ;
+}
+ol {
+    padding-left: 1.9em ;
+}
+li {
+    margin-top: 0.4em ;
+    margin-bottom: 0.4em ;
+}
+li:first-child {
+    margin-top: 0 ;
+}
+li:last-child {
+    margin-bottom: 0 ;
 }
 
 @counter-style typewriter {

@@ -90,8 +90,8 @@ footer {
     text-align: center ;
     border-width: 1px ;
     border-style: none none solid none ;
-    padding-bottom: 2em ;
-    margin-bottom: 2em ;
+    padding-bottom: 1.4em ;
+    margin-bottom: 1.7em ;
 }
 
 footer {
@@ -101,20 +101,3 @@ footer {
 
 .poem header { text-align: center ; }
 .poem main { width: initial ; }
-
-menu, ul {
-    padding-left: 1.3em ;
-}
-ol {
-    padding-left: 1.9em ;
-}
-li {
-    margin-top: 0.4em ;
-    margin-bottom: 0.4em ;
-}
-li:first-child {
-    margin-top: 0 ;
-}
-li:last-child {
-    margin-bottom: 0 ;
-}

@@ -45,21 +45,23 @@
     {%- if site.posts.size > 0 -%}
     <header>
       <a href="#contents">
-        <h2 id="contents" class="post-list-heading">Contents</h2>
+        <h2 id="contents">Contents</h2>
       </a>
     </header>
 
     <main aria-label="Content">
-      <ol class="post-list" reversed="true" role="list">
+      <ol reversed="true" role="list" class="post-list">
         {%- for post in site.posts -%}
         <li
           itemprop="hasPart blogPost"
           itemscope
           itemtype="http://schema.org/BlogPosting"
           itemid="{{ post.url | absolute_url }}">
-          <a itemprop="url" href="{{ post.url | relative_url }}">
-            <h3 itemprop="name headline">{{ post.title | escape }}</h3>
-          </a>
+          <header>
+            <a itemprop="url" href="{{ post.url | relative_url }}">
+              <h3 itemprop="name headline">{{ post.title | escape }}</h3>
+            </a>
+          </header>
 
           <ul class="metadata">
             <li>
