@@ -38,3 +38,12 @@ blockquote {
     padding-left: 0.6em;
     border-color: color(primary, darker) ;
 }
+
+@counter-style typewriter {
+  system: cyclic;
+  symbols: "*";
+  suffix: "  ";
+}
+ul, menu {
+    list-style-type: typewriter ;
+}
