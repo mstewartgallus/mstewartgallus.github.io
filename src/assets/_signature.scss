@@ -6,17 +6,16 @@
 
 .metadata {
     font-size: 0.9em ;
-    display: flex ;
-    flex-wrap: wrap ;
-    gap: 0.3em ;
-}
-
-.metadata > li {
     display: block ;
 }
 
+.metadata > li {
+    display: inline ;
+}
+
 .metadata > li::before {
-    content: "•" ;
+    content: " • " ;
+    display: inline ;
     color: $grey-color ;
 }
 

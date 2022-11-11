@@ -83,13 +83,21 @@ function render(template, output, posts) {
 
         const keywords = [];
         for (const category of post.get('categories')) {
+            const anchor = document.createElement('a');
+            anchor.textContent = category;
+            anchor.href = '{{ "/search" | relative_url }}?category=' + category;
+
             const listEntry = document.createElement('li');
-            listEntry.textContent = category;
+            listEntry.append(anchor);
             keywords.push(listEntry);
         }
         for (const tag of post.get('tags')) {
+            const anchor = document.createElement('a');
+            anchor.textContent = tag;
+            anchor.href = '{{ "/search" | relative_url }}?tag=' + tag;
+
             const listEntry = document.createElement('li');
-            listEntry.textContent = tag;
+            listEntry.append(anchor);
             keywords.push(listEntry);
         }
 
@@ -97,7 +105,7 @@ function render(template, output, posts) {
         clone.querySelector('.search-title').textContent = title;
         clone.querySelector('.search-url').href = url;
         clone.querySelector('.search-date').textContent = date;
-        clone.querySelector('.search-keywords').replaceChildren(...keywords);
+        clone.querySelector('.search-keywords').append(...keywords);
         return clone;
     });
 

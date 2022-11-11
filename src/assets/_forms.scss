@@ -1,13 +1,17 @@
-option:hover, button:hover { background-color: color(primary, lighter) ; }
+option:hover, button:hover {
+    background-color: lighten(color(primary, lighter), 20%) ;
+}
 option:active, button:active { background-color: color(primary, default) ; }
 
 // Style select
-option { border-width: 1px ; }
-option { border-style: dashed none none none ; }
-option:first-child { border-style: none ; }
+option, option:focus {
+    border-width: 1px ;
+    border-style: dashed none none none ;
+}
+option:first-child, option:first-child:focus { border-style: none ; }
 
 option:checked {
-    background: color(primary, lighter) ;
+    background-color: lighten(color(primary, lighter), 30%) ;
 }
 
 fieldset {
