@@ -86,19 +86,6 @@ footer {
 }
 
 
-.post-list {
-    display: flex;
-    flex-direction: column ;
-    list-style-type: none ;
-    margin: 0 ;
-    padding: 0 ;
-}
-.post-list > li {
-    margin-top: 0.5em ;
-    margin-bottom: 0.5em ;
-}
-
-
 .home {
     text-align: center ;
     border-width: 1px ;
@@ -114,18 +101,3 @@ footer {
 
 .poem header { text-align: center ; }
 .poem main { width: initial ; }
-
-.home-menu {
-    list-style-type: none ;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column ;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.home-menu > li {
-    margin-top: 0.3em ;
-    margin-bottom: 0.3em ;
-}
