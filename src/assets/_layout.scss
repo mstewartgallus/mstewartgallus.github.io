@@ -53,11 +53,8 @@ body {
 }
 
 nav {
-    width: 100% ;
-    display: flex ;
-    justify-content: flex-end ;
+    text-align: right ;
 }
-
 
 @media (min-width: 40em) {
     nav {
