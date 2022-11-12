@@ -79,13 +79,23 @@ function render(template, output, posts) {
         const url = post.get('url');
 
         const keywords = [];
+        if (post.get('categories').length !== 0) {
+            const listEntry = document.createElement('dt');
+            listEntry.textContent = 'Category';
+            keywords.push(listEntry);
+        }
         for (const category of post.get('categories')) {
             const anchor = document.createElement('a');
             anchor.textContent = category;
             anchor.href = '/search?category=' + category;
 
-            const listEntry = document.createElement('li');
+            const listEntry = document.createElement('dd');
             listEntry.append(anchor);
+            keywords.push(listEntry);
+        }
+        if (post.get('tags').length !== 0) {
+            const listEntry = document.createElement('dt');
+            listEntry.textContent = 'Tag';
             keywords.push(listEntry);
         }
         for (const tag of post.get('tags')) {
@@ -93,7 +103,7 @@ function render(template, output, posts) {
             anchor.textContent = tag;
             anchor.href = '/search?tag=' + tag;
 
-            const listEntry = document.createElement('li');
+            const listEntry = document.createElement('dd');
             listEntry.append(anchor);
             keywords.push(listEntry);
         }

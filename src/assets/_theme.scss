@@ -112,3 +112,29 @@ menu > li::before {
 menu > li:first-child::before {
     content: none ;
 }
+
+dl, dt, dd {
+    display: inline-block ;
+    margin: 0;
+    padding: 0;
+}
+
+dt {
+    font-size: 0.7em ;
+}
+
+dl {
+    display: grid ;
+    grid-template-rows: [name] min-content [content] min-content;
+    grid-auto-flow: column ;
+    column-gap: 0.5em ;
+    align-items: center ;
+    justify-content: start ;
+}
+
+dt {
+    grid-row: name / name;
+}
+dd {
+    grid-row: content / content;
+}

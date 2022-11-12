@@ -1,26 +1,27 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-<div class="post-meta">
-  <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
-    – <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
-      <span itemprop="name">{{ page.author.name | escape }}</span>
-    </a>
-  </address>
-  <menu>
-    <li>
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }}
-      </time>
-    </li>
-    {%- for category in page.categories -%}
-    <li itemprop="articleSection">
-      <a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a>
-    </li>
-    {%- endfor -%}
-    {%- for tag in page.tags -%}
-    <li itemprop="keywords">
-      <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">{{ tag | escape }}</a>
-    </li>
-    {%- endfor -%}
-  </menu>
-</div>
+<address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+  - <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
+    <span itemprop="name">{{ page.author.name | escape }}</span>
+  </a>
+</address>
+<dl>
+  <dt>Posted</dt>
+  <dd>
+    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+      {{ page.date | date: date_format }}
+    </time>
+  </dd>
+  {%- for category in page.categories -%}
+  {%- if forloop.first -%}<dt>Category</dt>{%- endif -%}
+  <dd itemprop="articleSection">
+    <a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a>
+  </dd>
+  {%- endfor -%}
+  {%- for tag in page.tags -%}
+  {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
+  <dd itemprop="keywords">
+    <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">{{ tag | escape }}</a>
+  </dd>
+  {%- endfor -%}
+</dl>
