@@ -78,7 +78,10 @@ footer {
 
 
 .home {
-    text-align: center ;
+    display: flex ;
+    flex-direction: column;
+    flex-wrap: wrap ;
+    align-items: center;
     border-width: 1px ;
     border-color: $grey-color ;
     border-style: none none solid none ;

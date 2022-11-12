@@ -3,6 +3,7 @@
       itemtype="https://schema.org/WebPage" itemscope>
   <head>
     {%- include head.html -%}
+    <meta name="robots" content="noindex">
     <link href="{{ "/assets/search.json" | relative_url }}"
           rel="preload" as="fetch"
           type="application/json" crossorigin>
