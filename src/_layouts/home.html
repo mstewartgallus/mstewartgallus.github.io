@@ -7,10 +7,10 @@
     {%- include head.html -%}
   </head>
   <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <article class="home"
-             itemref="page"
-             itemtype="http://schema.org/WebSite"
-             itemscope>
+    <div class="home"
+         itemref="page"
+         itemtype="http://schema.org/WebSite"
+         itemscope>
       <header>
         {%- if site.title -%}
         <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
@@ -28,7 +28,7 @@
           <span itemprop="name">{{ site.author.name | escape }}</span>
         </a>
       </address>
-    </article>
+    </div>
 
     <article>
       {%- if page.title -%}
