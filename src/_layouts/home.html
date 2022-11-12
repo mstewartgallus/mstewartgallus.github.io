@@ -7,17 +7,15 @@
     {%- include head.html -%}
   </head>
   <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <div class="home"
+    <header class="home"
          itemref="page"
          itemtype="http://schema.org/WebSite"
          itemscope>
-      <header>
-        {%- if site.title -%}
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h1 itemprop="name">{{ site.title | escape }}</h1>
-        </a>
-        {%- endif -%}
-      </header>
+      {%- if site.title -%}
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        <h1 itemprop="name">{{ site.title | escape }}</h1>
+      </a>
+      {%- endif -%}
 
       <div itemprop="description">
         {{ site.description | escape }}
@@ -28,7 +26,7 @@
           <span itemprop="name">{{ site.author.name | escape }}</span>
         </a>
       </address>
-    </div>
+    </header>
 
     <article>
       {%- if page.title -%}
