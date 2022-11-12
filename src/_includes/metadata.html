@@ -6,7 +6,7 @@
       <span itemprop="name">{{ page.author.name | escape }}</span>
     </a>
   </address>
-  <ul class="metadata">
+  <menu>
     <li>
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: date_format }}
@@ -22,5 +22,5 @@
       <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">{{ tag | escape }}</a>
     </li>
     {%- endfor -%}
-  </ul>
+  </menu>
 </div>

@@ -63,7 +63,7 @@
             </a>
           </header>
 
-          <ul class="metadata">
+          <menu>
             <li>
               <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
                 {{ post.date | date: date_format }}
@@ -79,7 +79,7 @@
               <a href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">{{ tag | escape }}</a>
             </li>
             {%- endfor -%}
-          </ul>
+          </menu>
           <span itemprop="creator author" itemscope itemtype="http://schema.org/Person">
             <link itemprop="url" href="{{ post.author.url | relative_url }}">
             <meta itemprop="name" content="{{ post.author.name | escape }}">

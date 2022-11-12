@@ -87,3 +87,28 @@ ul, menu {
 ol {
     list-style-type: typewriter-ordered;
 }
+
+// abuse menu unsemantically
+menu, menu > li {
+    margin: 0;
+    padding: 0;
+    line-height: inherit ;
+}
+
+menu {
+    font-size: 0.9em ;
+    display: block ;
+}
+
+menu > li {
+    display: inline ;
+}
+
+menu > li::before {
+    content: " • " ;
+    display: inline ;
+}
+
+menu > li:first-child::before {
+    content: none ;
+}
