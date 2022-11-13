@@ -101,6 +101,9 @@ $color: (
 :link {
     color: map-get($primary, 800) ;
 }
+:link:hover {
+    color: map-get($primary, 700) ;
+}
 :visited {
     color: map-get($primary, 900) ;
 }
@@ -142,12 +145,15 @@ option:checked {
     :visited {
         color: map-get($primary, 200) ;
     }
+    :is(:link,:visited):hover {
+        color: map-get($accent, 100) ;
+    }
     :is(:link, :visited):active {
         color: map-get($warn, 300) ;
     }
 
     :is(nav, h1,h2,h3,h4,h5,h6,h7) a:active {
-        color: map-get($warn, 900) ;
+        color: map-get($warn, 700) ;
     }
 
     hr::after {
