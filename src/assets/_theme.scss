@@ -56,20 +56,21 @@ hr {
     text-align: center;
     overflow: visible ;
     height: 0px ;
-    border-width: 5px ;
-    border-style: double none none none ;
-    border-color: lighten(color(primary, lighter), 10%) ;
+    border: none ;
+    outline-width: 1px ;
+    outline-style: solid ;
+    outline-color: lighten(color(primary, lighter), 10%) ;
     margin-top: 1.5em ;
     margin-bottom: 1.5em ;
 }
 hr::after {
-    top: -0.8em ;
+    top: -0.7em ;
     position: relative ;
     content: "§" ;
     padding: 0 4px ;
     background-color: white ;
     color: color(primary, lighter) ;
-    font-size: 1.5em ;
+    font-size: 1.125em ;
 }
 
 blockquote {

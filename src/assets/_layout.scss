@@ -77,13 +77,17 @@ footer {
     display: flex ;
     flex-direction: column;
     flex-wrap: wrap ;
-    align-items: start;
-    // FIXME avoid throwing off by border-width
-    border-width: 1px ;
-    border-color: $grey-color ;
-    border-style: none none solid none ;
-    padding-bottom: 1.5em ;
+    align-items: center;
+}
+.home::after {
+    content: "";
+    width: 100%;
+    height: 0 ;
+    outline-color: $grey-color ;
+    outline-style: solid ;
+    outline-width: 1px  ;
     margin-bottom: 1.5em ;
+    margin-top: 1.5em ;
 }
 
 footer {
