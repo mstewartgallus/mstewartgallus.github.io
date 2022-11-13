@@ -1,0 +1,71 @@
+// provide some sensible defaults for line spacing, etc..
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.286 ;
+    font-size: 1.125em ;
+}
+
+h1, h2 {
+    font-weight: bold ;
+    font-size: 1.5em ;
+    line-height: 1 ;
+
+    margin-top: 1.929em ;
+    margin-bottom: 0.643em ;
+}
+
+dd {
+    margin-left: 2em ;
+}
+
+body {
+    line-height: 1.5 ;
+}
+
+small {
+    font-size: 0.75em ;
+    line-height: 2 ;
+}
+
+// left indent all but first paragrahp
+p {
+    margin-top: 1.5em ;
+}
+p + p {
+    margin-top: 0 ;
+    text-indent: 1.2em ;
+}
+
+p {
+    hyphens: auto ;
+}
+
+hr {
+    margin-top: 1.5em ;
+    margin-bottom: 1.5em ;
+    // an obtuse hack is needed to prevent horizontal rules throwing
+    // off the spacing
+    height: 0px ;
+    border: none ;
+    outline-width: 1px ;
+    outline-style: solid ;
+}
+
+abbr {
+    font-variant-caps: small-caps ;
+    letter-spacing: 0.1em ;
+}
+* {
+    font-variant-numeric: proportional-nums oldstyle-nums ;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-variant-numeric: proportional-nums lining-nums ;
+}
+
+table {
+    border-collapse: collapse ;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+menu, ul, ol {
+    padding-left: 1.8em ;
+}
