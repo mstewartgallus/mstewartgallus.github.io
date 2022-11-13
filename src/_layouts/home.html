@@ -12,41 +12,40 @@
          itemtype="http://schema.org/WebSite"
          itemscope>
       {%- if site.title -%}
-      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-        <h1 itemprop="name">{{ site.title | escape }}</h1>
-      </a>
+      <h1 itemprop="name">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ site.title | escape }}</a>
+      </h1>
       {%- endif -%}
-
       <div itemprop="description">
         {{ site.description | escape }}
       </div>
-
       <address itemprop="author" itemscope itemtype="https://schema.org/Person">
         <a itemprop="url" rel="author" href="{{ page.author.url | relative_url}}">
           @<span itemprop="name">{{ site.author.name | escape }}</span>
         </a>
       </address>
     </header>
-
     <article>
       {%- if page.title -%}
       <header>
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          <h2 itemprop="name headline">{{ page.title | escape }}</h2>
-        </a>
+        <h2 itemprop="name headline">
+          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+            {{ page.title | escape }}
+          </a>
+        </h2>
       </header>
       {%- endif -%}
-
       {{ content }}
     </article>
-
     {%- if site.posts.size > 0 -%}
     <header>
-      <a href="#contents">
-        <h2 id="contents">Contents</h2>
-      </a>
+      <h2 id="contents">
+        <a href="#contents">
+          Contents
+        </a>
+      </h2>
     </header>
-
     <main aria-label="Content">
       <ol reversed role="list" class="post-list">
         {%- for post in site.posts -%}
@@ -56,11 +55,12 @@
           itemtype="http://schema.org/BlogPosting"
           itemid="{{ post.url | absolute_url }}">
           <header>
-            <a itemprop="url" href="{{ post.url | relative_url }}">
-              <h3 itemprop="name headline">{{ post.title | escape }}</h3>
-            </a>
+            <h3 itemprop="name headline">
+              <a itemprop="url" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+              </a>
+            </h3>
           </header>
-
           <dl class="metadata">
             <dt>Posted</dt>
             <dd>

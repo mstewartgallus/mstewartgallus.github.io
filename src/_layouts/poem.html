@@ -9,28 +9,26 @@
     <nav>
       {%- include nav.html -%}
     </nav>
-
     <div itemscope
          itemprop="blogPost hasPart"
          itemtype="https://schema.org/BlogPosting"
          itemid="{{ page.url | absolute_url }}">
       <div class="poem" itemprop="text">
         <header>
-          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-            <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-          </a>
+          <h1 itemprop="name headline">
+            <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+              {{ page.title | escape }}
+            </a>
+          </h1>
         </header>
-
         <main aria-label="Content" itemprop="articleBody">
           {{ content }}
-
           <div style="text-align: left;margin-top:2em">
             {%- include metadata.html -%}
           </div>
         </main>
       </div>
     </div>
-
     <footer aria-label="pagination">
       {%- include footer.html -%}
     </footer>

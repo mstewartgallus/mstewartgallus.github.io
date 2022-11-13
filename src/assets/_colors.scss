@@ -96,37 +96,25 @@ $color: (
 }
 
 
-a {
+:link {
     color: map-get($primary, 800) ;
 }
-a:visited {
+:visited {
     color: map-get($primary, 900) ;
 }
-a:active {
-    color: map-get($accent, 800) ;
+:link:active {
+    color: map-get($warn, 900) ;
 }
 
-html {
-    background-color: white;
-    color: map-get($primary, 900) ;
-}
-body {
-    color: black ;
-}
-.home {
-    color: map-get($primary, 900) ;
-}
-.home div {
-    color: black;
+:is(nav, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) { color: black; }
+:is(nav, h1,h2,h3,h4,h5,h6,h7) a:active {
+    color: map-get($warn, 900) ;
 }
 
 hr::after {
     background-color: white ;
-    color: color(primary, lighter) ;
 }
-hr {
-    color: color(primary, lighter) ;
-}
+
 blockquote {
     color: color(primary, darker) ;
 }
@@ -139,10 +127,6 @@ option:active, button:active {
 }
 option:checked {
     background-color: lighten(color(primary, lighter), 30%) ;
-}
-
-fieldset {
-    border-color: color(primary, lighter);
 }
 
 @media (prefers-color-scheme: dark) {

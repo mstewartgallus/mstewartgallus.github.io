@@ -45,10 +45,18 @@ p {
     hyphens: auto ;
 }
 
-a {
+:link {
+    font-variant-caps: small-caps ;
+}
+:link[rel~="author"],
+:is(footer, nav, h1, h2, h3, h4, h5, h6, h7) :link {
     text-decoration: none ;
 }
-a:hover {
+:link[rel~="author"],
+:is(header, h1, h2, h3, h4, h5, h6, h7) :link {
+    font-variant-caps: normal ;
+}
+:link:hover {
     text-decoration: underline ;
 }
 
@@ -148,18 +156,6 @@ h1, h2, h3, h4, h5, h6 {
     font-variant-numeric: proportional-nums lining-nums ;
 }
 
-a[href^="/"], a[href^="..."] {
-    font-variant-caps: small-caps ;
-}
-
-a[rel="author"] {
-    font-variant-caps: normal ;
-}
-
-h1, h2, h3, h4, h5, h6, h7 {
-    font-variant-caps: normal ;
-}
-
 table {
     border-collapse: collapse ;
     font-variant-numeric: lining-nums tabular-nums;
@@ -173,4 +169,8 @@ p:first-of-type::first-letter {
 
 p:first-of-type::first-line {
     font-style: italic ;
+}
+
+fieldset {
+    border-color: currentcolor ;
 }
