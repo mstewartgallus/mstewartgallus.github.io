@@ -9,30 +9,35 @@ permalink: /about/
   <p>I guess right now I'm just working on my portfolio.</p>
 
   <address>
-    <ul class="social-media-list">
-      <li>
+    <dl>
+      <dl>
+        About
+      </dl>
+      <dd>
         <a rel="author" href="/about">@<span itemProp="name">Molossus Spondee</span></a>
-      </li>
-      <li>
-        <a href="mailto:{{site.email}}">
-          email: <span itemprop="email">{{site.email}}</span>
-        </a>
-      </li>
-      <li>
+      </dd>
+      <dl>Email</dl>
+      <dd>
+        <a itemprop="email" href="mailto:{{site.email}}">{{site.email}}</a>
+      </dd>
+      <dl>GitHub</dl>
+      <dd>
         <a itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
-          GitHub: {{ site.github| escape }}
+          {{ site.github | escape }}
         </a>
-      </li>
-      <li>
+      </dd>
+      <dl>LinkedIn</dl>
+      <dd>
         <a itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
-          LinkedIn: {{ site.linkedin | escape }}
+          {{ site.linkedin | escape }}
         </a>
-      </li>
-      <li>
+      </dd>
+      <dl>Twitter</dl>
+      <dd>
         <a itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
-          Twitter: {{ site.twitter.username | escape }}
+          @{{ site.twitter.username | escape }}
         </a>
-      </li>
-    </ul>
+      </dd>
+    </dl>
   </address>
 </article>

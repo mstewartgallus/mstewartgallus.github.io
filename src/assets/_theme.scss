@@ -8,11 +8,9 @@ abbr {
     font-variant-caps: small-caps ;
     text-transform: lowercase ;
 }
-:link[rel~="author"],
 :is(footer, nav, h1, h2, h3, h4, h5, h6, h7) :link {
     text-decoration: none ;
 }
-:link[rel~="author"],
 :is(header, h1, h2, h3, h4, h5, h6, h7) :link {
     font-variant-caps: normal ;
     text-transform: none ;
@@ -67,9 +65,13 @@ menu > li:first-child::before {
 }
 
 .metadata, .metadata > dt, .metadata > dd {
-    display: inline-block ;
+    display: inline ;
     margin: 0;
-    padding: 0;
+}
+
+.metadata {
+    font-size: 0.75em ;
+    line-height: 2 ;
 }
 
 .metadata {
@@ -83,18 +85,14 @@ menu > li:first-child::before {
 
 .metadata > dt {
     grid-row: name / name;
-    font-size: 0.75em ;
-    line-height: 1.714 ;
 }
 .metadata > dd {
     grid-row: content / content;
-    font-size: 0.875em ;
-    line-height: 2 ;
 }
 
 p:first-of-type::first-letter {
-    line-height: 1.286 ;
-    font-size: 1.125em ;
+    line-height: 1.285714 ;
+    font-size: 1.166666666666em ;
     font-weight: bold ;
 }
 
