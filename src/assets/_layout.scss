@@ -1,7 +1,6 @@
-$A4-width: 8.3in ;
-$A4-height: 11.7in ;
-$A4-margin: 1.5in ;
-$body-width: 5.3in ;
+$A4-width: 49.8rem ;
+$A4-margin: 9rem ;
+$body-width: 31.8rem ;
 
 
 html {
@@ -21,7 +20,7 @@ body {
     justify-content: center ;
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 40rem) {
     html {
         width: $A4-width ;
     }
@@ -30,7 +29,7 @@ body {
     }
 }
 
-@media screen and (min-width: 50em) {
+@media screen and (min-width: 50rem) {
     html {
         box-shadow: 0.03em -0.01em 0.2em $grey-color ;
     }
@@ -39,16 +38,16 @@ body {
         margin: $A4-margin ;
     }
 }
-@media screen and (min-width: 70em) {
+@media screen and (min-width: 70rem) {
     html {
-        margin-left: 1in ;
+        margin-left: 8rem ;
     }
 }
 
-@media only screen and (max-width: 40em) {
+@media only screen and (max-width: 40rem) {
     body {
-        margin: 0.7em ;
-        margin-top: 0.2em ;
+        margin: 0.7rem ;
+        margin-top: 0.2rem ;
     }
 }
 
@@ -56,11 +55,11 @@ nav {
     text-align: right ;
 }
 
-@media (min-width: 40em) {
+@media (min-width: 40rem) {
     nav {
         position: absolute ;
         right: 0;
-        top: -1em;
+        top: -1rem;
     }
 }
 
