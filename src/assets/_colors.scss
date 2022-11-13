@@ -96,17 +96,18 @@ $color: (
 }
 
 
+:is(nav, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) { color: inherit; }
+
 :link {
     color: map-get($primary, 800) ;
 }
 :visited {
     color: map-get($primary, 900) ;
 }
-:link:active {
+:is(:link, :visited):active {
     color: map-get($warn, 900) ;
 }
 
-:is(nav, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) { color: black; }
 :is(nav, h1,h2,h3,h4,h5,h6,h7) a:active {
     color: map-get($warn, 900) ;
 }
@@ -130,5 +131,33 @@ option:checked {
 }
 
 @media (prefers-color-scheme: dark) {
-    // FIXME
+    html {
+        background-color: #222 ;
+        color: white ;
+    }
+
+    :link {
+        color: map-get($primary, 100) ;
+    }
+    :visited {
+        color: map-get($primary, 200) ;
+    }
+    :is(:link, :visited):active {
+        color: map-get($warn, 300) ;
+    }
+
+    :is(nav, h1,h2,h3,h4,h5,h6,h7) a:active {
+        color: map-get($warn, 900) ;
+    }
+
+    hr::after {
+        background-color: #222 ;
+    }
+
+    option:hover {
+        background-color: map-get($primary, 300) ;
+    }
+    option:checked {
+        background-color: map-get($primary, 400) ;
+    }
 }
