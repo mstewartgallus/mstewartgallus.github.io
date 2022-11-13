@@ -11,7 +11,7 @@ abbr {
 :is(footer, nav, h1, h2, h3, h4, h5, h6, h7) :link {
     text-decoration: none ;
 }
-:is(header, h1, h2, h3, h4, h5, h6, h7) :link {
+:is(h1, h2, h3, h4, h5, h6, h7) :link {
     font-variant-caps: normal ;
     text-transform: none ;
 }
