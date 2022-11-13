@@ -21,16 +21,21 @@ h1, h2 {
         margin-bottom: 0.643em ;
     }
 }
+a {
+    font-size: 1em ;
+    line-height: 1.5 ;
+}
 p {
     font-size: 1em ;
+    line-height: 1.5 ;
 }
 
 small {
     font-size: 0.75em ;
+    line-height: 2 ;
 }
 
 p {
-    line-height: 1.5 ;
     margin-top: 1.5em ;
     margin-bottom: 1.5em ;
 }
@@ -84,6 +89,8 @@ blockquote {
 
 
 menu, ul, ol {
+    font-size: 1em ;
+    line-height: 1.5 ;
     padding-left: 1.5em ;
     margin-top: 1.5em ;
     margin-bottom: 1.5em ;
@@ -132,10 +139,12 @@ menu > li:first-child::before {
 .metadata > dt {
     grid-row: name / name;
     font-size: 0.75em ;
+    line-height: 1.714 ;
 }
 .metadata > dd {
     grid-row: content / content;
     font-size: 0.875em ;
+    line-height: 2 ;
 }
 
 address {
