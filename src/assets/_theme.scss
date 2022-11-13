@@ -9,15 +9,15 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 2.2em ;
     margin-top: 0.6em ;
-    margin-bottom: 0.6em ;
+    margin-bottom: 0.5em ;
 }
 h2 {
     margin-top: 0.4em ;
-    margin-bottom: 0.4em ;
+    margin-bottom: 0.3em ;
 }
 h3 {
     margin-top: 0.3em ;
-    margin-bottom: 0.3em ;
+    margin-bottom: 0.2em ;
 }
 
 @media only screen and (max-width: 40em) {
@@ -113,17 +113,13 @@ menu > li:first-child::before {
     content: none ;
 }
 
-dl, dt, dd {
+.metadata, .metadata > dt, .metadata > dd {
     display: inline-block ;
     margin: 0;
     padding: 0;
 }
 
-dt {
-    font-size: 0.7em ;
-}
-
-dl {
+.metadata {
     display: grid ;
     grid-template-rows: [name] min-content [content] min-content;
     grid-auto-flow: column ;
@@ -132,9 +128,11 @@ dl {
     justify-content: start ;
 }
 
-dt {
+.metadata > dt {
     grid-row: name / name;
+    font-size: 0.7em ;
 }
-dd {
+.metadata > dd {
     grid-row: content / content;
+    font-size: 0.9em ;
 }

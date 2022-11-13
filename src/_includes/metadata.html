@@ -5,7 +5,8 @@
     <span itemprop="name">{{ page.author.name | escape }}</span>
   </a>
 </address>
-<dl>
+
+<dl class="metadata">
   <dt>Posted</dt>
   <dd>
     <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
