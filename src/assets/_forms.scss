@@ -1,8 +1,3 @@
-option:hover, button:hover {
-    background-color: lighten(color(primary, lighter), 20%) ;
-}
-option:active, button:active { background-color: color(primary, default) ; }
-
 // Style select
 option, option:focus {
     border-width: 1px ;
@@ -10,14 +5,9 @@ option, option:focus {
 }
 option:first-child, option:first-child:focus { border-style: none ; }
 
-option:checked {
-    background-color: lighten(color(primary, lighter), 30%) ;
-}
-
 fieldset {
     border-style: dashed ;
     border-radius: 1px ;
-    border-color: color(primary, lighter);
     display: flex ;
     flex-direction: row ;
     flex-wrap: wrap ;

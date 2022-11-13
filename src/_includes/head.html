@@ -1,7 +1,6 @@
 {%- assign icon = "/assets/favicon.svg" | relative_url -%}
 {%- assign abs_icon = "/assets/favicon.svg" | absolute_url -%}
 {%- assign css = "/assets/main.css" | relative_url -%}
-{%- assign dark = "/assets/dark.css" | relative_url -%}
 {%- assign feed = "/feed.xml" | relative_url -%}
 {%- assign site_title = site.title -%}
 {%- assign title = page.title | default: site_title -%}
@@ -18,8 +17,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ title }} - {{ site_title }}</title>
 <link rel="icon" href="{{ icon }}">
-<link rel="stylesheet" href="{{ css }}" title="Light">
-<link rel="alternate stylesheet" href="{{ dark }}" title="Dark (beta)" media="(prefers-color-scheme: dark)">
+<link rel=" stylesheet" href="{{ css }}">
 <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
 <link rel="canonical" href="{{ url }}">
 <link rel="author" href="{{ author_url }}">
