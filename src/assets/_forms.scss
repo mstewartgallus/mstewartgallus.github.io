@@ -20,17 +20,20 @@ select:focus, button:focus {
 
 fieldset {
     border: none ;
-    border-radius: 1px ;
+    border-radius: 4px ;
     outline-style: dashed ;
+    outline-width: 3px ;
     display: flex ;
     flex-direction: row ;
     flex-wrap: wrap ;
     gap: 1.5rem ;
+    padding-left: 1rem ;
+    padding-right: 1rem ;
 }
 
 .label {
     display: block ;
-    margin-bottom: pt(12) ;
+    margin-bottom: pt(18) ;
 }
 
 form {
@@ -46,6 +49,6 @@ option, option:focus {
 }
 
 button, button:focus {
-    margin-top: pt(12) ;
-    margin-bottom: pt(12) ;
+    margin-top: pt(27) ;
+    margin-bottom: pt(9) ;
 }

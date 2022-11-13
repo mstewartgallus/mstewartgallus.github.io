@@ -19,6 +19,7 @@ bleh i don't get it
 body {
     line-height: 1.5rem ;
 }
+
 // provide some sensible defaults for line spacing, etc..
 h1, h2, h3, h4, h5, h6 {
     font-size: pt(14) ;
@@ -31,18 +32,9 @@ h2 {
     font-size: pt(16) ;
 }
 
-h1 {
+h1, h2, h3 {
     margin-top: pt(27) ;
     margin-bottom: pt(9) ;
-}
-h2 {
-    margin-top: pt(24) ;
-    margin-bottom: pt(8) ;
-}
-
-h3 {
-    margin-top: pt(21) ;
-    margin-bottom: pt(7) ;
 }
 
 
@@ -61,7 +53,7 @@ small {
 
 // left indent all but first paragrahp
 p {
-    margin-top: pt(12) ;
+    margin-top: pt(18) ;
 }
 p + p {
     margin-top: 0 ;
@@ -73,8 +65,7 @@ p {
 }
 
 hr {
-    margin-top: pt(24) ;
-    margin-bottom: pt(8) ;
+    margin-top: pt(18) ;
     // an obtuse hack is needed to prevent horizontal rules throwing
     // off the spacing
     height: 0px ;
