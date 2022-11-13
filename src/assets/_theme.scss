@@ -162,3 +162,8 @@ a[rel="author"] {
 h1, h2, h3, h4, h5, h6, h7 {
     font-variant-caps: normal ;
 }
+
+table {
+    border-collapse: collapse ;
+    font-variant-numeric: lining-nums tabular-nums;
+}

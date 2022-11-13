@@ -15,11 +15,15 @@
 }
 
 .stanzas {
-    text-align: left ;
+    // text-align: left ;
 }
 
 .stanza > li {
     // Tab indent hanging lines
     text-indent: -4em ;
     margin-left: 4em ;
+}
+
+.stanza > li {
+    text-align: "." left ;
 }
