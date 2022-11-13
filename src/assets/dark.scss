@@ -2,13 +2,13 @@
 ---
 @import "assets/_branding.scss";
 
-$text-color:       black ;
-$background-color: white ;
-$brand-color: color(primary, default);
+$text-color:       white ;
+$background-color: black ;
+$brand-color: color(primary, lighter);
 
 $grey-color:       #657 ;
-$grey-color-light: lighten($grey-color, 40%) ;
-$grey-color-dark:  darken($grey-color, 25%) ;
+$grey-color-light: lighten($grey-color, 25%) ;
+$grey-color-dark:  darken($grey-color, 40%) ;
 
 @import "assets/_reset.scss";
 @import "assets/_formreset.scss";

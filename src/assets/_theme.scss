@@ -1,3 +1,8 @@
+html {
+    background-color: $background-color;
+    color: $text-color ;
+}
+
 body {
     font-size: 100% ;
 }
@@ -59,7 +64,7 @@ hr {
     border: none ;
     outline-width: 1px ;
     outline-style: solid ;
-    outline-color: lighten(color(primary, lighter), 10%) ;
+    outline-color: color(primary, lighter) ;
     margin-top: 1.5em ;
     margin-bottom: 1.5em ;
 }
@@ -68,7 +73,7 @@ hr::after {
     position: relative ;
     content: "§" ;
     padding: 0 4px ;
-    background-color: white ;
+    background-color: $background-color ;
     color: color(primary, lighter) ;
     font-size: 1.125em ;
 }
