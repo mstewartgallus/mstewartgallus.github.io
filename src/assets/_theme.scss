@@ -1,31 +1,49 @@
+body {
+    font-size: 100% ;
+}
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400 ;
-    line-height: 1.1em ;
-    margin-top: 0.2em ;
-    margin-bottom: 0.2em ;
-    display: inline-block ;
+    line-height: 1.286 ;
+    font-size: 1.125em ;
 }
-
-h1 {
-    font-size: 2.2em ;
-    margin-top: 0.6em ;
-    margin-bottom: 0.5em ;
+h1, h2 {
+    font-weight: bold ;
 }
-h2 {
-    margin-top: 0.4em ;
-    margin-bottom: 0.3em ;
+h1, h2 {
+    font-size: 1.5em ;
 }
-h3 {
-    margin-top: 0.3em ;
-    margin-bottom: 0.2em ;
-}
-
-@media only screen and (max-width: 40em) {
+@media (min-width: 40em) {
     h1 {
-        font-size: 1.5em ;
-        line-height: 1em ;
+        font-size: 2.25em ;
+    }
+    h1, h2 {
+        margin-top: 1.929em ;
+        margin-bottom: 0.643em ;
     }
 }
+p {
+    font-size: 1em ;
+}
+
+small {
+    font-size: 0.75em ;
+}
+
+p {
+    line-height: 1.5 ;
+    margin-top: 1.5em ;
+    margin-bottom: 1.5em ;
+}
+
+p {
+    margin-bottom: 0 ;
+}
+
+p + p {
+    margin-top: 0 ;
+    text-indent: 1em ;
+}
+
 
 a {
     text-decoration: none ;
@@ -41,6 +59,8 @@ hr {
     border-width: 5px ;
     border-style: double none none none ;
     border-color: lighten(color(primary, lighter), 10%) ;
+    margin-top: 1.5em ;
+    margin-bottom: 1.5em ;
 }
 hr::after {
     top: -0.8em ;
@@ -49,35 +69,24 @@ hr::after {
     padding: 0 4px ;
     background-color: white ;
     color: color(primary, lighter) ;
-    font-size: 1.4em ;
+    font-size: 1.5em ;
 }
 
 blockquote {
     border-style: none none none dashed ;
     border-width: 1px;
-    margin-left: 0.3em;
-    padding-left: 0.6em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-left: 1em;
     border-color: color(primary, darker) ;
 }
 
 
-menu, ul {
-    padding-left: 1.3em ;
+menu, ul, ol {
+    padding-left: 1.5em ;
+    margin-top: 1.5em ;
+    margin-bottom: 1.5em ;
 }
-ol {
-    padding-left: 1.9em ;
-}
-li {
-    margin-top: 0.4em ;
-    margin-bottom: 0.4em ;
-}
-li:first-child {
-    margin-top: 0 ;
-}
-li:last-child {
-    margin-bottom: 0 ;
-}
-
 
 // abuse menu unsemantically
 menu, menu > li {
@@ -87,7 +96,7 @@ menu, menu > li {
 }
 
 menu {
-    font-size: 0.9em ;
+    font-size: 1.5em ;
     display: block ;
 }
 
@@ -114,18 +123,18 @@ menu > li:first-child::before {
     display: grid ;
     grid-template-rows: [name] min-content [content] min-content;
     grid-auto-flow: column ;
-    column-gap: 0.5em ;
+    column-gap: 1.5em ;
     align-items: center ;
     justify-content: start ;
 }
 
 .metadata > dt {
     grid-row: name / name;
-    font-size: 0.7em ;
+    font-size: 0.75em ;
 }
 .metadata > dd {
     grid-row: content / content;
-    font-size: 0.9em ;
+    font-size: 0.875em ;
 }
 
 address {
@@ -133,9 +142,14 @@ address {
 }
 abbr {
     font-variant-caps: small-caps ;
+    font-style: normal ;
+    letter-spacing: 0.1em ;
 }
 * {
     font-variant-numeric: proportional-nums oldstyle-nums ;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-variant-numeric: proportional-nums lining-nums ;
 }
 
 a[href^="/"], a[href^="..."] {
