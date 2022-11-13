@@ -63,7 +63,7 @@ would be her.
 
 For the rest of the night I drifted in and out of sleep.  Each time I
 woke up I felt Must on top of me watching.  Until the morning sun
-appeared when I woke up and the prescence was gone completely.
+appeared when I woke up and the presence was gone completely.
 
 ***
 

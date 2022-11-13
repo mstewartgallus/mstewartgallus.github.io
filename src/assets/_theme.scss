@@ -38,9 +38,12 @@ p {
 
 p + p {
     margin-top: 0 ;
-    text-indent: 1em ;
+    text-indent: 1.2em ;
 }
 
+p {
+    hyphens: auto ;
+}
 
 a {
     text-decoration: none ;
@@ -120,7 +123,7 @@ menu > li:first-child::before {
     display: grid ;
     grid-template-rows: [name] min-content [content] min-content;
     grid-auto-flow: column ;
-    column-gap: 1.5em ;
+    column-gap: 1.2em ;
     align-items: center ;
     justify-content: start ;
 }
