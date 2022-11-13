@@ -35,12 +35,21 @@ a:hover {
 }
 
 hr {
-    text-align: center ;
-    border: none ;
+    text-align: center;
+    overflow: visible ;
+    height: 0px ;
+    border-width: 5px ;
+    border-style: double none none none ;
+    border-color: lighten(color(primary, lighter), 10%) ;
 }
-hr::before {
-    content: "***" ;
+hr::after {
+    top: -0.8em ;
+    position: relative ;
+    content: "§" ;
+    padding: 0 4px ;
+    background-color: white ;
     color: color(primary, lighter) ;
+    font-size: 1.4em ;
 }
 
 blockquote {
@@ -69,24 +78,6 @@ li:last-child {
     margin-bottom: 0 ;
 }
 
-@counter-style typewriter {
-  system: cyclic;
-  symbols: "*";
-  suffix: "  ";
-}
-ul, menu {
-    list-style-type: typewriter ;
-}
-
-@counter-style typewriter-ordered {
-  system: numeric;
-  symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
-  suffix: ". " ;
-}
-
-ol {
-    list-style-type: typewriter-ordered;
-}
 
 // abuse menu unsemantically
 menu, menu > li {
@@ -136,3 +127,17 @@ menu > li:first-child::before {
     grid-row: content / content;
     font-size: 0.9em ;
 }
+
+address {
+    font-style: normal ;
+}
+abbr {
+    font-variant-caps: small-caps ;
+}
+* {
+    font-variant-numeric: proportional-nums oldstyle-nums ;
+}
+
+// h1 {
+//     font-variant-caps: small-caps ;
+// }
