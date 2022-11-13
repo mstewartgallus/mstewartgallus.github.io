@@ -138,6 +138,14 @@ abbr {
     font-variant-numeric: proportional-nums oldstyle-nums ;
 }
 
-// h1 {
-//     font-variant-caps: small-caps ;
-// }
+a[href^="/"], a[href^="..."] {
+    font-variant-caps: small-caps ;
+}
+
+a[rel="author"] {
+    font-variant-caps: normal ;
+}
+
+h1, h2, h3, h4, h5, h6, h7 {
+    font-variant-caps: normal ;
+}

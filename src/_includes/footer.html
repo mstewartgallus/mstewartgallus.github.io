@@ -1,18 +1,28 @@
 {%- if page.previous.url -%}
-<span itemscope
-      itemprop="blogPost hasPart"
-      itemtype="https://schema.org/BlogPosting">
-  <a href="{{page.previous.url}}" rel="prev" itemprop="url">
-    Previous: <span itemprop="name headline">{{page.previous.title | escape}}</span>
-  </a>
-</span>
+<dl class="metadata">
+  <dt>Previous</dt>
+  <dd>
+    <span itemscope
+          itemprop="blogPost hasPart"
+          itemtype="https://schema.org/BlogPosting">
+      <a href="{{page.previous.url}}" rel="prev" itemprop="url">
+        <span itemprop="name headline">{{page.previous.title | escape}}</span>
+      </a>
+    </span>
+  </dd>
+</dl>
 {%- endif -%}
 {%- if page.next.url -%}
-<span itemscope
-      itemprop="blogPost hasPart"
-      itemtype="https://schema.org/BlogPosting">
-  <a href="{{page.next.url}}" rel="next" itemprop="url">
-    Next: <span itemprop="name headline">{{page.next.title | escape}}</span>
-  </a>
-</span>
+<dl class="metadata">
+  <dt>Next</dt>
+  <dd>
+    <span itemscope
+          itemprop="blogPost hasPart"
+          itemtype="https://schema.org/BlogPosting">
+      <a href="{{page.next.url}}" rel="next" itemprop="url">
+        <span itemprop="name headline">{{page.next.title | escape}}</span>
+      </a>
+    </span>
+  </dd>
+</dl>
 {%- endif -%}
