@@ -168,3 +168,13 @@ table {
     border-collapse: collapse ;
     font-variant-numeric: lining-nums tabular-nums;
 }
+
+p:first-of-type::first-letter {
+    line-height: 1.286 ;
+    font-size: 1.125em ;
+    font-weight: bold ;
+}
+
+p:first-of-type::first-line {
+    font-style: italic ;
+}
