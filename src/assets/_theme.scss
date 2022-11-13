@@ -35,8 +35,8 @@ hr::after {
 blockquote {
     border-style: none none none dashed ;
     border-width: 1px;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
+    margin-top: pt(12);
+    margin-bottom: pt(12);
     margin-left: 1em;
 }
 
@@ -69,9 +69,13 @@ menu > li:first-child::before {
     margin: 0;
 }
 
-.metadata {
-    font-size: 0.75em ;
-    line-height: 2 ;
+.metadata > dt {
+    font-size: pt(9) ;
+    line-height: inv(9) ;
+}
+.metadata > dd {
+    font-size: pt(12) ;
+    line-height: inv(12) ;
 }
 
 .metadata {
