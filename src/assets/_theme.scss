@@ -44,7 +44,6 @@ blockquote {
 menu, menu > li {
     margin: 0;
     padding: 0;
-    line-height: inherit ;
 }
 
 menu {
@@ -71,18 +70,16 @@ menu > li:first-child::before {
 
 .metadata > dt {
     font-size: pt(9) ;
-    line-height: inv(9) ;
 }
 .metadata > dd {
     font-size: pt(12) ;
-    line-height: inv(12) ;
 }
 
 .metadata {
     display: grid ;
     grid-template-rows: [name] min-content [content] min-content;
     grid-auto-flow: column ;
-    column-gap: 1.2em ;
+    column-gap: 1.4rem ;
     align-items: center ;
     justify-content: start ;
 }
@@ -95,8 +92,7 @@ menu > li:first-child::before {
 }
 
 p:first-of-type::first-letter {
-    line-height: 1.285714 ;
-    font-size: 1.166666666666em ;
+    font-size: pt(14) ;
     font-weight: bold ;
 }
 

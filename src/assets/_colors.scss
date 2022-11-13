@@ -160,7 +160,7 @@ option:checked {
         background-color: #222 ;
     }
 
-    option:hover {
+    button:hover, option:hover {
         background-color: map-get($primary, 300) ;
     }
     option:checked {

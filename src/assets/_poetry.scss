@@ -10,8 +10,8 @@
 }
 
 .stanza {
-    margin-top: 1.5em ;
-    margin-bottom: 1.5em ;
+    margin-top: pt(12) ;
+    margin-bottom: pt(12) ;
 }
 
 .stanzas {
@@ -22,8 +22,4 @@
     // Tab indent hanging lines
     text-indent: -4em ;
     margin-left: 4em ;
-}
-
-.stanza > li {
-    text-align: "." left ;
 }

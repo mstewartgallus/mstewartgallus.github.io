@@ -10,38 +10,41 @@ bleh i don't get it
 */
 
 @function pt($pts) {
-    @return (($pts / 12) * 1em);
+    @return (($pts / 12) * 1rem);
 }
 @function inv($pts) {
     @return (18 /$pts);
 }
 
 body {
-    // font-size: pt(10) ;
+    line-height: 1.5rem ;
 }
 // provide some sensible defaults for line spacing, etc..
 h1, h2, h3, h4, h5, h6 {
-    line-height: inv(14) ;
     font-size: pt(14) ;
 }
 
 h1 {
     font-size: pt(18) ;
-    line-height: inv(18) ;
 }
 h2 {
     font-size: pt(16) ;
-    line-height: inv(16) ;
 }
 
 h1 {
-    margin-top: pt(20) ;
-    margin-bottom: pt(16) ;
+    margin-top: pt(27) ;
+    margin-bottom: pt(9) ;
 }
 h2 {
-    margin-top: pt(18) ;
-    margin-bottom: pt(14) ;
+    margin-top: pt(24) ;
+    margin-bottom: pt(8) ;
 }
+
+h3 {
+    margin-top: pt(21) ;
+    margin-bottom: pt(7) ;
+}
+
 
 h1 { font-weight: 900 ; }
 h2 { font-weight: 600 ; }
@@ -51,13 +54,9 @@ dd {
     margin-left: 2em ;
 }
 
-body {
-    line-height: inv(12) ;
-}
 
 small {
     font-size: pt(9) ;
-    line-height: inv(9) ;
 }
 
 // left indent all but first paragrahp
@@ -74,8 +73,8 @@ p {
 }
 
 hr {
-    margin-top: pt(20) ;
-    margin-bottom: pt(16) ;
+    margin-top: pt(24) ;
+    margin-bottom: pt(8) ;
     // an obtuse hack is needed to prevent horizontal rules throwing
     // off the spacing
     height: 0px ;

@@ -24,30 +24,3 @@ select:focus, option:focus, button:focus, input:focus {
 }
 
 select, option, button { cursor: pointer }
-
-select, button,
-select:focus, button:focus {
-    border-radius: 3px ;
-    border-style: solid;
-    border-width: 1px ;
-}
-
-option, option:focus {
-    padding: 0.2em 0.8em 0.2em 0.8em ;
-}
-
-button, button:focus {
-    padding: 0.3em 0.8em 0.3em 0.8em ;
-    margin-top: 0.4em ;
-    margin-bottom: 0.4em ;
-}
-
-option { border-width: 1px ; }
-option { border-style: dashed none none none ; }
-option:first-child { border-style: none ; }
-
-select:focus, button:focus {
-    outline: dashed ;
-    outline-offset: 3px ;
-    outline-width: 1px ;
-}
