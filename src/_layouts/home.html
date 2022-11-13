@@ -78,7 +78,7 @@
             {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
             <dd>
               <a href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">
-                #<span itemprop="keywords">{{ tag | escape }}<span>
+                #<span itemprop="keywords">{{ tag | escape }}</span>
               </a>
             </dd>
             {%- endfor -%}
