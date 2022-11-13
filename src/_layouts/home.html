@@ -23,7 +23,7 @@
 
       <address itemprop="author" itemscope itemtype="https://schema.org/Person">
         <a itemprop="url" rel="author" href="{{ page.author.url | relative_url}}">
-          <span itemprop="name">{{ site.author.name | escape }}</span>
+          @<span itemprop="name">{{ site.author.name | escape }}</span>
         </a>
       </address>
     </header>
@@ -76,8 +76,10 @@
             {%- endfor -%}
             {%- for tag in post.tags -%}
             {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
-            <dd itemprop="keywords">
-              <a href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">{{ tag | escape }}</a>
+            <dd>
+              <a href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">
+                #<span itemprop="keywords">{{ tag | escape }}<span>
+              </a>
             </dd>
             {%- endfor -%}
           </dl>

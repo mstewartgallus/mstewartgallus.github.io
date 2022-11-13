@@ -100,7 +100,7 @@ function render(template, output, posts) {
         }
         for (const tag of post.get('tags')) {
             const anchor = document.createElement('a');
-            anchor.textContent = tag;
+            anchor.textContent = '#' + tag;
             anchor.href = '/search?tag=' + tag;
 
             const listEntry = document.createElement('dd');

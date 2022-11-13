@@ -1,8 +1,8 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
-  - <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
-    <span itemprop="name">{{ page.author.name | escape }}</span>
+  <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
+    @<span itemprop="name">{{ page.author.name | escape }}</span>
   </a>
 </address>
 
@@ -22,7 +22,7 @@
   {%- for tag in page.tags -%}
   {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
   <dd itemprop="keywords">
-    <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">{{ tag | escape }}</a>
+    <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">#{{ tag | escape }}</a>
   </dd>
   {%- endfor -%}
 </dl>
