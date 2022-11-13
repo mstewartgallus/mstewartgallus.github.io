@@ -26,9 +26,8 @@ fieldset {
     display: flex ;
     flex-direction: row ;
     flex-wrap: wrap ;
-    gap: 1.5rem ;
-    padding-left: 1rem ;
-    padding-right: 1rem ;
+    gap: pt(18) ;
+    padding: pt(18);
 }
 
 .label {
