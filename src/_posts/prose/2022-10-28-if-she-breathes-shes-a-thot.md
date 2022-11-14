@@ -28,9 +28,9 @@ I fell asleep.
 
 The supernatural intruded slowly.
 
-The first night when I was wanking away at 12 AM imagining my ass
-being penetrated I heard a loud buzzing sound like wasps.  I put it
-down to nerves.
+The first night when I was wanking away at 12 <abbr>AM</abbr>
+imagining my ass being penetrated I heard a loud buzzing sound like
+wasps.  I put it down to nerves.
 
 Steadily the phenomenon added up.  A loud hum at the midnight hours.
 When I rested before bed a sound like bells.  When I looked out one

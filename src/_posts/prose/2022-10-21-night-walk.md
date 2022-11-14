@@ -13,10 +13,11 @@ tap. Ollie twitched as fear gripped his heart like a tapeworm.
 
 ***
 
-I wake up late in the afternoon with a splitting headache. TMJ, bad
-posture and too much time on the internet. I swallow a Tylenol and
-pull myself out of bed. By sunset I make it to the door. I throw on a
-large coat to hide my meagre gyno and head out.
+I wake up late in the afternoon with a splitting
+headache. <abbr>TMJ</abbr>, bad posture and too much time on the
+internet. I swallow a Tylenol and pull myself out of bed. By sunset I
+make it to the door. I throw on a large coat to hide my meagre gyno
+and head out.
 
 ***
 
