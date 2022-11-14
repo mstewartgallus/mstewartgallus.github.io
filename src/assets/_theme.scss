@@ -64,6 +64,7 @@ menu > li:first-child::before {
 }
 
 .metadata > dt {
+    text-style: italic;
     font-size: pt(9) ;
 }
 .metadata > dd {
@@ -72,19 +73,19 @@ menu > li:first-child::before {
 
 .metadata {
     display: grid ;
-    grid-template-rows: [name] min-content [content] min-content;
-    grid-auto-flow: column ;
-    grid-auto-columns: auto ;
-    column-gap: $col3 ;
-    justify-content: start ;
+    grid-template-columns: [key] 1fr [value] 4fr;
+    grid-column-gap: 1.5em ;
+    justify-items: start ;
+    align-items: baseline ;
 }
 
 .metadata > dt {
-    grid-row: name / name;
+    grid-column: key / key ;
 }
 .metadata > dd {
-    grid-row: content / content;
+    grid-column: value / value ;
 }
+
 
 p:first-of-type::first-letter {
     font-size: pt(13) ;
