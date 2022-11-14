@@ -1,4 +1,4 @@
-.stanzas, .stanza, .stanzas > li, .stanza > li {
+.stanzas, .stanza, .line {
     all: initial ;
     background-color: transparent;
     vertical-align: baseline ;
@@ -12,33 +12,23 @@
     outline: none;
 
 }
-.stanzas > li::before, .stanza > li::before {
-    content: unset;
-}
-.stanzas, .stanza, .stanzas > li, .stanza > li {
+.stanzas, .stanza, .line {
+    display: block ;
     margin: 0 ;
     padding: 0 ;
-    display: list-item;
-    list-style-type: none ;
 }
 
-
-.stanzas, .stanza {
-    margin: 0 ;
-    padding: 0 ;
-    list-style-type: none ;
-}
 
 .stanza {
-    margin-top: pt(12) ;
-    margin-bottom: pt(12) ;
+    margin-top: $line ;
+    margin-bottom: $line ;
 }
 
 .stanzas {
     // text-align: left ;
 }
 
-.stanza > li {
+.line {
     // Tab indent hanging lines
     text-indent: -4em ;
     margin-left: 4em ;
