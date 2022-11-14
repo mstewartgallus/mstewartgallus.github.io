@@ -55,11 +55,9 @@
           itemtype="http://schema.org/BlogPosting"
           itemid="{{ post.url | absolute_url }}">
           <header>
-            <h3 itemprop="name headline">
-              <a itemprop="url" href="{{ post.url | relative_url }}">
+            <a itemprop="name headline url" href="{{ post.url | relative_url }}">
               {{ post.title | escape }}
-              </a>
-            </h3>
+            </a>
           </header>
           <dl class="metadata">
             <dt>Posted</dt>

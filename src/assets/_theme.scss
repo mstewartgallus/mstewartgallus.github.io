@@ -5,15 +5,10 @@ abbr {
 }
 
 :link {
-    font-variant-caps: small-caps ;
-    text-transform: lowercase ;
-}
-:is(footer, nav, h1, h2, h3, h4, h5, h6, h7) :link {
     text-decoration: none ;
 }
-:is(h1, h2, h3, h4, h5, h6, h7) :link {
-    font-variant-caps: normal ;
-    text-transform: none ;
+p :link {
+    text-decoration: underline ;
 }
 :link:hover {
     text-decoration: underline ;
@@ -25,18 +20,18 @@ hr {
 }
 hr::after {
     text-align: center ;
-    top: -0.7em ;
+    top: -0.5em ;
     position: relative ;
     content: "§" ;
     padding: 0 4px ;
-    font-size: 1.125em ;
+    font-size: pt(18) ;
 }
 
 blockquote {
     border-style: none none none dashed ;
     border-width: 1px;
-    margin-top: pt(27);
-    margin-bottom: pt(9);
+    margin-top: $lineandhalf;
+    margin-bottom: $halfline;
     margin-left: 1em;
 }
 
@@ -79,8 +74,8 @@ menu > li:first-child::before {
     display: grid ;
     grid-template-rows: [name] min-content [content] min-content;
     grid-auto-flow: column ;
-    column-gap: 1.4rem ;
-    align-items: center ;
+    grid-auto-columns: auto ;
+    column-gap: 1.3rem ;
     justify-content: start ;
 }
 
@@ -92,7 +87,7 @@ menu > li:first-child::before {
 }
 
 p:first-of-type::first-letter {
-    font-size: pt(14) ;
+    font-size: pt(13) ;
     font-weight: bold ;
 }
 

@@ -16,8 +16,13 @@ bleh i don't get it
     @return (18 /$pts);
 }
 
+$line: 1.5rem ;
+$halfline: 0.5 * $line ;
+$lineandhalf: 1.5 * $line ;
+$doubleline: 2 * $line ;
+
 body {
-    line-height: 1.5rem ;
+    line-height: $line ;
 }
 
 // provide some sensible defaults for line spacing, etc..
@@ -26,15 +31,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: pt(18) ;
+    font-size: $line ;
 }
 h2 {
     font-size: pt(16) ;
 }
 
 h1, h2, h3 {
-    margin-top: pt(27) ;
-    margin-bottom: pt(9) ;
+    margin-top: $lineandhalf ;
+    margin-bottom: $halfline ;
 }
 
 
@@ -51,12 +56,13 @@ small {
     font-size: pt(9) ;
 }
 
-// left indent all but first paragrahp
-p {
-    margin-top: pt(18) ;
+p:first-of-type {
+    margin-top: $line ;
+}
+p:last-of-type {
+    margin-bottom: $line ;
 }
 p + p {
-    margin-top: 0 ;
     text-indent: 1.2em ;
 }
 
@@ -64,9 +70,10 @@ p {
     hyphens: auto ;
 }
 
+// FIXME do asymmetric margins here
 hr {
-    margin-top: pt(18) ;
-    margin-bottom: pt(18) ;
+    margin-top: $line ;
+    margin-bottom: $line ;
     // an obtuse hack is needed to prevent horizontal rules throwing
     // off the spacing
     height: 0px ;
@@ -75,10 +82,11 @@ hr {
     outline-style: solid ;
 }
 
-* {
+p {
     font-variant-numeric: proportional-nums oldstyle-nums ;
 }
-h1, h2, h3, h4, h5, h6 {
+
+body {
     font-variant-numeric: proportional-nums lining-nums ;
 }
 
