@@ -13,12 +13,19 @@
 
 }
 .stanzas, .stanza, .line {
-    display: block ;
     margin: 0 ;
     padding: 0 ;
 }
-
-
+.stanzas {
+    display: block ;
+}
+.stanza {
+    display: flex ;
+    flex-directioN: column ;
+}
+.line {
+    display: inline-block ;
+}
 .stanza {
     margin-top: $line ;
     margin-bottom: $line ;
