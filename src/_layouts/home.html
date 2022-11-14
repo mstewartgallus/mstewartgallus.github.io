@@ -7,7 +7,7 @@
     {%- include head.html -%}
   </head>
   <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <header class="home"
+    <header
          itemref="page"
          itemtype="http://schema.org/WebSite"
          itemscope>
@@ -47,7 +47,7 @@
       </h2>
     </header>
     <main aria-label="Content">
-      <ol reversed role="list" class="post-list">
+      <ol reversed role="list">
         {%- for post in site.posts -%}
         <li
           itemprop="hasPart blogPost"
