@@ -15,8 +15,10 @@ module MSG
     output = ""
     output << '<div class="stanzas">'
     output << "\n"
+    # Use role="paragraph" to force stanzas to be spoken all at once
+    # not sure if the best experience
     stanzas.each do |stanza|
-      output << '<p class="stanza">'
+      output << '<p role="paragraph" class="stanza">'
 
       stanza.each do |line|
         output << "\n"
