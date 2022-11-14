@@ -96,8 +96,6 @@ $color: (
 }
 
 
-:is(nav, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) { color: inherit; }
-
 :link {
     color: map-get($primary, 800) ;
 }
@@ -111,7 +109,7 @@ $color: (
     color: map-get($warn, 900) ;
 }
 
-:is(nav, h1,h2,h3,h4,h5,h6,h7) a:active {
+:is(nav, h1,h2,h3,h4,h5,h6,h7) :link:active {
     color: map-get($warn, 900) ;
 }
 
@@ -152,7 +150,7 @@ option:checked {
         color: map-get($warn, 300) ;
     }
 
-    :is(nav, h1,h2,h3,h4,h5,h6,h7) a:active {
+    :is(nav, h1,h2,h3,h4,h5,h6,h7) :link:active {
         color: map-get($warn, 700) ;
     }
 

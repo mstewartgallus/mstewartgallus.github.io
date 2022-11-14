@@ -4,11 +4,10 @@ abbr {
     letter-spacing: 0.1em ;
 }
 
-:link {
-    text-decoration: none ;
-}
-p :link {
-    text-decoration: underline ;
+
+:is(nav, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) {
+    text-decoration: inherit ;
+    color: inherit;
 }
 :link:hover {
     text-decoration: underline ;
