@@ -75,7 +75,7 @@ menu > li:first-child::before {
     grid-template-rows: [name] min-content [content] min-content;
     grid-auto-flow: column ;
     grid-auto-columns: auto ;
-    column-gap: 1.3rem ;
+    column-gap: $col3 ;
     justify-content: start ;
 }
 

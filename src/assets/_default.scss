@@ -16,6 +16,12 @@ bleh i don't get it
     @return (18 /$pts);
 }
 
+$col: 0.45rem ;
+$col2: 2 * $col ;
+$col3: 3 * $col ;
+$col4: 4 * $col ;
+$col8: 8 * $col ;
+
 $line: 1.5rem ;
 $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
@@ -48,7 +54,7 @@ h2 { font-weight: 600 ; }
 h3 { font-weight: 500 ; }
 
 dd {
-    margin-left: 2em ;
+    margin-left: $col8 ;
 }
 
 
@@ -63,7 +69,7 @@ p:last-of-type {
     margin-bottom: $line ;
 }
 p + p {
-    text-indent: 1.2em ;
+    text-indent: $col4 ;
 }
 
 p {
@@ -96,8 +102,8 @@ table {
 }
 
 menu, ul {
-    padding-left: 1em ;
+    padding-left: $col2 ;
 }
 ol {
-    padding-left: 1.8em ;
+    padding-left: $col4 ;
 }
