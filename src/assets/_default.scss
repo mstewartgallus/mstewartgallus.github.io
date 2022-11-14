@@ -90,6 +90,10 @@ hr {
     outline-style: solid ;
 }
 
+@mixin tabular {
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
 p {
     font-variant-numeric: proportional-nums oldstyle-nums ;
 }
@@ -100,7 +104,7 @@ body {
 
 table {
     border-collapse: collapse ;
-    font-variant-numeric: lining-nums tabular-nums;
+    @include tabular ;
 }
 
 menu, ul {
