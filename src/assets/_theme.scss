@@ -17,14 +17,14 @@ hr {
     text-align: center;
     overflow: visible ;
     outline: none ;
+    display: flex;
+    flex-direction: column ;
+    align-items: center ;
+    justify-content: center ;
 }
 hr::after {
-    text-align: center ;
-    top: -0.5em ;
-    position: relative ;
     content: "§" ;
     padding: 0 4px ;
-    font-size: pt(18) ;
 }
 
 blockquote {
