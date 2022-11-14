@@ -30,10 +30,6 @@ body {
 }
 
 @media screen and (min-width: 50rem) {
-    html {
-        box-shadow: 0.03em -0.01em 0.2em ;
-    }
-
     body {
         margin: $A4-margin ;
     }
