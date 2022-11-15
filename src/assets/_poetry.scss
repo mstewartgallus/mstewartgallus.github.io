@@ -19,8 +19,6 @@
 .stanza {
     margin-top: $line ;
     margin-bottom: $line ;
-    display: flex ;
-    flex-direction: column ;
 }
 
 .line {
@@ -28,9 +26,8 @@
     clear: both ;
     margin: 0;
     padding: 0;
-    // Tab indent hanging lines
-    text-indent: -4em ;
-    margin-left: 4em ;
+}
+.line-br {
 }
 
 // Hide line-end periods but show them to screen readers

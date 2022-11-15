@@ -23,7 +23,7 @@ module MSG
         output << "\n"
         output << '<span class="line">' << line << '</span>'
         # FIXME only insert a hidden full stop if needed
-        output << '<span title=". " aria-hidden="false" class="line-end"></span>'
+        output << '<span title=". " aria-hidden="false" class="line-end"></span><br class="line-br">'
       end
       output << "\n"
       output << '</p>'
