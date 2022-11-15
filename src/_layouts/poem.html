@@ -21,14 +21,13 @@
             </a>
           </h1>
         </header>
-        <main aria-label="Content" itemprop="articleBody">
+        <main itemprop="articleBody">
           {{ content }}
-          {%- include metadata.html -%}
         </main>
       </div>
+      <footer>
+        {%- include footer.html -%}
+      </footer>
     </div>
-    <footer aria-label="pagination">
-      {%- include footer.html -%}
-    </footer>
   </body>
 </html>

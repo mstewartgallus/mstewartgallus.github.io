@@ -60,10 +60,13 @@ nav {
 }
 
 
-footer {
-    display: flex ;
-    flex-wrap: wrap ;
-    justify-content: space-between ;
+[rel="previous"] {
+    float: left ;
+    display: block ;
+}
+[rel="next"] {
+    float: right ;
+    display: block ;
 }
 
 footer {
