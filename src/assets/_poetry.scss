@@ -1,4 +1,4 @@
-.stanza {
+.stanza, .line {
     all: initial ;
     background-color: transparent;
     vertical-align: baseline ;
@@ -12,10 +12,10 @@
     outline: none;
     margin: 0;
     padding: 0;
-    display: block ;
+    text-indent: 0;
 }
-
 .stanza {
+    display: block ;
     margin-top: $line ;
     margin-bottom: $line ;
 }
@@ -23,10 +23,14 @@
 // with screenreaders
 .line::after {
     content: ' . ' ;
-}
-.line::after {
-    color: transparent ;
-}
-.line::after:is(:focus, :active) {
-    color: inherit ;
+
+    // Hide visually
+    // see https://www.a11yproject.com/posts/how-to-hide-content/
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    height: 1px;
+    width: 1px;
 }
