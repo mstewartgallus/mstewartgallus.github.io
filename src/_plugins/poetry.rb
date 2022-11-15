@@ -19,10 +19,10 @@ module MSG
       stanza.each do |line|
         output << "\n"
         if not first then
-          output << '<br aria-hidden="true" class="line-br">'
+          output << '<span class="sr-br"></span><br aria-hidden="true">'
         end
         first = false
-        output << '<span role="none" class="line">' << line << '</span>'
+        output << line
       end
       output << "\n"
       output << '</p>'
