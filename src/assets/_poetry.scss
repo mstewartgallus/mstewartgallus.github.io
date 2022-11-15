@@ -12,26 +12,29 @@
     outline: none;
 
 }
-.stanzas, .stanza, .line {
-    display: block ;
+.stanzas, .stanza {
     margin: 0 ;
     padding: 0 ;
 }
 .stanza {
     margin-top: $line ;
     margin-bottom: $line ;
+    // display: flex ;
+    // flex-direction: column ;
 }
 
 .line {
+    display: inline ;
+    clear: both ;
+    margin: 0;
+    padding: 0;
     // Tab indent hanging lines
-    text-indent: -4em ;
-    margin-left: 4em ;
+    // text-indent: -4em ;
+    // margin-left: 4em ;
 }
 
 // Hide line-end periods but show them to screen readers
 .line-end {
-    // needed for Chrome
-    display: inline-block;
     color: transparent;
     position: absolute;
     position: absolute !important;

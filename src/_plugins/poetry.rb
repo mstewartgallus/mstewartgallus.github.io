@@ -22,8 +22,8 @@ module MSG
       stanza.each do |line|
         output << "\n"
         output << '<span class="line">' << line << '</span>'
-        # FIXME only insert a hidden full stop if neeeded
-        output << '<span aria-hidden="false" class="line-end">. </span>'
+        # FIXME only insert a hidden full stop if needed
+        output << '<span title=". " aria-hidden="false" class="line-end"></span><br>'
       end
       output << "\n"
       output << '</p>'
