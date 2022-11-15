@@ -20,7 +20,7 @@ module MSG
 
       stanza.each do |line|
         output << "\n"
-        output << '<span class="line">' << line << '</span><br>'
+        output << '<span class="line">' << line << '</span><span class="line-end">. </span><br>'
       end
       output << "\n"
       output << '</p>'
