@@ -1,4 +1,5 @@
 .stanza {
+    display:block ;
     margin: 0;
     padding: 0;
     text-indent: 0;
@@ -9,11 +10,13 @@
 
 // Insert a full stop between each line for so they sound like
 // sentences with screenreaders
-.sr-br {
+.sr-br::before {
+    content: " . ";
+    user-select: none ;
+
     // Hide visually
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important;
-    -webkit-clip-path: inset(50%) !important;
     clip-path: inset(50%) !important;
     overflow: hidden !important;
     padding: 0 !important;
