@@ -32,6 +32,7 @@
 
 // Hide line-end periods but show them to screen readers
 .line-end {
+    display: inline ;
     color: transparent;
     position: absolute;
     position: absolute !important;

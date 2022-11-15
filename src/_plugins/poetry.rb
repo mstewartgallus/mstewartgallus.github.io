@@ -21,7 +21,7 @@ module MSG
       output << '<p class="stanza">'
       stanza.each do |line|
         output << "\n"
-        output << line
+        output << '<span class="line">' << line << '</span>'
         # FIXME only insert a hidden full stop if needed
         output << '<span aria-hidden="false" class="line-end">. </span><br class="line-br">'
       end
