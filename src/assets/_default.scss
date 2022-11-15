@@ -54,11 +54,11 @@ body {
 
 // provide some sensible defaults for line spacing, etc..
 h1, h2, h3, h4, h5, h6 {
-    font-size: pt(14) ;
+    font-size: pt(13) ;
 }
 
 h1 {
-    font-size: $line ;
+    font-size: pt(18) ;
 }
 h2 {
     font-size: pt(16) ;

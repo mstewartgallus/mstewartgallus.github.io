@@ -54,13 +54,9 @@
           itemscope
           itemtype="http://schema.org/BlogPosting"
           itemid="{{ post.url | absolute_url }}">
-          <header>
-            <h3>
-              <a itemprop="name headline url" href="{{ post.url | relative_url }}">
-                {{ post.title | escape }}
-              </a>
-            </h3>
-          </header>
+          <a itemprop="name headline url" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
         </li>
         {%- endfor -%}
       </ol>

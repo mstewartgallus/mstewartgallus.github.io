@@ -101,6 +101,7 @@ $color: (
 
 :focus {
     background-color: black ;
+    outline-color: black ;
     color: white !important ;
 }
 :is(h1,h2,h2,h4,h5,h6):focus-within {
@@ -154,6 +155,7 @@ option:checked {
 
     :focus {
         background-color: white ;
+        outline-color: white ;
         color: black !important ;
     }
     :is(h1,h2,h2,h4,h5,h6):focus-within {
