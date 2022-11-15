@@ -14,9 +14,13 @@ abbr {
 }
 
 hr {
+    // FIXME do asymmetric margins here
+    margin-top: $line ;
+    margin-bottom: $line ;
+    height: 0px ;
+    border: none ;
     text-align: center;
     overflow: visible ;
-    outline: none ;
     display: flex;
     flex-direction: column ;
     align-items: center ;

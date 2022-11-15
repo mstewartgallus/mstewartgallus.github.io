@@ -78,17 +78,6 @@ p + p {
 p {
     hyphens: auto ;
 }
-// FIXME do asymmetric margins here
-hr {
-    margin-top: $line ;
-    margin-bottom: $line ;
-    // an obtuse hack is needed to prevent horizontal rules throwing
-    // off the spacing
-    height: 0px ;
-    border: none ;
-    outline-width: 1px ;
-    outline-style: solid ;
-}
 
 @mixin tabular {
     font-variant-numeric: lining-nums tabular-nums;
