@@ -30,10 +30,22 @@ $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;
 
+
 :focus {
     outline-style: solid ;
-    outline-width: 0.2em;
+    outline-width: 0.3em ;
     outline-offset: 0;
+}
+
+:is(h1,h2,h2,h4,h5,h6, li):focus-within {
+    outline-style: solid ;
+    outline-width: 0.3em ;
+    outline-offset: 0;
+}
+
+:is(h1,h2,h2,h4,h5,h6, li) :focus {
+    background-color: transparent ;
+    outline: none;
 }
 
 body {

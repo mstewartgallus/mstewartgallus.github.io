@@ -95,10 +95,16 @@ $color: (
     @return map-get(map-get($color, $type), $bright);
 }
 
+* {
+    color-scheme: light ;
+}
+
 :focus {
-    outline-color: black ;
     background-color: black ;
     color: white !important ;
+}
+:is(h1,h2,h2,h4,h5,h6, li):focus-within {
+    background-color: black ;
 }
 
 :link {
@@ -137,15 +143,21 @@ option:checked {
 }
 
 @media (prefers-color-scheme: dark) {
+    * {
+        color-scheme: dark ;
+    }
+
     html, body {
         background-color: #222 ;
         color: white ;
     }
 
     :focus {
-        outline-color: white ;
         background-color: white ;
         color: black !important ;
+    }
+    :is(h1,h2,h2,h4,h5,h6, li):focus-within {
+        background-color: white ;
     }
 
     :link {
