@@ -1,19 +1,8 @@
 .stanza {
-    all: initial ;
-    background-color: transparent;
-    vertical-align: baseline ;
-    font-family: inherit;
-    font-size: inherit;
-    font-style: inherit;
-    font-weight: inherit ;
-    line-height: inherit;
-    color: inherit ;
-    border: none;
     margin: 0;
     padding: 0;
     text-indent: 0;
 
-    display: block ;
     margin-top: $line ;
     margin-bottom: $line ;
 }
@@ -21,7 +10,6 @@
 // Insert a full stop between each line for so they sound like
 // sentences with screenreaders
 .sr-br::before {
-    display: inline ;
     content: ' . ' ;
 
     // Hide visually
