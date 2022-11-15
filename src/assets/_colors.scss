@@ -96,7 +96,9 @@ $color: (
 }
 
 :focus {
-    outline-color: map-get($accent, 900) ;
+    outline-color: black ;
+    background-color: black ;
+    color: white !important ;
 }
 
 :link {
@@ -135,13 +137,15 @@ option:checked {
 }
 
 @media (prefers-color-scheme: dark) {
-    html {
+    html, body {
         background-color: #222 ;
         color: white ;
     }
 
     :focus {
-        outline-color: map-get($accent, 200) ;
+        outline-color: white ;
+        background-color: white ;
+        color: black !important ;
     }
 
     :link {
