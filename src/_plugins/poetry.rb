@@ -16,11 +16,14 @@ module MSG
     output << '<div class="stanzas">'
     output << "\n"
     stanzas.each do |stanza|
-      output << '<p class="stanza">'
-
+      # role="paragraph" is required to force reading as a paragraph
+      # even though CSS makes span a block
+      output << '<p role="paragraph" class="stanza">'
       stanza.each do |line|
         output << "\n"
-        output << '<span class="line">' << line << '</span><span aria-hidden="false" class="line-end">. </span><br>'
+        output << '<span class="line">' << line << '</span>'
+        # FIXME only insert a hidden full stop if neeeded
+        output << '<span aria-hidden="false" class="line-end">. </span>'
       end
       output << "\n"
       output << '</p>'
