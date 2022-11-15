@@ -18,7 +18,7 @@ module MSG
     stanzas.each do |stanza|
       # role="paragraph" is required to force reading as a paragraph
       # even though CSS makes span a block
-      output << '<p role="paragraph" class="stanza">'
+      output << '<p class="stanza">'
       stanza.each do |line|
         output << "\n"
         output << line
