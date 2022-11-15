@@ -1,8 +1,7 @@
 // Hide select arrow
 select::-ms-expand { display: none ; }
 
-select, option, button, input,
-select:focus, option:focus, button:focus, input:focus {
+select, option, button, input {
   margin: 0;
   padding: 0;
 

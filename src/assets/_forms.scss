@@ -2,10 +2,6 @@ select, option, button { cursor: pointer }
 
 select, button {
     border: none;
-}
-
-select, button,
-select:focus, button:focus {
     padding-left: 0.5em ;
     padding-right: 0.5em ;
 
@@ -13,9 +9,7 @@ select:focus, button:focus {
     margin-right: 0.5em ;
     margin-top: $line ;
     margin-bottom: $line ;
-}
-select:focus, button:focus {
-    outline-style: solid;
+
     outline-width: 1px ;
 }
 
@@ -34,11 +28,12 @@ fieldset {
 .label {
     display: block ;
     margin-top: $line ;
-}
-.label::after {
-    content: "";
-    outline-style: solid;
-    outline-width:1px;
+
+    // Hack to keep aligned to  grid
+    margin-bottom: -2px ;
+    border-width: 2px;
+
+    border-style: none none solid none ;
     width:100%;
     display:block;
 }
