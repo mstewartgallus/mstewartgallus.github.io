@@ -103,7 +103,7 @@ $color: (
     background-color: black ;
     color: white !important ;
 }
-:is(h1,h2,h2,h4,h5,h6, li):focus-within {
+:is(h1,h2,h2,h4,h5,h6):focus-within {
     background-color: black ;
 }
 
@@ -120,7 +120,7 @@ $color: (
     color: map-get($warn, 900) ;
 }
 
-:is(nav, h1,h2,h3,h4,h5,h6,h7) :link:active {
+:is(nav, h1,h2,h3,h4,h5,h6) :link:active {
     color: map-get($warn, 900) ;
 }
 
@@ -156,7 +156,7 @@ option:checked {
         background-color: white ;
         color: black !important ;
     }
-    :is(h1,h2,h2,h4,h5,h6, li):focus-within {
+    :is(h1,h2,h2,h4,h5,h6):focus-within {
         background-color: white ;
     }
 
