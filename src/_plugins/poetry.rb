@@ -18,13 +18,16 @@ module MSG
     stanzas.each do |stanza|
       # role="paragraph" is required to force reading as a paragraph
       # even though CSS makes span a block
-      output << '<p class="stanza">'
+      output << '<p class="stanza" role="img" aria-label="'
+      stanza.each do |line|
+        # FIXME only insert a hidden full stop if needed
+        # FIXME use other whitespace characters?
+        output << CGI::escapeHTML(line) << " . \n"
+      end
+      output << '">'
       stanza.each do |line|
         output << "\n"
         output << '<span class="line">' << line << '</span>'
-        # FIXME only insert a hidden full stop if needed
-        # FIXME use other whitespace characters?
-        output << '<span class="line-end"> . </span><br class="line-br">'
       end
       output << "\n"
       output << '</p>'
