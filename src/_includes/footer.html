@@ -1,15 +1,14 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 
-{%- if page.previous.url -%}
-<a href="{{page.previous.url}}" rel="previous">Previous: {{page.previous.title | escape}}</a>
-{%- endif -%}
-{%- if page.next.url -%}
-<a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
-{%- endif -%}
-
-<!-- FIXME use a class or something -->
-<br style="margin-top:1.5rem">
+<div style="margin-bottom:1.5rem">
+  {%- if page.previous.url -%}
+  <a href="{{page.previous.url}}" rel="previous">Previous: {{page.previous.title | escape}}</a>
+  {%- endif -%}
+  {%- if page.next.url -%}
+  <a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
+  {%- endif -%}
+</div>
 
 <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
   <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
