@@ -15,9 +15,14 @@ module MSG
     output = ""
     stanzas.each do |stanza|
       output << '<p class="stanza">'
+      first = true
       stanza.each do |line|
         output << "\n"
-        output << '<span class="line">' << line << '</span><br class="line-br">'
+        if not first then
+          output << '<br class="line-br">'
+        end
+        first = false
+        output << '<span class="line">' << line << '</span>'
       end
       output << "\n"
       output << '</p>'

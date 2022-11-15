@@ -19,9 +19,9 @@
     margin-top: $line ;
     margin-bottom: $line ;
 }
-// Insert a full stop after each line for so they sound like sentences
+// Insert a full stop between each line for so they sound like sentences
 // with screenreaders
-.line::after {
+.line:not(:last-of-type)::after {
     content: ' . ' ;
 
     // Hide visually
