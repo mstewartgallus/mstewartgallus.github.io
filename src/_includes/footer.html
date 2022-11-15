@@ -2,7 +2,7 @@
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 
 {%- if page.previous.url -%}
-<a href="{{page.previous.url}}" rel="previous">Previous: {{page.next.title | escape}}</a>
+<a href="{{page.previous.url}}" rel="previous">Previous: {{page.previous.title | escape}}</a>
 {%- endif -%}
 {%- if page.next.url -%}
 <a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
