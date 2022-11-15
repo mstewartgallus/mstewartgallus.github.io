@@ -13,27 +13,33 @@ module MSG
 
   def tohtml(stanzas)
     output = ""
-    output << '<div class="stanzas">'
+    output << '<ol role="none" class="stanzas">'
     output << "\n"
     stanzas.each do |stanza|
       # role="paragraph" is required to force reading as a paragraph
       # even though CSS makes span a block
-      output << '<p class="stanza" aria-label="'
-      stanza.each do |line|
-        # FIXME only insert a hidden full stop if needed
-        # FIXME use other whitespace characters?
-        output << CGI::escapeHTML(line) << " . \n"
-      end
-      output << '">'
+      output << '<li role="none">'
+      output << "\n"
+      output << '<ol class="stanza" role="paragraph"'
+      # output << '<ol class="stanza" role="img" aria-label="'
+      # stanza.each do |line|
+      #   # FIXME only insert a hidden full stop if needed
+      #   # FIXME use other whitespace characters?
+      #   output << CGI::escapeHTML(line) << " . \n"
+      # end
+      # output << '"'
+      output << '>'
       stanza.each do |line|
         output << "\n"
-        output << '<span aria-hidden="true" class="line">' << line << '</span>'
+        output << '<li role="none">' << line << '</li>'
       end
       output << "\n"
-      output << '</p>'
+      output << '</ol>'
+      output << "\n"
+      output << '</li>'
       output << "\n"
     end
-    output << '</div>'
+    output << '</ol>'
     output.freeze
   end
 

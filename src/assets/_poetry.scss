@@ -1,4 +1,4 @@
-.stanzas, .stanza, .line {
+.stanzas, .stanza, .stanzas > li, .stanza > li {
     all: initial ;
     background-color: transparent;
     vertical-align: baseline ;
@@ -10,24 +10,32 @@
     color: inherit ;
     border: none;
     outline: none;
+    margin: 0;
+    padding: 0;
+    display: block ;
 
 }
-.stanzas, .stanza, .line {
-    display: block ;
-    margin: 0 ;
-    padding: 0 ;
+.stanza > li::after {
+    content: ' . ' ;
+    color: transparent ;
 }
+
+.stanza > li::before {
+    content: none ;
+}
+.stanzas > li::before {
+    content: none ;
+}
+
 .stanza {
     margin-top: $line ;
     margin-bottom: $line ;
 }
 
-.line {
+.stanza > li {
     padding-left: $col4;
     text-indent: -$col4;
 }
-// .line-br {
-// }
 
 // // Hide line-end periods but show them to screen readers
 // .line-end {
