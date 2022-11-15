@@ -33,16 +33,16 @@
 
 // Hide line-end periods but show them to screen readers
 .line-end {
-    display: inline ;
-    color: transparent;
-    position: absolute;
-    position: absolute !important;
-    width: 1px !important;
+    // See https://www.a11yproject.com/posts/how-to-hide-content/
+    // for source of visual hiding code
+    clip: rect(0 0 0 0) !important;
+    clip-path: insert(50%) !important;
     height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0,0,0,0) !important;
+    width: 1px !important;
+    position: absolute !important;
     white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
     border: 0 !important;
+    overflow: hidden !important;
 }
