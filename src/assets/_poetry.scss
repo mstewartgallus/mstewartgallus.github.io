@@ -12,10 +12,10 @@
     outline: none;
 
 }
-.stanzas, .stanza, .line {
+.stanzas, .stanza {
+    display: block ;
     margin: 0 ;
     padding: 0 ;
-    display: block ;
 }
 .stanza {
     margin-top: $line ;
@@ -23,6 +23,7 @@
 }
 
 .line {
+    display: inline-block ;
     // Tab indent hanging lines
     text-indent: -4em ;
     margin-left: 4em ;
