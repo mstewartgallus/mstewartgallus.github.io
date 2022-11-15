@@ -95,10 +95,6 @@ $color: (
     @return map-get(map-get($color, $type), $bright);
 }
 
-* {
-    color-scheme: light ;
-}
-
 :focus {
     background-color: black ;
     outline-color: black ;
@@ -144,10 +140,6 @@ option:checked {
 }
 
 @media (prefers-color-scheme: dark) {
-    * {
-        color-scheme: dark ;
-    }
-
     html, body {
         background-color: #222 ;
         color: white ;

@@ -64,11 +64,24 @@ h2 {
     font-size: pt(16) ;
 }
 
+
+@media (prefers-color-scheme: light) {
+    * {
+        color-scheme: light ;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    * {
+        color-scheme: dark ;
+    }
+}
+
+
 h1, h2 {
     margin-top: $lineandhalf ;
     margin-bottom: $halfline ;
 }
-
 
 h1 { font-weight: 900 ; }
 h2 { font-weight: 600 ; }

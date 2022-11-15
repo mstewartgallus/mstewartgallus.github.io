@@ -21,11 +21,6 @@ address, abbr {
     color: inherit ;
 }
 
-html, body {
-    background: white;
-    color: black;
-}
-
 body {
     line-height: 1;
     font-family: -apple-system,
@@ -37,3 +32,17 @@ body {
 
 // Hide select arrow
 select::-ms-expand { display: none ; }
+
+@media (prefers-color-scheme: light) {
+    html, body {
+        background: white;
+        color: black;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    html, body {
+        background: black;
+        color: white;
+    }
+}
