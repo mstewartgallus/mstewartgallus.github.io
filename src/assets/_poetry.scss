@@ -1,4 +1,4 @@
-.stanzas, .stanza, .stanzas > li, .stanza > li {
+.stanza {
     all: initial ;
     background-color: transparent;
     vertical-align: baseline ;
@@ -13,33 +13,20 @@
     margin: 0;
     padding: 0;
     display: block ;
-
-}
-
-.stanza > li::before {
-    content: none ;
-}
-.stanzas > li::before {
-    content: none ;
-}
-
-// Insert a full stop after each line for accessiblity
-.stanza > li::after {
-    content: ' . ' ;
-}
-.stanza > li::after {
-    color: transparent ;
-}
-.stanza > li::after:is(:focus, :active) {
-    color: inherit ;
 }
 
 .stanza {
     margin-top: $line ;
     margin-bottom: $line ;
 }
-
-.stanza > li {
-    padding-left: $col4;
-    text-indent: -$col4;
+// Insert a full stop after each line for so they sound like sentences
+// with screenreaders
+.line::after {
+    content: ' . ' ;
+}
+.line::after {
+    color: transparent ;
+}
+.line::after:is(:focus, :active) {
+    color: inherit ;
 }
