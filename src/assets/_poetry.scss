@@ -18,9 +18,13 @@
     margin-top: $line ;
     margin-bottom: $line ;
 }
+.line {
+    display: inline ;
+}
 // Insert a full stop between each line for so they sound like sentences
 // with screenreaders
 .line:not(:last-of-type)::after {
+    display: inline ;
     content: ' . ' ;
 
     // Hide visually
