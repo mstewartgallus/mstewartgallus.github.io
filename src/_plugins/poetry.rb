@@ -16,19 +16,9 @@ module MSG
     output << '<ol role="none" class="stanzas">'
     output << "\n"
     stanzas.each do |stanza|
-      # role="paragraph" is required to force reading as a paragraph
-      # even though CSS makes span a block
       output << '<li role="none">'
       output << "\n"
-      output << '<ol class="stanza" role="paragraph"'
-      # output << '<ol class="stanza" role="img" aria-label="'
-      # stanza.each do |line|
-      #   # FIXME only insert a hidden full stop if needed
-      #   # FIXME use other whitespace characters?
-      #   output << CGI::escapeHTML(line) << " . \n"
-      # end
-      # output << '"'
-      output << '>'
+      output << '<ol class="stanza" role="paragraph">'
       stanza.each do |line|
         output << "\n"
         output << '<li role="none">' << line << '</li>'

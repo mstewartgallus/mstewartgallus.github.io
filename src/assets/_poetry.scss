@@ -15,16 +15,23 @@
     display: block ;
 
 }
-.stanza > li::after {
-    content: ' . ' ;
-    color: transparent ;
-}
 
 .stanza > li::before {
     content: none ;
 }
 .stanzas > li::before {
     content: none ;
+}
+
+// Insert a full stop after each line for accessiblity
+.stanza > li::after {
+    content: ' . ' ;
+}
+.stanza > li::after {
+    color: transparent ;
+}
+.stanza > li::after:is(:focus, :active) {
+    color: inherit ;
 }
 
 .stanza {
@@ -36,19 +43,3 @@
     padding-left: $col4;
     text-indent: -$col4;
 }
-
-// // Hide line-end periods but show them to screen readers
-// .line-end {
-//     // See https://www.a11yproject.com/posts/how-to-hide-content/
-//     // for source of visual hiding code
-//     clip: rect(0 0 0 0) !important;
-//     clip-path: insert(50%) !important;
-//     height: 1px !important;
-//     width: 1px !important;
-//     position: absolute !important;
-//     white-space: nowrap !important;
-//     margin: 0 !important;
-//     padding: 0 !important;
-//     border: 0 !important;
-//     overflow: hidden !important;
-// }
