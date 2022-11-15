@@ -95,6 +95,9 @@ $color: (
     @return map-get(map-get($color, $type), $bright);
 }
 
+:focus {
+    outline-color: map-get($accent, 900) ;
+}
 
 :link {
     color: map-get($primary, 800) ;
@@ -135,6 +138,10 @@ option:checked {
     html {
         background-color: #222 ;
         color: white ;
+    }
+
+    :focus {
+        outline-color: map-get($accent, 200) ;
     }
 
     :link {

@@ -30,6 +30,12 @@ $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;
 
+:focus {
+    outline-style: solid ;
+    outline-width: 3px;
+    outline-offset: 2px;
+}
+
 body {
     line-height: $line ;
 }
