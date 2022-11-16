@@ -8,58 +8,62 @@
   </head>
   <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
     <header></header>
-    <div
-      itemref="page"
-      itemtype="http://schema.org/WebSite"
-      itemscope>
-      {%- if site.title -%}
-      <h1 itemprop="name">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ site.title | escape }}</a>
-      </h1>
-      {%- endif -%}
-      <div itemprop="description">
-        {{ site.description | escape }}
+    <div>
+      <div
+        itemref="page"
+        itemtype="http://schema.org/WebSite"
+        itemscope>
+        {%- if site.title -%}
+        <h1 itemprop="name">
+          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+            {{ site.title | escape }}</a>
+        </h1>
+        {%- endif -%}
+        <div itemprop="description">
+          {{ site.description | escape }}
+        </div>
+        <address itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <a itemprop="url" rel="author" href="{{ page.author.url | relative_url}}">
+            @<span itemprop="name">{{ site.author.name | escape }}</span>
+          </a>
+        </address>
       </div>
-      <address itemprop="author" itemscope itemtype="https://schema.org/Person">
-        <a itemprop="url" rel="author" href="{{ page.author.url | relative_url}}">
-          @<span itemprop="name">{{ site.author.name | escape }}</span>
-        </a>
-      </address>
-    </div>
-    <article>
-      {%- if page.title -%}
-      <h2 itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ page.title | escape }}
+      <article>
+        {%- if page.title -%}
+        <h2 itemprop="name headline">
+          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+            {{ page.title | escape }}
+          </a>
+        </h2>
+        {%- endif -%}
+        {{ content }}
+      </article>
+      {%- if site.posts.size > 0 -%}
+      <h2 id="contents">
+        <a href="#contents">
+          Contents
         </a>
       </h2>
-      {%- endif -%}
-      {{ content }}
-    </article>
-    {%- if site.posts.size > 0 -%}
-    <h2 id="contents">
-      <a href="#contents">
-        Contents
-      </a>
-    </h2>
 
-    <main aria-label="Content">
-      <ol reversed role="list">
-        {%- for post in site.posts -%}
-        <li
-          itemprop="hasPart blogPost"
-          itemscope
-          itemtype="http://schema.org/BlogPosting"
-          itemid="{{ post.url | absolute_url }}">
-          <a itemprop="name headline url" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </li>
-        {%- endfor -%}
-      </ol>
-    </main>
-    {%- endif -%}
+      <main aria-label="Content">
+        <ol reversed role="list">
+          {%- for post in site.posts -%}
+          <li
+            itemprop="hasPart blogPost"
+            itemscope
+            itemtype="http://schema.org/BlogPosting"
+            itemid="{{ post.url | absolute_url }}">
+            <a itemprop="name headline url" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </li>
+          {%- endfor -%}
+        </ol>
+      </main>
+      {%- endif -%}
+    </div>
+    <aside>
+    </aside>
     <footer>
     </footer>
   </body>

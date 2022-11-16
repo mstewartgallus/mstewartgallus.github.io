@@ -1,3 +1,7 @@
+{%- assign date_id_format = "%Y-%m-%d" -%}
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+{%- assign categories = site.categories | sort -%}
+{%- assign tags = site.tags | sort -%}
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}"
       itemtype="https://schema.org/WebPage" itemscope>
@@ -33,56 +37,57 @@
       {%- include nav.html -%}
     </header>
 
-    <h1 itemprop="name headline">
-      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-        {{ page.title | escape }}
-      </a>
-    </h1>
+    <div>
+      <h1 itemprop="name headline">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ page.title | escape }}
+        </a>
+      </h1>
 
-    <div itemprop="text">
-      <main itemprop="mainEntity">
-        {{ content }}
-      </main>
+      <div itemprop="text">
+        <main itemprop="mainEntity">
+          {{ content }}
+        </main>
 
-{%- assign date_id_format = "%Y-%m-%d" -%}
-{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-{%- assign categories = site.categories | sort -%}
-{%- assign tags = site.tags | sort -%}
+        <form id="search" rel="search" role="search" name="search-form" method="get">
+          <fieldset>
+            <label for="category">
+              <span class="label">Category:</span>
+              <span style="display:block">
+                <select id="category" name="category" multiple="multiple" size="2">
+                  {% for category in categories %}
+                  {% assign cat = category[0] | escape %}
+                  <option value="{{ cat }}">{{ cat }}</option>
+                  {% endfor %}
+                </select>
+              </span>
+            </label>
 
-<form id="search" rel="search" role="search" name="search-form" method="get">
-  <fieldset>
-    <label for="category">
-      <span class="label">Category:</span>
-      <span style="display:block">
-        <select id="category" name="category" multiple="multiple" size="2">
-          {% for category in categories %}
-          {% assign cat = category[0] | escape %}
-          <option value="{{ cat }}">{{ cat }}</option>
-          {% endfor %}
-        </select>
-      </span>
-    </label>
+            <label for="tag">
+              <span class="label">Tag:</span>
+              <span style="display:block">
+                <select id="tag" name="tag" multiple="multiple" size="5">
+                  {% for tag in tags %}
+                  {% assign tg = tag[0] | escape %}
+                  <option value="{{ tg }}">{{ tg }}</option>
+                  {% endfor %}
+                </select>
+              </span>
+            </label>
+          </fieldset>
 
-    <label for="tag">
-      <span class="label">Tag:</span>
-      <span style="display:block">
-        <select id="tag" name="tag" multiple="multiple" size="5">
-          {% for tag in tags %}
-          {% assign tg = tag[0] | escape %}
-          <option value="{{ tg }}">{{ tg }}</option>
-          {% endfor %}
-        </select>
-      </span>
-    </label>
-  </fieldset>
+          <span style="display:block; text-align:center">
+            <button>Search</button>
+          </span>
 
-  <span style="display:block; text-align:center">
-    <button>Search</button>
-  </span>
-
-  <output id="search-output" aria-live="polite">
-  </output>
-</form>
+          <output id="search-output" aria-live="polite">
+          </output>
+        </form>
+      </div>
     </div>
+    <aside>
+    </aside>
+    <footer>
+    </footer>
   </body>
 </html>
