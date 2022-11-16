@@ -3,6 +3,7 @@ $A4-margin: 9rem ;
 $body-width: 31.8rem ;
 
 html, body {
+    box-sizing: border-box;
     margin-left: auto ;
     margin-right: auto ;
     min-height: 100vh ;
