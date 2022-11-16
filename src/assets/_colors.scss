@@ -98,7 +98,6 @@ $color: (
 :focus {
     background-color: black ;
     outline-color: black ;
-    color: white !important ;
 }
 :is(h1,h2,h2,h4,h5,h6):focus-within {
     background-color: black ;
@@ -107,18 +106,17 @@ $color: (
 :link {
     color: map-get($primary, 800) ;
 }
-:link:hover {
-    color: map-get($primary, 700) ;
-}
 :visited {
     color: map-get($primary, 900) ;
 }
-:is(:link, :visited):active {
+:is(:link,:visited):hover {
+    color: map-get($primary, 700) ;
+}
+:is(:link,:visited):active {
     color: map-get($warn, 900) ;
 }
-
-:is(nav, h1,h2,h3,h4,h5,h6) :link:active {
-    color: map-get($warn, 900) ;
+:is(:link,:visited):focus, :focus {
+    color: white ;
 }
 
 hr::after {
@@ -145,15 +143,6 @@ option:checked {
         color: white ;
     }
 
-    :focus {
-        background-color: white ;
-        outline-color: white ;
-        color: black !important ;
-    }
-    :is(h1,h2,h2,h4,h5,h6):focus-within {
-        background-color: white ;
-    }
-
     :link {
         color: map-get($primary, 100) ;
     }
@@ -163,12 +152,20 @@ option:checked {
     :is(:link,:visited):hover {
         color: map-get($accent, 100) ;
     }
-    :is(:link, :visited):active {
+    :is(:link,:visited):active {
         color: map-get($warn, 300) ;
     }
+    :is(:link,:visited):focus, :focus {
+        color: black ;
+    }
 
-    :is(nav, h1,h2,h3,h4,h5,h6,h7) :link:active {
-        color: map-get($warn, 700) ;
+    :focus {
+        background-color: white ;
+        outline-color: white ;
+    }
+
+    :is(h1,h2,h2,h4,h5,h6):focus-within {
+        background-color: white ;
     }
 
     hr::after {
