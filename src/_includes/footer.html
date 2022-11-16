@@ -1,7 +1,7 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 
-<div style="margin-bottom:1.5rem">
+<div style="width:100%">
   {%- if page.previous.url -%}
   <a href="{{page.previous.url}}" rel="previous">Previous: {{page.previous.title | escape}}</a>
   {%- endif -%}
@@ -9,32 +9,34 @@
   <a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
   {%- endif -%}
 </div>
+<br>
+<div style="width:100%;margin-top:1.5rem">
+  <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+    <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
+      @<span itemprop="name">{{ page.author.name | escape }}</span>
+    </a>
+  </address>
 
-<address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
-  <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
-    @<span itemprop="name">{{ page.author.name | escape }}</span>
-  </a>
-</address>
+  <dl class="metadata">
+    <dt>Posted</dt>
+    <dd>
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: date_format }}
+      </time>
+    </dd>
+    {%- for category in page.categories -%}
+    {%- if forloop.first -%}<dt>Category</dt>{%- endif -%}
+    <dd itemprop="articleSection">
+      <a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a>
+    </dd>
+    {%- endfor -%}
+    {%- for tag in page.tags -%}
+    {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
+    <dd itemprop="keywords">
+      <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">#{{ tag | escape }}</a>
+    </dd>
+    {%- endfor -%}
+  </dl>
 
-<dl class="metadata">
-  <dt>Posted</dt>
-  <dd>
-    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-      {{ page.date | date: date_format }}
-    </time>
-  </dd>
-  {%- for category in page.categories -%}
-  {%- if forloop.first -%}<dt>Category</dt>{%- endif -%}
-  <dd itemprop="articleSection">
-    <a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a>
-  </dd>
-  {%- endfor -%}
-  {%- for tag in page.tags -%}
-  {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
-  <dd itemprop="keywords">
-    <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">#{{ tag | escape }}</a>
-  </dd>
-  {%- endfor -%}
-</dl>
-
-<span tabindex="0" title="Sighted people are dumb dumbs right?"></span>
+  <span class="sr-only">Sighted people are dumb dumbs right?</span>
+</div>
