@@ -1,5 +1,6 @@
 $A4-width: 49.8rem ;
 $A4-margin: 9rem ;
+$A4-2margin: 18rem ;
 $body-width: 31.8rem ;
 
 html, body {
@@ -34,54 +35,40 @@ footer {
 }
 
 body {
-    grid-template-areas:
-        ". .       ."
-        ". header  ."
-        ". title   ."
-        ". body   ."
-        ". footer ."
-        ". aside  ."
-        ". .      ." ;
-    grid-template-columns: 0.2rem 1fr 0.2rem ;
-    grid-template-rows: 0.7rem auto auto 1fr auto auto 0.7rem ;
+    display: flex ;
+    flex-direction: column ;
+    margin: 0.7em 0.2em ;
 }
+
 header {
+    display: flex ;
+    flex-direction: column ;
+    justify-content: end ;
     text-align: right ;
 }
 
-@media screen and (min-width: $body-width) {
-    body {
-        grid-template-rows: $A4-margin auto 1fr auto auto $A4-margin ;
-    }
-}
 
 @media screen and (min-width: $body-width + $A4-margin) {
     body {
+        margin-left: auto ;
+        margin-right: auto ;
+        display: grid ;
+        column-gap: $col;
         grid-template-areas:
-            ". .      .      ."
-            ". title  .      ."
-            ". body   header  ."
-            ". body   aside  ."
-            ". footer .      ."
-            ". .      .      ." ;
-        grid-template-rows: $A4-margin auto auto 1fr auto $A4-margin ;
-        grid-template-columns: auto $body-width auto-margin auto ;
+            "title  header     "
+            "body   aside "
+            "footer .     ";
+        grid-template-rows: auto auto 1fr auto ;
+        grid-template-columns: $body-width auto $A4-2margin ;
     }
     header {
         text-align: left ;
     }
-    header, aside {
-        margin-left: $col ;
-
-    }
-    aside {
-        box-sizing: border-box;
-        width: 2 * $A4-margin ;
-    }
 }
 @media screen and (min-width: $A4-width) {
     body {
-        grid-template-columns: $A4-margin $body-width auto auto ;
+        grid-template-columns: $body-width auto auto ;
+        margin-left: $A4-margin ;
     }
 }
 
