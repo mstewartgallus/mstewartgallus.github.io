@@ -6,10 +6,15 @@ html, body {
     box-sizing: border-box;
     margin-left: auto ;
     margin-right: auto ;
+}
+
+html {
     min-height: 100vh ;
 }
 
 body {
+    min-height: 90vh ;
+
     position: relative ;
     display: flex ;
     flex-direction: column ;
