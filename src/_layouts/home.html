@@ -7,8 +7,8 @@
     {%- include head.html -%}
   </head>
   <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <header
-         itemref="page"
+    <header></header>
+    <div itemref="page"
          itemtype="http://schema.org/WebSite"
          itemscope>
       {%- if site.title -%}
@@ -25,27 +25,24 @@
           @<span itemprop="name">{{ site.author.name | escape }}</span>
         </a>
       </address>
-    </header>
+    </div>
     <article>
       {%- if page.title -%}
-      <header>
-        <h2 itemprop="name headline">
-          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-            {{ page.title | escape }}
-          </a>
-        </h2>
-      </header>
+      <h2 itemprop="name headline">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ page.title | escape }}
+        </a>
+      </h2>
       {%- endif -%}
       {{ content }}
     </article>
     {%- if site.posts.size > 0 -%}
-    <header>
-      <h2 id="contents">
-        <a href="#contents">
-          Contents
-        </a>
-      </h2>
-    </header>
+    <h2 id="contents">
+      <a href="#contents">
+        Contents
+      </a>
+    </h2>
+
     <main aria-label="Content">
       <ol reversed role="list">
         {%- for post in site.posts -%}
@@ -62,5 +59,7 @@
       </ol>
     </main>
     {%- endif -%}
+    <footer>
+    </footer>
   </body>
 </html>

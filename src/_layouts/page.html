@@ -5,20 +5,20 @@
     {%- include head.html -%}
   </head>
   <body>
-    <nav itemtype="http://schema.org/Blog" itemscope>
+    <header itemtype="http://schema.org/Blog" itemscope>
       {%- include nav.html -%}
-    </nav>
+    </header>
     <div itemprop="text">
-      <header>
-        <h1 itemprop="name headline">
-          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-            {{ page.title | escape }}
-          </a>
-        </h1>
-      </header>
+      <h1 itemprop="name headline">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ page.title | escape }}
+        </a>
+      </h1>
       <main itemprop="mainEntity">
         {{ content }}
       </main>
     </div>
+    <footer>
+    </footer>
   </body>
 </html>

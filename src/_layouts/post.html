@@ -4,31 +4,26 @@
   <head>
     {%- include head.html -%}
   </head>
-  <body itemprop="mainEntity hasPart"
-        itemtype="https://schema.org/Blog" itemscope>
-    <nav>
+  <body itemscope
+        itemprop="mainEntity hasPart"
+        itemtype="https://schema.org/BlogPosting"
+        itemid="{{ page.url | absolute_url }}">
+    <header>
       {%- include nav.html -%}
-    </nav>
-    <div itemscope
-         itemprop="blogPost hasPart"
-         itemtype="https://schema.org/BlogPosting"
-         itemid="{{ page.url | absolute_url }}">
-      <div itemprop="text">
-        <header>
-          <h1 itemprop="name headline">
-            <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-              {{ page.title | escape }}
-            </a>
-          </h1>
-        </header>
+    </header>
+    <div itemprop="text">
+      <h1 itemprop="name headline">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ page.title | escape }}
+        </a>
+      </h1>
 
-        <main itemprop="articleBody">
-          {{ content }}
-        </main>
-      </div>
-      <footer>
-        {%- include footer.html -%}
-      </footer>
+      <main itemprop="articleBody">
+        {{ content }}
+      </main>
     </div>
+    <footer>
+      {%- include footer.html -%}
+    </footer>
   </body>
 </html>

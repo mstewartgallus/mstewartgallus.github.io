@@ -17,7 +17,7 @@ body {
     display: flex ;
     flex-direction: column ;
     align-items: stretch ;
-    justify-content: center ;
+    justify-content: space-between ;
 }
 
 @media screen and (min-width: 40rem) {
@@ -30,8 +30,15 @@ body {
 }
 
 @media screen and (min-width: 50rem) {
+    header {
+        margin-top: $A4-margin ;
+    }
     body {
-        margin: $A4-margin ;
+        margin-left: $A4-margin ;
+        margin-right: $A4-margin ;
+    }
+    footer {
+        margin-bottom: $A4-margin ;
     }
 }
 @media screen and (min-width: 70rem) {
@@ -47,16 +54,8 @@ body {
     }
 }
 
-nav {
+header {
     text-align: right ;
-}
-
-@media (min-width: 40rem) {
-    nav {
-        position: absolute ;
-        right: 0;
-        top: -$line;
-    }
 }
 
 
