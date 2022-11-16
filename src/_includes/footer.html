@@ -1,7 +1,6 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-
-<div style="width:100%">
+<div>
   {%- if page.previous.url -%}
   <a href="{{page.previous.url}}" rel="previous">Previous: {{page.previous.title | escape}}</a>
   {%- endif -%}
@@ -9,8 +8,8 @@
   <a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
   {%- endif -%}
 </div>
-<br>
-<div style="width:100%;margin-top:1.5rem">
+
+<div>
   <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
     <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
       @<span itemprop="name">{{ page.author.name | escape }}</span>

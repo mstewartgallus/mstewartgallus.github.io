@@ -72,6 +72,17 @@ nav {
 footer {
     margin-top: $line ;
 }
+footer {
+    display: flex ;
+    flex-direction: column ;
+    align-items: stretch ;
+    gap: $line ;
+}
+footer:first-child {
+    display: flex ;
+    flex-direction: row ;
+    flex-wrap: wrap ;
+}
 
 .poem {
     display: flex ;
