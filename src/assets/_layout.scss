@@ -15,7 +15,10 @@ html {
 
 body {
     position: relative ;
-    display: grid ;
+    display: flex ;
+    column-gap: $col;
+    flex-direction: column ;
+    margin: 0.7em 0.2em ;
 }
 
 body > * {
@@ -34,10 +37,9 @@ footer {
     grid-area: footer;
 }
 
-body {
-    display: flex ;
-    flex-direction: column ;
-    margin: 0.7em 0.2em ;
+footer {
+    margin-top: $line;
+    margin-bottom: $line;
 }
 
 header {
@@ -47,18 +49,18 @@ header {
     text-align: right ;
 }
 
-
 @media screen and (min-width: $body-width + $A4-margin) {
     body {
+        margin-top: $A4-margin ;
+        margin-bottom: $A4-margin ;
         margin-left: auto ;
         margin-right: auto ;
         display: grid ;
-        column-gap: $col;
         grid-template-areas:
-            "title  header     "
+            "title  header "
             "body   aside "
             "footer .     ";
-        grid-template-rows: auto auto 1fr auto ;
+        grid-template-rows: auto 1fr auto auto ;
         grid-template-columns: $body-width auto $A4-2margin ;
     }
     header {
@@ -79,9 +81,6 @@ header {
 [rel="next"] {
     float: right ;
     display: block ;
-}
-footer {
-    margin-top: $line ;
 }
 footer {
     display: flex ;
