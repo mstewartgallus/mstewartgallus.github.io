@@ -20,6 +20,9 @@ body {
 body > * {
     grid-area: body;
 }
+h1 {
+    grid-area: title;
+}
 header {
     grid-area: header;
 }
@@ -32,14 +35,18 @@ footer {
 
 body {
     grid-template-areas:
-        ". .     ."
-        ". header."
+        ". .       ."
+        ". header  ."
+        ". title   ."
         ". body   ."
-        ". aside  ."
         ". footer ."
+        ". aside  ."
         ". .      ." ;
     grid-template-columns: 0.2rem 1fr 0.2rem ;
-    grid-template-rows: 0.7rem auto 1fr auto auto 0.7rem ;
+    grid-template-rows: 0.7rem auto auto 1fr auto auto 0.7rem ;
+}
+header {
+    text-align: right ;
 }
 
 @media screen and (min-width: $body-width) {
@@ -52,23 +59,30 @@ body {
     body {
         grid-template-areas:
             ". .      .      ."
-            ". header .      ."
+            ". title  .      ."
+            ". body   header  ."
             ". body   aside  ."
             ". footer .      ."
             ". .      .      ." ;
-        grid-template-rows: $A4-margin auto 1fr auto $A4-margin ;
-        grid-template-columns: auto $body-width $A4-margin auto ;
+        grid-template-rows: $A4-margin auto auto 1fr auto $A4-margin ;
+        grid-template-columns: auto $body-width auto-margin auto ;
+    }
+    header {
+        text-align: left ;
+    }
+    header, aside {
+        margin-left: $col ;
+
+    }
+    aside {
+        box-sizing: border-box;
+        width: 2 * $A4-margin ;
     }
 }
 @media screen and (min-width: $A4-width) {
     body {
-        grid-template-columns: $A4-margin $body-width $A4-margin auto ;
+        grid-template-columns: $A4-margin $body-width auto auto ;
     }
-}
-
-
-header {
-    text-align: right ;
 }
 
 [rel="previous"] {
@@ -79,27 +93,20 @@ header {
     float: right ;
     display: block ;
 }
-
 footer {
     margin-top: $line ;
 }
 footer {
     display: flex ;
-    flex-direction: column ;
-    align-items: stretch ;
-    gap: $line ;
-}
-footer:first-child {
-    display: flex ;
     flex-direction: row ;
-    flex-wrap: wrap ;
+    justify-content: space-between ;
 }
 
-.poem {
+h1.poem {
+    text-align: center ;
+}
+main.poem {
     display: flex ;
     flex-direction: column ;
     align-items: center ;
-}
-.poem h1 {
-    text-align: center ;
 }

@@ -37,15 +37,15 @@
       {%- include nav.html -%}
     </header>
 
-    <div>
-      <h1 itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ page.title | escape }}
-        </a>
-      </h1>
+    <h1 itemprop="name headline">
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        {{ page.title | escape }}
+      </a>
+    </h1>
 
-      <div itemprop="text">
-        <main itemprop="mainEntity">
+    <div>
+      <div>
+        <main>
           {{ content }}
         </main>
 
@@ -85,9 +85,9 @@
         </form>
       </div>
     </div>
-    <aside>
-    </aside>
     <footer>
     </footer>
+    <aside>
+    </aside>
   </body>
 </html>

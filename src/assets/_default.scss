@@ -78,7 +78,7 @@ h2 { font-weight: 600 ; }
 h3 { font-weight: 500 ; }
 
 dd {
-    margin-left: $col8 ;
+    margin-left: $col3 ;
 }
 
 
@@ -86,9 +86,6 @@ small {
     font-size: pt(9) ;
 }
 
-p:first-of-type {
-    margin-top: $line ;
-}
 p:last-of-type {
     margin-bottom: $line ;
 }
@@ -124,7 +121,7 @@ ol {
     padding-left: $col4 ;
 }
 
-.sr-only {
+.sr-only:not(:focus) {
     display: inline-block ;
     -webkit-user-select: none ;
     user-select: none ;

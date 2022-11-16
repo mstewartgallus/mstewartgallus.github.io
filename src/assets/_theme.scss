@@ -64,9 +64,19 @@ menu > li:first-child::before {
     content: none ;
 }
 
-.metadata, .metadata > dt, .metadata > dd {
-    display: inline ;
-    margin: 0;
+.metadata {
+    display: grid ;
+    grid-template-columns: [key] 1fr [value] 3fr ;
+}
+.metadata > dt, .metadata > dd {
+    display: block ;
+    margin: 0 ;
+}
+.metadata > dt {
+    grid-column-start: key ;
+}
+.metadata > dd {
+    grid-column-start: value ;
 }
 
 .metadata > dt {
@@ -77,20 +87,20 @@ menu > li:first-child::before {
     font-size: pt(12) ;
 }
 
-.metadata {
-    display: grid ;
-    grid-template-columns: [key] 1fr [value] 4fr;
-    grid-column-gap: 1.5em ;
-    justify-items: start ;
-    align-items: baseline ;
-}
+// .metadata {
+//     display: grid ;
+//     grid-template-columns: [key] 1fr [value] 4fr;
+//     grid-column-gap: 1.5em ;
+//     justify-items: start ;
+//     align-items: baseline ;
+// }
 
-.metadata > dt {
-    grid-column: key / key ;
-}
-.metadata > dd {
-    grid-column: value / value ;
-}
+// .metadata > dt {
+//     grid-column: key / key ;
+// }
+// .metadata > dd {
+//     grid-column: value / value ;
+// }
 
 
 p:first-of-type::first-letter {

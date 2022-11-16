@@ -10,20 +10,19 @@
     <header>
       {%- include nav.html -%}
     </header>
-    <div itemprop="text">
-      <h1 itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ page.title | escape }}
-        </a>
-      </h1>
-      <main itemprop="articleBody">
-        {{ content }}
-      </main>
-    </div>
-    <aside>
-    </aside>
+    <h1 itemprop="name headline">
+      <a id="content" rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        {{ page.title | escape }}
+      </a>
+    </h1>
+    <main itemprop="articleBody">
+      {{ content }}
+    </main>
     <footer>
       {%- include footer.html -%}
     </footer>
+    <aside>
+      {%- include metadata.html -%}
+    </aside>
   </body>
 </html>

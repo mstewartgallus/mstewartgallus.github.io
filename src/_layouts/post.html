@@ -13,7 +13,7 @@
     </header>
     <div itemprop="text">
       <h1 itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        <a id="content" rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
           {{ page.title | escape }}
         </a>
       </h1>
@@ -22,10 +22,11 @@
         {{ content }}
       </main>
     </div>
-    <aside>
-    </aside>
     <footer>
       {%- include footer.html -%}
     </footer>
+    <aside>
+      {%- include metadata.html -%}
+    </aside>
   </body>
 </html>
