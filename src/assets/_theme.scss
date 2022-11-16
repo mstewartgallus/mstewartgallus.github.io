@@ -80,28 +80,12 @@ menu > li:first-child::before {
 }
 
 .metadata > dt {
-    text-style: italic;
-    font-size: pt(10) ;
-}
-.metadata > dd {
-    font-size: pt(12) ;
+    font-style: italic;
 }
 
-// .metadata {
-//     display: grid ;
-//     grid-template-columns: [key] 1fr [value] 4fr;
-//     grid-column-gap: 1.5em ;
-//     justify-items: start ;
-//     align-items: baseline ;
-// }
-
-// .metadata > dt {
-//     grid-column: key / key ;
-// }
-// .metadata > dd {
-//     grid-column: value / value ;
-// }
-
+aside {
+    font-size: pt(11) ;
+}
 
 p:first-of-type::first-letter {
     font-size: pt(14) ;

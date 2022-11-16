@@ -2,6 +2,7 @@ $A4-width: 49.8rem ;
 $A4-margin: 9rem ;
 $A4-2margin: 18rem ;
 $body-width: 31.8rem ;
+$aside: 27rem ;
 
 html, body {
     box-sizing: border-box;
@@ -61,10 +62,13 @@ header {
             "body   aside "
             "footer .     ";
         grid-template-rows: auto 1fr auto auto ;
-        grid-template-columns: $body-width auto $A4-2margin ;
+        grid-template-columns: $body-width auto auto ;
     }
     header {
         text-align: left ;
+    }
+    aside {
+        max-width: $aside ;
     }
 }
 @media screen and (min-width: $A4-width) {
