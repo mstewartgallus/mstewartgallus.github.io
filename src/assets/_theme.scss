@@ -1,3 +1,10 @@
+@media (min-width: $A4-width) {
+    h1 {
+        font-size: pt(25) ;
+        line-height: $doubleline ;
+    }
+}
+
 abbr {
     display: inline ;
     font-variant-caps: small-caps ;
