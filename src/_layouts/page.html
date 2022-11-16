@@ -8,16 +8,14 @@
     <header itemtype="http://schema.org/Blog" itemscope>
       {%- include nav.html -%}
     </header>
-    <div itemprop="text">
-      <h1 itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ page.title | escape }}
-        </a>
-      </h1>
-      <main itemprop="mainEntity">
-        {{ content }}
-      </main>
-    </div>
+    <h1 itemprop="name headline">
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        {{ page.title | escape }}
+      </a>
+    </h1>
+    <main itemprop="mainEntity">
+      {{ content }}
+    </main>
     <footer>
     </footer>
     <aside>
