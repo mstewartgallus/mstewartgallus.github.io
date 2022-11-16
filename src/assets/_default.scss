@@ -31,16 +31,14 @@ $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;
 
 
-:focus {
-    outline-style: solid ;
-    outline-width: 0.3em ;
-    outline-offset: 0;
-}
-
+:focus,
 :is(h1,h2,h2,h4,h5,h6):focus-within {
     outline-style: solid ;
     outline-width: 0.3em ;
     outline-offset: 0;
+}
+:focus {
+    outline-width: 0.2em ;
 }
 
 :is(h1,h2,h2,h4,h5,h6) :focus {
