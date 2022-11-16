@@ -8,9 +8,10 @@
   </head>
   <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
     <header></header>
-    <div itemref="page"
-         itemtype="http://schema.org/WebSite"
-         itemscope>
+    <div
+      itemref="page"
+      itemtype="http://schema.org/WebSite"
+      itemscope>
       {%- if site.title -%}
       <h1 itemprop="name">
         <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
