@@ -1,6 +1,0 @@
-.stanza {
-    display:block ;: 0;
-    padding: 0;
-    text-indent: 0;
-    margin-bottom: $line ;
-}

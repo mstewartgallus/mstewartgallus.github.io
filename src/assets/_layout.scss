@@ -47,7 +47,7 @@ header {
     display: flex ;
     flex-direction: column ;
     justify-content: end ;
-    text-align: right ;
+    align-items: end ;
 }
 
 @media screen and (min-width: $body-width + $A4-margin) {
@@ -65,7 +65,7 @@ header {
         grid-template-columns: $body-width auto auto ;
     }
     header {
-        text-align: left ;
+        align-items: start ;
     }
     aside {
         max-width: $aside ;

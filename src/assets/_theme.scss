@@ -36,6 +36,7 @@ hr {
 }
 hr::after {
     // this is a dinkus
+    display: block ;
     content: "* * *" ;
     padding: 0 4px ;
 }
