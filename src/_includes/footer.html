@@ -9,33 +9,33 @@
   {%- endif -%}
 </div>
 
-<div>
-  <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
-    <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
-      @<span itemprop="name">{{ page.author.name | escape }}</span>
-    </a>
-  </address>
+<dl class="metadata">
+  <dt>Author</dt>
+  <dd>
+    <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+      <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
+        @<span itemprop="name">{{ page.author.name | escape }}</span>
+      </a>
+    </address>
+  </dd>
+  <dt>Posted</dt>
+  <dd>
+    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+      {{ page.date | date: date_format }}
+    </time>
+  </dd>
+  {%- for category in page.categories -%}
+  {%- if forloop.first -%}<dt>Category</dt>{%- endif -%}
+  <dd itemprop="articleSection">
+    <a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a>
+  </dd>
+  {%- endfor -%}
+  {%- for tag in page.tags -%}
+  {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
+  <dd itemprop="keywords">
+    <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">#{{ tag | escape }}</a>
+  </dd>
+  {%- endfor -%}
+</dl>
 
-  <dl class="metadata">
-    <dt>Posted</dt>
-    <dd>
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }}
-      </time>
-    </dd>
-    {%- for category in page.categories -%}
-    {%- if forloop.first -%}<dt>Category</dt>{%- endif -%}
-    <dd itemprop="articleSection">
-      <a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">{{ category | escape }}</a>
-    </dd>
-    {%- endfor -%}
-    {%- for tag in page.tags -%}
-    {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
-    <dd itemprop="keywords">
-      <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">#{{ tag | escape }}</a>
-    </dd>
-    {%- endfor -%}
-  </dl>
-
-  <span class="sr-only">Sighted people are dumb dumbs right?</span>
-</div>
+<span class="sr-only">Sighted people are dumb dumbs right?</span>
