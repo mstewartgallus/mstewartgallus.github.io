@@ -6,7 +6,8 @@ $pt: 1rem / 12;
     @return $pts * $pt;
 }
 
-$col: 6.5 * $pt ;
+
+$col: 0.6 * 13 * $pt ;
 $col2: 2 * $col ;
 $col3: 3 * $col ;
 $col4: 4 * $col ;
@@ -15,7 +16,7 @@ $col6: 6 * $col ;
 $col7: 7 * $col ;
 $col8: 8 * $col ;
 
-$line: pt(1.6 * 13) ;
+$line: 1.6 * 13 * $pt ;
 $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;
