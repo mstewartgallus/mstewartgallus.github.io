@@ -41,12 +41,6 @@ footer {
     margin-bottom: $line;
 }
 
-// nav {
-//     display: flex ;
-//     flex-direction: column ;
-//     justify-content: end ;
-//     align-items: end ;
-// }
 
 main, header, footer {
     max-width: $body-width;
@@ -61,9 +55,7 @@ main, header, footer {
 @media screen and (min-width: $body-width + $A4-margin) {
     body {
         padding: 0;
-
-        margin-top: $A4-margin ;
-        margin-bottom: $A4-margin ;
+        margin: 0;
         margin-left: auto ;
         margin-right: auto ;
         display: grid ;
@@ -78,6 +70,8 @@ main, header, footer {
 }
 @media screen and (min-width: $A4-width + $A4-margin) {
     body {
+        margin-top: $A4-margin ;
+        margin-bottom: $A4-margin ;
         grid-template-columns: $A4-margin [main] $body-width [aside] auto 1fr ;
     }
 }
