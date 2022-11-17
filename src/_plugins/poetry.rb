@@ -17,9 +17,9 @@ module MSG
       output << '<p class="stanza">'
       first = true
       stanza.each do |line|
-        output << "\n"
         if not first then
-          output << '<span class="sr-only"> . </span><br aria-hidden="true">'
+          output << '<span class="sr-only"> . </span>'
+          output << "\n"
         end
         first = false
         output << line
