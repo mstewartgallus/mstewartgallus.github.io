@@ -44,7 +44,7 @@ aside {
 }
 
 p:first-of-type::first-letter {
-    font-size: pt(14) ;
+    font-size: 14 * $pt ;
     font-weight: bold ;
 }
 

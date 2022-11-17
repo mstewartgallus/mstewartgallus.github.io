@@ -35,3 +35,25 @@ body {
 
 // Hide select arrow
 select::-ms-expand { display: none ; }
+
+select, option, button, input {
+  margin: 0;
+  padding: 0;
+
+  border: none ;
+  font-family: inherit ;
+  vertical-align: baseline ;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: none;
+  background-color: transparent;
+  color: inherit ;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+select, option, button { cursor: pointer }

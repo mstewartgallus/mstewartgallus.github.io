@@ -6,7 +6,7 @@ $pt: 1rem / 12;
     @return $pts * $pt;
 }
 
-$col: pt(6.5) ;
+$col: 6.5 * $pt ;
 $col2: 2 * $col ;
 $col3: 3 * $col ;
 $col4: 4 * $col ;
@@ -15,7 +15,7 @@ $col6: 6 * $col ;
 $col7: 7 * $col ;
 $col8: 8 * $col ;
 
-$line: pt(19.5) ;
+$line: pt(1.6 * 13) ;
 $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;
@@ -50,7 +50,6 @@ $doubleline: 2 * $line ;
 
 @import "assets/_layout.scss";
 
-@import "assets/_formreset.scss";
 @import "assets/_forms.scss";
 
 @import "assets/_theme.scss";
@@ -61,10 +60,9 @@ $doubleline: 2 * $line ;
 
 @import "assets/_colors.scss";
 
-// html {
-//     background: linear-gradient(217deg, black, rgba(255,0,0,0) 70.71%),
-//                 linear-gradient(127deg, rgba(0,255,0,.8), black 70.71%),
-//                 linear-gradient(336deg, black, rgba(0,0,255,0) 70.71%);
-//     background-position: 0 $A4-margin;
-//     background-size: 1.5rem 1.5rem ;
+// $back-width: 2 * $col8 ;
+// body {
+//     background: linear-gradient(0deg, rgba(255,0,0,0), #222 90%),
+//                 linear-gradient(90deg, rgba(0,255,0,.8), #222 60%);
+//     background-size: $back-width $line ;
 // }

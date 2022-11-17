@@ -1,7 +1,6 @@
-// Set legible defaults
 body {
     line-height: $line ;
-    font-size: pt(13) ;
+    font-size: 13 * $pt;
     text-underline-offset: 0.27em ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
     hyphens: auto ;
@@ -9,28 +8,28 @@ body {
 
 nav,header,footer,h1,h2,h3,h4,h5,h6 {
     font-variant-numeric: proportional-nums lining-nums ;
+    hyphens: manual ;
 }
 
 // provide some sensible defaults for line spacing, etc..
-h1, h2, h3, h4, h5, h6 {
-    font-size: pt(14) ;
+h1,h2,h3,h4,h5,h6 {
+    font-size: 14 * $pt ;
+    font-weight: 500 ;
 }
 
 h1 {
-    font-size: pt(19) ;
+    font-size: 19 * $pt ;
+    font-weight: 900 ;
 }
 h2 {
-    font-size: pt(16) ;
+    font-size: 16 * $pt ;
+    font-weight: 700 ;
 }
 
-h1, h2 {
+h1,h2 {
     margin-top: $lineandhalf ;
     margin-bottom: $halfline ;
 }
-
-h1 { font-weight: 900 ; }
-h2 { font-weight: 600 ; }
-h3 { font-weight: 500 ; }
 
 dd {
     margin-left: $col3 ;
@@ -38,10 +37,6 @@ dd {
 dt {
     float: left ;
     margin-right: $col2 ;
-}
-
-small {
-    font-size: pt(9) ;
 }
 
 table, ol > li::marker {

@@ -11,33 +11,31 @@ select, button {
 }
 
 
-fieldset {
-    border-radius: 3px ;
+label {
+    // I have no idea why this fixes certain padding issues
     display: flex ;
-    flex-direction: row ;
-    flex-wrap: wrap ;
-    gap: pt(18) ;
-    padding-left: pt(9);
-    padding-right: pt(9);
+    flex-direction: column ;
 }
-
 .label {
-    display: block ;
     margin-top: $line ;
 
     // Hack to keep aligned to  grid
     margin-bottom: -2px ;
     border-width: 2px;
-
     border-style: none none solid none ;
     width:100%;
     display:block;
 }
 
-form {
-    display: flex ;
-    flex-direction: column ;
-    flex-wrap: wrap ;
+option, select {
+    box-sizing: border-box ;
+}
+
+option {
+    min-height: $line ;
+}
+select {
+    min-height: 4 * $line ;
 }
 
 option, option:focus {
