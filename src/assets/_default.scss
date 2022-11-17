@@ -121,11 +121,10 @@ ol {
     padding-left: $col4 ;
 }
 
+.sr-only {
+    display: block ;
+}
 .sr-only:not(:focus) {
-    display: inline-block ;
-    -webkit-user-select: none ;
-    user-select: none ;
-
     // Hide visually
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important;

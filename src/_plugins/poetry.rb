@@ -18,13 +18,12 @@ module MSG
       first = true
       stanza.each do |line|
         if not first then
-          output << '<span class="sr-only"> . </span>'
+          output << '<span class="sr-hint"> . </span>'
           output << "\n"
         end
         first = false
         output << line
       end
-      output << "\n"
       output << '</p>'
       output << "\n"
     end
