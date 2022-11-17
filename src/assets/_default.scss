@@ -109,6 +109,10 @@ body {
     font-variant-numeric: proportional-nums lining-nums ;
 }
 
+body {
+    text-underline-offset: 0.27em ;
+}
+
 table {
     border-collapse: collapse ;
     @include tabular ;
@@ -139,8 +143,4 @@ ol {
     font-size: 1px !important;
     white-space: nowrap !important;
     color: transparent !important ;
-}
-
-body {
-    text-underline-offset: 0.28em ;
 }
