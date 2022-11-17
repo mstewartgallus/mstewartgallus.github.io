@@ -31,12 +31,13 @@ h1,h2 {
     margin-bottom: $halfline ;
 }
 
-dd {
-    margin-left: $col3 ;
-}
 dt {
+    clear: both ;
     float: left ;
-    margin-right: $col2 ;
+    margin-right: $col ;
+}
+dd {
+    margin-left: $col4 ;
 }
 
 table, ol > li::marker {
