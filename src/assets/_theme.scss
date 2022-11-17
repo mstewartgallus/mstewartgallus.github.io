@@ -13,7 +13,7 @@ abbr {
 }
 
 
-:is(header, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) {
+:is(nav, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) {
     text-decoration: inherit ;
     color: inherit;
 }
@@ -49,28 +49,6 @@ blockquote {
     margin-left: 1em;
 }
 
-// abuse menu unsemantically
-menu, menu > li {
-    margin: 0;
-    padding: 0;
-}
-
-menu {
-    display: block ;
-}
-
-menu > li {
-    display: inline ;
-}
-
-menu > li::before {
-    content: " • " ;
-    display: inline ;
-}
-
-menu > li:first-child::before {
-    content: none ;
-}
 
 .metadata {
     display: grid ;

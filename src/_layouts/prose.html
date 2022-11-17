@@ -7,14 +7,16 @@
         itemprop="hasPart mainEntity"
         itemtype="https://schema.org/BlogPosting"
         itemid="{{ page.url | absolute_url }}">
-    <header>
+    <nav>
       {%- include nav.html -%}
+    </nav>
+    <header>
+      <h1 itemprop="name headline">
+        <a id="content" rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ page.title | escape }}
+        </a>
+      </h1>
     </header>
-    <h1 itemprop="name headline">
-      <a id="content" rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-        {{ page.title | escape }}
-      </a>
-    </h1>
     <main itemprop="articleBody">
       {{ content }}
     </main>

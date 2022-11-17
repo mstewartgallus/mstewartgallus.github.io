@@ -7,27 +7,26 @@
     {%- include head.html -%}
   </head>
   <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <header></header>
-    <div>
-      <div
-        itemref="page"
-        itemtype="http://schema.org/WebSite"
-        itemscope>
-        {%- if site.title -%}
-        <h1 itemprop="name">
-          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-            {{ site.title | escape }}</a>
-        </h1>
-        {%- endif -%}
-        <div itemprop="description">
-          {{ site.description | escape }}
-        </div>
-        <address itemprop="author" itemscope itemtype="https://schema.org/Person">
-          <a itemprop="url" rel="author" href="{{ page.author.url | relative_url}}">
-            @<span itemprop="name">{{ site.author.name | escape }}</span>
-          </a>
-        </address>
+    <header
+      itemref="page"
+      itemtype="http://schema.org/WebSite"
+      itemscope>
+      {%- if site.title -%}
+      <h1 itemprop="name">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ site.title | escape }}</a>
+      </h1>
+      {%- endif -%}
+      <div itemprop="description">
+        {{ site.description | escape }}
       </div>
+      <address itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <a itemprop="url" rel="author" href="{{ page.author.url | relative_url}}">
+          @<span itemprop="name">{{ site.author.name | escape }}</span>
+        </a>
+      </address>
+    </header>
+    <div>
       <article>
         {%- if page.title -%}
         <h2 itemprop="name headline">

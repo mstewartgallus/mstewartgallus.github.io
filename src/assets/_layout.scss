@@ -19,23 +19,21 @@ body {
     display: flex ;
     column-gap: $col;
     flex-direction: column ;
-    margin: 0.7em 0.2em ;
+    padding: 0.7em 0.2em ;
+    grid-template-columns: [main] auto [aside] auto 1fr ;
 }
 
 body > * {
-    grid-area: body;
+    grid-column: main;
 }
-h1 {
-    grid-area: title;
+nav, aside {
+    grid-column: aside;
 }
-header {
-    grid-area: header;
+nav {
+    grid-row: 1 ;
 }
 aside {
-    grid-area: aside;
-}
-footer {
-    grid-area: footer;
+    grid-row: 2 ;
 }
 
 footer {
@@ -43,37 +41,36 @@ footer {
     margin-bottom: $line;
 }
 
-header {
+nav {
     display: flex ;
     flex-direction: column ;
     justify-content: end ;
     align-items: end ;
 }
 
+main, header, footer {
+    max-width: $body-width;
+}
+
 @media screen and (min-width: $body-width + $A4-margin) {
     body {
+        padding: 0;
+
         margin-top: $A4-margin ;
         margin-bottom: $A4-margin ;
         margin-left: auto ;
         margin-right: auto ;
         display: grid ;
-        grid-template-areas:
-            "title  header "
-            "body   aside "
-            "footer .     ";
-        grid-template-rows: auto 1fr auto auto ;
-        grid-template-columns: $body-width auto auto ;
     }
-    header {
+    nav {
         align-items: start ;
     }
-    aside {
+    nav, aside {
         max-width: $aside ;
     }
 }
 @media screen and (min-width: $A4-width) {
     body {
-        grid-template-columns: $body-width auto auto ;
         margin-left: $A4-margin ;
     }
 }
