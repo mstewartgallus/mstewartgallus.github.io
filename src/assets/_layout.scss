@@ -72,7 +72,7 @@ main, header, footer {
 }
 @media screen and (min-width: $A4-width + $A4-margin) {
     body {
-        grid-template-columns: $A4-margin [main] auto [aside] auto 1fr ;
+        grid-template-columns: $A4-margin [main] $body-width [aside] auto 1fr ;
     }
 }
 
@@ -83,13 +83,4 @@ main, header, footer {
 [rel="next"] {
     float: right ;
     display: block ;
-}
-
-h1.poem {
-    text-align: center ;
-}
-main.poem {
-    display: flex ;
-    flex-direction: column ;
-    align-items: center ;
 }
