@@ -5,11 +5,15 @@
     }
 }
 
-abbr {
-    display: inline ;
+@mixin small-caps {
     font-variant-caps: small-caps ;
     text-transform: lowercase ;
-    letter-spacing: 0.1em ;
+    letter-spacing: 0.07em ;
+}
+
+abbr {
+    display: inline ;
+    @include small-caps ;
 }
 
 
@@ -120,4 +124,8 @@ ol {
 }
 ul {
     padding-left: $col5;
+}
+
+nav {
+    @include small-caps ;
 }

@@ -1,7 +1,6 @@
 select, option, button { cursor: pointer }
 
 select, button {
-    border: none;
     padding-left: 0.5em ;
     padding-right: 0.5em ;
 
@@ -13,7 +12,6 @@ select, button {
 
 
 fieldset {
-    border: none ;
     border-radius: 3px ;
     display: flex ;
     flex-direction: row ;
@@ -45,4 +43,9 @@ form {
 option, option:focus {
     margin-left: 0.2em ;
     margin-right: 0.2em ;
+}
+
+button {
+    border-style: solid ;
+    border-width: 1px ;
 }
