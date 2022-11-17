@@ -22,7 +22,6 @@ body {
     grid-template-columns: 1fr [main] auto [aside] auto 1fr ;
     grid-auto-flow: dense ;
     justify-items: stretch ;
-    align-items: start ;
 }
 
 body > * {
@@ -60,6 +59,7 @@ main, header, footer {
         margin-right: auto ;
         display: grid ;
         grid-template-columns: auto [main] $body-width [aside] auto 1fr ;
+        align-items: start ;
     }
     nav {
         align-items: start ;
