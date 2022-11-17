@@ -21,11 +21,16 @@ body {
     flex-direction: column ;
     grid-template-columns: 1fr [main] auto [aside] auto 1fr ;
     grid-auto-flow: dense ;
+    justify-items: stretch ;
+    align-items: start ;
 }
 
 body > * {
     grid-column: main;
     max-width: $body-width;
+}
+nav:first-of-type {
+    align-self: end ;
 }
 nav, aside {
     grid-column: aside;
@@ -36,12 +41,12 @@ footer {
     margin-bottom: $line;
 }
 
-nav {
-    display: flex ;
-    flex-direction: column ;
-    justify-content: end ;
-    align-items: end ;
-}
+// nav {
+//     display: flex ;
+//     flex-direction: column ;
+//     justify-content: end ;
+//     align-items: end ;
+// }
 
 main, header, footer {
     max-width: $body-width;
