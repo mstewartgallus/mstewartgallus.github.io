@@ -26,41 +26,42 @@
         </a>
       </address>
     </header>
-    <div>
-      <article>
-        {%- if page.title -%}
-        <h2 itemprop="name headline">
-          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-            {{ page.title | escape }}
-          </a>
-        </h2>
-        {%- endif -%}
-        {{ content }}
-      </article>
-      {%- if site.posts.size > 0 -%}
-      <h2 id="contents">
-        <a href="#contents">
-          Contents
+
+    <article>
+      {%- if page.title -%}
+      <h2 itemprop="name headline">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ page.title | escape }}
         </a>
       </h2>
-
-      <main aria-label="Content">
-        <ol reversed role="list">
-          {%- for post in site.posts -%}
-          <li
-            itemprop="hasPart blogPost"
-            itemscope
-            itemtype="http://schema.org/BlogPosting"
-            itemid="{{ post.url | absolute_url }}">
-            <a itemprop="name headline url" href="{{ post.url | relative_url }}">
-              {{ post.title | escape }}
-            </a>
-          </li>
-          {%- endfor -%}
-        </ol>
-      </main>
       {%- endif -%}
-    </div>
+      {{ content }}
+    </article>
+
+    {%- if site.posts.size > 0 -%}
+    <h2 id="contents">
+      <a href="#contents">
+        Contents
+      </a>
+    </h2>
+
+    <main aria-label="Content">
+      <ol reversed role="list">
+        {%- for post in site.posts -%}
+        <li
+          itemprop="hasPart blogPost"
+          itemscope
+          itemtype="http://schema.org/BlogPosting"
+          itemid="{{ post.url | absolute_url }}">
+          <a itemprop="name headline url" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </li>
+        {%- endfor -%}
+      </ol>
+    </main>
+    {%- endif -%}
+
     <footer>
     </footer>
     <aside>
