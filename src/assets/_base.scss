@@ -1,0 +1,100 @@
+// Set legible defaults
+body {
+    line-height: $line ;
+    font-size: pt(13) ;
+    text-underline-offset: 0.27em ;
+    font-variant-numeric: proportional-nums oldstyle-nums ;
+    hyphens: auto ;
+}
+
+nav,header,footer,h1,h2,h3,h4,h5,h6 {
+    font-variant-numeric: proportional-nums lining-nums ;
+}
+
+// provide some sensible defaults for line spacing, etc..
+h1, h2, h3, h4, h5, h6 {
+    font-size: pt(14) ;
+}
+
+h1 {
+    font-size: pt(19) ;
+}
+h2 {
+    font-size: pt(16) ;
+}
+
+h1, h2 {
+    margin-top: $lineandhalf ;
+    margin-bottom: $halfline ;
+}
+
+h1 { font-weight: 900 ; }
+h2 { font-weight: 600 ; }
+h3 { font-weight: 500 ; }
+
+dd {
+    margin-left: $col3 ;
+}
+dt {
+    float: left ;
+    margin-right: $col2 ;
+}
+
+small {
+    font-size: pt(9) ;
+}
+
+table, ol > li::marker {
+    font-variant-numeric: lining-nums tabular-nums;
+}
+table {
+    border-collapse: collapse ;
+}
+
+@counter-style nodot {
+  system: numeric;
+  symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
+  suffix: "   ";
+}
+@counter-style bullet {
+  system: cyclic;
+  symbols: "•";
+  suffix: "   ";
+}
+
+ol {
+    list-style-type: nodot ;
+}
+
+menu, ul {
+    list-style-type: bullet ;
+}
+
+menu, ul, ol {
+    padding-left: $col5;
+}
+
+@mixin small-caps {
+    font-variant-caps: small-caps ;
+    text-transform: lowercase ;
+    letter-spacing: 0.07em ;
+}
+
+abbr {
+    @include small-caps ;
+}
+
+:focus,
+:is(h1,h2,h2,h4,h5,h6):focus-within {
+    outline-style: solid ;
+    outline-width: 0.3em ;
+    outline-offset: 0;
+}
+:focus {
+    outline-width: 0.25em ;
+}
+
+:is(h1,h2,h2,h4,h5,h6) :focus {
+    background-color: transparent ;
+    outline: none;
+}

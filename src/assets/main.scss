@@ -1,13 +1,56 @@
 ---
 ---
+$pt: 1rem / 12;
+
+@function pt($pts) {
+    @return $pts * $pt;
+}
+
+$col: pt(6.5) ;
+$col2: 2 * $col ;
+$col3: 3 * $col ;
+$col4: 4 * $col ;
+$col5: 5 * $col ;
+$col6: 6 * $col ;
+$col7: 7 * $col ;
+$col8: 8 * $col ;
+
+$line: pt(19.5) ;
+$halfline: 0.5 * $line ;
+$lineandhalf: 1.5 * $line ;
+$doubleline: 2 * $line ;
+
+@mixin clear {
+    all: initial ;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block ;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none ;
+    background-color: transparent;
+    vertical-align: baseline ;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit ;
+    line-height: inherit;
+    text-indent: 0;
+    color: inherit ;
+}
 
 @import "assets/_clear.scss";
-@import "assets/_default.scss";
+@import "assets/_base.scss";
 
-@import "assets/_formreset.scss";
+* {
+    color-scheme: light dark ;
+}
 
 @import "assets/_layout.scss";
 
+@import "assets/_formreset.scss";
 @import "assets/_forms.scss";
 
 @import "assets/_theme.scss";

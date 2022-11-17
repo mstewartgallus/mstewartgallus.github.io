@@ -1,5 +1,4 @@
-html, body,
-blockquote, pre,
+html, body,blockquote, pre,
 menu, ol, ul, li,
 dl, dd, figure,
 h1, h2, h3, h4, h5, h6, p, hr,
@@ -21,6 +20,10 @@ address, abbr {
     color: inherit ;
 }
 
+html, body {
+    background: initial;
+}
+
 body {
     line-height: 1;
     font-family: -apple-system,
@@ -32,17 +35,3 @@ body {
 
 // Hide select arrow
 select::-ms-expand { display: none ; }
-
-@media (prefers-color-scheme: light) {
-    html, body {
-        background: white;
-        color: black;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    html, body {
-        background: black;
-        color: white;
-    }
-}

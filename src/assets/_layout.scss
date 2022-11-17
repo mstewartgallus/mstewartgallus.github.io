@@ -17,7 +17,7 @@ html {
 body {
     position: relative ;
     display: flex ;
-    column-gap: $col;
+    column-gap: $col2;
     flex-direction: column ;
     grid-template-columns: 1fr [main] auto [aside] auto 1fr ;
     grid-auto-flow: dense ;

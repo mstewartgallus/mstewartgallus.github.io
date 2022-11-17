@@ -1,19 +1,12 @@
+p + p {
+    text-indent: $col3 ;
+}
+
 @media (min-width: $A4-width) {
     h1 {
         font-size: pt(25) ;
         line-height: $doubleline ;
     }
-}
-
-@mixin small-caps {
-    font-variant-caps: small-caps ;
-    text-transform: lowercase ;
-    letter-spacing: 0.07em ;
-}
-
-abbr {
-    display: inline ;
-    @include small-caps ;
 }
 
 
@@ -26,11 +19,12 @@ abbr {
 }
 
 hr {
+    @include clear ;
+
     // FIXME do asymmetric margins here
     margin-top: $line ;
     margin-bottom: $line ;
-    height: 0px ;
-    border: none ;
+    height: 0 ;
     text-align: center;
     overflow: visible ;
     display: flex;
@@ -45,35 +39,6 @@ hr::after {
     padding: 0 4px ;
 }
 
-blockquote {
-    border-style: none none none dashed ;
-    border-width: 1px;
-    margin-top: $lineandhalf;
-    margin-bottom: $halfline;
-    margin-left: 1em;
-}
-
-
-.metadata {
-    display: grid ;
-    grid-template-columns: [key] auto [value] 3fr ;
-    column-gap: $col ;
-}
-.metadata > dt, .metadata > dd {
-    display: block ;
-    margin: 0 ;
-}
-.metadata > dt {
-    grid-column-start: key ;
-}
-.metadata > dd {
-    grid-column-start: value ;
-}
-
-.metadata > dt {
-    font-style: italic;
-}
-
 aside {
     font-size: pt(11) ;
 }
@@ -85,45 +50,6 @@ p:first-of-type::first-letter {
 
 p:first-of-type::first-line {
     font-style: italic ;
-}
-
-@counter-style nodot {
-  system: numeric;
-  symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
-}
-@counter-style bullet {
-  system: cyclic;
-  symbols: "•";
-  suffix: "    ";
-}
-
-ol {
-    list-style: none ;
-}
-
-ol > li {
-    position: relative;
-}
-
-ol > li::before {
-    content: counter(list-item, nodot) ;
-    @include tabular ;
-    position: absolute;
-    display: block;
-    min-width: $col4 ;
-    left: -$col6 ;
-    text-align: right ;
-}
-
-ul {
-    list-style: bullet ;
-}
-
-ol {
-    padding-left: $col5;
-}
-ul {
-    padding-left: $col5;
 }
 
 nav {
