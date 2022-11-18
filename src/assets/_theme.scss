@@ -2,14 +2,6 @@ p + p {
     text-indent: $col3 ;
 }
 
-@media (min-width: $A4-width) {
-    h1 {
-        font-size: pt(25) ;
-        line-height: $doubleline ;
-    }
-}
-
-
 :is(nav, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) {
     text-decoration: inherit ;
     color: inherit;
@@ -40,7 +32,7 @@ hr::after {
 }
 
 aside {
-    font-size: pt(11) ;
+    font-size: 11 * $pt ;
 }
 
 p:first-of-type::first-letter {

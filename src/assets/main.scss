@@ -1,5 +1,7 @@
 ---
 ---
+@charset "utf-8";
+
 $pt: 1rem / 12;
 
 @function pt($pts) {
@@ -7,7 +9,14 @@ $pt: 1rem / 12;
 }
 
 
-$col: 0.6 * 13 * $pt ;
+$font-size: 13 ;
+
+@function font($pts) {
+    @return ($font-size + $pts) * $pt;
+}
+
+
+$col: 0.6 * $font-size * $pt ;
 $col2: 2 * $col ;
 $col3: 3 * $col ;
 $col4: 4 * $col ;
@@ -16,7 +25,7 @@ $col6: 6 * $col ;
 $col7: 7 * $col ;
 $col8: 8 * $col ;
 
-$line: 1.6 * 13 * $pt ;
+$line: 1.5 * $font-size * $pt ;
 $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;

@@ -24,15 +24,6 @@ html, body {
     background: initial;
 }
 
-body {
-    line-height: 1;
-    font-family: -apple-system,
-                 system-ui,
-                 BlinkMacSystemFont,
-                 "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji",
-                 Roboto, Helvetica, Arial, sans-serif ;
-}
-
 // Hide select arrow
 select::-ms-expand { display: none ; }
 

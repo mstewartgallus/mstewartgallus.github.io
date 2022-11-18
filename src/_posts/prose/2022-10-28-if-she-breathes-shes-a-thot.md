@@ -10,10 +10,10 @@ frequented and I had to see the madness through.
 
 Besides some idiot had got bent into a rant.
 
-"You have no power here" I replied.  And then again "I'm already dead
-anyway pretty much"
+<q>You have no power here</q> I replied.  And then again <q>I'm already dead
+anyway pretty much</q>
 
-She replied "ok".
+She replied <q>ok</q>.
 
 I checked back every hour or so but she seemed to have stopped
 replying even to my colorful image suggesting she was transgender.

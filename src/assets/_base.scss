@@ -1,9 +1,27 @@
 body {
+    font-family: -apple-system,
+                 system-ui,
+                 BlinkMacSystemFont,
+                 "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji",
+                 Roboto, Helvetica, Arial, sans-serif ;
+
     line-height: $line ;
-    font-size: 13 * $pt;
-    text-underline-offset: 0.27em ;
+    font-size: $font-size * $pt;
     font-variant-numeric: proportional-nums oldstyle-nums ;
     hyphens: auto ;
+    overflow-wrap: break-word ;
+
+    // more legible hyperlinks
+    text-underline-offset: 0.27em ;
+
+    quotes: "“" "”" "‘" "’";
+}
+
+sub {
+    font-variant-position: sub ;
+}
+sup {
+    font-variant-position: super ;
 }
 
 nav,header,footer,h1,h2,h3,h4,h5,h6 {
@@ -13,16 +31,16 @@ nav,header,footer,h1,h2,h3,h4,h5,h6 {
 
 // provide some sensible defaults for line spacing, etc..
 h1,h2,h3,h4,h5,h6 {
-    font-size: 14 * $pt ;
+    font-size: font(1) ;
     font-weight: 500 ;
 }
 
 h1 {
-    font-size: 19 * $pt ;
+    font-size: font(6) ;
     font-weight: 900 ;
 }
 h2 {
-    font-size: 16 * $pt ;
+    font-size: font(3) ;
     font-weight: 700 ;
 }
 
@@ -35,6 +53,7 @@ dt {
     clear: both ;
     float: left ;
     margin-right: $col ;
+    font-style: italic ;
 }
 dd {
     margin-left: $col4 ;
@@ -80,11 +99,18 @@ abbr {
     @include small-caps ;
 }
 
+* {
+    outline-offset: 0;
+}
+
 :focus,
 :is(h1,h2,h2,h4,h5,h6):focus-within {
     outline-style: solid ;
+}
+
+:focus,
+:is(h1,h2,h2,h4,h5,h6):focus-within {
     outline-width: 0.3em ;
-    outline-offset: 0;
 }
 :focus {
     outline-width: 0.25em ;

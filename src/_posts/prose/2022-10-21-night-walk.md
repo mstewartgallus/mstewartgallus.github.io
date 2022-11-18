@@ -46,9 +46,9 @@ table in the hall outside the college library proper. Ollie crumpled
 over his laptop and began to exorcise the images that dug like wasps
 against his skull.
 
-"Earlier that day a man and a woman kissed in the park. I thought: I
+<q>Earlier that day a man and a woman kissed in the park. I thought: I
 should tackle the girl to the ground and I should smash her head
-against the pavement and I should rape her."
+against the pavement and I should rape her.</q>
 
 ***
 
