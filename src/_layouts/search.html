@@ -41,34 +41,35 @@
         {{ page.title | escape }}
       </a>
     </h1>
-    <main aria-labelledby="title">
-      <form id="search" rel="search" role="search" name="search-form" method="get">
-        <label for="category">
-          <span class="label">Category:</span>
-          <select id="category" name="category" multiple="multiple" size="2">
-            {% for category in categories %}
-            {% assign cat = category[0] | escape %}
-            <option value="{{ cat }}">{{ cat }}</option>
-            {% endfor %}
-          </select>
-        </label>
+    <form aria-labelledby="title"
+          id="search" rel="search" role="search" name="search-form" method="get">
+      <label for="category">
+        <span class="label">Category:</span>
+        <select id="category" name="category" multiple="multiple" size="2">
+          {% for category in categories %}
+          {% assign cat = category[0] | escape %}
+          <option value="{{ cat }}">{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </label>
 
-        <label for="tag">
-          <span class="label">Tag:</span>
-          <select id="tag" name="tag" multiple="multiple" size="5">
-            {% for tag in tags %}
-            {% assign tg = tag[0] | escape %}
-            <option value="{{ tg }}">{{ tg }}</option>
-            {% endfor %}
-          </select>
-        </label>
+      <label for="tag">
+        <span class="label">Tag:</span>
+        <select id="tag" name="tag" multiple="multiple" size="5">
+          {% for tag in tags %}
+          {% assign tg = tag[0] | escape %}
+          <option value="{{ tg }}">{{ tg }}</option>
+          {% endfor %}
+        </select>
+      </label>
 
-        <span style="display:block; text-align:center">
-          <button>Search</button>
-        </span>
-      </form>
+      <span style="display:block; text-align:center">
+        <button>Search</button>
+      </span>
+    </form>
+    <main>
+      <output for="search" id="search-output" aria-live="polite">
+      </output>
     </main>
-    <output for="search" id="search-output" aria-live="polite">
-    </output>
   </body>
 </html>
