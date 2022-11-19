@@ -18,8 +18,7 @@ module MSG
       first = true
       stanza.each do |line|
         if not first then
-          # CR+LF
-          output << '&#13;&#10;'
+          output << "\r\n"
         end
         first = false
         output << line
