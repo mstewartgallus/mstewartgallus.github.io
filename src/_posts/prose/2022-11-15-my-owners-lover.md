@@ -1,7 +1,7 @@
 ---
 title: My Owner's Lover
 date: 2022-11-15 16:49 -0700
-tags: hamster
+tags: Hamster
 ---
 My name is Silk and I am a hamster. I am a woman and I have pale cream
 colored fur. Being a hamster I am a solitary sort but I actually like
