@@ -37,42 +37,40 @@
       {%- include nav.html -%}
     </nav>
     <header>
-      <h1 itemprop="name headline">
+      <h1 id="header" itemprop="name headline">
         <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
           {{ page.title | escape }}
         </a>
       </h1>
     </header>
 
-    <main>
-      {{ content }}
+    <main aria-labelledby="header">
+      <form id="search" rel="search" role="search" name="search-form" method="get">
+        <label for="category">
+          <span class="label">Category:</span>
+          <select id="category" name="category" multiple="multiple" size="2">
+            {% for category in categories %}
+            {% assign cat = category[0] | escape %}
+            <option value="{{ cat }}">{{ cat }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label for="tag">
+          <span class="label">Tag:</span>
+          <select id="tag" name="tag" multiple="multiple" size="5">
+            {% for tag in tags %}
+            {% assign tg = tag[0] | escape %}
+            <option value="{{ tg }}">{{ tg }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <span style="display:block; text-align:center">
+          <button>Search</button>
+        </span>
+      </form>
     </main>
-
-    <form id="search" rel="search" role="search" name="search-form" method="get">
-      <label for="category">
-        <span class="label">Category:</span>
-        <select id="category" name="category" multiple="multiple" size="2">
-          {% for category in categories %}
-          {% assign cat = category[0] | escape %}
-          <option value="{{ cat }}">{{ cat }}</option>
-          {% endfor %}
-        </select>
-      </label>
-
-      <label for="tag">
-        <span class="label">Tag:</span>
-        <select id="tag" name="tag" multiple="multiple" size="5">
-          {% for tag in tags %}
-          {% assign tg = tag[0] | escape %}
-          <option value="{{ tg }}">{{ tg }}</option>
-          {% endfor %}
-        </select>
-      </label>
-
-      <span style="display:block; text-align:center">
-        <button>Search</button>
-      </span>
-    </form>
     <output for="search" id="search-output" aria-live="polite">
     </output>
     <footer>

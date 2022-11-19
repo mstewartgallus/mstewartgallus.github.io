@@ -15,7 +15,7 @@
       <h1 itemprop="name headline"><a href="{{ "/" | relative_url }}">{{ page.title | escape }}</a></h1>
     </header>
 
-    <section>
+    <section aria-labelledby="pages">
       <h2 id="pages"><a href="#pages">Pages</a></h2>
       <ul>
         <li><a href="{{ "about" | relative_url }}" rel="author">About the Author: @{{ site.author.name | escape }}</a></li>
@@ -25,7 +25,7 @@
     </section>
 
     {%- if site.posts.size > 0 -%}
-    <main>
+    <main aria-labelledby="posts">
       <h2 id="posts">
         <a href="#posts">Posts</a>
       </h2>

@@ -12,13 +12,13 @@
       {%- include nav.html -%}
     </nav>
     <header>
-      <h1 itemprop="name headline">
-        <a id="content" rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+      <h1 id="header" itemprop="name headline">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
           {{ page.title | escape }}
         </a>
       </h1>
     </header>
-    <main itemprop="articleBody">
+    <main aria-labelledby="header" itemprop="articleBody">
       <div>
         {{ content }}
       </div>
