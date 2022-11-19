@@ -20,7 +20,8 @@ module MSG
         if not first then
           # Full stops can be interpreted as websites or abbreviations
           # Semicolon is a more neutral pause
-          output << '<span class="sr-hint">; </span>'
+          # output << '<span class="sr-hint">; </span>'
+          output << ' '
           output << "\n"
         end
         first = false
