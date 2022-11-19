@@ -16,6 +16,16 @@ permalink: /about/
       <dd>
         <a rel="author" href="/about">@<span itemProp="name">Molossus Spondee</span></a>
       </dd>
+      <dt>Mastodon</dt>
+      <dd>
+        <a rel="me" itemProp="sameAs" href="https://mastodon.lol/@MSpondee">@MSpondee@mastodon.lol</a>
+      </dd>
+      <dt>Twitter</dt>
+      <dd>
+        <a itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
+          @{{ site.twitter.username | escape }}
+        </a>
+      </dd>
       <dt>Email</dt>
       <dd>
         <a itemprop="email" href="mailto:{{site.email}}">{{site.email}}</a>
@@ -30,12 +40,6 @@ permalink: /about/
       <dd>
         <a itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
           {{ site.linkedin | escape }}
-        </a>
-      </dd>
-      <dt>Twitter</dt>
-      <dd>
-        <a itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
-          @{{ site.twitter.username | escape }}
         </a>
       </dd>
     </dl>
