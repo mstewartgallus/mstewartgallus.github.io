@@ -18,10 +18,8 @@ module MSG
       first = true
       stanza.each do |line|
         if not first then
-          # Full stops can be interpreted as websites or abbreviations
-          # Semicolon is a more neutral pause
-          # output << '<span class="sr-hint">; </span>'
-          output << ' '
+          # Force a pause between lines with nonbreaking spaces
+          output << '&nbsp;'
           output << "\n"
         end
         first = false
