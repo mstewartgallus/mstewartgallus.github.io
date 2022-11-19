@@ -1,6 +1,9 @@
-{%- if page.previous.url -%}
-<a href="{{page.previous.url}}" rel="previous">Previous: {{page.previous.title | escape}}</a>
-{%- endif -%}
-{%- if page.next.url -%}
-<a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
-{%- endif -%}
+<nav aria-labelledby="paging">
+  <h2 id="paging"><a href="#paging">Paging</a></h2>
+  {%- if page.previous.url -%}
+  <a href="{{page.previous.url}}" rel="previous">Previous: {{page.previous.title | escape}}</a>
+  {%- endif -%}
+  {%- if page.next.url -%}
+  <a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
+  {%- endif -%}
+</nav>
