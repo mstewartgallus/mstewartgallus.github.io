@@ -21,7 +21,7 @@ module MSG
           # Force a pause between lines with nonbreaking spaces?
           # &ZeroWidthSpace;
           # or <wbr>
-          output << '&ZeroWidthSpace;'
+          output << '&ZeroWidthSpace;<br>'
           output << "\n"
         end
         first = false
