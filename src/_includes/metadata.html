@@ -1,8 +1,8 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-<aside aria-labelledby="metadata">
+<footer aria-labelledby="metadata">
   <h2 id="metadata"><a href="#metadata">Metadata</a></h2>
-  <dl class="metadata" aria-labelledby="metadata">
+  <dl class="metadata">
     <dt>Author</dt>
     <dd>
       <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
@@ -30,4 +30,4 @@
     </dd>
     {%- endfor -%}
   </dl>
-</aside>
+</footer>
