@@ -18,9 +18,9 @@ module MSG
       first = true
       stanza.each do |line|
         if not first then
-          # Force a pause between lines with nonbreaking spaces
+          # Force a pause between lines with nonbreaking spaces?
           output << '&nbsp;'
-          output << "\n"
+          output << "<br>"
         end
         first = false
         output << line
