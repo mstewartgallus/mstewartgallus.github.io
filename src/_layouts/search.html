@@ -36,13 +36,13 @@
     <header itemtype="http://schema.org/Blog" itemscope>
       {%- include header.html -%}
     </header>
-    <h1 id="title" itemprop="name headline">
-      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-        {{ page.title | escape }}
-      </a>
-    </h1>
     <form aria-labelledby="title"
           id="search" rel="search" role="search" name="search-form" method="get">
+      <h1 id="title" itemprop="name headline">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ page.title | escape }}
+        </a>
+      </h1>
       <label for="category">
         <span class="label">Category:</span>
         <select id="category" name="category" multiple="multiple" size="2">

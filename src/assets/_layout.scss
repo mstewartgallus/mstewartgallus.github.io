@@ -33,9 +33,6 @@ body > header {
     align-self: end ;
     grid-column: span 2;
 }
-body > aside:first-of-type {
-    grid-row: span 2;
-}
 body > aside {
     grid-column: aside;
 }

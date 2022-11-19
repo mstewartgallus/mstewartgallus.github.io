@@ -11,12 +11,12 @@
     <header>
       {%- include header.html -%}
     </header>
-    <h1 id="title" itemprop="name headline">
-      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-        {{ page.title | escape }}
-      </a>
-    </h1>
     <main aria-labelledby="title" itemprop="articleBody">
+      <h1 id="title" itemprop="name headline">
+        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+          {{ page.title | escape }}
+        </a>
+      </h1>
       {{ content }}
     </main>
     {%- include nav.html -%}
