@@ -23,7 +23,6 @@ body {
     grid-auto-flow: dense ;
     justify-items: stretch ;
     justify-content: stretch ;
-    align-items: stretch ;
 }
 
 body > * {
@@ -32,8 +31,12 @@ body > * {
 }
 nav:first-of-type {
     align-self: end ;
+    grid-column: span 2;
 }
-nav, aside {
+aside:first-of-type {
+    grid-row: span 2;
+}
+aside {
     grid-column: aside;
 }
 
@@ -41,7 +44,6 @@ footer {
     margin-top: $line;
     margin-bottom: $line;
 }
-
 
 main, header, footer {
     max-width: $body-width;
@@ -65,11 +67,12 @@ main, header, footer {
         grid-template-columns: [main] $body-width [aside] auto 1fr ;
         align-items: start ;
     }
-    nav {
-        align-items: start ;
-    }
     nav, aside {
         max-width: $aside ;
+    }
+    nav:first-of-type {
+        justify-self: end ;
+        max-width: initial ;
     }
 }
 @media screen and (min-width: $A4-width + $A4-margin) {
