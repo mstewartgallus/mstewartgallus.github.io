@@ -2,7 +2,7 @@
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}"
-      id="page" itemprop="hasPart mainEntity" itemtype="http://schema.org/WebPage" itemscope>
+      itemtype="http://schema.org/WebPage" itemscope>
   <head>
     {%- include head.html -%}
   </head>
@@ -28,7 +28,7 @@
         <a href="#posts">Posts</a>
       </h2>
 
-      <ol reversed role="list">
+      <ol reversed>
         {%- for post in site.posts -%}
         <li
           itemprop="hasPart blogPost"
