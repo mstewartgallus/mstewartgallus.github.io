@@ -33,18 +33,15 @@
     </template>
   </head>
   <body>
-    <nav itemtype="http://schema.org/Blog" itemscope>
-      {%- include nav.html -%}
-    </nav>
-    <header>
-      <h1 id="header" itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ page.title | escape }}
-        </a>
-      </h1>
+    <header itemtype="http://schema.org/Blog" itemscope>
+      {%- include header.html -%}
     </header>
-
-    <main aria-labelledby="header">
+    <h1 id="title" itemprop="name headline">
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        {{ page.title | escape }}
+      </a>
+    </h1>
+    <main aria-labelledby="title">
       <form id="search" rel="search" role="search" name="search-form" method="get">
         <label for="category">
           <span class="label">Category:</span>
@@ -73,8 +70,8 @@
     </main>
     <output for="search" id="search-output" aria-live="polite">
     </output>
-    <footer>
-    </footer>
+    <nav>
+    </nav>
     <aside>
     </aside>
   </body>

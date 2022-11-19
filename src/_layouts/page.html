@@ -5,21 +5,19 @@
     {%- include head.html -%}
   </head>
   <body>
-    <nav itemtype="http://schema.org/Blog" itemscope>
-      {%- include nav.html -%}
-    </nav>
-    <header id="header">
-      <h1 itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ page.title | escape }}
-        </a>
-      </h1>
+    <header itemtype="http://schema.org/Blog" itemscope>
+      {%- include header.html -%}
     </header>
-    <main aria-labelledby="header" itemprop="mainEntity">
+    <h1 id="title" itemprop="name headline">
+      <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+        {{ page.title | escape }}
+      </a>
+    </h1>
+    <main aria-labelledby="title" itemprop="mainEntity">
       {{ content }}
     </main>
-    <footer>
-    </footer>
+    <nav>
+    </nav>
     <aside>
     </aside>
   </body>

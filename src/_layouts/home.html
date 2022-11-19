@@ -7,13 +7,11 @@
     {%- include head.html -%}
   </head>
   <body itemprop="hasPart mainEntity" itemtype="http://schema.org/Blog" itemscope>
-    <nav>
-      {%- include nav.html -%}
-    </nav>
-
     <header>
-      <h1 itemprop="name headline"><a href="{{ "/" | relative_url }}">{{ page.title | escape }}</a></h1>
+      {%- include header.html -%}
     </header>
+
+    <h1 itemprop="name headline"><a href="{{ "/" | relative_url }}">{{ page.title | escape }}</a></h1>
 
     <section aria-labelledby="pages">
       <h2 id="pages"><a href="#pages">Pages</a></h2>
@@ -46,8 +44,8 @@
     </main>
     {%- endif -%}
 
-    <footer>
-    </footer>
+    <nav>
+    </nav>
     <aside>
     </aside>
   </body>

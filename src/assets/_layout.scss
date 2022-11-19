@@ -1,5 +1,5 @@
 $A4-width: 49.8rem ;
-$aside: 27rem ;
+$aside: 18rem ;
 $body-width: 35.8rem ;
 $A4-2margin: $A4-width - $body-width ;
 $A4-margin: $A4-2margin / 2 ;
@@ -12,6 +12,9 @@ html, body {
 
 html {
     min-height: 100vh ;
+    display: flex ;
+    align-items: center ;
+    justify-content: center ;
 }
 
 body {
@@ -21,32 +24,20 @@ body {
     flex-direction: column ;
     grid-template-columns: 1fr [main] auto [aside] auto 1fr ;
     grid-auto-flow: dense ;
-    justify-items: stretch ;
-    justify-content: stretch ;
 }
 
 body > * {
     grid-column: main;
-    max-width: $body-width;
 }
-nav:first-of-type {
+body > header {
     align-self: end ;
     grid-column: span 2;
 }
-aside:first-of-type {
+body > aside:first-of-type {
     grid-row: span 2;
 }
-aside {
+body > aside {
     grid-column: aside;
-}
-
-footer {
-    margin-top: $line;
-    margin-bottom: $line;
-}
-
-main, header, footer {
-    max-width: $body-width;
 }
 
 @media screen {
@@ -61,26 +52,22 @@ main, header, footer {
     body {
         padding: 0;
         margin: 0;
-        margin-left: auto ;
-        margin-right: auto ;
         display: grid ;
-        grid-template-columns: [main] $body-width [aside] auto 1fr ;
-        align-items: start ;
+        grid-template-columns: [main] $body-width [aside] $aside ;
     }
-    nav, aside {
-        max-width: $aside ;
-    }
-    nav:first-of-type {
+    body > header {
         justify-self: end ;
         max-width: initial ;
     }
 }
-@media screen and (min-width: $A4-width + $A4-margin) {
+@media screen and (min-width: $A4-width + $A4-2margin) {
     body {
         margin-top: $A4-margin ;
         margin-bottom: $A4-margin ;
         margin-left: $A4-margin ;
-        grid-template-columns: [main] $body-width [aside] auto 1fr ;
+    }
+    html {
+        justify-content: start ;
     }
 }
 

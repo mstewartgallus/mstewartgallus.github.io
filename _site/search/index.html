@@ -45,17 +45,14 @@
     </template>
   </head>
   <body>
-    <nav itemtype="http://schema.org/Blog" itemscope><a href="/">Words to Kick Your Teeth Out</a>
-</nav>
-    <header>
-      <h1 id="header" itemprop="name headline">
-        <a rel="bookmark" href="/search/" itemprop="url">
-          Search
-        </a>
-      </h1>
-    </header>
-
-    <main aria-labelledby="header">
+    <header itemtype="http://schema.org/Blog" itemscope><a href="/">Words to Kick Your Teeth Out</a>
+</header>
+    <h1 id="title" itemprop="name headline">
+      <a rel="bookmark" href="/search/" itemprop="url">
+        Search
+      </a>
+    </h1>
+    <main aria-labelledby="title">
       <form id="search" rel="search" role="search" name="search-form" method="get">
         <label for="category">
           <span class="label">Category:</span>
@@ -111,8 +108,8 @@
     </main>
     <output for="search" id="search-output" aria-live="polite">
     </output>
-    <footer>
-    </footer>
+    <nav>
+    </nav>
     <aside>
     </aside>
   </body>

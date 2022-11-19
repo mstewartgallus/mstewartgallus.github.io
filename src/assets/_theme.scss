@@ -2,7 +2,7 @@ p + p {
     text-indent: $col3 ;
 }
 
-:is(nav, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) {
+:is(header, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) {
     text-decoration: inherit ;
     color: inherit;
 }
@@ -44,6 +44,6 @@ p:first-of-type::first-line {
     font-style: italic ;
 }
 
-nav {
+body > header {
     @include small-caps ;
 }

@@ -1,1 +1,6 @@
-<a href="{{ "/" | relative_url }}">{{site.title}}</a>
+{%- if page.previous.url -%}
+<a href="{{page.previous.url}}" rel="previous">Previous: {{page.previous.title | escape}}</a>
+{%- endif -%}
+{%- if page.next.url -%}
+<a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
+{%- endif -%}
