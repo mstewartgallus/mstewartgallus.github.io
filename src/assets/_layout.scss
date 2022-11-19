@@ -1,5 +1,5 @@
 $A4-width: 49.8rem ;
-$aside: 18rem ;
+$aside: 13rem ;
 $body-width: 35.8rem ;
 $A4-2margin: $A4-width - $body-width ;
 $A4-margin: $A4-2margin / 2 ;
@@ -51,7 +51,6 @@ body > aside {
 @media screen and (min-width: $body-width + $A4-margin) {
     body {
         padding: 0;
-        margin: 0;
         display: grid ;
         grid-template-columns: [main] $body-width [aside] $aside ;
     }
@@ -60,7 +59,7 @@ body > aside {
         max-width: initial ;
     }
 }
-@media screen and (min-width: $A4-width + $A4-2margin) {
+@media screen and (min-width: $A4-width + $A4-margin) {
     body {
         margin-top: $A4-margin ;
         margin-bottom: $A4-margin ;
