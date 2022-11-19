@@ -50,6 +50,12 @@ defaults:
       layout: "none"
   -
     scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      permalink: /:categories/:year/:month/:day/:title/
+  -
+    scope:
       path: "_posts/poem"
       type: "posts"
     values:
