@@ -66,8 +66,8 @@ dd {
     margin-left: $col ;
 }
 dt::before {
-    content: "" ;
-    display: block ;
+    content: "\a" ;
+    white-space: pre ;
 }
 
 table, ol > li::marker {
