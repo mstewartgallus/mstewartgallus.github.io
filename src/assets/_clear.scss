@@ -1,4 +1,4 @@
-html, body,blockquote, pre,
+html, body, blockquote, pre,
 menu, ol, ul, li,
 dl, dd, figure,
 h1, h2, h3, h4, h5, h6, p, hr,
@@ -9,7 +9,6 @@ address, abbr {
     appearance: none;
     margin: 0;
     padding: 0;
-    background-color: transparent;
     vertical-align: baseline ;
     font-family: inherit;
     font-size: inherit;
@@ -17,11 +16,6 @@ address, abbr {
     font-weight: inherit ;
     line-height: inherit;
     border: none;
-    color: inherit ;
-}
-
-html, body {
-    background: initial;
 }
 
 // Hide select arrow
