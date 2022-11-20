@@ -13,8 +13,8 @@ html, body {
 html {
     min-height: 100vh ;
     display: flex ;
-    align-items: start ;
-    justify-content: center ;
+    align-items: stretch ;
+    justify-content: stretch ;
 }
 
 body {
@@ -32,6 +32,10 @@ body > * {
 body > header {
     align-self: end ;
     grid-column: span 2;
+}
+body > main {
+    justify-self: center ;
+    align-self: center ;
 }
 body > footer {
     grid-column: aside;
@@ -54,6 +58,9 @@ body > footer {
     body > header {
         justify-self: end ;
         max-width: initial ;
+    }
+    body > main {
+        align-self: initial ;
     }
 }
 @media screen and (min-width: $A4-width + $A4-margin) {
