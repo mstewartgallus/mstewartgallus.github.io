@@ -1,4 +1,7 @@
-select, option, button { cursor: pointer }
+select, button {
+    border-style: none ;
+    border-color: currentcolor ;
+}
 
 select, button {
     padding-left: 0.5em ;
@@ -35,7 +38,7 @@ option {
     min-height: $line ;
 }
 select {
-    min-height: 4 * $line ;
+    min-height: 3 * $line ;
 }
 
 option, option:focus {

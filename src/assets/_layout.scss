@@ -17,6 +17,7 @@ body {
     display: block ;
     align-items: stretch ;
     justify-content: stretch ;
+    row-gap: $line;
     column-gap: $col2;
     flex-direction: column ;
     grid-template-columns: 1fr [main] auto [aside] auto 1fr ;
@@ -33,7 +34,6 @@ body > header {
 }
 body > footer {
     grid-column: aside;
-    align-self: center ;
 }
 
 @media screen {

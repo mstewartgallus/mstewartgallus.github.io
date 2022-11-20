@@ -1,44 +1,49 @@
 html, body, blockquote, pre,
 menu, ol, ul, li,
-dl, dd, figure,
-h1, h2, h3, h4, h5, h6, p, hr,
+dl, dt, dd, figure,
+p, hr,
+h1, h2, h3, h4, h5, h6,
 fieldset, select, option, button, input,
 address, abbr {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    margin: 0;
     padding: 0;
     vertical-align: baseline ;
     font-family: inherit;
+    line-height: inherit;
+}
+
+
+html, body, blockquote, pre,
+menu, ol, ul, li,
+dt, figure,
+hr,
+h1, h2, h3, h4, h5, h6,
+fieldset, select, option, button, input,
+address, abbr {
+    margin: 0;
+}
+
+html, body, blockquote, pre,
+menu, ol, ul, li,
+dl, dt, dd, figure,
+p, hr,
+fieldset, select, option, button, input,
+address, abbr {
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit ;
-    line-height: inherit;
-    border: none;
 }
 
 // Hide select arrow
 select::-ms-expand { display: none ; }
 
 select, option, button, input {
-  margin: 0;
-  padding: 0;
-
-  border: none ;
-  font-family: inherit ;
-  vertical-align: baseline ;
-
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  cursor: none;
   background-color: transparent;
   color: inherit ;
-  border: none;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
 }
 
-select, option, button { cursor: pointer }
+hr {
+    color: inherit ;
+}

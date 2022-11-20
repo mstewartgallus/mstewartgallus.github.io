@@ -23,6 +23,11 @@ body {
     quotes: "“" "”" "‘" "’";
 }
 
+p {
+    margin-top: $line ;
+    margin-bottom: $line ;
+}
+
 sub {
     font-variant-position: sub ;
 }
@@ -45,7 +50,7 @@ h1 {
     font-size: font(3) ;
     font-weight: 900 ;
     line-height: $line2 ;
-    margin-top: $line2 ;
+    margin-top: $line ;
     margin-bottom: $line ;
 }
 h2 {
@@ -55,6 +60,9 @@ h2 {
     margin-bottom: $line ;
 }
 
+dl {
+    margin: 0;
+}
 dt, dd {
     display: inline ;
 }
@@ -97,7 +105,15 @@ menu, ul {
 }
 
 menu, ul, ol {
-    padding-left: $col3;
+    padding-left: $col3 ;
+}
+
+li {
+    margin-top: $line ;
+    margin-bottom: $line ;
+}
+li + li {
+    margin-top: -$halfline ;
 }
 
 abbr {
@@ -118,4 +134,9 @@ abbr {
 }
 :is(h1,h2,h2,h4,h5,h6) :focus {
     outline-style: none;
+}
+
+p {
+    margin-top: $line ;
+    margin-bottom: $line ;
 }

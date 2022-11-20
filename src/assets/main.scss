@@ -2,16 +2,16 @@
 ---
 @charset "utf-8";
 
-$pt: 1rem / 12;
+$pt: 1rem / 16;
 
 @function pt($pts) {
     @return $pts * $pt;
 }
 
 
-$font-size: 13 ;
+$font-size: 18 ;
 
-$scale: 1.41421356237 ;
+$scale: 5/4 ;
 
 $sc: (
     -3: 1/($scale * $scale * $scale),
@@ -28,22 +28,6 @@ $sc: (
 @function font($pts) {
     @return map-get($sc, $pts) * $font-size * $pt;
 }
-
-// $prime: (
-//     -3: 2,
-//     -2: 3,
-//     -1: 5,
-//     0: 7,
-//     1: 11,
-//     2: 13,
-//     3: 17,
-//     4: 19,
-//     5: 23
-// ) ;
-
-// @function font($pts) {
-//     @return map-get($prime, $pts) * ($font-size / map-get($prime, 0)) * $pt;
-// }
 
 $col: 0.6 * $font-size * $pt ;
 $col2: 2 * $col ;
@@ -96,9 +80,7 @@ $A4-margin: $A4-2margin / 2 ;
 @import "assets/_clear.scss";
 @import "assets/_base.scss";
 
-* {
-    color-scheme: light dark ;
-}
+* { color-scheme: light dark ; }
 
 @import "assets/_layout.scss";
 
