@@ -2,12 +2,10 @@ p + p {
     text-indent: $col3 ;
 }
 
-:is(header, h1,h2,h3,h4,h5,h6,h7) :is(:link, :visited) {
+:is(header, h1,h2,h3,h4,h5,h6,h7)
+:is(:link, :visited):not(:focus):not(:active):not(:hover) {
     text-decoration: inherit ;
     color: inherit;
-}
-:link:hover {
-    text-decoration: underline ;
 }
 
 hr {
