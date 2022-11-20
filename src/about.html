@@ -23,23 +23,23 @@ permalink: /about/
       <dt>Twitter</dt>
       <dd>
         <a itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
-          @{{ site.twitter.username | escape }}
+          @{{- site.twitter.username | escape -}}
         </a>
       </dd>
       <dt>Email</dt>
       <dd>
-        <a itemprop="email" href="mailto:{{site.email}}">{{site.email}}</a>
+        <a itemprop="email" href="mailto:{{site.email}}">{{- site.email -}}</a>
       </dd>
       <dt>GitHub</dt>
       <dd>
         <a itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
-          {{ site.github | escape }}
+          {{- site.github | escape -}}
         </a>
       </dd>
       <dt>LinkedIn</dt>
       <dd>
         <a itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
-          {{ site.linkedin | escape }}
+          {{- site.linkedin | escape -}}
         </a>
       </dd>
     </dl>

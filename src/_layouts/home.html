@@ -36,7 +36,7 @@
           itemtype="http://schema.org/BlogPosting"
           itemid="{{ post.url | absolute_url }}">
           <a itemprop="name headline url" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
+            {{- post.title | escape -}}
           </a>
         </li>
         {%- endfor -%}
