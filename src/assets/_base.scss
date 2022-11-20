@@ -95,12 +95,6 @@ menu, ul, ol {
     padding-left: $col4;
 }
 
-@mixin small-caps {
-    font-variant-caps: small-caps ;
-    text-transform: lowercase ;
-    letter-spacing: 0.07em ;
-}
-
 abbr {
     @include small-caps ;
 }

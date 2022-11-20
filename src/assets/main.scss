@@ -29,6 +29,21 @@ $sc: (
     @return map-get($sc, $pts) * $font-size * $pt;
 }
 
+// $prime: (
+//     -3: 2,
+//     -2: 3,
+//     -1: 5,
+//     0: 7,
+//     1: 11,
+//     2: 13,
+//     3: 17,
+//     4: 19,
+//     5: 23
+// ) ;
+
+// @function font($pts) {
+//     @return map-get($prime, $pts) * ($font-size / map-get($prime, 0)) * $pt;
+// }
 
 $col: 0.6 * $font-size * $pt ;
 $col2: 2 * $col ;
@@ -45,6 +60,12 @@ $line3: 3 * $line ;
 $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;
+
+$A4-width: 49.8rem ;
+$aside: 13rem ;
+$body-width: 35.8rem ;
+$A4-2margin: $A4-width - $body-width ;
+$A4-margin: $A4-2margin / 2 ;
 
 @mixin clear {
     all: initial ;
@@ -65,6 +86,11 @@ $doubleline: 2 * $line ;
     line-height: inherit;
     text-indent: 0;
     color: inherit ;
+}
+@mixin small-caps {
+    font-variant-caps: small-caps ;
+    text-transform: lowercase ;
+    letter-spacing: 0.07em ;
 }
 
 @import "assets/_clear.scss";
