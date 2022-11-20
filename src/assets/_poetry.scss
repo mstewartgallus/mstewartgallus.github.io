@@ -1,7 +1,9 @@
 .stanza {
     text-indent: 0 ;
-    margin-bottom: $line ;
     white-space: pre-line ;
+}
+.stanza + .stanza {
+    margin-top: $line ;
 }
 
 .sr-hint {

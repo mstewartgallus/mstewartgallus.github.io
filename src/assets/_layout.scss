@@ -20,6 +20,8 @@ html {
 body {
     position: relative ;
     display: flex ;
+    align-items: stretch ;
+    justify-content: stretch ;
     column-gap: $col2;
     flex-direction: column ;
     grid-template-columns: 1fr [main] auto [aside] auto 1fr ;
@@ -32,10 +34,6 @@ body > * {
 body > header {
     align-self: end ;
     grid-column: span 2;
-}
-body > main {
-    justify-self: center ;
-    align-self: center ;
 }
 body > footer {
     grid-column: aside;
@@ -58,9 +56,6 @@ body > footer {
     body > header {
         justify-self: end ;
         max-width: initial ;
-    }
-    body > main {
-        align-self: initial ;
     }
 }
 @media screen and (min-width: $A4-width + $A4-margin) {
