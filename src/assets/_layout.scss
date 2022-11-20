@@ -63,19 +63,7 @@ body > footer {
     }
 }
 
-// don't float past sections
-header,footer,nav,main,article,section {
-    clear: both ;
-}
-
-body > main > nav {
-    display: grid ;
-    grid-template-columns: [left] 1fr [right] 1fr ;
-}
-body > main > nav h2 {
-    grid-column: span 2;
-}
-
-body > main > nav [rel="next"] {
-    justify-self: end ;
+.paging {
+    display: flex ;
+    justify-content: space-between ;
 }
