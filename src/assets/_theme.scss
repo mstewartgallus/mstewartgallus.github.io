@@ -3,7 +3,7 @@ p {
 }
 p + p {
     margin-top: 0 ;
-    text-indent: $col3 ;
+    text-indent: 1em ;
 }
 p:last-of-type {
     margin-bottom: $line ;
@@ -36,10 +36,6 @@ hr::after {
     padding: 0 4px ;
 }
 
-footer {
-    font-size: font(-1);
-}
-
 p:first-of-type::first-letter {
     font-size: font(1);
     font-weight: bold ;
@@ -47,6 +43,10 @@ p:first-of-type::first-letter {
 
 p:first-of-type::first-line {
     font-style: italic ;
+}
+
+body > main > nav, body > footer {
+    font-size: font(-1);
 }
 
 body > header {

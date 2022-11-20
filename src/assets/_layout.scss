@@ -33,6 +33,7 @@ body > header {
 }
 body > footer {
     grid-column: aside;
+    align-self: center ;
 }
 
 @media screen {
@@ -64,7 +65,7 @@ body > footer {
     }
 }
 
-.paging {
+body > main > nav {
     display: flex ;
     flex-wrap: wrap ;
     justify-content: space-between ;

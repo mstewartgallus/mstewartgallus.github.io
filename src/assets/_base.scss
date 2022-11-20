@@ -18,7 +18,7 @@ body {
     overflow-wrap: break-word ;
 
     // more legible hyperlinks
-    text-underline-offset: 0.27em ;
+    text-underline-offset: 0.25em ;
 
     quotes: "“" "”" "‘" "’";
 }
@@ -60,10 +60,10 @@ dt, dd {
 }
 dt {
     font-style: italic ;
-    margin-right: $col ;
+    margin-right: 0.1em ;
 }
 dd {
-    margin-left: $col ;
+    margin-left: 0.1em ;
 }
 dt ~ dt::before {
     content: "\a" ;
@@ -80,7 +80,7 @@ table {
 @counter-style nodot {
   system: numeric;
   symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
-  suffix: "    ";
+  suffix: "   ";
 }
 @counter-style bullet {
   system: cyclic;
@@ -97,7 +97,7 @@ menu, ul {
 }
 
 menu, ul, ol {
-    padding-left: $col4;
+    padding-left: $col3;
 }
 
 abbr {
@@ -105,16 +105,17 @@ abbr {
 }
 
 * {
-    outline-offset: 0.2em;
+    outline-offset: 0.1em;
     outline-width: 0.2em ;
 }
 
-:focus,
 :is(h1,h2,h2,h4,h5,h6):focus-within {
     outline-style: solid ;
 }
 
-
+:focus {
+    outline-style: solid ;
+}
 :is(h1,h2,h2,h4,h5,h6) :focus {
-    outline: none;
+    outline-style: none;
 }
