@@ -55,14 +55,19 @@ h2 {
     margin-bottom: $line ;
 }
 
+dt, dd {
+    display: inline ;
+}
 dt {
-    clear: both ;
-    float: left ;
-    margin-right: $col ;
     font-style: italic ;
+    margin-right: $col ;
 }
 dd {
-    margin-left: $col4 ;
+    margin-left: $col ;
+}
+dt::before {
+    content: "" ;
+    display: block ;
 }
 
 table, ol > li::marker {
