@@ -68,14 +68,24 @@ header,footer,nav,main,article,section {
     clear: both ;
 }
 
-body > main > nav [rel="previous"], body > main > nav [rel="next"] {
-    display: block ;
-    max-width: 40% ;
+body > main > nav {
+    display: grid ;
+    grid-template-columns: [left] 1fr [right] 1fr ;
 }
-body > main > nav [rel="previous"] {
-    float: left ;
-    margin-right: auto;
+body > main > nav h2 {
+    grid-column: span 2;
 }
+
 body > main > nav [rel="next"] {
-    margin-left: auto;
+    justify-self: end ;
 }
+// body > main > nav [rel="previous"]::after {
+//     content: "	" ;
+//     white-space: pre ;
+// }
+//     float: left ;
+//     margin-right: auto;
+// }
+// body > main > nav [rel="next"] {
+//     margin-left: auto;
+// }
