@@ -65,7 +65,7 @@ dt {
 dd {
     margin-left: $col ;
 }
-dt::before {
+dt ~ dt::before {
     content: "\a" ;
     white-space: pre ;
 }
