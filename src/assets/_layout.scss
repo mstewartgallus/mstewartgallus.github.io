@@ -27,7 +27,8 @@ body > * {
     grid-column: main;
 }
 body > header {
-    text-align: right ;
+    display: flex ;
+    justify-content: end ;
     grid-column: span 2;
 }
 body > footer {
