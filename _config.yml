@@ -60,12 +60,12 @@ defaults:
       type: "posts"
     values:
       layout: "poem"
-      categories: "poem"
+      categories: "Poem"
   -
     scope:
       path: "_posts/prose"
       type: "posts"
     values:
       layout: "prose"
-      categories: "prose"
+      categories: "Prose"
  
