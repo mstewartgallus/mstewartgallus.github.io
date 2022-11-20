@@ -14,7 +14,7 @@ html {
 body {
     width: 100%;
     position: relative ;
-    display: flex ;
+    display: block ;
     align-items: stretch ;
     justify-content: stretch ;
     column-gap: $col2;
@@ -27,7 +27,7 @@ body > * {
     grid-column: main;
 }
 body > header {
-    align-self: end ;
+    text-align: right ;
     grid-column: span 2;
 }
 body > footer {
@@ -50,7 +50,6 @@ body > footer {
     }
     body > header {
         justify-self: end ;
-        max-width: initial ;
     }
 }
 @media screen and (min-width: $A4-width + $A4-margin) {
@@ -64,11 +63,19 @@ body > footer {
     }
 }
 
-[rel="previous"] {
-    float: left ;
-    display: block ;
+// don't float past sections
+header,footer,nav,main,article,section {
+    clear: both ;
 }
-[rel="next"] {
-    float: right ;
+
+body > main > nav [rel="previous"], body > main > nav [rel="next"] {
     display: block ;
+    max-width: 40% ;
+}
+body > main > nav [rel="previous"] {
+    float: left ;
+    margin-right: auto;
+}
+body > main > nav [rel="next"] {
+    margin-left: auto;
 }

@@ -11,37 +11,38 @@
       {%- include header.html -%}
     </header>
 
-    <h1 itemprop="name headline"><a href="{{ "/" | relative_url }}">{{ page.title | escape }}</a></h1>
+    <main aria-labelledby="title">
+      <h1 id="title" itemprop="name headline"><a href="{{ "/" | relative_url }}">{{ page.title | escape }}</a></h1>
+      {{- contents -}}
+      <section aria-labelledby="pages">
+        <h2 id="pages"><a href="#pages">Pages</a></h2>
+        <ul>
+          <li><a href="{{ "about" | relative_url }}" rel="author">About the Author: @{{ site.author.name | escape }}</a></li>
+          <li><a href="{{ "search" | relative_url }}" rel="search">Search</a></li>
+          <li><a href="{{ "feed.xml" | relative_url }}" rel="alternate">RSS Feed</a></li>
+        </ul>
+      </section>
+      {%- if site.posts.size > 0 -%}
+      <section aria-labelledby="posts">
+        <h2 id="posts">
+          <a href="#posts">Posts</a>
+        </h2>
 
-    <section aria-labelledby="pages">
-      <h2 id="pages"><a href="#pages">Pages</a></h2>
-      <ul>
-        <li><a href="{{ "about" | relative_url }}" rel="author">About the Author: @{{ site.author.name | escape }}</a></li>
-        <li><a href="{{ "search" | relative_url }}" rel="search">Search</a></li>
-        <li><a href="{{ "feed.xml" | relative_url }}" rel="alternate">RSS Feed</a></li>
-      </ul>
-    </section>
-
-    {%- if site.posts.size > 0 -%}
-    <main aria-labelledby="posts">
-      <h2 id="posts">
-        <a href="#posts">Posts</a>
-      </h2>
-
-      <ol reversed>
-        {%- for post in site.posts -%}
-        <li
-          itemprop="hasPart blogPost"
-          itemscope
-          itemtype="http://schema.org/BlogPosting"
-          itemid="{{ post.url | absolute_url }}">
-          <a itemprop="name headline url" href="{{ post.url | relative_url }}">
-            {{- post.title | escape -}}
-          </a>
-        </li>
-        {%- endfor -%}
-      </ol>
+        <ol reversed>
+          {%- for post in site.posts -%}
+          <li
+            itemprop="hasPart blogPost"
+            itemscope
+            itemtype="http://schema.org/BlogPosting"
+            itemid="{{ post.url | absolute_url }}">
+            <a itemprop="name headline url" href="{{ post.url | relative_url }}">
+              {{- post.title | escape -}}
+            </a>
+          </li>
+          {%- endfor -%}
+        </ol>
+      </section>
+      {%- endif -%}
     </main>
-    {%- endif -%}
   </body>
 </html>
