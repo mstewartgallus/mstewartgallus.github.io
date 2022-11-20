@@ -108,13 +108,6 @@ menu, ul, ol {
     padding-left: $col3 ;
 }
 
-li {
-    margin-top: $line ;
-    margin-bottom: $line ;
-}
-li + li {
-    margin-top: -$halfline ;
-}
 
 abbr {
     @include small-caps ;
