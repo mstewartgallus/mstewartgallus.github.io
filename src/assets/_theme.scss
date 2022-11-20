@@ -32,11 +32,11 @@ hr::after {
 }
 
 footer {
-    font-size: 11 * $pt ;
+    font-size: font(-1);
 }
 
 p:first-of-type::first-letter {
-    font-size: 14 * $pt ;
+    font-size: font(1);
     font-weight: bold ;
 }
 

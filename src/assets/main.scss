@@ -11,8 +11,22 @@ $pt: 1rem / 12;
 
 $font-size: 13 ;
 
+$scale: 1.41421356237 ;
+
+$sc: (
+    -3: 1/($scale * $scale * $scale),
+    -2: 1/($scale * $scale),
+    -1: 1/$scale,
+    0: 1,
+    1: $scale,
+    2: $scale * $scale,
+    3: $scale * $scale * $scale,
+    4: $scale * $scale * $scale * $scale,
+    5: $scale * $scale * $scale * $scale * $scale
+) ;
+
 @function font($pts) {
-    @return ($font-size + $pts) * $pt;
+    @return map-get($sc, $pts) * $font-size * $pt;
 }
 
 
@@ -25,7 +39,9 @@ $col6: 6 * $col ;
 $col7: 7 * $col ;
 $col8: 8 * $col ;
 
-$line: 1.5 * $font-size * $pt ;
+$line: font(1) ;
+$line2: 2 * $line ;
+$line3: 3 * $line ;
 $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;
