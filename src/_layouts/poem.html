@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}"
-      itemtype="https://schema.org/WebPage" itemscope>
-  <head>
-    {%- include head.html -%}
-  </head>
-  <body itemscope
-        itemprop="mainEntity hasPart"
-        itemtype="https://schema.org/BlogPosting"
-        itemid="{{ page.url | absolute_url }}">
-    <header>
-      {%- include header.html -%}
-    </header>
-    <main aria-labelledby="title" itemprop="articleBody">
-      <h1 id="title" itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ page.title | escape }}
-        </a>
-      </h1>
-      <div>
-        {{ content }}
-      </div>
-    </main>
-    {%- include nav.html -%}
-    {%- include metadata.html -%}
-  </body>
-</html>
+---
+layout: post
+---
+{{ content }}

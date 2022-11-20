@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}"
-      itemtype="https://schema.org/WebPage" itemscope>
-  <head>
-    {%- include head.html -%}
-  </head>
-  <body>
-    <header itemtype="http://schema.org/Blog" itemscope>
-      {%- include header.html -%}
-    </header>
-    <main aria-labelledby="title" itemprop="mainEntity">
-      <h1 id="title" itemprop="name headline">
-        <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-          {{ page.title | escape }}
-        </a>
-      </h1>
-      {{ content }}
-    </main>
-  </body>
-</html>
+---
+layout: post
+---
+{{ content }}

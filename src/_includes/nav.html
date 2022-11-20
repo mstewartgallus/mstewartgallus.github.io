@@ -1,3 +1,4 @@
+{%- if page.previous.url or page.next.url -%}
 <nav aria-labelledby="paging">
   <h2 id="paging"><a href="#paging">Paging</a></h2>
   {%- if page.previous.url -%}
@@ -7,3 +8,4 @@
   <a href="{{page.next.url}}" rel="next">Next: {{page.next.title | escape}}</a>
   {%- endif -%}
 </nav>
+{%- endif -%}
