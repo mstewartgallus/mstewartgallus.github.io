@@ -4,12 +4,8 @@
 
 $pt: 1rem / 16;
 
-@function pt($pts) {
-    @return $pts * $pt;
-}
-
-
 $font-size: 18 ;
+$base-font-size: $font-size * $pt  ;
 
 $scale: 5/4 ;
 
@@ -30,10 +26,13 @@ $sc: (
 }
 
 @function font($n) {
-    @return scale($n) * $font-size * $pt;
+    @return scale($n) * $base-font-size ;
 }
 
-$col: 0.6 * $font-size * $pt ;
+$line: (1/0.32) * 1ex ;
+$width: 60ch ;
+
+$col: 1ch ;
 $col2: 2 * $col ;
 $col3: 3 * $col ;
 $col4: 4 * $col ;
@@ -41,9 +40,6 @@ $col5: 5 * $col ;
 $col6: 6 * $col ;
 $col7: 7 * $col ;
 $col8: 8 * $col ;
-
-$line: (1/0.32) * 1ex ;
-$width: 60ch ;
 
 $line2: 2 * $line ;
 $line3: 3 * $line ;
@@ -97,7 +93,7 @@ $A4-margin: $A4-2margin / 2 ;
 
 @import "assets/_print.scss";
 
-$back-width: 2 * $col8 ;
+// $back-width: 2 * $col8 ;
 // body {
 //     background: linear-gradient(0deg, rgba(255,0,0,0), #222 90%),
 //                 linear-gradient(90deg, rgba(0,255,0,.8), #222 60%);
