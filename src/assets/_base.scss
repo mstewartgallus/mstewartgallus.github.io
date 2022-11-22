@@ -18,13 +18,16 @@ body {
 
     line-height: $line ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
+    text-rendering: optimizeLegibility ;
     hyphens: auto ;
     overflow-wrap: break-word ;
 
     // more legible hyperlinks
     text-underline-position: under ;
 
-    quotes: "“" "”" "‘" "’";
+    quotes: "“" "”" "‘" "’" ;
+
+    scroll-behavior: smooth ;
 }
 
 p {

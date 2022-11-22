@@ -72,8 +72,7 @@ $A4-margin: $A4-2margin / 2 ;
     color: inherit ;
 }
 @mixin small-caps {
-    font-variant-caps: small-caps ;
-    text-transform: lowercase ;
+    font-variant-caps: all-small-caps ;
     letter-spacing: 0.07em ;
 }
 
