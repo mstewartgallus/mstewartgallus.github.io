@@ -51,10 +51,18 @@ button {
         background: white ;
         color: black ;
     }
+    button:active {
+        background: white ;
+        color: black ;
+    }
 }
 
 @media (prefers-color-scheme: light) {
     option:checked {
+        background: black ;
+        color: white ;
+    }
+    button:active {
         background: black ;
         color: white ;
     }

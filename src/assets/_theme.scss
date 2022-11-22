@@ -4,12 +4,12 @@ p + p {
 }
 
 :is(header, h1,h2,h3,h4,h5,h6,h7)
-:link:not(:focus):not(:active):not(:hover) {
+:any-link:not(:focus):not(:active):not(:hover) {
     text-decoration: inherit ;
 }
 
 :is(header, h1,h2,h3,h4,h5,h6,h7)
-:is(:link, :visited):not(:focus):not(:active):not(:hover) {
+:any-link:not(:focus):not(:active):not(:hover) {
     color: inherit;
 }
 
