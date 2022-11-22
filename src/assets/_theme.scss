@@ -33,7 +33,7 @@ hr::after {
 }
 
 p:first-of-type::first-letter {
-    font-size: font(1);
+    font-size: scale(1) * 1em;
     font-weight: bold ;
     line-height: $line / scale(1) ;
 }
@@ -43,7 +43,7 @@ p:first-of-type::first-line {
 }
 
 body > footer {
-    font-size: font(-1);
+    font-size: scale(-1) * 1em;
     line-height: $line / scale(-1) ;
 }
 
