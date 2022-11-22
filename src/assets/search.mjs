@@ -4,7 +4,6 @@
 const meta = new URL(import.meta.url).searchParams;
 const outputId = meta.get('output');
 const templateId = meta.get('template');
-const searchId = meta.get('search');
 
 function intersect(X, Y) {
     const Z = new Set();
@@ -33,6 +32,7 @@ function parseForm(formData) {
     return [tags, categories];
 };
 
+const doctitle = document.title;
 const location = new URL(document.location);
 const params = location.searchParams;
 const base = location.href + ':' + location.port;
@@ -75,7 +75,10 @@ function findPosts(db, tags, categories) {
     return Array.from(intersect(cs, ts)).map(index => posts[index]);
 }
 
-function render(template, output, posts) {
+function render(tagParams, categoryParams, template, output, posts) {
+    const tags = Array.from(tagParams.values());
+    const cats = Array.from(categoryParams.values());
+    document.title = `${tags} ${cats} — ${doctitle}`;
     const elems = posts.map((post) => {
         const title = post.get('title');
         const date = post.get('date');
@@ -157,25 +160,8 @@ for (const option of tag.options) {
 
 const template = document.getElementById(templateId).content;
 const output = document.getElementById(outputId);
-const search = document.getElementById(searchId);
 
 const db = await getDB;
 
-render(template, output, findPosts(db, tagParams, categoryParams));
-
-function* mainLoop(template, output) {
-    while (true) {
-        const event = yield;
-        const [tags, categories] = parseForm(new FormData(event.target));
-        const filtered = findPosts(db, tags, categories);
-        render(template, output, filtered);
-    }
-};
-
-const loop = mainLoop(template, output);
-loop.next();
-
-search.addEventListener('submit', event => {
-    event.preventDefault();
-    loop.next(event);
-});
+const posts = findPosts(db, tagParams, categoryParams);
+render(tagParams, categoryParams, template, output, posts);
