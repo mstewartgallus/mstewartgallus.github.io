@@ -1,4 +1,9 @@
+// FIXME
 body {
+    font-size: font(0);
+}
+
+:root {
     font-family: "-apple-system",
                  system-ui,
                  "BlinkMacSystemFont",
@@ -7,18 +12,17 @@ body {
                  "Segoe UI Symbol",
                  "Apple Color Emoji",
                  "Roboto",
-                 "Helvetica",
                  "Arial",
+                 "Helvetica",
                  sans-serif ;
 
     line-height: $line ;
-    font-size: font(0);
     font-variant-numeric: proportional-nums oldstyle-nums ;
     hyphens: auto ;
     overflow-wrap: break-word ;
 
     // more legible hyperlinks
-    text-underline-offset: 0.25em ;
+    text-underline-position: under ;
 
     quotes: "“" "”" "‘" "’";
 }
@@ -48,7 +52,7 @@ h1,h2,h3,h4,h5,h6 {
 
 h1 {
     font-size: font(3) ;
-    font-weight: 900 ;
+    font-weight: 800 ;
     line-height: $line2 ;
     margin-top: $line ;
     margin-bottom: $line ;
