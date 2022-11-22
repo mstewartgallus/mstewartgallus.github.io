@@ -1,8 +1,3 @@
-// FIXME
-body {
-    font-size: font(0);
-}
-
 :root {
     font-family: "-apple-system",
                  system-ui,
@@ -15,24 +10,20 @@ body {
                  "Arial",
                  "Helvetica",
                  sans-serif ;
-
-    line-height: $line ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
-    text-rendering: optimizeLegibility ;
     hyphens: auto ;
-    overflow-wrap: break-word ;
 
     // more legible hyperlinks
     text-underline-position: under ;
-
-    quotes: "“" "”" "‘" "’" ;
-
-    scroll-behavior: smooth ;
 }
 
-p {
-    margin-top: $line ;
-    margin-bottom: $line ;
+nav,header,footer,h1,h2,h3,h4,h5,h6 {
+    font-variant-numeric: proportional-nums lining-nums ;
+    hyphens: manual ;
+}
+
+table, li::marker {
+    font-variant-numeric: lining-nums tabular-nums;
 }
 
 sub {
@@ -41,12 +32,27 @@ sub {
 sup {
     font-variant-position: super ;
 }
-
-nav,header,footer,h1,h2,h3,h4,h5,h6 {
-    font-variant-numeric: proportional-nums lining-nums ;
-    hyphens: manual ;
+sub, sup {
+    vertical-align: inherit ;
 }
 
+:root {
+    scroll-behavior: smooth ;
+}
+
+
+:root {
+    line-height: $line ;
+}
+// FIXME
+body {
+    font-size: font(0);
+}
+
+p {
+    margin-top: $line ;
+    margin-bottom: $line ;
+}
 // provide some sensible defaults for line spacing, etc..
 h1,h2,h3,h4,h5,h6 {
     font-size: font(1) ;
@@ -85,9 +91,6 @@ dt ~ dt::before {
     white-space: pre ;
 }
 
-table, ol > li::marker {
-    font-variant-numeric: lining-nums tabular-nums;
-}
 table {
     border-collapse: collapse ;
 }
