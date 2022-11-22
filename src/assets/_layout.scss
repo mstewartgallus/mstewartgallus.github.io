@@ -1,10 +1,4 @@
-html, body {
-    box-sizing: border-box;
-    margin-left: auto ;
-    margin-right: auto ;
-}
-
-html {
+:root {
     min-height: 100vh ;
     display: flex ;
     align-items: start ;
@@ -36,21 +30,25 @@ body > footer {
     grid-column: aside;
 }
 body > main {
-    width: $width ;
+    inline-size: $width ;
     max-width: 100% ;
 }
 
 @media screen {
+    :root {
+        padding-inline: 0.8em ;
+    }
     body {
-        margin: 0 0.2em ;
-        margin-bottom: 3 * $line ;
-        margin-top: 0.2em ;
+        margin-block-end: 3 * $line ;
+        margin-block-start: 0.2em ;
     }
 }
 
 @media screen and (min-width: $body-width + $A4-margin) {
+    :root {
+        padding-inline: 0 ;
+    }
     body {
-        padding: 0;
         display: grid ;
         grid-template-columns: [main] auto [aside] auto 1fr ;
     }
@@ -60,10 +58,12 @@ body > main {
 }
 @media screen and (min-width: $A4-width + $A4-margin) {
     body {
-        margin-top: 2 * $line  ;
-        margin-left: $A4-margin ;
+        margin-inline-start: $A4-margin ;
     }
-    html {
+    body {
+        margin-block-start: 2 * $line  ;
+    }
+    :root {
         justify-content: start ;
     }
 }

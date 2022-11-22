@@ -1,6 +1,6 @@
 p + p {
     text-indent: $col2 ;
-    margin-top: -$line ;
+    margin-block-start: -$line ;
 }
 
 :is(header, h1,h2,h3,h4,h5,h6,h7)
@@ -14,10 +14,10 @@ p + p {
 }
 
 hr {
+    block-size: 0 ;
+    inline-size: 100% ;
     border: none ;
-    margin-top: $line ;
-    margin-bottom: $line ;
-    height: 0 ;
+    margin-block: $line ;
     text-align: center;
     overflow: visible ;
     display: flex ;
@@ -29,7 +29,7 @@ hr::after {
     // this is a dinkus
     display: block ;
     content: "* * *" ;
-    padding: 0 4px ;
+    padding-inline: 4px ;
 }
 
 p:first-of-type::first-letter {

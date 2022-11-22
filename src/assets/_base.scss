@@ -47,12 +47,11 @@ sub, sup {
 }
 
 p {
-    margin-top: $line ;
-    margin-bottom: $line ;
+    margin-block: $line ;
 }
 
 hr, p {
-    width: $width ;
+    inline-size: $width ;
 }
 
 hr, p, h1, h2, h3, h4, h5, h6 {
@@ -63,24 +62,22 @@ hr, p, h1, h2, h3, h4, h5, h6 {
 h1,h2,h3,h4,h5,h6 {
     line-height: $line / scale(1) ;
     font-size: scale(1) * 1em ;
-    width: $width / scale(1) ;
+    inline-size: $width / scale(1) ;
     font-weight: 500 ;
 }
 
 h1 {
     font-weight: 800 ;
     font-size: scale(3) * 1em ;
-    width: $width / scale(3) ;
+    inline-size: $width / scale(3) ;
     line-height: $line / scale(3) ;
-    margin-top: $line / scale(3) ;
-    margin-bottom: $line / scale(3) ;
+    margin-block: $line / scale(3) ;
 }
 h2 {
     font-size: scale(2) * 1em ;
-    width: $width / scale(2) ;
+    inline-size: $width / scale(2) ;
     line-height: $line / scale(2) ;
-    margin-top: $line / scale(2) ;
-    margin-bottom: $line / scale(2) ;
+    margin-block: $line / scale(2) ;
 }
 
 dl {
@@ -91,10 +88,10 @@ dt, dd {
 }
 dt {
     font-style: italic ;
-    margin-right: 0.1em ;
+    margin-inline-end: 0.1em ;
 }
 dd {
-    margin-left: 0.1em ;
+    margin-inline-start: 0.1em ;
 }
 dt ~ dt::before {
     content: "\a" ;
@@ -125,7 +122,7 @@ menu, ul {
 }
 
 menu, ul, ol {
-    padding-left: $col3 ;
+    padding-inline-start: $col3 ;
 }
 
 
