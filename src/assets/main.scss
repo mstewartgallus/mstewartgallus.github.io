@@ -25,8 +25,12 @@ $sc: (
     5: $scale * $scale * $scale * $scale * $scale
 ) ;
 
-@function font($pts) {
-    @return map-get($sc, $pts) * $font-size * $pt;
+@function scale($n) {
+    @return map-get($sc, $n) ;
+}
+
+@function font($n) {
+    @return scale($n) * $font-size * $pt;
 }
 
 $col: 0.6 * $font-size * $pt ;
@@ -38,7 +42,9 @@ $col6: 6 * $col ;
 $col7: 7 * $col ;
 $col8: 8 * $col ;
 
-$line: 1.5 * font(0) ;
+$line: (1/0.32) * 1ex ;
+$width: 60ch ;
+
 $line2: 2 * $line ;
 $line3: 3 * $line ;
 $halfline: 0.5 * $line ;
@@ -47,7 +53,7 @@ $doubleline: 2 * $line ;
 
 $A4-width: 49.8rem ;
 $aside: 13rem ;
-$body-width: 35.8rem ;
+$body-width: 43rem ;
 $A4-2margin: $A4-width - $body-width ;
 $A4-margin: $A4-2margin / 2 ;
 
@@ -91,8 +97,8 @@ $A4-margin: $A4-2margin / 2 ;
 
 @import "assets/_print.scss";
 
-// $back-width: 2 * $col8 ;
-// form, h1, section, main, header, nav, footer {
+$back-width: 2 * $col8 ;
+// body {
 //     background: linear-gradient(0deg, rgba(255,0,0,0), #222 90%),
 //                 linear-gradient(90deg, rgba(0,255,0,.8), #222 60%);
 //     background-size: $back-width $line ;

@@ -17,7 +17,6 @@ body {
     display: block ;
     align-items: stretch ;
     justify-content: stretch ;
-    row-gap: $line;
     column-gap: $col2;
     flex-direction: column ;
     grid-template-columns: 1fr [main] auto [aside] auto 1fr ;
@@ -35,11 +34,15 @@ body > header {
 body > footer {
     grid-column: aside;
 }
+body > main {
+    width: $body-width ;
+    max-width: 100% ;
+}
 
 @media screen {
     body {
         margin: 0 0.2em ;
-        margin-bottom: $lineandhalf ;
+        margin-bottom: 3 * $line ;
         margin-top: 0.2em ;
     }
 }
@@ -48,7 +51,7 @@ body > footer {
     body {
         padding: 0;
         display: grid ;
-        grid-template-columns: [main] $body-width [aside] $aside ;
+        grid-template-columns: [main] auto [aside] auto 1fr ;
     }
     body > header {
         justify-self: end ;
@@ -56,8 +59,7 @@ body > footer {
 }
 @media screen and (min-width: $A4-width + $A4-margin) {
     body {
-        margin-top: $A4-margin ;
-        margin-bottom: $A4-margin ;
+        margin-top: 2 * $line  ;
         margin-left: $A4-margin ;
     }
     html {

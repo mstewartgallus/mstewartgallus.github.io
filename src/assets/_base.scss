@@ -47,30 +47,44 @@ sub, sup {
 // FIXME
 body {
     font-size: font(0);
+    line-height: $line ;
 }
 
 p {
     margin-top: $line ;
     margin-bottom: $line ;
 }
+
+hr, p {
+    width: $width ;
+}
+
+hr, p, h1, h2, h3, h4, h5, h6 {
+    max-width: 100% ;
+}
+
 // provide some sensible defaults for line spacing, etc..
 h1,h2,h3,h4,h5,h6 {
+    line-height: $line / scale(1) ;
     font-size: font(1) ;
+    width: $width / scale(1) ;
     font-weight: 500 ;
 }
 
 h1 {
-    font-size: font(3) ;
     font-weight: 800 ;
-    line-height: $line2 ;
-    margin-top: $line ;
-    margin-bottom: $line ;
+    font-size: font(3) ;
+    width: $width / scale(3) ;
+    line-height: $line / scale(3) ;
+    margin-top: $line / scale(3) ;
+    margin-bottom: $line / scale(3) ;
 }
 h2 {
     font-size: font(2) ;
-    line-height: $line2 ;
-    margin-top: $line ;
-    margin-bottom: $line ;
+    width: $width / scale(2) ;
+    line-height: $line / scale(2) ;
+    margin-top: $line / scale(2) ;
+    margin-bottom: $line / scale(2) ;
 }
 
 dl {
