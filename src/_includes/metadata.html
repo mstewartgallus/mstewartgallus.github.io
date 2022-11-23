@@ -18,16 +18,20 @@
         {{- page.date | date: date_format -}}
       </time>
     </dd>
+    {%- if page.categories.size > 0 -%}
+    <dt>Category</dt>
+    {%- endif -%}
     {%- for category in page.categories -%}
-    {%- if forloop.first -%}<dt>Category</dt>{%- endif -%}
     <dd itemprop="articleSection">
       <a rel="tag" href="{% link search.html %}?category={{ category | escape }}">
         {{- category | escape -}}
       </a>
     </dd>
     {%- endfor -%}
+    {%- if page.tags.size > 0 -%}
+    <dt>Tag</dt>
+    {%- endif -%}
     {%- for tag in page.tags -%}
-    {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
     <dd itemprop="keywords">
       <a rel="tag" href="{% link search.html %}?tag={{ tag | escape }}">#{{- tag | escape -}}</a>
     </dd>
