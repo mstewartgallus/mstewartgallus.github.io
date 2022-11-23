@@ -14,7 +14,7 @@ body {
     row-gap: $line ;
     column-gap: $col2;
     flex-direction: column ;
-    grid-template-columns: 1fr [main] auto [aside] auto 1fr ;
+    grid-template-columns: 1fr [main] auto [aside] $aside 1fr ;
     grid-auto-flow: dense ;
 }
 
@@ -50,7 +50,7 @@ body > main {
     }
     body {
         display: grid ;
-        grid-template-columns: [main] auto [aside] auto 1fr ;
+        grid-template-columns: [main] auto [aside] $aside 1fr ;
     }
     body > header {
         justify-self: end ;
@@ -68,7 +68,7 @@ body > main {
     }
 }
 
-body > main > nav {
+.paging {
     display: flex ;
     flex-wrap: wrap ;
     justify-content: space-between ;
