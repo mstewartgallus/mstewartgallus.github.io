@@ -1,6 +1,6 @@
 {%- assign date_id_format = "%Y-%m-%d" -%}
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-{%- if page.date -%}
+{%- if page.collection == 'posts' -%}
 <footer aria-labelledby="metadata">
   <h2 id="metadata"><a href="#metadata">Metadata</a></h2>
   <dl class="metadata">
@@ -21,7 +21,7 @@
     {%- for category in page.categories -%}
     {%- if forloop.first -%}<dt>Category</dt>{%- endif -%}
     <dd itemprop="articleSection">
-      <a rel="tag" href="{{ "/search" | relative_url }}?category={{ category | escape }}">
+      <a rel="tag" href="{% link search.html %}?category={{ category | escape }}">
         {{- category | escape -}}
       </a>
     </dd>
@@ -29,7 +29,7 @@
     {%- for tag in page.tags -%}
     {%- if forloop.first -%}<dt>Tag</dt>{%- endif -%}
     <dd itemprop="keywords">
-      <a rel="tag" href="{{ "/search" | relative_url }}?tag={{ tag | escape }}">#{{- tag | escape -}}</a>
+      <a rel="tag" href="{% link search.html %}?tag={{ tag | escape }}">#{{- tag | escape -}}</a>
     </dd>
     {%- endfor -%}
   </dl>

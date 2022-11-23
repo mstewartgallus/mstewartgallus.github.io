@@ -10,13 +10,17 @@
 {%- assign author_name = author.name -%}
 {%- assign author_url = author.url | relative_url -%}
 {%- capture type -%}
-{%- if page.date -%}article{%- else -%}website{%- endif -%}
+{%- if page.collection == 'posts' -%}
+article
+{%- else -%}
+website
+{%- endif -%}
 {%- endcapture -%}
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ title }} — {{ site_title }}</title>
-<link rel="icon" href="{{ icon }}">
+<link rel="icon" href="{% link assets/favicon.svg %}">
 <link rel=" stylesheet" href="{{ css }}">
 <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
 <link rel="canonical" href="{{ url }}">
@@ -29,7 +33,7 @@
 <meta name="og:site_name" content="{{ site_title }}">
 <meta property="og:image" content="{{ abs_icon }}" >
 <meta property="og:description" content="{{ description }}">
-{%- if page.date -%}
+{%- if page.collection == 'posts' -%}
 <meta property="og:article:author" content="{{ author_name }}">
 <meta property="og:article:published_time" content="{{ page.date | date: "%Y-%m-%d" }}">
 {%- for tag in page.tags -%}

@@ -3,7 +3,7 @@ layout: page
 title: About the Author
 permalink: /about/
 ---
-<article itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
+<div itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
   <p>My pen name is Molossus Spondee. This is my personal blog mostly
   for posting silly poetry.</p>
   <p>I guess right now I'm just working on my portfolio.</p>
@@ -14,7 +14,7 @@ permalink: /about/
         About
       </dt
       <dd>
-        <a rel="author" href="/about">@<span itemProp="name">Molossus Spondee</span></a>
+        <a rel="author" href="{% link about.html %}">@<span itemProp="name">Molossus Spondee</span></a>
       </dd>
       <dt>Mastodon</dt>
       <dd>
@@ -44,4 +44,4 @@ permalink: /about/
       </dd>
     </dl>
   </address>
-</article>
+</div>
