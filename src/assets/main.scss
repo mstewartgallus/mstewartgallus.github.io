@@ -90,17 +90,14 @@ $A4-margin: 10rem ;
     }
 }
 
-p {
-    break-inside: avoid-column ;
-}
-main {
-    width: 130ch ;
-}
-main {
-    column-count: auto ;
-    column-fill: balance ;
-    column-width: 60ch ;
-}
+// p {
+//     break-inside: avoid-column ;
+// }
+// main {
+//     column-count: auto ;
+//     column-fill: balance ;
+//     column-width: 60ch ;
+// }
 // $back-width: 2 * $col8 ;
 // body {
 //     background: linear-gradient(0deg, rgba(255,0,0,0), #222 90%),
