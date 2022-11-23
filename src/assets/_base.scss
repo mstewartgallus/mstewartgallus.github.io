@@ -55,7 +55,7 @@ hr, p {
 }
 
 hr, p, h1, h2, h3, h4, h5, h6 {
-    max-width: 100% ;
+    max-inline-size: 100% ;
 }
 
 // provide some sensible defaults for line spacing, etc..
