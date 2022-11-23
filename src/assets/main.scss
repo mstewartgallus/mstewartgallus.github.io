@@ -86,10 +86,21 @@ $A4-margin: 10rem ;
 
 @media (prefers-reduced-motion: no-preference) {
     * {
-        transition: outline 0.1s, color 0.1s, background-color 0.1s ;
+        transition: outline 0.05s, color 0.1s, background-color 0.1s ;
     }
 }
 
+p {
+    break-inside: avoid-column ;
+}
+main {
+    width: 130ch ;
+}
+main {
+    column-count: auto ;
+    column-fill: balance ;
+    column-width: 60ch ;
+}
 // $back-width: 2 * $col8 ;
 // body {
 //     background: linear-gradient(0deg, rgba(255,0,0,0), #222 90%),
