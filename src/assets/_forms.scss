@@ -36,6 +36,9 @@ select {
     min-height: 3 * $line ;
 }
 
+option {
+    padding-inline: 0.4em ;
+}
 option, option:focus {
     margin-inline: 0.2em ;
 }

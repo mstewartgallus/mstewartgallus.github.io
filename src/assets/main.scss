@@ -84,6 +84,12 @@ $A4-margin: 10rem ;
 
 @import "assets/_print.scss";
 
+@media (prefers-reduced-motion: no-preference) {
+    * {
+        transition: outline 0.1s, color 0.1s, background-color 0.1s ;
+    }
+}
+
 // $back-width: 2 * $col8 ;
 // body {
 //     background: linear-gradient(0deg, rgba(255,0,0,0), #222 90%),
