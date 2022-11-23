@@ -19,56 +19,63 @@
 <meta property="og:image" content="https://mstewartgallus.github.io/assets/favicon.svg" >
 <meta property="og:description" content="lol, lmao"><meta property="og:profile" content="Molossus Spondee">
 <meta property="og:profile:username" content="Molossus Spondee">
-<meta name="robots" content="noindex">
-    <link href="/assets/search.json"
-          rel="preload" as="fetch"
-          type="application/json" crossorigin>
-    <script type="module" defer async
-            src="/assets/search.mjs?output=search-output&template=search-result"
-            ></script>
-
-    <template id="search-result">
-      <li>
-        <a class="search-url">
-          <span class="search-title">Title</span>
-        </a>
-
-        <dl class="search-keywords metadata">
-          <dt>Posted</dt>
-          <dd>
-            <time class="search-date">
-              Date
-            </time>
-          </dd>
-        </dl>
-      </li>
-    </template>
-  </head>
-  <body>
+</head>
+  <body itemscope
+        itemprop="mainEntity hasPart"
+        itemtype="https://schema.org/BlogPosting"
+        itemid="https://mstewartgallus.github.io/search/">
     <header><a href="/">Words to Kick Your Teeth Out</a>
 </header>
-    <form aria-labelledby="title"
-          rel="search" role="search" name="search-form" method="get">
-      <h1 id="title" itemprop="name headline">
-        <a rel="bookmark" href="/search/" itemprop="url">Search</a>
-      </h1>
-      <label for="category">
-        <span class="label">Category:</span>
-        <select id="category" name="category" multiple="multiple" size="2"><option value="Poem">Poem</option><option value="Prose">Prose</option></select>
-      </label>
+    <div>
+      <main aria-labelledby="title" itemprop="text">
+        <h1 id="title" itemprop="name headline">
+          <a rel="bookmark" href="/search/" itemprop="url">Search</a>
+        </h1>
+        <div itemprop="articleBody"><meta name="robots" content="noindex">
+<link href="/assets/search.json"
+      rel="preload" as="fetch"
+      type="application/json" crossorigin>
 
-      <label for="tag">
-        <span class="label">Tag:</span>
-        <select id="tag" name="tag" multiple="multiple" size="5"><option value="2018">2018</option><option value="2019">2019</option><option value="2021">2021</option><option value="2022">2022</option><option value="Coffee">Coffee</option><option value="Hamster">Hamster</option><option value="If She Breathes">If She Breathes</option><option value="The Night Ghost">The Night Ghost</option><option value="The Ring and the Cup">The Ring and the Cup</option></select>
-      </label>
+<template id="search-result">
+  <li>
+    <a class="search-url">
+      <span class="search-title">Title</span>
+    </a>
 
-      <span style="display:block; text-align:center">
-        <button>Search</button>
-      </span>
-    </form>
-    <main>
-      <output for="search" id="search-output" aria-live="polite">
-      </output>
-    </main>
-  </body>
+    <dl class="search-keywords metadata">
+      <dt>Posted</dt>
+      <dd>
+        <time class="search-date">
+          Date
+        </time>
+      </dd>
+    </dl>
+  </li>
+</template>
+
+<form aria-labelledby="title"
+      rel="search" role="search" name="search-form" method="get">
+  <label for="category">
+    <span class="label">Category:</span>
+    <select id="category" name="category" multiple="multiple" size="2"><option value="Poem">Poem</option><option value="Prose">Prose</option></select>
+  </label>
+
+  <label for="tag">
+    <span class="label">Tag:</span>
+    <select id="tag" name="tag" multiple="multiple" size="5"><option value="2018">2018</option><option value="2019">2019</option><option value="2021">2021</option><option value="2022">2022</option><option value="Coffee">Coffee</option><option value="Hamster">Hamster</option><option value="If She Breathes">If She Breathes</option><option value="The Night Ghost">The Night Ghost</option><option value="The Ring and the Cup">The Ring and the Cup</option></select>
+  </label>
+
+  <span style="display:block; text-align:center">
+    <button>Search</button>
+  </span>
+</form>
+
+<output for="search" id="search-output" aria-live="polite">
+</output>
+
+<script type="module" defer async
+        src="/assets/search.mjs?output=search-output&template=search-result"
+        ></script>
+</div>
+      </main></div></body>
 </html>
