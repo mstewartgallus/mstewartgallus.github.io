@@ -24,8 +24,8 @@ layout: page
       itemscope
       itemtype="http://schema.org/BlogPosting"
       itemid="{{ post.url | absolute_url }}">
-      <a itemprop="name headline url" href="{{ post.url | relative_url }}">
-        {{- post.title | escape -}}
+      <a itemprop="url" href="{{ post.url | relative_url }}">
+        <span itemprop="name headline">{{- post.title | escape -}}</span>
       </a>
     </li>
     {%- endfor -%}

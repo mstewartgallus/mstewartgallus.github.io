@@ -21,7 +21,7 @@ https://schema.org/WebPage
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}"
       itemscope
-        itemtype="{{ pagetype }}"
+      itemtype="{{ pagetype }}"
       itemid="{{ page.url | absolute_url }}">
   <head>
     {%- include head.html -%}
