@@ -1,29 +1,10 @@
 .stanza {
-    text-indent: 0 ;
+    margin-block: $line ;
     white-space: pre-line ;
+    text-indent: 0 ;
 }
-.stanza + .stanza {
-    margin-top: $line ;
-}
-
-.sr-hint {
-    @include clear ;
-
-    display: inline ;
-    user-select: none ;
-
-    // Hide visually
-    border: 0 !important;
-    clip: rect(1px, 1px, 1px, 1px) !important;
-    clip-path: inset(50%) !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    height: 1px !important;
-    width: 1px !important;
-
-    margin: -1px !important;
-    font-size: 1px !important;
-    line-height: 1px !important;
-    white-space: nowrap !important;
-    color: transparent !important ;
+.line {
+    display: inline-block ;
+    text-indent: -4ch ;
+    margin-left: 4ch ;
 }

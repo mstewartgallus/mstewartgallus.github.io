@@ -21,7 +21,9 @@ module MSG
           output << "\r\n"
         end
         first = false
+        output << '<span role="presentation" class="line">'
         output << line
+        output << '</span>'
       end
       output << '</p>'
       output << "\n"
