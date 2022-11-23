@@ -97,6 +97,10 @@ dt ~ dt::before {
     content: "\a" ;
     white-space: pre ;
 }
+dt::after {
+    display: inline ;
+    content: ": " ;
+}
 
 table {
     border-collapse: collapse ;
