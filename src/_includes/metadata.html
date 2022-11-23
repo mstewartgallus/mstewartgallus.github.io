@@ -2,7 +2,11 @@
 {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 {%- if page.collection == 'posts' -%}
 <footer aria-labelledby="metadata">
-  <h2 id="metadata"><a href="#metadata">Metadata</a></h2>
+  <header>
+    <hgroup>
+      <h2 id="metadata"><a href="#metadata">Metadata</a></h2>
+    </hgroup>
+  </header>
   <dl class="metadata">
     <dt>Author</dt>
     <dd>

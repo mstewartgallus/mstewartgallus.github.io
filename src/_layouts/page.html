@@ -35,11 +35,18 @@ https://schema.org/WebPage
     </header>
     <div>
       <main aria-labelledby="title" itemprop="text">
-        <h1 id="title" itemprop="name headline">
-          <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
-            {{- page.title | escape -}}
-          </a>
-        </h1>
+        <header>
+          <hgroup>
+            <h1 id="title" itemprop="name headline">
+              <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
+                {{- page.title | escape -}}
+              </a>
+            </h1>
+            {%- if page.subtitle -%}
+            <p>{{- page.subtitle -}}</p>
+            {%- endif -%}
+          </hgroup>
+        </header>
         {%- if maintype == 'https://schema.org/Blog' -%}
         {{- content -}}
         {%- else -%}

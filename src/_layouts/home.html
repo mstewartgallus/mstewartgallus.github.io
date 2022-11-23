@@ -4,7 +4,11 @@ layout: page
 {{- content -}}
 
 <section aria-labelledby="pages">
-  <h2 id="pages"><a href="#pages">Pages</a></h2>
+  <header>
+    <hgroup>
+      <h2 id="pages"><a href="#pages">Pages</a></h2>
+    </hgroup>
+  </header>
   <ul>
     <li><a href="{% link about.html %}" rel="author me">About the Author: @{{ site.author.name | default: site.author | escape }}</a></li>
     <li><a href="{% link search.html %}" rel="search">Search</a></li>
@@ -13,9 +17,13 @@ layout: page
 </section>
 {%- if site.posts.size > 0 -%}
 <section aria-labelledby="posts">
-  <h2 id="posts">
-    <a href="#posts">Posts</a>
-  </h2>
+  <header>
+    <hgroup>
+      <h2 id="posts">
+        <a href="#posts">Posts</a>
+      </h2>
+    </hgroup>
+  </header>
 
   <ol reversed>
     {%- for post in site.posts -%}

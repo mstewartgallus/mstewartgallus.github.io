@@ -21,6 +21,13 @@ p + p {
     text-indent: $col2 ;
 }
 
+hgroup p {
+    font-style: italic;
+}
+hgroup p:first-of-type {
+    margin-block-start: -$line ;
+}
+
 hr {
     border: none ;
     text-align: center;
@@ -30,13 +37,13 @@ hr::after {
     content: "• • •" ;
 }
 
-p:first-of-type::first-letter {
+main > div > p:first-of-type::first-letter {
     font-size: scale(1) * 1em;
     font-weight: bold ;
     line-height: $line / scale(1) ;
 }
 
-p:first-of-type::first-line {
+main > div > p:first-of-type::first-line {
     font-style: italic ;
 }
 
