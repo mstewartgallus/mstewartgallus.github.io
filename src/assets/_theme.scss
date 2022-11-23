@@ -8,37 +8,26 @@
     color: inherit;
 }
 
+p {
+    margin-block: 0 ;
+}
+p:first-of-type {
+    margin-block-start: $line ;
+}
+p:last-of-type {
+    margin-block-end: $line ;
+}
 p + p {
     text-indent: $col2 ;
 }
-p + p {
-    margin-block-start: -$line ;
-}
-
-p + hr {
-    margin-block-start: -$halfline ;
-}
-hr + p {
-    margin-block-start: $halfline ;
-}
 
 hr {
-    block-size: 0 ;
-    inline-size: 100% ;
     border: none ;
-    margin-block: 0  ;
     text-align: center;
-    overflow: visible ;
-    display: flex ;
-    flex-direction: column ;
-    align-items: center ;
-    justify-content: center ;
 }
 hr::after {
-    // this is a dinkus
-    display: block ;
-    content: "* * *" ;
-    padding-inline: 4px ;
+    display: inline ;
+    content: "• • •" ;
 }
 
 p:first-of-type::first-letter {
