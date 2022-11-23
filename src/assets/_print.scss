@@ -1,9 +1,38 @@
 @media print {
     @page {
         size: A4 portrait ;
-        margin: $A4-margin ;
     }
-    header, nav, footer {
+    body > header, body > div > nav, body > footer {
         display: none ;
     }
+    body {
+        column-count: 2 ;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    break-inside: avoid ;
+}
+p {
+    break-inside: avoid ;
+}
+
+h1 {
+    break-before: all ;
+}
+hr {
+    break-before: avoid ;
+    break-after: column ;
+}
+h2 {
+    break-before: column ;
+}
+
+h1, h2 {
+    break-after: avoid ;
+}
+
+p {
+    widows: 3 ;
+    orphans: 3 ;
 }
