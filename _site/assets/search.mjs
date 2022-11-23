@@ -88,9 +88,12 @@ function render(tagParams, categoryParams, template, output, posts) {
             keywords.push(listEntry);
         }
         for (const category of post.get('categories')) {
+            const params = new URLSearchParams();
+            params.append('category', category);
+
             const anchor = document.createElement('a');
             anchor.textContent = category;
-            anchor.href = '/search?category=' + category;
+            anchor.href = '/search?' + params;
 
             const listEntry = document.createElement('dd');
             listEntry.append(anchor);
@@ -102,9 +105,12 @@ function render(tagParams, categoryParams, template, output, posts) {
             keywords.push(listEntry);
         }
         for (const tag of post.get('tags')) {
+            const params = new URLSearchParams();
+            params.append('tag', tag);
+
             const anchor = document.createElement('a');
             anchor.textContent = '#' + tag;
-            anchor.href = '/search?tag=' + tag;
+            anchor.href = '/search?' + params;
 
             const listEntry = document.createElement('dd');
             listEntry.append(anchor);
