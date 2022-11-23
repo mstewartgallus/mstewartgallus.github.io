@@ -10,11 +10,9 @@ permalink: /about/
 
   <address>
     <dl>
-      <dt>
-        About
-      </dt
+      <dt>About</dt>
       <dd>
-        <a rel="author" href="{% link about.html %}">@<span itemProp="name">Molossus Spondee</span></a>
+        <a rel="author me" href="{% link about.html %}">@<span itemProp="name">Molossus Spondee</span></a>
       </dd>
       <dt>Mastodon</dt>
       <dd>
@@ -22,23 +20,23 @@ permalink: /about/
       </dd>
       <dt>Twitter</dt>
       <dd>
-        <a itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
+        <a rel="me" itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
           @{{- site.twitter.username | escape -}}
         </a>
       </dd>
       <dt>Email</dt>
       <dd>
-        <a itemprop="email" href="mailto:{{site.email}}">{{- site.email -}}</a>
+        <a rel="me" itemprop="email" href="mailto:{{site.email}}">{{- site.email -}}</a>
       </dd>
       <dt>GitHub</dt>
       <dd>
-        <a itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
+        <a rel="me" itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
           {{- site.github | escape -}}
         </a>
       </dd>
       <dt>LinkedIn</dt>
       <dd>
-        <a itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
+        <a rel="me" itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
           {{- site.linkedin | escape -}}
         </a>
       </dd>
