@@ -18,6 +18,11 @@ https://schema.org/ItemPage
 https://schema.org/WebPage
 {%- endif -%}
 {%- endcapture -%}
+{%- capture itemprop -%}
+{%- if maintype != 'https://schema.org/Blog' -%}
+itemprop="articleBody"
+{%- endif -%}
+{%- endcapture -%}
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}"
       itemscope
@@ -47,13 +52,9 @@ https://schema.org/WebPage
             {%- endif -%}
           </hgroup>
         </header>
-        {%- if maintype == 'https://schema.org/Blog' -%}
-        {{- content -}}
-        {%- else -%}
-        <div itemprop="articleBody">
+        <div {{ itemprop }}>
           {{- content -}}
         </div>
-        {%- endif -%}
       </main>
       {%- include paging.html -%}
     </div>

@@ -1,6 +1,6 @@
 const meta = new URL(import.meta.url).searchParams;
-const outputId = meta.get('output');
-const templateId = meta.get('template');
+const outputId = meta.get("output");
+const templateId = meta.get("template");
 
 function intersect(X, Y) {
     const Z = new Set();
@@ -18,10 +18,10 @@ function parseForm(formData) {
 
     for (const [key, value] of formData.entries()) {
         switch (key) {
-        case 'tag':
+        case "tag":
             tags.add(value);
             break;
-        case 'category':
+        case "category":
             categories.add(value);
             break;
         }
@@ -32,10 +32,10 @@ function parseForm(formData) {
 const doctitle = document.title;
 const location = new URL(document.location);
 const params = location.searchParams;
-const base = location.href + ':' + location.port;
+const base = location.href + ":" + location.port;
 
 function reviver(key, value) {
-    if (typeof value === 'object'
+    if (typeof value === "object"
         && !Array.isArray(value)
         && value !== null) {
         value = new Map(Object.entries(value));
@@ -44,7 +44,7 @@ function reviver(key, value) {
 }
 
 async function fetchDB() {
-    const response = await fetch('/assets/search.json');
+    const response = await fetch("/assets/search.json");
     const text = await response.text();
     return JSON.parse(text, reviver);
 }
@@ -52,9 +52,9 @@ async function fetchDB() {
 const getDB = fetchDB();
 
 function findPosts(db, tags, categories) {
-    const category = db.get('category');
-    const tag = db.get('tag');
-    const posts = db.get('post');
+    const category = db.get("category");
+    const tag = db.get("tag");
+    const posts = db.get("post");
 
     // FIXME process sets lazily somehow?
     let cs = new Set(Array.from(categories)
@@ -77,55 +77,55 @@ function render(tagParams, categoryParams, template, output, posts) {
     const cats = Array.from(categoryParams.values());
     document.title = `${tags} ${cats} — ${doctitle}`;
     const elems = posts.map((post) => {
-        const title = post.get('title');
-        const date = post.get('date');
-        const url = post.get('url');
+        const title = post.get("title");
+        const date = post.get("date");
+        const url = post.get("url");
 
         const keywords = [];
-        if (post.get('categories').length !== 0) {
-            const listEntry = document.createElement('dt');
-            listEntry.textContent = 'Category';
+        if (post.get("categories").length !== 0) {
+            const listEntry = document.createElement("dt");
+            listEntry.textContent = "Category";
             keywords.push(listEntry);
         }
-        for (const category of post.get('categories')) {
+        for (const category of post.get("categories")) {
             const params = new URLSearchParams();
-            params.append('category', category);
+            params.append("category", category);
 
-            const anchor = document.createElement('a');
+            const anchor = document.createElement("a");
             anchor.textContent = category;
-            anchor.href = '/search?' + params;
+            anchor.href = "/search/?" + params;
 
-            const listEntry = document.createElement('dd');
+            const listEntry = document.createElement("dd");
             listEntry.append(anchor);
             keywords.push(listEntry);
         }
-        if (post.get('tags').length !== 0) {
-            const listEntry = document.createElement('dt');
-            listEntry.textContent = 'Tag';
+        if (post.get("tags").length !== 0) {
+            const listEntry = document.createElement("dt");
+            listEntry.textContent = "Tag";
             keywords.push(listEntry);
         }
-        for (const tag of post.get('tags')) {
+        for (const tag of post.get("tags")) {
             const params = new URLSearchParams();
-            params.append('tag', tag);
+            params.append("tag", tag);
 
-            const anchor = document.createElement('a');
-            anchor.textContent = '#' + tag;
-            anchor.href = '/search?' + params;
+            const anchor = document.createElement("a");
+            anchor.textContent = "#" + tag;
+            anchor.href = "/search/?" + params;
 
-            const listEntry = document.createElement('dd');
+            const listEntry = document.createElement("dd");
             listEntry.append(anchor);
             keywords.push(listEntry);
         }
 
         const clone = template.cloneNode(true);
-        clone.querySelector('.search-title').textContent = title;
-        clone.querySelector('.search-url').href = url;
-        clone.querySelector('.search-date').textContent = date;
-        clone.querySelector('.search-keywords').append(...keywords);
+        clone.querySelector(".search-title").textContent = title;
+        clone.querySelector(".search-url").href = url;
+        clone.querySelector(".search-date").textContent = date;
+        clone.querySelector(".search-keywords").append(...keywords);
         return clone;
     });
 
-    const postList = document.createElement('ul');
+    const postList = document.createElement("ul");
     postList.append(...elems);
     output.replaceChildren(postList);
 };
@@ -135,10 +135,10 @@ function parseParams(params) {
     const cats = new Set();
     for (const [key, value] of params) {
         switch (key) {
-        case 'tag':
+        case "tag":
             tags.add(value);
             break;
-        case 'category':
+        case "category":
             cats.add(value);
             break;
         }
@@ -148,17 +148,13 @@ function parseParams(params) {
 
 const [tagParams, categoryParams] = parseParams(params);
 
-const category = document.getElementById('category');
-const tag = document.getElementById('tag');
+const category = document.getElementById("category");
+const tag = document.getElementById("tag");
 for (const option of category.options) {
-    if (categoryParams.has(option.value)) {
-        option.selected = true;
-    }
+    option.selected = categoryParams.has(option.value);
 }
 for (const option of tag.options) {
-    if (tagParams.has(option.value)) {
-        option.selected = true;
-    }
+    option.selected = tagParams.has(option.value);
 }
 
 const template = document.getElementById(templateId).content;

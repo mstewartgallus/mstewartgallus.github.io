@@ -1,6 +1,8 @@
 ---
 layout: page
 ---
+{%- assign pages = site.html_pages | where: "sitemap", nil | sort: "title" -%}
+
 {{- content -}}
 
 <section aria-labelledby="pages">
@@ -10,11 +12,20 @@ layout: page
     </hgroup>
   </header>
   <ul>
-    <li><a href="{% link about.html %}" rel="author me">About the Author: @{{ site.author.name | default: site.author | escape }}</a></li>
-    <li><a href="{% link search.html %}" rel="search">Search</a></li>
-    <li><a href="{{ "/feed.xml" | relative_url }}" rel="alternate">RSS Feed</a></li>
+    {%- for page in pages -%}
+    <li
+      itemprop="hasPart"
+      itemscope
+      itemtype="http://schema.org/WebPage"
+      itemid="{{ page.url | absolute_url }}">
+      <a itemprop="url" href="{{ page.url | relative_url }}">
+        <span itemprop="name headline">{{- page.title | default: page.url | escape -}}</span>
+      </a>
+    </li>
+    {%- endfor -%}
   </ul>
 </section>
+
 {%- if site.posts.size > 0 -%}
 <section aria-labelledby="posts">
   <header>

@@ -1,12 +1,21 @@
 @media print {
     @page {
         size: A4 portrait ;
+        margin: $A4-margin ;
     }
-    body > header, body > div > nav, body > footer {
+    body > header, body > div > nav {
         display: none ;
     }
-    body {
-        column-count: 2 ;
+
+    body > div,
+    body > div > main,
+    body > footer {
+        display: contents ;
+    }
+    body > footer :any-link {
+        text-decoration: none ;
+        // FIXME
+        color: black !important ;
     }
 }
 
@@ -32,7 +41,7 @@ h1, h2 {
     break-after: avoid ;
 }
 
-p {
+:root {
     widows: 3 ;
     orphans: 3 ;
 }
