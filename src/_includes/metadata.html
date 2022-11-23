@@ -25,7 +25,7 @@
     {%- endif -%}
     {%- for category in page.categories -%}
     <dd itemprop="articleSection">
-      <a rel="tag" href="{% link search.html %}?category={{ category | escape }}">
+      <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}">
         {{- category | escape -}}
       </a>
     </dd>
@@ -35,7 +35,7 @@
     {%- endif -%}
     {%- for tag in page.tags -%}
     <dd itemprop="keywords">
-      <a rel="tag" href="{% link search.html %}?tag={{ tag | escape }}">#{{- tag | escape -}}</a>
+      <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">#{{- tag | escape -}}</a>
     </dd>
     {%- endfor -%}
   </dl>

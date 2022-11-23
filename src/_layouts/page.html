@@ -43,7 +43,7 @@ https://schema.org/WebPage
               </a>
             </h1>
             {%- if page.subtitle -%}
-            <p>{{- page.subtitle -}}</p>
+            <p>{{- page.subtitle | escape -}}</p>
             {%- endif -%}
           </hgroup>
         </header>
