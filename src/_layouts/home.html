@@ -44,9 +44,11 @@ layout: page
       itemtype="http://schema.org/BlogPosting"
       itemid="{{ post.url | absolute_url }}">
       <a itemprop="url" href="{{ post.url | relative_url }}">
-        <ins datetime="{{ post.date | date_to_xmlschema }}"
-             itemprop="name headline">
-          {{- post.title | escape -}}
+        <ins itemprop="datePublished"
+             datetime="{{ post.date | date_to_xmlschema }}">
+          <span itemprop="name headline">
+            {{- post.title | escape -}}
+          </span>
         </ins>
       </a>
     </li>
