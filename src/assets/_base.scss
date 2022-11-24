@@ -153,3 +153,14 @@ cite {
 :is(h1,h2,h2,h4,h5,h6) :focus {
     outline-style: none;
 }
+
+ins[datetime] {
+    position: relative ;
+}
+ins[datetime]:is(:hover,:focus-within)::after {
+    position: absolute ;
+    inset-inline-start: 100% ;
+    content: " " attr(datetime);
+    white-space: pre ;
+    text-decoration: none ;
+}
