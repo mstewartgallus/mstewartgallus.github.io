@@ -7,7 +7,7 @@ description: >-
   lol, lmao
 baseurl: ""
 url: "https://mstewartgallus.github.io"
-lang: "en-ca"
+lang: "en-CA"
 
 plugins:
   - jekyll-feed
