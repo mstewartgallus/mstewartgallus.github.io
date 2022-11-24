@@ -4,39 +4,39 @@ title: About the Author
 permalink: /about/
 ---
 <div itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
-  <p>My pen name is Molossus Spondee. This is my personal blog mostly
-  for posting silly poetry.</p>
+  <p>My pen name is <span translate="no">Molossus Spondee</span>. This
+  is my personal blog mostly for posting silly poetry.</p>
   <p>I guess right now I'm just working on my portfolio.</p>
 
   <address>
     <dl>
       <dt>About</dt>
       <dd>
-        <a rel="author me" href="{% link about.html %}">@<span itemProp="name">Molossus Spondee</span></a>
+        <a rel="author me" href="{% link about.html %}">@<span translate="no" itemProp="name">Molossus Spondee</span></a>
       </dd>
-      <dt>Mastodon</dt>
+      <dt translate="no">Mastodon</dt>
       <dd>
-        <a rel="me" itemProp="sameAs" href="https://mastodon.lol/@MSpondee">@MSpondee@mastodon.lol</a>
+        <a rel="me" itemProp="sameAs" href="https://mastodon.lol/@MSpondee" translate="no">@MSpondee@mastodon.lol</a>
       </dd>
-      <dt>Twitter</dt>
+      <dt translate="no">Twitter</dt>
       <dd>
-        <a rel="me" itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
+        <a translate="no" rel="me" itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
           @{{- site.twitter.username | escape -}}
         </a>
       </dd>
       <dt>Email</dt>
       <dd>
-        <a rel="me" itemprop="email" href="mailto:{{site.email}}">{{- site.email -}}</a>
+        <a translate="no" rel="me" itemprop="email" href="mailto:{{site.email}}">{{- site.email -}}</a>
       </dd>
-      <dt>GitHub</dt>
+      <dt translate="no">GitHub</dt>
       <dd>
-        <a rel="me" itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
+        <a translate="no" rel="me" itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
           {{- site.github | escape -}}
         </a>
       </dd>
-      <dt>LinkedIn</dt>
+      <dt translate="no">LinkedIn</dt>
       <dd>
-        <a rel="me" itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
+        <a translate="no" rel="me" itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
           {{- site.linkedin | escape -}}
         </a>
       </dd>
