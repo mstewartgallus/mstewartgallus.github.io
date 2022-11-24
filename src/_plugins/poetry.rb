@@ -16,7 +16,7 @@ module MSG
     stanzas.each do |stanza|
       output << '<p class="stanza">'
       stanza.each do |line|
-        output << '<span class="line">'
+        output << '<span class="line" role="presentation">'
         output << line
         output << '</span>'
         output << "\n"
