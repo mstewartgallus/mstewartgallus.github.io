@@ -71,15 +71,15 @@ h1 {
     font-size: scale(3) * 1em ;
     inline-size: $width / scale(3) ;
     line-height: $line / scale(3) ;
-    margin-block-start: $lineandhalf / scale(3) ;
-    margin-block-end: $halfline / scale(3) ;
+    margin-block-start: $line / scale(3) ;
+    margin-block-end: $line / scale(3) ;
 }
 h2 {
     font-size: scale(2) * 1em ;
     inline-size: $width / scale(2) ;
     line-height: $line / scale(2) ;
-    margin-block-start: $lineandhalf / scale(2) ;
-    margin-block-end: $halfline / scale(2) ;
+    margin-block-start: $line / scale(2) ;
+    margin-block-end: $line / scale(2) ;
 }
 
 dl {
