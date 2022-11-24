@@ -89,8 +89,7 @@ dt, dd {
     display: inline ;
 }
 dt {
-    font-style: italic ;
-    margin-inline-end: 0.1em ;
+    margin-inline-end: 0.2em ;
 }
 dd {
     margin-inline-start: 0.1em ;
@@ -133,6 +132,9 @@ menu, ul, ol {
 
 
 abbr {
+    @include all-small-caps ;
+}
+cite {
     @include small-caps ;
 }
 

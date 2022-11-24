@@ -4,7 +4,7 @@ dl, dt, dd, figure,
 p, hr,
 h1, h2, h3, h4, h5, h6,
 fieldset, select, option, button, input,
-address, abbr {
+address, cite, abbr {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -21,7 +21,7 @@ dt, figure,
 hr,
 h1, h2, h3, h4, h5, h6,
 fieldset, select, option, button, input,
-address, abbr {
+address, cite, abbr {
     margin: 0;
 }
 
@@ -30,7 +30,7 @@ menu, ol, ul, li,
 dl, dt, dd, figure,
 p, hr,
 fieldset, select, option, button, input,
-address, abbr {
+address, cite, abbr {
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit ;

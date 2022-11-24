@@ -64,9 +64,13 @@ $A4-margin: 10rem ;
     text-indent: 0;
     color: inherit ;
 }
-@mixin small-caps {
+@mixin all-small-caps {
     font-variant-caps: all-small-caps ;
-    letter-spacing: 0.07em ;
+    letter-spacing: 0.07ch ;
+}
+@mixin small-caps {
+    font-variant-caps: small-caps ;
+    letter-spacing: 0.07ch ;
 }
 
 @import "assets/_clear.scss";

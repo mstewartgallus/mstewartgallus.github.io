@@ -7,20 +7,24 @@
   </header>
   <div class="paging">
     {%- if page.previous.url -%}
-    <dl>
-      <dt>Previous</dt>
-      <dd>
-        <a href="{{page.previous.url}}" rel="previous">{{page.previous.title | escape}}</a>
-      </dd>
-    </dl>
+    <a href="{{page.previous.url}}" rel="previous">
+      <dl>
+        <dt>Previous</dt>
+        <dd>
+          <cite>{{page.previous.title | escape}}</cite>
+        </dd>
+      </dl>
+    </a>
     {%- endif -%}
     {%- if page.next.url -%}
-    <dl>
-      <dt>Next</dt>
-      <dd>
-        <a href="{{page.next.url}}" rel="next">{{page.next.title | escape}}</a>
-      </dd>
-    </dl>
+    <a href="{{page.next.url}}" rel="next">
+      <dl>
+        <dt>Next</dt>
+        <dd>
+          <cite>{{page.next.title | escape}}</cite>
+        </dd>
+      </dl>
+    </a>
     {%- endif -%}
   </div>
 </nav>
