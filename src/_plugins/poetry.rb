@@ -13,12 +13,12 @@ module MSG
 
   def tohtml(stanzas)
     output = ""
-    output << '<ol class="poem">'
+    output << '<ol class="poem" role="presentation">'
     stanzas.each do |stanza|
       output << '<li>'
       output << '<ol class="stanza" role="presentation">'
       stanza.each do |line|
-        output << '<li>'
+        output << '<li role="presentation">'
         output << line
         output << '</li>'
         output << "\n"
