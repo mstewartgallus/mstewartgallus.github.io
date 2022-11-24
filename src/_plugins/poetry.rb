@@ -18,7 +18,7 @@ module MSG
       output << '<li>'
       output << '<ol class="stanza" role="presentation">'
       stanza.each do |line|
-        output << '<li>'
+        output << '<li role="presentation">'
         output << line
         output << '</li>'
         output << "\n"
