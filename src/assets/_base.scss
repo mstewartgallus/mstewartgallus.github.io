@@ -158,9 +158,18 @@ ins[datetime] {
     position: relative ;
 }
 ins[datetime]:is(:hover,:focus-within)::after {
+    font-variant-numeric: lining-nums tabular-nums ;
     position: absolute ;
-    inset-inline-start: 100% ;
-    content: " " attr(datetime);
-    white-space: pre ;
+    display: block ;
+    content: attr(datetime) ;
     text-decoration: none ;
+    z-index: 1000 ;
+    opacity: 95% ;
+    background-color: Canvas ;
+    box-shadow: 1px 1px 1px CanvasText ;
+    color: CanvasText ;
+    inset-inline-start: -10% ;
+    padding-block: 0.2ex ;
+    padding-inline: 0.3em ;
+    border-radius: 0.2em ;
 }
