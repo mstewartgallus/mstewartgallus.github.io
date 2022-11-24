@@ -1,18 +1,12 @@
-.poem {
-    padding: 0 ;
-}
-.poem > li {
-    display: block ;
-}
 .stanza {
+    text-indent: 0 ;
     margin-block: $line ;
     padding: 0 ;
     display: flex ;
     flex-direction: column ;
     align-items: start ;
 }
-.stanza > li {
-    display: block ;
+.line {
     text-align-last: end ;
     pause: medium medium ;
 }
