@@ -13,21 +13,21 @@ module MSG
 
   def tohtml(stanzas)
     output = ""
+    output << '<ol class="poem">'
     stanzas.each do |stanza|
-      output << '<p class="stanza">'
-      first = true
+      output << '<li>'
+      output << '<ol class="stanza" role="presentation">'
       stanza.each do |line|
-        if not first then
-          output << "\r\n"
-        end
-        first = false
-        output << '<span role="presentation" class="line">'
+        output << '<li role="presentation">'
         output << line
-        output << '</span>'
+        output << '</li>'
+        output << "\n"
       end
-      output << '</p>'
+      output << '</ol>'
       output << "\n"
+      output << "</li>"
     end
+    output << "</ol>"
     output.freeze
   end
 
