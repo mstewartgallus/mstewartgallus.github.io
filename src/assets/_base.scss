@@ -138,6 +138,13 @@ cite {
     @include small-caps ;
 }
 
+figure {
+    margin-block: $line ;
+}
+figcaption {
+    font-weight: 500 ;
+}
+
 * {
     outline-offset: 0.1em;
     outline-width: 0.2em ;

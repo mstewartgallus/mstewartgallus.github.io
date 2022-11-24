@@ -93,3 +93,10 @@ $A4-margin: 10rem ;
         transition: outline 0.05s, color 0.1s, background-color 0.1s ;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    @import "assets/_syntax-dark.scss";
+}
+@media (prefers-color-scheme: light) {
+    @import "assets/_syntax-light.scss";
+}
