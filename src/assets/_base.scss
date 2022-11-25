@@ -137,6 +137,7 @@ menu, ul, ol {
 
 abbr {
     @include all-small-caps ;
+    text-emphasis: inherit ;
 }
 cite {
     @include small-caps ;

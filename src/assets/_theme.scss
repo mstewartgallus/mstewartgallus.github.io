@@ -55,3 +55,7 @@ main > div > p:first-of-type::first-line {
 body > header {
     @include small-caps ;
 }
+
+.highlight {
+    overflow-block: scroll ;
+}
