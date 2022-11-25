@@ -96,6 +96,13 @@ $aside: 13rem ;
 }
 
 @media (prefers-color-scheme: dark) {
+    :root, body {
+        background: #242526 ;
+        color: #c3c8ca ;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
     @import "assets/_syntax-dark.scss";
 }
 @media (prefers-color-scheme: light) {
