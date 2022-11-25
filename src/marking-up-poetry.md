@@ -147,7 +147,7 @@ Internet Applications">ARIA</abbr> role can ameliorate the problem.
 Less or more use of the `presentation` role as in [markup
 A](#markupa2) and [markup A''](#markupa3) works well enough.  By the
 spec use of the `presentation` role in a list item for a list already
-marked with `presentation` role shouldn't really do anything but it
+marked with a `presentation` role shouldn't really do anything but it
 can reduce cruft in the accessibility inspector in Firefox.
 
 <figure>
@@ -326,8 +326,8 @@ on this site along with [code](#examplecode).
 </figure>
 {:#examplecode}
 
-Probably the most appropriate <abbr>HTML</abbr> element for poetry is
-the `audio` element.
+<i>Probably the most appropriate <abbr>HTML</abbr> element for poetry
+is the `audio` element.</i>
 
 ## [Try It](#tryit)
 {:#tryit}
