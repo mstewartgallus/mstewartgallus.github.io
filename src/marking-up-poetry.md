@@ -10,7 +10,16 @@ sitemap: false
 permalink: /secret-preview/
 ---
 
-{% capture markupa %}
+Common poetry <abbr title="HyperText Markup Language">HTML</abbr>
+markup is inaccessible, unsemantic and doesn't display well.  I am not
+skilled in accessiblity and I don't have good solutions.  See [Try
+It](#tryit) if you want to try out a screen reader yourself.
+
+## [Accessibility](#accessiblity)
+{:#accessiblity}
+
+
+{% capture markupb %}
 ```html
 <p class="stanza">Roses are red<br>
 Violets are blue,<br>
@@ -19,7 +28,7 @@ And so are you.</p>
 ```
 {% endcapture %}
 
-{% capture markupb %}
+{% capture markupa %}
 ```html
 <ol class="poem">
 <li>
@@ -34,15 +43,7 @@ And so are you.</p>
 ```
 {% endcapture %}
 
-Common poetry <abbr title="HyperText Markup Language">HTML</abbr>
-markup is inaccessible, unsemantic and doesn't display well.  I am not
-skilled in accessiblity and I don't have good solutions.
-
-## [Accessibility](#accessiblity)
-{:#accessiblity}
-
-
-{% capture markupb2 %}
+{% capture markupa2 %}
 ```html
 <ol class="poem">
 <li>
@@ -57,7 +58,7 @@ skilled in accessiblity and I don't have good solutions.
 ```
 {% endcapture %}
 
-{% capture markupb3 %}
+{% capture markupa3 %}
 ```html
 <ol class="poem" role="presentation">
 <li>
@@ -96,7 +97,7 @@ skilled in accessiblity and I don't have good solutions.
 ```
 {% endcapture %}
 
-{% capture markupa2 %}
+{% capture markupb2 %}
 ```html
 <p>Roses are red<span class="sr-only">; </span><br>
 Violets are blue,<br>
@@ -105,7 +106,7 @@ And so are you.</p>
 ```
 {% endcapture %}
 
-{% capture markupa3 %}
+{% capture markupb3 %}
 ```css
 .sr-only {
    display: inline-block ;
@@ -119,7 +120,11 @@ And so are you.</p>
 
 Under common screen readers most poetry markup is awkward to navigate,
 does not insert appropriate pauses for breath and mispronounces stress
-and sounds. Consider [markup A](#markupa) and [markup B](#markupb).
+and sounds.  Consider [markup A](#markupa) and [markup B](#markupb).
+In [markup A](#markupa) a poem is an ordered list of stanzas and
+stanzas are ordered lists of verses.  In [markup B](#markupb) poems
+are sequences of stanzas, stanzas are paragraphs and lines in a
+paragraph are separated with line break elements.
 
 <figure>
 {{ markupa | markdownify }}
@@ -127,38 +132,42 @@ and sounds. Consider [markup A](#markupa) and [markup B](#markupb).
 </figure>
 {:#markupa}
 
+
 <figure>
 {{ markupb | markdownify }}
 <figcaption><a href="#markupb">Markup B</a></figcaption>
 </figure>
 {:#markupb}
 
-
-[Markup B](#markupb) is hard to navigate as each line in an ordered
+[Markup A](#markupa) is hard to navigate as each line in an ordered
 list must be manually tracked through.  As well <q>line <var>m</var>
 of <var>n</var></q> is repeated for every line of [Markup
-B](#markupb).  Use of the `presentation` <abbr title="Accessible Rich Internet Applications">ARIA</abbr>
-role can ameliorate the problem.  Less or more use of the
-`presentation` role as in [markup B'](#markupb2) and [markup
-B''](#markupb3) works well enough.
+A](#markupa).  Use of the `presentation` <abbr title="Accessible Rich
+Internet Applications">ARIA</abbr> role can ameliorate the problem.
+Less or more use of the `presentation` role as in [markup
+A](#markupa2) and [markup A''](#markupa3) works well enough.  By the
+spec use of the `presentation` role in a list item for a list already
+marked with `presentation` role shouldn't really do anything but it
+can reduce cruft in the accessibility inspector in Firefox.
 
 <figure>
-{{- markupb2 | markdownify -}}
-<figcaption><a href="#markupb2">Markup B'</a></figcaption>
+{{- markupa2 | markdownify -}}
+<figcaption><a href="#markupa2">Markup A'</a></figcaption>
 </figure>
-{:#markupb2}
+{:#markupa2}
 
 <figure>
-{{- markupb3 | markdownify -}}
-<figcaption><a href="#markupb3">Markup B''</a></figcaption>
+{{- markupa3 | markdownify -}}
+<figcaption><a href="#markupa3">Markup A''</a></figcaption>
 </figure>
-{:#markupb3}
+{:#markupa3}
 
 A <i>nuclear</i> solution is to markup the text for graphical display
 only using the `graphic` role as in [Markup N](#markupn).  I would
 advise use of the `aria-labelledby` attribute instead of the
-`aria-label` attribute here. `aria-labelledby` lets you use extra
-markup as appropriate.
+`aria-label` attribute here. `aria-label` has a tendency to work
+poorly with newlines in text, is not usually translated by automated
+tools and doesn't let you embed more markup as appropriate.
 
 <figure>
 {{- markupn | markdownify -}}
@@ -166,24 +175,24 @@ markup as appropriate.
 </figure>
 {:#markupn}
 
-In some setups [Markup A](#markupa) *sounds* yucky.  Ending and
+In some setups [Markup B](#markupb) *sounds* yucky.  Ending and
 starting words in separate lines like <i>red</i> and <i>Violets</i>
 run together.  One workaround is to include extra punctuation
-annotated with a screen reader only class as with [Markup
-A'](#markupa2) and [Markup A' CSS](#markupa3).  However, on Firefox
+annotated with a screen-reader-only class as with [Markup
+A'](#markupb2) and [Markup B' CSS](#markupb3).  However, on Firefox
 this hack breaks up lines into separate areas to track through.
 
 <figure>
-{{- markupa2 | markdownify -}}
-<figcaption><a href="#markupa2">Markup A' <abbr>HTML</abbr></a></figcaption>
+{{- markupb2 | markdownify -}}
+<figcaption><a href="#markupb2">Markup B' <abbr>HTML</abbr></a></figcaption>
 </figure>
-{:#markupa2}
+{:#markupb2}
 
 <figure>
-{{- markupa3 | markdownify -}}
-<figcaption><a href="#markupa3">Markup A' <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
+{{- markupb3 | markdownify -}}
+<figcaption><a href="#markupb3">Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
 </figure>
-{:#markupa3}
+{:#markupb3}
 
 No revisions of [Markup A](#markupa) or [Markup B](#markupb) ensure
 proper pronounciation of stress and sounds.  Only American English is
@@ -201,14 +210,23 @@ lang="non">Sleipnir</i>` (old Norse) and `<i lang="gem">Wotan</i>`
 
 Semantically the `em` element should be appropriate for marking up
 stress emphasis.  However, such markup is verbose and many screen
-readers completel ignore elements like `em` anyway because of heavy
-unsemantic abuse of such elements in the wider internet for presenting
-bold text.
+readers ignore elements like `em` because of the heavy unsemantic
+abuse of such elements in the wider internet for presenting bold text.
 
 ## [Presentation](#presentation)
 {:#presentation}
 
-{% capture linecss %}
+{% capture indentcss %}
+```css
+.line {
+   text-indent: -4ch ;
+   margin-left: 4ch ;
+}
+```
+{% endcapture %}
+
+
+{% capture alignlastcss %}
 ```css
 .stanza {
    display: flex ;
@@ -223,20 +241,27 @@ bold text.
 {% endcapture %}
 
 Laying out poetry on squashed formats is awkward.  In print the
-standard layout for overlong lines is to indent to the right.
+standard layout for overlong lines is to align the first line ragged
+right and all other lines ragged right.
 
-For a hanging indent effect on the web every line block should should
-be aligned to the left but the text *within* the line block should be
-aligned to the right.  Something like [Line
-<abbr>CSS</abbr>](#linecss) is often the most appropriate
-<abbr>CSS</abbr> for a hanging indent. The negative `text-indent` hack
-is not really necessary.
+The typical advice to approximate a poetry layout is a hanging indent
+something like [Indent <abbr>CSS</abbr>](#indentcss).  However, a
+hanging indent layout is not really correct.
+
+<figure> {{- indentcss | markdownify -}} <figcaption><a
+href="#indentcss">Indent <abbr>CSS</abbr></a></figcaption> </figure>
+
+You can approximate a poetry layout on the web by aligning every line
+block to the left but aligning the last line of the text *within* the
+line block to the right.  Something like [Align Last
+<abbr>CSS</abbr>](#alignlastcss) almost works for a poetry layout.
+However, even this layout fails when you overflow multiple lines.
 
 <figure>
-{{- linecss | markdownify -}}
-<figcaption><a href="#linecss">Line <abbr>CSS</abbr></a></figcaption>
+{{- alignlastcss | markdownify -}}
+<figcaption><a href="#alignlastcss">Align Last <abbr>CSS</abbr></a></figcaption>
 </figure>
-{:#linecss}
+{:#alignlastcss}
 
 ## Conclusion
 
@@ -304,8 +329,21 @@ on this site along with [code](#examplecode).
 Probably the most appropriate <abbr>HTML</abbr> element for poetry is
 the `audio` element.
 
+## [Try It](#tryit)
+{:#tryit}
 
-## And one More Thing
+Personally I found Android TalkBack to be the easiest screen reader to
+get started with. <a href="https://a11yproject.com">The helpful
+<cite>A11y Project</cite> blog</a> has a number of guides on getting
+started with screen readeres but they might be a little old.
+
+- <a href="https://a11project.com/posts/getting-started-with-orca"><cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite></a>
+- <a href="https://a11project.com/posts/getting-started-with-voiceover-ios"><cite>Getting Started with VoiceOver on iOS</cite></a>
+- <a href="https://a11project.com/posts/getting-started-with-nvda"><cite>Getting Started with NVDA</cite></a>
+- <a href="https://a11project.com/posts/getting-started-with-voiceover"><cite>Getting Started with MacOS VoiceOver</cite></a>
+
+## [And One More Thing](#onemorething)
+{:#onemorething}
 
 As of this blog post the [<cite><abbr>CSS</abbr> Speech
 Module</cite>](https://www.w3.org/TR/css-speech-1/) has never really
