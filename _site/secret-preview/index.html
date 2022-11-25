@@ -36,20 +36,21 @@
               <a rel="bookmark" href="/secret-preview/" itemprop="url">Marking Up Poetry</a>
             </h1></hgroup>
         </header>
-        <div itemprop="articleBody"><p>Common poetry <abbr title="HyperText Markup Language">HTML</abbr>
-markup is inaccessible, unsemantic and doesn’t display well.  I am not
-skilled in accessiblity and I don’t have good solutions.  See <a href="#tryit">Try
-It</a> if you want to try out a screen reader yourself.</p>
+        <div itemprop="articleBody"><p>Common poetry markup is inaccessible, unsemantic and doesn’t display
+well. I am not skilled in accessiblity and I don’t have good
+solutions.  See <a href="#tryit">Try It</a> if you want to try out a screen
+reader yourself.</p>
 
 <h2 id="accessiblity"><a href="#accessiblity">Accessibility</a></h2>
 
-<p>Under common screen readers most poetry markup is awkward to navigate,
-does not insert appropriate pauses for breath and mispronounces stress
-and sounds.  Consider <a href="#markupa">markup A</a> and <a href="#markupb">markup B</a>.
-In <a href="#markupa">markup A</a> a poem is an ordered list of stanzas and
-stanzas are ordered lists of verses.  In <a href="#markupb">markup B</a> poems
-are sequences of stanzas, stanzas are paragraphs and lines in a
-paragraph are separated with line break elements.</p>
+<p>The art of the spoken word is not accessible to the visually impaired.
+Most markup navigates awkwardly, does not insert appropriate pauses
+for breath and mispronounces stress and sounds.  Consider <a href="#markupa">markup
+A</a> and <a href="#markupb">markup B</a>.  In <a href="#markupa">markup A</a> a poem
+is an ordered list of stanzas and stanzas are ordered lists of verses.
+In <a href="#markupb">markup B</a> poems are sequences of stanzas, stanzas are
+paragraphs and lines in a paragraph are separated with line break
+elements.</p>
 
 <figure id="markupa">
 
@@ -82,14 +83,14 @@ And so are you.<span class="nt">&lt;/p&gt;</span>
 <p><a href="#markupa">Markup A</a> is hard to navigate as each line in an ordered
 list must be manually tracked through.  As well <q>line <var>m</var>
 of <var>n</var></q> is repeated for every line of <a href="#markupa">Markup
-A</a>.  Use of the <code class="language-plaintext highlighter-rouge">presentation</code> <abbr title="Accessible Rich Internet Applications">ARIA</abbr> role can ameliorate the problem.
-Less or more use of the <code class="language-plaintext highlighter-rouge">presentation</code> role as in <a href="#markupa2">markup
-A</a> and <a href="#markupa3">markup A’’</a> works well enough.  By the
-spec use of the <code class="language-plaintext highlighter-rouge">presentation</code> role in a list item for a list already
-marked with a <code class="language-plaintext highlighter-rouge">presentation</code> role shouldn’t really do anything but it
-can reduce cruft in the accessibility inspector in Firefox.</p>
+A</a>.  You can use the <code class="language-plaintext highlighter-rouge">presentation</code> <abbr title="Accessible Rich Internet Applications">ARIA</abbr> role as in <a href="#markupa2">markup
+A</a> and <a href="#markupa3">markup A’’</a> to ameliorate the problem.
+By the spec using the <code class="language-plaintext highlighter-rouge">presentation</code> role in a list item for a list
+already marked with a <code class="language-plaintext highlighter-rouge">presentation</code> role shouldn’t do much but such
+markup can reduce cruft in Firefox’s accessibility inspector.</p>
 
 <figure id="markupa2">
+
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
     <span class="nt">&lt;ol</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
@@ -101,10 +102,12 @@ can reduce cruft in the accessibility inspector in Firefox.</p>
 <span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ol&gt;</span>
 </code></pre></div></div>
+
 <figcaption><a href="#markupa2">Markup A'</a></figcaption>
 </figure>
 
 <figure id="markupa3">
+
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
     <span class="nt">&lt;ol</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
@@ -116,17 +119,19 @@ can reduce cruft in the accessibility inspector in Firefox.</p>
 <span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ol&gt;</span>
 </code></pre></div></div>
+
 <figcaption><a href="#markupa3">Markup A''</a></figcaption>
 </figure>
 
-<p>A <i>nuclear</i> solution is to markup the text for graphical display
-only using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn">Markup N</a>.  I would
+<p>As a <i>nuclear</i> solution is you can markup the text for graphical
+display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn">Markup N</a>.  I would
 advise use of the <code class="language-plaintext highlighter-rouge">aria-labelledby</code> attribute instead of the
 <code class="language-plaintext highlighter-rouge">aria-label</code> attribute here. <code class="language-plaintext highlighter-rouge">aria-label</code> has a tendency to work
 poorly with newlines in text, is not usually translated by automated
 tools and doesn’t let you embed more markup as appropriate.</p>
 
 <figure id="markupn">
+
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
 <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span> <span class="na">role=</span><span class="s">"graphic"</span> <span class="na">aria-labelledby=</span><span class="s">"transcript"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
@@ -147,26 +152,30 @@ tools and doesn’t let you embed more markup as appropriate.</p>
 <span class="nt">&lt;/figcaption&gt;</span>
 <span class="nt">&lt;/figure&gt;</span>
 </code></pre></div></div>
+
 <figcaption><a href="#markupn">Markup N</a></figcaption>
 </figure>
 
-<p>In some setups <a href="#markupb">Markup B</a> <em>sounds</em> yucky.  Ending and
-starting words in separate lines like <i>red</i> and <i>Violets</i>
-run together.  One workaround is to include extra punctuation
-annotated with a screen-reader-only class as with <a href="#markupb2">Markup
-A’</a> and <a href="#markupb3">Markup B’ CSS</a>.  However, on Firefox
+<p>In some setups <a href="#markupb">Markup B</a> sounds yucky.  Ending and starting
+words in separate lines like <i>red</i> and <i>Violets</i> run
+together.  You might include extra punctuation annotated with a
+screen-reader-only class as with <a href="#markupb2">Markup A’</a> and <a href="#markupb3">Markup B’
+CSS</a> to workaround around this issue.  However, on Firefox
 this hack breaks up lines into separate areas to track through.</p>
 
 <figure id="markupb2">
+
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>Roses are red<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>; <span class="nt">&lt;/span&gt;&lt;br&gt;</span>
 Violets are blue,<span class="nt">&lt;br&gt;</span>
 Sugar is sweet<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>; <span class="nt">&lt;/span&gt;&lt;br&gt;</span>
 And so are you.<span class="nt">&lt;/p&gt;</span>
 </code></pre></div></div>
-<figcaption><a href="#markupb2">Markup B' <abbr>HTML</abbr></a></figcaption>
+
+<figcaption><a href="#markupb2">Markup B' <abbr title="HyperText Markup Language">HTML</abbr></a></figcaption>
 </figure>
 
 <figure id="markupb3">
+
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.sr-only</span> <span class="p">{</span>
    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span> <span class="p">;</span>
    <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span> <span class="p">;</span>
@@ -175,27 +184,28 @@ And so are you.<span class="nt">&lt;/p&gt;</span>
    <span class="nl">color</span><span class="p">:</span> <span class="nb">transparent</span> <span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
 <figcaption><a href="#markupb3">Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
 </figure>
 
 <p>No revisions of <a href="#markupa">Markup A</a> or <a href="#markupb">Markup B</a> ensure
 proper pronounciation of stress and sounds.  Only American English is
-likely to be pronounced correctly. Setting the language attribute for
-documents and poems as appropriate can help but is not a complete
-solution.</p>
+likely to be pronounced correctly. To help you can set the language
+attribute for documents and poems as appropriate.  However, this is
+not a complete solution.</p>
 
-<p>As an anglophone Canadian author I would set the language attribute
-for my documents and poems to <code class="language-plaintext highlighter-rouge">en-CA</code>. However, this use of the <code class="language-plaintext highlighter-rouge">lang</code>
+<p>As an anglophone Canadian author I set the language attribute for my
+documents and poems to <code class="language-plaintext highlighter-rouge">en-CA</code>. However, this use of the <code class="language-plaintext highlighter-rouge">lang</code>
 attribute only helps with English words and not with imports from
-other languages.  I am not sure how to help screen readers pronounce
-names of mythical figures.  Markup of individual phrases like <code class="language-plaintext highlighter-rouge">&lt;i
-lang="non"&gt;Sleipnir&lt;/i&gt;</code> (old Norse) and <code class="language-plaintext highlighter-rouge">&lt;i lang="gem"&gt;Wotan&lt;/i&gt;</code>
-(Germanic languages group) doesn’t help.</p>
+other languages.  I don’t know how to help screen readers pronounce
+names of mythical figures.  You could markup individual phrases like
+<code class="language-plaintext highlighter-rouge">&lt;i lang="non"&gt;Sleipnir&lt;/i&gt;</code> (old Norse) and <code class="language-plaintext highlighter-rouge">&lt;i lang="gem"&gt;Wotan&lt;/i&gt;</code>
+(Germanic languages group) but this particular markup doesn’t help.</p>
 
-<p>Semantically the <code class="language-plaintext highlighter-rouge">em</code> element should be appropriate for marking up
-stress emphasis.  However, such markup is verbose and many screen
-readers ignore elements like <code class="language-plaintext highlighter-rouge">em</code> because of the heavy unsemantic
-abuse of such elements in the wider internet for presenting bold text.</p>
+<p>Semantically you might markup stress with emphasis with the <code class="language-plaintext highlighter-rouge">em</code>
+element.  However, such markup is verbose and many screen readers
+ignore elements like <code class="language-plaintext highlighter-rouge">em</code> because of the heavy unsemantic abuse of
+such elements in the wider internet for presenting bold text.</p>
 
 <h2 id="presentation"><a href="#presentation">Presentation</a></h2>
 
@@ -203,17 +213,20 @@ abuse of such elements in the wider internet for presenting bold text.</p>
 standard layout for overlong lines is to align the first line ragged
 right and all other lines ragged right.</p>
 
-<p>The typical advice to approximate a poetry layout is a hanging indent
+<p>You can approximate a poetry layout with a hanging indent layout
 something like <a href="#indentcss">Indent <abbr>CSS</abbr></a>.  However, a
 hanging indent layout is not really correct.</p>
 
 <figure>
+
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.line</span> <span class="p">{</span>
    <span class="nl">text-indent</span><span class="p">:</span> <span class="m">-4ch</span> <span class="p">;</span>
    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">4ch</span> <span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<figcaption><a href="#indentcss">Indent <abbr>CSS</abbr></a></figcaption> </figure>
+
+<figcaption><a href="#indentcss">Indent <abbr>CSS</abbr></a></figcaption>
+</figure>
 
 <p>You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text <em>within</em> the
@@ -222,6 +235,7 @@ line block to the right.  Something like <a href="#alignlastcss">Align Last
 However, even this layout fails when you overflow multiple lines.</p>
 
 <figure id="alignlastcss">
+
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.stanza</span> <span class="p">{</span>
    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span> <span class="p">;</span>
    <span class="nl">flex-direction</span><span class="p">:</span> <span class="n">column</span> <span class="p">;</span>
@@ -232,10 +246,9 @@ However, even this layout fails when you overflow multiple lines.</p>
    <span class="nl">text-align-last</span><span class="p">:</span> <span class="n">end</span> <span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
 <figcaption><a href="#alignlastcss">Align Last <abbr>CSS</abbr></a></figcaption>
 </figure>
-
-<h2 id="conclusion">Conclusion</h2>
 
 <p>Here is an <a href="#example">example</a> similar to the current compromise I use
 on this site along with <a href="#examplecode">code</a>.</p>
@@ -262,7 +275,7 @@ on this site along with <a href="#examplecode">code</a>.</p>
 </p>
 </div>
 
-<figcaption><a href="#example">Final Example</a></figcaption>
+<figcaption><a href="#example">Example</a></figcaption>
 </figure>
 
 <figure id="examplecode">
@@ -287,18 +300,19 @@ on this site along with <a href="#examplecode">code</a>.</p>
 <span class="nt">&lt;/div&gt;</span>
 </code></pre></div></div>
 
-<figcaption><a href="#examplecode">Final Example Code</a></figcaption>
+<figcaption><a href="#examplecode">Example Code</a></figcaption>
 </figure>
 
-<p>In summary the most appropriate markup for poetry is <i>the <code class="language-plaintext highlighter-rouge">audio</code>
-element.</i></p>
+<h2 id="conclusion"><a href="#conclusion">Conclusion</a></h2>
+
+<p>You should use the <code class="language-plaintext highlighter-rouge">audio</code> element to markup poetry.</p>
 
 <h2 id="tryit"><a href="#tryit">Try It</a></h2>
 
 <p>Personally I found Android TalkBack to be the easiest screen reader to
 get started with. <a href="https://a11yproject.com">The helpful
 <cite>A11y Project</cite> blog</a> has a number of guides on getting
-started with screen readeres but they might be a little old.</p>
+started with screen readers but they might be a little old.</p>
 
 <ul>
   <li><a href="https://a11project.com/posts/getting-started-with-orca"><cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite></a></li>
