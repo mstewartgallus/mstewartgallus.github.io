@@ -44,14 +44,17 @@ sub, sup {
 // default font sizes are at about 16px
 // so 18em / 16 should scale up to 18px
 $root-font-size: ($font-size / 16) * 1em ;
-$larger-font-size: (($font-size + 1) / 16) * 1em ;
+$double-font-size: 2 * $root-font-size ;
 
 :root {
     font-size: $root-font-size ;
 }
-@media screen and (min-width: $A4-width) {
+@media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+only screen and (-o-min-device-pixel-ratio: 13/10),
+only screen and (min-resolution: 120dpi)
+{
     :root {
-        font-size: $larger-font-size ;
+        font-size: $double-font-size ;
     }
 }
 
