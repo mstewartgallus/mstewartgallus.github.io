@@ -2,7 +2,7 @@
 ---
 @charset "utf-8";
 
-$font-size: 18 ;
+$font-size: 16 ;
 
 $scale: 6/5 ;
 
@@ -40,9 +40,10 @@ $halfline: 0.5 * $line ;
 $lineandhalf: 1.5 * $line ;
 $doubleline: 2 * $line ;
 
-$A4-width: 49.8rem ;
+$A4-width: 11in ;
+$A4-margin: 1.5in ;
+
 $aside: 13rem ;
-$A4-margin: 10rem ;
 
 @mixin clear {
     all: initial ;
