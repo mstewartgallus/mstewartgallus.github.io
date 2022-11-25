@@ -22,7 +22,7 @@
 h1, h2, h3, h4, h5, h6 {
     break-inside: avoid ;
 }
-p {
+figure {
     break-inside: avoid ;
 }
 
@@ -42,6 +42,6 @@ h1, h2 {
 }
 
 :root {
-    widows: 3 ;
-    orphans: 3 ;
+    widows: 2 ;
+    orphans: 2 ;
 }
