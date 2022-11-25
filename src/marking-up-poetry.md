@@ -326,8 +326,8 @@ on this site along with [code](#examplecode).
 </figure>
 {:#examplecode}
 
-<i>Probably the most appropriate <abbr>HTML</abbr> element for poetry
-is the `audio` element.</i>
+In summary the most appropriate markup for poetry is <i>the `audio`
+element.</i>
 
 ## [Try It](#tryit)
 {:#tryit}
