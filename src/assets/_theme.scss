@@ -1,6 +1,6 @@
 :is(header, figcaption, h1,h2,h3,h4,h5,h6,h7)
 :any-link:not(:focus):not(:active):not(:hover) {
-    text-decoration: inherit ;
+    text-decoration: none ;
 }
 
 :is(header, figcaption, h1,h2,h3,h4,h5,h6,h7)
