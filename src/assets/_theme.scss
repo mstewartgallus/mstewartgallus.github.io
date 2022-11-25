@@ -56,11 +56,6 @@ body > header {
     @include small-caps ;
 }
 
-div.highlight, div.highlighter-rouge {
-    display: contents ;
-}
-pre.highlight {
-    inline-size: $width ;
-    max-inline-size: 100% ;
-    overflow-block: scroll ;
+.highlight {
+    overflow: auto ;
 }

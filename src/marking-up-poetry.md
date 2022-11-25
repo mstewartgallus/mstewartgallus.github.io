@@ -139,20 +139,20 @@ list must be manually tracked through.  As well <q>line <var>m</var>
 of <var>n</var></q> is repeated for every line of [Markup
 B](#markupb).  Use of the `presentation` <abbr title="Accessible Rich Internet Applications">ARIA</abbr>
 role can ameliorate the problem.  Less or more use of the
-`presentation` role as in [markup B'](#markupb') and [markup
-B''](#markupb'') works well enough.
+`presentation` role as in [markup B'](#markupb2) and [markup
+B''](#markupb3) works well enough.
 
 <figure>
 {{- markupb2 | markdownify -}}
-<figcaption><a href="#markupb'">Markup B'</a></figcaption>
+<figcaption><a href="#markupb2">Markup B'</a></figcaption>
 </figure>
-{:#markupb'}
+{:#markupb2}
 
 <figure>
 {{- markupb3 | markdownify -}}
-<figcaption><a href="#markupb''">Markup B''</a></figcaption>
+<figcaption><a href="#markupb3">Markup B''</a></figcaption>
 </figure>
-{:#markupb''}
+{:#markupb3}
 
 A <i>nuclear</i> solution is to markup the text for graphical display
 only using the `graphic` role as in [Markup N](#markupn).  I would
@@ -170,20 +170,20 @@ In some setups [Markup A](#markupa) *sounds* yucky.  Ending and
 starting words in separate lines like <i>red</i> and <i>Violets</i>
 run together.  One workaround is to include extra punctuation
 annotated with a screen reader only class as with [Markup
-A'](#markupa') and [Markup A' CSS](#markupa'').  However, on Firefox
+A'](#markupa2) and [Markup A' CSS](#markupa3).  However, on Firefox
 this hack breaks up lines into separate areas to track through.
 
 <figure>
 {{- markupa2 | markdownify -}}
-<figcaption><a href="#markupa'">Markup A' <abbr>HTML</abbr></a></figcaption>
+<figcaption><a href="#markupa2">Markup A' <abbr>HTML</abbr></a></figcaption>
 </figure>
-{:#markupa'}
+{:#markupa2}
 
 <figure>
 {{- markupa3 | markdownify -}}
-<figcaption><a href="#markupa''">Markup A' <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
+<figcaption><a href="#markupa3">Markup A' <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
 </figure>
-{:#markupa''}
+{:#markupa3}
 
 No revisions of [Markup A](#markupa) or [Markup B](#markupb) ensure
 proper pronounciation of stress and sounds.  Only American English is
