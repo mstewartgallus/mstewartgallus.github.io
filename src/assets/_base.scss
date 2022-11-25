@@ -41,8 +41,12 @@ sub, sup {
 }
 
 
+// default font sizes are at about 16px
+// so 18em / 16 should scale up to 18px
+$root-font-size: ($font-size / 16) * 1em ;
+
 :root {
-    font-size: 18em / 16 ;
+    font-size: $root-font-size ;
     line-height: $line ;
 }
 
