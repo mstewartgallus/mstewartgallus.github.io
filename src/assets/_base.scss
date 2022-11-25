@@ -54,11 +54,12 @@ p {
     margin-block: $line ;
 }
 
-hr, p {
+hr, p, li, figure {
     inline-size: $width ;
+    max-inline-size: 100% ;
 }
 
-hr, p, h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     max-inline-size: 100% ;
 }
 
