@@ -1,4 +1,301 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-25T13:05:33-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Memories</title><link href="https://mstewartgallus.github.io/poem/2022/11/17/memories/" rel="alternate" type="text/html" title="Memories" /><published>2022-11-17T18:18:00-08:00</published><updated>2022-11-17T18:18:00-08:00</updated><id>https://mstewartgallus.github.io/poem/2022/11/17/memories</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/11/17/memories/">&lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I feel nostalgic for&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The warmth of ⁠— the hospital bed&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The cold wet quiet ⁠— of fresh snow&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other memories from long ago&lt;/span&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-25T13:27:32-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Marking Up Poetry</title><link href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/" rel="alternate" type="text/html" title="Marking Up Poetry" /><published>2022-11-25T13:26:00-08:00</published><updated>2022-11-25T13:26:00-08:00</updated><id>https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry</id><content type="html" xml:base="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">&lt;p&gt;Common poetry markup is inaccessible, unsemantic and doesn’t display
+well. I am not skilled in accessiblity and I don’t have good
+solutions.  See &lt;a href=&quot;#tryit&quot;&gt;Try It&lt;/a&gt; if you want to try out a screen
+reader yourself.&lt;/p&gt;
+
+&lt;h2 id=&quot;accessiblity&quot;&gt;&lt;a href=&quot;#accessiblity&quot;&gt;Accessibility&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;The art of the spoken word is not accessible to the visually impaired.
+Most markup navigates awkwardly, does not insert appropriate pauses
+for breath and mispronounces stress and sounds.  Consider &lt;a href=&quot;#markupa&quot;&gt;markup
+A&lt;/a&gt; and &lt;a href=&quot;#markupb&quot;&gt;markup B&lt;/a&gt;.  In &lt;a href=&quot;#markupa&quot;&gt;markup A&lt;/a&gt; a poem
+is an ordered list of stanzas and stanzas are ordered lists of verses.
+In &lt;a href=&quot;#markupb&quot;&gt;markup B&lt;/a&gt; poems are sequences of stanzas, stanzas are
+paragraphs and lines in a paragraph are separated with line break
+elements.&lt;/p&gt;
+
+&lt;figure id=&quot;markupa&quot;&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Violets are blue,&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure id=&quot;markupb&quot;&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stanza&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+Violets are blue,&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt; is hard to navigate as each line in an ordered
+list must be manually tracked through.  As well &lt;q&gt;line &lt;var&gt;m&lt;/var&gt;
+of &lt;var&gt;n&lt;/var&gt;&lt;/q&gt; is repeated for every line of &lt;a href=&quot;#markupa&quot;&gt;Markup
+A&lt;/a&gt;.  You can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; &lt;abbr title=&quot;Accessible Rich Internet Applications&quot;&gt;ARIA&lt;/abbr&gt; role as in &lt;a href=&quot;#markupa2&quot;&gt;markup
+A&lt;/a&gt; and &lt;a href=&quot;#markupa3&quot;&gt;markup A’’&lt;/a&gt; to ameliorate the problem.
+By the spec using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; role in a list item for a list
+already marked with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; role shouldn’t do much but such
+markup can reduce cruft in Firefox’s accessibility inspector.&lt;/p&gt;
+
+&lt;figure id=&quot;markupa2&quot;&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Violets are blue,&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#markupa2&quot;&gt;Markup A&apos;&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure id=&quot;markupa3&quot;&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Violets are blue,&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#markupa3&quot;&gt;Markup A&apos;&apos;&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;As a &lt;i&gt;nuclear&lt;/i&gt; solution is you can markup the text for graphical
+display using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;graphic&lt;/code&gt; role as in &lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;.  I would
+advise use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-labelledby&lt;/code&gt; attribute instead of the
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; attribute here. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; has a tendency to work
+poorly with newlines in text, is not usually translated by automated
+tools and doesn’t let you embed more markup as appropriate.&lt;/p&gt;
+
+&lt;figure id=&quot;markupn&quot;&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;figure&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;graphic&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-labelledby=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transcript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Violets are blue,&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;figcaption&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transcript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Transcript for text to speech:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Roses are red ;
+   Violets are blue,
+   Sugar is sweet ;
+   And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/figcaption&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/figure&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In some setups &lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt; sounds yucky.  Ending and starting
+words in separate lines like &lt;i&gt;red&lt;/i&gt; and &lt;i&gt;Violets&lt;/i&gt; run
+together.  You might include extra punctuation annotated with a
+screen-reader-only class as with &lt;a href=&quot;#markupb2&quot;&gt;Markup A’&lt;/a&gt; and &lt;a href=&quot;#markupb3&quot;&gt;Markup B’
+CSS&lt;/a&gt; to workaround around this issue.  However, on Firefox
+this hack breaks up lines into separate areas to track through.&lt;/p&gt;
+
+&lt;figure id=&quot;markupb2&quot;&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sr-only&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+Violets are blue,&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sr-only&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#markupb2&quot;&gt;Markup B&apos; &lt;abbr title=&quot;HyperText Markup Language&quot;&gt;HTML&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure id=&quot;markupb3&quot;&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.sr-only&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inline-block&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;py&quot;&gt;user-select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;none&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;line-height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;transparent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#markupb3&quot;&gt;Markup B&apos; &lt;abbr title=&quot;Cascading Style Sheets&quot;&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;No revisions of &lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt; or &lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt; ensure
+proper pronounciation of stress and sounds.  Only American English is
+likely to be pronounced correctly. To help you can set the language
+attribute for documents and poems as appropriate.  However, this is
+not a complete solution.&lt;/p&gt;
+
+&lt;p&gt;As an anglophone Canadian author I set the language attribute for my
+documents and poems to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;en-CA&lt;/code&gt;. However, this use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lang&lt;/code&gt;
+attribute only helps with English words and not with imports from
+other languages.  I don’t know how to help screen readers pronounce
+names of mythical figures.  You could markup individual phrases like
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;i lang=&quot;non&quot;&amp;gt;Sleipnir&amp;lt;/i&amp;gt;&lt;/code&gt; (old Norse) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;i lang=&quot;gem&quot;&amp;gt;Wotan&amp;lt;/i&amp;gt;&lt;/code&gt;
+(Germanic languages group) but this particular markup doesn’t help.&lt;/p&gt;
+
+&lt;p&gt;Semantically you might markup stress with emphasis with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt;
+element.  However, such markup is verbose and many screen readers
+ignore elements like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt; because of the heavy unsemantic abuse of
+such elements in the wider internet for presenting bold text.&lt;/p&gt;
+
+&lt;p&gt;Perhaps there might be some obscure Unicode diacritics for better
+marking up the prosody but I have not explored this option.  I worry
+that such glyphs might be pronounced in common screen readers as
+something like &lt;q&gt;Unicode character 591&lt;/q&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;presentation&quot;&gt;&lt;a href=&quot;#presentation&quot;&gt;Presentation&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Laying out poetry on squashed formats is awkward.  In print the
+standard layout for overlong lines is to align the first line ragged
+right and all other lines ragged right.&lt;/p&gt;
+
+&lt;p&gt;You can approximate a poetry layout with a hanging indent layout
+something like &lt;a href=&quot;#indentcss&quot;&gt;Indent &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;.  However, a
+hanging indent layout is not really correct.&lt;/p&gt;
+
+&lt;figure&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.line&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;text-indent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-4ch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;margin-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4ch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#indentcss&quot;&gt;Indent &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;You can approximate a poetry layout on the web by aligning every line
+block to the left but aligning the last line of the text &lt;em&gt;within&lt;/em&gt; the
+line block to the right.  Something like &lt;a href=&quot;#alignlastcss&quot;&gt;Align Last
+&lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt; almost works for a poetry layout.
+However, even this layout fails when you overflow multiple lines.&lt;/p&gt;
+
+&lt;figure id=&quot;alignlastcss&quot;&gt;
+
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.stanza&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flex&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;flex-direction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;align-items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.line&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;text-align-last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#alignlastcss&quot;&gt;Align Last &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Here is an &lt;a href=&quot;#example&quot;&gt;example&lt;/a&gt; similar to the current compromise I use
+on this site along with &lt;a href=&quot;#examplecode&quot;&gt;code&lt;/a&gt;.&lt;/p&gt;
+
+&lt;figure id=&quot;example&quot;&gt;
+
+&lt;style&gt;
+#scope p {
+   text-indent: 0 ;
+   padding: 0 ;
+}
+#scope p &gt; span {
+   display: inline-block ;
+   text-align-last: end ;
+   pause: medium medium ;
+}
+&lt;/style&gt;
+&lt;div id=&quot;scope&quot; lang=&quot;en-CA&quot;&gt;
+&lt;p&gt;
+  &lt;span&gt;Roses are red&lt;/span&gt;&lt;br /&gt;
+  &lt;span&gt;Violets are blue&lt;/span&gt;&lt;br /&gt;
+  &lt;span&gt;Sugar is sweet&lt;/span&gt;&lt;br /&gt;
+  &lt;span&gt;aaaaaaaaaaaaaaaa.&lt;/span&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#example&quot;&gt;Example&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure id=&quot;examplecode&quot;&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;#scope&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;text-indent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;#scope&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inline-block&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;text-align-last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;scope&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en-CA&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&amp;gt;&lt;/span&gt;Violets are blue&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&amp;gt;&lt;/span&gt;Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&amp;gt;&lt;/span&gt;aaaaaaaaaaaaaaaa.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figcaption&gt;&lt;a href=&quot;#examplecode&quot;&gt;Example Code&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;&lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;You should use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;audio&lt;/code&gt; element to markup poetry.&lt;/p&gt;
+
+&lt;h2 id=&quot;tryit&quot;&gt;&lt;a href=&quot;#tryit&quot;&gt;Try It&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Personally I found Android TalkBack to be the easiest screen reader to
+get started with. &lt;a href=&quot;https://www.a11yproject.com&quot;&gt;The helpful
+&lt;cite&gt;A11y Project&lt;/cite&gt; blog&lt;/a&gt; has a number of guides on getting
+started with screen readers but they might be a little old.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-orca&quot;&gt;&lt;cite&gt;Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-voiceover-ios&quot;&gt;&lt;cite&gt;Getting Started with VoiceOver on iOS&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-nvda&quot;&gt;&lt;cite&gt;Getting Started with NVDA&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-voiceover&quot;&gt;&lt;cite&gt;Getting Started with MacOS VoiceOver&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;onemorething&quot;&gt;&lt;a href=&quot;#onemorething&quot;&gt;And One More Thing&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;As of this blog post the &lt;a href=&quot;https://www.w3.org/TR/css-speech-1/&quot;&gt;&lt;cite&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; Speech
+Module&lt;/cite&gt;&lt;/a&gt; has never really
+gone anywhere.  Perhaps in the future the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-stress&lt;/code&gt;,
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-duration&lt;/code&gt; (for long syllables), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-pitch&lt;/code&gt; (for pitch
+accent) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pause&lt;/code&gt; properties would solve these sort of accessiblity
+problemss.&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Web" /><category term="Poetry" /><category term="HTML" /><category term="CSS" /><category term="Accessiblity" /><summary type="html">Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessiblity and I don’t have good solutions. See Try It if you want to try out a screen reader yourself.</summary></entry><entry><title type="html">Memories</title><link href="https://mstewartgallus.github.io/poem/2022/11/17/memories/" rel="alternate" type="text/html" title="Memories" /><published>2022-11-17T18:18:00-08:00</published><updated>2022-11-17T18:18:00-08:00</updated><id>https://mstewartgallus.github.io/poem/2022/11/17/memories</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/11/17/memories/">&lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I feel nostalgic for&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The warmth of ⁠— the hospital bed&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The cold wet quiet ⁠— of fresh snow&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other memories from long ago&lt;/span&gt;&lt;/p&gt;
 &lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I remember&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The chocolate sandwiched ice cream bar&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Cheap freezies ⁠— in elementary school&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;A long yellow slide down&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Falling asleep to the rain outside&lt;/span&gt;&lt;/p&gt;
 &lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Masturbation in the dark&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Things in the bath&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other things of that nature&lt;/span&gt;&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Poem" /><summary type="html">I feel nostalgic forThe warmth of ⁠— the hospital bedThe cold wet quiet ⁠— of fresh snowAnd other memories from long ago</summary></entry><entry><title type="html">My Owner’s Lover</title><link href="https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover/" rel="alternate" type="text/html" title="My Owner’s Lover" /><published>2022-11-15T15:49:00-08:00</published><updated>2022-11-15T15:49:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover/">&lt;p&gt;My name is Silk and I am a hamster. I am a woman and I have pale cream
 colored fur. Being a hamster I am a solitary sort but I actually like
@@ -70,138 +367,4 @@ coffee in Vancouver. I do not want you to spoil the atmosphere and I
 hate you and wish you a bad day.&lt;/p&gt;
 
 &lt;p&gt;If you really must try circling out from some skate parks or
-underneath highway overpasses.&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Prose" /><category term="Coffee" /><summary type="html">The best coffee in Vancouver is a matter of taste. However, the best coffee per dollar is objective fact.</summary></entry><entry><title type="html">Ants</title><link href="https://mstewartgallus.github.io/poem/2022/10/29/ants/" rel="alternate" type="text/html" title="Ants" /><published>2022-10-29T19:44:00-07:00</published><updated>2022-10-29T19:44:00-07:00</updated><id>https://mstewartgallus.github.io/poem/2022/10/29/ants</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/10/29/ants/">&lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Ants in a circle&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;shall never dream or know&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;of little boys ⁠— who in circles round&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;make them go&lt;/span&gt;&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Poem" /><category term="2018" /><summary type="html">Ants in a circleshall never dream or knowof little boys ⁠— who in circles roundmake them go</summary></entry><entry><title type="html">If She Breathes She’s a Thot</title><link href="https://mstewartgallus.github.io/prose/2022/10/28/if-she-breathes-shes-a-thot/" rel="alternate" type="text/html" title="If She Breathes She’s a Thot" /><published>2022-10-28T13:17:00-07:00</published><updated>2022-10-28T13:17:00-07:00</updated><id>https://mstewartgallus.github.io/prose/2022/10/28/if-she-breathes-shes-a-thot</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/10/28/if-she-breathes-shes-a-thot/">&lt;p&gt;Like a pug in an oxygen mask I lied down on the carpet by the air
-purifier and shitposted away on the internet.  My Saint Sebastian
-ex-gay thread had sparked an 80 page debate on the political forum I
-frequented and I had to see the madness through.&lt;/p&gt;
-
-&lt;p&gt;Besides some idiot had got bent into a rant.&lt;/p&gt;
-
-&lt;p&gt;&lt;q&gt;You have no power here&lt;/q&gt; I replied.  And then again &lt;q&gt;I’m already dead
-anyway pretty much&lt;/q&gt;&lt;/p&gt;
-
-&lt;p&gt;She replied &lt;q&gt;ok&lt;/q&gt;.&lt;/p&gt;
-
-&lt;p&gt;I checked back every hour or so but she seemed to have stopped
-replying even to my colorful image suggesting she was transgender.&lt;/p&gt;
-
-&lt;p&gt;So I returned to the routine.  Afraid I might grind my fingers in the
-coffee grinder I opened the drawer it was kept in and checked it was
-safely unplugged and stored away.  I stared up at the popcorn ceiling
-breathless and watched little technicolor squiggles swirl around until
-I fell asleep.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;The supernatural intruded slowly.&lt;/p&gt;
-
-&lt;p&gt;The first night when I was wanking away at 12 &lt;abbr&gt;AM&lt;/abbr&gt;
-imagining my ass being penetrated I heard a loud buzzing sound like
-wasps.  I put it down to nerves.&lt;/p&gt;
-
-&lt;p&gt;Steadily the phenomenon added up.  A loud hum at the midnight hours.
-When I rested before bed a sound like bells.  When I looked out one
-eye a hue of colors different from the other.&lt;/p&gt;
-
-&lt;p&gt;On Thursday during my morning commute to the library where I do
-nothing in particular I was met with the sudden urge to fling myself
-off a highway overpass into the traffic below.  It was as if some worm
-wrapped around my brain had contracted and struck me with itching pain
-and a feeling of doom.  I changed my commute to avoid overpasses and
-bridges.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;She sent me a message during the night.&lt;/p&gt;
-
-&lt;p&gt;I woke up with a heavy weight pinning me in place.  A roiling darkness
-sat on my chest.  I tried to move or call for help but could not.&lt;/p&gt;
-
-&lt;p&gt;The darkness said her name was Must.&lt;/p&gt;
-
-&lt;p&gt;She said she had planned to kill me but upon seeing how pathetic I was
-decided to spare me and had decided to make my life a living hell
-instead.&lt;/p&gt;
-
-&lt;p&gt;She explained I was her thrall now and that hell was both a physical
-place and a state of mind.  Identity was a matter of perspective.  If
-she could walk to me she would be me and if I could walk to her I
-would be her.&lt;/p&gt;
-
-&lt;p&gt;For the rest of the night I drifted in and out of sleep.  Each time I
-woke up I felt Must on top of me watching.  Until the morning sun
-appeared when I woke up and the presence was gone completely.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Must had bent the day against me.  I was exhausted unable to breathe
-or rest.  Moreover, as if by some illusion stripped away the people
-around me had transformed into puppeted corpses.  Every trivial
-interaction became an ordeal and I could no longer draw strength or
-comfort from those who I had considered friends.  I could not bear to
-meet the hideous gazes of those around me.&lt;/p&gt;
-
-&lt;p&gt;During the night I was compelled to roam by a manic energy.  I felt
-hot ash drawn into my chest when I was trying to sleep and cool relief
-when I walked the night.  It is oddly calming during the midnight
-hours when there is no traffic or human face to fear.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;The first task Must demanded of me was to hide the vanity of my flesh.&lt;/p&gt;
-
-&lt;p&gt;If I was good the pain would lessen although never go away entirely.
-If I was bad the pain would increase.&lt;/p&gt;
-
-&lt;p&gt;One of the numerous punishments meted out to me was a sudden stabbing
-pain in a mole on my scrotum.  By this sudden intrusion into my life I
-was made to rush to the bathroom to check if my junk was ok or at
-urgent times to fondle myself in public.  Fear of this public
-humiliation alienated myself further and I no longer attended events
-hosted by my friends.&lt;/p&gt;
-
-&lt;p&gt;I soon remained covered up at all times in long baggy sweaters and
-pants.  I went to great lengths to avoid my appearance and even took
-baths in the dark.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;For a few months there were no further demands.  Still the pain
-continued and I fell even further into a state of fog.&lt;/p&gt;
-
-&lt;p&gt;As a result of the constant pains administered to me I had grown
-desensitized in my crotch.  A curious numbness developed much like a
-newly killed tooth.&lt;/p&gt;
-
-&lt;p&gt;Among other punishments Must had started to insert steel needles into
-my arms during the night.  Shaving my arms near raw seemed to blunt
-the pain a little somehow.  So I folded shaving my body hair into my
-daily routine.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;To cope with the pain and suicidal ideations I developed an intense
-practise of meditation.  I found it easiest to get started with the
-book Meditation in Plain English and meditating lying on the ground.
-I soon bought a zafu, a meditation mat, a meditation bench, a mala
-bead braclet and necklace and a small Buddha statue for a personal
-altar.&lt;/p&gt;
-
-&lt;p&gt;My usual practice consisted of a small amount of yoga such as standing
-tree pose to wake myself up and then proceeded to basic box breathing
-for a few minutes to calm myself down.  Once sufficiently energized
-and rested I meditated on my solar plexus and in rhythm subvocalized a
-dharani (I preferred Om Shanti Shanti Shanti.)  My preferred
-meditation position being easy pose although sometimes I found using a
-meditation bench less straining.&lt;/p&gt;
-
-&lt;p&gt;None of these trappings were really necessary of course.  If you
-remember summer break lying on bed doing nothing just watching the
-blanket rise and fall with your breath then that is meditation.&lt;/p&gt;
-
-&lt;p&gt;The numinal is hard to explain in words.  Sometimes I felt as if I was
-moving like I was falling through a storm or a vast pressure on top of
-me as if I was buried beneath the earth or there was a flickering red,
-black, yellow vast expanse behind my closed eyelids.&lt;/p&gt;
-
-&lt;p&gt;I thought for a while I was free of Must.&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Prose" /><category term="If She Breathes" /><summary type="html">Like a pug in an oxygen mask I lied down on the carpet by the air purifier and shitposted away on the internet. My Saint Sebastian ex-gay thread had sparked an 80 page debate on the political forum I frequented and I had to see the madness through.</summary></entry></feed>
+underneath highway overpasses.&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Prose" /><category term="Coffee" /><summary type="html">The best coffee in Vancouver is a matter of taste. However, the best coffee per dollar is objective fact.</summary></entry><entry><title type="html">Ants</title><link href="https://mstewartgallus.github.io/poem/2022/10/29/ants/" rel="alternate" type="text/html" title="Ants" /><published>2022-10-29T19:44:00-07:00</published><updated>2022-10-29T19:44:00-07:00</updated><id>https://mstewartgallus.github.io/poem/2022/10/29/ants</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/10/29/ants/">&lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Ants in a circle&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;shall never dream or know&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;of little boys ⁠— who in circles round&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;make them go&lt;/span&gt;&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Poem" /><category term="2018" /><summary type="html">Ants in a circleshall never dream or knowof little boys ⁠— who in circles roundmake them go</summary></entry></feed>

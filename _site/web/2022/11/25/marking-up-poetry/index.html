@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-CA"
       itemscope
-      itemtype="https://schema.org/WebPage"
-      itemid="https://mstewartgallus.github.io/secret-preview/">
+      itemtype="https://schema.org/ItemPage"
+      itemid="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,22 +10,31 @@
 <link rel="icon" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/main.css">
 <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Words to Kick Your Teeth Out" >
-<link rel="canonical" href="https://mstewartgallus.github.io/secret-preview/">
+<link rel="canonical" href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">
 <link rel="author" href="/about">
 <meta name="author" content="Molossus Spondee">
-<meta name="description" content="lol, lmao">
+<meta name="description" content="Common poetry markup is inaccessible, unsemantic and doesn’t display
+well. I am not skilled in accessiblity and I don’t have good
+solutions.  See Try It if you want to try out a screen
+reader yourself.
+">
 <meta property="og:title" content="Marking Up Poetry">
-<meta property="og:url" content="https://mstewartgallus.github.io/secret-preview/">
-<meta property="og:type" content="website">
+<meta property="og:url" content="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">
+<meta property="og:type" content="article">
 <meta name="og:site_name" content="Words to Kick Your Teeth Out">
 <meta property="og:image" content="https://mstewartgallus.github.io/assets/favicon.svg" >
-<meta property="og:description" content="lol, lmao"><meta property="og:profile" content="Molossus Spondee">
+<meta property="og:description" content="Common poetry markup is inaccessible, unsemantic and doesn’t display
+well. I am not skilled in accessiblity and I don’t have good
+solutions.  See Try It if you want to try out a screen
+reader yourself.
+"><meta property="og:article:author" content="Molossus Spondee">
+<meta property="og:article:published_time" content="2022-11-25"><meta property="og:article:tag" content="Poetry"><meta property="og:article:tag" content="HTML"><meta property="og:article:tag" content="CSS"><meta property="og:article:tag" content="Accessiblity"><meta property="og:profile" content="Molossus Spondee">
 <meta property="og:profile:username" content="Molossus Spondee">
 </head>
   <body itemscope
         itemprop="mainEntity hasPart"
-        itemtype="https://schema.org/WebContent"
-        itemid="https://mstewartgallus.github.io/secret-preview/">
+        itemtype="https://schema.org/BlogPosting"
+        itemid="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">
     <header><a translate="no" href="/"><cite>Words to Kick Your Teeth Out</cite></a>
 </header>
     <div>
@@ -33,7 +42,7 @@
         <header>
           <hgroup>
             <h1 id="title" itemprop="name headline">
-              <a rel="bookmark" href="/secret-preview/" itemprop="url">Marking Up Poetry</a>
+              <a rel="bookmark" href="/web/2022/11/25/marking-up-poetry/" itemprop="url">Marking Up Poetry</a>
             </h1></hgroup>
         </header>
         <div itemprop="articleBody"><p>Common poetry markup is inaccessible, unsemantic and doesn’t display
@@ -207,6 +216,11 @@ element.  However, such markup is verbose and many screen readers
 ignore elements like <code class="language-plaintext highlighter-rouge">em</code> because of the heavy unsemantic abuse of
 such elements in the wider internet for presenting bold text.</p>
 
+<p>Perhaps there might be some obscure Unicode diacritics for better
+marking up the prosody but I have not explored this option.  I worry
+that such glyphs might be pronounced in common screen readers as
+something like <q>Unicode character 591</q>.</p>
+
 <h2 id="presentation"><a href="#presentation">Presentation</a></h2>
 
 <p>Laying out poetry on squashed formats is awkward.  In print the
@@ -310,15 +324,15 @@ on this site along with <a href="#examplecode">code</a>.</p>
 <h2 id="tryit"><a href="#tryit">Try It</a></h2>
 
 <p>Personally I found Android TalkBack to be the easiest screen reader to
-get started with. <a href="https://a11yproject.com">The helpful
+get started with. <a href="https://www.a11yproject.com">The helpful
 <cite>A11y Project</cite> blog</a> has a number of guides on getting
 started with screen readers but they might be a little old.</p>
 
 <ul>
-  <li><a href="https://a11project.com/posts/getting-started-with-orca"><cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite></a></li>
-  <li><a href="https://a11project.com/posts/getting-started-with-voiceover-ios"><cite>Getting Started with VoiceOver on iOS</cite></a></li>
-  <li><a href="https://a11project.com/posts/getting-started-with-nvda"><cite>Getting Started with NVDA</cite></a></li>
-  <li><a href="https://a11project.com/posts/getting-started-with-voiceover"><cite>Getting Started with MacOS VoiceOver</cite></a></li>
+  <li><a href="https://www.a11yproject.com/posts/getting-started-with-orca"><cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite></a></li>
+  <li><a href="https://www.a11yproject.com/posts/getting-started-with-voiceover-ios"><cite>Getting Started with VoiceOver on iOS</cite></a></li>
+  <li><a href="https://www.a11yproject.com/posts/getting-started-with-nvda"><cite>Getting Started with NVDA</cite></a></li>
+  <li><a href="https://www.a11yproject.com/posts/getting-started-with-voiceover"><cite>Getting Started with MacOS VoiceOver</cite></a></li>
 </ul>
 
 <h2 id="onemorething"><a href="#onemorething">And One More Thing</a></h2>
@@ -330,5 +344,46 @@ gone anywhere.  Perhaps in the future the <code class="language-plaintext highli
 accent) and <code class="language-plaintext highlighter-rouge">pause</code> properties would solve these sort of accessiblity
 problemss.</p>
 </div>
-      </main></div></body>
+      </main><nav aria-labelledby="paging">
+  <header>
+    <hgroup>
+      <h2 id="paging"><a href="#paging">Paging</a></h2>
+    </hgroup>
+  </header>
+  <div class="paging"><a href="/poem/2022/11/17/memories/" rel="previous">
+      <dl>
+        <dt>Previous</dt>
+        <dd>
+          <cite>Memories</cite>
+        </dd>
+      </dl>
+    </a></div>
+</nav></div><footer aria-labelledby="metadata">
+  <hgroup>
+    <h2 id="metadata"><a href="#metadata">Metadata</a></h2>
+  </hgroup>
+  <dl class="metadata">
+    <dt>Author</dt>
+    <dd>
+      <span itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+        <a rel="author" itemprop="url" href="/about">
+          @<span translate="no" itemprop="name">Molossus Spondee</span>
+        </a>
+      </span>
+    </dd>
+    <dt>Posted</dt>
+    <dd>
+      <time datetime="2022-11-25T13:26:00-08:00" itemprop="datePublished">Nov 25, 2022</time>
+    </dd><dt>Category</dt><dd itemprop="articleSection">
+      <a rel="tag" href="/search/?category=Web">Web</a>
+    </dd><dt>Tag</dt><dd itemprop="keywords">
+      <a rel="tag" href="/search/?tag=Poetry">#Poetry</a>
+    </dd><dd itemprop="keywords">
+      <a rel="tag" href="/search/?tag=HTML">#HTML</a>
+    </dd><dd itemprop="keywords">
+      <a rel="tag" href="/search/?tag=CSS">#CSS</a>
+    </dd><dd itemprop="keywords">
+      <a rel="tag" href="/search/?tag=Accessiblity">#Accessiblity</a>
+    </dd></dl>
+</footer></body>
 </html>

@@ -1,13 +1,11 @@
 ---
 title: Marking Up Poetry
-date: 2022-11-24 17:13 0700
+date: 2022-11-25 13:26 0700
 tags:
 - 'Poetry'
 - 'HTML'
 - 'CSS'
 - 'Accessiblity'
-sitemap: false
-permalink: /secret-preview/
 ---
 
 Common poetry markup is inaccessible, unsemantic and doesn't display
@@ -213,6 +211,12 @@ element.  However, such markup is verbose and many screen readers
 ignore elements like `em` because of the heavy unsemantic abuse of
 such elements in the wider internet for presenting bold text.
 
+Perhaps there might be some obscure Unicode diacritics for better
+marking up the prosody but I have not explored this option.  I worry
+that such glyphs might be pronounced in common screen readers as
+something like <q>Unicode character 591</q>.
+
+
 ## [Presentation](#presentation)
 {:#presentation}
 
@@ -336,14 +340,14 @@ You should use the `audio` element to markup poetry.
 {:#tryit}
 
 Personally I found Android TalkBack to be the easiest screen reader to
-get started with. <a href="https://a11yproject.com">The helpful
+get started with. <a href="https://www.a11yproject.com">The helpful
 <cite>A11y Project</cite> blog</a> has a number of guides on getting
 started with screen readers but they might be a little old.
 
-- <a href="https://a11project.com/posts/getting-started-with-orca"><cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite></a>
-- <a href="https://a11project.com/posts/getting-started-with-voiceover-ios"><cite>Getting Started with VoiceOver on iOS</cite></a>
-- <a href="https://a11project.com/posts/getting-started-with-nvda"><cite>Getting Started with NVDA</cite></a>
-- <a href="https://a11project.com/posts/getting-started-with-voiceover"><cite>Getting Started with MacOS VoiceOver</cite></a>
+- <a href="https://www.a11yproject.com/posts/getting-started-with-orca"><cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite></a>
+- <a href="https://www.a11yproject.com/posts/getting-started-with-voiceover-ios"><cite>Getting Started with VoiceOver on iOS</cite></a>
+- <a href="https://www.a11yproject.com/posts/getting-started-with-nvda"><cite>Getting Started with NVDA</cite></a>
+- <a href="https://www.a11yproject.com/posts/getting-started-with-voiceover"><cite>Getting Started with MacOS VoiceOver</cite></a>
 
 ## [And One More Thing](#onemorething)
 {:#onemorething}
