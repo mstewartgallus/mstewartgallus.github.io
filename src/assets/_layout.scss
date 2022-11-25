@@ -38,8 +38,10 @@ body > footer {
 }
 
 @media screen {
-    body {
+    :root {
         padding-inline: 0.6em ;
+    }
+    body {
         margin-block-end: 3 * $line ;
         margin-block-start: 0.2em ;
     }
