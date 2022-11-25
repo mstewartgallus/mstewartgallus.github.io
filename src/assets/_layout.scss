@@ -4,6 +4,8 @@
 body {
     position: relative ;
     margin-inline: auto ;
+    inline-size: $width ;
+    max-inline-size: 100% ;
 }
 
 body > header {
@@ -43,16 +45,19 @@ body > footer {
     }
 }
 
-@media screen and (min-width: $A4-width) {
+@media screen and (min-width: $A4-width + 2 * $A4-margin) {
     body {
+        inline-size: initial ;
+        max-inline-size: initial ;
+
         padding-inline: 0 ;
         display: grid ;
     }
 }
 
-@media screen and (min-width: $A4-width + 2 * $A4-margin) {
+@media screen and (min-width: $A4-width + 3 * $A4-margin) {
     body {
         grid-template-columns: $A4-margin [main] auto [aside] $aside 1fr ;
-        margin-block-start: 3 * $line  ;
+        margin-block-start: $line3  ;
     }
 }
