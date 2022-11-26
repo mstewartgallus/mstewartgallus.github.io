@@ -90,17 +90,14 @@ h2 {
     margin-block-end: $line / scale(2) ;
 }
 
-dl {
+dl, dd {
     margin: 0;
 }
 dt, dd {
     display: inline ;
 }
-dt {
-    margin-inline-end: 0.2em ;
-}
-dd {
-    margin-inline-start: 0.2em ;
+dd::before {
+    content: " " ;
 }
 dt ~ dt::before {
     content: "\a" ;
