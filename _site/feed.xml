@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-25T16:22:20-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Marking Up Poetry</title><link href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/" rel="alternate" type="text/html" title="Marking Up Poetry" /><published>2022-11-25T13:26:00-08:00</published><updated>2022-11-25T13:26:00-08:00</updated><id>https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry</id><content type="html" xml:base="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">&lt;p&gt;Common poetry markup is inaccessible, unsemantic and doesn’t display
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-25T16:24:27-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Marking Up Poetry</title><link href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/" rel="alternate" type="text/html" title="Marking Up Poetry" /><published>2022-11-25T13:26:00-08:00</published><updated>2022-11-25T13:26:00-08:00</updated><id>https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry</id><content type="html" xml:base="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">&lt;p&gt;Common poetry markup is inaccessible, unsemantic and doesn’t display
 well. I am not skilled in accessibility and I don’t have good
 solutions.  See &lt;a href=&quot;#tryit&quot;&gt;Try It&lt;/a&gt; if you want to try out a screen
 reader yourself.&lt;/p&gt;
@@ -46,7 +46,7 @@ And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 
 &lt;p&gt;&lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt; is hard to navigate as each line in an ordered
 list must be manually tracked through.  As well &lt;q&gt;line &lt;var&gt;m&lt;/var&gt;
-of &lt;var&gt;n&lt;/var&gt;&lt;/q&gt; is repeated for every line of &lt;a href=&quot;#markupa&quot;&gt;Markup
+of &lt;var&gt;n&lt;/var&gt;&lt;/q&gt; is repeated for every line of &lt;a href=&quot;#markupa&quot;&gt;markup
 A&lt;/a&gt;.  You can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; &lt;abbr title=&quot;Accessible Rich Internet Applications&quot;&gt;ARIA&lt;/abbr&gt; role as in &lt;a href=&quot;#markupa2&quot;&gt;markup
 A&lt;/a&gt; and &lt;a href=&quot;#markupa3&quot;&gt;markup A’’&lt;/a&gt; to ameliorate the problem.
 By the spec using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; role in a list item for a list
@@ -88,7 +88,7 @@ markup can reduce cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;As a &lt;i&gt;nuclear&lt;/i&gt; solution you can markup the text for graphical
-display using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;graphic&lt;/code&gt; role as in &lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;.  I advise
+display using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;graphic&lt;/code&gt; role as in &lt;a href=&quot;#markupn&quot;&gt;markup N&lt;/a&gt;.  I advise
 use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-labelledby&lt;/code&gt; attribute instead of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt;
 attribute here. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; has a tendency to work poorly with
 newlines in text, is not usually translated by automated tools and
@@ -120,10 +120,10 @@ doesn’t let you embed more markup as appropriate.&lt;/p&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;In some setups &lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt; sounds yucky.  Ending and starting
+&lt;p&gt;In some setups &lt;a href=&quot;#markupb&quot;&gt;markup B&lt;/a&gt; sounds yucky.  Ending and starting
 words in separate lines like &lt;i&gt;red&lt;/i&gt; and &lt;i&gt;Violets&lt;/i&gt; run
 together.  You might include extra punctuation annotated with a
-screen-reader-only class as with &lt;a href=&quot;#markupb2&quot;&gt;Markup A’&lt;/a&gt; and &lt;a href=&quot;#markupb3&quot;&gt;Markup B’
+screen-reader-only class as with &lt;a href=&quot;#markupb2&quot;&gt;markup A’&lt;/a&gt; and &lt;a href=&quot;#markupb3&quot;&gt;markup B’
 CSS&lt;/a&gt; to work around this issue.  However, on Firefox this
 hack breaks up lines into separate areas to track through.&lt;/p&gt;
 
@@ -152,7 +152,7 @@ And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupb3&quot;&gt;Markup B&apos; &lt;abbr title=&quot;Cascading Style Sheets&quot;&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;No revisions of &lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt; or &lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt; ensure
+&lt;p&gt;No revisions of &lt;a href=&quot;#markupa&quot;&gt;markup A&lt;/a&gt; or &lt;a href=&quot;#markupb&quot;&gt;markup B&lt;/a&gt; ensure
 proper pronunciation of stress and sounds.  Only American English is
 likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is

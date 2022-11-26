@@ -142,7 +142,7 @@ elements.
 
 [Markup A](#markupa) is hard to navigate as each line in an ordered
 list must be manually tracked through.  As well <q>line <var>m</var>
-of <var>n</var></q> is repeated for every line of [Markup
+of <var>n</var></q> is repeated for every line of [markup
 A](#markupa).  You can use the `presentation` <abbr title="Accessible
 Rich Internet Applications">ARIA</abbr> role as in [markup
 A](#markupa2) and [markup A''](#markupa3) to ameliorate the problem.
@@ -163,7 +163,7 @@ markup can reduce cruft in Firefox's accessibility inspector.
 {:#markupa3}
 
 As a <i>nuclear</i> solution you can markup the text for graphical
-display using the `graphic` role as in [Markup N](#markupn).  I advise
+display using the `graphic` role as in [markup N](#markupn).  I advise
 use of the `aria-labelledby` attribute instead of the `aria-label`
 attribute here. `aria-label` has a tendency to work poorly with
 newlines in text, is not usually translated by automated tools and
@@ -175,10 +175,10 @@ doesn't let you embed more markup as appropriate.
 </figure>
 {:#markupn}
 
-In some setups [Markup B](#markupb) sounds yucky.  Ending and starting
+In some setups [markup B](#markupb) sounds yucky.  Ending and starting
 words in separate lines like <i>red</i> and <i>Violets</i> run
 together.  You might include extra punctuation annotated with a
-screen-reader-only class as with [Markup A'](#markupb2) and [Markup B'
+screen-reader-only class as with [markup A'](#markupb2) and [markup B'
 CSS](#markupb3) to work around this issue.  However, on Firefox this
 hack breaks up lines into separate areas to track through.
 
@@ -194,7 +194,7 @@ hack breaks up lines into separate areas to track through.
 </figure>
 {:#markupb3}
 
-No revisions of [Markup A](#markupa) or [Markup B](#markupb) ensure
+No revisions of [markup A](#markupa) or [markup B](#markupb) ensure
 proper pronunciation of stress and sounds.  Only American English is
 likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is
