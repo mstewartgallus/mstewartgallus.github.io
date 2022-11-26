@@ -177,12 +177,14 @@ doesn't let you embed more markup as appropriate.
 </figure>
 {:#markupn}
 
-In some setups [<cite>Markup B</cite>](#markupb) sounds yucky.  Ending and starting
-words in separate lines like <i>red</i> and <i>Violets</i> run
-together.  You might include extra punctuation annotated with a
-screen-reader-only class as with [<cite>Markup A'</cite>](#markupb2) and [<cite>Markup B'
-CSS</cite>](#markupb3) to work around this issue.  However, on Firefox this
-hack breaks up lines into separate areas to track through.
+In some setups [<cite>Markup B</cite>](#markupb) sounds yucky.  Ending
+and starting words in separate lines like <i>red</i> and
+<i>Violets</i> run together.  You might include extra punctuation
+annotated with a screen-reader-only class as with [<cite>Markup
+A'</cite>](#markupb2) and [<cite>Markup B'
+<abbr>CSS</abbr></cite>](#markupb3) to work around this issue.
+However, on Firefox this hack breaks up lines into separate areas to
+track through.
 
 <figure>
 {{ markupb2 | markdownify }}

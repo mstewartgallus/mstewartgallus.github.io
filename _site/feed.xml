@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-25T16:31:12-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Marking Up Poetry</title><link href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/" rel="alternate" type="text/html" title="Marking Up Poetry" /><published>2022-11-25T13:26:00-08:00</published><updated>2022-11-25T13:26:00-08:00</updated><id>https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry</id><content type="html" xml:base="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">&lt;p&gt;Common poetry markup is inaccessible, unsemantic and doesn’t display
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-25T16:44:34-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Marking Up Poetry</title><link href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/" rel="alternate" type="text/html" title="Marking Up Poetry" /><published>2022-11-25T13:26:00-08:00</published><updated>2022-11-25T13:26:00-08:00</updated><id>https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry</id><content type="html" xml:base="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">&lt;p&gt;Common poetry markup is inaccessible, unsemantic and doesn’t display
 well. I am not skilled in accessibility and I don’t have good
 solutions.  See &lt;a href=&quot;#tryit&quot;&gt;&lt;cite&gt;Try It&lt;/cite&gt;&lt;/a&gt; if you want to try out a screen
 reader yourself.&lt;/p&gt;
@@ -123,12 +123,14 @@ doesn’t let you embed more markup as appropriate.&lt;/p&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;In some setups &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt; sounds yucky.  Ending and starting
-words in separate lines like &lt;i&gt;red&lt;/i&gt; and &lt;i&gt;Violets&lt;/i&gt; run
-together.  You might include extra punctuation annotated with a
-screen-reader-only class as with &lt;a href=&quot;#markupb2&quot;&gt;&lt;cite&gt;Markup A’&lt;/cite&gt;&lt;/a&gt; and &lt;a href=&quot;#markupb3&quot;&gt;&lt;cite&gt;Markup B’
-CSS&lt;/cite&gt;&lt;/a&gt; to work around this issue.  However, on Firefox this
-hack breaks up lines into separate areas to track through.&lt;/p&gt;
+&lt;p&gt;In some setups &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt; sounds yucky.  Ending
+and starting words in separate lines like &lt;i&gt;red&lt;/i&gt; and
+&lt;i&gt;Violets&lt;/i&gt; run together.  You might include extra punctuation
+annotated with a screen-reader-only class as with &lt;a href=&quot;#markupb2&quot;&gt;&lt;cite&gt;Markup
+A’&lt;/cite&gt;&lt;/a&gt; and &lt;a href=&quot;#markupb3&quot;&gt;&lt;cite&gt;Markup B’
+&lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/cite&gt;&lt;/a&gt; to work around this issue.
+However, on Firefox this hack breaks up lines into separate areas to
+track through.&lt;/p&gt;
 
 &lt;figure id=&quot;markupb2&quot;&gt;
 
