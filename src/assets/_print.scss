@@ -22,24 +22,18 @@
 h1, h2, h3, h4, h5, h6 {
     break-inside: avoid ;
 }
+h1, h2, h3, h4, h5, h6 {
+    break-after: avoid ;
+}
+
 figure {
     break-inside: avoid ;
 }
 
-h1 {
-    break-before: all ;
-}
 hr {
     break-before: avoid ;
-    break-after: column ;
-}
-h2 {
-    break-before: column ;
 }
 
-h1, h2 {
-    break-after: avoid ;
-}
 
 :root {
     widows: 2 ;
