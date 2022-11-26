@@ -1,5 +1,7 @@
 :root {
-    font-family: "-apple-system",
+    font-family: 'Atkinson Hyperlegible',
+                 "Helvetica",
+                 "-apple-system",
                  system-ui,
                  "BlinkMacSystemFont",
                  "Segoe UI",
@@ -8,13 +10,33 @@
                  "Apple Color Emoji",
                  "Roboto",
                  "Arial",
-                 "Helvetica",
                  sans-serif ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
     hyphens: auto ;
 
     // more legible hyperlinks
     text-underline-position: under ;
+}
+
+// Atkinson Hyperlegible doesn't have small caps :(
+abbr, cite, body > header {
+    font-family:
+        "Helvetica",
+
+        "-apple-system",
+        system-ui,
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Apple Color Emoji",
+        "Roboto",
+        "Arial",
+        sans-serif ;
+}
+
+code, pre {
+    font-family: 'JetBrains Mono', monospace ;
 }
 
 nav,header,footer,h1,h2,h3,h4,h5,h6 {
@@ -71,11 +93,10 @@ h1,h2,h3,h4,h5,h6 {
     line-height: $line / scale(1) ;
     font-size: scale(1) * 1em ;
     inline-size: $width / scale(1) ;
-    font-weight: 500 ;
+    font-weight: 700 ;
 }
 
 h1 {
-    font-weight: 800 ;
     font-size: scale(3) * 1em ;
     inline-size: $width / scale(3) ;
     line-height: $line / scale(3) ;
@@ -134,7 +155,6 @@ menu, ul {
 menu, ul, ol {
     padding-inline-start: $col3 ;
 }
-
 
 abbr {
     @include all-small-caps ;
