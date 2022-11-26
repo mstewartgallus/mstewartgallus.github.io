@@ -2,7 +2,7 @@
     font-family: 'Atkinson Hyperlegible';
     font-weight: normal;
     font-display: swap;
-    src: url('/assets/vendor/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.ttf') format('truetype');
+    src: url('/assets/vend/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -10,21 +10,21 @@
     font-weight: normal;
     font-style: italic;
     font-display: swap;
-    src: url('/assets/vendor/Atkinson_Hyperlegible/AtkinsonHyperlegible-Italic.ttf') format('truetype');
+    src: url('/assets/vend/Atkinson_Hyperlegible/AtkinsonHyperlegible-Italic.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Atkinson Hyperlegible' ;
     font-weight: bold;
     font-display: swap;
-    src: url('/assets/vendor/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf') format('truetype');
+    src: url('/assets/vend/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Jetbrains Mono';
     font-weight: 100 800;
     font-display: swap;
-    src: url('/assets/vendor/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+    src: url('/assets/vend/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
 }
 
 @font-face {
@@ -32,7 +32,7 @@
     font-weight: 100 800;
     font-style: italic;
     font-display: swap;
-    src: url('/assets/vendor/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
+    src: url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
 }
 
 :root {
