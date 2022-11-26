@@ -13,14 +13,14 @@
 <link rel="canonical" href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">
 <link rel="author" href="/about">
 <meta name="author" content="Molossus Spondee">
-<meta name="description" content="Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessiblity and I don’t have good solutions. See Try It if you want to try out a screen reader yourself.">
+<meta name="description" content="Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessibility and I don’t have good solutions. See Try It if you want to try out a screen reader yourself.">
 <meta property="og:title" content="Marking Up Poetry">
 <meta property="og:url" content="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">
 <meta property="og:type" content="article">
 <meta name="og:site_name" content="Words to Kick Your Teeth Out">
 <meta property="og:image" content="https://mstewartgallus.github.io/assets/favicon.svg" >
-<meta property="og:description" content="Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessiblity and I don’t have good solutions. See Try It if you want to try out a screen reader yourself."><meta property="og:article:author" content="Molossus Spondee">
-<meta property="og:article:published_time" content="2022-11-25"><meta property="og:article:tag" content="Poetry"><meta property="og:article:tag" content="HTML"><meta property="og:article:tag" content="CSS"><meta property="og:article:tag" content="Accessiblity"><meta property="og:profile" content="Molossus Spondee">
+<meta property="og:description" content="Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessibility and I don’t have good solutions. See Try It if you want to try out a screen reader yourself."><meta property="og:article:author" content="Molossus Spondee">
+<meta property="og:article:published_time" content="2022-11-25"><meta property="og:article:tag" content="Poetry"><meta property="og:article:tag" content="HTML"><meta property="og:article:tag" content="CSS"><meta property="og:article:tag" content="Accessibility"><meta property="og:profile" content="Molossus Spondee">
 <meta property="og:profile:username" content="Molossus Spondee">
 </head>
   <body itemscope
@@ -38,19 +38,21 @@
             </h1></hgroup>
         </header>
         <div itemprop="articleBody"><p>Common poetry markup is inaccessible, unsemantic and doesn’t display
-well. I am not skilled in accessiblity and I don’t have good
+well. I am not skilled in accessibility and I don’t have good
 solutions.  See <a href="#tryit">Try It</a> if you want to try out a screen
 reader yourself.</p>
 
-<h2 id="accessiblity"><a href="#accessiblity">Accessibility</a></h2>
+<p><b>Special thanks to the kind people who helped edit this post.</b></p>
+
+<h2 id="accessibility"><a href="#accessibility">Accessibility</a></h2>
 
 <p>The art of the spoken word is not accessible to the visually impaired.
 Most markup navigates awkwardly, does not insert appropriate pauses
-for breath and mispronounces stress and sounds.  Consider <a href="#markupa">markup
+for breath, and mispronounces stress and sounds.  Consider <a href="#markupa">markup
 A</a> and <a href="#markupb">markup B</a>.  In <a href="#markupa">markup A</a> a poem
 is an ordered list of stanzas and stanzas are ordered lists of verses.
 In <a href="#markupb">markup B</a> poems are sequences of stanzas, stanzas are
-paragraphs and lines in a paragraph are separated with line break
+paragraphs and lines in a paragraph are separated by line break
 elements.</p>
 
 <figure id="markupa">
@@ -87,7 +89,7 @@ of <var>n</var></q> is repeated for every line of <a href="#markupa">Markup
 A</a>.  You can use the <code class="language-plaintext highlighter-rouge">presentation</code> <abbr title="Accessible Rich Internet Applications">ARIA</abbr> role as in <a href="#markupa2">markup
 A</a> and <a href="#markupa3">markup A’’</a> to ameliorate the problem.
 By the spec using the <code class="language-plaintext highlighter-rouge">presentation</code> role in a list item for a list
-already marked with a <code class="language-plaintext highlighter-rouge">presentation</code> role shouldn’t do much but such
+already marked with a <code class="language-plaintext highlighter-rouge">presentation</code> role doesn’t do much, but such
 markup can reduce cruft in Firefox’s accessibility inspector.</p>
 
 <figure id="markupa2">
@@ -124,12 +126,12 @@ markup can reduce cruft in Firefox’s accessibility inspector.</p>
 <figcaption><a href="#markupa3">Markup A''</a></figcaption>
 </figure>
 
-<p>As a <i>nuclear</i> solution is you can markup the text for graphical
-display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn">Markup N</a>.  I would
-advise use of the <code class="language-plaintext highlighter-rouge">aria-labelledby</code> attribute instead of the
-<code class="language-plaintext highlighter-rouge">aria-label</code> attribute here. <code class="language-plaintext highlighter-rouge">aria-label</code> has a tendency to work
-poorly with newlines in text, is not usually translated by automated
-tools and doesn’t let you embed more markup as appropriate.</p>
+<p>As a <i>nuclear</i> solution you can markup the text for graphical
+display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn">Markup N</a>.  I advise
+use of the <code class="language-plaintext highlighter-rouge">aria-labelledby</code> attribute instead of the <code class="language-plaintext highlighter-rouge">aria-label</code>
+attribute here. <code class="language-plaintext highlighter-rouge">aria-label</code> has a tendency to work poorly with
+newlines in text, is not usually translated by automated tools and
+doesn’t let you embed more markup as appropriate.</p>
 
 <figure id="markupn">
 
@@ -161,8 +163,8 @@ tools and doesn’t let you embed more markup as appropriate.</p>
 words in separate lines like <i>red</i> and <i>Violets</i> run
 together.  You might include extra punctuation annotated with a
 screen-reader-only class as with <a href="#markupb2">Markup A’</a> and <a href="#markupb3">Markup B’
-CSS</a> to workaround around this issue.  However, on Firefox
-this hack breaks up lines into separate areas to track through.</p>
+CSS</a> to work around this issue.  However, on Firefox this
+hack breaks up lines into separate areas to track through.</p>
 
 <figure id="markupb2">
 
@@ -190,18 +192,18 @@ And so are you.<span class="nt">&lt;/p&gt;</span>
 </figure>
 
 <p>No revisions of <a href="#markupa">Markup A</a> or <a href="#markupb">Markup B</a> ensure
-proper pronounciation of stress and sounds.  Only American English is
-likely to be pronounced correctly. To help you can set the language
+proper pronunciation of stress and sounds.  Only American English is
+likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is
 not a complete solution.</p>
 
 <p>As an anglophone Canadian author I set the language attribute for my
-documents and poems to <code class="language-plaintext highlighter-rouge">en-CA</code>. However, this use of the <code class="language-plaintext highlighter-rouge">lang</code>
-attribute only helps with English words and not with imports from
-other languages.  I don’t know how to help screen readers pronounce
-names of mythical figures.  You could markup individual phrases like
-<code class="language-plaintext highlighter-rouge">&lt;i lang="non"&gt;Sleipnir&lt;/i&gt;</code> (old Norse) and <code class="language-plaintext highlighter-rouge">&lt;i lang="gem"&gt;Wotan&lt;/i&gt;</code>
-(Germanic languages group) but this particular markup doesn’t help.</p>
+documents and poems to <code class="language-plaintext highlighter-rouge">en-CA</code>. However, this only helps with English
+words and not with imports from other languages.  I don’t know how to
+help screen readers pronounce names of mythical figures.  You could
+markup individual phrases like <code class="language-plaintext highlighter-rouge">&lt;i lang="non"&gt;Sleipnir&lt;/i&gt;</code> (old
+Norse) and <code class="language-plaintext highlighter-rouge">&lt;i lang="gem"&gt;Wotan&lt;/i&gt;</code> (Germanic languages group) but
+this particular markup doesn’t help.</p>
 
 <p>Semantically you might markup stress with emphasis with the <code class="language-plaintext highlighter-rouge">em</code>
 element.  However, such markup is verbose and many screen readers
@@ -215,9 +217,9 @@ something like <q>Unicode character 591</q>.</p>
 
 <h2 id="presentation"><a href="#presentation">Presentation</a></h2>
 
-<p>Laying out poetry on squashed formats is awkward.  In print the
-standard layout for overlong lines is to align the first line ragged
-right and all other lines ragged right.</p>
+<p>Laying out poetry on small formats is awkward.  In print the standard
+layout for overlong lines is to align the first line ragged right and
+all other lines ragged left.</p>
 
 <p>You can approximate a poetry layout with a hanging indent layout
 something like <a href="#indentcss">Indent <abbr>CSS</abbr></a>.  However, a
@@ -329,12 +331,12 @@ started with screen readers but they might be a little old.</p>
 
 <h2 id="onemorething"><a href="#onemorething">And One More Thing</a></h2>
 
-<p>As of this blog post the <a href="https://www.w3.org/TR/css-speech-1/"><cite><abbr>CSS</abbr> Speech
+<p>As of this blog post, the <a href="https://www.w3.org/TR/css-speech-1/"><cite><abbr>CSS</abbr> Speech
 Module</cite></a> has never really
 gone anywhere.  Perhaps in the future the <code class="language-plaintext highlighter-rouge">voice-stress</code>,
 <code class="language-plaintext highlighter-rouge">voice-duration</code> (for long syllables), <code class="language-plaintext highlighter-rouge">voice-pitch</code> (for pitch
-accent) and <code class="language-plaintext highlighter-rouge">pause</code> properties would solve these sort of accessiblity
-problemss.</p>
+accent) and <code class="language-plaintext highlighter-rouge">pause</code> properties would solve these sort of accessibility
+problems.</p>
 </div>
       </main><nav aria-labelledby="paging">
   <header>
@@ -375,7 +377,7 @@ problemss.</p>
     </dd><dd itemprop="keywords">
       <a rel="tag" href="/search/?tag=CSS">#CSS</a>
     </dd><dd itemprop="keywords">
-      <a rel="tag" href="/search/?tag=Accessiblity">#Accessiblity</a>
+      <a rel="tag" href="/search/?tag=Accessibility">#Accessibility</a>
     </dd></dl>
 </footer></body>
 </html>

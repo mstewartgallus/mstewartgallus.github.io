@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-25T15:17:07-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Marking Up Poetry</title><link href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/" rel="alternate" type="text/html" title="Marking Up Poetry" /><published>2022-11-25T13:26:00-08:00</published><updated>2022-11-25T13:26:00-08:00</updated><id>https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry</id><content type="html" xml:base="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">&lt;p&gt;Common poetry markup is inaccessible, unsemantic and doesn’t display
-well. I am not skilled in accessiblity and I don’t have good
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-25T16:22:20-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Marking Up Poetry</title><link href="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/" rel="alternate" type="text/html" title="Marking Up Poetry" /><published>2022-11-25T13:26:00-08:00</published><updated>2022-11-25T13:26:00-08:00</updated><id>https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry</id><content type="html" xml:base="https://mstewartgallus.github.io/web/2022/11/25/marking-up-poetry/">&lt;p&gt;Common poetry markup is inaccessible, unsemantic and doesn’t display
+well. I am not skilled in accessibility and I don’t have good
 solutions.  See &lt;a href=&quot;#tryit&quot;&gt;Try It&lt;/a&gt; if you want to try out a screen
 reader yourself.&lt;/p&gt;
 
-&lt;h2 id=&quot;accessiblity&quot;&gt;&lt;a href=&quot;#accessiblity&quot;&gt;Accessibility&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;b&gt;Special thanks to the kind people who helped edit this post.&lt;/b&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;accessibility&quot;&gt;&lt;a href=&quot;#accessibility&quot;&gt;Accessibility&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;The art of the spoken word is not accessible to the visually impaired.
 Most markup navigates awkwardly, does not insert appropriate pauses
-for breath and mispronounces stress and sounds.  Consider &lt;a href=&quot;#markupa&quot;&gt;markup
+for breath, and mispronounces stress and sounds.  Consider &lt;a href=&quot;#markupa&quot;&gt;markup
 A&lt;/a&gt; and &lt;a href=&quot;#markupb&quot;&gt;markup B&lt;/a&gt;.  In &lt;a href=&quot;#markupa&quot;&gt;markup A&lt;/a&gt; a poem
 is an ordered list of stanzas and stanzas are ordered lists of verses.
 In &lt;a href=&quot;#markupb&quot;&gt;markup B&lt;/a&gt; poems are sequences of stanzas, stanzas are
-paragraphs and lines in a paragraph are separated with line break
+paragraphs and lines in a paragraph are separated by line break
 elements.&lt;/p&gt;
 
 &lt;figure id=&quot;markupa&quot;&gt;
@@ -48,7 +50,7 @@ of &lt;var&gt;n&lt;/var&gt;&lt;/q&gt; is repeated for every line of &lt;a href=&
 A&lt;/a&gt;.  You can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; &lt;abbr title=&quot;Accessible Rich Internet Applications&quot;&gt;ARIA&lt;/abbr&gt; role as in &lt;a href=&quot;#markupa2&quot;&gt;markup
 A&lt;/a&gt; and &lt;a href=&quot;#markupa3&quot;&gt;markup A’’&lt;/a&gt; to ameliorate the problem.
 By the spec using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; role in a list item for a list
-already marked with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; role shouldn’t do much but such
+already marked with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; role doesn’t do much, but such
 markup can reduce cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 
 &lt;figure id=&quot;markupa2&quot;&gt;
@@ -85,12 +87,12 @@ markup can reduce cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupa3&quot;&gt;Markup A&apos;&apos;&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;As a &lt;i&gt;nuclear&lt;/i&gt; solution is you can markup the text for graphical
-display using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;graphic&lt;/code&gt; role as in &lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;.  I would
-advise use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-labelledby&lt;/code&gt; attribute instead of the
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; attribute here. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; has a tendency to work
-poorly with newlines in text, is not usually translated by automated
-tools and doesn’t let you embed more markup as appropriate.&lt;/p&gt;
+&lt;p&gt;As a &lt;i&gt;nuclear&lt;/i&gt; solution you can markup the text for graphical
+display using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;graphic&lt;/code&gt; role as in &lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;.  I advise
+use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-labelledby&lt;/code&gt; attribute instead of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt;
+attribute here. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; has a tendency to work poorly with
+newlines in text, is not usually translated by automated tools and
+doesn’t let you embed more markup as appropriate.&lt;/p&gt;
 
 &lt;figure id=&quot;markupn&quot;&gt;
 
@@ -122,8 +124,8 @@ tools and doesn’t let you embed more markup as appropriate.&lt;/p&gt;
 words in separate lines like &lt;i&gt;red&lt;/i&gt; and &lt;i&gt;Violets&lt;/i&gt; run
 together.  You might include extra punctuation annotated with a
 screen-reader-only class as with &lt;a href=&quot;#markupb2&quot;&gt;Markup A’&lt;/a&gt; and &lt;a href=&quot;#markupb3&quot;&gt;Markup B’
-CSS&lt;/a&gt; to workaround around this issue.  However, on Firefox
-this hack breaks up lines into separate areas to track through.&lt;/p&gt;
+CSS&lt;/a&gt; to work around this issue.  However, on Firefox this
+hack breaks up lines into separate areas to track through.&lt;/p&gt;
 
 &lt;figure id=&quot;markupb2&quot;&gt;
 
@@ -151,18 +153,18 @@ And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;No revisions of &lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt; or &lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt; ensure
-proper pronounciation of stress and sounds.  Only American English is
-likely to be pronounced correctly. To help you can set the language
+proper pronunciation of stress and sounds.  Only American English is
+likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is
 not a complete solution.&lt;/p&gt;
 
 &lt;p&gt;As an anglophone Canadian author I set the language attribute for my
-documents and poems to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;en-CA&lt;/code&gt;. However, this use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lang&lt;/code&gt;
-attribute only helps with English words and not with imports from
-other languages.  I don’t know how to help screen readers pronounce
-names of mythical figures.  You could markup individual phrases like
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;i lang=&quot;non&quot;&amp;gt;Sleipnir&amp;lt;/i&amp;gt;&lt;/code&gt; (old Norse) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;i lang=&quot;gem&quot;&amp;gt;Wotan&amp;lt;/i&amp;gt;&lt;/code&gt;
-(Germanic languages group) but this particular markup doesn’t help.&lt;/p&gt;
+documents and poems to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;en-CA&lt;/code&gt;. However, this only helps with English
+words and not with imports from other languages.  I don’t know how to
+help screen readers pronounce names of mythical figures.  You could
+markup individual phrases like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;i lang=&quot;non&quot;&amp;gt;Sleipnir&amp;lt;/i&amp;gt;&lt;/code&gt; (old
+Norse) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;i lang=&quot;gem&quot;&amp;gt;Wotan&amp;lt;/i&amp;gt;&lt;/code&gt; (Germanic languages group) but
+this particular markup doesn’t help.&lt;/p&gt;
 
 &lt;p&gt;Semantically you might markup stress with emphasis with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt;
 element.  However, such markup is verbose and many screen readers
@@ -176,9 +178,9 @@ something like &lt;q&gt;Unicode character 591&lt;/q&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;presentation&quot;&gt;&lt;a href=&quot;#presentation&quot;&gt;Presentation&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Laying out poetry on squashed formats is awkward.  In print the
-standard layout for overlong lines is to align the first line ragged
-right and all other lines ragged right.&lt;/p&gt;
+&lt;p&gt;Laying out poetry on small formats is awkward.  In print the standard
+layout for overlong lines is to align the first line ragged right and
+all other lines ragged left.&lt;/p&gt;
 
 &lt;p&gt;You can approximate a poetry layout with a hanging indent layout
 something like &lt;a href=&quot;#indentcss&quot;&gt;Indent &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;.  However, a
@@ -290,12 +292,12 @@ started with screen readers but they might be a little old.&lt;/p&gt;
 
 &lt;h2 id=&quot;onemorething&quot;&gt;&lt;a href=&quot;#onemorething&quot;&gt;And One More Thing&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;As of this blog post the &lt;a href=&quot;https://www.w3.org/TR/css-speech-1/&quot;&gt;&lt;cite&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; Speech
+&lt;p&gt;As of this blog post, the &lt;a href=&quot;https://www.w3.org/TR/css-speech-1/&quot;&gt;&lt;cite&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; Speech
 Module&lt;/cite&gt;&lt;/a&gt; has never really
 gone anywhere.  Perhaps in the future the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-stress&lt;/code&gt;,
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-duration&lt;/code&gt; (for long syllables), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-pitch&lt;/code&gt; (for pitch
-accent) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pause&lt;/code&gt; properties would solve these sort of accessiblity
-problemss.&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Web" /><category term="Poetry" /><category term="HTML" /><category term="CSS" /><category term="Accessiblity" /><summary type="html">Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessiblity and I don’t have good solutions. See Try It if you want to try out a screen reader yourself.</summary></entry><entry><title type="html">Memories</title><link href="https://mstewartgallus.github.io/poem/2022/11/17/memories/" rel="alternate" type="text/html" title="Memories" /><published>2022-11-17T18:18:00-08:00</published><updated>2022-11-17T18:18:00-08:00</updated><id>https://mstewartgallus.github.io/poem/2022/11/17/memories</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/11/17/memories/">&lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I feel nostalgic for&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The warmth of ⁠— the hospital bed&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The cold wet quiet ⁠— of fresh snow&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other memories from long ago&lt;/span&gt;&lt;/p&gt;
+accent) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pause&lt;/code&gt; properties would solve these sort of accessibility
+problems.&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Web" /><category term="Poetry" /><category term="HTML" /><category term="CSS" /><category term="Accessibility" /><summary type="html">Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessibility and I don’t have good solutions. See Try It if you want to try out a screen reader yourself.</summary></entry><entry><title type="html">Memories</title><link href="https://mstewartgallus.github.io/poem/2022/11/17/memories/" rel="alternate" type="text/html" title="Memories" /><published>2022-11-17T18:18:00-08:00</published><updated>2022-11-17T18:18:00-08:00</updated><id>https://mstewartgallus.github.io/poem/2022/11/17/memories</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/11/17/memories/">&lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I feel nostalgic for&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The warmth of ⁠— the hospital bed&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The cold wet quiet ⁠— of fresh snow&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other memories from long ago&lt;/span&gt;&lt;/p&gt;
 &lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I remember&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The chocolate sandwiched ice cream bar&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Cheap freezies ⁠— in elementary school&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;A long yellow slide down&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Falling asleep to the rain outside&lt;/span&gt;&lt;/p&gt;
 &lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Masturbation in the dark&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Things in the bath&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other things of that nature&lt;/span&gt;&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Poem" /><summary type="html">I feel nostalgic forThe warmth of ⁠— the hospital bedThe cold wet quiet ⁠— of fresh snowAnd other memories from long ago</summary></entry><entry><title type="html">My Owner’s Lover</title><link href="https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover/" rel="alternate" type="text/html" title="My Owner’s Lover" /><published>2022-11-15T15:49:00-08:00</published><updated>2022-11-15T15:49:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover/">&lt;p&gt;My name is Silk and I am a hamster. I am a woman and I have pale cream
 colored fur. Being a hamster I am a solitary sort but I actually like

@@ -5,16 +5,18 @@ tags:
 - 'Poetry'
 - 'HTML'
 - 'CSS'
-- 'Accessiblity'
+- 'Accessibility'
 ---
 
 Common poetry markup is inaccessible, unsemantic and doesn't display
-well. I am not skilled in accessiblity and I don't have good
+well. I am not skilled in accessibility and I don't have good
 solutions.  See [Try It](#tryit) if you want to try out a screen
 reader yourself.
 
-## [Accessibility](#accessiblity)
-{:#accessiblity}
+<b>Special thanks to the kind people who helped edit this post.</b>
+
+## [Accessibility](#accessibility)
+{:#accessibility}
 
 
 {% capture markupb %}
@@ -118,11 +120,11 @@ And so are you.</p>
 
 The art of the spoken word is not accessible to the visually impaired.
 Most markup navigates awkwardly, does not insert appropriate pauses
-for breath and mispronounces stress and sounds.  Consider [markup
+for breath, and mispronounces stress and sounds.  Consider [markup
 A](#markupa) and [markup B](#markupb).  In [markup A](#markupa) a poem
 is an ordered list of stanzas and stanzas are ordered lists of verses.
 In [markup B](#markupb) poems are sequences of stanzas, stanzas are
-paragraphs and lines in a paragraph are separated with line break
+paragraphs and lines in a paragraph are separated by line break
 elements.
 
 <figure>
@@ -145,7 +147,7 @@ A](#markupa).  You can use the `presentation` <abbr title="Accessible
 Rich Internet Applications">ARIA</abbr> role as in [markup
 A](#markupa2) and [markup A''](#markupa3) to ameliorate the problem.
 By the spec using the `presentation` role in a list item for a list
-already marked with a `presentation` role shouldn't do much but such
+already marked with a `presentation` role doesn't do much, but such
 markup can reduce cruft in Firefox's accessibility inspector.
 
 <figure>
@@ -160,12 +162,12 @@ markup can reduce cruft in Firefox's accessibility inspector.
 </figure>
 {:#markupa3}
 
-As a <i>nuclear</i> solution is you can markup the text for graphical
-display using the `graphic` role as in [Markup N](#markupn).  I would
-advise use of the `aria-labelledby` attribute instead of the
-`aria-label` attribute here. `aria-label` has a tendency to work
-poorly with newlines in text, is not usually translated by automated
-tools and doesn't let you embed more markup as appropriate.
+As a <i>nuclear</i> solution you can markup the text for graphical
+display using the `graphic` role as in [Markup N](#markupn).  I advise
+use of the `aria-labelledby` attribute instead of the `aria-label`
+attribute here. `aria-label` has a tendency to work poorly with
+newlines in text, is not usually translated by automated tools and
+doesn't let you embed more markup as appropriate.
 
 <figure>
 {{ markupn | markdownify }}
@@ -177,8 +179,8 @@ In some setups [Markup B](#markupb) sounds yucky.  Ending and starting
 words in separate lines like <i>red</i> and <i>Violets</i> run
 together.  You might include extra punctuation annotated with a
 screen-reader-only class as with [Markup A'](#markupb2) and [Markup B'
-CSS](#markupb3) to workaround around this issue.  However, on Firefox
-this hack breaks up lines into separate areas to track through.
+CSS](#markupb3) to work around this issue.  However, on Firefox this
+hack breaks up lines into separate areas to track through.
 
 <figure>
 {{ markupb2 | markdownify }}
@@ -193,18 +195,18 @@ this hack breaks up lines into separate areas to track through.
 {:#markupb3}
 
 No revisions of [Markup A](#markupa) or [Markup B](#markupb) ensure
-proper pronounciation of stress and sounds.  Only American English is
-likely to be pronounced correctly. To help you can set the language
+proper pronunciation of stress and sounds.  Only American English is
+likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is
 not a complete solution.
 
 As an anglophone Canadian author I set the language attribute for my
-documents and poems to `en-CA`. However, this use of the `lang`
-attribute only helps with English words and not with imports from
-other languages.  I don't know how to help screen readers pronounce
-names of mythical figures.  You could markup individual phrases like
-`<i lang="non">Sleipnir</i>` (old Norse) and `<i lang="gem">Wotan</i>`
-(Germanic languages group) but this particular markup doesn't help.
+documents and poems to `en-CA`. However, this only helps with English
+words and not with imports from other languages.  I don't know how to
+help screen readers pronounce names of mythical figures.  You could
+markup individual phrases like `<i lang="non">Sleipnir</i>` (old
+Norse) and `<i lang="gem">Wotan</i>` (Germanic languages group) but
+this particular markup doesn't help.
 
 Semantically you might markup stress with emphasis with the `em`
 element.  However, such markup is verbose and many screen readers
@@ -244,9 +246,9 @@ something like <q>Unicode character 591</q>.
 ```
 {% endcapture %}
 
-Laying out poetry on squashed formats is awkward.  In print the
-standard layout for overlong lines is to align the first line ragged
-right and all other lines ragged right.
+Laying out poetry on small formats is awkward.  In print the standard
+layout for overlong lines is to align the first line ragged right and
+all other lines ragged left.
 
 You can approximate a poetry layout with a hanging indent layout
 something like [Indent <abbr>CSS</abbr>](#indentcss).  However, a
@@ -352,9 +354,9 @@ started with screen readers but they might be a little old.
 ## [And One More Thing](#onemorething)
 {:#onemorething}
 
-As of this blog post the [<cite><abbr>CSS</abbr> Speech
+As of this blog post, the [<cite><abbr>CSS</abbr> Speech
 Module</cite>](https://www.w3.org/TR/css-speech-1/) has never really
 gone anywhere.  Perhaps in the future the `voice-stress`,
 `voice-duration` (for long syllables), `voice-pitch` (for pitch
-accent) and `pause` properties would solve these sort of accessiblity
-problemss.
+accent) and `pause` properties would solve these sort of accessibility
+problems.
