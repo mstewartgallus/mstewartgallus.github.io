@@ -10,7 +10,7 @@ tags:
 
 Common poetry markup is inaccessible, unsemantic and doesn't display
 well. I am not skilled in accessibility and I don't have good
-solutions.  See [Try It](#tryit) if you want to try out a screen
+solutions.  See [<cite>Try It</cite>](#tryit) if you want to try out a screen
 reader yourself.
 
 <b>Special thanks to the kind people who helped edit this post.</b>
@@ -120,12 +120,13 @@ And so are you.</p>
 
 The art of the spoken word is not accessible to the visually impaired.
 Most markup navigates awkwardly, does not insert appropriate pauses
-for breath, and mispronounces stress and sounds.  Consider [markup
-A](#markupa) and [markup B](#markupb).  In [markup A](#markupa) a poem
-is an ordered list of stanzas and stanzas are ordered lists of verses.
-In [markup B](#markupb) poems are sequences of stanzas, stanzas are
-paragraphs and lines in a paragraph are separated by line break
-elements.
+for breath, and mispronounces stress and sounds.  Consider
+[<cite>Markup A</cite>](#markupa) and [<cite>Markup
+B</cite>](#markupb).  In [<cite>Markup A</cite>](#markupa) a poem is
+an ordered list of stanzas and stanzas are ordered lists of verses.
+In [<cite>Markup B</cite>](#markupb) poems are sequences of stanzas,
+stanzas are paragraphs and lines in a paragraph are separated by line
+break elements.
 
 <figure>
 {{ markupa | markdownify }}
@@ -140,15 +141,16 @@ elements.
 </figure>
 {:#markupb}
 
-[Markup A](#markupa) is hard to navigate as each line in an ordered
-list must be manually tracked through.  As well <q>line <var>m</var>
-of <var>n</var></q> is repeated for every line of [markup
-A](#markupa).  You can use the `presentation` <abbr title="Accessible
-Rich Internet Applications">ARIA</abbr> role as in [markup
-A](#markupa2) and [markup A''](#markupa3) to ameliorate the problem.
-By the spec using the `presentation` role in a list item for a list
-already marked with a `presentation` role doesn't do much, but such
-markup can reduce cruft in Firefox's accessibility inspector.
+[<cite>Markup A</cite>](#markupa) is hard to navigate as each line in
+an ordered list must be manually tracked through.  As well <q>line
+<var>m</var> of <var>n</var></q> is repeated for every line of
+[<cite>Markup A</cite>](#markupa).  You can use the `presentation`
+<abbr title="Accessible Rich Internet Applications">ARIA</abbr> role
+as in [<cite>Markup A</cite>](#markupa2) and [<cite>Markup
+A''</cite>](#markupa3) to ameliorate the problem.  By the spec using
+the `presentation` role in a list item for a list already marked with
+a `presentation` role doesn't do much, but such markup can reduce
+cruft in Firefox's accessibility inspector.
 
 <figure>
 {{ markupa2 | markdownify }}
@@ -163,7 +165,7 @@ markup can reduce cruft in Firefox's accessibility inspector.
 {:#markupa3}
 
 As a <i>nuclear</i> solution you can markup the text for graphical
-display using the `graphic` role as in [markup N](#markupn).  I advise
+display using the `graphic` role as in [<cite>Markup N</cite>](#markupn).  I advise
 use of the `aria-labelledby` attribute instead of the `aria-label`
 attribute here. `aria-label` has a tendency to work poorly with
 newlines in text, is not usually translated by automated tools and
@@ -175,11 +177,11 @@ doesn't let you embed more markup as appropriate.
 </figure>
 {:#markupn}
 
-In some setups [markup B](#markupb) sounds yucky.  Ending and starting
+In some setups [<cite>Markup B</cite>](#markupb) sounds yucky.  Ending and starting
 words in separate lines like <i>red</i> and <i>Violets</i> run
 together.  You might include extra punctuation annotated with a
-screen-reader-only class as with [markup A'](#markupb2) and [markup B'
-CSS](#markupb3) to work around this issue.  However, on Firefox this
+screen-reader-only class as with [<cite>Markup A'</cite>](#markupb2) and [<cite>Markup B'
+CSS</cite>](#markupb3) to work around this issue.  However, on Firefox this
 hack breaks up lines into separate areas to track through.
 
 <figure>
@@ -194,7 +196,7 @@ hack breaks up lines into separate areas to track through.
 </figure>
 {:#markupb3}
 
-No revisions of [markup A](#markupa) or [markup B](#markupb) ensure
+No revisions of [<cite>Markup A</cite>](#markupa) or [<cite>Markup B</cite>](#markupb) ensure
 proper pronunciation of stress and sounds.  Only American English is
 likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is
@@ -251,7 +253,7 @@ layout for overlong lines is to align the first line ragged right and
 all other lines ragged left.
 
 You can approximate a poetry layout with a hanging indent layout
-something like [Indent <abbr>CSS</abbr>](#indentcss).  However, a
+something like [<cite>Indent <abbr>CSS</abbr></cite>](#indentcss).  However, a
 hanging indent layout is not really correct.
 
 <figure>
@@ -261,8 +263,8 @@ hanging indent layout is not really correct.
 
 You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text *within* the
-line block to the right.  Something like [Align Last
-<abbr>CSS</abbr>](#alignlastcss) almost works for a poetry layout.
+line block to the right.  Something like [<cite>Align Last
+<abbr>CSS</abbr></cite>](#alignlastcss) almost works for a poetry layout.
 However, even this layout fails when you overflow multiple lines.
 
 <figure>
@@ -317,8 +319,8 @@ However, even this layout fails when you overflow multiple lines.
 {% endcapture %}
 
 
-Here is an [example](#example) similar to the current compromise I use
-on this site along with [code](#examplecode).
+[<cite>Example</cite>](#example) and [<cite>Example Code</cite>](#examplecode) are similar to
+the current compromise I use on this site.
 
 <figure>
 {{ example }}

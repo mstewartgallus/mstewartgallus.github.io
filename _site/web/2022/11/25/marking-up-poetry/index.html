@@ -39,7 +39,7 @@
         </header>
         <div itemprop="articleBody"><p>Common poetry markup is inaccessible, unsemantic and doesn’t display
 well. I am not skilled in accessibility and I don’t have good
-solutions.  See <a href="#tryit">Try It</a> if you want to try out a screen
+solutions.  See <a href="#tryit"><cite>Try It</cite></a> if you want to try out a screen
 reader yourself.</p>
 
 <p><b>Special thanks to the kind people who helped edit this post.</b></p>
@@ -48,12 +48,13 @@ reader yourself.</p>
 
 <p>The art of the spoken word is not accessible to the visually impaired.
 Most markup navigates awkwardly, does not insert appropriate pauses
-for breath, and mispronounces stress and sounds.  Consider <a href="#markupa">markup
-A</a> and <a href="#markupb">markup B</a>.  In <a href="#markupa">markup A</a> a poem
-is an ordered list of stanzas and stanzas are ordered lists of verses.
-In <a href="#markupb">markup B</a> poems are sequences of stanzas, stanzas are
-paragraphs and lines in a paragraph are separated by line break
-elements.</p>
+for breath, and mispronounces stress and sounds.  Consider
+<a href="#markupa"><cite>Markup A</cite></a> and <a href="#markupb"><cite>Markup
+B</cite></a>.  In <a href="#markupa"><cite>Markup A</cite></a> a poem is
+an ordered list of stanzas and stanzas are ordered lists of verses.
+In <a href="#markupb"><cite>Markup B</cite></a> poems are sequences of stanzas,
+stanzas are paragraphs and lines in a paragraph are separated by line
+break elements.</p>
 
 <figure id="markupa">
 
@@ -83,14 +84,16 @@ And so are you.<span class="nt">&lt;/p&gt;</span>
 <figcaption><a href="#markupb">Markup B</a></figcaption>
 </figure>
 
-<p><a href="#markupa">Markup A</a> is hard to navigate as each line in an ordered
-list must be manually tracked through.  As well <q>line <var>m</var>
-of <var>n</var></q> is repeated for every line of <a href="#markupa">markup
-A</a>.  You can use the <code class="language-plaintext highlighter-rouge">presentation</code> <abbr title="Accessible Rich Internet Applications">ARIA</abbr> role as in <a href="#markupa2">markup
-A</a> and <a href="#markupa3">markup A’’</a> to ameliorate the problem.
-By the spec using the <code class="language-plaintext highlighter-rouge">presentation</code> role in a list item for a list
-already marked with a <code class="language-plaintext highlighter-rouge">presentation</code> role doesn’t do much, but such
-markup can reduce cruft in Firefox’s accessibility inspector.</p>
+<p><a href="#markupa"><cite>Markup A</cite></a> is hard to navigate as each line in
+an ordered list must be manually tracked through.  As well <q>line
+<var>m</var> of <var>n</var></q> is repeated for every line of
+<a href="#markupa"><cite>Markup A</cite></a>.  You can use the <code class="language-plaintext highlighter-rouge">presentation</code>
+<abbr title="Accessible Rich Internet Applications">ARIA</abbr> role
+as in <a href="#markupa2"><cite>Markup A</cite></a> and <a href="#markupa3"><cite>Markup
+A’’</cite></a> to ameliorate the problem.  By the spec using
+the <code class="language-plaintext highlighter-rouge">presentation</code> role in a list item for a list already marked with
+a <code class="language-plaintext highlighter-rouge">presentation</code> role doesn’t do much, but such markup can reduce
+cruft in Firefox’s accessibility inspector.</p>
 
 <figure id="markupa2">
 
@@ -127,7 +130,7 @@ markup can reduce cruft in Firefox’s accessibility inspector.</p>
 </figure>
 
 <p>As a <i>nuclear</i> solution you can markup the text for graphical
-display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn">markup N</a>.  I advise
+display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn"><cite>Markup N</cite></a>.  I advise
 use of the <code class="language-plaintext highlighter-rouge">aria-labelledby</code> attribute instead of the <code class="language-plaintext highlighter-rouge">aria-label</code>
 attribute here. <code class="language-plaintext highlighter-rouge">aria-label</code> has a tendency to work poorly with
 newlines in text, is not usually translated by automated tools and
@@ -159,11 +162,11 @@ doesn’t let you embed more markup as appropriate.</p>
 <figcaption><a href="#markupn">Markup N</a></figcaption>
 </figure>
 
-<p>In some setups <a href="#markupb">markup B</a> sounds yucky.  Ending and starting
+<p>In some setups <a href="#markupb"><cite>Markup B</cite></a> sounds yucky.  Ending and starting
 words in separate lines like <i>red</i> and <i>Violets</i> run
 together.  You might include extra punctuation annotated with a
-screen-reader-only class as with <a href="#markupb2">markup A’</a> and <a href="#markupb3">markup B’
-CSS</a> to work around this issue.  However, on Firefox this
+screen-reader-only class as with <a href="#markupb2"><cite>Markup A’</cite></a> and <a href="#markupb3"><cite>Markup B’
+CSS</cite></a> to work around this issue.  However, on Firefox this
 hack breaks up lines into separate areas to track through.</p>
 
 <figure id="markupb2">
@@ -191,7 +194,7 @@ And so are you.<span class="nt">&lt;/p&gt;</span>
 <figcaption><a href="#markupb3">Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
 </figure>
 
-<p>No revisions of <a href="#markupa">markup A</a> or <a href="#markupb">markup B</a> ensure
+<p>No revisions of <a href="#markupa"><cite>Markup A</cite></a> or <a href="#markupb"><cite>Markup B</cite></a> ensure
 proper pronunciation of stress and sounds.  Only American English is
 likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is
@@ -222,7 +225,7 @@ layout for overlong lines is to align the first line ragged right and
 all other lines ragged left.</p>
 
 <p>You can approximate a poetry layout with a hanging indent layout
-something like <a href="#indentcss">Indent <abbr>CSS</abbr></a>.  However, a
+something like <a href="#indentcss"><cite>Indent <abbr>CSS</abbr></cite></a>.  However, a
 hanging indent layout is not really correct.</p>
 
 <figure>
@@ -238,8 +241,8 @@ hanging indent layout is not really correct.</p>
 
 <p>You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text <em>within</em> the
-line block to the right.  Something like <a href="#alignlastcss">Align Last
-<abbr>CSS</abbr></a> almost works for a poetry layout.
+line block to the right.  Something like <a href="#alignlastcss"><cite>Align Last
+<abbr>CSS</abbr></cite></a> almost works for a poetry layout.
 However, even this layout fails when you overflow multiple lines.</p>
 
 <figure id="alignlastcss">
@@ -258,8 +261,8 @@ However, even this layout fails when you overflow multiple lines.</p>
 <figcaption><a href="#alignlastcss">Align Last <abbr>CSS</abbr></a></figcaption>
 </figure>
 
-<p>Here is an <a href="#example">example</a> similar to the current compromise I use
-on this site along with <a href="#examplecode">code</a>.</p>
+<p><a href="#example"><cite>Example</cite></a> and <a href="#examplecode"><cite>Example Code</cite></a> are similar to
+the current compromise I use on this site.</p>
 
 <figure id="example">
 
