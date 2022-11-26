@@ -9,13 +9,12 @@ select, button {
     margin-block: $line ;
 }
 
-
-label {
-    // I have no idea why this fixes certain padding issues
+form {
     display: flex ;
     flex-direction: column ;
 }
-.label {
+
+label {
     margin-block-end: $line ;
 
     // Hack to keep aligned to  grid

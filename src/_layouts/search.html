@@ -30,28 +30,24 @@ layout: page
 
 <form aria-labelledby="title"
       rel="search" role="search" name="search-form" method="get">
-  <label for="category">
-    <span class="label">Category:</span>
-    <select id="category" name="category" multiple="multiple" size="2">
-      {%- for category in categories -%}
-      {%- assign cat = category[0] | escape -%}
-      <option value="{{ cat }}">{{- cat -}}</option>
-      {%- endfor -%}
-    </select>
-  </label>
+  <label for="category">Category:</label>
+  <select id="category" name="category" multiple="multiple" size="2">
+    {%- for category in categories -%}
+    {%- assign cat = category[0] | escape -%}
+    <option value="{{ cat }}">{{- cat -}}</option>
+    {%- endfor -%}
+  </select>
 
-  <label for="tag">
-    <span class="label">Tag:</span>
-    <select id="tag" name="tag" multiple="multiple" size="5">
-      {%- for tag in tags -%}
-      {%- assign tg = tag[0] | escape -%}
-      <option value="{{ tg }}">{{- tg -}}</option>
-      {%- endfor -%}
-    </select>
-  </label>
+  <label for="tag">Tag:</label>
+  <select id="tag" name="tag" multiple="multiple" size="5">
+    {%- for tag in tags -%}
+    {%- assign tg = tag[0] | escape -%}
+    <option value="{{ tg }}">{{- tg -}}</option>
+    {%- endfor -%}
+  </select>
 
   <span style="display:block; text-align:center">
-    <button>Search</button>
+    <button type="submit">Search</button>
   </span>
 </form>
 
