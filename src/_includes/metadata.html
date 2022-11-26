@@ -5,39 +5,45 @@
   <hgroup>
     <h2 id="metadata"><a href="#metadata">Metadata</a></h2>
   </hgroup>
-  <dl class="metadata">
-    <dt>Author</dt>
-    <dd>
-      <span itemprop="creator author" itemscope itemtype="https://schema.org/Person">
-        <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
-          @<span translate="no" itemprop="name">{{ page.author.name | escape }}</span>
+
+  <div class="metadata">
+    <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+      <dl>
+        <dt>Author</dt>
+        <dd>
+          <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
+            @<span translate="no" itemprop="name">{{ page.author.name | escape }}</span>
+          </a>
+        </dd>
+      </dl>
+    </address>
+    <dl>
+      <dt>Posted</dt>
+      <dd>
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+          {{- page.date | date: date_format -}}
+        </time>
+      </dd>
+      {%- if page.categories.size > 0 -%}
+      <dt>Category</dt>
+      {%- for category in page.categories -%}
+      <dd itemprop="articleSection">
+        <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}">
+          {{- category | escape -}}
         </a>
-      </span>
-    </dd>
-    <dt>Posted</dt>
-    <dd>
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{- page.date | date: date_format -}}
-      </time>
-    </dd>
-    {%- if page.categories.size > 0 -%}
-    <dt>Category</dt>
-    {%- endif -%}
-    {%- for category in page.categories -%}
-    <dd itemprop="articleSection">
-      <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}">
-        {{- category | escape -}}
-      </a>
-    </dd>
-    {%- endfor -%}
-    {%- if page.tags.size > 0 -%}
-    <dt>Tag</dt>
-    {%- endif -%}
-    {%- for tag in page.tags -%}
-    <dd itemprop="keywords">
-      <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">#{{- tag | escape -}}</a>
-    </dd>
-    {%- endfor -%}
-  </dl>
+      </dd>
+      {%- endfor -%}
+      {%- endif -%}
+
+      {%- if page.tags.size > 0 -%}
+      <dt>Tag</dt>
+      {%- for tag in page.tags -%}
+      <dd itemprop="keywords">
+        <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">#{{- tag | escape -}}</a>
+      </dd>
+      {%- endfor -%}
+      {%- endif -%}
+    </dl>
+  </div>
 </footer>
 {%- endif -%}
