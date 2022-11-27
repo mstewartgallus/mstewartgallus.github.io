@@ -35,45 +35,24 @@
     src: url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
 }
 
+$root-font-size: $font-size * 1pt ;
 :root {
-    font-family: 'Atkinson Hyperlegible',
-                 "Helvetica",
-                 "-apple-system",
-                 system-ui,
-                 "BlinkMacSystemFont",
-                 "Segoe UI",
-                 "Segoe UI Emoji",
-                 "Segoe UI Symbol",
-                 "Apple Color Emoji",
-                 "Roboto",
-                 "Arial",
-                 sans-serif ;
+    line-height: $line ;
+    font-size: $root-font-size ;
+    font-size-adjust: 0.5 ;
+    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
     hyphens: auto ;
+
+    // Atkinson Hyperlegible doesn't have small caps :(
+    font-synthesis: none ;
 
     // more legible hyperlinks
     text-underline-position: under ;
 }
 
-// Atkinson Hyperlegible doesn't have small caps :(
-abbr, cite, body > header {
-    font-family:
-        "Helvetica",
-
-        "-apple-system",
-        system-ui,
-        "BlinkMacSystemFont",
-        "Segoe UI",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Apple Color Emoji",
-        "Roboto",
-        "Arial",
-        sans-serif ;
-}
-
 code, pre {
-    font-family: 'JetBrains Mono', monospace ;
+    font-family: inherit ;
 }
 
 nav,header,footer,h1,h2,h3,h4,h5,h6 {
@@ -97,19 +76,6 @@ sub, sup {
 
 :root {
     scroll-behavior: smooth ;
-}
-
-
-// default font sizes are at about 16px
-// so 18em / 16 should scale up to 18px
-$root-font-size: $font-size * 1pt ;
-
-:root {
-    font-size: $root-font-size ;
-}
-
-:root {
-    line-height: $line ;
 }
 
 p {
