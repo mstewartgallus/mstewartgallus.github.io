@@ -9,7 +9,17 @@
 <title>The Wrath That Might Have Been — Words to Kick Your Teeth Out</title>
 <link rel="icon" href="/assets/favicon.svg">
 <style>
-  @font-face {
+  /*
+|           | Atkinson HyperLegible | Noto Sans | JetBrains Mono |
+|-----------+-----------------------+-----------+----------------|
+| Units/em  |                  1000 |      1000 |           1000 |
+| x Height  |                   496 |       536 |            550 |
+| Ascender  |                   950 |      1069 |           1020 |
+| Descender |                  -290 |      -293 |           -300 |
+| Descender |                  1240 |      1362 |           1320 |
+| Line Gap  |                     0 |         0 |              0 |
+ */
+@font-face {
     font-family: 'Atkinson Hyperlegible';
     font-weight: normal;
     font-style: normal ;
@@ -36,6 +46,7 @@
         local('Atkinson Hyperlegible'),
         url('/assets/vend/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf') format('truetype');
 }
+
 @font-face {
     font-family: 'JetBrains Mono';
     font-weight: 100 800;
@@ -44,9 +55,8 @@
     src:
         local('JetBrains Mono'),
         url('/assets/vend/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
-    /* Atkinson x 10.5833px */
-    /* JetBrains x 11.7333px */
-    size-adjust: 90.1988357921% ;
+    size-adjust: 90.1818181818% ;
+    /* size-adjust: 93.9393939394% ; */
 }
 @font-face {
     font-family: 'JetBrains Mono';
@@ -55,9 +65,11 @@
     font-display: swap;
     src:
         local('JetBrains Mono'),
-        url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
-    size-adjust: 90.1988357921% ;
+        url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype'); 
+    size-adjust: 90.1818181818% ;
+    /* size-adjust: 93.9393939394% ; */
 }
+
 @font-face {
     font-family: 'Noto Sans';
     font-weight: normal;
@@ -66,21 +78,20 @@
     src:
         local('Noto Sans'),
         url('/assets/vend/Noto_Sans/NotoSans-Regular.ttf') format('truetype');
-    /* Atkinson x 10.5833px */
-    /* Noto Sans x 11.4333px */
-    /* size-adjust: 92.5655759929% ; */
+    /* size-adjust: 92.5373134328% ; */
     /* not sure why but I needed an extra adjustment down */
     size-adjust: 89% ;
+    /* size-adjust: 91.0425844347% ; */
 }
-
 @font-face {
     font-family: 'Noto Sans';
     font-weight: bold;
     font-style: normal ;
-    font-display: swap;
+    font-display: swap ;
     src:
         local('Noto Sans'),
         url('/assets/vend/Noto_Sans/NotoSans-Bold.ttf') format('truetype');
+    /* size-adjust: 91.0425844347% ; */
     size-adjust: 89% ;
 }
 

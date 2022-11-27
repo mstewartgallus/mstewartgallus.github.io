@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en-CA"
       itemscope
-      itemtype="https://schema.org/WebPage"
+      itemtype=""
       itemid="https://mstewartgallus.github.io/xheight/">
-  <head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Debug page — Words to Kick Your Teeth Out</title>
-<link rel="icon" href="/assets/favicon.svg">
-<style>
-  @font-face {
+  <head>
+    <style>
+      /*
+|           | Atkinson HyperLegible | Noto Sans | JetBrains Mono |
+|-----------+-----------------------+-----------+----------------|
+| Units/em  |                  1000 |      1000 |           1000 |
+| x Height  |                   496 |       536 |            550 |
+| Ascender  |                   950 |      1069 |           1020 |
+| Descender |                  -290 |      -293 |           -300 |
+| Descender |                  1240 |      1362 |           1320 |
+| Line Gap  |                     0 |         0 |              0 |
+ */
+@font-face {
     font-family: 'Atkinson Hyperlegible';
     font-weight: normal;
     font-style: normal ;
@@ -36,6 +42,7 @@
         local('Atkinson Hyperlegible'),
         url('/assets/vend/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf') format('truetype');
 }
+
 @font-face {
     font-family: 'JetBrains Mono';
     font-weight: 100 800;
@@ -44,9 +51,8 @@
     src:
         local('JetBrains Mono'),
         url('/assets/vend/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
-    /* Atkinson x 10.5833px */
-    /* JetBrains x 11.7333px */
-    size-adjust: 90.1988357921% ;
+    size-adjust: 90.1818181818% ;
+    /* size-adjust: 93.9393939394% ; */
 }
 @font-face {
     font-family: 'JetBrains Mono';
@@ -55,9 +61,11 @@
     font-display: swap;
     src:
         local('JetBrains Mono'),
-        url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
-    size-adjust: 90.1988357921% ;
+        url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype'); 
+    size-adjust: 90.1818181818% ;
+    /* size-adjust: 93.9393939394% ; */
 }
+
 @font-face {
     font-family: 'Noto Sans';
     font-weight: normal;
@@ -66,102 +74,71 @@
     src:
         local('Noto Sans'),
         url('/assets/vend/Noto_Sans/NotoSans-Regular.ttf') format('truetype');
-    /* Atkinson x 10.5833px */
-    /* Noto Sans x 11.4333px */
-    /* size-adjust: 92.5655759929% ; */
+    /* size-adjust: 92.5373134328% ; */
     /* not sure why but I needed an extra adjustment down */
     size-adjust: 89% ;
+    /* size-adjust: 91.0425844347% ; */
 }
-
 @font-face {
     font-family: 'Noto Sans';
     font-weight: bold;
     font-style: normal ;
-    font-display: swap;
+    font-display: swap ;
     src:
         local('Noto Sans'),
         url('/assets/vend/Noto_Sans/NotoSans-Bold.ttf') format('truetype');
+    /* size-adjust: 91.0425844347% ; */
     size-adjust: 89% ;
 }
 
-</style>
-<link rel="stylesheet" href="/assets/main.css">
-<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Words to Kick Your Teeth Out" >
-<link rel="canonical" href="https://mstewartgallus.github.io/xheight/">
-<link rel="author" href="/about">
-<meta name="author" content="Molossus Spondee">
-<meta name="description" content="lol, lmao">
-<meta property="og:title" content="Debug page">
-<meta property="og:url" content="https://mstewartgallus.github.io/xheight/">
-<meta property="og:type" content="website">
-<meta name="og:site_name" content="Words to Kick Your Teeth Out">
-<meta property="og:image" content="https://mstewartgallus.github.io/assets/favicon.svg" >
-<meta property="og:description" content="lol, lmao"><meta property="og:profile" content="Molossus Spondee">
-<meta property="og:profile:username" content="Molossus Spondee">
-</head>
-  <body itemscope
-        itemprop="mainEntity hasPart"
-        itemtype="https://schema.org/WebContent"
-        itemid="https://mstewartgallus.github.io/xheight/">
-    <header><a translate="no" href="/"><cite>Words to Kick Your Teeth Out</cite></a>
-</header>
-    <main aria-labelledby="title" itemprop="text">
-      <header>
-        <hgroup>
-          <h1 id="title" itemprop="name headline">
-            <a rel="bookmark" href="/xheight/" itemprop="url">Debug page</a>
-          </h1></hgroup>
-      </header>
-      <div itemprop="articleBody"><style>
-  table {
-      table-layout: fixed ;
-  }
-  td {
-      vertical-align: top ;
-  }
-  .x {
-      display: block ;
-      height: 1ex ;
-      width: 1ex ;
-      background-color: black ;
-      color: white ;
-  }
-</style>
-<table style="width:100%">
-  <caption>
-    Font x comparison table
-  </caption>
-  <thead>
-    <tr>
-      <th>
-        Noto Sans
-      </th>
-      <th>
-        Atkinson Hyperlegible
-      </th>
-      <th>
-        JetBrains Mono
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <abbr>
-          <div class="x"></div>
-        </abbr>
-      </td>
-      <td>
-          <div class="x"></div>
-      </td>
-      <td>
-        <code>
-          <div class="x"></div>
-        </code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
-    </main></body>
+      :root {
+          line-height: 1.5 ;
+          padding: 0;
+          margin: 0 ;
+          font-size: 100pt ;
+      }
+      body {
+          display: contents ;
+      }
+      body > div {
+          float: left ;
+          text-decoration: underline overline;
+      }
+      :root {
+          font-family: 'Atkinson HyperLegible' ;
+      }
+      .atkinson {
+          font-family: 'Atkinson HyperLegible' ;
+      }
+      .jet {
+          font-family: 'JetBrains Mono' ;
+      }
+      .sans {
+          font-family: 'Noto Sans' ;
+      }
+      .ex {
+          background: black ;
+          width: 1ex ;
+          height: 1ex ;
+      }
+      .cap {
+          background: grey ;
+          width: 1cap ;
+          height: 1cap ;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="atkinson"><div class="ex"></div></div>
+    <div class="jet"><div class="ex"></div></div>
+    <div class="sans"><div class="ex"></div></div>
+
+    <div class="atkinson"><div class="cap"></div></div>
+    <div class="jet"><div class="cap"></div></div>
+    <div class="sans"><div class="cap"></div></div>
+
+    <div class="atkinson">Xx</div>
+    <div class="jet">Xx</div>
+    <div class="sans">Xx</div>
+</body>
 </html>

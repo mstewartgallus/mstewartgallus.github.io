@@ -96,7 +96,7 @@ $aside: 13rem ;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root, body {
+    :root {
         background: #242526 ;
         color: #d3e0e3 ;
     }
@@ -114,6 +114,6 @@ $aside: 13rem ;
 }
 
 // body {
-//     background: linear-gradient(black, grey);
+//     background: linear-gradient(grey, black);
 //     background-size: 100% $line ;
 // }

@@ -1,56 +1,63 @@
 ---
-layout: page
-title: Debug page
+layout: none
 permalink: /xheight/
-sitemap: false
 ---
-<style>
-  table {
-      table-layout: fixed ;
-  }
-  td {
-      vertical-align: top ;
-  }
-  .x {
-      display: block ;
-      height: 1ex ;
-      width: 1ex ;
-      background-color: black ;
-      color: white ;
-  }
-</style>
-<table style="width:100%">
-  <caption>
-    Font x comparison table
-  </caption>
-  <thead>
-    <tr>
-      <th>
-        Noto Sans
-      </th>
-      <th>
-        Atkinson Hyperlegible
-      </th>
-      <th>
-        JetBrains Mono
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <abbr>
-          <div class="x"></div>
-        </abbr>
-      </td>
-      <td>
-          <div class="x"></div>
-      </td>
-      <td>
-        <code>
-          <div class="x"></div>
-        </code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}"
+      itemscope
+      itemtype="{{ pagetype }}"
+      itemid="{{ page.url | absolute_url }}">
+  <head>
+    <style>
+      {% include fonts.css %}
+      :root {
+          line-height: 1.5 ;
+          padding: 0;
+          margin: 0 ;
+          font-size: 100pt ;
+      }
+      body {
+          display: contents ;
+      }
+      body > div {
+          float: left ;
+          text-decoration: underline overline;
+      }
+      :root {
+          font-family: 'Atkinson HyperLegible' ;
+      }
+      .atkinson {
+          font-family: 'Atkinson HyperLegible' ;
+      }
+      .jet {
+          font-family: 'JetBrains Mono' ;
+      }
+      .sans {
+          font-family: 'Noto Sans' ;
+      }
+      .ex {
+          background: black ;
+          width: 1ex ;
+          height: 1ex ;
+      }
+      .cap {
+          background: grey ;
+          width: 1cap ;
+          height: 1cap ;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="atkinson"><div class="ex"></div></div>
+    <div class="jet"><div class="ex"></div></div>
+    <div class="sans"><div class="ex"></div></div>
+
+    <div class="atkinson"><div class="cap"></div></div>
+    <div class="jet"><div class="cap"></div></div>
+    <div class="sans"><div class="cap"></div></div>
+
+    <div class="atkinson">Xx</div>
+    <div class="jet">Xx</div>
+    <div class="sans">Xx</div>
+</body>
+</html>
