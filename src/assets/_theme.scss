@@ -29,13 +29,11 @@ hgroup p:first-of-type {
 }
 
 hr {
-    border: none ;
-    text-align: center;
+    height: 0 ;
+    border: 0 ;
+    margin-block-end: $line ;
 }
-hr::after {
-    display: inline ;
-    content: "• • •" ;
-}
+
 
 main > div > p:first-of-type::first-letter {
     font-size: scale(1) * 1em;
