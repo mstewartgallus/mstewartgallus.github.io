@@ -108,3 +108,7 @@ $aside: 13rem ;
 @media (prefers-color-scheme: light) {
     @import "assets/_syntax-light.scss";
 }
+
+.highlight {
+    background-color: transparent ;
+}
