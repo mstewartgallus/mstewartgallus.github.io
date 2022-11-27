@@ -17,12 +17,13 @@ body > header {
     display: flex ;
     flex-wrap: wrap ;
     justify-content: space-between ;
+    column-gap: 1ch ;
 }
 
 body {
     align-items: stretch ;
     justify-content: stretch ;
-    row-gap: $line ;
+    row-gap: 0 ;
     column-gap: 2ch ;
     grid-auto-flow: dense ;
     grid-template-columns: 1fr [main] auto [aside] $aside 1fr ;
@@ -54,6 +55,9 @@ body > footer {
 
         padding-inline: 0 ;
         display: grid ;
+    }
+    body > nav {
+        margin-block-start: - $line ;
     }
 }
 

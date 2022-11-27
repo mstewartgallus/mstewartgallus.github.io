@@ -11,13 +11,12 @@
         font-size: 11pt ;
     }
 
-    body > header, body > div > nav {
+    body > header, body > nav {
         display: none ;
     }
 
     body,
-    body > div,
-    body > div > main,
+    body > main,
     body > footer {
         display: contents ;
     }
