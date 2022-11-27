@@ -25,6 +25,7 @@
     font-weight: 100 800;
     font-display: swap;
     src: url('/assets/vend/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+    size-adjust: 90%;
 }
 
 @font-face {
@@ -33,18 +34,16 @@
     font-style: italic;
     font-display: swap;
     src: url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
+    size-adjust: 90%;
 }
 
 $root-font-size: $font-size * 1pt ;
 :root {
     line-height: $line ;
     font-size: $root-font-size ;
-    font-size-adjust: 0.5 ;
     font-family: 'Atkinson Hyperlegible', system-ui, sans-serif ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
     hyphens: auto ;
-
-    // Atkinson Hyperlegible doesn't have small caps :(
     font-synthesis: none ;
 
     // more legible hyperlinks
@@ -52,7 +51,15 @@ $root-font-size: $font-size * 1pt ;
 }
 
 code, pre {
-    font-family: inherit ;
+    font-family: 'JetBrains Mono', system-ui ;
+}
+
+// Atkinson Hyperlegible doesn't have small caps :(
+cite, abbr, body > header {
+    // FIXME this is Noto Sans on my system but probably something
+    // horrible elsewhere
+    font-family: system-ui ;
+    font-size-adjust: 0.45 ;
 }
 
 nav,header,footer,h1,h2,h3,h4,h5,h6 {
