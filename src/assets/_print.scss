@@ -12,10 +12,12 @@
     body > footer {
         display: contents ;
     }
-    body > footer :any-link {
+    :any-link {
         text-decoration: none ;
-        // FIXME
-        color: black !important ;
+        color: inherit ;
+    }
+    :any-link:not(:is([href^="/"], [href^="#"]))::after {
+        content: " " attr(href) ;
     }
 }
 
