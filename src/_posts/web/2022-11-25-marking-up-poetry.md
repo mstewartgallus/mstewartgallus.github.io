@@ -129,15 +129,15 @@ stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.
 
 <figure>
-{{ markupa | markdownify }}
 <figcaption><a href="#markupa">Markup A</a></figcaption>
+{{ markupa | markdownify }}
 </figure>
 {:#markupa}
 
 
 <figure>
-{{ markupb | markdownify }}
 <figcaption><a href="#markupb">Markup B</a></figcaption>
+{{ markupb | markdownify }}
 </figure>
 {:#markupb}
 
@@ -153,14 +153,14 @@ a `presentation` role doesn't do much, but such markup can reduce
 cruft in Firefox's accessibility inspector.
 
 <figure>
-{{ markupa2 | markdownify }}
 <figcaption><a href="#markupa2">Markup A'</a></figcaption>
+{{ markupa2 | markdownify }}
 </figure>
 {:#markupa2}
 
 <figure>
-{{ markupa3 | markdownify }}
 <figcaption><a href="#markupa3">Markup A''</a></figcaption>
+{{ markupa3 | markdownify }}
 </figure>
 {:#markupa3}
 
@@ -172,8 +172,8 @@ newlines in text, is not usually translated by automated tools and
 doesn't let you embed more markup as appropriate.
 
 <figure>
-{{ markupn | markdownify }}
 <figcaption><a href="#markupn">Markup N</a></figcaption>
+{{ markupn | markdownify }}
 </figure>
 {:#markupn}
 
@@ -187,14 +187,14 @@ However, on Firefox this hack breaks up lines into separate areas to
 track through.
 
 <figure>
-{{ markupb2 | markdownify }}
 <figcaption><a href="#markupb2">Markup B' <abbr title="HyperText Markup Language">HTML</abbr></a></figcaption>
+{{ markupb2 | markdownify }}
 </figure>
 {:#markupb2}
 
 <figure>
-{{ markupb3 | markdownify }}
 <figcaption><a href="#markupb3">Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
+{{ markupb3 | markdownify }}
 </figure>
 {:#markupb3}
 
@@ -259,8 +259,8 @@ something like [<cite>Indent <abbr>CSS</abbr></cite>](#indentcss).  However, a
 hanging indent layout is not really correct.
 
 <figure>
-{{ indentcss | markdownify }}
 <figcaption><a href="#indentcss">Indent <abbr>CSS</abbr></a></figcaption>
+{{ indentcss | markdownify }}
 </figure>
 
 You can approximate a poetry layout on the web by aligning every line
@@ -270,8 +270,8 @@ line block to the right.  Something like [<cite>Align Last
 However, even this layout fails when you overflow multiple lines.
 
 <figure>
-{{ alignlastcss | markdownify }}
 <figcaption><a href="#alignlastcss">Align Last <abbr>CSS</abbr></a></figcaption>
+{{ alignlastcss | markdownify }}
 </figure>
 {:#alignlastcss}
 
@@ -325,14 +325,14 @@ However, even this layout fails when you overflow multiple lines.
 the current compromise I use on this site.
 
 <figure>
-{{ example }}
 <figcaption><a href="#example">Example</a></figcaption>
+{{ example }}
 </figure>
 {:#example}
 
 <figure>
-{{ examplecode | markdownify }}
 <figcaption><a href="#examplecode">Example Code</a></figcaption>
+{{ examplecode | markdownify }}
 </figure>
 {:#examplecode}
 

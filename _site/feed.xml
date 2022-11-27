@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-26T18:51:38-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Dentist</title><link href="https://mstewartgallus.github.io/prose/2022/11/26/dentist/" rel="alternate" type="text/html" title="Dentist" /><published>2022-11-26T13:13:00-08:00</published><updated>2022-11-26T13:13:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/26/dentist</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/26/dentist/">&lt;p&gt;I rotate up to a 45° angle.  Head on the ground legs in the air.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-11-26T18:53:56-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Dentist</title><link href="https://mstewartgallus.github.io/prose/2022/11/26/dentist/" rel="alternate" type="text/html" title="Dentist" /><published>2022-11-26T13:13:00-08:00</published><updated>2022-11-26T13:13:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/26/dentist</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/26/dentist/">&lt;p&gt;I rotate up to a 45° angle.  Head on the ground legs in the air.&lt;/p&gt;
 
 &lt;p&gt;It is a cool dark evening and I am safe and sheltered in my warm
 winter coat.  I am in the park near the highway.  I hear the traffic
@@ -63,6 +63,7 @@ stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.&lt;/p&gt;
 
 &lt;figure id=&quot;markupa&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
@@ -76,10 +77,10 @@ break elements.&lt;/p&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;figure id=&quot;markupb&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stanza&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
 Violets are blue,&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
@@ -87,7 +88,6 @@ Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
 And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;&lt;a href=&quot;#markupa&quot;&gt;&lt;cite&gt;Markup A&lt;/cite&gt;&lt;/a&gt; is hard to navigate as each line in
@@ -102,6 +102,7 @@ a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentatio
 cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 
 &lt;figure id=&quot;markupa2&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#markupa2&quot;&gt;Markup A&apos;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
@@ -115,10 +116,10 @@ cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#markupa2&quot;&gt;Markup A&apos;&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;figure id=&quot;markupa3&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#markupa3&quot;&gt;Markup A&apos;&apos;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;
@@ -132,7 +133,6 @@ cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#markupa3&quot;&gt;Markup A&apos;&apos;&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;As a &lt;i&gt;nuclear&lt;/i&gt; solution you can markup the text for graphical
@@ -143,6 +143,7 @@ newlines in text, is not usually translated by automated tools and
 doesn’t let you embed more markup as appropriate.&lt;/p&gt;
 
 &lt;figure id=&quot;markupn&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;figure&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;graphic&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-labelledby=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transcript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -165,7 +166,6 @@ doesn’t let you embed more markup as appropriate.&lt;/p&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/figure&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;In some setups &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt; sounds yucky.  Ending
@@ -178,6 +178,7 @@ However, on Firefox this hack breaks up lines into separate areas to
 track through.&lt;/p&gt;
 
 &lt;figure id=&quot;markupb2&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#markupb2&quot;&gt;Markup B&apos; &lt;abbr title=&quot;HyperText Markup Language&quot;&gt;HTML&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sr-only&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt;&lt;/span&gt;
 Violets are blue,&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
@@ -185,10 +186,10 @@ Sugar is sweet&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;spa
 And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#markupb2&quot;&gt;Markup B&apos; &lt;abbr title=&quot;HyperText Markup Language&quot;&gt;HTML&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;figure id=&quot;markupb3&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#markupb3&quot;&gt;Markup B&apos; &lt;abbr title=&quot;Cascading Style Sheets&quot;&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.sr-only&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inline-block&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -199,7 +200,6 @@ And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#markupb3&quot;&gt;Markup B&apos; &lt;abbr title=&quot;Cascading Style Sheets&quot;&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;No revisions of &lt;a href=&quot;#markupa&quot;&gt;&lt;cite&gt;Markup A&lt;/cite&gt;&lt;/a&gt; or &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt; ensure
@@ -237,6 +237,7 @@ something like &lt;a href=&quot;#indentcss&quot;&gt;&lt;cite&gt;Indent &lt;abbr&
 hanging indent layout is not really correct.&lt;/p&gt;
 
 &lt;figure&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#indentcss&quot;&gt;Indent &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.line&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
    &lt;span class=&quot;nl&quot;&gt;text-indent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-4ch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -244,7 +245,6 @@ hanging indent layout is not really correct.&lt;/p&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#indentcss&quot;&gt;Indent &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;You can approximate a poetry layout on the web by aligning every line
@@ -254,6 +254,7 @@ line block to the right.  Something like &lt;a href=&quot;#alignlastcss&quot;&gt
 However, even this layout fails when you overflow multiple lines.&lt;/p&gt;
 
 &lt;figure id=&quot;alignlastcss&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#alignlastcss&quot;&gt;Align Last &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.stanza&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flex&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -266,13 +267,13 @@ However, even this layout fails when you overflow multiple lines.&lt;/p&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#alignlastcss&quot;&gt;Align Last &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;&lt;a href=&quot;#example&quot;&gt;&lt;cite&gt;Example&lt;/cite&gt;&lt;/a&gt; and &lt;a href=&quot;#examplecode&quot;&gt;&lt;cite&gt;Example Code&lt;/cite&gt;&lt;/a&gt; are similar to
 the current compromise I use on this site.&lt;/p&gt;
 
 &lt;figure id=&quot;example&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#example&quot;&gt;Example&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;style&gt;
 #scope p {
@@ -294,10 +295,10 @@ the current compromise I use on this site.&lt;/p&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#example&quot;&gt;Example&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;figure id=&quot;examplecode&quot;&gt;
+&lt;figcaption&gt;&lt;a href=&quot;#examplecode&quot;&gt;Example Code&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;#scope&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -319,7 +320,6 @@ the current compromise I use on this site.&lt;/p&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figcaption&gt;&lt;a href=&quot;#examplecode&quot;&gt;Example Code&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;&lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
