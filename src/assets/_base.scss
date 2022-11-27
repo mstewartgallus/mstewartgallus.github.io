@@ -192,12 +192,22 @@ menu, ul {
 }
 
 menu, ul, ol {
-    padding-inline-start: 4ch ;
+    padding-inline-start: 0 ;
 }
-$list-width: $width - 4ch ;
 li {
-    inline-size: $list-width ;
+    inline-size: $width ;
     max-inline-size: 100% ;
+}
+
+$list-width: $width - 4ch ;
+@media screen and (max-width: $A4-width) {
+    menu, ul, ol {
+        padding-inline-start: 4ch ;
+    }
+    li {
+        inline-size: $list-width ;
+        max-inline-size: 100% ;
+    }
 }
 
 abbr {

@@ -1,9 +1,10 @@
 @media print {
     @page {
         size: A4 portrait ;
-        margin: 1.5in ;
-        // FIXME make writing-mode independent ?
-        margin-right: 0 ;
+        margin: 1.5in 0 ;
+    }
+    :root {
+        padding-inline-start: 1.5in ;
     }
 
     :root {
