@@ -116,7 +116,7 @@ p {
     margin-block: $line ;
 }
 
-hr, p, li, figure {
+hr, p, figure {
     inline-size: $width ;
     max-inline-size: 100% ;
 }
@@ -192,7 +192,12 @@ menu, ul {
 }
 
 menu, ul, ol {
-    padding-inline-start: $col3 ;
+    padding-inline-start: 3ch ;
+}
+$list-width: $width - 3ch ;
+li {
+    inline-size: $list-width ;
+    max-inline-size: 100% ;
 }
 
 abbr {

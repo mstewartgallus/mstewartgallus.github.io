@@ -23,7 +23,7 @@ body {
     align-items: stretch ;
     justify-content: stretch ;
     row-gap: $line ;
-    column-gap: $col2;
+    column-gap: 1em;
     grid-auto-flow: dense ;
     grid-template-columns: 1fr [main] auto [aside] $aside 1fr ;
 }
@@ -39,7 +39,7 @@ body > footer {
 
 @media screen {
     :root {
-        padding-inline: 0.6em ;
+        padding-inline: 0.8ch ;
     }
     body {
         margin-block-end: 3 * $line ;
