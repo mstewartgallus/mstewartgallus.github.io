@@ -23,7 +23,7 @@ body {
     align-items: stretch ;
     justify-content: stretch ;
     row-gap: $line ;
-    column-gap: 1em;
+    column-gap: 2ch ;
     grid-auto-flow: dense ;
     grid-template-columns: 1fr [main] auto [aside] $aside 1fr ;
 }
