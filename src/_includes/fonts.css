@@ -49,3 +49,12 @@
     /* not sure why but I needed an extra adjustment down */
     size-adjust: 89% ;
 }
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-weight: bold;
+    font-style: normal ;
+    font-display: swap;
+    src: url('/assets/vend/Noto_Sans/NotoSans-Bold.ttf') format('truetype');
+    size-adjust: 89% ;
+}
