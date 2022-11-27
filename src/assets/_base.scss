@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Atkinson Hyperlegible';
     font-weight: normal;
+    font-style: normal ;
     font-display: swap;
     src: url('/assets/vend/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.ttf') format('truetype');
 }
@@ -15,33 +16,50 @@
 
 @font-face {
     font-family: 'Atkinson Hyperlegible' ;
+    font-style: normal ;
     font-weight: bold;
     font-display: swap;
     src: url('/assets/vend/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Jetbrains Mono';
+    font-family: 'JetBrains Mono';
     font-weight: 100 800;
     font-display: swap;
+    font-style: normal ;
     src: url('/assets/vend/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
-    size-adjust: 90%;
+    // Atkinson x 10.5833px
+    // JetBrains x 11.7333px
+    size-adjust: 90.1988357921% ;
 }
 
 @font-face {
-    font-family: 'Jetbrains Mono';
+    font-family: 'JetBrains Mono';
     font-weight: 100 800;
     font-style: italic;
     font-display: swap;
     src: url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
-    size-adjust: 90%;
+    size-adjust: 90.1988357921% ;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-weight: normal;
+    font-style: normal ;
+    font-display: swap;
+    src: url('/assets/vend/Noto_Sans/NotoSans-Regular.ttf') format('truetype');
+    // Atkinson x 10.5833px
+    // Noto Sans x 11.4333px
+    // size-adjust: 92.5655759929% ;
+    // not sure why but I needed an extra adjustment down
+    size-adjust: 89% ;
 }
 
 $root-font-size: $font-size * 1pt ;
 :root {
     line-height: $line ;
     font-size: $root-font-size ;
-    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif ;
+    font-family: 'Atkinson Hyperlegible', sans-serif ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
     hyphens: auto ;
     font-synthesis: none ;
@@ -51,15 +69,12 @@ $root-font-size: $font-size * 1pt ;
 }
 
 code, pre {
-    font-family: 'JetBrains Mono', system-ui ;
+    font-family: 'JetBrains Mono', monospace ;
 }
 
 // Atkinson Hyperlegible doesn't have small caps :(
 cite, abbr, body > header {
-    // FIXME this is Noto Sans on my system but probably something
-    // horrible elsewhere
-    font-family: system-ui ;
-    font-size-adjust: 0.45 ;
+    font-family: 'Noto Sans', sans-serif ;
 }
 
 nav,header,footer,h1,h2,h3,h4,h5,h6 {
