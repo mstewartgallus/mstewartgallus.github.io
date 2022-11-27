@@ -29,7 +29,7 @@ I fell asleep.
 
 The supernatural intruded slowly.
 
-The first night when I was wanking away at 12 <abbr>AM</abbr>
+The first night when I was wanking away at 12&nbsp;<abbr>AM</abbr>
 imagining my ass being penetrated I heard a loud buzzing sound like
 wasps.  I put it down to nerves.
 
