@@ -155,15 +155,17 @@ dt, dd {
     display: inline ;
 }
 dd::before {
-    content: " " ;
+    content: "\2002" ;
+}
+dt + dd::before {
+    content: none ;
 }
 dt ~ dt::before {
     content: "\a" ;
     white-space: pre ;
 }
 dt::after {
-    display: inline ;
-    content: ": " ;
+    content: "\2003" ;
 }
 
 table {
@@ -173,12 +175,12 @@ table {
 @counter-style nodot {
   system: numeric;
   symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
-  suffix: "   ";
+  suffix: "\2003";
 }
 @counter-style bullet {
   system: cyclic;
   symbols: "•";
-  suffix: "    ";
+  suffix: "\2003";
 }
 
 ol {
