@@ -2,7 +2,6 @@ $root-font-size: $font-size * 1pt ;
 :root {
     line-height: $line ;
     font-size: $root-font-size ;
-    font-family: 'Atkinson Hyperlegible', sans-serif ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
     hyphens: auto ;
     font-synthesis: none ;
@@ -11,10 +10,12 @@ $root-font-size: $font-size * 1pt ;
     text-underline-position: under ;
 }
 
+:root {
+    font-family: 'Atkinson Hyperlegible', sans-serif ;
+}
 code, pre {
     font-family: 'JetBrains Mono', monospace ;
 }
-
 // Atkinson Hyperlegible doesn't have small caps :(
 cite, abbr, body > header {
     font-family: 'Noto Sans', sans-serif ;
