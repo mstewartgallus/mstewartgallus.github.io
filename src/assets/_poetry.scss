@@ -1,7 +1,7 @@
 .stanza {
     margin-block: $line ;
     text-indent: 0 ;
-    hyphens: manual ;
+    @include hyphens(manual) ;
 }
 .line {
     display: inline-block ;

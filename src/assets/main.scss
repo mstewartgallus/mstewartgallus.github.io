@@ -45,6 +45,17 @@ $A4-margin: 1.5in ;
 
 $aside: 13rem ;
 
+@mixin prefix($property, $value) {
+    -moz-#{$property}: $value;
+    -ms-#{$property}: $value;
+    -webkit-#{$property}: $value;
+    $property: $value;
+}
+
+@mixin hyphens($value) {
+    @include prefix(hyphens, $value);
+}
+
 @mixin clear {
     all: initial ;
     -webkit-appearance: none;
