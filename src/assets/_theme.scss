@@ -1,9 +1,9 @@
-:is(header, figcaption, h1,h2,h3,h4,h5,h6,h7)
+:is(figcaption, h1,h2,h3,h4,h5,h6)
 :any-link:not(:focus):not(:active):not(:hover) {
     text-decoration: none ;
 }
 
-:is(header, figcaption, h1,h2,h3,h4,h5,h6,h7)
+:is(figcaption, h1,h2,h3,h4,h5,h6)
 :any-link:not(:focus):not(:active):not(:hover) {
     color: inherit;
 }
@@ -33,7 +33,6 @@ hr {
     border: 0 ;
     margin-block-end: $line ;
 }
-
 
 main > div > p:first-of-type::first-letter {
     font-size: scale(1) * 1em;
