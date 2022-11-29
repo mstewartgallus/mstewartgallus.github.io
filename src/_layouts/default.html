@@ -41,13 +41,13 @@ itemprop="articleBody"
     <main aria-labelledby="title" itemprop="text">
       <header>
         <hgroup>
-          <h1 id="title" itemprop="name headline">
+          <h1 id="title" itemprop="name headline title">
             <a rel="bookmark" href="{{ page.url | relative_url }}" itemprop="url">
               {{- page.title | escape -}}
             </a>
           </h1>
           {%- if page.subtitle -%}
-          <p>{{- page.subtitle | escape -}}</p>
+          <p itemprop="subheading">{{- page.subtitle | escape -}}</p>
           {%- endif -%}
         </hgroup>
       </header>
