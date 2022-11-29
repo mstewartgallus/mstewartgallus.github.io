@@ -24,7 +24,7 @@ body {
     align-items: stretch ;
     justify-content: stretch ;
     row-gap: 0 ;
-    column-gap: 2ch ;
+    column-gap: 1ch ;
     grid-auto-flow: dense ;
     grid-template-columns: 1fr [main] auto [aside] $aside 1fr ;
     grid-template-rows: auto auto auto 1fr ;
@@ -67,6 +67,7 @@ body > :is(header, footer, nav) {
         display: block ;
     }
     main {
+        padding-right: 1ch ;
         scroll-behavior: smooth ;
         scrollbar-gutter: stable ;
         overflow-y: scroll ;
