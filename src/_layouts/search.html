@@ -3,6 +3,9 @@ layout: page
 ---
 {%- assign categories = site.categories | sort -%}
 {%- assign tags = site.tags | sort -%}
+<script type="module" defer async
+        src="{% link assets/search.mjs %}?output=search-output&template=search-result"
+        ></script>
 
 {{- content -}}
 
@@ -29,7 +32,7 @@ layout: page
 </template>
 
 <form aria-labelledby="title"
-      rel="search" role="search" name="search-form" method="get">
+      id="search" rel="search" role="search" name="search-form" method="get">
   <label for="category">Category</label>
   <select id="category" name="category" multiple="multiple" size="2">
     {%- for category in categories -%}
@@ -48,12 +51,9 @@ layout: page
 
   <menu>
     <li><button type="submit">Search</button></li>
+    <li><button type="reset">Reset</button></li>
   </menu>
 </form>
 
 <output for="search" id="search-output" aria-live="polite" aria-busy="true">
 </output>
-
-<script type="module" defer async
-        src="{% link assets/search.mjs %}?output=search-output&template=search-result"
-        ></script>

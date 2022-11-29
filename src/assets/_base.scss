@@ -122,24 +122,24 @@ ol {
     list-style-type: nodot ;
 }
 
-menu, ul {
+ul {
     list-style-type: bullet ;
 }
 
-menu, ul, ol {
+ul, ol {
     padding-inline-start: 0 ;
 }
-li {
+:is(ul, ol) > li {
     inline-size: $width ;
     max-inline-size: 100% ;
 }
 
 $list-width: $width - 4ch ;
 @media screen and (max-width: $A4-width) {
-    menu, ul, ol {
+    ul, ol {
         padding-inline-start: 4ch ;
     }
-    li {
+    :is(ul, ol) > li {
         inline-size: $list-width ;
         max-inline-size: 100% ;
     }

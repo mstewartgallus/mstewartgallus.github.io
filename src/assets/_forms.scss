@@ -5,7 +5,9 @@ select, button {
 
 select, button {
     padding-inline: 0.5em ;
-    margin-inline: 0.5em ;
+}
+
+select {
     margin-block: $line ;
 }
 
@@ -68,4 +70,16 @@ button {
         background: black ;
         color: white ;
     }
+}
+
+menu {
+    padding: 0;
+    margin: 0;
+    display: flex ;
+    justify-content: start ;
+    margin-block-end: $line ;
+    column-gap: 1ch ;
+}
+menu > li {
+    display: block ;
 }

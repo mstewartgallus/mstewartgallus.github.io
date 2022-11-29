@@ -160,9 +160,12 @@
     <main aria-labelledby="title" itemprop="text">
       <header>
         <hgroup>
-          <h1 id="title" itemprop="name headline title">Search</h1></hgroup>
+          <!-- allow focus for search -->
+          <h1 tabindex="-1" id="title" itemprop="name headline title">Search</h1></hgroup>
       </header>
-      <div itemprop="articleBody"><meta name="robots" content="noindex">
+      <div itemprop="articleBody"><script type="module" defer async
+        src="/assets/search.mjs?output=search-output&template=search-result"
+        ></script><meta name="robots" content="noindex">
 <link href="/assets/search.json"
       rel="preload" as="fetch"
       type="application/json" crossorigin>
@@ -185,7 +188,7 @@
 </template>
 
 <form aria-labelledby="title"
-      rel="search" role="search" name="search-form" method="get">
+      id="search" rel="search" role="search" name="search-form" method="get">
   <label for="category">Category</label>
   <select id="category" name="category" multiple="multiple" size="2"><option value="Poem">Poem</option><option value="Prose">Prose</option><option value="Web">Web</option></select>
 
@@ -194,15 +197,12 @@
 
   <menu>
     <li><button type="submit">Search</button></li>
+    <li><button type="reset">Reset</button></li>
   </menu>
 </form>
 
 <output for="search" id="search-output" aria-live="polite" aria-busy="true">
 </output>
-
-<script type="module" defer async
-        src="/assets/search.mjs?output=search-output&template=search-result"
-        ></script>
 </div>
     </main></body>
 </html>
