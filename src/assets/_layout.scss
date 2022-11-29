@@ -27,14 +27,16 @@ body {
     column-gap: 2ch ;
     grid-auto-flow: dense ;
     grid-template-columns: 1fr [main] auto [aside] $aside 1fr ;
+    grid-template-rows: auto auto auto 1fr ;
 }
 body > * {
     grid-column: main;
 }
-body > header {
-    grid-column: span 3;
+main {
+    grid-row: span 4 ;
 }
-body > footer {
+
+body > :is(header, footer, nav) {
     grid-column: aside;
 }
 
@@ -49,21 +51,32 @@ body > footer {
 }
 
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
+    :root {
+        padding-inline: 0 ;
+    }
     body {
         inline-size: initial ;
         max-inline-size: initial ;
+        margin-block: 0 ;
 
         padding-inline: 0 ;
         display: grid ;
+        height: 100vh ;
     }
-    body > nav {
-        margin-block-start: - $line ;
+    main {
+        overflow-y: scroll ;
+        padding-block-end: $line3 ;
+        box-sizing: border-box ;
+    }
+    .paging {
+        display: block ;
     }
 }
 
 @media screen and (min-width: $A4-width + 3 * $A4-margin) {
     body {
-        grid-template-columns: $A4-margin [main] auto [aside] $aside 1fr ;
-        margin-block-start: $line3  ;
+        grid-template-columns: 1in [main] auto [aside] $aside 1fr ;
+        padding-block-start: $line  ;
+        box-sizing: border-box ;
     }
 }

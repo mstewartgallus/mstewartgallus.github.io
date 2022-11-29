@@ -43,7 +43,7 @@ $doubleline: 2 * $line ;
 $A4-width: 8.3in ;
 $A4-margin: 1.5in ;
 
-$aside: 13rem ;
+$aside: 16rem ;
 
 @mixin prefix($property, $value) {
     -moz-#{$property}: $value;
