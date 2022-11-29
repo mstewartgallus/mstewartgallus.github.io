@@ -76,7 +76,7 @@ And so are you.</p>
 {% capture markupn %}
 ```html
 <figure>
-<ol class="poem" role="graphic" aria-labelledby="transcript">
+<ol class="poem" role="graphic" aria-details="transcript">
 <li>
     <ol>
         <li>Roses are red</li>
@@ -165,11 +165,14 @@ cruft in Firefox's accessibility inspector.
 {:#markupa3}
 
 As a <i>nuclear</i> solution you can markup the text for graphical
-display using the `graphic` role as in [<cite>Markup N</cite>](#markupn).  I advise
-use of the `aria-labelledby` attribute instead of the `aria-label`
-attribute here. `aria-label` has a tendency to work poorly with
-newlines in text, is not usually translated by automated tools and
-doesn't let you embed more markup as appropriate.
+display using the `graphic` role as in [<cite>Markup
+N</cite>](#markupn).  I advise use of the <s><code
+class="language-plaintext
+highlighter-rouge">aria-labelledby</code></s> `aria-details`
+(2022-11-28) attribute instead of the `aria-label` attribute
+here. `aria-label` has a tendency to work poorly with newlines in
+text, is not usually translated by automated tools and doesn't let you
+embed more markup as appropriate.
 
 <figure>
 <figcaption><a href="#markupn">Markup N</a></figcaption>

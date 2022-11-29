@@ -258,17 +258,18 @@ cruft in Firefox’s accessibility inspector.</p>
 </figure>
 
 <p>As a <i>nuclear</i> solution you can markup the text for graphical
-display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn"><cite>Markup N</cite></a>.  I advise
-use of the <code class="language-plaintext highlighter-rouge">aria-labelledby</code> attribute instead of the <code class="language-plaintext highlighter-rouge">aria-label</code>
-attribute here. <code class="language-plaintext highlighter-rouge">aria-label</code> has a tendency to work poorly with
-newlines in text, is not usually translated by automated tools and
-doesn’t let you embed more markup as appropriate.</p>
+display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn"><cite>Markup
+N</cite></a>.  I advise use of the <s><code class="language-plaintext highlighter-rouge">aria-labelledby</code></s> <code class="language-plaintext highlighter-rouge">aria-details</code>
+(2022-11-28) attribute instead of the <code class="language-plaintext highlighter-rouge">aria-label</code> attribute
+here. <code class="language-plaintext highlighter-rouge">aria-label</code> has a tendency to work poorly with newlines in
+text, is not usually translated by automated tools and doesn’t let you
+embed more markup as appropriate.</p>
 
 <figure id="markupn">
 <figcaption><a href="#markupn">Markup N</a></figcaption>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
-<span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span> <span class="na">role=</span><span class="s">"graphic"</span> <span class="na">aria-labelledby=</span><span class="s">"transcript"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span> <span class="na">role=</span><span class="s">"graphic"</span> <span class="na">aria-details=</span><span class="s">"transcript"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
     <span class="nt">&lt;ol&gt;</span>
         <span class="nt">&lt;li&gt;</span>Roses are red<span class="nt">&lt;/li&gt;</span>
