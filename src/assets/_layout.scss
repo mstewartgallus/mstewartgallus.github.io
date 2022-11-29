@@ -63,7 +63,11 @@ body > :is(header, footer, nav) {
         display: grid ;
         height: 100vh ;
     }
+    body > header {
+        display: block ;
+    }
     main {
+        scrollbar-gutter: stable ;
         overflow-y: scroll ;
         padding-block-end: $line3 ;
         box-sizing: border-box ;
