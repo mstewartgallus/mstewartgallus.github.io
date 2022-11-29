@@ -113,11 +113,14 @@ $aside: 16rem ;
     }
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
     @import "assets/_syntax-dark.scss";
 }
-@media (prefers-color-scheme: light) {
+@media screen and (prefers-color-scheme: light) {
     @import "assets/_syntax-light.scss";
+}
+@media print {
+    @import "assets/_syntax-print.scss";
 }
 
 .highlight {
