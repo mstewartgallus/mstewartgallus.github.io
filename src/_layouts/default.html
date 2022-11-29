@@ -35,7 +35,9 @@ itemprop="articleBody"
         itemprop="mainEntity hasPart"
         itemtype="{{ maintype }}"
         itemid="{{ page.url | absolute_url }}">
-    {%- include header.html -%}
+    <header>
+      {%- include header.html -%}
+    </header>
     <main aria-labelledby="title" itemprop="text">
       <header>
         <hgroup>
