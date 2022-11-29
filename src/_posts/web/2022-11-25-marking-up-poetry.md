@@ -76,7 +76,8 @@ And so are you.</p>
 {% capture markupn %}
 ```html
 <figure>
-<ol class="poem" role="graphic" aria-details="transcript">
+<div role="img" aria-details="transcript">
+<ol class="poem">
 <li>
     <ol>
         <li>Roses are red</li>
@@ -86,6 +87,7 @@ And so are you.</p>
     </ol>
 </li>
 </ol>
+</div>
 <figcaption id="transcript">
 <p>Transcript for text to speech:</p>
 <p>Roses are red ;
