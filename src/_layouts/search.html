@@ -46,12 +46,12 @@ layout: page
     {%- endfor -%}
   </select>
 
-  <span style="display:block; text-align:center">
-    <button type="submit">Search</button>
-  </span>
+  <menu>
+    <li><button type="submit">Search</button></li>
+  </menu>
 </form>
 
-<output for="search" id="search-output" aria-live="polite">
+<output for="search" id="search-output" aria-live="polite" aria-busy="true">
 </output>
 
 <script type="module" defer async

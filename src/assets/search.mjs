@@ -131,7 +131,8 @@ function render(tagParams, categoryParams, template, output, posts) {
     const postList = document.createElement("ul");
     postList.append(...elems);
     output.replaceChildren(postList);
-};
+    output.ariaBusy = 'false' ;
+}
 
 function parseParams(params) {
     const tags = new Set();
