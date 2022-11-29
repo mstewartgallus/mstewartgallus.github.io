@@ -67,7 +67,8 @@ body > :is(header, footer, nav) {
         display: block ;
     }
     main {
-        padding-right: 1ch ;
+        padding-inline-start: 4ch ;
+        padding-inline-end: 1ch ;
         scroll-behavior: smooth ;
         scrollbar-gutter: stable ;
         overflow-y: scroll ;
