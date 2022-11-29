@@ -24,7 +24,7 @@ body {
     align-items: stretch ;
     justify-content: stretch ;
     row-gap: 0 ;
-    column-gap: 1ch ;
+    column-gap: 2ch ;
     grid-auto-flow: dense ;
     grid-template-columns: 1fr [main] auto [aside] $aside 1fr ;
     grid-template-rows: auto auto auto 1fr ;
@@ -57,22 +57,13 @@ body > :is(header, footer, nav) {
     body {
         inline-size: initial ;
         max-inline-size: initial ;
-        margin-block: 0 ;
-
         padding-inline: 0 ;
         display: grid ;
-        height: 100vh ;
     }
     body > header {
         display: block ;
     }
     main {
-        padding-inline-start: 4ch ;
-        padding-inline-end: 1ch ;
-        scroll-behavior: smooth ;
-        scrollbar-gutter: stable ;
-        overflow-y: scroll ;
-        padding-block-end: $line3 ;
         box-sizing: border-box ;
     }
     .paging {
@@ -83,7 +74,7 @@ body > :is(header, footer, nav) {
 @media screen and (min-width: $A4-width + 3 * $A4-margin) {
     body {
         grid-template-columns: 1in [main] auto [aside] $aside 1fr ;
-        padding-block-start: $line  ;
+        margin-block-start: $line  ;
         box-sizing: border-box ;
     }
 }
