@@ -30,7 +30,7 @@ layout: page
 
 <form aria-labelledby="title"
       rel="search" role="search" name="search-form" method="get">
-  <label for="category">Category:</label>
+  <label for="category">Category</label>
   <select id="category" name="category" multiple="multiple" size="2">
     {%- for category in categories -%}
     {%- assign cat = category[0] | escape -%}
@@ -38,7 +38,7 @@ layout: page
     {%- endfor -%}
   </select>
 
-  <label for="tag">Tag:</label>
+  <label for="tag">Tag</label>
   <select id="tag" name="tag" multiple="multiple" size="5">
     {%- for tag in tags -%}
     {%- assign tg = tag[0] | escape -%}
