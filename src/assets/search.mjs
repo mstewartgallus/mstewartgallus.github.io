@@ -69,7 +69,7 @@ const DOMContentLoaded = new Promise((resolve, reject) => {
 
 const doctitle = document.title;
 
-function render(tagParams, categoryParams, template, output, posts) {
+function render(tagParams, categoryParams, template, posts) {
     const tags = Array.from(tagParams.values());
     const cats = Array.from(categoryParams.values());
     document.title = `${tags} ${cats} — ${doctitle}`;
@@ -122,17 +122,9 @@ function render(tagParams, categoryParams, template, output, posts) {
         return clone;
     });
 
-    for (const option of category.options) {
-        option.selected = categoryParams.has(option.value);
-    }
-    for (const option of tag.options) {
-        option.selected = tagParams.has(option.value);
-    }
-
     const postList = document.createElement("ul");
     postList.append(...elems);
-    output.replaceChildren(postList);
-    output.ariaBusy = 'false' ;
+    return postList;
 }
 
 const meta = new URL(import.meta.url).searchParams;
@@ -149,13 +141,24 @@ async function* search() {
     const h1 = document.getElementById("title");
     const template = document.getElementById(templateId).content;
     const output = document.getElementById(outputId);
+    const category = document.getElementById('category');
+    const tag = document.getElementById('tag');
 
     let isfirst = true;
     for (;;) {
         const [tagParams, categoryParams] = yield;
 
         const posts = findPosts(db, tagParams, categoryParams);
-        render(tagParams, categoryParams, template, output, posts);
+        const postList = render(tagParams, categoryParams, template, posts);
+        output.replaceChildren(postList);
+        output.ariaBusy = 'false' ;
+
+        for (const option of category.options) {
+            option.selected = categoryParams.has(option.value);
+        }
+        for (const option of tag.options) {
+            option.selected = tagParams.has(option.value);
+        }
         if (isfirst) {
             isfirst = false;
         } else {
