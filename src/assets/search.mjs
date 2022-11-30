@@ -11,23 +11,6 @@ function intersect(X, Y) {
     return Z;
 };
 
-function parseForm(formData) {
-    const tags = new Set();
-    const categories = new Set();
-
-    for (const [key, value] of formData.entries()) {
-        switch (key) {
-        case "tag":
-            tags.add(value);
-            break;
-        case "category":
-            categories.add(value);
-            break;
-        }
-    }
-    return [tags, categories];
-};
-
 function reviver(key, value) {
     if (typeof value === "object"
         && !Array.isArray(value)
@@ -74,14 +57,6 @@ function findPosts(db, tags, categories) {
     return Array.from(intersect(cs, ts)).map(index => posts[index]);
 }
 
-async function fetchDB() {
-    const response = await fetch("{% link assets/search.json %}");
-    const text = await response.text();
-    return JSON.parse(text, reviver);
-}
-
-const getDB = fetchDB();
-
 const DOMContentLoaded = new Promise((resolve, reject) => {
     document.addEventListener('DOMContentLoaded', (event) => resolve());
     switch (document.readyState) {
@@ -92,26 +67,7 @@ const DOMContentLoaded = new Promise((resolve, reject) => {
     }
 });
 
-const meta = new URL(import.meta.url).searchParams;
-const outputId = meta.get("output");
-const templateId = meta.get("template");
-
 const doctitle = document.title;
-const location = new URL(document.location);
-const params = location.searchParams;
-const base = location.href + ":" + location.port;
-
-const [tagParams, categoryParams] = parseParams(params);
-
-await DOMContentLoaded;
-
-const h1 = document.getElementById("title");
-const form = document.getElementById("search");
-const category = document.getElementById("category");
-const tag = document.getElementById("tag");
-
-const template = document.getElementById(templateId).content;
-const output = document.getElementById(outputId);
 
 function render(tagParams, categoryParams, template, output, posts) {
     const tags = Array.from(tagParams.values());
@@ -179,44 +135,125 @@ function render(tagParams, categoryParams, template, output, posts) {
     output.ariaBusy = 'false' ;
 }
 
-const db = await getDB;
+const meta = new URL(import.meta.url).searchParams;
+const outputId = meta.get("output");
+const templateId = meta.get("template");
 
-function findRenderFocus(tagParams, categoryParams) {
-    const posts = findPosts(db, tagParams, categoryParams);
-    render(tagParams, categoryParams, template, output, posts);
-    h1.focus();
+async function* search() {
+    const response = await fetch("{% link assets/search.json %}");
+    const text = await response.text();
+    const db = JSON.parse(text, reviver);
+
+    await DOMContentLoaded;
+
+    const h1 = document.getElementById("title");
+    const template = document.getElementById(templateId).content;
+    const output = document.getElementById(outputId);
+
+    let isfirst = true;
+    for (;;) {
+        const [tagParams, categoryParams] = yield;
+
+        const posts = findPosts(db, tagParams, categoryParams);
+        render(tagParams, categoryParams, template, output, posts);
+        if (isfirst) {
+            isfirst = false;
+        } else {
+            h1.focus();
+        }
+    }
 }
 
-findRenderFocus(tagParams, categoryParams);
+async function* route() {
+    let accept = true;
+    const loop = await search();
 
-window.addEventListener('popstate', (event) => {
-    setTimeout(() => {
-        const params = new URL(document.location).searchParams;
-        const [tagParams, categoryParams] = parseParams(params);
-        findRenderFocus(tagParams, categoryParams);
-    }, 0);
+    await loop.next();
+    for (;;) {
+        const request = yield accept;
+        const location = new URL(request.url);
+        accept = false;
+        switch (location.pathname) {
+        case '/search/':
+            accept = true;
+            await loop.next(parseParams(location.searchParams));
+            break;
+        }
+    }
+}
+
+async function* main() {
+    const loop = await route();
+
+    await loop.next();
+
+    await loop.next(new Request(window.location));
+    for (;;) {
+        const event = yield;
+
+        switch (event.type) {
+        case 'popstate': {
+            const accept = await loop.next(new Request(window.location));
+            if (accept) {
+                event.preventDefault();
+            }
+            break;
+        }
+
+        case 'click': {
+            const tag = event.target;
+            if (tag.tagName != 'A') {
+                continue;
+            }
+            const href = tag.href;
+            if (!href) {
+                continue;
+            }
+            if (event.button != 0) {
+                continue;
+            }
+
+            if (tag.origin != document.location.origin) {
+                continue;
+            }
+
+            const request = new Request(href);
+            const accept = await loop.next(request);
+            if (accept) {
+                history.pushState(null, '', request.url);
+                event.preventDefault();
+            }
+            break;
+        }
+
+        case 'submit': {
+            const form = event.target;
+
+            const params = new URLSearchParams(new FormData(form));
+            const request = new Request(form.action + "?" + params);
+            if (new URL(request.url).origin != document.location.origin) {
+                continue;
+            }
+            const accept = await loop.next(request);
+            if (accept) {
+                history.pushState(null, '', request.url);
+                event.preventDefault();
+            }
+            break;
+        }
+        }
+    }
+}
+
+const loop = await main();
+await loop.next();
+
+document.addEventListener('click', async (event) => {
+    await loop.next(event);
 });
-
-form.addEventListener('submit', event => {
-    event.preventDefault();
-
-    const cat = new Set();
-    const tags = new Set();
-    for (const option of category.selectedOptions) {
-        cat.add(option.value);
-    }
-    for (const option of tag.selectedOptions) {
-        tags.add(option.value);
-    }
-
-    findRenderFocus(tags, cat);
-
-    const params = new URLSearchParams();
-    for (const t of tags) {
-        params.append("tag", t);
-    }
-    for (const c of cat) {
-        params.append("category", c);
-    }
-    history.pushState(null, '', '?' + params);
+document.addEventListener('submit', async (event) => {
+    await loop.next(event);
+});
+window.addEventListener('popstate', async (event) => {
+    await loop.next(event);
 });

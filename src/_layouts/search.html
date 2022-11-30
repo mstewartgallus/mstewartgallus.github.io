@@ -32,7 +32,8 @@ layout: page
 </template>
 
 <form aria-labelledby="title"
-      id="search" rel="search" role="search" name="search-form" method="get">
+      id="search" rel="search" role="search" name="search-form" method="get"
+      action="{% link search.html %}">
   <label for="category">Category</label>
   <select id="category" name="category" multiple="multiple" size="2">
     {%- for category in categories -%}
