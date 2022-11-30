@@ -38,8 +38,10 @@
       {%- if page.tags.size > 0 -%}
       <dt>Tag</dt>
       {%- for tag in page.tags -%}
-      <dd itemprop="keywords">
-        <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">#{{- tag | escape -}}</a>
+      <dd>
+        <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
+          #<span itemprop="keywords">{{- tag | escape -}}</span>
+        </a>
       </dd>
       {%- endfor -%}
       {%- endif -%}
