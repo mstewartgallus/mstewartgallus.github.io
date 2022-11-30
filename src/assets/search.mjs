@@ -80,6 +80,39 @@ async function fetchDB() {
     return JSON.parse(text, reviver);
 }
 
+const getDB = fetchDB();
+
+const DOMContentLoaded = new Promise((resolve, reject) => {
+    document.addEventListener('DOMContentLoaded', (event) => resolve());
+    switch (document.readyState) {
+    case 'interactive':
+    case 'complete':
+        resolve();
+        break;
+    }
+});
+
+const meta = new URL(import.meta.url).searchParams;
+const outputId = meta.get("output");
+const templateId = meta.get("template");
+
+const doctitle = document.title;
+const location = new URL(document.location);
+const params = location.searchParams;
+const base = location.href + ":" + location.port;
+
+const [tagParams, categoryParams] = parseParams(params);
+
+await DOMContentLoaded;
+
+const h1 = document.getElementById("title");
+const form = document.getElementById("search");
+const category = document.getElementById("category");
+const tag = document.getElementById("tag");
+
+const template = document.getElementById(templateId).content;
+const output = document.getElementById(outputId);
+
 function render(tagParams, categoryParams, template, output, posts) {
     const tags = Array.from(tagParams.values());
     const cats = Array.from(categoryParams.values());
@@ -133,73 +166,34 @@ function render(tagParams, categoryParams, template, output, posts) {
         return clone;
     });
 
+    for (const option of category.options) {
+        option.selected = categoryParams.has(option.value);
+    }
+    for (const option of tag.options) {
+        option.selected = tagParams.has(option.value);
+    }
+
     const postList = document.createElement("ul");
     postList.append(...elems);
     output.replaceChildren(postList);
     output.ariaBusy = 'false' ;
 }
 
-const getDB = fetchDB();
-
-const DOMContentLoaded = new Promise((resolve, reject) => {
-    document.addEventListener('DOMContentLoaded', (event) => resolve());
-    switch (document.readyState) {
-    case 'interactive':
-    case 'complete':
-        resolve();
-        break;
-    }
-});
-
-const meta = new URL(import.meta.url).searchParams;
-const outputId = meta.get("output");
-const templateId = meta.get("template");
-
-const doctitle = document.title;
-const location = new URL(document.location);
-const params = location.searchParams;
-const base = location.href + ":" + location.port;
-
-const [tagParams, categoryParams] = parseParams(params);
-
-await DOMContentLoaded;
-
-const h1 = document.getElementById("title");
-const form = document.getElementById("search");
-const category = document.getElementById("category");
-const tag = document.getElementById("tag");
-for (const option of category.options) {
-    option.selected = categoryParams.has(option.value);
-}
-for (const option of tag.options) {
-    option.selected = tagParams.has(option.value);
-}
-
-const template = document.getElementById(templateId).content;
-const output = document.getElementById(outputId);
-
 const db = await getDB;
 
-const posts = findPosts(db, tagParams, categoryParams);
+function findRenderFocus(tagParams, categoryParams) {
+    const posts = findPosts(db, tagParams, categoryParams);
+    render(tagParams, categoryParams, template, output, posts);
+    h1.focus();
+}
 
-render(tagParams, categoryParams, template, output, posts);
+findRenderFocus(tagParams, categoryParams);
 
 window.addEventListener('popstate', (event) => {
-    event.preventDefault();
     setTimeout(() => {
         const params = new URL(document.location).searchParams;
         const [tagParams, categoryParams] = parseParams(params);
-
-        for (const option of category.options) {
-            option.selected = categoryParams.has(option.value);
-        }
-        for (const option of tag.options) {
-            option.selected = tagParams.has(option.value);
-        }
-
-        const posts = findPosts(db, tagParams, categoryParams);
-        render(tags, cat, template, output, posts);
-        h1.focus();
+        findRenderFocus(tagParams, categoryParams);
     }, 0);
 });
 
@@ -215,9 +209,7 @@ form.addEventListener('submit', event => {
         tags.add(option.value);
     }
 
-    const posts = findPosts(db, tags, cat);
-    render(tags, cat, template, output, posts);
-    h1.focus();
+    findRenderFocus(tags, cat);
 
     const params = new URLSearchParams();
     for (const t of tags) {
