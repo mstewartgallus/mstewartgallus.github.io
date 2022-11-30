@@ -124,79 +124,56 @@ function render(tagParams, categoryParams, template, posts) {
     return postList;
 }
 
-const meta = new URL(import.meta.url).searchParams;
-const outputId = meta.get("output");
-const templateId = meta.get("template");
+class Queue {
+    #events = [];
+    #promise;
+    #signal;
 
-async function* search() {
-    const response = await fetch("/assets/search.json");
-    const text = await response.text();
-    const db = JSON.parse(text, reviver);
+    constructor() {
+        this.#promise = new Promise(r => {
+            this.#signal = r;
+        });
+    }
 
-    await DOMContentLoaded;
+    push(e) {
+        this.#events.push(e);
+        this.#signal();
+    }
 
-    const h1 = document.getElementById("title");
-    const template = document.getElementById(templateId).content;
-    const output = document.getElementById(outputId);
-    const category = document.getElementById('category');
-    const tag = document.getElementById('tag');
-
-    let isfirst = true;
-    for (;;) {
-        const [tagParams, categoryParams] = yield;
-
-        const posts = findPosts(db, tagParams, categoryParams);
-        const postList = render(tagParams, categoryParams, template, posts);
-        output.replaceChildren(postList);
-        output.ariaBusy = 'false' ;
-
-        for (const option of category.options) {
-            option.selected = categoryParams.has(option.value);
-        }
-        for (const option of tag.options) {
-            option.selected = tagParams.has(option.value);
-        }
-        if (isfirst) {
-            isfirst = false;
-        } else {
-            h1.focus();
+    async pop() {
+        for (;;) {
+            const e = this.#events.pop();
+            if (e != null) {
+                return e;
+            }
+            await this.#promise;
+            this.#promise = new Promise(r => {
+                this.#signal = r;
+            });
         }
     }
 }
 
-async function* route() {
-    let accept = true;
-    const loop = await search();
 
-    await loop.next();
+const queue = new Queue();
+
+document.addEventListener('click', e => queue.push(e));
+document.addEventListener('submit', e => queue.push(e));
+window.addEventListener('popstate', e => queue.push(e));
+
+async function* events() {
     for (;;) {
-        const request = yield accept;
-        const location = new URL(request.url);
-        accept = false;
-        switch (location.pathname) {
-        case '/search/':
-            accept = true;
-            await loop.next(parseParams(location.searchParams));
-            break;
-        }
+        yield await queue.pop();
     }
 }
 
-async function* main() {
-    const loop = await route();
+async function* requests() {
+    yield new Request(window.location);
 
-    await loop.next();
-
-    await loop.next(new Request(window.location));
-    for (;;) {
-        const event = yield;
-
+    for await (const event of events()) {
         switch (event.type) {
         case 'popstate': {
-            const accept = await loop.next(new Request(window.location));
-            if (accept) {
-                event.preventDefault();
-            }
+            yield new Request(window.location);
             break;
         }
 
@@ -217,9 +194,8 @@ async function* main() {
                 continue;
             }
 
-            const request = new Request(href);
-            const accept = await loop.next(request);
-            if (accept) {
+            const response = yield new Request(href);
+            if (response.ok) {
                 history.pushState(null, '', request.url);
                 event.preventDefault();
             }
@@ -234,8 +210,8 @@ async function* main() {
             if (new URL(request.url).origin != document.location.origin) {
                 continue;
             }
-            const accept = await loop.next(request);
-            if (accept) {
+            const response = yield request;
+            if (response.ok) {
                 history.pushState(null, '', request.url);
                 event.preventDefault();
             }
@@ -245,15 +221,58 @@ async function* main() {
     }
 }
 
-const loop = await main();
-await loop.next();
+const meta = new URL(import.meta.url).searchParams;
+const outputId = meta.get("output");
+const templateId = meta.get("template");
 
-document.addEventListener('click', async (event) => {
-    await loop.next(event);
-});
-document.addEventListener('submit', async (event) => {
-    await loop.next(event);
-});
-window.addEventListener('popstate', async (event) => {
-    await loop.next(event);
-});
+const loop = await requests();
+
+const jsresponse = await fetch("/assets/search.json");
+const text = await jsresponse.text();
+const db = JSON.parse(text, reviver);
+
+await DOMContentLoaded;
+
+const template = document.getElementById(templateId).content;
+const output = document.getElementById(outputId);
+const category = document.getElementById('category');
+const tag = document.getElementById('tag');
+
+const h1 = document.getElementsByTagName('h1');
+
+let isfirst = true;
+let request = (await loop.next()).value;
+for (;;) {
+    const location = new URL(request.url);
+    let response;
+    switch (location.pathname) {
+    case '/search/': {
+        const [tagParams, categoryParams] = parseParams(location.searchParams);
+
+        const posts = findPosts(db, tagParams, categoryParams);
+        const postList = render(tagParams, categoryParams, template, posts);
+        output.replaceChildren(postList);
+        output.ariaBusy = 'false' ;
+
+        for (const option of category.options) {
+            option.selected = categoryParams.has(option.value);
+        }
+        for (const option of tag.options) {
+            option.selected = tagParams.has(option.value);
+        }
+        response = new Response({ status: 200 });
+        break;
+    }
+
+    default:
+        response = Response.error();
+        break;
+    }
+
+    if (!isfirst) {
+        if (response.ok && h1[0]) {
+            h1[0].focus();
+        }
+    }
+    request = (await loop.next(response)).value;
+}
