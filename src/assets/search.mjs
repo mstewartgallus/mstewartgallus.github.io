@@ -1,5 +1,56 @@
 ---
 ---
+class Queue {
+    #events = [];
+    #promise;
+    #signal;
+
+    constructor() {
+        this.#promise = new Promise(r => {
+            this.#signal = r;
+        });
+    }
+
+    push(e) {
+        this.#events.push(e);
+        this.#signal();
+    }
+
+    async pop() {
+        for (;;) {
+            const e = this.#events.pop();
+            if (e != null) {
+                return e;
+            }
+            await this.#promise;
+            this.#promise = new Promise(r => {
+                this.#signal = r;
+            });
+        }
+    }
+}
+
+class Lazy {
+    #fn;
+    #value;
+    #init = false;
+
+    constructor(f) {
+        this.#fn = f;
+    }
+
+    async force() {
+        if (this.#init) {
+            return this.#value;
+        }
+        const value = await this.#fn();
+        this.#value = value;
+        this.#fn = null;
+        this.#init = true;
+        return value;
+    }
+}
+
 
 function intersect(X, Y) {
     const Z = new Set();
@@ -57,22 +108,7 @@ function findPosts(db, tags, categories) {
     return Array.from(intersect(cs, ts)).map(index => posts[index]);
 }
 
-const DOMContentLoaded = new Promise((resolve, reject) => {
-    document.addEventListener('DOMContentLoaded', (event) => resolve());
-    switch (document.readyState) {
-    case 'interactive':
-    case 'complete':
-        resolve();
-        break;
-    }
-});
-
-const doctitle = document.title;
-
-function render(tagParams, categoryParams, template, posts) {
-    const tags = Array.from(tagParams.values());
-    const cats = Array.from(categoryParams.values());
-    document.title = `${tags} ${cats} — ${doctitle}`;
+function render(template, posts) {
     const elems = posts.map((post) => {
         const title = post.get("title");
         const date = post.get("date");
@@ -127,37 +163,6 @@ function render(tagParams, categoryParams, template, posts) {
     return postList;
 }
 
-class Queue {
-    #events = [];
-    #promise;
-    #signal;
-
-    constructor() {
-        this.#promise = new Promise(r => {
-            this.#signal = r;
-        });
-    }
-
-    push(e) {
-        this.#events.push(e);
-        this.#signal();
-    }
-
-    async pop() {
-        for (;;) {
-            const e = this.#events.pop();
-            if (e != null) {
-                return e;
-            }
-            await this.#promise;
-            this.#promise = new Promise(r => {
-                this.#signal = r;
-            });
-        }
-    }
-}
-
-
 const queue = new Queue();
 
 document.addEventListener('click', e => queue.push(e));
@@ -208,11 +213,25 @@ async function* requests() {
         case 'submit': {
             const form = event.target;
 
-            const params = new URLSearchParams(new FormData(form));
-            const request = new Request(form.action + "?" + params);
-            if (new URL(request.url).origin != document.location.origin) {
+            let url = new URL(form.action, document.location.origin);
+            if (url.origin != document.location.origin) {
                 continue;
             }
+
+            const formdata = new FormData(form);
+            const options = {
+                method: form.method
+            };
+            if (form.method === 'get') {
+                const params = new URLSearchParams(formdata);
+                for (const [key, value] of url.searchParams) {
+                    params.append(key, value);
+                }
+                url = new URL(url.origin + url.pathname + "?" + params);
+            } else {
+                options.body = formdata;
+            }
+            const request = new Request(url, options);
             const response = yield request;
             if (response.ok) {
                 history.pushState(null, '', request.url);
@@ -223,19 +242,27 @@ async function* requests() {
         }
     }
 }
+const db = new Lazy(async () => {
+    const jsresponse = await fetch("{% link assets/search.json %}");
+    const text = await jsresponse.text();
+    return JSON.parse(text, reviver);
+});
+
+await new Promise((resolve, reject) => {
+    document.addEventListener('DOMContentLoaded', (event) => resolve());
+    switch (document.readyState) {
+    case 'interactive':
+    case 'complete':
+        resolve();
+        break;
+    }
+});
 
 const meta = new URL(import.meta.url).searchParams;
 const outputId = meta.get("output");
 const templateId = meta.get("template");
 
-const loop = await requests();
-
-const jsresponse = await fetch("{% link assets/search.json %}");
-const text = await jsresponse.text();
-const db = JSON.parse(text, reviver);
-
-await DOMContentLoaded;
-
+const doctitle = document.title;
 const template = document.getElementById(templateId).content;
 const output = document.getElementById(outputId);
 const category = document.getElementById('category');
@@ -244,16 +271,23 @@ const tag = document.getElementById('tag');
 const h1 = document.getElementsByTagName('h1');
 
 let isfirst = true;
+const loop = await requests();
 let request = (await loop.next()).value;
 for (;;) {
     const location = new URL(request.url);
     let response;
-    switch (location.pathname) {
-    case '/search/': {
+    if (location.pathname === '/search/'
+        && request.method === 'GET') {
         const [tagParams, categoryParams] = parseParams(location.searchParams);
 
-        const posts = findPosts(db, tagParams, categoryParams);
-        const postList = render(tagParams, categoryParams, template, posts);
+        const posts = findPosts(await db.force(), tagParams, categoryParams);
+        const postList = render(template, posts);
+
+        const tags = Array.from(tagParams.values());
+        const cats = Array.from(categoryParams.values());
+
+        document.title = `${tags} ${cats} — ${doctitle}`;
+
         output.replaceChildren(postList);
         output.ariaBusy = 'false' ;
 
@@ -263,13 +297,9 @@ for (;;) {
         for (const option of tag.options) {
             option.selected = tagParams.has(option.value);
         }
-        response = new Response({ status: 200 });
-        break;
-    }
-
-    default:
-        response = Response.error();
-        break;
+        response = new Response('', { status: 200, statusText: 'OK' });
+    } else {
+        response = new Response('', { status: 404, statusText: 'Not Found' });
     }
 
     if (!isfirst) {
@@ -277,5 +307,6 @@ for (;;) {
             h1[0].focus();
         }
     }
+    isfirst = false;
     request = (await loop.next(response)).value;
 }
