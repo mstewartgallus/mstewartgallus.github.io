@@ -55,6 +55,9 @@ $aside: 16rem ;
 @mixin hyphens($value) {
     @include prefix(hyphens, $value);
 }
+@mixin font-size-adjust($value) {
+    @include prefix(font-size-adjust, $value);
+}
 
 @mixin clear {
     all: initial ;
