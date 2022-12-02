@@ -54,6 +54,10 @@ p {
     margin-block: $line ;
 }
 
+hr {
+    margin-block: 0 ;
+}
+
 hr, p, figure {
     inline-size: $width ;
     max-inline-size: 100% ;
@@ -67,23 +71,21 @@ h1, h2, h3, h4, h5, h6 {
 h1,h2,h3,h4,h5,h6 {
     line-height: $line / scale(1) ;
     font-size: scale(1) * 1em ;
-    inline-size: $width / scale(1) ;
     font-weight: 700 ;
+    inline-size: $width / scale(1) ;
 }
 
 h1 {
     font-size: scale(3) * 1em ;
     inline-size: $width / scale(3) ;
     line-height: $line / scale(3) ;
-    margin-block-start: $line / scale(3) ;
-    margin-block-end: $line / scale(3) ;
+    margin-block: $line / scale(3) ;
 }
 h2 {
     font-size: scale(2) * 1em ;
     inline-size: $width / scale(2) ;
     line-height: $line / scale(2) ;
-    margin-block-start: $line / scale(2) ;
-    margin-block-end: $line / scale(2) ;
+    margin-block: $line / scale(2) ;
 }
 
 dl, dd {
@@ -119,6 +121,10 @@ table {
   system: cyclic;
   symbols: "•";
   suffix: "\2003";
+}
+
+ul, ol, menu {
+    margin-block: $line ;
 }
 
 ol {
