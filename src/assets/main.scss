@@ -49,7 +49,7 @@ $aside: 16rem ;
     -moz-#{$property}: $value;
     -ms-#{$property}: $value;
     -webkit-#{$property}: $value;
-    $property: $value;
+    #{$property}: $value;
 }
 
 @mixin hyphens($value) {
