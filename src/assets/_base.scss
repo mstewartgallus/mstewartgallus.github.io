@@ -9,11 +9,16 @@ $root-font-size: $font-size * 1pt ;
     text-underline-position: under ;
 
     @include font-size-adjust(none);
-}
-
-:root {
     @include hyphens(auto) ;
 }
+
+
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth ;
+    }
+}
+
 
 :root {
     font-family: 'Atkinson Hyperlegible', sans-serif ;
@@ -43,10 +48,6 @@ sup {
 }
 sub, sup {
     vertical-align: inherit ;
-}
-
-:root {
-    scroll-behavior: smooth ;
 }
 
 p {
