@@ -1,49 +1,14 @@
-html, body, blockquote, pre,
-menu, ol, ul, li,
-dl, dt, dd, figure,
-p, hr,
-h1, h2, h3, h4, h5, h6,
-fieldset, select, option, button, input,
-address, cite, abbr {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    padding: 0;
-    vertical-align: baseline ;
-    font-family: inherit;
-    line-height: inherit;
+figure {
+    margin-inline: 0;
 }
 
-
-html, body, blockquote, pre,
-menu, ol, ul, li,
-dt, figure,
-hr,
-h1, h2, h3, h4, h5, h6,
-fieldset, select, option, button, input,
-address, cite, abbr {
-    margin: 0;
-}
-
-html, body, blockquote, pre,
-menu, ol, ul, li,
-dl, dt, dd, figure,
-p, hr,
-fieldset, select, option, button, input,
 address, cite, abbr {
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit ;
 }
 
-// Hide select arrow
-select::-ms-expand { display: none ; }
-
-select, option, button, input {
-  background-color: transparent;
-  color: inherit ;
-}
-
 hr {
     color: inherit ;
 }
+

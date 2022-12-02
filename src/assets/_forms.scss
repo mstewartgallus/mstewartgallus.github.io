@@ -1,3 +1,20 @@
+select, option, button, input {
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit ;
+}
+
+// Hide select arrow
+select::-ms-expand { display: none ; }
+
+select, option, button, input {
+    background-color: transparent;
+    color: inherit ;
+}
+select, option, button, input {
+    @include prefix(appearance, none);
+}
+
 select, button {
     border-style: none ;
     border-color: currentcolor ;
