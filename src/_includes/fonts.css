@@ -54,7 +54,6 @@
         local('JetBrains Mono'),
         url('/assets/vend/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
     size-adjust: 90.1818181818% ;
-    /* size-adjust: 93.9393939394% ; */
 }
 @font-face {
     font-family: 'JetBrains Mono';
@@ -65,7 +64,6 @@
         local('JetBrains Mono'),
         url('/assets/vend/JetBrains_Mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
     size-adjust: 90.1818181818% ;
-    /* size-adjust: 93.9393939394% ; */
 }
 
 @font-face {
@@ -79,7 +77,6 @@
     /* size-adjust: 92.5373134328% ; */
     /* not sure why but I needed an extra adjustment down */
     size-adjust: 89% ;
-    /* size-adjust: 91.0425844347% ; */
 }
 @font-face {
     font-family: 'Noto Sans';
