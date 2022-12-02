@@ -20,7 +20,7 @@ select, button {
     border-color: currentcolor ;
 }
 
-select, button {
+button {
     padding-inline: 0.5em ;
 }
 
@@ -55,10 +55,11 @@ select {
 }
 
 option {
-    padding-inline: 0.4em ;
+    padding: 0 ;
+    margin: 0 ;
 }
-option, option:focus {
-    margin-inline: 0.2em ;
+select {
+    padding-block: 0;
 }
 
 button {
@@ -66,6 +67,12 @@ button {
     border-width: 1px ;
 }
 
+select {
+    margin-inline: -0.6ch ;
+}
+option {
+    padding-inline: 0.6ch ;
+}
 
 @media (prefers-color-scheme: dark) {
     option:checked {

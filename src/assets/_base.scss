@@ -144,10 +144,10 @@ ul, ol {
     max-inline-size: 100% ;
 }
 
-$list-width: $width - 4ch ;
+$list-width: $width - 3.4ch ;
 @media screen and (max-width: $A4-width) {
     ul, ol {
-        padding-inline-start: 4ch ;
+        padding-inline-start: 3.4ch ;
     }
     :is(ul, ol) > li {
         inline-size: $list-width ;
