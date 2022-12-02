@@ -12,7 +12,7 @@ layout: page
     </hgroup>
   </header>
   <ul>
-    {%- for page in pages -%}
+    {%- for page in pages %}
     <li
       itemprop="hasPart"
       itemscope
@@ -35,7 +35,7 @@ layout: page
   </header>
 
   <ol reversed>
-    {%- for post in site.posts -%}
+    {%- for post in site.posts %}
     <li>
       <ins
         datetime="{{ post.date | date_to_xmlschema }}"

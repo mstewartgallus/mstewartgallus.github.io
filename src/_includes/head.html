@@ -1,50 +1,16 @@
 {%- assign icon = "/assets/favicon.svg" | relative_url -%}
-{%- assign abs_icon = "/assets/favicon.svg" | absolute_url -%}
 {%- assign css = "/assets/main.css" | relative_url -%}
 {%- assign feed = "/feed.xml" | relative_url -%}
 {%- assign site_title = site.title -%}
 {%- assign title = page.title | default: site_title -%}
-{%- assign description = page.description | default: page.excerpt | normalize_whitespace | strip | strip_html | default: site.description | escape -%}
-{%- assign url = page.url | absolute_url -%}
-{%- assign author = page.author | default: site.author -%}
-{%- assign author_name = author.name -%}
-{%- assign author_url = author.url | relative_url -%}
-{%- capture type -%}
-{%- if page.collection == 'posts' -%}
-article
-{%- else -%}
-website
-{%- endif -%}
-{%- endcapture -%}
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ title }} — {{ site_title }}</title>
 <link rel="icon" href="{% link assets/favicon.svg %}">
 <style>
-  {% include fonts.css %}
+{% include fonts.css %}
 </style>
 <link rel="stylesheet" href="{{ css }}">
 <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
-<link rel="canonical" href="{{ url }}">
-<link rel="author" href="{{ author_url }}">
-<meta name="author" content="{{ author_name }}">
-<meta name="description" content="{{ description }}">
-<meta property="og:title" content="{{ title }}">
-<meta property="og:url" content="{{ url }}">
-<meta property="og:type" content="{{ type }}">
-<meta name="og:site_name" content="{{ site_title }}">
-<meta property="og:image" content="{{ abs_icon }}" >
-<meta property="og:description" content="{{ description }}">
-{%- if page.collection == 'posts' -%}
-<meta property="og:article:author" content="{{ author_name }}">
-<meta property="og:article:published_time" content="{{ page.date | date: "%Y-%m-%d" }}">
-{%- for tag in page.tags -%}
-<meta property="og:article:tag" content="{{ tag | escape }}">
-{%- endfor -%}
-{%- for cat in page.category -%}
-<meta property="og:article:tag" content="{{ cat | escape }}">
-{%- endfor -%}
-{%- endif -%}
-<meta property="og:profile" content="{{ author_name }}">
-<meta property="og:profile:username" content="{{ author_name }}">
+{% include seo.html -%}
