@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-12-02T19:26:06-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Dentist</title><link href="https://mstewartgallus.github.io/prose/2022/11/26/dentist/" rel="alternate" type="text/html" title="Dentist" /><published>2022-11-26T13:13:00-08:00</published><updated>2022-11-26T13:13:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/26/dentist</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/26/dentist/">&lt;p&gt;I rotate up to a 45° angle.  Head on the ground legs in the air.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-12-03T12:43:22-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Dentist</title><link href="https://mstewartgallus.github.io/prose/2022/11/26/dentist/" rel="alternate" type="text/html" title="Dentist" /><published>2022-11-26T13:13:00-08:00</published><updated>2022-11-26T13:13:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/26/dentist</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/26/dentist/">&lt;p&gt;I rotate up to a 45° angle.  Head on the ground legs in the air.&lt;/p&gt;
 
 &lt;p&gt;It is a cool dark evening and I am safe and sheltered in my warm
 winter coat.  I am in the park near the highway.  I hear the traffic
@@ -50,9 +50,9 @@ reader yourself.&lt;/p&gt;
 
 &lt;p&gt;&lt;b&gt;Special thanks to the kind people who helped edit this post.&lt;/b&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;accessibility&quot;&gt;&lt;a href=&quot;#accessibility&quot;&gt;Accessibility&lt;/a&gt;&lt;/h2&gt;
+&lt;section&gt;  &lt;h2 id=&quot;accessibility&quot;&gt;&lt;a href=&quot;#accessibility&quot;&gt;Accessibility&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;The art of the spoken word is not accessible to the visually impaired.
+  &lt;p&gt;The art of the spoken word is not accessible to the visually impaired.
 Most markup navigates awkwardly, does not insert appropriate pauses
 for breath, and mispronounces stress and sounds.  Consider
 &lt;a href=&quot;#markupa&quot;&gt;&lt;cite&gt;Markup A&lt;/cite&gt;&lt;/a&gt; and &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup
@@ -62,7 +62,7 @@ In &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt
 stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.&lt;/p&gt;
 
-&lt;figure id=&quot;markupa&quot;&gt;
+  &lt;figure id=&quot;markupa&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupa&quot;&gt;Markup A&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -79,7 +79,7 @@ break elements.&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;figure id=&quot;markupb&quot;&gt;
+  &lt;figure id=&quot;markupb&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupb&quot;&gt;Markup B&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stanza&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
@@ -90,7 +90,7 @@ And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 
 &lt;/figure&gt;
 
-&lt;p&gt;&lt;a href=&quot;#markupa&quot;&gt;&lt;cite&gt;Markup A&lt;/cite&gt;&lt;/a&gt; is hard to navigate as each line in
+  &lt;p&gt;&lt;a href=&quot;#markupa&quot;&gt;&lt;cite&gt;Markup A&lt;/cite&gt;&lt;/a&gt; is hard to navigate as each line in
 an ordered list must be manually tracked through.  As well &lt;q&gt;line
 &lt;var&gt;m&lt;/var&gt; of &lt;var&gt;n&lt;/var&gt;&lt;/q&gt; is repeated for every line of
 &lt;a href=&quot;#markupa&quot;&gt;&lt;cite&gt;Markup A&lt;/cite&gt;&lt;/a&gt;.  You can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt;
@@ -101,7 +101,7 @@ the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentat
 a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;presentation&lt;/code&gt; role doesn’t do much, but such markup can reduce
 cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 
-&lt;figure id=&quot;markupa2&quot;&gt;
+  &lt;figure id=&quot;markupa2&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupa2&quot;&gt;Markup A&apos;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -118,7 +118,7 @@ cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;figure id=&quot;markupa3&quot;&gt;
+  &lt;figure id=&quot;markupa3&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupa3&quot;&gt;Markup A&apos;&apos;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poem&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;presentation&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -135,7 +135,7 @@ cruft in Firefox’s accessibility inspector.&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;p&gt;As a &lt;i&gt;nuclear&lt;/i&gt; solution you can markup the text for graphical
+  &lt;p&gt;As a &lt;i&gt;nuclear&lt;/i&gt; solution you can markup the text for graphical
 display using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;graphic&lt;/code&gt; role as in &lt;a href=&quot;#markupn&quot;&gt;&lt;cite&gt;Markup
 N&lt;/cite&gt;&lt;/a&gt;.  I advise use of the &lt;s&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-labelledby&lt;/code&gt;&lt;/s&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-details&lt;/code&gt;
 (2022-11-28) attribute instead of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; attribute
@@ -143,7 +143,7 @@ here. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aria-la
 text, is not usually translated by automated tools and doesn’t let you
 embed more markup as appropriate.&lt;/p&gt;
 
-&lt;figure id=&quot;markupn&quot;&gt;
+  &lt;figure id=&quot;markupn&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupn&quot;&gt;Markup N&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;figure&amp;gt;&lt;/span&gt;
@@ -171,7 +171,7 @@ embed more markup as appropriate.&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;p&gt;In some setups &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt; sounds yucky.  Ending
+  &lt;p&gt;In some setups &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt; sounds yucky.  Ending
 and starting words in separate lines like &lt;i&gt;red&lt;/i&gt; and
 &lt;i&gt;Violets&lt;/i&gt; run together.  You might include extra punctuation
 annotated with a screen-reader-only class as with &lt;a href=&quot;#markupb2&quot;&gt;&lt;cite&gt;Markup
@@ -180,7 +180,7 @@ A’&lt;/cite&gt;&lt;/a&gt; and &lt;a href=&quot;#markupb3&quot;&gt;&lt;cite&gt;
 However, on Firefox this hack breaks up lines into separate areas to
 track through.&lt;/p&gt;
 
-&lt;figure id=&quot;markupb2&quot;&gt;
+  &lt;figure id=&quot;markupb2&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupb2&quot;&gt;Markup B&apos; &lt;abbr title=&quot;HyperText Markup Language&quot;&gt;HTML&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Roses are red&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sr-only&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt;&lt;/span&gt;
@@ -191,7 +191,7 @@ And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 
 &lt;/figure&gt;
 
-&lt;figure id=&quot;markupb3&quot;&gt;
+  &lt;figure id=&quot;markupb3&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#markupb3&quot;&gt;Markup B&apos; &lt;abbr title=&quot;Cascading Style Sheets&quot;&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.sr-only&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -205,13 +205,13 @@ And so are you.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
 
 &lt;/figure&gt;
 
-&lt;p&gt;No revisions of &lt;a href=&quot;#markupa&quot;&gt;&lt;cite&gt;Markup A&lt;/cite&gt;&lt;/a&gt; or &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt; ensure
+  &lt;p&gt;No revisions of &lt;a href=&quot;#markupa&quot;&gt;&lt;cite&gt;Markup A&lt;/cite&gt;&lt;/a&gt; or &lt;a href=&quot;#markupb&quot;&gt;&lt;cite&gt;Markup B&lt;/cite&gt;&lt;/a&gt; ensure
 proper pronunciation of stress and sounds.  Only American English is
 likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is
 not a complete solution.&lt;/p&gt;
 
-&lt;p&gt;As an anglophone Canadian author I set the language attribute for my
+  &lt;p&gt;As an anglophone Canadian author I set the language attribute for my
 documents and poems to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;en-CA&lt;/code&gt;. However, this only helps with English
 words and not with imports from other languages.  I don’t know how to
 help screen readers pronounce names of mythical figures.  You could
@@ -219,27 +219,28 @@ markup individual phrases like &lt;code class=&quot;language-plaintext highlight
 Norse) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;i lang=&quot;gem&quot;&amp;gt;Wotan&amp;lt;/i&amp;gt;&lt;/code&gt; (Germanic languages group) but
 this particular markup doesn’t help.&lt;/p&gt;
 
-&lt;p&gt;Semantically you might markup stress with emphasis with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt;
+  &lt;p&gt;Semantically you might markup stress with emphasis with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt;
 element.  However, such markup is verbose and many screen readers
 ignore elements like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt; because of the heavy unsemantic abuse of
 such elements in the wider internet for presenting bold text.&lt;/p&gt;
 
-&lt;p&gt;Perhaps there might be some obscure Unicode diacritics for better
+  &lt;p&gt;Perhaps there might be some obscure Unicode diacritics for better
 marking up the prosody but I have not explored this option.  I worry
 that such glyphs might be pronounced in common screen readers as
 something like &lt;q&gt;Unicode character 591&lt;/q&gt;.&lt;/p&gt;
 
-&lt;h2 id=&quot;presentation&quot;&gt;&lt;a href=&quot;#presentation&quot;&gt;Presentation&lt;/a&gt;&lt;/h2&gt;
+&lt;/section&gt;
+&lt;section&gt;  &lt;h2 id=&quot;presentation&quot;&gt;&lt;a href=&quot;#presentation&quot;&gt;Presentation&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Laying out poetry on small formats is awkward.  In print the standard
+  &lt;p&gt;Laying out poetry on small formats is awkward.  In print the standard
 layout for overlong lines is to align the first line ragged right and
 all other lines ragged left.&lt;/p&gt;
 
-&lt;p&gt;You can approximate a poetry layout with a hanging indent layout
+  &lt;p&gt;You can approximate a poetry layout with a hanging indent layout
 something like &lt;a href=&quot;#indentcss&quot;&gt;&lt;cite&gt;Indent &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/cite&gt;&lt;/a&gt;.  However, a
 hanging indent layout is not really correct.&lt;/p&gt;
 
-&lt;figure&gt;
+  &lt;figure&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#indentcss&quot;&gt;Indent &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.line&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -250,13 +251,13 @@ hanging indent layout is not really correct.&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;p&gt;You can approximate a poetry layout on the web by aligning every line
+  &lt;p&gt;You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text &lt;em&gt;within&lt;/em&gt; the
 line block to the right.  Something like &lt;a href=&quot;#alignlastcss&quot;&gt;&lt;cite&gt;Align Last
 &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/cite&gt;&lt;/a&gt; almost works for a poetry layout.
 However, even this layout fails when you overflow multiple lines.&lt;/p&gt;
 
-&lt;figure id=&quot;alignlastcss&quot;&gt;
+  &lt;figure id=&quot;alignlastcss&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#alignlastcss&quot;&gt;Align Last &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;.stanza&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -272,10 +273,10 @@ However, even this layout fails when you overflow multiple lines.&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;p&gt;&lt;a href=&quot;#example&quot;&gt;&lt;cite&gt;Example&lt;/cite&gt;&lt;/a&gt; and &lt;a href=&quot;#examplecode&quot;&gt;&lt;cite&gt;Example Code&lt;/cite&gt;&lt;/a&gt; are similar to
+  &lt;p&gt;&lt;a href=&quot;#example&quot;&gt;&lt;cite&gt;Example&lt;/cite&gt;&lt;/a&gt; and &lt;a href=&quot;#examplecode&quot;&gt;&lt;cite&gt;Example Code&lt;/cite&gt;&lt;/a&gt; are similar to
 the current compromise I use on this site.&lt;/p&gt;
 
-&lt;figure id=&quot;example&quot;&gt;
+  &lt;figure id=&quot;example&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#example&quot;&gt;Example&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;style&gt;
@@ -300,7 +301,7 @@ the current compromise I use on this site.&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;figure id=&quot;examplecode&quot;&gt;
+  &lt;figure id=&quot;examplecode&quot;&gt;
 &lt;figcaption&gt;&lt;a href=&quot;#examplecode&quot;&gt;Example Code&lt;/a&gt;&lt;/figcaption&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
@@ -325,32 +326,36 @@ the current compromise I use on this site.&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;h2 id=&quot;conclusion&quot;&gt;&lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
+&lt;/section&gt;
+&lt;section&gt;  &lt;h2 id=&quot;conclusion&quot;&gt;&lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;You should use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;audio&lt;/code&gt; element to markup poetry.&lt;/p&gt;
+  &lt;p&gt;You should use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;audio&lt;/code&gt; element to markup poetry.&lt;/p&gt;
 
-&lt;h2 id=&quot;tryit&quot;&gt;&lt;a href=&quot;#tryit&quot;&gt;Try It&lt;/a&gt;&lt;/h2&gt;
+&lt;/section&gt;
+&lt;section&gt;  &lt;h2 id=&quot;tryit&quot;&gt;&lt;a href=&quot;#tryit&quot;&gt;Try It&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Personally I found Android TalkBack to be the easiest screen reader to
+  &lt;p&gt;Personally I found Android TalkBack to be the easiest screen reader to
 get started with. &lt;a href=&quot;https://www.a11yproject.com&quot;&gt;The helpful
 &lt;cite&gt;A11y Project&lt;/cite&gt; blog&lt;/a&gt; has a number of guides on getting
 started with screen readers but they might be a little old.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-orca&quot;&gt;&lt;cite&gt;Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-voiceover-ios&quot;&gt;&lt;cite&gt;Getting Started with VoiceOver on iOS&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-nvda&quot;&gt;&lt;cite&gt;Getting Started with NVDA&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-voiceover&quot;&gt;&lt;cite&gt;Getting Started with MacOS VoiceOver&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-orca&quot;&gt;&lt;cite&gt;Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-voiceover-ios&quot;&gt;&lt;cite&gt;Getting Started with VoiceOver on iOS&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-nvda&quot;&gt;&lt;cite&gt;Getting Started with NVDA&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.a11yproject.com/posts/getting-started-with-voiceover&quot;&gt;&lt;cite&gt;Getting Started with MacOS VoiceOver&lt;/cite&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;h2 id=&quot;onemorething&quot;&gt;&lt;a href=&quot;#onemorething&quot;&gt;And One More Thing&lt;/a&gt;&lt;/h2&gt;
+&lt;/section&gt;
+&lt;section&gt;  &lt;h2 id=&quot;onemorething&quot;&gt;&lt;a href=&quot;#onemorething&quot;&gt;And One More Thing&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;As of this blog post, the &lt;a href=&quot;https://www.w3.org/TR/css-speech-1/&quot;&gt;&lt;cite&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; Speech
+  &lt;p&gt;As of this blog post, the &lt;a href=&quot;https://www.w3.org/TR/css-speech-1/&quot;&gt;&lt;cite&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; Speech
 Module&lt;/cite&gt;&lt;/a&gt; has never really
 gone anywhere.  Perhaps in the future the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-stress&lt;/code&gt;,
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-duration&lt;/code&gt; (for long syllables), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;voice-pitch&lt;/code&gt; (for pitch
 accent) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pause&lt;/code&gt; properties would solve these sort of accessibility
-problems.&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Web" /><category term="Poetry" /><category term="HTML" /><category term="CSS" /><category term="Accessibility" /><summary type="html">Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessibility and I don’t have good solutions. See Try It if you want to try out a screen reader yourself.</summary></entry><entry><title type="html">Memories</title><link href="https://mstewartgallus.github.io/poem/2022/11/17/memories/" rel="alternate" type="text/html" title="Memories" /><published>2022-11-17T18:18:00-08:00</published><updated>2022-11-17T18:18:00-08:00</updated><id>https://mstewartgallus.github.io/poem/2022/11/17/memories</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/11/17/memories/">&lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I feel nostalgic for&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The warmth of&amp;thinsp;—&amp;thinsp;the hospital bed&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The cold wet quiet&amp;thinsp;—&amp;thinsp;of fresh snow&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other memories from long ago&lt;/span&gt;&lt;/p&gt;
+problems.&lt;/p&gt;
+&lt;/section&gt;</content><author><name>Molossus Spondee</name></author><category term="Web" /><category term="Poetry" /><category term="HTML" /><category term="CSS" /><category term="Accessibility" /><summary type="html">Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessibility and I don’t have good solutions. See Try It if you want to try out a screen reader yourself.</summary></entry><entry><title type="html">Memories</title><link href="https://mstewartgallus.github.io/poem/2022/11/17/memories/" rel="alternate" type="text/html" title="Memories" /><published>2022-11-17T18:18:00-08:00</published><updated>2022-11-17T18:18:00-08:00</updated><id>https://mstewartgallus.github.io/poem/2022/11/17/memories</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/11/17/memories/">&lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I feel nostalgic for&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The warmth of&amp;thinsp;—&amp;thinsp;the hospital bed&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The cold wet quiet&amp;thinsp;—&amp;thinsp;of fresh snow&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other memories from long ago&lt;/span&gt;&lt;/p&gt;
 &lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;I remember&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;The chocolate sandwiched ice cream bar&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Cheap freezies&amp;thinsp;—&amp;thinsp;in elementary school&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;A long yellow slide down&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Falling asleep to the rain outside&lt;/span&gt;&lt;/p&gt;
 &lt;p class=&quot;stanza&quot;&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Masturbation in the dark&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;Things in the bath&lt;/span&gt;&lt;br&gt;&lt;span role=&quot;presentation&quot; class=&quot;line&quot;&gt;And other things of that nature&lt;/span&gt;&lt;/p&gt;</content><author><name>Molossus Spondee</name></author><category term="Poem" /><summary type="html">I feel nostalgic forThe warmth of&amp;thinsp;—&amp;thinsp;the hospital bedThe cold wet quiet&amp;thinsp;—&amp;thinsp;of fresh snowAnd other memories from long ago</summary></entry><entry><title type="html">My Owner’s Lover</title><link href="https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover/" rel="alternate" type="text/html" title="My Owner’s Lover" /><published>2022-11-15T15:49:00-08:00</published><updated>2022-11-15T15:49:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/15/my-owners-lover/">&lt;p&gt;My name is Silk and I am a hamster. I am a woman and I have pale cream
 colored fur. Being a hamster I am a solitary sort but I actually like
