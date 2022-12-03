@@ -57,23 +57,29 @@ body > header {
     overflow: auto ;
 }
 
-ins[datetime] {
+ins {
     position: relative ;
 }
-ins[datetime]:is(:hover,:focus-within)::after {
-    font-variant-numeric: lining-nums tabular-nums ;
+.tooltip {
     position: absolute ;
-    display: block ;
-    content: attr(datetime) ;
-    text-decoration: none ;
+    left: 0;
+    top: $line;
     z-index: 1000 ;
-    opacity: 95% ;
-    background-color: Canvas ;
-    color: CanvasText ;
-    inset-inline-start: 0;
-    inset-block-start: $line;
-    padding-block: 0.4ex ;
-    padding-inline: 0.8ch ;
-    border-radius: 0.2em ;
-    white-space: nowrap ;
+
+    border: none ;
+    border-radius: 1ch ;
+    margin-block: $halfline ;
+    padding-block: $halfline ;
+    padding-inline: 1ch ;
+    background: black ;
+    white-space: pre ;
+}
+
+.sr-only {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
 }

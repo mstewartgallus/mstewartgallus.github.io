@@ -1,5 +1,6 @@
 {%- assign icon = "/assets/favicon.svg" | relative_url -%}
 {%- assign css = "/assets/main.css" | relative_url -%}
+{%- assign mjs = "/assets/main.mjs" | relative_url -%}
 {%- assign feed = "/feed.xml" | relative_url -%}
 {%- assign site_title = site.title -%}
 {%- assign title = page.title | default: site_title -%}
@@ -13,4 +14,5 @@
 </style>
 <link rel="stylesheet" href="{{ css }}">
 <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
+<script type="module" defer async src="{% link assets/main.mjs %}"></script>
 {% include seo.html -%}
