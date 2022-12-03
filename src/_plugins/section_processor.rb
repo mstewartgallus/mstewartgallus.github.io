@@ -38,6 +38,9 @@ module Kramdown
           attributes['aria-labelledby'] = id
         end
 
+        hgroup = Element.new :html_element, 'hgroup'
+        hgroup.children.push el
+
         # FIXME make this nicer
         if id != :nil
         then
@@ -46,11 +49,8 @@ module Kramdown
 
           a = Element.new :a, :nil, {'href' => '#' + id, 'rel' => 'bookmark'}
           a.children = [text]
-          el.children.push a
+          hgroup.children.push a
         end
-
-        hgroup = Element.new :html_element, 'hgroup'
-        hgroup.children.push el
 
         header = Element.new :html_element, 'header'
         header.children.push hgroup

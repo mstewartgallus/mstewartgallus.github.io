@@ -175,18 +175,15 @@ figcaption {
     outline-width: 0.2em ;
 }
 
-:is(h1,h2,h2,h4,h5,h6):focus-within {
-    outline-style: solid ;
-}
-
 :focus {
     outline-style: solid ;
 }
-:is(h1,h2,h2,h4,h5,h6) :focus {
-    outline-style: none;
-}
 
-h1,h2,h3,h4,h5,h6 {
-    display: flex ;
-    justify-content: space-between ;
+hgroup {
+    position: relative ;
+}
+hgroup > a {
+    position: absolute ;
+    inset-block-start: 0;
+    inset-inline-end: 0;
 }
