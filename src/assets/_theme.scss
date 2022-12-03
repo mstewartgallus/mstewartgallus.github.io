@@ -69,11 +69,11 @@ ins[datetime]:is(:hover,:focus-within)::after {
     z-index: 1000 ;
     opacity: 95% ;
     background-color: Canvas ;
-    box-shadow: 1px 1px 1px CanvasText ;
     color: CanvasText ;
-    inset-inline-start: -10% ;
-    padding-block: 0.2ex ;
-    padding-inline: 0.3em ;
+    inset-inline-start: 0;
+    inset-block-start: $line;
+    padding-block: 0.4ex ;
+    padding-inline: 0.8ch ;
     border-radius: 0.2em ;
     white-space: nowrap ;
 }
