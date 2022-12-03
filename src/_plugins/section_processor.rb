@@ -6,8 +6,8 @@ module Kramdown
   class Section < Element
     attr_reader :level, :parent
 
-    def initialize(level, parent)
-      super :html_element, 'section'
+    def initialize(level, parent, attr = nil)
+      super :html_element, 'section', attr
       @level = level
       @parent = parent
     end
@@ -25,15 +25,21 @@ module Kramdown
             current.children.push el
             next
           end
-          options = el.options()
-
-          level = options[:level]
+          level = el.options()[:level]
 
           if level <= current.level
             current = current.parent
           end
-          # FIXME set aria-labelledby to id of header element
-          sect = Section.new level, current
+
+          # FIXME set auto ids option
+          id = el.attr()['id']
+          attributes = {}
+          if id != :nil
+          then
+            attributes['aria-labelledby'] = id
+          end
+
+          sect = Section.new level, current, attributes
           sect.children.push el
           current.children.push sect
           current = sect
