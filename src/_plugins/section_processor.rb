@@ -13,10 +13,9 @@ module Kramdown
     end
   end
 
-  # FIXME ugly monkey patching of our alternative converter
-  class JekyllDocument < Document
-    def section
-      old = @root.children
+  module MyUtils
+    def self.section(doc)
+      old = doc.root.children
       # FIXME handle header offsets better
       start = Section.new 1, :nil
       current = start
@@ -39,12 +38,15 @@ module Kramdown
           attributes['aria-labelledby'] = id
         end
 
-        # FIXME look into alternatives to wrapping headers in anchors
+        # FIXME make this nicer
         if id != :nil
         then
-          a = Element.new :html_element, 'a', {'href' => '#' + id}
-          a.children = el.children
-          el.children = [a]
+          text = Element.new :text
+          text.value = '#'
+
+          a = Element.new :a, :nil, {'href' => '#' + id, 'rel' => 'bookmark'}
+          a.children = [text]
+          el.children.push a
         end
 
         hgroup = Element.new :html_element, 'hgroup'
@@ -58,12 +60,15 @@ module Kramdown
         current.children.push sect
         current = sect
       end
-      @root.children = start.children
+      doc.root.children = start.children
     end
+  end
 
+  # FIXME ugly monkey patching of our alternative converter
+  class JekyllDocument < Document
     def to_html
       copy = dup
-      copy.section
+      MyUtils.section(copy)
       output, warnings = Kramdown::Converter::Html.convert(copy.root, @options)
       @warnings.concat(warnings)
       output
