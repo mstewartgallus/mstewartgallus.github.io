@@ -39,6 +39,14 @@ module Kramdown
           attributes['aria-labelledby'] = id
         end
 
+        # FIXME look into alternatives to wrapping headers in anchors
+        if id != :nil
+        then
+          a = Element.new :html_element, 'a', {'href' => '#' + id}
+          a.children = el.children
+          el.children = [a]
+        end
+
         hgroup = Element.new :html_element, 'hgroup'
         hgroup.children.push el
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-12-03T14:36:18-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Dentist</title><link href="https://mstewartgallus.github.io/prose/2022/11/26/dentist/" rel="alternate" type="text/html" title="Dentist" /><published>2022-11-26T13:13:00-08:00</published><updated>2022-11-26T13:13:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/26/dentist</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/26/dentist/">&lt;p&gt;I rotate up to a 45° angle.  Head on the ground legs in the air.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-12-03T14:43:54-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>Molossus Spondee</name></author><entry><title type="html">Dentist</title><link href="https://mstewartgallus.github.io/prose/2022/11/26/dentist/" rel="alternate" type="text/html" title="Dentist" /><published>2022-11-26T13:13:00-08:00</published><updated>2022-11-26T13:13:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/11/26/dentist</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/11/26/dentist/">&lt;p&gt;I rotate up to a 45° angle.  Head on the ground legs in the air.&lt;/p&gt;
 
 &lt;p&gt;It is a cool dark evening and I am safe and sheltered in my warm
 winter coat.  I am in the park near the highway.  I hear the traffic
@@ -50,7 +50,8 @@ reader yourself.&lt;/p&gt;
 
 &lt;p&gt;&lt;b&gt;Special thanks to the kind people who helped edit this post.&lt;/b&gt;&lt;/p&gt;
 
-&lt;section aria-labelledby=&quot;accessibility&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;accessibility&quot;&gt;&lt;a href=&quot;#accessibility&quot;&gt;Accessibility&lt;/a&gt;&lt;/h2&gt;
+&lt;section aria-labelledby=&quot;accessibility&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;accessibility&quot;&gt;        &lt;a href=&quot;#accessibility&quot;&gt;Accessibility&lt;/a&gt;
+&lt;/h2&gt;
 &lt;/hgroup&gt;
 &lt;/header&gt;
 
@@ -232,7 +233,8 @@ that such glyphs might be pronounced in common screen readers as
 something like &lt;q&gt;Unicode character 591&lt;/q&gt;.&lt;/p&gt;
 
 &lt;/section&gt;
-&lt;section aria-labelledby=&quot;presentation&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;presentation&quot;&gt;&lt;a href=&quot;#presentation&quot;&gt;Presentation&lt;/a&gt;&lt;/h2&gt;
+&lt;section aria-labelledby=&quot;presentation&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;presentation&quot;&gt;        &lt;a href=&quot;#presentation&quot;&gt;Presentation&lt;/a&gt;
+&lt;/h2&gt;
 &lt;/hgroup&gt;
 &lt;/header&gt;
 
@@ -331,14 +333,16 @@ the current compromise I use on this site.&lt;/p&gt;
 &lt;/figure&gt;
 
 &lt;/section&gt;
-&lt;section aria-labelledby=&quot;conclusion&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;conclusion&quot;&gt;&lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
+&lt;section aria-labelledby=&quot;conclusion&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;conclusion&quot;&gt;        &lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;/a&gt;
+&lt;/h2&gt;
 &lt;/hgroup&gt;
 &lt;/header&gt;
 
   &lt;p&gt;You should use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;audio&lt;/code&gt; element to markup poetry.&lt;/p&gt;
 
 &lt;/section&gt;
-&lt;section aria-labelledby=&quot;tryit&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;tryit&quot;&gt;&lt;a href=&quot;#tryit&quot;&gt;Try It&lt;/a&gt;&lt;/h2&gt;
+&lt;section aria-labelledby=&quot;tryit&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;tryit&quot;&gt;        &lt;a href=&quot;#tryit&quot;&gt;Try It&lt;/a&gt;
+&lt;/h2&gt;
 &lt;/hgroup&gt;
 &lt;/header&gt;
 
@@ -355,7 +359,8 @@ started with screen readers but they might be a little old.&lt;/p&gt;
   &lt;/ul&gt;
 
 &lt;/section&gt;
-&lt;section aria-labelledby=&quot;onemorething&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;onemorething&quot;&gt;&lt;a href=&quot;#onemorething&quot;&gt;And One More Thing&lt;/a&gt;&lt;/h2&gt;
+&lt;section aria-labelledby=&quot;onemorething&quot;&gt;  &lt;header&gt;    &lt;hgroup&gt;      &lt;h2 id=&quot;onemorething&quot;&gt;        &lt;a href=&quot;#onemorething&quot;&gt;And One More Thing&lt;/a&gt;
+&lt;/h2&gt;
 &lt;/hgroup&gt;
 &lt;/header&gt;
 

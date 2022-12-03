@@ -15,7 +15,7 @@ reader yourself.
 
 <b>Special thanks to the kind people who helped edit this post.</b>
 
-## [Accessibility](#accessibility)
+## Accessibility
 {:#accessibility}
 
 
@@ -228,7 +228,7 @@ that such glyphs might be pronounced in common screen readers as
 something like <q>Unicode character 591</q>.
 
 
-## [Presentation](#presentation)
+## Presentation
 {:#presentation}
 
 {% capture indentcss %}
@@ -342,12 +342,12 @@ the current compromise I use on this site.
 {:#examplecode}
 
 
-## [Conclusion](#conclusion)
+## Conclusion
 {:#conclusion}
 
 You should use the `audio` element to markup poetry.
 
-## [Try It](#tryit)
+## Try It
 {:#tryit}
 
 Personally I found Android TalkBack to be the easiest screen reader to
@@ -360,7 +360,7 @@ started with screen readers but they might be a little old.
 - <a href="https://www.a11yproject.com/posts/getting-started-with-nvda"><cite>Getting Started with NVDA</cite></a>
 - <a href="https://www.a11yproject.com/posts/getting-started-with-voiceover"><cite>Getting Started with MacOS VoiceOver</cite></a>
 
-## [And One More Thing](#onemorething)
+## And One More Thing
 {:#onemorething}
 
 As of this blog post, the [<cite><abbr>CSS</abbr> Speech
