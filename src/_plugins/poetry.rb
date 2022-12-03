@@ -14,18 +14,13 @@ module MSG
   def tohtml(stanzas)
     output = ""
     stanzas.each do |stanza|
-      output << '<p class="stanza">'
-      first = true
+      output << '<article class="stanza" aria-roledescription="stanza">'
       stanza.each do |line|
-        if not first then
-          output << "<br>"
-        end
-        first = false
-        output << '<span role="presentation" class="line">'
+        output << '<p class="line">'
         output << line
-        output << '</span>'
+        output << '</p>'
       end
-      output << '</p>'
+      output << '</article>'
       output << "\n"
     end
     output.freeze
