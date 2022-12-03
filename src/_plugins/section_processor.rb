@@ -17,7 +17,7 @@ module Kramdown
     def self.section(doc)
       old = doc.root.children
       # FIXME handle header offsets better
-      start = Section.new 1, :nil
+      start = Section.new 1, nil
       current = start
       for el in old
         if el.type != :header
@@ -33,7 +33,7 @@ module Kramdown
         # FIXME set auto ids option
         id = el.attr()['id']
         attributes = {}
-        if id != :nil
+        if id != nil
         then
           attributes['aria-labelledby'] = id
         end
@@ -41,13 +41,12 @@ module Kramdown
         hgroup = Element.new :html_element, 'hgroup'
         hgroup.children.push el
 
-        # FIXME make this nicer
-        if id != :nil
+        if id != nil
         then
           text = Element.new :text
           text.value = '#'
 
-          a = Element.new :a, :nil, {'href' => '#' + id, 'rel' => 'bookmark'}
+          a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
           a.children = [text]
           hgroup.children.push a
         end
@@ -62,6 +61,40 @@ module Kramdown
       end
       doc.root.children = start.children
     end
+
+    def self.autoFigure(el)
+      if el.type == :html_element and el.value == 'figure'
+      then
+        swabFigure(el)
+      end
+
+      for el in el.children
+        autoFigure(el)
+      end
+    end
+
+    def self.swabFigure(figure)
+      id = figure.attr()['id']
+      if id == nil then
+        return
+      end
+
+      caption = nil
+      for child in figure.children do
+        if child.type == :html_element and child.value == 'figcaption' then
+          caption = child
+          break
+        end
+      end
+      if caption == nil then
+        return
+      end
+
+      # FIXME consider alternatives to wrapping captions
+      a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
+      a.children = caption.children
+      caption.children = [a]
+    end
   end
 
   # FIXME ugly monkey patching of our alternative converter
@@ -69,6 +102,7 @@ module Kramdown
     def to_html
       copy = dup
       MyUtils.section(copy)
+      MyUtils.autoFigure(copy.root)
       output, warnings = Kramdown::Converter::Html.convert(copy.root, @options)
       @warnings.concat(warnings)
       output

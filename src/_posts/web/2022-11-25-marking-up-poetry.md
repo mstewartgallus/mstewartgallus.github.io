@@ -131,14 +131,14 @@ stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.
 
 <figure>
-<figcaption><a href="#markupa">Markup A</a></figcaption>
+<figcaption>Markup A</figcaption>
 {{ markupa | markdownify }}
 </figure>
 {:#markupa}
 
 
 <figure>
-<figcaption><a href="#markupb">Markup B</a></figcaption>
+<figcaption>Markup B</figcaption>
 {{ markupb | markdownify }}
 </figure>
 {:#markupb}
@@ -155,13 +155,13 @@ a `presentation` role doesn't do much, but such markup can reduce
 cruft in Firefox's accessibility inspector.
 
 <figure>
-<figcaption><a href="#markupa2">Markup A'</a></figcaption>
+<figcaption>Markup A'</figcaption>
 {{ markupa2 | markdownify }}
 </figure>
 {:#markupa2}
 
 <figure>
-<figcaption><a href="#markupa3">Markup A''</a></figcaption>
+<figcaption>Markup A''</figcaption>
 {{ markupa3 | markdownify }}
 </figure>
 {:#markupa3}
@@ -177,7 +177,7 @@ text, is not usually translated by automated tools and doesn't let you
 embed more markup as appropriate.
 
 <figure>
-<figcaption><a href="#markupn">Markup N</a></figcaption>
+<figcaption>Markup N</figcaption>
 {{ markupn | markdownify }}
 </figure>
 {:#markupn}
@@ -192,13 +192,13 @@ However, on Firefox this hack breaks up lines into separate areas to
 track through.
 
 <figure>
-<figcaption><a href="#markupb2">Markup B' <abbr title="HyperText Markup Language">HTML</abbr></a></figcaption>
+<figcaption>Markup B' <abbr title="HyperText Markup Language">HTML</abbr></figcaption>
 {{ markupb2 | markdownify }}
 </figure>
 {:#markupb2}
 
 <figure>
-<figcaption><a href="#markupb3">Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
+<figcaption>Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></figcaption>
 {{ markupb3 | markdownify }}
 </figure>
 {:#markupb3}
@@ -264,7 +264,7 @@ something like [<cite>Indent <abbr>CSS</abbr></cite>](#indentcss).  However, a
 hanging indent layout is not really correct.
 
 <figure>
-<figcaption><a href="#indentcss">Indent <abbr>CSS</abbr></a></figcaption>
+<figcaption>Indent <abbr>CSS</abbr></figcaption>
 {{ indentcss | markdownify }}
 </figure>
 
@@ -275,7 +275,7 @@ line block to the right.  Something like [<cite>Align Last
 However, even this layout fails when you overflow multiple lines.
 
 <figure>
-<figcaption><a href="#alignlastcss">Align Last <abbr>CSS</abbr></a></figcaption>
+<figcaption>Align Last <abbr>CSS</abbr></figcaption>
 {{ alignlastcss | markdownify }}
 </figure>
 {:#alignlastcss}
@@ -330,13 +330,13 @@ However, even this layout fails when you overflow multiple lines.
 the current compromise I use on this site.
 
 <figure>
-<figcaption><a href="#example">Example</a></figcaption>
+<figcaption>Example</figcaption>
 {{ example }}
 </figure>
 {:#example}
 
 <figure>
-<figcaption><a href="#examplecode">Example Code</a></figcaption>
+<figcaption>Example Code</figcaption>
 {{ examplecode | markdownify }}
 </figure>
 {:#examplecode}
