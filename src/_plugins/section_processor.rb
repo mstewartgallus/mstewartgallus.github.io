@@ -90,10 +90,13 @@ module Kramdown
         return
       end
 
-      # FIXME consider alternatives to wrapping captions
+
+      text = Element.new :text
+      text.value = '#'
+
       a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
-      a.children = caption.children
-      caption.children = [a]
+      a.children = [text]
+      caption.children.push a
     end
   end
 

@@ -1,13 +1,3 @@
-:is(figcaption)
-:any-link:not(:focus):not(:active):not(:hover) {
-    text-decoration: none ;
-}
-
-:is(figcaption)
-:any-link:not(:focus):not(:active):not(:hover) {
-    color: inherit;
-}
-
 p {
     margin-block: 0 ;
 }

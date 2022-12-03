@@ -179,10 +179,11 @@ figcaption {
     outline-style: solid ;
 }
 
-hgroup {
+hgroup, figcaption {
     position: relative ;
 }
-hgroup > a {
+
+a[rel~="bookmark"] {
     position: absolute ;
     inset-block-start: 0;
     inset-inline-end: 0;
