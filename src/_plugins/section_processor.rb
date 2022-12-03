@@ -13,49 +13,44 @@ module Kramdown
     end
   end
 
-  module Converter
-    class SectionHtml < Html
-      def convert_root(root, indent)
-        old = root.children
-        # FIXME handle header offsets better
-        start = Section.new 1, :nil
-        current = start
-        for el in old
-          if el.type != :header
-            current.children.push el
-            next
-          end
-          level = el.options()[:level]
-
-          if level <= current.level
-            current = current.parent
-          end
-
-          # FIXME set auto ids option
-          id = el.attr()['id']
-          attributes = {}
-          if id != :nil
-          then
-            attributes['aria-labelledby'] = id
-          end
-
-          sect = Section.new level, current, attributes
-          sect.children.push el
-          current.children.push sect
-          current = sect
-        end
-        root.children = start.children
-        super(root, indent)
-      end
-    end
-  end
-end
-
-# FIXME ugly monkey patching of our alternative converter
-module Kramdown
+  # FIXME ugly monkey patching of our alternative converter
   class JekyllDocument < Document
+    def section
+      old = @root.children
+      # FIXME handle header offsets better
+      start = Section.new 1, :nil
+      current = start
+      for el in old
+        if el.type != :header
+          current.children.push el
+          next
+        end
+        level = el.options()[:level]
+
+        if level <= current.level
+          current = current.parent
+        end
+
+        # FIXME set auto ids option
+        id = el.attr()['id']
+        attributes = {}
+        if id != :nil
+        then
+          attributes['aria-labelledby'] = id
+        end
+
+        sect = Section.new level, current, attributes
+        sect.children.push el
+        current.children.push sect
+        current = sect
+      end
+      @root.children = start.children
+    end
+
     def to_html
-      output, warnings = Kramdown::Converter::SectionHtml.convert(@root, @options)
+      copy = dup
+      copy.section
+      output, warnings = Kramdown::Converter::Html.convert(copy.root, @options)
       @warnings.concat(warnings)
       output
     end
