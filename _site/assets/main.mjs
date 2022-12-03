@@ -16,6 +16,7 @@ function create(tag) {
 
     const tooltip = document.createElement('div');
     tooltip.setAttribute('class', 'tooltip sr-only');
+    tooltip.setAttribute('aria-hidden', 'true');
     tooltip.setAttribute('role', 'tooltip');
     tooltip.setAttribute('tabindex', -1);
     tooltip.setAttribute('id', id);
