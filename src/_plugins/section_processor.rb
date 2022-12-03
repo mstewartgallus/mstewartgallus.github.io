@@ -39,8 +39,14 @@ module Kramdown
           attributes['aria-labelledby'] = id
         end
 
+        hgroup = Element.new :html_element, 'hgroup'
+        hgroup.children.push el
+
+        header = Element.new :html_element, 'header'
+        header.children.push hgroup
+
         sect = Section.new level, current, attributes
-        sect.children.push el
+        sect.children.push header
         current.children.push sect
         current = sect
       end
