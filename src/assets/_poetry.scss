@@ -2,6 +2,7 @@
     margin-block: $line ;
     text-indent: 0 ;
     @include hyphens(manual) ;
+    white-space: pre-line ;
 }
 .line {
     display: inline-block ;
