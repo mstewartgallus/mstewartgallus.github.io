@@ -183,21 +183,21 @@ figcaption {
     outline-style: solid ;
 }
 
-hgroup, figure {
+header, figure {
     position: relative ;
 }
 
-:is(hgroup, figure) a[rel~="bookmark"] {
+:is(header, figure) a[rel~="bookmark"] {
     position: absolute ;
     inset-block-start: 0;
     inset-inline-start: -2ch;
 }
 
 @media screen and (max-width: $A4-width) {
-    :is(hgroup, figure) a[rel~="bookmark"] {
+    :is(header, figure) a[rel~="bookmark"] {
         inset-inline-start: 0 ;
     }
-    a[rel~="bookmark"] + :is(h1,h2,h3,h4,h5,h6, figcaption) {
+    a[rel~="bookmark"] + :is(hgroup, figcaption) {
         padding-inline-start: 1.5ch ;
     }
 }
