@@ -90,9 +90,8 @@ $aside: 16rem ;
 }
 
 @import "assets/_clear.scss";
-@import "assets/_base.scss";
 
-* { color-scheme: light dark ; }
+@import "assets/_base.scss";
 
 @import "assets/_layout.scss";
 
@@ -109,6 +108,8 @@ $aside: 16rem ;
         transition: outline 0.05s, color 0.1s, background-color 0.1s ;
     }
 }
+
+* { color-scheme: light dark ; }
 
 @media (prefers-color-scheme: dark) {
     :root {
@@ -131,10 +132,7 @@ $aside: 16rem ;
     background-color: transparent ;
 }
 
-p {
-    vertical-align: top ;
-}
 // body {
-//     background: linear-gradient(grey, black);
+//     background: linear-gradient(grey, Canvas);
 //     background-size: 100% $line ;
 // }
