@@ -14,17 +14,19 @@ module MSG
   def tohtml(stanzas)
     output = ""
     stanzas.each_with_index do |stanza, index|
-      output << '<section class="stanza" aria-labelledby="stanza-%d" aria-roledescription="Stanza">' % index
+      output << '<p class="stanza" aria-roledescription="Stanza">'
       output << "\n"
-      output << '<h2 id="stanza-%d" hidden>' % index
-      output << '%d' % index
-      output << '</h2>'
+      first = true
       stanza.each do |line|
-        output << '<p class="line">'
+        if not first then
+          output << '<br>'
+        end
+        first = false
+        output << '<span role="presentation" class="line">'
         output << line
-        output << '</p>'
+        output << '</span>'
       end
-      output << '</section>'
+      output << '</p>'
       output << "\n"
     end
     output.freeze
