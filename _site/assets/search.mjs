@@ -266,7 +266,7 @@ const output = document.getElementById(outputId);
 const category = document.getElementById('category');
 const tag = document.getElementById('tag');
 
-const h1 = document.getElementsByTagName('h1');
+const h1s = document.getElementsByTagName('h1');
 
 let isfirst = true;
 const loop = await requests();
@@ -301,8 +301,11 @@ for (;;) {
     }
 
     if (!isfirst) {
-        if (response.ok && h1[0]) {
-            h1[0].focus();
+        const h1 = h1s[0];
+        if (h1) {
+            h1.setAttribute('tabindex', '-1');
+            h1.focus();
+            h1.removeAttribute('tabindex');
         }
     }
     isfirst = false;
