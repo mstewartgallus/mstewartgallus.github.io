@@ -189,8 +189,14 @@ header, figure {
 
 :is(header, figure) a[rel~="bookmark"] {
     position: absolute ;
-    inset-block-start: 0;
     inset-inline-start: -2ch;
+}
+
+header a[rel~="bookmark"] {
+    inset-block-start: 0;
+}
+figure a[rel~="bookmark"] {
+    inset-block-end: 0;
 }
 
 @media screen and (max-width: $A4-width) {

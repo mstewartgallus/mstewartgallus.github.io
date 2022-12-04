@@ -98,8 +98,7 @@ module Kramdown
       a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
       a.children = [text]
 
-      figure.children.unshift caption
-      figure.children.unshift a
+      figure.children.push a, caption
     end
   end
 

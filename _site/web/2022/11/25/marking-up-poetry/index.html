@@ -172,7 +172,7 @@ In <a href="#markupb"><cite>Markup B</cite></a> poems are sequences of stanzas,
 stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.</p>
 
-  <figure id="markupa"><a href="#markupa" rel="bookmark">#</a><figcaption>Markup A</figcaption>
+  <figure id="markupa">
 
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
@@ -187,9 +187,9 @@ break elements.</p>
 <span class="nt">&lt;/ol&gt;</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#markupa" rel="bookmark">#</a><figcaption>Markup A</figcaption></figure>
 
-  <figure id="markupb"><a href="#markupb" rel="bookmark">#</a><figcaption>Markup B</figcaption>
+  <figure id="markupb">
 
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"stanza"</span><span class="nt">&gt;</span>Roses are red<span class="nt">&lt;br&gt;</span>
@@ -198,7 +198,7 @@ Sugar is sweet<span class="nt">&lt;br&gt;</span>
 And so are you.<span class="nt">&lt;/p&gt;</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#markupb" rel="bookmark">#</a><figcaption>Markup B</figcaption></figure>
 
   <p><a href="#markupa"><cite>Markup A</cite></a> is hard to navigate as each line in
 an ordered list must be manually tracked through.  As well <q>line
@@ -211,7 +211,7 @@ the <code class="language-plaintext highlighter-rouge">presentation</code> role 
 a <code class="language-plaintext highlighter-rouge">presentation</code> role doesn’t do much, but such markup can reduce
 cruft in Firefox’s accessibility inspector.</p>
 
-  <figure id="markupa2"><a href="#markupa2" rel="bookmark">#</a><figcaption>Markup A'</figcaption>
+  <figure id="markupa2">
 
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
@@ -226,9 +226,9 @@ cruft in Firefox’s accessibility inspector.</p>
 <span class="nt">&lt;/ol&gt;</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#markupa2" rel="bookmark">#</a><figcaption>Markup A'</figcaption></figure>
 
-  <figure id="markupa3"><a href="#markupa3" rel="bookmark">#</a><figcaption>Markup A''</figcaption>
+  <figure id="markupa3">
 
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
@@ -243,7 +243,7 @@ cruft in Firefox’s accessibility inspector.</p>
 <span class="nt">&lt;/ol&gt;</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#markupa3" rel="bookmark">#</a><figcaption>Markup A''</figcaption></figure>
 
   <p>As a <i>nuclear</i> solution you can markup the text for graphical
 display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn"><cite>Markup
@@ -253,7 +253,7 @@ here. <code class="language-plaintext highlighter-rouge">aria-label</code> has a
 text, is not usually translated by automated tools and doesn’t let you
 embed more markup as appropriate.</p>
 
-  <figure id="markupn"><a href="#markupn" rel="bookmark">#</a><figcaption>Markup N</figcaption>
+  <figure id="markupn">
 
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
@@ -279,7 +279,7 @@ embed more markup as appropriate.</p>
 <span class="nt">&lt;/figure&gt;</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#markupn" rel="bookmark">#</a><figcaption>Markup N</figcaption></figure>
 
   <p>In some setups <a href="#markupb"><cite>Markup B</cite></a> sounds yucky.  Ending
 and starting words in separate lines like <i>red</i> and
@@ -290,7 +290,7 @@ A’</cite></a> and <a href="#markupb3"><cite>Markup B’
 However, on Firefox this hack breaks up lines into separate areas to
 track through.</p>
 
-  <figure id="markupb2"><a href="#markupb2" rel="bookmark">#</a><figcaption>Markup B' <abbr title="HyperText Markup Language">HTML</abbr></figcaption>
+  <figure id="markupb2">
 
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>Roses are red<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>; <span class="nt">&lt;/span&gt;&lt;br&gt;</span>
@@ -299,9 +299,9 @@ Sugar is sweet<span class="nt">&lt;span</span> <span class="na">class=</span><sp
 And so are you.<span class="nt">&lt;/p&gt;</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#markupb2" rel="bookmark">#</a><figcaption>Markup B' <abbr title="HyperText Markup Language">HTML</abbr></figcaption></figure>
 
-  <figure id="markupb3"><a href="#markupb3" rel="bookmark">#</a><figcaption>Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></figcaption>
+  <figure id="markupb3">
 
 
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.sr-only</span> <span class="p">{</span>
@@ -313,7 +313,7 @@ And so are you.<span class="nt">&lt;/p&gt;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#markupb3" rel="bookmark">#</a><figcaption>Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></figcaption></figure>
 
   <p>No revisions of <a href="#markupa"><cite>Markup A</cite></a> or <a href="#markupb"><cite>Markup B</cite></a> ensure
 proper pronunciation of stress and sounds.  Only American English is
@@ -352,7 +352,7 @@ all other lines ragged left.</p>
 something like <a href="#indentcss"><cite>Indent <abbr>CSS</abbr></cite></a>.  However, a
 hanging indent layout is not really correct.</p>
 
-  <figure id="indentcss"><a href="#indentcss" rel="bookmark">#</a><figcaption>Indent <abbr>CSS</abbr></figcaption>
+  <figure id="indentcss">
 
 
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.line</span> <span class="p">{</span>
@@ -361,7 +361,7 @@ hanging indent layout is not really correct.</p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#indentcss" rel="bookmark">#</a><figcaption>Indent <abbr>CSS</abbr></figcaption></figure>
 
   <p>You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text <em>within</em> the
@@ -369,7 +369,7 @@ line block to the right.  Something like <a href="#alignlastcss"><cite>Align Las
 <abbr>CSS</abbr></cite></a> almost works for a poetry layout.
 However, even this layout fails when you overflow multiple lines.</p>
 
-  <figure id="alignlastcss"><a href="#alignlastcss" rel="bookmark">#</a><figcaption>Align Last <abbr>CSS</abbr></figcaption>
+  <figure id="alignlastcss">
 
 
 <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.stanza</span> <span class="p">{</span>
@@ -383,12 +383,12 @@ However, even this layout fails when you overflow multiple lines.</p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#alignlastcss" rel="bookmark">#</a><figcaption>Align Last <abbr>CSS</abbr></figcaption></figure>
 
   <p><a href="#example"><cite>Example</cite></a> and <a href="#examplecode"><cite>Example Code</cite></a> are similar to
 the current compromise I use on this site.</p>
 
-  <figure id="example"><a href="#example" rel="bookmark">#</a><figcaption>Example</figcaption>
+  <figure id="example">
 
 
 <style>
@@ -411,9 +411,9 @@ the current compromise I use on this site.</p>
 </p>
 </div>
 
-</figure>
+<a href="#example" rel="bookmark">#</a><figcaption>Example</figcaption></figure>
 
-  <figure id="examplecode"><a href="#examplecode" rel="bookmark">#</a><figcaption>Example Code</figcaption>
+  <figure id="examplecode">
 
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
@@ -436,7 +436,7 @@ the current compromise I use on this site.</p>
 <span class="nt">&lt;/div&gt;</span>
 </code></pre></div></div>
 
-</figure>
+<a href="#examplecode" rel="bookmark">#</a><figcaption>Example Code</figcaption></figure>
 
 </section>
 <section aria-labelledby="conclusion">  <header><a href="#conclusion" rel="bookmark">#</a>    <hgroup>      <h2 id="conclusion">Conclusion</h2>
