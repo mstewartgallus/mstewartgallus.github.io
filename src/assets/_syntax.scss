@@ -1,0 +1,13 @@
+@media screen and (prefers-color-scheme: dark) {
+    @import "_syntax-dark.scss";
+}
+@media screen and (prefers-color-scheme: light) {
+    @import "_syntax-light.scss";
+}
+@media print {
+    @import "_syntax-print.scss";
+}
+
+.highlight {
+    background-color: transparent ;
+}

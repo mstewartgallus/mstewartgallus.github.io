@@ -53,7 +53,7 @@
     src:
         local('JetBrains Mono'),
         url('/assets/vend/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
-    size-adjust: 90.1818181818% ;
+    /* size-adjust: 90.1818181818% ; */
 }
 @font-face {
     font-family: 'JetBrains Mono';

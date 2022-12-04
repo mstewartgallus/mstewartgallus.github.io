@@ -1,55 +1,10 @@
-hgroup p {
-    font-style: italic;
-}
-hgroup p:first-of-type {
-    margin-block-start: -$line ;
-}
-
-hr {
-    height: 0 ;
-    border: 0 ;
-    margin-block-end: $line ;
-}
-
-main > div > p:first-of-type::first-letter {
-    font-size: scale(1) * 1em;
-    font-weight: bold ;
-    line-height: $line / scale(1) ;
-}
-
-main > div > p:first-of-type::first-line {
-    font-style: italic ;
-}
-
 .metadata {
     font-size: scale(-1) * 1em;
     line-height: $line / scale(-1) ;
 }
 
-body > header {
-    @include small-caps ;
-}
-
 .highlight {
     overflow: auto ;
-}
-
-ins {
-    position: relative ;
-}
-.tooltip {
-    position: absolute ;
-    left: 0;
-    top: $line;
-    z-index: 1000 ;
-
-    border: none ;
-    border-radius: 1ch ;
-    margin-block: $halfline ;
-    padding-block: $halfline ;
-    padding-inline: 1ch ;
-    background: black ;
-    white-space: pre ;
 }
 
 .sr-only {
@@ -59,4 +14,25 @@ ins {
     width:1px;
     height:1px;
     overflow:hidden;
+}
+
+:is(header, figure) a[rel~="bookmark"] {
+    position: absolute ;
+    inset-inline-start: -2ch;
+}
+
+header a[rel~="bookmark"] {
+    inset-block-start: 0;
+}
+figure a[rel~="bookmark"] {
+    inset-block-end: 0;
+}
+
+@media screen and (max-width: $A4-width) {
+    :is(header, figure) a[rel~="bookmark"] {
+        inset-inline-start: 0 ;
+    }
+    a[rel~="bookmark"] + :is(hgroup, figcaption) {
+        padding-inline-start: 1.5ch ;
+    }
 }

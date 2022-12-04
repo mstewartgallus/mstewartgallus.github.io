@@ -23,7 +23,7 @@ $sc: (
 }
 
 $line: (1/0.32) * 1ex ;
-$width: 58.5ch ;
+$width: 52.5ch ;
 
 $col: 1ch ;
 $col2: 2 * $col ;
@@ -59,27 +59,6 @@ $aside: 16rem ;
     @include prefix(font-size-adjust, $value);
 }
 
-@mixin clear {
-    all: initial ;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    display: block ;
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none ;
-    background-color: transparent;
-    vertical-align: baseline ;
-    font-family: inherit;
-    font-size: inherit;
-    font-style: inherit;
-    font-weight: inherit ;
-    line-height: inherit;
-    text-indent: 0;
-    color: inherit ;
-}
-
 @mixin all-small-caps {
     font-variant-caps: all-small-caps ;
     letter-spacing: 0.07ch ;
@@ -90,47 +69,15 @@ $aside: 16rem ;
 }
 
 @import "assets/_clear.scss";
-
-@import "assets/_base.scss";
-
+@import "assets/_fonts.scss";
 @import "assets/_layout.scss";
-
 @import "assets/_forms.scss";
-
-@import "assets/_theme.scss";
-
+@import "assets/_decorate.scss";
 @import "assets/_poetry.scss";
-
+@import "assets/_theme.scss";
+@import "assets/_colors.scss";
 @import "assets/_print.scss";
-
-@media (prefers-reduced-motion: no-preference) {
-    * {
-        transition: outline 0.05s, color 0.1s, background-color 0.1s ;
-    }
-}
-
-* { color-scheme: light dark ; }
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        background: #242526 ;
-        color: #d3e0e3 ;
-    }
-}
-
-@media screen and (prefers-color-scheme: dark) {
-    @import "assets/_syntax-dark.scss";
-}
-@media screen and (prefers-color-scheme: light) {
-    @import "assets/_syntax-light.scss";
-}
-@media print {
-    @import "assets/_syntax-print.scss";
-}
-
-.highlight {
-    background-color: transparent ;
-}
+@import "assets/_syntax.scss";
 
 // body {
 //     background: linear-gradient(grey, Canvas);

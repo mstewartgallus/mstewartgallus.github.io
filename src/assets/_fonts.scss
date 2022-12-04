@@ -1,0 +1,14 @@
+:root {
+    font-synthesis: none ;
+}
+:root {
+    font-family: 'Atkinson Hyperlegible', sans-serif ;
+}
+code, pre {
+    font-family: 'JetBrains Mono', monospace ;
+}
+// Atkinson Hyperlegible doesn't have small caps :(
+cite, abbr {
+    font-family: 'Noto Sans', 'Atkinson Hyperlegible', sans-serif ;
+    font-family: 'Atkinson Hyperlegible', sans-serif ;
+}

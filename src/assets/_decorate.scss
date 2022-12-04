@@ -1,0 +1,137 @@
+:root {
+    // more legible hyperlinks
+    text-underline-position: under ;
+}
+
+main {
+    font-variant-numeric: proportional-nums oldstyle-nums ;
+    @include hyphens(auto) ;
+}
+nav,header,footer,h1,h2,h3,h4,h5,h6 {
+    font-variant-numeric: proportional-nums lining-nums ;
+    @include hyphens(manual) ;
+}
+
+code, pre, table, li::marker {
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+sub {
+    font-variant-position: sub ;
+}
+sup {
+    font-variant-position: super ;
+}
+sub, sup {
+    vertical-align: inherit ;
+}
+
+abbr {
+    @include all-small-caps ;
+    text-decoration: none ;
+}
+cite {
+    @include small-caps ;
+}
+
+header, figure {
+    position: relative ;
+}
+
+table {
+    border-collapse: collapse ;
+}
+
+@counter-style nodot {
+  system: numeric;
+  symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
+  suffix: "\2003";
+}
+@counter-style bullet {
+  system: cyclic;
+  symbols: "•";
+  suffix: "\2003";
+}
+
+ul, ol, menu {
+    margin-block: $line ;
+}
+
+ol {
+    list-style-type: nodot ;
+}
+
+menu, ul {
+    list-style-type: bullet ;
+}
+
+menu, ul, ol {
+    padding-inline-start: 3.4ch ;
+}
+
+$list-width: $width - 3.4ch ;
+@media (min-width: $A4-width) {
+    menu, ul, ol {
+        padding-inline-start: 0 ;
+    }
+}
+
+
+dl, dd {
+    margin: 0;
+}
+dt, dd {
+    display: inline ;
+}
+dd::before {
+    content: "\2002" ;
+}
+dt + dd::before {
+    content: none ;
+}
+dt ~ dt::before {
+    content: "\a" ;
+    white-space: pre ;
+}
+dt::after {
+    content: "\2003" ;
+}
+
+hr {
+    height: 0 ;
+    border: none ;
+    margin-block: $line ;
+}
+
+hgroup > p {
+    font-style: italic;
+}
+
+// FIXME awkward
+main > div > p:first-of-type::first-letter {
+    font-size: scale(1) * 1em;
+    font-weight: bold ;
+    line-height: $line / scale(1) ;
+}
+
+main > div > p:first-of-type::first-line {
+    font-style: italic ;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth ;
+    }
+    * {
+        transition: outline 0.05s, color 0.1s, background-color 0.1s ;
+    }
+}
+
+* {
+    outline-offset: 0.1em;
+    outline-width: 0.2em ;
+}
+
+:focus {
+    outline-style: solid ;
+}

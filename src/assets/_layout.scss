@@ -1,3 +1,38 @@
+$root-font-size: $font-size * 1pt ;
+:root {
+    line-height: $line ;
+    font-size: $root-font-size ;
+}
+
+:root {
+    // @include font-size-adjust(1);
+}
+code, pre {
+    // @include font-size-adjust(0.901818181818);
+
+    // font-family: 'JetBrains Mono', monospace ;
+}
+// Atkinson Hyperlegible doesn't have small caps :(
+cite, abbr {
+    // @include font-size-adjust(0.89);
+}
+
+h3,h4,h5,h6 {
+    font-size: scale(1) * 1em ;
+    line-height: $line / scale(1) ;
+}
+
+h1 {
+    font-size: scale(3) * 1em ;
+    line-height: $line / scale(3) ;
+    margin-block: $line / scale(3) ;
+}
+h2 {
+    font-size: scale(2) * 1em ;
+    line-height: $line / scale(2) ;
+    margin-block: $line / scale(2) ;
+}
+
 :root {
     position: relative ;
 }
@@ -17,7 +52,7 @@ body > header {
     display: flex ;
     flex-wrap: wrap ;
     justify-content: space-between ;
-    column-gap: 1ch ;
+    column-gap: 1.5ch ;
 }
 
 body {
@@ -82,4 +117,27 @@ body > :is(header, footer, nav) {
 main {
     inline-size: $width ;
     max-inline-size: 100% ;
+}
+
+figure {
+    margin-inline: 0;
+    margin-block: $line ;
+}
+pre, dl {
+    margin-block: 0;
+}
+
+p {
+    margin-block: $line;
+}
+
+hgroup p:first-of-type {
+    margin-block-start: -$line ;
+}
+
+$line-reduced: $line - 0.1ex ;
+hr {
+    border-width: 0.1ex ;
+    margin-block-start: $line ;
+    margin-block-end: $line-reduced ;
 }
