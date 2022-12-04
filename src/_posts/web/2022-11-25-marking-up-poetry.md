@@ -19,12 +19,12 @@ reader yourself.
 {:#accessibility}
 
 {% capture markupb %}
-{% highlight html %}
+```html
 <p class="stanza">Roses are red<br>
 Violets are blue,<br>
 Sugar is sweet<br>
 And so are you.</p>
-{% endhighlight %}
+```
 {% endcapture %}
 
 {% capture markupa %}
