@@ -90,13 +90,16 @@ module Kramdown
         return
       end
 
+      figure.children.delete(caption)
 
       text = Element.new :text
       text.value = '#'
 
       a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
       a.children = [text]
-      caption.children.unshift a
+
+      figure.children.unshift caption
+      figure.children.unshift a
     end
   end
 
