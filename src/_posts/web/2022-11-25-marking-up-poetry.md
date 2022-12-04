@@ -267,6 +267,7 @@ hanging indent layout is not really correct.
 <figcaption>Indent <abbr>CSS</abbr></figcaption>
 {{ indentcss | markdownify }}
 </figure>
+{:#indentcss}
 
 You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text *within* the

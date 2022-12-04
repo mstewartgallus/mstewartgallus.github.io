@@ -48,7 +48,7 @@ module Kramdown
 
           a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
           a.children = [text]
-          hgroup.children.push a
+          hgroup.children.unshift a
         end
 
         header = Element.new :html_element, 'header'
@@ -96,7 +96,7 @@ module Kramdown
 
       a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
       a.children = [text]
-      caption.children.push a
+      caption.children.unshift a
     end
   end
 

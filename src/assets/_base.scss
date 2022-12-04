@@ -191,7 +191,12 @@ a[rel~="bookmark"] {
 
 @media screen and (max-width: $A4-width) {
     a[rel~="bookmark"] {
-        inset-inline-start: unset ;
-        inset-inline-end: 0;
+        inset-inline-start: 0 ;
+    }
+    a[rel~="bookmark"] + :is(h1,h2,h3,h4,h5,h6) {
+        margin-inline-start: 1.5ch ;
+    }
+    figcaption {
+        padding-inline-start: 2ch ;
     }
 }
