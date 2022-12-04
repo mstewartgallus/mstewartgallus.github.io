@@ -16,22 +16,13 @@
 }
 
 :is(header, figure) a[rel~="bookmark"] {
-    position: absolute ;
-    inset-inline-start: -2ch;
+    float: inline-start ;
+    margin-inline-end: 1.5ch ;
 }
 
-header a[rel~="bookmark"] {
-    inset-block-start: 0;
-}
-figure a[rel~="bookmark"] {
-    inset-block-end: 0;
-}
-
-@media screen and (max-width: $A4-width) {
+@media (min-width: $A4-width) {
     :is(header, figure) a[rel~="bookmark"] {
-        inset-inline-start: 0 ;
-    }
-    a[rel~="bookmark"] + :is(hgroup, figcaption) {
-        padding-inline-start: 1.5ch ;
+        margin-inline-start: -1em ;
+        margin-inline-end: -1em ;
     }
 }
