@@ -15,10 +15,11 @@ module MSG
     output = ""
     stanzas.each_with_index do |stanza, index|
       output << '<p class="stanza">'
+      output << "\n"
       first = true
       stanza.each do |line|
         if not first then
-          output << "\n"
+          output << '<br>'
         end
         first = false
         output << '<span role="presentation" class="line">'
