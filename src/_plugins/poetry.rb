@@ -13,13 +13,12 @@ module MSG
 
   def tohtml(stanzas)
     output = ""
-    length = stanzas.length
     stanzas.each_with_index do |stanza, index|
       output << '<section class="stanza" aria-labelledby="stanza-%d" aria-roledescription="Stanza">' % index
       output << "\n"
-      output << '<p id="stanza-%d" hidden="true">' % index
-      output << '%d of %d' % [index, length]
-      output << '</p>'
+      output << '<h2 id="stanza-%d" hidden>' % index
+      output << '%d' % index
+      output << '</h2>'
       stanza.each do |line|
         output << '<p class="line">'
         output << line
