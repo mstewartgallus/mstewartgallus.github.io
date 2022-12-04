@@ -1,7 +1,9 @@
 $root-font-size: $font-size * 1pt ;
 :root {
-    line-height: $line ;
+    line-height: $lh * $font-size * 1pt ;
     font-size: $root-font-size ;
+    // Noto Sans aspect ratio :(
+    font-size-adjust: ex-height 0.536 ;
 }
 
 :root {
@@ -9,19 +11,16 @@ $root-font-size: $font-size * 1pt ;
 }
 
 h3,h4,h5,h6 {
-    font-size: scale(1) * 1em ;
-    line-height: $line / scale(1) ;
+    font-size: scale(1) * 1rem ;
 }
 
 h1 {
-    font-size: scale(3) * 1em ;
-    line-height: $line / scale(3) ;
-    margin-block: $line / scale(3) ;
+    font-size: scale(3) * 1rem ;
+    margin-block: $line ;
 }
 h2 {
-    font-size: scale(2) * 1em ;
-    line-height: $line / scale(2) ;
-    margin-block: $line / scale(2) ;
+    font-size: scale(2) * 1rem ;
+    margin-block: $line ;
 }
 
 :root {
@@ -72,7 +71,7 @@ body > :is(header, footer, nav) {
     }
     body {
         margin-block-end: 3 * $line ;
-        margin-block-start: 0.2em ;
+        margin-block-start: 0.2rem ;
     }
 }
 
@@ -126,9 +125,6 @@ hgroup p:first-of-type {
     margin-block-start: -$line ;
 }
 
-$line-reduced: $line - 0.1ex ;
 hr {
-    border-width: 0.1ex ;
-    margin-block-start: $line ;
-    margin-block-end: $line-reduced ;
+    margin-block: $line ;
 }

@@ -22,8 +22,10 @@ $sc: (
     @return map-get($sc, $n) ;
 }
 
-$line: (1/0.32) * 1ex ;
-$width: 52.5ch ;
+
+$lh: 1.5 ;
+$line: $lh * $font-size * 1pt ;
+$width: 54.5ch ;
 
 $col: 1ch ;
 $col2: 2 * $col ;
@@ -72,7 +74,6 @@ $aside: 16rem ;
 }
 
 @import "assets/_clear.scss";
-@import "assets/_fonts.scss";
 @import "assets/_layout.scss";
 @import "assets/_forms.scss";
 @import "assets/_decorate.scss";
