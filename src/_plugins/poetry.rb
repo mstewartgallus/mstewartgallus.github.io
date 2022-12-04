@@ -14,13 +14,13 @@ module MSG
   def tohtml(stanzas)
     output = ""
     stanzas.each do |stanza|
-      output << '<div role="group" class="stanza" aria-roledescription="stanza">'
+      output << '<article class="stanza" aria-roledescription="stanza">'
       stanza.each do |line|
         output << '<p class="line">'
         output << line
         output << '</p>'
       end
-      output << '</div>'
+      output << '</article>'
       output << "\n"
     end
     output.freeze
