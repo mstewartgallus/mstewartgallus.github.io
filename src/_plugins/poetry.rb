@@ -14,12 +14,12 @@ module MSG
   def tohtml(stanzas)
     output = ""
     stanzas.each_with_index do |stanza, index|
-      output << '<p class="stanza" aria-roledescription="Stanza">'
+      output << '<p class="stanza">'
       output << "\n"
       first = true
       stanza.each do |line|
         if not first then
-          output << '<br>'
+          output << '<br role="presentation">'
         end
         first = false
         output << '<span role="presentation" class="line">'
