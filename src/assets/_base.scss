@@ -73,23 +73,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 // provide some sensible defaults for line spacing, etc..
-h1,h2,h3,h4,h5,h6 {
-    line-height: $line / scale(1) ;
+h3,h4,h5,h6 {
     font-size: scale(1) * 1em ;
-    font-weight: 700 ;
+    line-height: $line / scale(1) ;
     inline-size: $width / scale(1) ;
 }
 
 h1 {
+    font-weight: bold ;
     font-size: scale(3) * 1em ;
-    inline-size: $width / scale(3) ;
     line-height: $line / scale(3) ;
+    inline-size: $width / scale(3) ;
     margin-block: $line / scale(3) ;
 }
 h2 {
     font-size: scale(2) * 1em ;
-    inline-size: $width / scale(2) ;
     line-height: $line / scale(2) ;
+    inline-size: $width / scale(2) ;
     margin-block: $line / scale(2) ;
 }
 
@@ -169,9 +169,6 @@ cite {
 
 figure {
     margin-block: $line ;
-}
-figcaption {
-    font-weight: bold ;
 }
 
 * {
