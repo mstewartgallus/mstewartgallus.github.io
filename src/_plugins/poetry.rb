@@ -19,7 +19,7 @@ module MSG
       first = true
       stanza.each do |line|
         if not first then
-          output << '<br role="presentation">'
+          output << '<br>'
         end
         first = false
         output << '<span role="presentation" class="line">'
