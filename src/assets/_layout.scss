@@ -5,16 +5,7 @@ $root-font-size: $font-size * 1pt ;
 }
 
 :root {
-    // @include font-size-adjust(1);
-}
-code, pre {
-    // @include font-size-adjust(0.901818181818);
-
-    // font-family: 'JetBrains Mono', monospace ;
-}
-// Atkinson Hyperlegible doesn't have small caps :(
-cite, abbr {
-    // @include font-size-adjust(0.89);
+    @include text-size-adjust(none);
 }
 
 h3,h4,h5,h6 {

@@ -58,6 +58,9 @@ $aside: 16rem ;
 @mixin font-size-adjust($value) {
     @include prefix(font-size-adjust, $value);
 }
+@mixin text-size-adjust($value) {
+    @include prefix(text-size-adjust, $value);
+}
 
 @mixin all-small-caps {
     font-variant-caps: all-small-caps ;
