@@ -49,7 +49,10 @@ module Kramdown
           text = Element.new :text
           text.value = '#'
 
-          a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
+          a = Element.new :a, nil, {
+                            'href' => '#' + id,
+                            'aria-details' => id,
+                            'rel' => 'bookmark'}
           a.children = [text]
 
           header.children.push a
