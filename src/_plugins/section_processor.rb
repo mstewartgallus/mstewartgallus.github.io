@@ -41,6 +41,9 @@ module Kramdown
         hgroup = Element.new :html_element, 'hgroup'
         hgroup.children.push el
 
+        header = Element.new :html_element, 'header'
+        header.children.push hgroup
+
         if id != nil
         then
           text = Element.new :text
@@ -49,14 +52,8 @@ module Kramdown
           a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
           a.children = [text]
 
-          p = Element.new :p, nil
-          p.children = [a]
-
-          hgroup.children.push p
+          header.children.push a
         end
-
-        header = Element.new :html_element, 'header'
-        header.children.push hgroup
 
         sect = Section.new level, current, attributes
         sect.children.push header

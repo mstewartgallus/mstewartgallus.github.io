@@ -4,6 +4,9 @@
     justify-content: space-between ;
     column-gap: 1.5ch ;
 }
+.paging dl {
+    margin: 0;
+}
 
 .metadata {
     font-size: scale(-1) * 1rem;
