@@ -1,1 +1,2 @@
 Sitemap: https://mstewartgallus.github.io/sitemap.xml
+Disallow: /search/
