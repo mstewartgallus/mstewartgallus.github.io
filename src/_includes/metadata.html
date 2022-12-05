@@ -23,7 +23,8 @@
     <dt>Category</dt>
     {%- for category in page.categories -%}
     <dd itemprop="articleSection">
-      <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}">
+      <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}"
+         itemtype="https://schema.org/SearchResultsPage">
         {{- category | escape -}}
       </a>
     </dd>
@@ -34,7 +35,8 @@
     <dt>Tag</dt>
     {%- for tag in page.tags -%}
     <dd>
-      <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
+      <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}"
+         itemtype="https://schema.org/SearchResultsPage">
         #<span itemprop="keywords">{{- tag | escape -}}</span>
       </a>
     </dd>
