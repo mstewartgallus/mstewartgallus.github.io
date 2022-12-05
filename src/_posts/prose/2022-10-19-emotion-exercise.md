@@ -1,6 +1,6 @@
 ---
 title: Emotion Exercise
-date: 2022-10-19 17:14 -0700
+date: 2022-10-19 17:14 -0800
 tags: "2019"
 ---
 

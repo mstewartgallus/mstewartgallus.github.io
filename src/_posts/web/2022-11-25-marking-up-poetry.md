@@ -1,6 +1,6 @@
 ---
 title: Marking Up Poetry
-date: 2022-11-25 13:26 0700
+date: 2022-11-25 13:26 0800
 tags:
 - 'Poetry'
 - 'HTML'

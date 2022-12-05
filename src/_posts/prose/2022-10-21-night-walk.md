@@ -1,6 +1,6 @@
 ---
 title: Night Walk
-date: 2022-10-21 19:00 -0700
+date: 2022-10-21 19:00 -0800
 ---
 Ollie pulled down his long sleeved shirt and stared at his pasty dry
 arms in the bathroom mirror. The moles were climbing along his
