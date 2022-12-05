@@ -21,12 +21,6 @@ body > :is(header, footer, nav) {
     grid-column: aside;
 }
 
-@media screen and (max-width: $A4-width + 2 * $A4-margin) {
-    body {
-        margin-inline: 0.8ch ;
-    }
-}
-
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
     body {
         inline-size: unset ;
