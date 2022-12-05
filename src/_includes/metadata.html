@@ -24,6 +24,7 @@
     {%- for category in page.categories -%}
     <dd itemprop="articleSection">
       <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}"
+         itemid="{% link search.html %}?category={{ category | cgi_escape }}"
          itemscope
          itemtype="https://schema.org/SearchResultsPage">
         {{- category | escape -}}
