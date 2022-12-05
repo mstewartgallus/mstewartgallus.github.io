@@ -65,7 +65,6 @@ menu, ul, ol {
     padding-inline-start: 3.4ch ;
 }
 
-$list-width: $width - 3.4ch ;
 @media (min-width: $A4-width) {
     menu, ul, ol {
         padding-inline-start: 0 ;

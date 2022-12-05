@@ -25,7 +25,12 @@ $sc: (
 
 $lh: 1.5 ;
 $line: $lh * $font-size * 1pt ;
-$width: 54.5ch ;
+$paragraph-width: 50.3ch ;
+$main-width: 62.3ch ;
+$width: $paragraph-width;
+
+$min-margin: 3.1ch ;
+$aside: 14.9rem ;
 
 $col: 1ch ;
 $col2: 2 * $col ;
@@ -44,8 +49,6 @@ $doubleline: 2 * $line ;
 
 $A4-width: 8.3in ;
 $A4-margin: 1.5in ;
-
-$aside: 16rem ;
 
 @mixin prefix($property, $value) {
     -moz-#{$property}: $value;

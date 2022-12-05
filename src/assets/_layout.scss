@@ -23,13 +23,17 @@ h2 {
     margin-block: $line ;
 }
 
-:root {
-    position: relative ;
+p {
+    inline-size: $paragraph-width ;
+    max-inline-size: 100% ;
 }
+// :root {
+//     display: flex ;
+//     justify-content: center ;
+// }
+
+
 body {
-    position: relative ;
-    margin-inline: auto ;
-    inline-size: $width ;
     max-inline-size: 100% ;
 }
 
@@ -46,12 +50,10 @@ body > header {
 }
 
 body {
-    align-items: stretch ;
-    justify-content: stretch ;
     row-gap: 0 ;
-    column-gap: 2ch ;
+    column-gap: 1ch ;
     grid-auto-flow: dense ;
-    grid-template-columns: 1fr [main] auto [aside] $aside 1fr ;
+    grid-template-columns: [main] $main-width [aside] $aside ;
     grid-template-rows: auto auto auto 1fr ;
 }
 body > * {
@@ -64,32 +66,39 @@ main {
 body > :is(header, footer, nav) {
     grid-column: aside;
 }
+:root, body, main {
+    display: block ;
+    padding: 0 ;
+    margin: 0 ;
+}
+
+:root {
+    display: flex ;
+    justify-content: center ;
+}
 
 @media screen {
-    :root {
-        padding-inline: 0.8ch ;
-    }
     body {
         margin-block-end: 3 * $line ;
-        margin-block-start: 0.2rem ;
+        margin-block-start: $line ;
+
+        max-inline-size: 100% ;
+    }
+}
+
+@media screen and (max-width: $A4-width + 2 * $A4-margin) {
+    body {
+        inline-size: $main-width ;
+        margin-inline: 0.8ch ;
     }
 }
 
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
-    :root {
-        padding-inline: 0 ;
-    }
     body {
-        inline-size: initial ;
-        max-inline-size: initial ;
-        padding-inline: 0 ;
         display: grid ;
     }
     body > header {
         display: block ;
-    }
-    main {
-        box-sizing: border-box ;
     }
     .paging {
         display: block ;
@@ -97,17 +106,14 @@ body > :is(header, footer, nav) {
 }
 
 @media screen and (min-width: $A4-width + 3 * $A4-margin) {
+    :root {
+        justify-content: start ;
+    }
     body {
-        grid-template-columns: 1in [main] auto [aside] $aside 1fr ;
-        margin-block-start: $line  ;
-        box-sizing: border-box ;
+        margin-inline-start: $A4-margin ;
     }
 }
 
-main {
-    inline-size: $width ;
-    max-inline-size: 100% ;
-}
 
 figure {
     margin-inline: 0;
@@ -127,4 +133,15 @@ hgroup p:first-of-type {
 
 hr {
     margin-block: $line ;
+}
+
+@media screen and (min-width: $A4-width) {
+    main {
+        margin-inline: $min-margin;
+    }
+}
+@media screen and (min-width: $A4-width + 2 * $A4-margin) {
+    main {
+        margin-inline-end: 0;
+    }
 }
