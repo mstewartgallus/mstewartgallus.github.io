@@ -65,13 +65,6 @@ menu, ul, ol {
     padding-inline-start: 3.6ch ;
 }
 
-@media (min-width: $A4-width) {
-    menu, ul, ol {
-        margin-inline-start: -3.6ch ;
-        margin-inline-end:  -3.6ch ;
-    }
-}
-
 
 dd {
     margin: 0;

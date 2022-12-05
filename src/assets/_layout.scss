@@ -26,12 +26,24 @@ body > :is(header, footer, nav) {
         inline-size: unset ;
         display: grid ;
     }
-    body > header {
-        display: block ;
-    }
 }
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
     main {
         margin-inline-end: 0;
+    }
+    body > header  {
+        display: block ;
+    }
+}
+
+body > header  {
+    margin: 0;
+}
+
+
+@media (min-width: $A4-width) {
+    main :is(menu, ul, ol) {
+        margin-inline-start: -3.6ch ;
+        margin-inline-end:  -3.6ch ;
     }
 }

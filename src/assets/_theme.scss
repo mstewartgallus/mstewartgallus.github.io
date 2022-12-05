@@ -24,3 +24,18 @@
     height:1px;
     overflow:hidden;
 }
+
+[itemtype="https://schema.org/BreadcrumbList"] {
+    padding: 0;
+    margin-block-start: $line;
+    margin-block-end: 0;
+}
+[itemtype="https://schema.org/BreadcrumbList"] li {
+    display: inline list-item ;
+}
+[itemtype="https://schema.org/BreadcrumbList"] li:first-of-type {
+    display: inline ;
+}
+[itemtype="https://schema.org/BreadcrumbList"] li::marker {
+    content: "\2003" ;
+}
