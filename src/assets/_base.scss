@@ -1,0 +1,87 @@
+$root-font-size: $font-size * 1pt ;
+:root {
+    line-height: $lh * $font-size * 1pt ;
+    font-size: $root-font-size ;
+    // Noto Sans aspect ratio :(
+    font-size-adjust: 0.536 ;
+}
+
+:root {
+    @include text-size-adjust(none);
+}
+
+h3,h4,h5,h6 {
+    font-size: scale(1) * 1rem ;
+}
+
+h1 {
+    font-size: scale(3) * 1rem ;
+    margin-block: $line ;
+}
+h2 {
+    font-size: scale(2) * 1rem ;
+    margin-block: $line ;
+}
+
+p {
+    inline-size: $paragraph-width ;
+    max-inline-size: 100% ;
+}
+figure {
+    margin-inline: 0;
+    margin-block: $line ;
+}
+pre, dl {
+    margin-block: 0;
+}
+
+p {
+    margin-block: $line;
+}
+
+hgroup p:first-of-type {
+    margin-block-start: -$line ;
+}
+
+hr {
+    margin-block: $line ;
+}
+
+:root, main, body {
+    padding: 0 ;
+    margin: 0 ;
+}
+:root {
+    display: flex ;
+    justify-content: center ;
+}
+
+@media screen {
+    body {
+        inline-size: $main-width ;
+        max-inline-size: 100% ;
+        margin-block-end: 3 * $line ;
+        margin-block-start: $line ;
+    }
+}
+
+@media screen and (max-width: $A4-width) {
+    :root {
+        padding-inline: 0.8ch ;
+    }
+}
+@media screen and (min-width: $A4-width + 3 * $A4-margin) {
+    :root {
+        justify-content: start ;
+    }
+    body {
+        margin-inline-start: $A4-margin ;
+    }
+}
+
+
+@media screen and (min-width: $A4-width) {
+    main {
+        margin-inline: $min-margin;
+    }
+}
