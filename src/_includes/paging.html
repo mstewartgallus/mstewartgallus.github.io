@@ -32,7 +32,9 @@
   {%- assign title = page.title | default: site_title -%}
   <ol reversed itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
-        ><a rel="bookmark" href="{{ page.url }}" itemprop="item"
+        ><a rel="bookmark" href="{{ page.url }}"
+            aria-labelledby="title"
+            itemprop="item"
             ><span itemprop="name">#</span
                                       ><meta itemprop="position" content="3"
                                              ></a
@@ -48,7 +50,9 @@
                              ></li>
     {%- endif -%}
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
-        ><a translate="no" href="{% link index.html %}" itemprop="item"
+        ><a translate="no" href="{% link index.html %}"
+            aria-labelledby="site-title"
+            itemprop="item"
             ><span itemprop="name">~</span
                                       ><meta itemprop="position" content="1"></a
                                                                                ></li>
