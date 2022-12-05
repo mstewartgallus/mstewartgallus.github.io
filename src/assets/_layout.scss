@@ -28,9 +28,6 @@ body > :is(header, footer, nav) {
     }
 }
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
-    main {
-        margin-inline-end: 0;
-    }
     body > header  {
         display: block ;
     }

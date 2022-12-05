@@ -83,10 +83,3 @@ hr {
         margin-inline-start: $A4-margin ;
     }
 }
-
-
-@media screen and (min-width: $A4-width) {
-    main {
-        margin-inline: $min-margin;
-    }
-}
