@@ -24,13 +24,3 @@
     height:1px;
     overflow:hidden;
 }
-
-figure a[rel~="bookmark"] {
-    float: left ;
-}
-@media (min-width: $A4-width) {
-    figure a[rel~="bookmark"] {
-        margin-inline-start: -1em ;
-        margin-inline-end: -1em ;
-    }
-}

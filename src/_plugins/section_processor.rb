@@ -91,15 +91,16 @@ module Kramdown
         return
       end
 
-      figure.children.delete(caption)
+      span = Element.new :html_element, 'div'
+      span.children = caption.children
+      caption.children = [span]
 
       text = Element.new :text
       text.value = '#'
 
       a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
       a.children = [text]
-
-      figure.children.push a, caption
+      caption.children.push a
     end
   end
 
