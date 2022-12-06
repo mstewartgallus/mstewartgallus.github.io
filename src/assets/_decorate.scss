@@ -74,10 +74,18 @@ dl {
 }
 dt, dd {
     float: left ;
-    clear: left ;
+}
+dt {
+    clear: both ;
 }
 dd {
     clear: right ;
+}
+dd:last-of-type {
+    clear: both ;
+}
+header {
+    clear: both ;
 }
 
 dt, dd {

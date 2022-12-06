@@ -10,7 +10,7 @@
       <a aria-describedby="author" rel="author" href="{{ page.author.url | relative_url }}" itemprop="url">Author</a>
       {{- -}}
     </dt>
-    <dd id="author">@<span translate="no" itemprop="name">{{- page.author.name | escape -}}</span></dd>
+    <dd id="author">@<span role="presentation" translate="no" itemprop="name">{{- page.author.name | escape -}}</span></dd>
     <dt>Posted</dt>
     <dd>
       {{- -}}
@@ -42,7 +42,7 @@
       {{- -}}
       <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
         {{- -}}
-        #<span itemprop="keywords">{{- tag | escape -}}</span>
+        #<span role="presentation" itemprop="keywords">{{- tag | escape -}}</span>
       {{- -}}
       </a>
       {{- -}}
