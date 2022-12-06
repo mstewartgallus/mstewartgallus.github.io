@@ -48,12 +48,9 @@ itemprop="articleBody"
         {{- content -}}
       </div>
     </main>
-    <details>
-      <summary>Menu</summary>
-      {%- include header.html -%}
-      {%- include paging.html -%}
-      {%- include breadcrumbs.html -%}
-      {%- include metadata.html -%}
-    </details>
+    {%- include paging.html -%}
+    {%- include breadcrumbs.html -%}
+    {%- include metadata.html -%}
+    {%- include header.html -%}
   </body>
 </html>

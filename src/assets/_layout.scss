@@ -12,45 +12,26 @@ body {
     grid-template-rows: auto auto auto 1fr ;
 }
 body > * {
-    grid-column: main;
-}
-main {
-    grid-row: 1 / span 4 ;
-}
-
-body > details > * {
     grid-column: aside;
 }
-
-body > details {
-    position: absolute ;
-    box-sizing: border-box ;
-    inset-inline-start: 0 ;
-    inset-block-start: -$line ;
-    background-color: Canvas ;
-    padding-block-start: 0 ;
-    padding-block-end: $halfline ;
-    padding-inline: 0.8ch ;
+main {
+    grid-column: main;
+    grid-row: span 4 ;
 }
+
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
     body {
         inline-size: unset ;
         display: grid ;
     }
-    body > details {
-        display: contents ;
-    }
-    body > details > summary {
-        display: none ;
-    }
 }
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
-    body > details > header  {
+    body > header  {
         display: block ;
     }
 }
 
-body > details > header  {
+body > header  {
     margin: 0;
 }
 
