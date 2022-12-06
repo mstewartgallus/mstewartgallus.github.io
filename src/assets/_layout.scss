@@ -11,7 +11,7 @@
     }
     main {
         grid-column: main;
-        grid-row: span 4 ;
+        grid-row: span 5 ;
     }
 
     @media (min-width: $A4-width + 2 * $A4-margin) {
