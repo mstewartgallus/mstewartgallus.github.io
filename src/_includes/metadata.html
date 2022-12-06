@@ -5,14 +5,10 @@
     <h2 id="metadata">Metadata</h2>
   </hgroup>
   <dl>
-    <dt>Author</dt>
-    <dd>
-      <address itemprop="creator author" itemscope itemtype="https://schema.org/Person" style="display:inline">
-        <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">
-          @<span translate="no" itemprop="name">{{ page.author.name | escape }}</span>
-        </a>
-      </address>
-    </dd>
+    <dt><address itemprop="creator author" itemscope itemtype="https://schema.org/Person" style="display:inline"
+                 ><a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">Author</a
+                                                                                                     ></address></dt>
+    <dd>@<span translate="no" itemprop="name">{{ page.author.name | escape }}</span></dd>
     <dt>Posted</dt>
     <dd>
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished pubdate">

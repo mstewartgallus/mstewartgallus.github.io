@@ -7,12 +7,12 @@
   </header>
   <dl>
     {%- if page.previous.url -%}
-    <dt>Previous</dt>
-    <dd><a href="{{page.previous.url}}" rel="previous"><cite>{{page.previous.title | escape}}</cite></a></dd>
+    <dt><a href="{{page.previous.url}}" rel="previous">Previous Item</a></dt>
+    <dd><cite>{{page.previous.title | escape}}</cite></dd>
     {%- endif -%}
     {%- if page.next.url -%}
-    <dt>Next</dt>
-    <dd><a href="{{page.next.url}}" rel="next"><cite>{{page.next.title | escape}}</cite></a></dd>
+    <dt><a href="{{page.next.url}}" rel="next">Next Item</a></dt>
+    <dd><cite>{{page.next.title | escape}}</cite></dd>
     {%- endif -%}
   </dl>
 </nav>
