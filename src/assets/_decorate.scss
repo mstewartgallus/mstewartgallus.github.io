@@ -112,16 +112,6 @@ main > div > p:first-of-type::first-line {
         scroll-behavior: smooth ;
     }
     * {
-        transition: outline 0.05s, color 0.1s, background-color 0.1s ;
+        transition: color 0.1s, background-color 0.1s ;
     }
-}
-
-* {
-    outline-offset: 0.1em;
-    outline-color: Highlight ;
-    outline-width: 0.3em ;
-}
-
-:focus {
-    outline-style: solid ;
 }
