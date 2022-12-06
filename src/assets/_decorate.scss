@@ -3,11 +3,11 @@
     @include text-underline-position(under) ;
 }
 
-main {
+:root {
     font-variant-numeric: proportional-nums oldstyle-nums ;
     @include hyphens(auto) ;
 }
-nav,header,footer,h1,h2,h3,h4,h5,h6 {
+header,h1,h2,h3,h4,h5,h6 {
     font-variant-numeric: proportional-nums lining-nums ;
     @include hyphens(manual) ;
 }
