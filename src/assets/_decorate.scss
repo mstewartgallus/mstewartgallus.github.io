@@ -69,11 +69,15 @@ menu, ul, ol {
 dt, dd {
     margin: 0 ;
 }
-dt {
-    display: inline ;
+dl {
+    clear: both ;
+}
+dt, dd {
+    float: left ;
+    clear: left ;
 }
 dd {
-    display: inline-block ;
+    clear: right ;
 }
 
 dt, dd {
@@ -81,11 +85,6 @@ dt, dd {
 }
 dd:last-of-type {
     margin-inline-end: 0 ;
-}
-// FIXME bad for accessibility
-dt ~ dt::before {
-    content: "\a" ;
-    white-space: pre ;
 }
 
 hr {
