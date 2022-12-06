@@ -118,7 +118,8 @@ main > div > p:first-of-type::first-line {
 
 * {
     outline-offset: 0.1em;
-    outline-width: 0.2em ;
+    outline-color: Highlight ;
+    outline-width: 0.3em ;
 }
 
 :focus {
