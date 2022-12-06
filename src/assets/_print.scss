@@ -5,23 +5,25 @@
     }
     :root {
         padding-inline-start: 1.5in ;
-    }
-
-    :root {
         font-size: 11pt ;
-        justify-content: start ;
     }
 
     body > :is(header, nav) {
         display: none ;
     }
 
-    :any-link {
+    a {
         text-decoration: none ;
         color: inherit ;
     }
+
+    // Hide bookmark links?
+    :any-link:is([rel~="bookmark"]) {
+        display: none ;
+    }
     :any-link:not(:is([href^="/"], [href^="#"]))::after {
-        content: " " attr(href) ;
+        content: "\2003" attr(href) ;
+        white-space: nowrap ;
     }
 }
 

@@ -1,4 +1,6 @@
-* { color-scheme: light dark ; }
+@media screen {
+    :root { color-scheme: light dark ; }
+}
 
 @media (prefers-color-scheme: dark) {
     :root {

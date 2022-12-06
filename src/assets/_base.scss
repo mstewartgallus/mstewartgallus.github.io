@@ -1,7 +1,13 @@
 $root-font-size: $font-size * 1pt ;
+
+@media screen {
+    :root {
+        font-size: $root-font-size ;
+    }
+}
+
 :root {
     line-height: $lh * 1rem ;
-    font-size: $root-font-size ;
     // Noto Sans aspect ratio :(
     font-size-adjust: 0.536 ;
 }
@@ -45,12 +51,13 @@ hr {
     padding: 0 ;
     margin: 0 ;
 }
-:root {
-    display: flex ;
-    justify-content: center ;
-}
 
 @media screen {
+    :root {
+        display: flex ;
+        justify-content: center ;
+    }
+
     body {
         inline-size: $main-width ;
         max-inline-size: 100% ;
@@ -58,18 +65,18 @@ hr {
     }
 }
 
-@media screen and (max-width: $A4-width) {
+@media only screen and (max-width: $A4-width) {
     body {
         box-sizing: border-box ;
         padding-inline: 0.9ch ;
     }
 }
-@media screen and (min-width: $A4-width) {
+@media only screen and (min-width: $A4-width) {
     body {
         margin-block-start: $line ;
     }
 }
-@media screen and (min-width: $A4-width + 3 * $A4-margin) {
+@media only screen and (min-width: $A4-width + 3 * $A4-margin) {
     :root {
         justify-content: start ;
     }
@@ -79,17 +86,17 @@ hr {
 }
 
 
-main > :is(h3,h4,h5,h6) {
+main :is(h3,h4,h5,h6) {
     font-size: scale(1) * 1rem ;
 }
 
-main > h1 {
+main h1 {
     font-size: scale(3) * 1rem ;
 }
-main > h2 {
+main h2 {
     font-size: scale(2) * 1rem ;
 }
 
-main > header {
+main header {
     margin-block-start: $line ;
 }

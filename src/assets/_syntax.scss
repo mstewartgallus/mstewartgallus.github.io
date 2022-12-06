@@ -1,7 +1,7 @@
-@media screen and (prefers-color-scheme: dark) {
+@media only screen and (prefers-color-scheme: dark) {
     @import "_syntax-dark.scss";
 }
-@media screen and (prefers-color-scheme: light) {
+@media only screen and (prefers-color-scheme: light) {
     @import "_syntax-light.scss";
 }
 @media print {
