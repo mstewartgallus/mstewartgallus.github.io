@@ -31,11 +31,11 @@
     display: inline ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
-    display: inline list-item ;
-}
-[itemtype="https://schema.org/BreadcrumbList"] li:first-of-type {
     display: inline ;
 }
-[itemtype="https://schema.org/BreadcrumbList"] li::marker {
+[itemtype="https://schema.org/BreadcrumbList"] li::before {
     content: "\2003" ;
+}
+[itemtype="https://schema.org/BreadcrumbList"] li:first-of-type::before {
+    content: "" ;
 }
