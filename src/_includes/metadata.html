@@ -1,19 +1,16 @@
 {%- assign date_format = "%Y-%m-%d" -%}
 {%- if page.collection == 'posts' -%}
-<footer aria-describedby="metadata" class="metadata">
+<footer aria-describedby="metadata-title">
   <hgroup>
-    <h2 id="metadata">Metadata</h2>
+    <h2 id="metadata-title">Metadata</h2>
   </hgroup>
   <dl>
-    <dt>{{- -}}
-      <address itemprop="creator author" itemscope itemtype="https://schema.org/Person" style="display:inline-block">
-        {{- -}}
-        <a rel="author" itemprop="url" href="{{ page.author.url | relative_url }}">Author</a>
-        {{- -}}
-      </address>
+    <dt itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+      {{- -}}
+      <a aria-describedby="author" rel="author" href="{{ page.author.url | relative_url }}" itemprop="url">Author</a>
       {{- -}}
     </dt>
-    <dd>@<span translate="no" itemprop="name">{{- page.author.name | escape -}}</span></dd>
+    <dd id="author">@<span translate="no" itemprop="name">{{- page.author.name | escape -}}</span></dd>
     <dt>Posted</dt>
     <dd>
       {{- -}}
