@@ -69,30 +69,11 @@ menu, ul, ol {
 dt, dd {
     margin: 0 ;
 }
-dl {
-    clear: both ;
-}
-dt, dd {
-    float: left ;
-}
-dt {
-    clear: both ;
-}
-dd {
-    clear: right ;
-}
-dd:last-of-type {
-    clear: both ;
-}
-header {
-    clear: both ;
-}
 
-dt, dd {
-    margin-inline-end: 1em ;
-}
-dd:last-of-type {
-    margin-inline-end: 0 ;
+dl > div {
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1em ;
 }
 
 hr {
