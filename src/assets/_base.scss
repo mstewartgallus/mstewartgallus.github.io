@@ -22,8 +22,8 @@ h2 {
     font-size: scale(2) * 1rem ;
 }
 
-footer, header {
-    margin-block: $line ;
+header {
+    margin-block-start: $line ;
 }
 
 p {
@@ -66,14 +66,18 @@ hr {
         inline-size: $main-width ;
         max-inline-size: 100% ;
         margin-block-end: 3 * $line ;
-        margin-block-start: $line ;
     }
 }
 
 @media screen and (max-width: $A4-width) {
     body {
         box-sizing: border-box ;
-        padding-inline: 0.8ch ;
+        padding-inline: 0.9ch ;
+    }
+}
+@media screen and (min-width: $A4-width) {
+    body {
+        margin-block-start: $line ;
     }
 }
 @media screen and (min-width: $A4-width + 3 * $A4-margin) {

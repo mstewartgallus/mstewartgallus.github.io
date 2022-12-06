@@ -21,10 +21,6 @@ main {
     }
 }
 
-body > header  {
-    margin: 0;
-}
-
 @media (min-width: $A4-width) {
     main :is(menu, ul, ol) {
         margin-inline-start: -3.6ch ;

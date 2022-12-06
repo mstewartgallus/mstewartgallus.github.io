@@ -7,12 +7,7 @@
 }
 
 .sr-only {
-    position:absolute;
-    left:-10000px;
-    top:auto;
-    width:1px;
-    height:1px;
-    overflow:hidden;
+    @include sr-only ;
 }
 
 [itemtype="https://schema.org/BreadcrumbList"] {
@@ -28,4 +23,15 @@
 }
 [itemtype="https://schema.org/BreadcrumbList"] li:first-of-type::before {
     content: "" ;
+}
+
+body > :is(header, nav, footer) {
+    font-size: scale(-1) * 1rem;
+}
+body > :is(header, nav, footer) h2 {
+    font-size: inherit ;
+}
+
+body > :is(nav, footer) :is(header, dl) {
+    margin-block: 0 ;
 }
