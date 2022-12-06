@@ -4,6 +4,7 @@ body > header {
 }
 
 body {
+    position: relative ;
     row-gap: 0 ;
     column-gap: 1ch ;
     grid-auto-flow: dense ;
@@ -14,26 +15,42 @@ body > * {
     grid-column: main;
 }
 main {
-    grid-row: span 4 ;
+    grid-row: 1 / span 4 ;
 }
 
-body > :is(header, footer, nav) {
+body > details > * {
     grid-column: aside;
 }
 
+body > details {
+    position: absolute ;
+    box-sizing: border-box ;
+    inset-inline-start: 0 ;
+    inset-block-start: -$line ;
+    background-color: Canvas ;
+    padding-block-start: 0 ;
+    padding-block-end: $halfline ;
+    padding-inline: 0.8ch ;
+}
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
     body {
         inline-size: unset ;
         display: grid ;
     }
+    body > details {
+        display: contents ;
+    }
+    body > details > summary {
+        display: none ;
+    }
 }
 @media screen and (min-width: $A4-width + 2 * $A4-margin) {
-    body > header  {
+    body > details > header  {
         display: block ;
     }
 }
 
-body > header  {
+body > details > header  {
     margin: 0;
 }
 

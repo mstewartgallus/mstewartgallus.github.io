@@ -71,7 +71,8 @@ hr {
 }
 
 @media screen and (max-width: $A4-width) {
-    :root {
+    body {
+        box-sizing: border-box ;
         padding-inline: 0.8ch ;
     }
 }

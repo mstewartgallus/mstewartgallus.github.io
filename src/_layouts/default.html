@@ -35,7 +35,6 @@ itemprop="articleBody"
         itemprop="mainEntity hasPart"
         itemtype="{{ maintype }}"
         itemid="{{ page.url | absolute_url }}">
-    {%- include header.html -%}
     <main aria-describedby="title" itemprop="text">
       <header>
         <hgroup>
@@ -49,8 +48,12 @@ itemprop="articleBody"
         {{- content -}}
       </div>
     </main>
-    {%- include paging.html -%}
-    {%- include breadcrumbs.html -%}
-    {%- include metadata.html -%}
+    <details>
+      <summary>Menu</summary>
+      {%- include header.html -%}
+      {%- include paging.html -%}
+      {%- include breadcrumbs.html -%}
+      {%- include metadata.html -%}
+    </details>
   </body>
 </html>
