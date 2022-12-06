@@ -25,13 +25,12 @@
     content: "" ;
 }
 
-body > :is(header, nav, footer) {
-    font-size: scale(-1) * 1rem;
-}
-body > :is(header, nav, footer) h2 {
-    font-size: inherit ;
-}
-
 body > :is(nav, footer) :is(header, dl) {
     margin-block: 0 ;
+}
+
+@media screen {
+    body > :is(header, nav, footer) {
+        font-size: scale(-1) * 1rem;
+    }
 }

@@ -9,17 +9,13 @@
 
     :root {
         font-size: 11pt ;
+        justify-content: start ;
     }
 
-    body > header, body > nav {
+    body > :is(header, nav) {
         display: none ;
     }
 
-    body,
-    body > main,
-    body > footer {
-        display: contents ;
-    }
     :any-link {
         text-decoration: none ;
         color: inherit ;
@@ -43,7 +39,6 @@ figure {
 hr {
     break-before: avoid ;
 }
-
 
 :root {
     widows: 2 ;

@@ -1,6 +1,6 @@
 $root-font-size: $font-size * 1pt ;
 :root {
-    line-height: $lh * $font-size * 1pt ;
+    line-height: $lh * 1rem ;
     font-size: $root-font-size ;
     // Noto Sans aspect ratio :(
     font-size-adjust: 0.536 ;
@@ -12,18 +12,7 @@ $root-font-size: $font-size * 1pt ;
 
 h1,h2,h3,h4,h5,h6 {
     margin-block: 0 ;
-    font-size: scale(1) * 1rem ;
-}
-
-h1 {
-    font-size: scale(3) * 1rem ;
-}
-h2 {
-    font-size: scale(2) * 1rem ;
-}
-
-header {
-    margin-block-start: $line ;
+    font-size: inherit ;
 }
 
 p {
@@ -87,4 +76,20 @@ hr {
     body {
         margin-inline-start: $A4-margin ;
     }
+}
+
+
+main > :is(h3,h4,h5,h6) {
+    font-size: scale(1) * 1rem ;
+}
+
+main > h1 {
+    font-size: scale(3) * 1rem ;
+}
+main > h2 {
+    font-size: scale(2) * 1rem ;
+}
+
+main > header {
+    margin-block-start: $line ;
 }
