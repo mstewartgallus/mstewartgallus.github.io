@@ -1,8 +1,3 @@
-body > header {
-    display: flex ;
-    justify-content: end ;
-}
-
 body {
     position: relative ;
     row-gap: 0 ;
@@ -25,16 +20,10 @@ main {
         display: grid ;
     }
 }
-@media screen and (min-width: $A4-width + 2 * $A4-margin) {
-    body > header  {
-        display: block ;
-    }
-}
 
 body > header  {
     margin: 0;
 }
-
 
 @media (min-width: $A4-width) {
     main :is(menu, ul, ol) {

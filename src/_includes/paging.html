@@ -5,27 +5,15 @@
       <h2 id="paging">Paging</h2>
     </hgroup>
   </header>
-  <div class="paging">
+  <dl>
     {%- if page.previous.url -%}
-    <a href="{{page.previous.url}}" rel="previous">
-      <dl>
-        <dt>Previous</dt>
-        <dd>
-          <cite>{{page.previous.title | escape}}</cite>
-        </dd>
-      </dl>
-    </a>
+    <dt>Previous</dt>
+    <dd><a href="{{page.previous.url}}" rel="previous"><cite>{{page.previous.title | escape}}</cite></a></dd>
     {%- endif -%}
     {%- if page.next.url -%}
-    <a href="{{page.next.url}}" rel="next">
-      <dl>
-        <dt>Next</dt>
-        <dd>
-          <cite>{{page.next.title | escape}}</cite>
-        </dd>
-      </dl>
-    </a>
+    <dt>Next</dt>
+    <dd><a href="{{page.next.url}}" rel="next"><cite>{{page.next.title | escape}}</cite></a></dd>
     {%- endif -%}
-  </div>
+  </dl>
 </nav>
 {%- endif -%}
