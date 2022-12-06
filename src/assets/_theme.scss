@@ -13,10 +13,9 @@
 [itemtype="https://schema.org/BreadcrumbList"] {
     padding: 0 ;
     margin: 0;
-    display: inline ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
-    display: inline ;
+    display: inline-block ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li::before {
     content: "\2003" ;
