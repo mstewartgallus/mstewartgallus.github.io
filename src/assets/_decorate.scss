@@ -1,6 +1,6 @@
 :root {
     // more legible hyperlinks
-    text-underline-position: under ;
+    @include text-underline-position(under) ;
 }
 
 main {

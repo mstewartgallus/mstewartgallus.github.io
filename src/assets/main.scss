@@ -60,11 +60,14 @@ $A4-margin: 1.5in ;
 @mixin hyphens($value) {
     @include prefix(hyphens, $value);
 }
-@mixin font-size-adjust($value) {
-    @include prefix(font-size-adjust, $value);
-}
 @mixin text-size-adjust($value) {
-    @include prefix(text-size-adjust, $value);
+    -moz-text-size-adjust: $value ;
+    -webkit-text-size-adjust: $value ;
+    text-size-adjust: $value ;
+}
+@mixin text-underline-position($value) {
+    -webkit-text-underline-position: $value ;
+    text-underline-position: $value ;
 }
 
 @mixin all-small-caps {
