@@ -16,10 +16,10 @@
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
     display: inline-block ;
-    margin-inline-start: 1em ;
+    margin-inline-end: 1em ;
 }
-[itemtype="https://schema.org/BreadcrumbList"] li:first-of-type {
-    margin-inline-start: 0 ;
+[itemtype="https://schema.org/BreadcrumbList"] li:last-of-type {
+    margin-inline-end: 0 ;
 }
 
 body > :is(nav, footer) :is(header, dl) {
