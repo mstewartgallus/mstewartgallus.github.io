@@ -12,7 +12,7 @@ nav,header,footer,h1,h2,h3,h4,h5,h6 {
     @include hyphens(manual) ;
 }
 
-code, pre, table, li::marker {
+time, code, pre, table, li::marker {
     font-variant-numeric: lining-nums tabular-nums;
 }
 
