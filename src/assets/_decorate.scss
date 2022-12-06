@@ -74,19 +74,18 @@ dt {
 }
 dd {
     display: inline-block ;
+    margin-inline-start: 1em ;
 }
-dd::before {
-    content: "\2002" ;
+dt + dd {
+    margin-inline-start: 0 ;
 }
-dt + dd::before {
-    content: none ;
-}
+// FIXME bad for accessibility
 dt ~ dt::before {
     content: "\a" ;
     white-space: pre ;
 }
-dt::after {
-    content: "\2003" ;
+dt {
+    margin-inline-end: 1em ;
 }
 
 hr {

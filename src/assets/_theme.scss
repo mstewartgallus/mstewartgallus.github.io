@@ -16,12 +16,10 @@
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
     display: inline-block ;
+    margin-inline-start: 1em ;
 }
-[itemtype="https://schema.org/BreadcrumbList"] li::before {
-    content: "\2003" ;
-}
-[itemtype="https://schema.org/BreadcrumbList"] li:first-of-type::before {
-    content: "" ;
+[itemtype="https://schema.org/BreadcrumbList"] li:first-of-type {
+    margin-inline-start: 0 ;
 }
 
 body > :is(nav, footer) :is(header, dl) {
