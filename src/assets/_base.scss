@@ -27,24 +27,16 @@ p {
 }
 figure {
     margin-inline: 0;
-    margin-block: $line ;
 }
 pre {
     margin-block: 0;
 }
-dl {
-    margin-block: $line;
-}
-p {
+hr, figure, dl, p {
     margin-block: $line;
 }
 
 hgroup p:first-of-type {
     margin-block-start: 0 ;
-}
-
-hr {
-    margin-block: $line ;
 }
 
 :root, main, body {
