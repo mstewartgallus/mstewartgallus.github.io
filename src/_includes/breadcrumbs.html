@@ -6,32 +6,37 @@
     </hgroup>
   </header>
   <ol reversed itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
-        ><a rel="bookmark" href="{{ page.url }}"
-            aria-labelledby="title"
-            aria-current="page"
-            itemprop="item"
-            ><span itemprop="name">#</span
-                                      ><meta itemprop="position" content="3"
-                                             ></a
-                                                ></li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
+      <a rel="bookmark" href="{{ page.url }}"
+         aria-labelledby="title"
+         aria-current="page"
+         itemprop="item"
+         >{{- -}}
+        <span itemprop="name">#</span>{{- -}}
+        <meta itemprop="position" content="3">{{- -}}
+      </a>{{- -}}
+    </li>
     {%- if page.categories.size > 0 -%}
     {%- assign categories = page.categories | sort -%}
     {%- assign category = categories | first -%}
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
-        ><a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}" itemprop="item"
-            ><span itemprop="name">{{- category | escape
-          -}}</span><meta itemprop="position" content="2"
-                          ></a
-                             ></li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
+      <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}" itemprop="item">
+        {{- -}}
+        <span itemprop="name">{{- category | escape -}}</span>{{- -}}
+        <meta itemprop="position" content="2">{{- -}}
+      </a>{{- -}}
+    </li>
     {%- endif -%}
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
-        ><a href="{% link index.html %}"
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      {{- -}}
+      <a href="{% link index.html %}"
             aria-labelledby="site-title"
             itemprop="item"
-            ><span itemprop="name">~</span
-                                      ><meta itemprop="position" content="1"></a
-                                                                               ></li>
+         >{{- -}}
+        <span itemprop="name">~</span>{{- -}}
+        <meta itemprop="position" content="1">{{- -}}
+      </a>{{- -}}
+    </li>
   </ol>
 </nav>
 {%- endif -%}

@@ -8,11 +8,11 @@
   <dl>
     {%- if page.previous.url -%}
     <dt><a href="{{page.previous.url}}" rel="previous">Previous Item</a></dt>
-    <dd><cite>{{page.previous.title | escape}}</cite></dd>
+    <dd><cite>{{- page.previous.title | escape -}}</cite></dd>
     {%- endif -%}
     {%- if page.next.url -%}
     <dt><a href="{{page.next.url}}" rel="next">Next Item</a></dt>
-    <dd><cite>{{page.next.title | escape}}</cite></dd>
+    <dd><cite>{{- page.next.title | escape -}}</cite></dd>
     {%- endif -%}
   </dl>
 </nav>
