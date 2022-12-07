@@ -65,14 +65,14 @@ hgroup p:first-of-type {
 }
 
 main :is(h3,h4,h5,h6) {
-    font-size: scale(1) * 1rem ;
+    font-size: inherit ;
 }
 
 main h1 {
-    font-size: scale(3) * 1rem ;
+    font-size: scale(2) * 1rem ;
 }
 main h2 {
-    font-size: scale(2) * 1rem ;
+    font-size: scale(1) * 1rem ;
 }
 
 main header {
