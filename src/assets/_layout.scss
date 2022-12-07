@@ -16,19 +16,7 @@
 
     @media (min-width: $A4-width + 2 * $A4-margin) {
         body {
-            inline-size: unset ;
             display: grid ;
         }
-    }
-
-    body > header {
-        margin-block-start: $line ;
-    }
-}
-
-@media (min-width: $A4-width) {
-    main :is(menu, ul, ol) {
-        margin-inline-start: -2em ;
-        margin-inline-end:  -2em ;
     }
 }

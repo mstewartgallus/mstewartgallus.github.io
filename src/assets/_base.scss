@@ -15,7 +15,6 @@ $div: 16 * (($root-max-font-size - $root-min-font-size) * 1px) / (($max-width - 
     }
 
     :root {
- // " - " $div-width
         font-size: #{"calc(" $root-min-font-size " + " $div " * (100vw -" $min-width "))"};
     }
 
@@ -87,39 +86,52 @@ main header {
 
 @media screen {
     :root {
-        width: 100vw ;
         display: flex ;
         justify-content: center ;
+        padding-inline: 0.9ch ;
+        padding-block-end: 3 * $line ;
     }
 
     body {
+        box-sizing: border-box ;
         inline-size: fit-content ;
         max-inline-size: 100% ;
-        margin-block-end: 3 * $line ;
     }
 
     main {
+        box-sizing: border-box ;
         inline-size: $main-width ;
         max-inline-size: 100% ;
     }
-}
 
-@media only screen and (max-width: $A4-width) {
-    body {
-        box-sizing: border-box ;
-        padding-inline: 0.9ch ;
-    }
-}
-@media only screen and (min-width: $A4-width) {
-    body {
+    body > header {
         margin-block-start: $line ;
     }
 }
-@media only screen and (min-width: $A4-width + 3 * $A4-margin) {
+
+@media only screen and (min-width: $main-width) {
+    :root {
+        padding-block-start: $line ;
+    }
+}
+
+@media only screen and (min-width: $main-width) {
+    :root {
+        padding-inline-start: 2rem;
+    }
+    main :is(menu, ul, ol) {
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width: $A4-width + 2 * $A4-margin) {
     :root {
         justify-content: start ;
     }
-    body {
-        margin-inline-start: $A4-margin ;
+}
+
+@media only screen and (min-width: $A4-width + 3 * $A4-margin) {
+    :root {
+        padding-inline-start: $A4-margin ;
     }
 }
