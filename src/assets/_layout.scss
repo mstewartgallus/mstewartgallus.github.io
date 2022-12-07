@@ -3,7 +3,7 @@
         column-gap: 1ch ;
     }
 
-    @media (min-width: $A4-width + 2 * $A4-margin) {
+    @media (min-width: $A4-width + 3 * $A4-margin) {
         body {
             display: flex ;
         }
