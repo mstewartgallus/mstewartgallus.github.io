@@ -5,7 +5,7 @@
 $max-font-size: 24 ;
 $min-font-size: 18 ;
 
-$scale: 4/3 ;
+$scale: 1.41421356237 ;
 
 $sc: (
     -3: 1/($scale * $scale * $scale),
@@ -24,7 +24,7 @@ $sc: (
 }
 
 
-$lh: 1.5 ;
+$lh: 1.41421356237 ;
 $line: $lh * 1rem ;
 $paragraph-width: 50.3ch ;
 $main-width: 67.3ch ;
