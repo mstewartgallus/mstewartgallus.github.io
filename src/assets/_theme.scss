@@ -13,13 +13,12 @@
 [itemtype="https://schema.org/BreadcrumbList"] {
     padding: 0 ;
     margin: 0;
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1em ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
-    display: inline-block ;
-    margin-inline-end: 1em ;
-}
-[itemtype="https://schema.org/BreadcrumbList"] li:last-of-type {
-    margin-inline-end: 0 ;
+    display: block ;
 }
 
 body > :is(nav, footer) :is(header, dl) {
