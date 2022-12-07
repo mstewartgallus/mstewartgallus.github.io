@@ -93,3 +93,12 @@ hgroup > p {
         transition: color 0.1s, background-color 0.1s ;
     }
 }
+
+figcaption {
+    position: sticky ;
+    left: 0 ;
+}
+figure {
+    position: relative ;
+    overflow: auto ;
+}
