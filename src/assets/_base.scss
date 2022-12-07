@@ -5,10 +5,10 @@ $root-max-font-size: ($max-font-size / 16) * 1rem ;
 @media screen {
     :root {
         font-size: $root-avg-font-size ;
-        // FIXME
-        font-size: clamp($root-min-font-size, 4vw, $root-max-font-size);
+        font-size: clamp($root-min-font-size, #{"4vw + 1rem"}, $root-max-font-size);
     }
 }
+
 
 :root {
     line-height: $lh * 1rem ;
