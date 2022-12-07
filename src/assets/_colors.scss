@@ -5,9 +5,16 @@
 @media (prefers-color-scheme: dark) {
     :root {
         background: #242526 ;
-        color: #d3e0e3 ;
+        color: #c3d0d3 ;
     }
-    body > details {
-        background: #242526 ;
+}
+
+h1 {
+    color: #D04040 ;
+}
+
+@media (prefers-color-scheme: dark) {
+    h1 {
+        color: #E04040 ;
     }
 }

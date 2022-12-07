@@ -85,16 +85,6 @@ hgroup > p {
     font-style: italic;
 }
 
-// FIXME awkward
-main > div > p:first-of-type::first-letter {
-    font-size: scale(1) * 1em;
-    font-weight: bold ;
-}
-
-main > div > p:first-of-type::first-line {
-    font-style: italic ;
-}
-
 @media (prefers-reduced-motion: no-preference) {
     :root {
         scroll-behavior: smooth ;
