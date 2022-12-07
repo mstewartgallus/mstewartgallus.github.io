@@ -5,41 +5,53 @@ permalink: /about/
 ---
 <div itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
   <p>My pen name is <span translate="no">Molossus Spondee</span>. This
-  is my personal blog mostly for posting silly poetry.</p>
+    is my personal blog mostly for posting silly poetry.</p>
   <p>I guess right now I'm just working on my portfolio.</p>
 
   <address>
     <dl>
-      <dt>About</dt>
-      <dd>
-        <a rel="author me" href="{% link about.html %}">@<span translate="no" itemProp="name">Molossus Spondee</span></a>
-      </dd>
-      <dt translate="no">Mastodon</dt>
-      <dd>
-        <a rel="me" itemProp="sameAs" href="https://mastodon.lol/@MSpondee" translate="no">@MSpondee@mastodon.lol</a>
-      </dd>
-      <dt translate="no">Twitter</dt>
-      <dd>
-        <a translate="no" rel="me" itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
-          @{{- site.twitter.username | escape -}}
-        </a>
-      </dd>
-      <dt>Email</dt>
-      <dd>
-        <a translate="no" rel="me" itemprop="email" href="mailto:{{site.email}}">{{- site.email -}}</a>
-      </dd>
-      <dt translate="no">GitHub</dt>
-      <dd>
-        <a translate="no" rel="me" itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
-          {{- site.github | escape -}}
-        </a>
-      </dd>
-      <dt translate="no">LinkedIn</dt>
-      <dd>
-        <a translate="no" rel="me" itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
-          {{- site.linkedin | escape -}}
-        </a>
-      </dd>
+      <div>
+        <dt>About</dt>
+        <dd>
+          <a rel="author me" href="{% link about.html %}">@<span translate="no" itemProp="name">Molossus Spondee</span></a>
+        </dd>
+      </div>
+      <div>
+        <dt translate="no">Mastodon</dt>
+        <dd>
+          <a rel="me" itemProp="sameAs" href="https://mastodon.lol/@MSpondee" translate="no">@MSpondee@mastodon.lol</a>
+        </dd>
+      </div>
+      <div>
+        <dt translate="no">Twitter</dt>
+        <dd>
+          <a translate="no" rel="me" itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">
+            @{{- site.twitter.username | escape -}}
+          </a>
+        </dd>
+      </div>
+      <div>
+        <dt>Email</dt>
+        <dd>
+          <a translate="no" rel="me" itemprop="email" href="mailto:{{site.email}}">{{- site.email -}}</a>
+        </dd>
+      </div>
+      <div>
+        <dt translate="no">GitHub</dt>
+        <dd>
+          <a translate="no" rel="me" itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">
+            {{- site.github | escape -}}
+          </a>
+        </dd>
+      </div>
+      <div>
+        <dt translate="no">LinkedIn</dt>
+        <dd>
+          <a translate="no" rel="me" itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">
+            {{- site.linkedin | escape -}}
+          </a>
+        </dd>
+      </div>
     </dl>
   </address>
 </div>
