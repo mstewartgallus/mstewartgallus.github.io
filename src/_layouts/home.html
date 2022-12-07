@@ -34,7 +34,7 @@ layout: page
     </hgroup>
   </header>
 
-  <ol reversed>
+  <ol reversed start="{{ site.posts | size }}">
     {%- for post in site.posts %}
     <li>
       <ins
