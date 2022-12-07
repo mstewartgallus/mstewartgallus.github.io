@@ -117,7 +117,7 @@ hgroup p {
 }
 
 @media only screen and (min-width: $main-width + 8ch) {
-    main {
+    body {
         margin-inline-start: 2rem;
     }
     main :is(menu, ul, ol) {
