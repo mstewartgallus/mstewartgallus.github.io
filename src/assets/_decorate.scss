@@ -7,6 +7,7 @@
     font-variant-numeric: proportional-nums oldstyle-nums ;
     @include hyphens(auto) ;
 }
+
 header,h1,h2,h3,h4,h5,h6 {
     font-variant-numeric: proportional-nums lining-nums ;
     @include hyphens(manual) ;

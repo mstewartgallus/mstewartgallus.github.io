@@ -53,15 +53,9 @@ p {
 figure {
     margin-inline: 0;
 }
-pre {
-    margin-block: 0;
-}
-hr, figure, dl, p {
-    margin-block: $line;
-}
 
-hgroup p:first-of-type {
-    margin-block-start: 0 ;
+pre, hr, figure, dl, p, dl {
+    margin-block: 0 ;
 }
 
 main :is(h3,h4,h5,h6) {
@@ -75,8 +69,12 @@ main h2 {
     font-size: scale(1) * 1rem ;
 }
 
-main header {
+main :is(figure, header, dl, p) {
     margin-block: $line ;
+}
+
+hgroup p {
+    margin-block: 0 ;
 }
 
 :root, main, body {
@@ -98,14 +96,14 @@ main header {
         max-inline-size: 100% ;
     }
 
+    body > * {
+        margin-block: $line ;
+    }
+
     main {
         box-sizing: border-box ;
         inline-size: $main-width ;
         max-inline-size: 100% ;
-    }
-
-    body > header {
-        margin-block-start: $line ;
     }
 }
 
