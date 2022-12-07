@@ -47,7 +47,7 @@ module Kramdown
         if id != nil
         then
           text = Element.new :text
-          text.value = '#'
+          text.value = '§'
 
           a = Element.new :a, nil, {
                             'href' => '#' + id,
