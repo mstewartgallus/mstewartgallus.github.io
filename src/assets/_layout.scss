@@ -1,22 +1,14 @@
 @media screen {
     body {
-        row-gap: 0 ;
         column-gap: 1ch ;
-        grid-auto-flow: dense ;
-        grid-template-columns: [main] auto [aside] auto ;
-        grid-template-rows: auto auto auto 1fr ;
-    }
-    body > * {
-        grid-column: aside;
-    }
-    main {
-        grid-column: main;
-        grid-row: span 5 ;
     }
 
     @media (min-width: $A4-width + 2 * $A4-margin) {
         body {
-            display: grid ;
+            display: flex ;
+        }
+        #side {
+            display: block ;
         }
     }
 }

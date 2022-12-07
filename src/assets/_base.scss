@@ -96,8 +96,11 @@ hgroup p {
         max-inline-size: 100% ;
     }
 
-    body > * {
+    #side > * {
         margin-block: $line ;
+    }
+    #side {
+        display: contents ;
     }
 
     main {
@@ -113,7 +116,7 @@ hgroup p {
     }
 }
 
-@media only screen and (min-width: $main-width) {
+@media only screen and (min-width: $main-width + 3ch) {
     :root {
         padding-inline-start: 2rem;
     }
