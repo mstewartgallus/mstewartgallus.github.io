@@ -1,8 +1,12 @@
-$root-font-size: $font-size * 1pt ;
+$root-min-font-size: ($min-font-size / 16) * 1rem ;
+$root-avg-font-size: (($min-font-size + $max-font-size) * 0.5rem) / 16 ;
+$root-max-font-size: ($max-font-size / 16) * 1rem ;
 
 @media screen {
     :root {
-        font-size: $root-font-size ;
+        font-size: $root-avg-font-size ;
+        // FIXME
+        font-size: clamp($root-min-font-size, 4vw, $root-max-font-size);
     }
 }
 
@@ -39,6 +43,21 @@ hgroup p:first-of-type {
     margin-block-start: 0 ;
 }
 
+main :is(h3,h4,h5,h6) {
+    font-size: scale(1) * 1rem ;
+}
+
+main h1 {
+    font-size: scale(3) * 1rem ;
+}
+main h2 {
+    font-size: scale(2) * 1rem ;
+}
+
+main header {
+    margin-block: $line ;
+}
+
 :root, main, body {
     padding: 0 ;
     margin: 0 ;
@@ -46,14 +65,20 @@ hgroup p:first-of-type {
 
 @media screen {
     :root {
+        width: 100vw ;
         display: flex ;
         justify-content: center ;
     }
 
     body {
-        inline-size: $main-width ;
+        inline-size: fit-content ;
         max-inline-size: 100% ;
         margin-block-end: 3 * $line ;
+    }
+
+    main {
+        inline-size: $main-width ;
+        max-inline-size: 100% ;
     }
 }
 
@@ -75,20 +100,4 @@ hgroup p:first-of-type {
     body {
         margin-inline-start: $A4-margin ;
     }
-}
-
-
-main :is(h3,h4,h5,h6) {
-    font-size: scale(1) * 1rem ;
-}
-
-main h1 {
-    font-size: scale(3) * 1rem ;
-}
-main h2 {
-    font-size: scale(2) * 1rem ;
-}
-
-main header {
-    margin-block: $line ;
 }

@@ -3,7 +3,7 @@
         row-gap: 0 ;
         column-gap: 1ch ;
         grid-auto-flow: dense ;
-        grid-template-columns: [main] $main-width [aside] $aside ;
+        grid-template-columns: [main] auto [aside] auto ;
         grid-template-rows: auto auto auto 1fr ;
     }
     body > * {
