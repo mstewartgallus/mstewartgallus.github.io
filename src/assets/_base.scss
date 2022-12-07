@@ -1,11 +1,11 @@
-$root-min-font-size: ($min-font-size / 16) * 1rem ;
 $root-avg-font-size: (($min-font-size + $max-font-size) * 0.5rem) / 16 ;
-$root-max-font-size: ($max-font-size / 16) * 1rem ;
+$root-min-font-size: ($min-font-size / 16) * 1em ;
+$root-max-font-size: ($max-font-size / 16) * 1em ;
 
 @media screen {
     :root {
         font-size: $root-avg-font-size ;
-        font-size: clamp($root-min-font-size, #{"4vw + 1rem"}, $root-max-font-size);
+        font-size: clamp($root-min-font-size, #{"4vw + 1em"}, $root-max-font-size);
     }
 }
 
