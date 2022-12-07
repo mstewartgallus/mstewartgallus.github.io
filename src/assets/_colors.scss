@@ -2,19 +2,26 @@
     :root { color-scheme: light dark ; }
 }
 
+// black/pink and dark green/yellow is most legible ?
+// Ensuring color legibility, T. H. Nilsson
+// https://files.upei.ca/arts/psychology/nilsson_color.pdf
+:root {
+    background: #fff2f7 ;
+    color: #232640 ;
+}
 @media (prefers-color-scheme: dark) {
     :root {
-        background: #242526 ;
-        color: #c3d0d3 ;
+        background: #191c19 ;
+        color: #b1a9a1 ;
     }
 }
 
 h1 {
-    color: #D04040 ;
+     color: #A02030 ;
 }
 
 @media (prefers-color-scheme: dark) {
     h1 {
-        color: #E04040 ;
+        color: #C07070 ;
     }
 }
