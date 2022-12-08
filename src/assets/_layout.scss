@@ -10,7 +10,8 @@
         margin-block-start: 0 ;
     }
     #side {
-        max-inline-size: 30ch ;
+        inline-size: 30ch ;
+        max-inline-size: 100% ;
     }
     #side > :first-child {
         margin-block-start: 0 ;
