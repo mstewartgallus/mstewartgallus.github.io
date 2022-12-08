@@ -114,11 +114,11 @@ function render(template, posts) {
         const date = post.get("date");
         const url = post.get("url");
 
-        const keywords = [];
+        const cat = document.createElement("div");
         if (post.get("categories").length !== 0) {
             const listEntry = document.createElement("dt");
             listEntry.textContent = "Category";
-            keywords.push(listEntry);
+            cat.append(listEntry);
         }
         for (const category of post.get("categories")) {
             const params = new URLSearchParams();
@@ -130,12 +130,15 @@ function render(template, posts) {
 
             const listEntry = document.createElement("dd");
             listEntry.append(anchor);
-            keywords.push(listEntry);
+            cat.append(listEntry);
         }
+
+
+        const tagel = document.createElement("div");
         if (post.get("tags").length !== 0) {
             const listEntry = document.createElement("dt");
             listEntry.textContent = "Tag";
-            keywords.push(listEntry);
+            tagel.append(listEntry);
         }
         for (const tag of post.get("tags")) {
             const params = new URLSearchParams();
@@ -147,14 +150,14 @@ function render(template, posts) {
 
             const listEntry = document.createElement("dd");
             listEntry.append(anchor);
-            keywords.push(listEntry);
+            tagel.append(listEntry);
         }
 
         const clone = template.cloneNode(true);
         clone.querySelector(".search-title").textContent = title;
         clone.querySelector(".search-url").href = url;
         clone.querySelector(".search-date").textContent = date;
-        clone.querySelector(".search-keywords").append(...keywords);
+        clone.querySelector(".search-keywords").append(cat, tagel);
         return clone;
     });
 
