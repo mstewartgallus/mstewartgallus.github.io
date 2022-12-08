@@ -71,7 +71,7 @@ main h2 {
     font-size: scale(1) * 1rem ;
 }
 
-main :is(figure, header, dl, p) {
+main :is(figure, header, p) {
     margin-block: $line ;
 }
 
@@ -109,7 +109,7 @@ main :is(header, figcaption) {
         max-inline-size: 100% ;
     }
 
-    #side > * {
+    #sidebar > * {
         margin-block: $line ;
     }
 
@@ -134,6 +134,6 @@ main :is(header, figcaption) {
     }
 }
 
-main :is(menu, ul, ol) {
+main :is(ul, ol) {
     padding-inline-start: #{"min((" $main-width + 5ch ") - 100vw, " 2rem ")"} ;
 }

@@ -10,14 +10,14 @@
     main > :first-child {
         margin-block-start: 0 ;
     }
-    #side {
+    #sidebar {
         inline-size: $side-width ;
         max-inline-size: 100% ;
     }
-    #side > :first-child {
+    #sidebar > :first-child {
         margin-block-start: 0 ;
     }
-    #side > :last-child {
+    #sidebar > :last-child {
         margin-block-end: 0 ;
     }
 }

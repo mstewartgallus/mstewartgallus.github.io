@@ -50,7 +50,7 @@ table {
   suffix: "\2003";
 }
 
-ul, ol, menu {
+ul, ol {
     margin-block: $line ;
 }
 
@@ -58,11 +58,11 @@ ol {
     list-style-type: nodot ;
 }
 
-menu, ul {
+ul {
     list-style-type: bullet ;
 }
 
-menu, ul, ol {
+ul, ol {
     padding-inline-start: 2em ;
 }
 
@@ -70,7 +70,7 @@ li::marker {
     font-weight: bold ;
 }
 
-dt, dd {
+dl, dt, dd {
     margin: 0 ;
 }
 

@@ -1,8 +1,15 @@
+{%- if page.url == '/search/' -%}
 {%- assign categories = site.categories | sort -%}
 {%- assign tags = site.tags | sort -%}
-<form aria-describedby="title"
-      id="search" rel="search" role="search" name="search-form" method="get"
+
+<form id="search" rel="search" role="search" name="search-form" method="get"
       action="{% link search.html %}">
+  <header>
+    <hgroup>
+      <h2>Search</h2>
+    </hgroup>
+  </header>
+
   <label for="category">Category</label>
   <select id="category" name="category" multiple="multiple" size="2">
     {%- for category in categories -%}
@@ -23,7 +30,6 @@
     <li><button type="submit">Search</button></li>
     <li><button type="reset">Reset</button></li>
   </menu>
-
-  <output id="search-output" aria-live="polite" aria-busy="true">
-  </output>
 </form>
+
+{%- endif -%}

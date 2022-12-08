@@ -48,7 +48,8 @@ itemprop="articleBody"
         {{- content -}}
       </div>
     </main>
-    <div id="side">
+    <div id="sidebar">
+      {%- include search.html -%}
       {%- include paging.html -%}
       {%- include breadcrumbs.html -%}
       {%- include metadata.html -%}

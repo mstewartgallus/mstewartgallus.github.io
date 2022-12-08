@@ -1,8 +1,6 @@
 ---
 layout: page
 ---
-{%- assign categories = site.categories | sort -%}
-{%- assign tags = site.tags | sort -%}
 <meta name="robots" content="noindex">
 <link href="{% link assets/search.json %}"
       rel="preload" as="fetch"
@@ -31,4 +29,5 @@ layout: page
 
 {{- content -}}
 
-{%- include search.html -%}
+<output for="search" id="search-output" aria-live="polite" aria-busy="true">
+</output>

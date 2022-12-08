@@ -1,5 +1,4 @@
-{%- assign date_format = "%Y-%m-%d" -%}
-{%- if page.collection == 'posts' -%}
+{%- if page.date -%}
 <footer id="metadata" aria-describedby="metadata-title">
   <hgroup>
     <h2 id="metadata-title">Metadata</h2>
@@ -23,11 +22,11 @@
       </dd>
     </div>
     <div>
-      <dt>Posted</dt>
+      <dt>Post Date</dt>
       <dd>
         {{- -}}
         <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished pubdate">
-          {{- page.date | date: date_format -}}
+          {{- page.date | date: "%Y-%m-D" -}}
         </time>
         {{- -}}
       </dd>

@@ -1,8 +1,8 @@
 {%- assign pages = site.html_pages | where: "sitemap", nil | sort: "title" -%}
-<nav aria-labelledby="pages">
+<nav id="pages" aria-labelledby="pages-title">
   <header>
     <hgroup>
-      <h2 id="pages">Pages</h2>
+      <h2 id="pages-title">Pages</h2>
     </hgroup>
   </header>
   <ul>
