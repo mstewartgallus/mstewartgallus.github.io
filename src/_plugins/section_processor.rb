@@ -51,7 +51,7 @@ module Kramdown
 
           a = Element.new :a, nil, {
                             'href' => '#' + id,
-                            'aria-details' => id,
+                            'aria-describedby' => id,
                             'rel' => 'bookmark'}
           a.children = [text]
 

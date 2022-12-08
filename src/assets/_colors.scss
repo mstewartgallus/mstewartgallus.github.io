@@ -11,17 +11,17 @@
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        background: #191c19 ;
+        background: #192019 ;
         color: #d0c9b0 ;
     }
 }
 
-h1,h2,h3,h4,h5,h6,figcaption {
+h1,h2,h3,h4,h5,h6,figcaption, li::marker {
      color: #A02030 ;
 }
 
 @media (prefers-color-scheme: dark) {
-    h1,h2,h3,h4,h5,h6,figcaption {
-        color: #C07070 ;
+    h1,h2,h3,h4,h5,h6,figcaption, li::marker {
+        color: #E07070 ;
     }
 }
