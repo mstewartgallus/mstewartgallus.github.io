@@ -8,22 +8,12 @@
     margin: 0;
     display: flex ;
     flex-wrap: wrap ;
-    column-gap: 1em ;
+    column-gap: 1ch ;
     inline-size: $paragraph-width ;
     max-inline-size: 100% ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
     all: unset ;
-}
-
-// FIXME ask around if decorations help
-hr {
-    all: unset ;
-    margin-block: $line ;
-    display: flex ;
-    justify-content: center ;
-    inline-size: $paragraph-width ;
-    max-inline-size: 100% ;
 }
 
 [itemtype="https://schema.org/BreadcrumbList"] li {
@@ -34,7 +24,7 @@ hr {
     display: block ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li::marker {
-    content: "→\2003";
+    content: "→\2002";
 }
 
 :is(#paging, #breadcrumbs) header,
