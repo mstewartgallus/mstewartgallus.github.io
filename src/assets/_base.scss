@@ -126,7 +126,7 @@ main :is(header, figcaption) {
 
     :root {
         padding-inline-start: 0.9ch ;
-        padding-inline-start: #{"clamp(0.9ch, 100vw - (" $A4-width + 2 * $A4-margin "), 3rem)"} ;
+        padding-inline-start: #{"clamp(0.9ch, 100vw - (" $main-width + 20ch "), 3rem)"} ;
     }
 
     :root {
@@ -134,11 +134,10 @@ main :is(header, figcaption) {
     }
 }
 
-@media only screen and (min-width: $main-width + 28ch) {
-    main :is(menu, ul, ol) {
-        padding: 0;
-    }
+main :is(menu, ul, ol) {
+    padding-inline-start: #{"min((" $main-width + 12ch ") - 100vw, " 2rem ")"} ;
 }
+
 // FIXME use a different break point
 @media only screen and (min-width: $A4-width + 2 * $A4-margin) {
     :root {
