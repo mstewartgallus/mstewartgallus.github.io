@@ -3,17 +3,10 @@ layout: page
 ---
 {%- assign categories = site.categories | sort -%}
 {%- assign tags = site.tags | sort -%}
-<script type="module" defer async
-        src="{% link assets/search.mjs %}?output=search-output&template=search-result"
-        ></script>
-
-{{- content -}}
-
 <meta name="robots" content="noindex">
 <link href="{% link assets/search.json %}"
       rel="preload" as="fetch"
       type="application/json" crossorigin>
-
 <template id="search-result">
   <li>
     <a class="search-url">
@@ -32,31 +25,10 @@ layout: page
     </dl>
   </li>
 </template>
+<script type="module" defer async
+        src="{% link assets/search.mjs %}?output=search-output&template=search-result"
+        ></script>
 
-<form aria-describedby="title"
-      id="search" rel="search" role="search" name="search-form" method="get"
-      action="{% link search.html %}">
-  <label for="category">Category</label>
-  <select id="category" name="category" multiple="multiple" size="2">
-    {%- for category in categories -%}
-    {%- assign cat = category[0] | escape -%}
-    <option value="{{ cat }}">{{- cat -}}</option>
-    {%- endfor -%}
-  </select>
+{{- content -}}
 
-  <label for="tag">Tag</label>
-  <select id="tag" name="tag" multiple="multiple" size="5">
-    {%- for tag in tags -%}
-    {%- assign tg = tag[0] | escape -%}
-    <option value="{{ tg }}">{{- tg -}}</option>
-    {%- endfor -%}
-  </select>
-
-  <menu>
-    <li><button type="submit">Search</button></li>
-    <li><button type="reset">Reset</button></li>
-  </menu>
-</form>
-
-<output for="search" id="search-output" aria-live="polite" aria-busy="true">
-</output>
+{%- include search.html -%}

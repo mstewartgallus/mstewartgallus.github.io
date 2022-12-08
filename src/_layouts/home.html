@@ -5,54 +5,5 @@ layout: page
 
 {{- content -}}
 
-<nav aria-labelledby="pages">
-  <header>
-    <hgroup>
-      <h2 id="pages">Pages</h2>
-    </hgroup>
-  </header>
-  <ul>
-    {%- for page in pages %}
-    {%- if page.name != 'index.html' -%}
-    <li
-      itemprop="hasPart"
-      itemscope
-      itemtype="http://schema.org/WebPage"
-      itemid="{{ page.url | absolute_url }}">
-      <a itemprop="url" href="{{ page.url | relative_url }}">
-        <span itemprop="name headline">{{- page.title | default: page.url | escape -}}</span>
-      </a>
-    </li>
-    {%- endif -%}
-    {%- endfor -%}
-  </ul>
-</nav>
-
-{%- if site.posts.size > 0 -%}
-<nav aria-labelledby="posts">
-  <header>
-    <hgroup>
-      <h2 id="posts">Posts</h2>
-    </hgroup>
-  </header>
-
-  <ol reversed start="{{ site.posts | size }}">
-    {%- for post in site.posts %}
-    <li>
-      <ins
-        datetime="{{ post.date | date_to_xmlschema }}"
-        itemprop="hasPart blogPost"
-        itemscope
-        itemtype="http://schema.org/BlogPosting"
-        itemid="{{ post.url | absolute_url }}">
-        <a itemprop="url" href="{{ post.url | relative_url }}">
-          <span itemprop="name headline">
-            {{- post.title | escape -}}
-          </span>
-        </a>
-      </ins>
-    </li>
-    {%- endfor -%}
-  </ol>
-</nav>
-{%- endif -%}
+{%- include pages.html -%}
+{%- include posts.html -%}

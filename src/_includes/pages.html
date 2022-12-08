@@ -1,0 +1,23 @@
+{%- assign pages = site.html_pages | where: "sitemap", nil | sort: "title" -%}
+<nav aria-labelledby="pages">
+  <header>
+    <hgroup>
+      <h2 id="pages">Pages</h2>
+    </hgroup>
+  </header>
+  <ul>
+    {%- for page in pages %}
+    {%- if page.name != 'index.html' -%}
+    <li
+      itemprop="hasPart"
+      itemscope
+      itemtype="http://schema.org/WebPage"
+      itemid="{{ page.url | absolute_url }}">
+      <a itemprop="url" href="{{ page.url | relative_url }}">
+        <span itemprop="name headline">{{- page.title | default: page.url | escape -}}</span>
+      </a>
+    </li>
+    {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</nav>

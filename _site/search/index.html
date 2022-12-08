@@ -32,13 +32,10 @@
         <hgroup>
           <h1 id="title" itemprop="name headline title">Search</h1></hgroup>
       </header>
-      <div itemprop="articleBody"><script type="module" defer async
-        src="/assets/search.mjs?output=search-output&template=search-result"
-        ></script><meta name="robots" content="noindex">
+      <div itemprop="articleBody"><meta name="robots" content="noindex">
 <link href="/assets/search.json"
       rel="preload" as="fetch"
       type="application/json" crossorigin>
-
 <template id="search-result">
   <li>
     <a class="search-url">
@@ -57,8 +54,9 @@
     </dl>
   </li>
 </template>
-
-<form aria-describedby="title"
+<script type="module" defer async
+        src="/assets/search.mjs?output=search-output&template=search-result"
+        ></script><form aria-describedby="title"
       id="search" rel="search" role="search" name="search-form" method="get"
       action="/search/">
   <label for="category">Category</label>
@@ -71,10 +69,10 @@
     <li><button type="submit">Search</button></li>
     <li><button type="reset">Reset</button></li>
   </menu>
-</form>
 
-<output for="search" id="search-output" aria-live="polite" aria-busy="true">
-</output>
+  <output id="search-output" aria-live="polite" aria-busy="true">
+  </output>
+</form>
 </div>
     </main>
     <div id="side"><header translate="no"><a href="/"
