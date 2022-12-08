@@ -68,12 +68,13 @@ $A4-margin: 1.5in ;
 }
 @mixin sr-only {
     :not(:focus-within) {
-        position:absolute;
-        left:-10000px;
-        top:auto;
-        width:1px;
-        height:1px;
-        overflow:hidden;
+        position: absolute !important ;
+        left: -10000px !important ;
+        top: auto !important ;
+        width: 1px !important ;
+        height: 1px !important ;
+        clip-path: polygon(0px 0px, 0px 0px, 0px 0px) !important ;
+        overflow: hidden !important ;
     }
 }
 
