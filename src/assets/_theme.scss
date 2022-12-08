@@ -9,6 +9,8 @@
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 1em ;
+    inline-size: $paragraph-width ;
+    max-inline-size: 100% ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
     all: unset ;
