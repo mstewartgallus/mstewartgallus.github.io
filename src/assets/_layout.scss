@@ -5,6 +5,9 @@
         flex-wrap: wrap ;
     }
 
+    main > :first-child {
+        margin-block-start: 0 ;
+    }
     #side {
         max-width: 40ch ;
     }
