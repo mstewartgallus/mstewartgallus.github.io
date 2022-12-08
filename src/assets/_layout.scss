@@ -1,14 +1,17 @@
 @media screen {
     body {
         column-gap: 1ch ;
+        display: flex ;
+        flex-wrap: wrap ;
     }
 
-    @media (min-width: $A4-width + 3 * $A4-margin) {
-        body {
-            display: flex ;
-        }
-        #side {
-            display: block ;
-        }
+    #side {
+        max-width: 40ch ;
+    }
+    #side > :first-child {
+        margin-block-start: 0 ;
+    }
+    #side > :last-child {
+        margin-block-end: 0 ;
     }
 }

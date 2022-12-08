@@ -5,7 +5,13 @@
 $max-font-size: 24 ;
 $min-font-size: 19 ;
 
-$scale: 5/4 ;
+// Noto Sans aspect ratio :(
+$ex-height: 0.536 ;
+
+$scale: 4/3 ;
+
+$paragraph-width: 59.7ch ;
+$main-width: 67.3ch ;
 
 $sc: (
     -3: 1/($scale * $scale * $scale),
@@ -23,29 +29,10 @@ $sc: (
     @return map-get($sc, $n) ;
 }
 
-
-$lh: 1.41421356237 ;
-$line: $lh * 1rem ;
-$paragraph-width: 50.3ch ;
-$main-width: 67.3ch ;
-
-$min-margin: 3.1ch ;
-$aside: 14.9rem ;
-
-$col: 1ch ;
-$col2: 2 * $col ;
-$col3: 3 * $col ;
-$col4: 4 * $col ;
-$col5: 5 * $col ;
-$col6: 6 * $col ;
-$col7: 7 * $col ;
-$col8: 8 * $col ;
-
-$line2: 2 * $line ;
-$line3: 3 * $line ;
-$halfline: 0.5 * $line ;
-$lineandhalf: 1.5 * $line ;
-$doubleline: 2 * $line ;
+// Compute legible line height in terms of rems
+// https://www.smashingmagazine.com/2020/07/css-techniques-legibility/
+$lh: (1ex / 0.32) ;
+$line: ($ex-height * $lh * 1rem) /  1ex ;
 
 $A4-width: 8.3in ;
 $A4-margin: 1.5in ;

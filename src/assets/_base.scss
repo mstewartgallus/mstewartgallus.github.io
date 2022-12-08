@@ -32,9 +32,8 @@ $div: 16 * (($root-max-font-size - $root-min-font-size) * 1px) / (($max-width - 
 
 
 :root {
-    line-height: $lh * 1rem ;
-    // Noto Sans aspect ratio :(
-    font-size-adjust: 0.536 ;
+    line-height: $line ;
+    font-size-adjust: $ex-height ;
 }
 
 :root {
@@ -99,9 +98,6 @@ hgroup p {
     #side > * {
         margin-block: $line ;
     }
-    #side {
-        display: contents ;
-    }
 
     main {
         box-sizing: border-box ;
@@ -125,9 +121,10 @@ hgroup p {
     }
 }
 
+// FIXME use a different break point
 @media only screen and (min-width: $A4-width + 3 * $A4-margin) {
     :root {
         justify-content: start ;
-        padding-inline-start: $A4-margin ;
+        padding-inline-start: 4rem ;
     }
 }
