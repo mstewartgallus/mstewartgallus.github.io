@@ -7,7 +7,9 @@
   </header>
   <ul>
     {%- for page in pages %}
-    {%- if page.name != 'index.html' -%}
+    {%- if page.url == '/' -%}
+    {%- continue -%}
+    {%- endif -%}
     <li
       itemprop="hasPart"
       itemscope
@@ -17,7 +19,6 @@
         <span itemprop="name headline">{{- page.title | default: page.url | escape -}}</span>
       </a>
     </li>
-    {%- endif -%}
     {%- endfor -%}
   </ul>
 </nav>
