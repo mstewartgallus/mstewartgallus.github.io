@@ -66,6 +66,10 @@ menu, ul, ol {
     padding-inline-start: 2em ;
 }
 
+li::marker {
+    font-weight: bold ;
+}
+
 dt, dd {
     margin: 0 ;
 }
