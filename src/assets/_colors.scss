@@ -12,16 +12,16 @@
 @media (prefers-color-scheme: dark) {
     :root {
         background: #191c19 ;
-        color: #c0b0a8 ;
+        color: #d0c9b0 ;
     }
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6,figcaption {
      color: #A02030 ;
 }
 
 @media (prefers-color-scheme: dark) {
-    h1,h2,h3,h4,h5,h6 {
+    h1,h2,h3,h4,h5,h6,figcaption {
         color: #C07070 ;
     }
 }
