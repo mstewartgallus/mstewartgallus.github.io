@@ -11,7 +11,7 @@
         margin-block-start: 0 ;
     }
     #side {
-        inline-size: 30ch ;
+        inline-size: $side-width ;
         max-inline-size: 100% ;
     }
     #side > :first-child {
