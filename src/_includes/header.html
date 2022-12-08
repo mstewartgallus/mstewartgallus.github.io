@@ -1,8 +1,14 @@
-<header>
-  <a translate="no" href="{% link index.html %}"
+<header translate="no">
+  {%- if page.name == 'index.html' -%}
+  <cite id="site-title">{{- site.title | escape -}}</cite>
+  {{- -}}
+  </a>
+  {%- else -%}
+  <a href="{% link index.html %}"
      itemid="{% link index.html %}"
      itemscope itemtype="http://schema.org/WebPage">{{- -}}
-    <cite id="site-title" itemprop="name">{{- site.title | escape
-      -}}</cite>{{- -}}
+    <cite id="site-title" itemprop="name">{{- site.title | escape -}}</cite>
+    {{- -}}
   </a>
+  {%- endif -%}
 </header>
