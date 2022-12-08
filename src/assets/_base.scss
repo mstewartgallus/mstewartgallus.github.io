@@ -81,6 +81,12 @@ hgroup p {
     margin: 0 ;
 }
 
+main :is(header, figcaption) {
+    display: flex ;
+    justify-content: space-between ;
+    max-width: $paragraph-width ;
+}
+
 @media screen {
     :root {
         display: flex ;
@@ -125,6 +131,6 @@ hgroup p {
 @media only screen and (min-width: $A4-width + 3 * $A4-margin) {
     :root {
         justify-content: start ;
-        padding-inline-start: 4rem ;
+        padding-inline-start: 3rem ;
     }
 }
