@@ -6,14 +6,14 @@
     </hgroup>
   </header>
   <ol start="1" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <a rel="bookmark" href="{{ page.url }}"
-         aria-labelledby="title"
-         aria-current="page"
-         itemprop="item"
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      {{- -}}
+      <a href="{% link index.html %}"
+            aria-labelledby="site-title"
+            itemprop="item"
          >{{- -}}
-        <span itemprop="name">§</span>{{- -}}
-        <meta itemprop="position" content="3">{{- -}}
+        <span itemprop="name">Home</span>{{- -}}
+        <meta itemprop="position" content="1">{{- -}}
       </a>{{- -}}
     </li>
     {%- if page.categories.size > 0 -%}
@@ -27,14 +27,14 @@
       </a>{{- -}}
     </li>
     {%- endif -%}
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-      {{- -}}
-      <a href="{% link index.html %}"
-            aria-labelledby="site-title"
-            itemprop="item"
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
+      <a rel="bookmark" href="{{ page.url }}"
+         aria-labelledby="title"
+         aria-current="page"
+         itemprop="item"
          >{{- -}}
-        <span itemprop="name">Home</span>{{- -}}
-        <meta itemprop="position" content="1">{{- -}}
+        <span itemprop="name">§</span>{{- -}}
+        <meta itemprop="position" content="3">{{- -}}
       </a>{{- -}}
     </li>
   </ol>
