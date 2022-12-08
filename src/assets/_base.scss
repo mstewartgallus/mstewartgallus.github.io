@@ -75,6 +75,10 @@ main :is(figure, header, dl, p) {
     margin-block: $line ;
 }
 
+hgroup {
+    max-inline-size: 100% ;
+}
+
 hgroup p {
     margin-block: 0 ;
 }
@@ -87,14 +91,15 @@ hgroup p {
 main :is(header, figcaption) {
     display: flex ;
     justify-content: space-between ;
-    max-width: $paragraph-width ;
+    inline-size: $paragraph-width ;
+    max-inline-size: 100% ;
 }
 
 @media screen {
     :root {
         display: flex ;
         justify-content: center ;
-        padding-inline: 0.9ch ;
+        padding-inline-end: 0.9ch ;
         padding-block-end: 3 * $line ;
     }
 
@@ -113,27 +118,30 @@ main :is(header, figcaption) {
         inline-size: $main-width ;
         max-inline-size: 100% ;
     }
-}
 
-@media only screen and (min-width: $main-width) {
-    :root {
-        padding-block-start: $line ;
-    }
-}
-
-@media only screen and (min-width: $main-width + 8ch) {
+    // FIXME provide better fallbacks for fluid layout
     body {
-        margin-inline-start: 3rem;
+        padding-inline-start: #{"clamp(0rem, 100vw - (" $main-width "), 3rem)"} ;
     }
+
+    :root {
+        padding-inline-start: 0.9ch ;
+        padding-inline-start: #{"clamp(0.9ch, 100vw - (" $A4-width + 2 * $A4-margin "), 3rem)"} ;
+    }
+
+    :root {
+        padding-block-start: #{"min(100vw - (" $main-width "), " $line ")"} ;
+    }
+}
+
+@media only screen and (min-width: $main-width + 28ch) {
     main :is(menu, ul, ol) {
         padding: 0;
     }
 }
-
 // FIXME use a different break point
-@media only screen and (min-width: $A4-width + 3 * $A4-margin) {
+@media only screen and (min-width: $A4-width + 2 * $A4-margin) {
     :root {
         justify-content: start ;
-        padding-inline-start: 3rem ;
     }
 }
