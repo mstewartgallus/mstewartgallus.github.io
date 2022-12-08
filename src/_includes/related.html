@@ -1,0 +1,22 @@
+{%- if site.related_posts.size > 0 -%}
+<nav id="related" aria-labelledby="related-title">
+  <header>
+    <hgroup>
+      <h2 id="related-title">Related Posts</h2>
+    </hgroup>
+  </header>
+
+  <ol>
+    {%- for post in site.related_posts -%}
+    {%- if post.url == page.url -%}
+    {%- continue -%}
+    {%- endif -%}
+    <li>
+      {{- -}}
+      <a rel="tag" href="{{- post.url -}}">{{- post.title | escape -}}</a>
+      {{- -}}
+    </li>
+    {%- endfor -%}
+  </ol>
+</nav>
+{%- endif -%}

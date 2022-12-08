@@ -27,7 +27,7 @@
     content: ">\2002";
 }
 
-:is(#paging, #breadcrumbs, #search) header,
+:is(#paging, #breadcrumbs, #search, #related) header,
 #metadata hgroup {
     @include sr-only ;
 }

@@ -37,3 +37,5 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 gem "webrick", "~> 1.7"
 
 gem "io-wait", "~> 0.2.3"
+
+gem "classifier-reborn", "~> 2.3"
