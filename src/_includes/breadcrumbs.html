@@ -16,7 +16,9 @@
       </a>{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span aria-current="page" aria-describedby="title" itemprop="name">Current Page</span>{{- -}}
+      <span aria-current="page" itemprop="name">
+        {{- page.title | escape -}}
+      </span>{{- -}}
       <meta itemprop="position" content="2">{{- -}}
     </li>
   </ol>
