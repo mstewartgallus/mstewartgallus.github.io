@@ -1,14 +1,13 @@
-{%- if page.collection == 'posts' -%}
+{%- if page.categories.size > 0 -%}
 <nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
   <header>
     <hgroup>
       <h2 id="breadcrumbs-title">Breadcrumbs</h2>
     </hgroup>
   </header>
+  {%- assign categories = page.categories | sort -%}
+  {%- for category in categories -%}
   <ol start="1" itemscope itemtype="https://schema.org/BreadcrumbList">
-    {%- if page.categories.size > 0 -%}
-    {%- assign categories = page.categories | sort -%}
-    {%- assign category = categories | first -%}
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}" itemprop="item">
         {{- -}}
@@ -16,11 +15,11 @@
         <meta itemprop="position" content="1">{{- -}}
       </a>{{- -}}
     </li>
-    {%- endif -%}
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <span aria-current="page" aria-describedby="title" itemprop="name">Current Page</span>{{- -}}
       <meta itemprop="position" content="2">{{- -}}
     </li>
   </ol>
+  {%- endfor -%}
 </nav>
 {%- endif -%}
