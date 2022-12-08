@@ -1,5 +1,5 @@
 {%- if page.previous.url or page.next.url -%}
-<nav aria-labelledby="paging-title">
+<nav id="paging" aria-labelledby="paging-title">
   <header>
     <hgroup>
       <h2 id="paging-title">Paging</h2>
@@ -8,13 +8,13 @@
   <dl>
     {%- if page.previous.url -%}
     <div>
-      <dt><a href="{{page.previous.url}}" aria-describedby="previous-page" rel="previous">Previous Item</a></dt>
+      <dt><a href="{{page.previous.url}}" aria-describedby="previous-page" rel="previous">Previous</a></dt>
       <dd id="previous-page"><cite>{{- page.previous.title | escape -}}</cite></dd>
     </div>
     {%- endif -%}
     {%- if page.next.url -%}
     <div>
-      <dt><a href="{{page.next.url}}" aria-describedby="next-page" rel="next">Next Item</a></dt>
+      <dt><a href="{{page.next.url}}" aria-describedby="next-page" rel="next">Next</a></dt>
       <dd id="next-page"><cite>{{- page.next.title | escape -}}</cite></dd>
     </div>
     {%- endif -%}

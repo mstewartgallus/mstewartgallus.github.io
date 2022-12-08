@@ -66,12 +66,14 @@ $A4-margin: 1.5in ;
     letter-spacing: 0.07ch ;
 }
 @mixin sr-only {
-    position:absolute;
-    left:-10000px;
-    top:auto;
-    width:1px;
-    height:1px;
-    overflow:hidden;
+    :not(:focus-within) {
+        position:absolute;
+        left:-10000px;
+        top:auto;
+        width:1px;
+        height:1px;
+        overflow:hidden;
+    }
 }
 
 @import "assets/_clear.scss";

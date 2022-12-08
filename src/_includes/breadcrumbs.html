@@ -1,5 +1,5 @@
 {%- if page.collection == 'posts' -%}
-<nav aria-labelledby="breadcrumbs-title">
+<nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
   <header>
     <hgroup>
       <h2 id="breadcrumbs-title">Breadcrumbs</h2>
@@ -33,7 +33,7 @@
          aria-current="page"
          itemprop="item"
          >{{- -}}
-        <span itemprop="name">§</span>{{- -}}
+        <span itemprop="name">Current Page</span>{{- -}}
         <meta itemprop="position" content="3">{{- -}}
       </a>{{- -}}
     </li>

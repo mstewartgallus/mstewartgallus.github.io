@@ -12,5 +12,51 @@
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
     all: unset ;
+}
+
+// FIXME ask around if decorations help
+hr {
+    all: unset ;
+    margin-block: $line ;
+    display: flex ;
+    justify-content: center ;
+    inline-size: $paragraph-width ;
+    max-inline-size: 100% ;
+}
+
+[itemtype="https://schema.org/BreadcrumbList"] li {
+    display: list-item ;
+    list-style-position: inside ;
+}
+[itemtype="https://schema.org/BreadcrumbList"] li:first-child {
     display: block ;
+}
+[itemtype="https://schema.org/BreadcrumbList"] li::marker {
+    content: "→\2003";
+}
+
+:is(#paging, #breadcrumbs) header,
+#metadata hgroup {
+    @include sr-only ;
+}
+#paging dl {
+    inline-size: $paragraph-width ;
+    max-inline-size: 100% ;
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1ch ;
+    justify-content: space-between ;
+}
+
+#paging dl > div {
+    display: flex ;
+    flex-direction: column ;
+    align-items: stretch ;
+}
+
+#paging dl > div:first-child {
+    align-items: start ;
+}
+#paging dl > div:last-child {
+    align-items: end ;
 }

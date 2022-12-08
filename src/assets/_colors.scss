@@ -16,12 +16,12 @@
     }
 }
 
-h1,h2,h3,h4,h5,h6,figcaption, li::marker {
+hr,h1,h2,h3,h4,h5,h6,figcaption, li::marker {
      color: #A02030 ;
 }
 
 @media (prefers-color-scheme: dark) {
-    h1,h2,h3,h4,h5,h6,figcaption, li::marker {
+    hr,h1,h2,h3,h4,h5,h6,figcaption, li::marker {
         color: #d07560 ;
     }
 }
