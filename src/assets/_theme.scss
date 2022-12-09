@@ -28,6 +28,7 @@
 }
 
 #paging dl {
+    all: unset ;
     max-inline-size: 100% ;
     display: flex ;
     flex-wrap: wrap ;
@@ -36,6 +37,7 @@
 }
 
 #paging dl > div {
+    all: unset ;
     display: flex ;
     flex-direction: column ;
 }

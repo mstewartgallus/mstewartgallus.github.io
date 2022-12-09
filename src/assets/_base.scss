@@ -136,3 +136,10 @@ main :is(header, figcaption) {
 main :is(ul, ol) {
     padding-inline-start: #{"min((" $main-width + 5ch ") - 100vw, " 2rem ")"} ;
 }
+
+:is(h1,h2,h3,h4,h5,h6):target {
+    filter: invert(100%) ;
+}
+:target figcaption {
+    filter: invert(100%) ;
+}
