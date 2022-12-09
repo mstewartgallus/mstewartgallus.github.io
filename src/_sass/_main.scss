@@ -1,19 +1,31 @@
 @charset "utf-8";
 
-$max-font-size: 30 ;
-$min-font-size: 19 ;
-$min-scale: 4/3 ;
-$max-scale: 3/2 ;
-
-$min-width: 320px ;
-$max-width: 2400px ;
-
 // Noto Sans aspect ratio :(
 $ex-height: 0.536 ;
 
 $paragraph-width: 50.7ch ;
 $main-width: 66.3ch ;
 $side-width: 32.2ch ;
+
+$min: (
+    width: 320px,
+    font-size: 19,
+    scale: 4/3
+) ;
+$max: (
+    width: 2400px,
+    font-size: 30,
+    scale: 3/2
+) ;
+
+$min-width: map-get($min, width) ;
+$max-width: map-get($max, width) ;
+
+$max-font-size: map-get($max, font-size) ;
+$min-font-size: map-get($min, font-size) ;
+
+$min-scale: map-get($min, scale) ;
+$max-scale: map-get($max, scale) ;
 
 @function pow($x, $n) {
     @if $n < 0 {
@@ -35,7 +47,7 @@ $side-width: 32.2ch ;
 }
 
 @function scale($n) {
-    @return lerp(pow(4/3, $n) * 1rem, pow(3/2, $n) * 1rem,
+    @return lerp(pow($min-scale, $n) * 1rem, pow($max-scale, $n) * 1rem,
                  $min-width, $max-width,
                  // very confused here but seems to work
                  2 * 16px/1rem) ;

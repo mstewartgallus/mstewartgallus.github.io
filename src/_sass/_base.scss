@@ -105,12 +105,17 @@ main :is(header, figcaption) {
     }
 
     :root {
-        padding-inline: 0.9ch ;
-        padding-inline: #{"clamp(0.9ch, 100vw - (" $main-width + 10ch "), 2.5rem)"} ;
+        padding-inline: 0.6rem ;
+        padding-inline: lerp(0.8rem, 2.5rem,
+                             $min-width, $max-width,
+                             // FIXME
+                             2 * (16px/1rem));
     }
 
     :root {
-        padding-block-start: #{"min(100vw - (" $main-width "), " $line ")"} ;
+        padding-block-start: lerp(0rem, $line,
+                                  $min-width, $max-width,
+                                  (16px/1rem));
     }
 }
 
