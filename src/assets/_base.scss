@@ -99,7 +99,6 @@ main :is(header, figcaption) {
     :root {
         display: flex ;
         justify-content: start ;
-        padding-inline-end: 0.9ch ;
         padding-block-end: 3 * $line ;
     }
 
@@ -125,8 +124,8 @@ main :is(header, figcaption) {
     }
 
     :root {
-        padding-inline-start: 0.9ch ;
-        padding-inline-start: #{"clamp(0.9ch, 100vw - (" $main-width + 30ch "), 2.5rem)"} ;
+        padding-inline: 0.9ch ;
+        padding-inline: #{"clamp(0.9ch, 100vw - (" $main-width + 10ch "), 2.5rem)"} ;
     }
 
     :root {
