@@ -3,7 +3,7 @@ $root-min-font-size: ($min-font-size / 16) * 1rem ;
 $root-max-font-size: ($max-font-size / 16) * 1rem ;
 
 $min-width: 320px ;
-$max-width: 1200px ;
+$max-width: 2400px ;
 
 $div: (($root-max-font-size - $root-min-font-size) * 1px) / (($max-width - $min-width) * 1rem) ;
 
