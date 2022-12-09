@@ -49,6 +49,7 @@
     grid-column: next ;
     justify-self: end ;
     align-items: end ;
+    text-align: end ;
 }
 
 :is(#paging, #breadcrumbs, #search, #related) header,
