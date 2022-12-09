@@ -13,7 +13,7 @@
           {{ site.data.strings.paging.previous | escape }}
         </a>
       </dt>
-      <dd id="previous-page"><cite>{{ page.previous.title | escape }}</cite></dd>
+      <dd aria-hidden="true" id="previous-page"><cite>{{ page.previous.title | escape }}</cite></dd>
     </div>
     {%- endif -%}
     {%- if page.next.url -%}
@@ -23,7 +23,7 @@
           {{ site.data.strings.paging.next | escape }}
         </a>
       </dt>
-      <dd id="next-page"><cite>{{ page.next.title | escape }}</cite></dd>
+      <dd aria-hidden="true" id="next-page"><cite>{{ page.next.title | escape }}</cite></dd>
     </div>
     {%- endif -%}
   </dl>
