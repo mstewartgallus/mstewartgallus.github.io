@@ -5,9 +5,9 @@ $root-max-font-size: ($max-font-size / 16) * 1rem ;
 @media screen {
     :root {
         font-size: $root-avg-font-size ;
-        font-size: lerp($root-min-font-size, $root-max-font-size,
-                        $min-width, $max-width,
-                        16px/1rem);
+        font-size:
+            lerp($root-min-font-size, $root-max-font-size,
+                 linstep($min-width, $max-width, 100vw));
     }
 }
 
@@ -100,27 +100,35 @@ main :is(header, figcaption) {
     }
 
     // FIXME provide better fallbacks for fluid layout
-    body {
-        padding-inline-start: #{"clamp(0rem, 100vw - (" $main-width "), 2.5rem)"} ;
+    :root {
+        padding-inline: 0.8rem ;
+        padding-inline:
+            lerp(0.8rem, 7rem,
+                 linstep(400px, 1000px,
+                         100vw));
     }
 
     :root {
-        padding-inline: 0.6rem ;
-        padding-inline: lerp(0.8rem, 2.5rem,
-                             $min-width, $max-width,
-                             // FIXME
-                             2 * (16px/1rem));
-    }
-
-    :root {
-        padding-block-start: lerp(0rem, $line,
-                                  $min-width, $max-width,
-                                  (16px/1rem));
+        padding-block-start:
+            lerp(0rem, $line,
+                 linstep($min-width, 1200px,
+                         100vw));
     }
 }
 
+@media screen {
+    body {
+        padding-inline-start:
+            lerp(0rem, 2rem,
+                 linstep(400px, 600px,
+                         100vw));
+    }
+}
 main :is(ul, ol) {
-    padding-inline-start: #{"min((" $main-width + 5ch ") - 100vw, " 2rem ")"} ;
+    padding-inline-start:
+            lerp(0rem, 2rem,
+                 #{"1px - " linstep(400px, 600px,
+                                    100vw)});
 }
 
 :is(h1,h2,h3,h4,h5,h6):target {
