@@ -27,10 +27,6 @@
     content: ">\2002";
 }
 
-:is(#paging, #breadcrumbs, #search, #related) header,
-#metadata hgroup {
-    @include sr-only ;
-}
 #paging dl {
     inline-size: $paragraph-width ;
     max-inline-size: 100% ;
@@ -52,4 +48,9 @@
 #paging dl > div.next {
     align-items: end ;
     align-self: end ;
+}
+
+:is(#paging, #breadcrumbs, #search, #related) header,
+#metadata hgroup {
+    @include sr-only ;
 }

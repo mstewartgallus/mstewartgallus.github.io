@@ -1,0 +1,23 @@
+breadcrumbs:
+  title: Breadcrumbs
+pages:
+  title: Pages
+posts:
+  title: Posts
+paging:
+  title: Paging
+  previous: Previous
+  next: Next
+metadata:
+  title: Metadata
+  author: Author
+  postDate: Post Date
+related:
+  title: Related Posts
+search:
+  title: Search
+  category: Category
+  tag: Tag
+  submit: Submit
+  reset: Reset
+  postDate: Post Date

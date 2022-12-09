@@ -2,10 +2,9 @@
 <nav id="posts" aria-labelledby="posts-title">
   <header>
     <hgroup>
-      <h2 id="posts-title">Posts</h2>
+      <h2 id="posts-title">{{ site.data.strings.posts.title | escape }}</h2>
     </hgroup>
   </header>
-
   <ol reversed start="{{ site.posts | size }}">
     {%- for post in site.posts %}
     <li>

@@ -1,11 +1,11 @@
 {%- if page.categories.size > 0 -%}
+{%- assign categories = page.categories | sort -%}
 <nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
   <header>
     <hgroup>
-      <h2 id="breadcrumbs-title">Breadcrumbs</h2>
+      <h2 id="breadcrumbs-title">{{ site.data.strings.breadcrumbs.title | escape }}</h2>
     </hgroup>
   </header>
-  {%- assign categories = page.categories | sort -%}
   {%- for category in categories -%}
   <ol start="1" itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}

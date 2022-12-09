@@ -6,11 +6,11 @@
       action="{% link search.html %}">
   <header>
     <hgroup>
-      <h2>Search</h2>
+      <h2>{{ site.data.strings.search.title | escape }}</h2>
     </hgroup>
   </header>
 
-  <label for="category">Category</label>
+  <label for="category">{{ site.data.strings.search.category | escape }}</label>
   <select id="category" name="category" multiple="multiple" size="2">
     {%- for category in categories -%}
     {%- assign cat = category[0] | escape -%}
@@ -18,7 +18,7 @@
     {%- endfor -%}
   </select>
 
-  <label for="tag">Tag</label>
+  <label for="tag">{{ site.data.strings.search.tag | escape }}</label>
   <select id="tag" name="tag" multiple="multiple" size="5">
     {%- for tag in tags -%}
     {%- assign tg = tag[0] | escape -%}
@@ -27,8 +27,8 @@
   </select>
 
   <menu>
-    <li><button type="submit">Search</button></li>
-    <li><button type="reset">Reset</button></li>
+    <li><button type="submit">{{ site.data.strings.search.submit | escape }}</button></li>
+    <li><button type="reset">{{ site.data.strings.search.reset | escape }}</button></li>
   </menu>
 </form>
 
