@@ -30,18 +30,22 @@
 #paging dl {
     inline-size: $paragraph-width ;
     max-inline-size: 100% ;
-    display: grid ;
+    display: flex ;
+    flex-wrap: wrap ;
     column-gap: 1ch ;
-    grid-template-columns: [previous] 1fr [next] 1fr ;
+    justify-content: space-between ;
 }
 
 #paging dl > div {
     display: flex ;
     flex-direction: column ;
 }
+#paging dl > div {
+    flex-grow: 1 ;
+    flex-shrink: 1 ;
+}
 
 #paging dl > div.previous {
-    grid-column: previous ;
     justify-self: start ;
     align-items: start ;
 }
