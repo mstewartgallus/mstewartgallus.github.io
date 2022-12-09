@@ -30,10 +30,9 @@
 #paging dl {
     inline-size: $paragraph-width ;
     max-inline-size: 100% ;
-    display: flex ;
-    flex-wrap: wrap ;
+    display: grid ;
     column-gap: 1ch ;
-    justify-content: space-between ;
+    grid-template-columns: [previous] 1fr [next] 1fr ;
 }
 
 #paging dl > div {
@@ -42,12 +41,14 @@
 }
 
 #paging dl > div.previous {
+    grid-column: previous ;
+    justify-self: start ;
     align-items: start ;
-    align-self: start ;
 }
 #paging dl > div.next {
+    grid-column: next ;
+    justify-self: end ;
     align-items: end ;
-    align-self: end ;
 }
 
 :is(#paging, #breadcrumbs, #search, #related) header,
