@@ -2,11 +2,14 @@
 
 $max-font-size: 30 ;
 $min-font-size: 19 ;
+$min-scale: 4/3 ;
+$max-scale: 3/2 ;
+
+$min-width: 320px ;
+$max-width: 2400px ;
 
 // Noto Sans aspect ratio :(
 $ex-height: 0.536 ;
-
-$scale: 4/3 ;
 
 $paragraph-width: 50.7ch ;
 $main-width: 66.3ch ;
@@ -24,8 +27,18 @@ $side-width: 32.2ch ;
     @return $p ;
 }
 
+@function lerp($min, $max, $min-width, $max-width, $k) {
+    $b: ($max - $min) / ($max-width - $min-width) ;
+    @return #{"clamp("  $min ", "
+              $min " + " ($b * $k) " * (100vw - " $min-width ") , "
+              $max ")"};
+}
+
 @function scale($n) {
-    @return pow($scale, $n) * 1rem ;
+    @return lerp(pow(4/3, $n) * 1rem, pow(3/2, $n) * 1rem,
+                 $min-width, $max-width,
+                 // very confused here but seems to work
+                 2 * 16px/1rem) ;
 }
 
 // Compute legible line height in terms of rems

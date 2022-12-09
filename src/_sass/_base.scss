@@ -2,31 +2,12 @@ $root-avg-font-size: (($min-font-size + $max-font-size) * 0.5rem) / 16 ;
 $root-min-font-size: ($min-font-size / 16) * 1rem ;
 $root-max-font-size: ($max-font-size / 16) * 1rem ;
 
-$min-width: 320px ;
-$max-width: 2400px ;
-
-$div: (($root-max-font-size - $root-min-font-size) * 1px) / (($max-width - $min-width) * 1rem) ;
-
-$div: 16 * (($root-max-font-size - $root-min-font-size) * 1px) / (($max-width - $min-width) * 1rem) ;
-
 @media screen {
     :root {
         font-size: $root-avg-font-size ;
-    }
-
-    :root {
-        font-size: #{"calc(" $root-min-font-size " + " $div " * (100vw -" $min-width "))"};
-    }
-
-    @media (max-width: $min-width) {
-        :root {
-            font-size: $root-min-font-size ;
-        }
-    }
-    @media (min-width: $max-width) {
-        :root {
-            font-size: $root-max-font-size ;
-        }
+        font-size: lerp($root-min-font-size, $root-max-font-size,
+                        $min-width, $max-width,
+                        16px/1rem);
     }
 }
 
