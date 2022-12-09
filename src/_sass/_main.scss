@@ -12,21 +12,20 @@ $paragraph-width: 50.7ch ;
 $main-width: 66.3ch ;
 $side-width: 32.2ch ;
 
-
-$sc: (
-    -3: 1/($scale * $scale * $scale),
-    -2: 1/($scale * $scale),
-    -1: 1/$scale,
-    0: 1,
-    1: $scale,
-    2: $scale * $scale,
-    3: $scale * $scale * $scale,
-    4: $scale * $scale * $scale * $scale,
-    5: $scale * $scale * $scale * $scale * $scale
-) ;
+@function pow($x, $n) {
+    @if $n < 0 {
+        $n: -$n ;
+        $x: 1/$x ;
+    }
+    $p: 1 ;
+    @for $i from 0 to $n {
+        $p: $p * $x ;
+    }
+    @return $p ;
+}
 
 @function scale($n) {
-    @return map-get($sc, $n) * 1rem ;
+    @return pow($scale, $n) * 1rem ;
 }
 
 // Compute legible line height in terms of rems
