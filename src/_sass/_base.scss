@@ -7,7 +7,8 @@ $root-max-font-size: ($max-font-size / 16) * 1rem ;
         font-size: $root-avg-font-size ;
         font-size:
             lerp($root-min-font-size, $root-max-font-size,
-                 linstep($min-width, $max-width, 100vw));
+                 pxtorem(
+                     linstep($min-width, $max-width, 100vw)));
     }
 }
 
@@ -104,15 +105,17 @@ main :is(header, figcaption) {
         padding-inline: 0.8rem ;
         padding-inline:
             lerp(0.8rem, 7rem,
-                 linstep(400px, 1000px,
-                         100vw));
+                 pxtorem(
+                     linstep(400px, 1000px,
+                             100vw)));
     }
 
     :root {
         padding-block-start:
             lerp(0rem, $line,
-                 linstep($min-width, 1200px,
-                         100vw));
+                 pxtorem(
+                     linstep($min-width, 1200px,
+                             100vw)));
     }
 }
 
@@ -120,15 +123,17 @@ main :is(header, figcaption) {
     body {
         padding-inline-start:
             lerp(0rem, 2rem,
-                 linstep(400px, 600px,
-                         100vw));
+                 pxtorem(
+                     linstep(400px, 600px,
+                             100vw)));
     }
 }
+
 main :is(ul, ol) {
     padding-inline-start:
             lerp(0rem, 2rem,
-                 #{"1px - " linstep(400px, 600px,
-                                    100vw)});
+                 pxtorem(#{"(1px - " linstep(400px, 600px,
+                                    100vw) ")"}));
 }
 
 :is(h1,h2,h3,h4,h5,h6):target {
