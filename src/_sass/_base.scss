@@ -65,10 +65,10 @@ main :is(h3,h4,h5,h6) {
 }
 
 main h1 {
-    font-size: scale(2) * 1rem ;
+    font-size: scale(2) ;
 }
 main h2 {
-    font-size: scale(1) * 1rem ;
+    font-size: scale(1) ;
 }
 
 main :is(figure, header, p) {
