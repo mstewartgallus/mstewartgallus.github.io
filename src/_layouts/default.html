@@ -7,6 +7,7 @@ https://schema.org/Blog
 https://schema.org/WebContent
 {%- endif -%}
 {%- endcapture -%}
+
 {%- capture pagetype -%}
 {%- if page.name == 'about.html' -%}
 https://schema.org/AboutPage
@@ -18,11 +19,7 @@ https://schema.org/ItemPage
 https://schema.org/WebPage
 {%- endif -%}
 {%- endcapture -%}
-{%- capture itemprop -%}
-{%- if maintype != 'https://schema.org/Blog' -%}
-itemprop="articleBody"
-{%- endif -%}
-{%- endcapture -%}
+
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}"
       itemscope
@@ -35,19 +32,7 @@ itemprop="articleBody"
         itemprop="mainEntity hasPart"
         itemtype="{{ maintype }}"
         itemid="{{ page.url | absolute_url }}">
-    <main aria-describedby="title" itemprop="text">
-      <header>
-        <hgroup>
-          <h1 id="title" itemprop="name headline title">{{- page.title | escape -}}</h1>
-          {%- if page.subtitle -%}
-          <p itemprop="subheading">{{- page.subtitle | escape -}}</p>
-          {%- endif -%}
-        </hgroup>
-      </header>
-      <div {{ itemprop }}>
-        {{- content -}}
-      </div>
-    </main>
+    {%- include main.html -%}
     {%- include sidebar.html -%}
   </body>
 </html>

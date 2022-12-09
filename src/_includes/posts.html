@@ -5,7 +5,7 @@
       <h2 id="posts-title">{{ site.data.strings.posts.title | escape }}</h2>
     </hgroup>
   </header>
-  <ol reversed start="{{ site.posts | size }}">
+  <ol reversed>
     {%- for post in site.posts %}
     <li>
       <ins
