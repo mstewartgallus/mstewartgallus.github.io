@@ -7,13 +7,13 @@
   </header>
   <dl>
     {%- if page.previous.url -%}
-    <div>
+    <div class="previous">
       <dt><a href="{{page.previous.url}}" aria-describedby="previous-page" rel="previous">Previous</a></dt>
       <dd id="previous-page"><cite>{{- page.previous.title | escape -}}</cite></dd>
     </div>
     {%- endif -%}
     {%- if page.next.url -%}
-    <div>
+    <div class="next">
       <dt><a href="{{page.next.url}}" aria-describedby="next-page" rel="next">Next</a></dt>
       <dd id="next-page"><cite>{{- page.next.title | escape -}}</cite></dd>
     </div>
