@@ -1,6 +1,23 @@
 <div id="sidebar">
+  {%- if page.url == '/' -%}
+  {%- include banner.html -%}
+  {%- endif -%}
+
+  {%- if page.url == '/search/' -%}
   {%- include search.html -%}
+  {%- endif -%}
+
+  {%- if page.previous.url or page.next.url -%}
   {%- include paging.html -%}
+  {%- endif -%}
+
+  {%- if page.date -%}
   {%- include metadata.html -%}
+  {%- endif -%}
+
   {%- include breadcrumbs.html -%}
+
+  {%- if false -%}
+  {%- include related.html -%}
+  {%- endif -%}
 </div>

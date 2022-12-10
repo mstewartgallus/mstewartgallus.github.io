@@ -3,5 +3,6 @@ layout: page
 ---
 {{- content -}}
 
-{%- include pages.html -%}
+{%- if site.posts.size > 0 -%}
 {%- include posts.html -%}
+{%- endif -%}

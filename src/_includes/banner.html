@@ -1,10 +1,12 @@
 {%- assign pages = site.html_pages | where: "sitemap", nil | sort: "title" -%}
-<nav id="pages" aria-labelledby="pages-title">
-  <header>
-    <hgroup>
-      <h2 id="pages-title">{{- site.data.strings.pages.title | escape -}}</h2>
-    </hgroup>
-  </header>
+<header id="banner" aria-describedby="banner-title"
+        itemscope itemid="{% link index.html %}"
+        itemtype="http://schema.org/WebSite">
+  <hgroup>
+    <h2 id="banner-title" itemprop="name">{{ site.title | escape }}</h2>
+    <p>{{ site.description | escape }}</p>
+  </hgroup>
+
   <ul>
     {%- for page in pages %}
     {%- if page.url == '/' -%}
@@ -20,5 +22,12 @@
       </a>
     </li>
     {%- endfor -%}
+
+    <li>
+      <a type="application/atom+xml" rel="alternate"
+         href="{{ "/feed.xml" | relative_url }}"
+         title="{{ site.title | escape }}">
+        Subscribe</a>
+    </li>
   </ul>
-</nav>
+</header>

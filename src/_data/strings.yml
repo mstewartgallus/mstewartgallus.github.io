@@ -1,23 +1,20 @@
 breadcrumbs:
-  title: Breadcrumbs
-pages:
-  title: Pages
-posts:
-  title: Posts
+  title: "Breadcrumbs"
+  root: "Home"
 paging:
-  title: Paging
-  previous: Previous
-  next: Next
+  title: "Paging"
+  previous: "Previous"
+  next: "Next"
 metadata:
-  title: Metadata
-  author: Author
-  postDate: Post Date
+  title: "Metadata"
+  author: "Author"
+  postDate: "Post Date"
 related:
-  title: Related Posts
+  title: "Related Posts"
 search:
-  title: Search
-  category: Category
-  tag: Tag
-  submit: Submit
-  reset: Reset
-  postDate: Post Date
+  title: "Search"
+  category: "Category"
+  tag: "Tag"
+  submit: "Submit"
+  reset: "Reset"
+  postDate: "Post Date"

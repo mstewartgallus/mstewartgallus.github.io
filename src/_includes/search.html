@@ -1,4 +1,3 @@
-{%- if page.url == '/search/' -%}
 {%- assign categories = site.categories | sort -%}
 {%- assign tags = site.tags | sort -%}
 
@@ -31,5 +30,3 @@
     <li><button type="reset">{{ site.data.strings.search.reset | escape }}</button></li>
   </menu>
 </form>
-
-{%- endif -%}
