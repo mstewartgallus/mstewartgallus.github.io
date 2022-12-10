@@ -2,11 +2,11 @@
 {%- assign categories = site.categories | sort -%}
 {%- assign tags = site.tags | sort -%}
 
-<form id="search" rel="search" role="search" name="search-form" method="get"
+<form id="search" rel="search" role="search" aria-describedby="search-title" name="search-form" method="get"
       action="{% link search.html %}">
   <header>
     <hgroup>
-      <h2>{{ site.data.strings.search.title | escape }}</h2>
+      <h2 id="search-title">{{ site.data.strings.search.title | escape }}</h2>
     </hgroup>
   </header>
 

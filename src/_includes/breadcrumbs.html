@@ -1,7 +1,9 @@
 <nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
-  <hgroup>
-    <h2 id="breadcrumbs-title">{{ site.data.strings.breadcrumbs.title | escape }}</h2>
-  </hgroup>
+  <header>
+    <hgroup>
+      <h2 id="breadcrumbs-title">{{ site.data.strings.breadcrumbs.title | escape }}</h2>
+    </hgroup>
+  </header>
   {%- if page.url == '/' -%}
   <ol itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}

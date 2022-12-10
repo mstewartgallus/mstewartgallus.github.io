@@ -56,11 +56,11 @@
         ></script><output for="search" id="search-output" aria-live="polite" hidden>
 </output>
 </main>
-<div id="sidebar"><form id="search" rel="search" role="search" name="search-form" method="get"
+<div id="sidebar"><form id="search" rel="search" role="search" aria-describedby="search-title" name="search-form" method="get"
       action="/search/">
   <header>
     <hgroup>
-      <h2>Search</h2>
+      <h2 id="search-title">Search</h2>
     </hgroup>
   </header>
 
@@ -75,9 +75,11 @@
     <li><button type="reset">Reset</button></li>
   </menu>
 </form><nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
-  <hgroup>
-    <h2 id="breadcrumbs-title">Breadcrumbs</h2>
-  </hgroup><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+  <header>
+    <hgroup>
+      <h2 id="breadcrumbs-title">Breadcrumbs</h2>
+    </hgroup>
+  </header><ol itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/"
          itemid="/"
          itemprop="item"
