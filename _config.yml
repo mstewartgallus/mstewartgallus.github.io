@@ -1,8 +1,5 @@
 title: Words to Kick Your Teeth Out
-email: molossusspondee@gmail.com
-author:
-  name: "Molossus Spondee"
-  url: "/about"
+author: mspondee
 description: >-
   lol, lmao
 baseurl: ""
@@ -12,20 +9,6 @@ lang: "en-CA"
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-
-rss: "Feed"
-social:
-  name: "Molossus Spondee"
-  links:
-    - https://twitter.com/MSpondee
-    - https://www.linkedin.com/in/mstewartgallus
-    - https://github.com/mstewartgallus
-twitter:
-  username: MSpondee
-  card: summary
-github: mstewartgallus
-linkedin: mstewartgallus
-stackoverflow: "Molossus Spondee"
 
 source: src
 
@@ -37,15 +20,11 @@ defaults:
     scope:
       path: ""
     values:
-      author:
-        name: "Molossus Spondee"
-        twitter: MSpondee
-        url: "/about"
+      author: "mspondee"
       layout: "default"
   -
     scope:
       path: "assets"
-      type: "pages"
     values:
       layout: "none"
   -

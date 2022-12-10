@@ -3,7 +3,8 @@
 {%- assign title = page.title | default: site_title -%}
 {%- assign description = page.description | default: page.excerpt | normalize_whitespace | strip | strip_html | default: site.description | escape -%}
 {%- assign url = page.url | absolute_url -%}
-{%- assign author = page.author | default: site.author -%}
+{%- assign the_author = page.author | default: site.author -%}
+{%- assign author = site.data.author[the_author] -%}
 {%- assign author_name = author.name -%}
 {%- assign author_url = author.url | relative_url -%}
 {%- capture type -%}

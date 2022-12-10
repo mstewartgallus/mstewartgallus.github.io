@@ -1,4 +1,5 @@
 {%- if page.date -%}
+{%- assign author = site.data.author[page.author] -%}
 <footer id="metadata" aria-describedby="metadata-title">
   <hgroup>
     <h2 id="metadata-title">{{ site.data.strings.metadata.title | escape }}</h2>
@@ -7,14 +8,14 @@
     <div>
       <dt itemprop="creator author" itemscope itemtype="https://schema.org/Person">
         {{- -}}
-        <a aria-describedby="author" rel="author" href="{{ page.author.url | relative_url }}" itemprop="url">
+        <a aria-describedby="author" rel="author" href="{{ author.url | relative_url }}" itemprop="url">
           {{- site.data.strings.metadata.author | escape -}}
         </a>
         {{- -}}
       </dt>
       <dd translate="no" aria-hidden="true">@{{- -}}
         <span aria-hidden="true" id="author" itemprop="name">
-          {{- page.author.name | escape -}}
+          {{- author.name | escape -}}
         </span>
       </dd>
     </div>

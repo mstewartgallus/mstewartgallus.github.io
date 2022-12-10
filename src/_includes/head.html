@@ -1,14 +1,15 @@
 {%- assign icon = "/assets/favicon.svg" | relative_url -%}
 {%- assign css = "/assets/main.css" | relative_url -%}
-{%- assign mjs = "/assets/main.mjs" | relative_url -%}
 {%- assign feed = "/feed.xml" | relative_url -%}
 {%- assign site_title = site.title -%}
 {%- assign title = page.title | default: site_title -%}
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ title }} — {{ site_title }}</title>
-<link rel="icon" href="{% link assets/favicon.svg %}">
-<link rel="stylesheet" href="{{ css }}">
-<link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
-{% include seo.html -%}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} — {{ site_title }}</title>
+  <link rel="icon" href="{% link assets/favicon.svg %}">
+  <link rel="stylesheet" href="{{ css }}">
+  <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
+  {% include seo.html -%}
+</head>
