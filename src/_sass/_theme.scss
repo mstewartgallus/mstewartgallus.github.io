@@ -16,15 +16,13 @@
     all: unset ;
 }
 
-[itemtype="https://schema.org/BreadcrumbList"] li {
-    display: list-item ;
-    list-style-position: inside ;
-}
-[itemtype="https://schema.org/BreadcrumbList"] li:first-child {
-    display: block ;
-}
-[itemtype="https://schema.org/BreadcrumbList"] li::marker {
-    content: ">\2002";
+[itemtype="https://schema.org/BreadcrumbList"] li + li::before {
+  display: inline-block;
+  margin-right: 0.5em;
+  transform: rotate(15deg);
+  border-right: 0.1em solid currentcolor;
+  height: 0.8em;
+  content: "";
 }
 
 #paging dl {
