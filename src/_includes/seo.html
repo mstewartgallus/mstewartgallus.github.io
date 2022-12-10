@@ -36,9 +36,3 @@ website
 {%- endif -%}
 <meta property="og:profile" content="{{ author_name }}">
 <meta property="og:profile:username" content="{{ author_name }}">
-{%- if page.previous.url -%}
-<link href="{{page.previous.url}}" title="{{ page.previous.title | escape }}" rel="next">
-{%- endif -%}
-{%- if page.next.url -%}
-<link href="{{page.next.url}}" title="{{ page.next.title | escape }}" rel="prev">
-{%- endif -%}

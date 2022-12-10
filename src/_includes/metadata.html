@@ -31,13 +31,15 @@
     </div>
     {%- if page.tags.size > 0 -%}
     <div>
-      <dt>Tag</dt>
+      <dt aria-hidden="true" id="tag-text">Tag</dt>
       {%- for tag in page.tags -%}
       <dd>
         {{- -}}
-        <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
+        <a aria-describedby="tag-text"
+           rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
           {{- -}}
-          #<span role="presentation" itemprop="keywords">{{- tag | escape -}}</span>
+          #<span role="presentation"
+                 itemprop="keywords">{{- tag | escape -}}</span>
           {{- -}}
         </a>
         {{- -}}

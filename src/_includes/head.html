@@ -11,5 +11,11 @@
   <link rel="icon" href="{% link assets/favicon.svg %}">
   <link rel="stylesheet" href="{{ css }}">
   <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
+  {%- if page.previous.url -%}
+  <link href="{{page.previous.url}}" title="{{ page.previous.title | escape }}" rel="next">
+  {%- endif -%}
+  {%- if page.next.url -%}
+  <link href="{{page.next.url}}" title="{{ page.next.title | escape }}" rel="prev">
+  {%- endif -%}
   {% include seo.html -%}
 </head>
