@@ -6,40 +6,67 @@ permalink: /about/
 <div itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
   <p>My pen name is <span translate="no">Molossus Spondee</span>. This
     is my personal blog mostly for posting silly poetry.</p>
-  <p>I guess right now I'm just working on my portfolio.</p>
 
   <address>
     <dl>
       <div>
-        <dt aria-current="page">About</dt>
-        <dd translate="no">@<span itemProp="name">Molossus Spondee</span></dd>
-      </div>
-      <div>
-        <dt translate="no"><a rel="me" itemProp="sameAs" href="https://mastodon.lol/@MSpondee">Mastodon</a></dt>
-        <dd translate="no">@MSpondee@mastodon.lol</dd>
-      </div>
-      <div>
-        <dt translate="no">
-          <a rel="me" itemProp="sameAs" href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}">Twitter</a>
-        </dt>
-        <dd translate="no">@{{- site.twitter.username | escape -}}</a>
-        </dd>
-      </div>
-      <div>
-        <dt><a rel="me" itemprop="email" href="mailto:{{site.email}}">Email</a></dt>
-        <dd translate="no">{{- site.email -}}</dd>
+        <dt aria-current="page"
+            aria-describedby="author">About the Author</dt>
+        <dd
+          translate="no"
+          aria-hidden="true">@<span
+                                id="author" aria-hidden="true"
+                                itemProp="name">Molossus Spondee</span></dd>
       </div>
       <div>
         <dt translate="no">
-          <a rel="me" itemProp="sameAs" href="https://github.com/{{ site.github | cgi_escape }}">GitHub</a>
+          <a rel="me"
+             href="https://mastodon.lol/@MSpondee"
+             aria-describedby="mastodon" itemProp="sameAs">Mastodon</a>
         </dt>
-        <dd translate="no">{{- site.github | escape -}}</dd>
+        <dd translate="no" id="mastodon"
+            aria-hidden="true">@MSpondee@mastodon.lol</dd>
       </div>
       <div>
         <dt translate="no">
-          <a rel="me" itemProp="sameAs" href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}">LinkedIn</a>
+          <a rel="me"
+             href="https://www.twitter.com/{{ site.twitter.username | cgi_escape }}"
+             aria-describedby="twitter"
+             itemProp="sameAs">Twitter</a>
         </dt>
-        <dd translate="no">{{- site.linkedin | escape -}}</dd>
+        <dd translate="no" id="twitter"
+            aria-hidden="true">@{{ site.twitter.username | escape }}</dd>
+      </div>
+      <div>
+        <dt>
+          <a rel="me"
+             href="mailto:{{site.email}}"
+             aria-describedby="email"
+             aria-hidden="true"
+             itemprop="email">Email</a>
+        </dt>
+        <dd translate="no" id="email">{{ site.email }}</dd>
+      </div>
+      <div>
+        <dt translate="no">
+          <a rel="me"
+             href="https://github.com/{{ site.github | cgi_escape }}"
+             aria-describedby="github"
+             aria-hidden="true"
+             itemProp="sameAs">GitHub</a>
+        </dt>
+        <dd translate="no" id="github">{{ site.github | escape }}</dd>
+      </div>
+      <div>
+        <dt translate="no">
+          <a rel="me"
+             href="https://www.linkedin.com/in/{{ site.linkedin | cgi_escape }}"
+             aria-describedby="linkedin"
+             aria-hidden="true"
+             itemProp="sameAs">LinkedIn</a>
+        </dt>
+        <dd translate="no" id="linkedin"
+            aria-hidden="true">{{ site.linkedin | escape }}</dd>
       </div>
     </dl>
   </address>
