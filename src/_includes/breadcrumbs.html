@@ -4,10 +4,10 @@
   </hgroup>
   {%- if page.url == '/' -%}
   <ol itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li
-      itemid="{% link index.html %}"
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
+      itemscope
       itemprop="item"
-      itemscope itemtype="http://schema.org/WebPage"
+      itemtype="http://schema.org/WebPage"
       >{{- -}}
       <cite aria-current="page" id="site-title" itemprop="name">{{- site.title | escape -}}</cite>{{- -}}
       <meta itemprop="position" content="1">{{- -}}
@@ -24,21 +24,21 @@
          itemscope itemtype="http://schema.org/WebPage"
          >{{- -}}
         <cite id="site-title" itemprop="name">{{- site.title | escape -}}</cite>{{- -}}
-        <meta itemprop="position" content="1">{{- -}}
       </a>
+      <meta itemprop="position" content="1">{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}" itemprop="item">
         {{- -}}
         <span itemprop="name">{{- category | escape -}}</span>{{- -}}
-        <meta itemprop="position" content="2">{{- -}}
       </a>{{- -}}
+      <meta itemprop="position" content="2">{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <cite aria-current="page" itemprop="name">
         {{- page.title | escape -}}
       </cite>{{- -}}
-      <meta itemprop="position" content="2">{{- -}}
+      <meta itemprop="position" content="3">{{- -}}
     </li>
   </ol>
   {%- endfor -%}
@@ -53,8 +53,8 @@
         <cite id="site-title" itemprop="name">
           {{- site.title | escape -}}
         </cite>{{- -}}
-        <meta itemprop="position" content="1">{{- -}}
       </a>
+      <meta itemprop="position" content="1">{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <cite aria-current="page" itemprop="name">
