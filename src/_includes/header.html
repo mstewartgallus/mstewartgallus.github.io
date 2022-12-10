@@ -1,14 +1,17 @@
 <header translate="no">
   {%- if page.url == '/' -%}
-  <cite id="site-title">{{- site.title | escape -}}</cite>
+  <a aria-current="page"
+     itemid="{% link index.html %}"
+     itemscope itemtype="http://schema.org/WebPage"
+     ><cite id="site-title" itemprop="name"
+            >{{- site.title | escape -}}</cite></a>
   {{- -}}
   </a>
   {%- else -%}
   <a href="{% link index.html %}"
      itemid="{% link index.html %}"
-     itemscope itemtype="http://schema.org/WebPage">{{- -}}
-    <cite id="site-title" itemprop="name">{{- site.title | escape -}}</cite>
-    {{- -}}
-  </a>
+     itemscope itemtype="http://schema.org/WebPage"
+     ><cite id="site-title" itemprop="name"
+          >{{- site.title | escape -}}</cite></a>
   {%- endif -%}
 </header>
