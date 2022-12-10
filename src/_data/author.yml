@@ -2,9 +2,16 @@ mspondee:
   name: "Molossus Spondee"
   url: "/about"
   email: "molossusspondee@gmail.com"
-  mastodon:
-    username: MSpondee
-    server: mastodon.lol
-  twitter: MSpondee
-  github: mstewartgallus
-  linkedin: mstewartgallus
+  service:
+  - name: Mastodon
+    username: "@MSpondee@mastodon.lol"
+    url: "https://mastodon.lol/@MSpondee"
+  - name: Twitter
+    username: "@MSpondee"
+    url: "https://twitter.com/MSpondee"
+  - name: GitHub
+    username: mstewartgallus
+    url: "https://github.com/mstewartgallus"
+  - name: LinkedIn
+    username: mstewartgallus
+    url: "https://www.linkedin.com/in/mstewartgallus"

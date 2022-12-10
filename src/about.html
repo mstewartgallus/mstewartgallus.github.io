@@ -3,72 +3,48 @@ layout: page
 title: About the Author
 permalink: /about/
 ---
-{%- assign author = site.data.author[site.author] -%}
-<div itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
-  <p>My pen name is <span translate="no">Molossus Spondee</span>. This
+{%- for keyval in site.data.author -%}
+{%- assign author_id = keyval[0] -%}
+{%- assign author = keyval[1] -%}
+<address id="{{ author_id }}"
+         itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
+  <p>My pen name is <span translate="no">{{ author.name }}</span>. This
     is my personal blog mostly for posting silly poetry.</p>
 
-  <address>
-    <dl>
-      <div>
-        <dt aria-current="page"
-            aria-describedby="author">About the Author</dt>
-        <dd
-          translate="no"
-          aria-hidden="true">@<span
-                                id="author" aria-hidden="true"
-                                itemProp="name">{{ author.name }}</span></dd>
-      </div>
-      <div>
-        <dt translate="no">
-          <a rel="me"
-             href="https://{{ author.mastodon.server | cgi_escape }}/@{{ author.mastodon.username | cgi_escape }}"
-             aria-describedby="mastodon" itemProp="sameAs">Mastodon</a>
-        </dt>
-        <dd translate="no" id="mastodon"
-            aria-hidden="true">@{{ author.mastodon.username | escape }}@{{ author.mastodon.server | escape }}</dd>
-      </div>
-      <div>
-        <dt translate="no">
-          <a rel="me"
-             href="https://www.twitter.com/{{ author.twitter | cgi_escape }}"
-             aria-describedby="twitter"
-             itemProp="sameAs">Twitter</a>
-        </dt>
-        <dd translate="no" id="twitter"
-            aria-hidden="true">@{{ author.twitter | escape }}</dd>
-      </div>
-      <div>
-        <dt>
-          <a rel="me"
-             href="mailto:{{author.email | cgi_escape}}"
-             aria-describedby="email"
-             aria-hidden="true"
-             itemprop="email">Email</a>
-        </dt>
-        <dd translate="no" id="email">{{ author.email | escape }}</dd>
-      </div>
-      <div>
-        <dt translate="no">
-          <a rel="me"
-             href="https://github.com/{{ author.github | cgi_escape }}"
-             aria-describedby="github"
-             aria-hidden="true"
-             itemProp="sameAs">GitHub</a>
-        </dt>
-        <dd translate="no" id="github">{{ author.github | escape }}</dd>
-      </div>
-      <div>
-        <dt translate="no">
-          <a rel="me"
-             href="https://www.linkedin.com/in/{{ author.linkedin | cgi_escape }}"
-             aria-describedby="linkedin"
-             aria-hidden="true"
-             itemProp="sameAs">LinkedIn</a>
-        </dt>
-        <dd translate="no" id="linkedin"
-            aria-hidden="true">{{ author.linkedin | escape }}</dd>
-      </div>
-    </dl>
-  </address>
-</div>
+  <dl>
+    <div>
+      <dt aria-current="page"
+          aria-describedby="author">About the Author</dt>
+      <dd
+        translate="no"
+        aria-hidden="true">@<span
+                              id="author" aria-hidden="true"
+                              itemProp="name">{{ author.name }}</span></dd>
+    </div>
+    <div>
+      <dt>
+        <a rel="me"
+           href="mailto:{{ author.email | cgi_escape}}"
+           aria-describedby="email"
+           aria-hidden="true"
+           itemprop="email">Email</a>
+      </dt>
+      <dd translate="no" id="email">{{ author.email | escape }}</dd>
+    </div>
+
+    {%- for service in author.service -%}
+    <div translate="no">
+      <dt>
+        <a rel="me"
+           href="{{ service.url }}"
+           aria-describedby="{{ author_id }}-{{ forloop.index }}" itemProp="sameAs">
+          {{- service.name | escape -}}
+        </a>
+      </dt>
+      <dd id="{{ author_id }}-{{ forloop.index }}"
+          aria-hidden="true">{{ service.username | escape }}</dd>
+    </div>
+    {%- endfor -%}
+  </dl>
+</address>
+{%- endfor -%}
