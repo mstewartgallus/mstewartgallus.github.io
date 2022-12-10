@@ -5,8 +5,8 @@
     <h2 id="metadata-title">{{ site.data.strings.metadata.title | escape }}</h2>
   </hgroup>
   <dl>
-    <div>
-      <dt itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+    <div itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+      <dt>
         {{- -}}
         <a aria-describedby="author" rel="author" href="{{ author.url | relative_url }}" itemprop="url">
           {{- site.data.strings.metadata.author | escape -}}

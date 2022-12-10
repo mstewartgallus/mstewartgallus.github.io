@@ -35,6 +35,7 @@
       <a rel="tag"
          href="{% link search.html %}?category={{ category | cgi_escape }}"
          itemprop="item"
+         itemid="{% link search.html %}?category={{ category | cgi_escape }}"
          itemscope itemtype="https://schema.org/SearchResultsPage">
         {{- -}}
         <span itemprop="name">{{- category | escape -}}</span>{{- -}}
@@ -43,7 +44,7 @@
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <span itemprop="item"
-            itemid="{{ page.url | absolute_url }}"
+            itemid="{{ page.url | relative_url }}"
             itemscope itemtype="https://schema.org/BlogPosting">{{- -}}
         <cite aria-current="page" itemprop="name">
           {{- page.title | escape -}}
