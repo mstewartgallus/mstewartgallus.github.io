@@ -42,7 +42,8 @@
       <meta itemprop="position" content="2">{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span itemid="{{ page.url | absolute_url }}"
+      <span itemprop="item"
+            itemid="{{ page.url | absolute_url }}"
             itemscope itemtype="https://schema.org/BlogPosting">{{- -}}
         <cite aria-current="page" itemprop="name">
           {{- page.title | escape -}}
@@ -67,7 +68,8 @@
       <meta itemprop="position" content="1">{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span itemid="{{ page.url | absolute_url }}"
+      <span itemprop="item"
+            itemid="{{ page.url | absolute_url }}"
             itemscope itemtype="https://schema.org/WebPage">{{- -}}
         <cite aria-current="page" itemprop="name">
           {{- page.title | escape -}}
