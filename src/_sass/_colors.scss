@@ -16,12 +16,12 @@
     }
 }
 
-hr,h1,h2,h3,h4,h5,h6,figcaption, li::marker, li::before, [aria-current="page"] {
+hr,h1,h2,h3,h4,h5,h6,figcaption, li::marker, li::before {
      color: #A02030 ;
 }
 
 @media (prefers-color-scheme: dark) {
-    hr,h1,h2,h3,h4,h5,h6,figcaption, li::marker, li::before, [aria-current="page"] {
+    hr,h1,h2,h3,h4,h5,h6,figcaption, li::marker, li::before {
         color: #d07560 ;
     }
 }

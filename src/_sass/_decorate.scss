@@ -116,3 +116,7 @@ figure {
     position: relative ;
     overflow: auto ;
 }
+
+[aria-current="page"] {
+    text-emphasis: dot ;
+}

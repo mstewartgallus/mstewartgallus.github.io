@@ -11,6 +11,7 @@
     column-gap: 1ch ;
     inline-size: $paragraph-width ;
     max-inline-size: 100% ;
+    align-items: end ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
     all: unset ;
