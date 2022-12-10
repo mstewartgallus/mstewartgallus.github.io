@@ -9,7 +9,7 @@
     {%- if page.previous.url -%}
     <div class="previous">
       <dt>
-        <a href="{{page.previous.url}}" aria-describedby="previous-page" rel="previous">
+        <a href="{{page.previous.url}}" aria-describedby="previous-page" rel="next">
           {{ site.data.strings.paging.previous | escape }}
         </a>
       </dt>
@@ -19,7 +19,7 @@
     {%- if page.next.url -%}
     <div class="next">
       <dt>
-        <a href="{{page.next.url}}" aria-describedby="next-page" rel="next">
+        <a href="{{page.next.url}}" aria-describedby="next-page" rel="prev">
           {{ site.data.strings.paging.next | escape }}
         </a>
       </dt>
