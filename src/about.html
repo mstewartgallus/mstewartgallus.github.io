@@ -26,10 +26,10 @@ permalink: /about/
         <a rel="me"
            href="mailto:{{ author.email | cgi_escape}}"
            aria-describedby="email"
-           aria-hidden="true"
            itemprop="email">Email</a>
       </dt>
-      <dd translate="no" id="email">{{ author.email | escape }}</dd>
+      <dd translate="no" id="email"
+          aria-hidden="true">{{ author.email | escape }}</dd>
     </div>
 
     {%- for service in author.service -%}
