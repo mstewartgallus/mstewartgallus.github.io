@@ -11,13 +11,12 @@
     column-gap: 1ch ;
     inline-size: $paragraph-width ;
     max-inline-size: 100% ;
-    align-items: end ;
 }
 [itemtype="https://schema.org/BreadcrumbList"] li {
     all: unset ;
 }
 
-[itemtype="https://schema.org/BreadcrumbList"] li + li::before {
+[itemtype="https://schema.org/BreadcrumbList"] li::before {
   display: inline-block;
   margin-right: 0.5em;
   transform: rotate(15deg);
