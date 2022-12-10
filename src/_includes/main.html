@@ -7,13 +7,5 @@
       {%- endif -%}
     </hgroup>
   </header>
-  {%- if page.collection == 'posts' -%}
-  <div>
-    {{- content -}}
-  </div>
-  {%- else -%}
-  <div itemprop="articleBody">
-    {{- content -}}
-  </div>
-  {%- endif -%}
+  {{- content -}}
 </main>
