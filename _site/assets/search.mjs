@@ -289,8 +289,9 @@ for (;;) {
 
         document.title = `${tags} ${cats} — ${doctitle}`;
 
+        output.setAttribute('hidden', 'hidden');
         output.replaceChildren(postList);
-        output.ariaBusy = 'false' ;
+        output.removeAttribute('hidden');
 
         for (const option of category.options) {
             option.selected = categoryParams.has(option.value);
@@ -308,7 +309,6 @@ for (;;) {
         if (h1) {
             h1.setAttribute('tabindex', '-1');
             h1.focus();
-            h1.removeAttribute('tabindex');
         }
     }
     isfirst = false;
