@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+// default ratio on browsers is 1rem = 16px
+$remperpx: 1rem / 16px ;
+
 // Noto Sans aspect ratio :(
 $ex-height: 0.536 ;
 
@@ -8,13 +11,13 @@ $main-width: 66.3ch ;
 $side-width: 32.2ch ;
 
 $min: (
-    width: 320px,
-    font-size: 19,
+    width: 320px * $remperpx,
+    font-size: 19px * $remperpx,
     scale: 4/3
 ) ;
 $max: (
-    width: 2400px,
-    font-size: 28,
+    width: 2400px * $remperpx,
+    font-size: 24px * $remperpx,
     scale: 3/2
 ) ;
 
@@ -43,42 +46,34 @@ $max-scale: map-get($max, scale) ;
     @return #{"clamp(" $a ", " $t ", " $b ")"};
 }
 
-@function pxtorem($t) {
-    @return #{"(16 * (" $t "))"};
-}
-
 // $t is between 0 and 1 rem
 @function lerp($a, $b, $t) {
     $A: $a / 1rem;
     $B: $b / 1rem;
+    $C: $B - $A ;
     @return clamp($a,
-                  $A " * (1rem - " $t ") +"
-                  $B " * " $t,
+                  $a " + " $C " * (" $t ")",
                   $b);
 }
-// outputs between 0 and 1 px
+// outputs between 0 and 1 rem
 @function linstep($a, $b, $x) {
-    $A: $a / 1px;
-    $B: $b / 1px;
+    $A: $a / 1rem;
+    $B: $b / 1rem;
     $c: 1/($B - $A) ;
-    @return clamp(0px,
-                  #{"((" $x ") - " $a" ) * " $c},
-                  1px);
+    @return clamp(0rem,
+                  #{"((" $x ") * " $c " - " $a * $c ")"},
+                  1rem);
 }
 
 @function scale($n) {
     @return lerp(pow($min-scale, $n) * 1rem, pow($max-scale, $n) * 1rem,
-                 pxtorem(
-                     linstep($min-width, $max-width, 100vw)));
+                     linstep($min-width, $max-width, 100vw));
 }
 
 // Compute legible line height in terms of rems
 // https://www.smashingmagazine.com/2020/07/css-techniques-legibility/
 $lh: (1ex / 0.32) ;
 $line: ($ex-height * $lh * 1rem) / 1ex ;
-
-$A4-width: 8.3in ;
-$A4-margin: 1.5in ;
 
 @mixin prefix($property, $value) {
     -moz-#{$property}: $value;
