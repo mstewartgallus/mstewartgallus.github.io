@@ -54,7 +54,7 @@
     text-align: end ;
 }
 
-:is(#paging, #breadcrumbs, #search, #related) header,
-#metadata hgroup {
+:is(#paging, #search, #related) header,
+:is(#breadcrumbs, #metadata) hgroup {
     @include sr-only ;
 }

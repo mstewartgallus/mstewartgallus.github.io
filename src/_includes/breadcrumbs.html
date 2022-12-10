@@ -1,18 +1,37 @@
-{%- if page.categories.size > 0 -%}
-{%- assign categories = page.categories | sort -%}
-<nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
-  <header>
-    <hgroup>
-      <h2 id="breadcrumbs-title">{{ site.data.strings.breadcrumbs.title | escape }}</h2>
-    </hgroup>
-  </header>
+<header id="breadcrumbs" aria-describedby="breadcrumbs-title">
+  <hgroup>
+    <h2 id="breadcrumbs-title">{{ site.data.strings.breadcrumbs.title | escape }}</h2>
+  </hgroup>
+  {%- if page.url == '/' -%}
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li
+      itemid="{% link index.html %}"
+      itemprop="item"
+      itemscope itemtype="http://schema.org/WebPage"
+      >{{- -}}
+      <cite aria-current="page" id="site-title" itemprop="name">{{- site.title | escape -}}</cite>{{- -}}
+      <meta itemprop="position" content="1">{{- -}}
+    </li>
+  </ol>
+  {%- elsif page.categories.size > 0 -%}
+  {%- assign categories = page.categories | sort -%}
   {%- for category in categories -%}
-  <ol start="1" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
+      <a href="{% link index.html %}"
+         itemid="{% link index.html %}"
+         itemprop="item"
+         itemscope itemtype="http://schema.org/WebPage"
+         >{{- -}}
+        <cite id="site-title" itemprop="name">{{- site.title | escape -}}</cite>{{- -}}
+        <meta itemprop="position" content="1">{{- -}}
+      </a>
+    </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <a rel="tag" href="{% link search.html %}?category={{ category | cgi_escape }}" itemprop="item">
         {{- -}}
         <span itemprop="name">{{- category | escape -}}</span>{{- -}}
-        <meta itemprop="position" content="1">{{- -}}
+        <meta itemprop="position" content="2">{{- -}}
       </a>{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
@@ -23,5 +42,24 @@
     </li>
   </ol>
   {%- endfor -%}
-</nav>
-{%- endif -%}
+  {%- else -%}
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
+      <a href="{% link index.html %}"
+         itemid="{% link index.html %}"
+         itemprop="item"
+         itemscope itemtype="http://schema.org/WebPage"
+         >{{- -}}
+        <cite id="site-title" itemprop="name">{{- site.title | escape -}}</cite>{{- -}}
+        <meta itemprop="position" content="1">{{- -}}
+      </a>
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
+      <span aria-current="page" itemprop="name">
+        {{- page.title | escape -}}
+      </span>{{- -}}
+      <meta itemprop="position" content="2">{{- -}}
+    </li>
+  </ol>
+  {%- endif -%}
+</header>
