@@ -1,197 +1,225 @@
-{
-    "post": [{
-            "title": "Little Thing",
-            "url": "/poem/2022/12/06/little-thing/",
-            "tags": [],
-            "categories": ["Poem"],
-            "date": "2022-12-06"
-        },{
-            "title": "TBH",
-            "url": "/poem/2022/12/05/tbh/",
-            "tags": ["Autism","Creature"],
-            "categories": ["Poem"],
-            "date": "2022-12-05"
-        },{
-            "title": "Dentist",
-            "url": "/prose/2022/11/26/dentist/",
-            "tags": ["Coffee","Dating","Dentist","Rotations"],
-            "categories": ["Prose"],
-            "date": "2022-11-26"
-        },{
-            "title": "Marking Up Poetry",
-            "url": "/web/2022/11/25/marking-up-poetry/",
-            "tags": ["Accessibility","CSS","HTML","Poetry"],
-            "categories": ["Web"],
-            "date": "2022-11-25"
-        },{
-            "title": "Memories",
-            "url": "/poem/2022/11/17/memories/",
-            "tags": [],
-            "categories": ["Poem"],
-            "date": "2022-11-17"
-        },{
-            "title": "My Owner's Lover",
-            "url": "/prose/2022/11/15/my-owners-lover/",
-            "tags": ["Hamster"],
-            "categories": ["Prose"],
-            "date": "2022-11-15"
-        },{
-            "title": "Three Mothers",
-            "url": "/poem/2022/11/14/three-mothers/",
-            "tags": ["2019"],
-            "categories": ["Poem"],
-            "date": "2022-11-14"
-        },{
-            "title": "Grounding",
-            "url": "/poem/2022/11/11/grounding/",
-            "tags": ["2021"],
-            "categories": ["Poem"],
-            "date": "2022-11-11"
-        },{
-            "title": "Gears",
-            "url": "/poem/2022/11/10/gears/",
-            "tags": ["2018"],
-            "categories": ["Poem"],
-            "date": "2022-11-10"
-        },{
-            "title": "Hunter Hunter",
-            "url": "/poem/2022/11/03/hunter-hunter/",
-            "tags": ["2018"],
-            "categories": ["Poem"],
-            "date": "2022-11-03"
-        },{
-            "title": "Orc",
-            "url": "/poem/2022/11/01/orc/",
-            "tags": [],
-            "categories": ["Poem"],
-            "date": "2022-11-01"
-        },{
-            "title": "The Best Coffee",
-            "url": "/prose/2022/10/31/the-best-coffee/",
-            "tags": ["Coffee"],
-            "categories": ["Prose"],
-            "date": "2022-10-31"
-        },{
-            "title": "Ants",
-            "url": "/poem/2022/10/29/ants/",
-            "tags": ["2018"],
-            "categories": ["Poem"],
-            "date": "2022-10-29"
-        },{
-            "title": "If She Breathes She's a Thot",
-            "url": "/prose/2022/10/28/if-she-breathes-shes-a-thot/",
-            "tags": ["If She Breathes"],
-            "categories": ["Prose"],
-            "date": "2022-10-28"
-        },{
-            "title": "Purple Sands",
-            "url": "/poem/2022/10/27/purple-sands/",
-            "tags": ["2019","2022"],
-            "categories": ["Poem"],
-            "date": "2022-10-27"
-        },{
-            "title": "Mammon",
-            "url": "/poem/2022/10/27/mammon/",
-            "tags": ["2019","The Ring and the Cup"],
-            "categories": ["Poem"],
-            "date": "2022-10-27"
-        },{
-            "title": "The Wrath That Might Have Been",
-            "url": "/poem/2022/10/25/the-wrath-that-might-have-been/",
-            "tags": ["2019"],
-            "categories": ["Poem"],
-            "date": "2022-10-25"
-        },{
-            "title": "Wotan",
-            "url": "/poem/2022/10/23/wotan/",
-            "tags": ["2018"],
-            "categories": ["Poem"],
-            "date": "2022-10-23"
-        },{
-            "title": "Gacc/Gock",
-            "url": "/prose/2022/10/22/gacc-gock/",
-            "tags": [],
-            "categories": ["Prose"],
-            "date": "2022-10-22"
-        },{
-            "title": "I Know a Secret",
-            "url": "/poem/2022/10/22/i-know-a-secret/",
-            "tags": ["2019","2022"],
-            "categories": ["Poem"],
-            "date": "2022-10-22"
-        },{
-            "title": "Morpheus",
-            "url": "/poem/2022/10/22/morpheus/",
-            "tags": ["2018"],
-            "categories": ["Poem"],
-            "date": "2022-10-22"
-        },{
-            "title": "Bed",
-            "url": "/poem/2022/10/22/bed/",
-            "tags": ["2019"],
-            "categories": ["Poem"],
-            "date": "2022-10-22"
-        },{
-            "title": "Night Walk",
-            "url": "/prose/2022/10/21/night-walk/",
-            "tags": [],
-            "categories": ["Prose"],
-            "date": "2022-10-21"
-        },{
-            "title": "The Rock",
-            "url": "/poem/2022/10/21/the-rock/",
-            "tags": ["2019"],
-            "categories": ["Poem"],
-            "date": "2022-10-21"
-        },{
-            "title": "Coffee",
-            "url": "/prose/2022/10/21/coffee/",
-            "tags": ["Coffee"],
-            "categories": ["Prose"],
-            "date": "2022-10-21"
-        },{
-            "title": "Two Girls",
-            "url": "/poem/2022/10/20/two-girls/",
-            "tags": ["2019"],
-            "categories": ["Poem"],
-            "date": "2022-10-20"
-        },{
-            "title": "Good Boy",
-            "url": "/prose/2022/10/20/good-boy/",
-            "tags": [],
-            "categories": ["Prose"],
-            "date": "2022-10-20"
-        },{
-            "title": "Emotion Exercise",
-            "url": "/prose/2022/10/19/emotion-exercise/",
-            "tags": ["2019"],
-            "categories": ["Prose"],
-            "date": "2022-10-19"
-        },{
-            "title": "Rumble",
-            "url": "/poem/2022/10/19/rumble/",
-            "tags": ["2019"],
-            "categories": ["Poem"],
-            "date": "2022-10-19"
-        },{
-            "title": "The Night Ghost",
-            "url": "/poem/2022/10/19/the-night-ghost/",
-            "tags": ["2019","The Night Ghost"],
-            "categories": ["Poem"],
-            "date": "2022-10-19"
-        },{
-            "title": "The Slow Rot",
-            "url": "/poem/2022/10/18/the-slow-rot/",
-            "tags": ["2019"],
-            "categories": ["Poem"],
-            "date": "2022-10-18"
-        },{
-            "title": "The Quest",
-            "url": "/poem/2022/10/18/the-quest/",
-            "tags": ["2019","The Ring and the Cup"],
-            "categories": ["Poem"],
-            "date": "2022-10-18"
-        }],
-    "category": {"Poem": [0,1,4,6,7,8,9,10,12,14,15,16,17,19,20,21,23,25,28,29,30,31],"Prose": [2,5,11,13,18,22,24,26,27],"Web": [3]},
-    "tag": {"The Ring and the Cup": [15,31],"2019": [6,14,15,16,19,21,23,25,27,28,29,30,31],"The Night Ghost": [29],"Coffee": [2,11,24],"2018": [8,9,12,17,20],"2022": [14,19],"If She Breathes": [13],"2021": [7],"Hamster": [5],"Poetry": [3],"HTML": [3],"CSS": [3],"Accessibility": [3],"Rotations": [2],"Dentist": [2],"Dating": [2],"Autism": [1],"Creature": [1]}
-}
+[{
+        "title": "Little Thing",
+        "content": " A small thing sat in the dirtlegs splayed, hands by its sides.I am tall it saidand stood to prove its point.  Nothing but the sky aroundso vast the earth surround.could hear and scarcely seethe little speck.  The sky knelt a little lowerto observe this would-be challenger.I am small but I am strongso the little thing would amend.",
+        "url": "/poem/2022/12/06/little-thing/",
+        "tags": [],
+        "categories": ["Poem"],
+        "date": "2022-12-06"
+    },{
+        "title": "TBH",
+        "content": " The creature stared at me with wide black eyesI had taken a look when I heard a sound by the binBright fur lit gold&thinsp;—&thinsp;in the sodium light To be honest, it said&thinsp;—&thinsp;I prefer the chicken",
+        "url": "/poem/2022/12/05/tbh/",
+        "tags": ["Autism","Creature"],
+        "categories": ["Poem"],
+        "date": "2022-12-05"
+    },{
+        "title": "Dentist",
+        "content": "I rotate up to a 45° angle. Head on the ground legs in the air. It is a cool dark evening and I am safe and sheltered in my warm winter coat. I am in the park near the highway. I hear the traffic rumble in the distance. Nearby a crow pecks at a stick and hops around cawwing. Rotations done for the day I head home.  It is sometime after bedtime and I am awake under warm heavy weighted blankets. A coppery taste comes up from my throat. I ponder taking a vegetable peeler to my flesh. My legs bend back at the hips at a 90° angle. I am a worm. I pull at my face nuzzling my cheeks against my hands my soft squishy flesh comforting in sensory feeling. Between my false ribs throbs a dull ache.  I wake up at 1:00 AM with my cock twitching and my nipples aching. I masturbate to fantasies of being tied up, forced femmed, put in latex and groped and raped. This morning I feel like the dried crust at the bottom of an unwashed coffee cup. I reach over to my phone on my the desk beside my bed to look for some of my favorite porn. It is 10:09 AM and I have a dentist appointment soon. Ah fuck! I struggle out of my floral jam jams and into a pair of deep blue jeans. I pull on a long sleeved red shirt and pick up my morning meds and rush out the bedroom to the door. On the way hurrying to the bus stop I phone the dentist.  On the way to the coffee shop it seems as if those around me are puppets moving all stiff and herky-jerky. The yellow crane in a nearby building under construction becomes a little toy. Toy cars and toy houses and toy people. I take a shit in the coffee shop after talking to a cute girl.",
+        "url": "/prose/2022/11/26/dentist/",
+        "tags": ["Coffee","Dating","Dentist","Rotations"],
+        "categories": ["Prose"],
+        "date": "2022-11-26"
+    },{
+        "title": "Marking Up Poetry",
+        "content": "Common poetry markup is inaccessible, unsemantic and doesn’t display well. I am not skilled in accessibility and I don’t have good solutions. See Try It if you want to try out a screen reader yourself. Special thanks to the kind people who helped edit this post.    Accessibility  § The art of the spoken word is not accessible to the visually impaired. Most markup navigates awkwardly, does not insert appropriate pauses for breath, and mispronounces stress and sounds. Consider Markup A and Markup B. In Markup A a poem is an ordered list of stanzas and stanzas are ordered lists of verses. In Markup B poems are sequences of stanzas, stanzas are paragraphs and lines in a paragraph are separated by line break elements.  Markup A# &lt;ol class=\"poem\"&gt; &lt;li&gt; &lt;ol&gt; &lt;li&gt;Roses are red&lt;/li&gt; &lt;li&gt;Violets are blue,&lt;/li&gt; &lt;li&gt;Sugar is sweet&lt;/li&gt; &lt;li&gt;And so are you.&lt;/li&gt; &lt;/ol&gt; &lt;/li&gt; &lt;/ol&gt;    Markup B# &lt;p class=\"stanza\"&gt;Roses are red&lt;br&gt; Violets are blue,&lt;br&gt; Sugar is sweet&lt;br&gt; And so are you.&lt;/p&gt;   Markup A is hard to navigate as each line in an ordered list must be manually tracked through. As well line m of n is repeated for every line of Markup A. You can use the presentation ARIA role as in Markup A and Markup A’’ to ameliorate the problem. By the spec using the presentation role in a list item for a list already marked with a presentation role doesn’t do much, but such markup can reduce cruft in Firefox’s accessibility inspector.  Markup A'# &lt;ol class=\"poem\"&gt; &lt;li&gt; &lt;ol role=\"presentation\"&gt; &lt;li role=\"presentation\"&gt;Roses are red&lt;/li&gt; &lt;li role=\"presentation\"&gt;Violets are blue,&lt;/li&gt; &lt;li role=\"presentation\"&gt;Sugar is sweet&lt;/li&gt; &lt;li role=\"presentation\"&gt;And so are you.&lt;/li&gt; &lt;/ol&gt; &lt;/li&gt; &lt;/ol&gt;    Markup A''# &lt;ol class=\"poem\" role=\"presentation\"&gt; &lt;li&gt; &lt;ol role=\"presentation\"&gt; &lt;li role=\"presentation\"&gt;Roses are red&lt;/li&gt; &lt;li role=\"presentation\"&gt;Violets are blue,&lt;/li&gt; &lt;li role=\"presentation\"&gt;Sugar is sweet&lt;/li&gt; &lt;li role=\"presentation\"&gt;And so are you.&lt;/li&gt; &lt;/ol&gt; &lt;/li&gt; &lt;/ol&gt;   As a nuclear solution you can markup the text for graphical display using the graphic role as in Markup N. I advise use of the aria-labelledby aria-details (2022-11-28) attribute instead of the aria-label attribute here. aria-label has a tendency to work poorly with newlines in text, is not usually translated by automated tools and doesn’t let you embed more markup as appropriate.  Markup N# &lt;figure&gt; &lt;div role=\"img\" aria-details=\"transcript\"&gt; &lt;ol class=\"poem\"&gt; &lt;li&gt; &lt;ol&gt; &lt;li&gt;Roses are red&lt;/li&gt; &lt;li&gt;Violets are blue,&lt;/li&gt; &lt;li&gt;Sugar is sweet&lt;/li&gt; &lt;li&gt;And so are you.&lt;/li&gt; &lt;/ol&gt; &lt;/li&gt; &lt;/ol&gt; &lt;/div&gt; &lt;figcaption id=\"transcript\"&gt; &lt;p&gt;Transcript for text to speech:&lt;/p&gt; &lt;p&gt;Roses are red ; Violets are blue, Sugar is sweet ; And so are you.&lt;/p&gt; &lt;/figcaption&gt; &lt;/figure&gt;   In some setups Markup B sounds yucky. Ending and starting words in separate lines like red and Violets run together. You might include extra punctuation annotated with a screen-reader-only class as with Markup A’ and Markup B’ CSS to work around this issue. However, on Firefox this hack breaks up lines into separate areas to track through.  Markup B' HTML # &lt;p&gt;Roses are red&lt;span class=\"sr-only\"&gt;; &lt;/span&gt;&lt;br&gt; Violets are blue,&lt;br&gt; Sugar is sweet&lt;span class=\"sr-only\"&gt;; &lt;/span&gt;&lt;br&gt; And so are you.&lt;/p&gt;    Markup B' CSS # .sr-only { display: inline-block ; user-select: none ; font-size: 1px ; line-height: 1px ; color: transparent ; }   No revisions of Markup A or Markup B ensure proper pronunciation of stress and sounds. Only American English is likely to be pronounced correctly. To help, you can set the language attribute for documents and poems as appropriate. However, this is not a complete solution. As an anglophone Canadian author I set the language attribute for my documents and poems to en-CA. However, this only helps with English words and not with imports from other languages. I don’t know how to help screen readers pronounce names of mythical figures. You could markup individual phrases like &lt;i lang=\"non\"&gt;Sleipnir&lt;/i&gt; (old Norse) and &lt;i lang=\"gem\"&gt;Wotan&lt;/i&gt; (Germanic languages group) but this particular markup doesn’t help. Semantically you might markup stress with emphasis with the em element. However, such markup is verbose and many screen readers ignore elements like em because of the heavy unsemantic abuse of such elements in the wider internet for presenting bold text. Perhaps there might be some obscure Unicode diacritics for better marking up the prosody but I have not explored this option. I worry that such glyphs might be pronounced in common screen readers as something like Unicode character 591.     Presentation  § Laying out poetry on small formats is awkward. In print the standard layout for overlong lines is to align the first line ragged right and all other lines ragged left. You can approximate a poetry layout with a hanging indent layout something like Indent CSS. However, a hanging indent layout is not really correct.  Indent CSS # .line { text-indent: -4ch ; margin-left: 4ch ; }   You can approximate a poetry layout on the web by aligning every line block to the left but aligning the last line of the text within the line block to the right. Something like Align Last CSS almost works for a poetry layout. However, even this layout fails when you overflow multiple lines.  Align Last CSS # .stanza { display: flex ; flex-direction: column ; align-items: start ; } .line { display: block ; text-align-last: end ; }   Example and Example Code are similar to the current compromise I use on this site.  Example#    Roses are red Violets are blue Sugar is sweet aaaaaaaaaaaaaaaa.     Example Code# &lt;style&gt; #scope p { text-indent: 0 ; padding: 0 ; } #scope p &gt; span { display: inline-block ; text-align-last: end ; } &lt;/style&gt; &lt;div id=\"scope\" lang=\"en-CA\"&gt; &lt;p&gt; &lt;span&gt;Roses are red&lt;/span&gt;&lt;br&gt; &lt;span&gt;Violets are blue&lt;/span&gt;&lt;br&gt; &lt;span&gt;Sugar is sweet&lt;/span&gt;&lt;br&gt; &lt;span&gt;aaaaaaaaaaaaaaaa.&lt;/span&gt; &lt;/p&gt; &lt;/div&gt;       Conclusion  § You should use the audio element to markup poetry.     Try It  § Personally I found Android TalkBack to be the easiest screen reader to get started with. The helpful A11y Project blog has a number of guides on getting started with screen readers but they might be a little old.  Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS Getting Started with VoiceOver on iOS Getting Started with NVDA Getting Started with MacOS VoiceOver      And One More Thing  § As of this blog post, the CSS Speech Module has never really gone anywhere. Perhaps in the future the voice-stress, voice-duration (for long syllables), voice-pitch (for pitch accent) and pause properties would solve these sort of accessibility problems. ",
+        "url": "/web/2022/11/25/marking-up-poetry/",
+        "tags": ["Accessibility","CSS","HTML","Poetry"],
+        "categories": ["Web"],
+        "date": "2022-11-25"
+    },{
+        "title": "Memories",
+        "content": " I feel nostalgic forThe warmth of&thinsp;—&thinsp;the hospital bedThe cold wet quiet&thinsp;—&thinsp;of fresh snowAnd other memories from long ago  I rememberThe chocolate sandwiched ice cream barCheap freezies&thinsp;—&thinsp;in elementary schoolA long yellow slide downFalling asleep to the rain outside  Masturbation in the darkThings in the bathAnd other things of that nature",
+        "url": "/poem/2022/11/17/memories/",
+        "tags": [],
+        "categories": ["Poem"],
+        "date": "2022-11-17"
+    },{
+        "title": "My Owner's Lover",
+        "content": "My name is Silk and I am a hamster. I am a woman and I have pale cream colored fur. Being a hamster I am a solitary sort but I actually like my owner. The only thing is I wish my owner and her lover wouldn’t have such loud and annoying sex. Have you ever heard a woman scream scootaloo during an orgasm? Or hear your owner poke her lover’s tits for ten minutes straight saying beep, boop, beep boop? Today I was curled up in my little coconut shell closet nibbling on a lightly fermented pumpkin seed while my owner and her lover were having dinner. They were having spaghetti with ground beef. I had a craving for mealworms but all I had were seeds. Quick cover Silk’s eyes my owner yelled and I knew I was in trouble. A quick peek out of my hut and it seemed as if my owner had spilled spaghetti across her lover’s prodigious chest but in the process of mopping things up had entangled themselves onto the floor. Whereupon my owner’s lover proceeded to mime playing a guitar while stroking my owner’s clit. rum pum pum pum, rum pum pum pum my owner sung to the tune of Little Drummer Boy while miming playing bongos with her lover’s chest.",
+        "url": "/prose/2022/11/15/my-owners-lover/",
+        "tags": ["Hamster"],
+        "categories": ["Prose"],
+        "date": "2022-11-15"
+    },{
+        "title": "Three Mothers",
+        "content": " The sky was grey and sweatyand three fat mothers talked and smoked.A little kid lay on the groundand played with the newest Nintendo toyand next to him a little childheld an Apple iPad in his stroller.The wind brought the traffic stink to meand I felt relief a little colder.",
+        "url": "/poem/2022/11/14/three-mothers/",
+        "tags": ["2019"],
+        "categories": ["Poem"],
+        "date": "2022-11-14"
+    },{
+        "title": "Grounding",
+        "content": " A lamp hanging over headThe overcast sky outsideThe felt cap across the deskA man in the seat aside across from meThe clock 9:19 an hour behind  Paper scrunching, cracklingFans, the AC? hummingKeypresses tapping  The textured chiclet keyboardOn my wrist, smooth greenwood beadsSoft dry socks warm my feet  Coffee stale on my tongue",
+        "url": "/poem/2022/11/11/grounding/",
+        "tags": ["2021"],
+        "categories": ["Poem"],
+        "date": "2022-11-11"
+    },{
+        "title": "Gears",
+        "content": " Ceaseless pacing&thinsp;—&thinsp;close behindGears colliding clash and&thinsp;—&thinsp;grindIn the&thinsp;—&thinsp;factory they dance and screechHaephestus hand&thinsp;—&thinsp;mother, machine and man  Words become javelins of&thinsp;—&thinsp;warHermes-Thoth no&thinsp;—&thinsp;angel anymoreThe&thinsp;—&thinsp;industrial disease of men— Behold the rape of ink and pen  Words at war with&thinsp;—&thinsp;mind become the demon tyrant of mankind",
+        "url": "/poem/2022/11/10/gears/",
+        "tags": ["2018"],
+        "categories": ["Poem"],
+        "date": "2022-11-10"
+    },{
+        "title": "Hunter Hunter",
+        "content": " Hunter, hunter&thinsp;—&thinsp;I hunt for one like theeHunter, hunter&thinsp;—&thinsp;why have you wounded me?Hunter, hunter&thinsp;—&thinsp;so strong and fairYou surpass Eros in dread accuracy  Hunter, hunter&thinsp;—&thinsp;where are your painless arrows?Hunter, hunter&thinsp;—&thinsp;I dream to hunt for gallowsHunter, hunter&thinsp;—&thinsp;of wild landsThe hunt has hunted me through straits and narrows  Hunter, hunter&thinsp;—&thinsp;can you find my path?Hunter, hunter&thinsp;—&thinsp;through woods and thornsHunter, hunter&thinsp;—&thinsp;of the silver moona stag implores you gut by its own horns",
+        "url": "/poem/2022/11/03/hunter-hunter/",
+        "tags": ["2018"],
+        "categories": ["Poem"],
+        "date": "2022-11-03"
+    },{
+        "title": "Orc",
+        "content": " Give me a wish&thinsp;—&thinsp;and I will wish you wellI will give you&thinsp;—&thinsp;a magic spellI'm in a mood, rather wickedI seek death&thinsp;—&thinsp;or something like itGive me your spiteAnd I will writeVicious murder, black shit&thinsp;—&thinsp;of Brigid's wombI will bring a man&thinsp;—&thinsp;to his tombDead things know&thinsp;—&thinsp;buried passions, wrath and thirstI am the font&thinsp;—&thinsp;Pluto's curseLiquid of the MnemosyneDrink and dreamAnd all ugly things in your sightBitter words I will write",
+        "url": "/poem/2022/11/01/orc/",
+        "tags": [],
+        "categories": ["Poem"],
+        "date": "2022-11-01"
+    },{
+        "title": "The Best Coffee",
+        "content": "The best coffee in Vancouver is a matter of taste. However, the best coffee per dollar is objective fact. The problem with chain fast food coffee is not poor quality but rather inconsistency. Despite guidelines otherwise I assume it is likely many coffee machines are unwashed for days or many pots of coffee are kept stale on warm for hours. So timing and location are key. Depending on the shift and the volume of customers you may or may not obtain a fresh cup of coffee. Never order decaf. I assume the employees must spit it in it or something. The other side of coffee is psychological and internal to the self. Coffee can be tough on the stomach and should be consumed in small quantities along with a small amount of some bread stuff. But moreover, time of day and relative thirst or hunger plays a role as well. The best coffee is consumed early in the morning along with the thick fog of a headache. Setting and weather are critical as well. The best coffee is drunk in a warm comfortable quiet place and at the same time under an umbrella during the rain in a park. Both are key ingredients. The best coffee requires walking. There are a few locations in Vancouver near a nice park and near a quiet place with good internet access like a public library. Some pleasant locations to look around from include the central library and the sea wall. Unfortunately such matters are also predicated on time. Nothing is constant and especially not coffee. Coffee is more of a feel or matter of experience for certain locations and times than for research. I will not share my favorite locations. Small grimy places, a few chains, a few hipster places you can look up on any review blog of coffee in Vancouver. I do not want you to spoil the atmosphere and I hate you and wish you a bad day. If you really must try circling out from some skate parks or underneath highway overpasses.",
+        "url": "/prose/2022/10/31/the-best-coffee/",
+        "tags": ["Coffee"],
+        "categories": ["Prose"],
+        "date": "2022-10-31"
+    },{
+        "title": "Ants",
+        "content": " Ants in a circleshall never dream or knowof little boys&thinsp;—&thinsp;who in circles roundmake them go",
+        "url": "/poem/2022/10/29/ants/",
+        "tags": ["2018"],
+        "categories": ["Poem"],
+        "date": "2022-10-29"
+    },{
+        "title": "If She Breathes She's a Thot",
+        "content": "Like a pug in an oxygen mask I lied down on the carpet by the air purifier and shitposted away on the internet. My Saint Sebastian ex-gay thread had sparked an 80 page debate on the political forum I frequented and I had to see the madness through. Besides some idiot had got bent into a rant. You have no power here I replied. And then again I’m already dead anyway pretty much She replied ok. I checked back every hour or so but she seemed to have stopped replying even to my colorful image suggesting she was transgender. So I returned to the routine. Afraid I might grind my fingers in the coffee grinder I opened the drawer it was kept in and checked it was safely unplugged and stored away. I stared up at the popcorn ceiling breathless and watched little technicolor squiggles swirl around until I fell asleep.  The supernatural intruded slowly. The first night when I was wanking away at 12 AM imagining my ass being penetrated I heard a loud buzzing sound like wasps. I put it down to nerves. Steadily the phenomenon added up. A loud hum at the midnight hours. When I rested before bed a sound like bells. When I looked out one eye a hue of colors different from the other. On Thursday during my morning commute to the library where I do nothing in particular I was met with the sudden urge to fling myself off a highway overpass into the traffic below. It was as if some worm wrapped around my brain had contracted and struck me with itching pain and a feeling of doom. I changed my commute to avoid overpasses and bridges.  She sent me a message during the night. I woke up with a heavy weight pinning me in place. A roiling darkness sat on my chest. I tried to move or call for help but could not. The darkness said her name was Must. She said she had planned to kill me but upon seeing how pathetic I was decided to spare me and had decided to make my life a living hell instead. She explained I was her thrall now and that hell was both a physical place and a state of mind. Identity was a matter of perspective. If she could walk to me she would be me and if I could walk to her I would be her. For the rest of the night I drifted in and out of sleep. Each time I woke up I felt Must on top of me watching. Until the morning sun appeared when I woke up and the presence was gone completely.  Must had bent the day against me. I was exhausted unable to breathe or rest. Moreover, as if by some illusion stripped away the people around me had transformed into puppeted corpses. Every trivial interaction became an ordeal and I could no longer draw strength or comfort from those who I had considered friends. I could not bear to meet the hideous gazes of those around me. During the night I was compelled to roam by a manic energy. I felt hot ash drawn into my chest when I was trying to sleep and cool relief when I walked the night. It is oddly calming during the midnight hours when there is no traffic or human face to fear.  The first task Must demanded of me was to hide the vanity of my flesh. If I was good the pain would lessen although never go away entirely. If I was bad the pain would increase. One of the numerous punishments meted out to me was a sudden stabbing pain in a mole on my scrotum. By this sudden intrusion into my life I was made to rush to the bathroom to check if my junk was ok or at urgent times to fondle myself in public. Fear of this public humiliation alienated myself further and I no longer attended events hosted by my friends. I soon remained covered up at all times in long baggy sweaters and pants. I went to great lengths to avoid my appearance and even took baths in the dark.  For a few months there were no further demands. Still the pain continued and I fell even further into a state of fog. As a result of the constant pains administered to me I had grown desensitized in my crotch. A curious numbness developed much like a newly killed tooth. Among other punishments Must had started to insert steel needles into my arms during the night. Shaving my arms near raw seemed to blunt the pain a little somehow. So I folded shaving my body hair into my daily routine.  To cope with the pain and suicidal ideations I developed an intense practise of meditation. I found it easiest to get started with the book Meditation in Plain English and meditating lying on the ground. I soon bought a zafu, a meditation mat, a meditation bench, a mala bead braclet and necklace and a small Buddha statue for a personal altar. My usual practice consisted of a small amount of yoga such as standing tree pose to wake myself up and then proceeded to basic box breathing for a few minutes to calm myself down. Once sufficiently energized and rested I meditated on my solar plexus and in rhythm subvocalized a dharani (I preferred Om Shanti Shanti Shanti.) My preferred meditation position being easy pose although sometimes I found using a meditation bench less straining. None of these trappings were really necessary of course. If you remember summer break lying on bed doing nothing just watching the blanket rise and fall with your breath then that is meditation. The numinal is hard to explain in words. Sometimes I felt as if I was moving like I was falling through a storm or a vast pressure on top of me as if I was buried beneath the earth or there was a flickering red, black, yellow vast expanse behind my closed eyelids. I thought for a while I was free of Must.",
+        "url": "/prose/2022/10/28/if-she-breathes-shes-a-thot/",
+        "tags": ["If She Breathes"],
+        "categories": ["Prose"],
+        "date": "2022-10-28"
+    },{
+        "title": "Purple Sands",
+        "content": " in a land of purple sands&thinsp;—&thinsp;a glasswork city grewcathedrals of stained glass&thinsp;—&thinsp;and a likewise people too  from the land the Glassmen sprung&thinsp;—&thinsp;as flowers from the earthlinked as one&thinsp;—&thinsp;one people all from birth  such was this race of men&thinsp;—&thinsp;that none could hate or condemnand no one could suffer ill&thinsp;—&thinsp;for death would the killer kill  and of this strangest race&thinsp;—&thinsp;they had no need for face or tonguefor each and all saw alike&thinsp;—&thinsp;as through glass&thinsp;—&thinsp;the one  to the city she brought&thinsp;—&thinsp;strange coins, strange eyesstrange clothing, tantalizing hips and thighs  a stranger wandered in&thinsp;—&thinsp;she had a voice you could not knowa heart they could not recall&thinsp;—&thinsp;and so much blood",
+        "url": "/poem/2022/10/27/purple-sands/",
+        "tags": ["2019","2022"],
+        "categories": ["Poem"],
+        "date": "2022-10-27"
+    },{
+        "title": "Mammon",
+        "content": " Two found the castle&thinsp;—&thinsp;and petitioned the dragon athis court&thinsp;—&thinsp;where the beast crouched atop his horde of gold   Lord Mammon&thinsp;—&thinsp;by right of property and on appeal to your convictions?Might you gift the ring I should inherit?  I know justice. I know mercyThese are the gods that men pray to in my presence!  And there is none, none that not fade away&thinsp;—&thinsp;Yes!All men all&thinsp;—&thinsp;decay and die, the dragon's horde  Being just&thinsp;—&thinsp;This earthly dust, the dross of manThis golden horde, the skulls of dead  What's earthly wealth in Hell&thinsp;—&thinsp;is your head!What should I care for mortal men and mercy?  But I always hunger more… A trade is due.  You ought to lose a heart to make a body wholeTake the ring and lose your heartKeep your heart and lose your soul  So take this ring then&thinsp;—&thinsp;this too shall passAlways will mortal's ring&thinsp;—&thinsp;slip away to me  By my father time, a weapon to surpassAll tanks and bombs and fears&thinsp;—&thinsp;all these years  My horde is greater still than any mortal kingsFor time makes all men afraid of golden rings!  And with a loud roaring of wind, our hero twistedAnd tumbled across the harsh desert sands  Blown about and about and about and aboutSinging and sighing and laughing and crying",
+        "url": "/poem/2022/10/27/mammon/",
+        "tags": ["2019","The Ring and the Cup"],
+        "categories": ["Poem"],
+        "date": "2022-10-27"
+    },{
+        "title": "The Wrath That Might Have Been",
+        "content": " At the rising of the sun,From their hovels creep the working menAnd crawling from the forest muck, crawling from its denTo the city&thinsp;—&thinsp;a sick thing wanders in  It is almost like a mana rotten starving man  Aching, shaking, crippled, crawling,The horrid thing, stinking filthShudders down the city streets  And with its wicked strength,All things it knocks asideBlind, unseeingThe rats about which run and hide  To the root it goes, to the city's centerAnd fat from the city poursFear of its boiling wrathEnough the streets to crush and render  To the root it goes, to the city's centerEmpty streets surroundCigarettes and needles, trash and embers  From on high the newsmen watchEntranced in fear and shockHow mighty must it once have been?This thing that struggles now to walk  It should rage and shoutShould&thinsp;—&thinsp;if sickness sound had not forgotIt ragesSilent as the lifeless streets around  At red dusk&thinsp;—&thinsp;smoggy, tired, nervous hotIt finds a fallen poleIt stoops to lift the cudgelIt lifts, tendons stretched taughtIt lifts&thinsp;—&thinsp;and stops, falls&thinsp;—&thinsp;on old pains caught  From icy chills and sweatIt boils fever fire hotIt stoopsAnd lifts its club again  With its mighty club it strikesAnd all the earth it shakesAnd in seventy pieces tearsthe wrath that might have been",
+        "url": "/poem/2022/10/25/the-wrath-that-might-have-been/",
+        "tags": ["2019"],
+        "categories": ["Poem"],
+        "date": "2022-10-25"
+    },{
+        "title": "Wotan",
+        "content": " Of those all&thinsp;—&thinsp;that Wotan call, number in good homeless mento Valhalla they go&thinsp;—&thinsp;was one-eye I know&thinsp;—&thinsp;a hobo they ken  For too many of hobos have talking headsAnd starved nine days without bread  Have you slept in the rain? 'Neath a tree?I'll show you the runes&thinsp;—&thinsp;the triangle hands  And all hobo's of old&thinsp;—&thinsp;the railroad rodeYou think Sleipnir was fast as the line?  And a Norse god of old&thinsp;—&thinsp;should know how to drinkSo who would you have?&thinsp;—&thinsp;The drunk or the erg'?  For a thief and a king&thinsp;—&thinsp;a warrior's dirge!",
+        "url": "/poem/2022/10/23/wotan/",
+        "tags": ["2018"],
+        "categories": ["Poem"],
+        "date": "2022-10-23"
+    },{
+        "title": "Gacc/Gock",
+        "content": "So I was idly browsing social media and hugging my blahaj in bed when I saw my mutuals’ post doing numbers on gacc/gock. gacc/gock The social media app for transbians by transbians. Clone an existing app but for a niche subgroup like college students or mentally ill men in dresses. Then expand. Or given the predilections of those on the platform inflate. The eternal recurrence. If a demon appeared before you and told you all that was shall be again would you cringe or declare yourself a God? The Nietzschean ubermensch is here and she is a lolcow. So I was staring at a time lapse of my friend’s supernumerary butt hole, an abscess drained last month ago. I suppose this was what Zhaungzhi meant by the pipes of heaven and earth. I had sworn a blood oath to stay off the chats but I suppose one little peek couldn’t hurt. The familiar cacophony overcame me as a vortex of fuck sucked me in. Typically I used a katana but the current meta favored a Mosin Nagant. The dueling subprogram of the network was old, elegant and endlessly broken. The latest patches only try to contain the worst of the chaos. I should know as the maintainer. The easiest way to find information is to get dirty. I hit the streets and greedily scarfed down the cigarette butts and needles littered about. Hey it’s VR they’re just bytes! Gradually I picked up an acrid trail. Amongst the usual forums I found a black mass with a leaking stoma. Wendigo. I walked in chewing on one last cigarette butt. Hey it’s a genuine exploit! I explained. They never intended you to use cigarettes like this so it leaks metadata like crazy. I took another drink of coffee. It didn’t wash the taste out of my mouth but it helped to pretend it did. Anon noted uhuh I understood a bit of that.",
+        "url": "/prose/2022/10/22/gacc-gock/",
+        "tags": [],
+        "categories": ["Prose"],
+        "date": "2022-10-22"
+    },{
+        "title": "I Know a Secret",
+        "content": " I know a secretthe creature saidHe sat there on the cobblestonesin the darkness, just out of sightof the yellow sodium light  We sat there for a whileMe on the bench, him by the seaThe wind not muchby the waterfront  The creature spoke againa few years back,I was sitting not far from herein the darkness, just out of sighta man raped a girl under cover of the night  I know a secret,for I see very well,even under&thinsp;—&thinsp;the night.These eyes catch many thingsI will never tell.  The truth came outdecades later at the trialYour courts&thinsp;—&thinsp;are not like oursWe have eyes&thinsp;—&thinsp;which catchThe beating of the heartWhispers&thinsp;—&thinsp;inside the throat  I saw an old man ill and dyingtoo rich and sick for jailWhen he was coughing sputum upI was sitting thereI know a secretand I will never tell",
+        "url": "/poem/2022/10/22/i-know-a-secret/",
+        "tags": ["2019","2022"],
+        "categories": ["Poem"],
+        "date": "2022-10-22"
+    },{
+        "title": "Morpheus",
+        "content": " Oh formless one  sing me, send me pleasant sights&thinsp;—&thinsp;sing me, send me horrid frights  show me darkness&thinsp;—&thinsp;and dawning of the dayand let me dream of&thinsp;—&thinsp;what I dreamt I locked away let me lose my heart&thinsp;—&thinsp;like an empty foollet me be a thief and king&thinsp;—&thinsp;to serve and rule  all these things show to me&thinsp;—&thinsp;there is naught I wouldn't knowto drink of memory&thinsp;—&thinsp;to the depths of Hell I'd go  down to the lake of fire&thinsp;—&thinsp;to the cracks of mindwhere unformed men&thinsp;—&thinsp;crawl through muck and grime  that wail and groan to us&thinsp;—&thinsp;these partial things afirewho lack tongue or eye or arm or bone  all things alight in flame, till even darkness fire consumenaught left but flame and gnashing teeth, the final doom  and to these ashes&thinsp;—&thinsp;let me dreamlet me see a niad&thinsp;—&thinsp;a mirror river stream   show me singing of the stars&thinsp;—&thinsp;heavenly winemad with love and loss&thinsp;—&thinsp;let me lose my mind  please send me a dream of&thinsp;—&thinsp;delirious ecstasyformless one, a formless dream to me  a thousand wars and&thinsp;—&thinsp;hosannas singing saviourand sick and drunken one&thinsp;—&thinsp;leaning 'gainst the wall  a red and swollen sky&thinsp;—&thinsp;beating like a drumthe battle ground&thinsp;—&thinsp;just a fantasy  let me dream it all&thinsp;—&thinsp;dream dreams dreaming dreams for me",
+        "url": "/poem/2022/10/22/morpheus/",
+        "tags": ["2018"],
+        "categories": ["Poem"],
+        "date": "2022-10-22"
+    },{
+        "title": "Bed",
+        "content": " Tired, hot&thinsp;—&thinsp;both my arms and moreWheels in my head&thinsp;—&thinsp;unbalanced turningMy nose and nasal tunnels&thinsp;—&thinsp;itchy, soreDry throat&thinsp;—&thinsp;cracked and burning  My poor stomach&thinsp;—&thinsp;rolling, churningHot, ugly&thinsp;—&thinsp;a fever in my headI should have stayed in bed",
+        "url": "/poem/2022/10/22/bed/",
+        "tags": ["2019"],
+        "categories": ["Poem"],
+        "date": "2022-10-22"
+    },{
+        "title": "Night Walk",
+        "content": "Ollie pulled down his long sleeved shirt and stared at his pasty dry arms in the bathroom mirror. The moles were climbing along his arm. One mole in particular was cracked and infected. Ollie plugged the bathtub and turned off the lights. Ollie slowly pulled himself into the bathtub and once seated turned on the tap. Ollie twitched as fear gripped his heart like a tapeworm.  I wake up late in the afternoon with a splitting headache. TMJ, bad posture and too much time on the internet. I swallow a Tylenol and pull myself out of bed. By sunset I make it to the door. I throw on a large coat to hide my meagre gyno and head out.  Ollie began the day’s ceremony of grinding coffee. Ollie unplugged the coffee grinder. Ollie poured in the coffee beans. Ollie plugged in the coffee grinder. Ollie thought about putting his fingers in the coffee grinder. Ollie ground the coffee. Ollie unplugged the coffee grinder. Ollie spotted left out scissors on the countertop. Ollie thought about sticking the scissors in his eyes. Ollie put the scissors away in the drawer beneath the countertop.  Downtown, I sip a cup of coffee comatose in a chain coffee shop until near midnight. It’s very quiet and there’s no traffic on the street. You can walk across the road pretty freely and there’s a pleasant feeling like soft cotton in your head. In the dark in the bad parts of town out among the street people I start to feel a little alive.  Ollie took a cup of coffee and a slice of banana bread to the little table in the hall outside the college library proper. Ollie crumpled over his laptop and began to exorcise the images that dug like wasps against his skull. Earlier that day a man and a woman kissed in the park. I thought: I should tackle the girl to the ground and I should smash her head against the pavement and I should rape her.  I take a shit in a public bathroom in Victory square. A massive constipation coffee dump. The guy in the room watching everything reminds me to flush. Fucker. I walk home down through China town. I’m tall and keep away from those roaming about at these hours. A deep anger keeps me moving on through the cool air.  Ollie rushed out of the classroom claiming he needed to go to the toilet. Ollie’s balls hurt. Ollie’s balls hurt a lot. In the toilet stall Ollie fiddled with his nuts. Balls in a rubber sack the cords caught twisted burning.  I make it home my legs all tired and the spite worked out a little. I turn off the lights and lie down prone in bed under the covers and I masturbate with my fist pressuring myself thinking of women and cock. I touch my chest and I think of shiny goddesses.  Ollie orgasmed face down grinding his hips against his bed and hand and staining the sheets with clear fluid and a foul smell.",
+        "url": "/prose/2022/10/21/night-walk/",
+        "tags": [],
+        "categories": ["Prose"],
+        "date": "2022-10-21"
+    },{
+        "title": "The Rock",
+        "content": " What clay figure sickly rotten, stands before usunformed, smashed&thinsp;—&thinsp;mockery of God's begotten?Do you think? Do you think?Do you have a mind?Are you man or golem?",
+        "url": "/poem/2022/10/21/the-rock/",
+        "tags": ["2019"],
+        "categories": ["Poem"],
+        "date": "2022-10-21"
+    },{
+        "title": "Coffee",
+        "content": "Day 8 of no coffee, captains log My body boils like a bubbling pot of pastrami noodles. The wet red meat mess gravy of my brain congeals over the stove top. I am frying eggs sunnyside up. I close my eyes and aeons pass. I open my eyes and it is another world. I remember Tuesday fondly. My head a pounding agony lying trapped beneath the embrace of my oneitis and enfolded in the choking intoxication of a vape fiend’s addiction in a closet sized apartment. I sequester protein sequences deep inside my intestine. The warm wet egg yolk dirtying my fine trimmed facial hair. Breakfast as usual is a tense quiet affair. We are not hopeful today.",
+        "url": "/prose/2022/10/21/coffee/",
+        "tags": ["Coffee"],
+        "categories": ["Prose"],
+        "date": "2022-10-21"
+    },{
+        "title": "Two Girls",
+        "content": " Two young girls walking 'cross the streetsauburn hair, tanned skin, lovely eyeshand in hand, short black skirts, high heelsbruises on the back of thighs",
+        "url": "/poem/2022/10/20/two-girls/",
+        "tags": ["2019"],
+        "categories": ["Poem"],
+        "date": "2022-10-20"
+    },{
+        "title": "Good Boy",
+        "content": "I was flush with good boy points from a recent contract with mama so I decided to treat myself. Mama said if I do well with a practice gf I could even get a real girl sometime! Chrome display cryocases of black hoodied models lined the room. At the depot running the counter was a lateshit twinkhon sales model in a black suit. I estimated about two more years of viable use. One more year if used roughly. We have a wide variety of models available dear I don’t care. I want a youngshit BDD passoid boymoder! Quite the popular option lately but have you considered other models? The lateshit gigahon roastie has quite a dedicated following. I want a smol PP girl boymoder not a toastie roastie! Not every BDD passoid is a youngshit you know? We have quite a few luckshit twinkhon futchboys waiting for a good home. How many good boy points do you even have dear? You’re looking for quite the expensive option you know? I leaned my big boned man padding over the counter. I want a BDD boymoder passoid small PP girl I said through gritted teeth. Omae was getting unwise. I pulled out a bag of McDonald’s takeout from my voluminous trenchcoat. All around the room models in their cryocases turned their heads to look. Oh honey, you’re a big boy! You wouldn’t dare cause an incident would you? You try me and these chicken nuggies show just how much of a big boy I am",
+        "url": "/prose/2022/10/20/good-boy/",
+        "tags": [],
+        "categories": ["Prose"],
+        "date": "2022-10-20"
+    },{
+        "title": "Emotion Exercise",
+        "content": "I feel a great heaviness about my eyes and tension is jamming needles in my jaw. My arms are all itchy red and swollen up and tension crushes the muscles of my back together. The ground beneath my feet is very heavy and weighs down on me so much. My gut grinds together and my burning parched throat chokes itself. I have a bit of a sinus headache and my face is itchy all over. My legs itch, my arms itch, my body itches, my face itches. I feel despondent, glum. I feel very ugly inside and out. I breathe shallowly with a racing heartbeat. I don’t know when the tiredness will ever leave my eyes. The tendons of my forearms are tense, my shoulders are tense, my whole body is tensed.",
+        "url": "/prose/2022/10/19/emotion-exercise/",
+        "tags": ["2019"],
+        "categories": ["Prose"],
+        "date": "2022-10-19"
+    },{
+        "title": "Rumble",
+        "content": " A man walked into townBound up in a brown coatWhen he talked you could seeBeneath his broad hatA cigarillo glowRed then black then red  His face all bandagedThe left arm just goneAnd the man had a limp when he walkedGauze and splints that talked  I was younger thenI kicked rocks across the roadwhile the sun beat downNow I'm no educated man  There was rumor of a rumbleThere's always rumors going roundwhen strange men come into town  I was not in the rumbleA coward keeps his legs to runBut when the violence was overI was the hacksawThe young carpenter's son  And when the rumble was overI did not know who was deadI found gauze and splints and bonesAnd I found a sieve full of lead  A man walked out of townHis face all bandagedThe left arm just goneAnd he had a limp when he walkedGauze and splints that talked",
+        "url": "/poem/2022/10/19/rumble/",
+        "tags": ["2019"],
+        "categories": ["Poem"],
+        "date": "2022-10-19"
+    },{
+        "title": "The Night Ghost",
+        "content": " The bungler in the grip of the demon heldTo his crypt by strange means is compelledAnd sleeping as a corpse in darkness rottingHe dreams forth the red eyed thingSo rises from the sleeper's breathComes the Night Ghost&thinsp;—&thinsp;who brings death!  The Night Ghost climbs, as a shadow leaping, overtop the manor wallAnd through an open window goes, as a chilling fogTo the room of the sleeper he creepsAnd as a swarm of bugs, overtop her stomach crawlsAnd on her chest, as a choking darkness sits  'Til she wakes with a gaspThe Night Ghost; by the window watching, giant as a shadow standingShe claps &lt;clap sound effect&gt; turning on the lightAnd The Night Ghost, as the darkness in the day, vanishes from all sight.",
+        "url": "/poem/2022/10/19/the-night-ghost/",
+        "tags": ["2019","The Night Ghost"],
+        "categories": ["Poem"],
+        "date": "2022-10-19"
+    },{
+        "title": "The Slow Rot",
+        "content": " The slow rotlived or died, it's hard to tellAnd fires lost away&thinsp;—&thinsp;down to hellAnd as wind trow to take&thinsp;—&thinsp;hero's hearthTo slimy lair&thinsp;—&thinsp;past danger's berth  The shepherd, lay, in drunken stuporAs wind waste fire back awaySo the nimble thief he plot to fire holdTo rob chilly's empty hall of filth and cold  Through rot and ruin barely seeingIn darkness scarce light flickers fleeingSo journeyed Bound in circles roundThe hunter searched, following found  Winged death, stumbling, the cripple come!The slow rot, silent, cold and numbAll gravid full of piss and shitHe bit, swallowed, spit  But thief rallied, brandished knife and struckYet the wound wasNot hot and bleeding&thinsp;—&thinsp;but rotting, eatingThe orc only coughed and shookAnd yet more the cunning man he ate and took  Hands deep pocketed inside his gutsThe thief struck with cuts and cutsAnd heart in hand took torch to scourSo doctor kills doctor kills doctor's power!",
+        "url": "/poem/2022/10/18/the-slow-rot/",
+        "tags": ["2019"],
+        "categories": ["Poem"],
+        "date": "2022-10-18"
+    },{
+        "title": "The Quest",
+        "content": " war lost, Two was exiled and turned to banditrywhere he assailed souls from all sides  till one day dreaming Two's heart rose upand sleeping in a cave he had a dream  lift up, take up, stand up, young son, lost one, lost son  go seek the ring&thinsp;—&thinsp;find the cup, rise up young sonyou live today&thinsp;—&thinsp;your heart beats still&thinsp;—&thinsp;and still sings on  for none can harm but what you sing, the heart you givefor bliss or ill this is your life  and you choose how your story ends&thinsp;—&thinsp;not the knifefor hell or heaven, judgement day or angel's song   no prison gate nor plague nor pain shall barthe mercy of the court&thinsp;—&thinsp;stands uncontested  Two find the cup and ring, the treasure that I singand keep on&thinsp;—&thinsp;and on and on, for me, for you  all men die, all churches crumble&thinsp;—&thinsp;all this shall fallthe weight and measure of so much dross&thinsp;—&thinsp;this all   just heart and soul&thinsp;—&thinsp;song and word and breath redeemthe weighty load you carry, wealth or burning coal  all sorrow then&thinsp;—&thinsp;just dust of men, thunderthe beating of the heart and&thinsp;—&thinsp;the singing soul",
+        "url": "/poem/2022/10/18/the-quest/",
+        "tags": ["2019","The Ring and the Cup"],
+        "categories": ["Poem"],
+        "date": "2022-10-18"
+    }]

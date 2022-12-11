@@ -15,6 +15,5 @@ search:
   title: "Search"
   category: "Category"
   tag: "Tag"
-  submit: "Submit"
-  reset: "Reset"
+  submit: "Search"
   postDate: "Post Date"

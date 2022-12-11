@@ -1,5 +1,7 @@
 ---
 ---
+import Fuse from './vend/fuse.mjs' ;
+
 class Queue {
     #events = [];
     #promise;
@@ -62,67 +64,26 @@ function intersect(X, Y) {
     return Z;
 };
 
-function reviver(key, value) {
-    if (typeof value === "object"
-        && !Array.isArray(value)
-        && value !== null) {
-        value = new Map(Object.entries(value));
-    }
-    return Object.freeze(value);
-}
-
-function parseParams(params) {
-    const tags = new Set();
-    const cats = new Set();
-    for (const [key, value] of params) {
-        switch (key) {
-        case "tag":
-            tags.add(value);
-            break;
-        case "category":
-            cats.add(value);
-            break;
-        }
-    }
-    return [tags, cats];
-}
-
-function findPosts(db, tags, categories) {
-    const category = db.get("category");
-    const tag = db.get("tag");
-    const posts = db.get("post");
-
-    // FIXME process sets lazily somehow?
-    let cs = new Set(Array.from(categories)
-                     .flatMap(c => category.get(c)));
-    let ts = new Set(Array.from(tags)
-                     .flatMap(t => tag.get(t)));
-
-    if (tags.size === 0) {
-        ts = cs;
-    }
-    if (categories.size === 0) {
-        cs = ts;
-    }
-
-    return Array.from(intersect(cs, ts)).map(index => posts[index]);
+function findPosts(fuse, query) {
+    return fuse.search(query)
 }
 
 function render(template, posts) {
-    const elems = posts.map((post) => {
-        const title = post.get("title");
-        const date = post.get("date");
-        const url = post.get("url");
+    const elems = posts.map(search => {
+        const post = search.item;
+        const title = post.title;
+        const date = post.date;
+        const url = post.url;
 
         const cat = document.createElement("div");
-        if (post.get("categories").length !== 0) {
+        if (post.categories.length !== 0) {
             const listEntry = document.createElement("dt");
             listEntry.textContent = "Category";
             cat.append(listEntry);
         }
-        for (const category of post.get("categories")) {
+        for (const category of post.categories) {
             const params = new URLSearchParams();
-            params.append("category", category);
+            params.append("s", category);
 
             const anchor = document.createElement("a");
             anchor.textContent = category;
@@ -133,16 +94,15 @@ function render(template, posts) {
             cat.append(listEntry);
         }
 
-
         const tagel = document.createElement("div");
-        if (post.get("tags").length !== 0) {
+        if (post.tags.length !== 0) {
             const listEntry = document.createElement("dt");
             listEntry.textContent = "Tag";
             tagel.append(listEntry);
         }
-        for (const tag of post.get("tags")) {
+        for (const tag of post.tags) {
             const params = new URLSearchParams();
-            params.append("tag", tag);
+            params.append("s", tag);
 
             const anchor = document.createElement("a");
             anchor.textContent = "#" + tag;
@@ -245,11 +205,22 @@ async function* requests() {
         }
     }
 }
-const db = new Lazy(async () => {
-    const jsresponse = await fetch("{% link assets/search.json %}");
-    const text = await jsresponse.text();
-    return JSON.parse(text, reviver);
+
+const options = Object.freeze({
+    ignoreLocation: true,
+    keys: ['title', 'content', 'tags', 'categories', 'date']
 });
+
+async function fetchjson(str) {
+    return await ((await fetch(str)).json());
+}
+
+const db = new Lazy(async () => {
+    const index = await fetchjson("{% link assets/index.json %}");
+    const search = await fetchjson("{% link assets/search.json %}");
+    return new Fuse(search, options, Fuse.parseIndex(index));
+});
+
 
 await new Promise((resolve, reject) => {
     document.addEventListener('DOMContentLoaded', (event) => resolve());
@@ -261,15 +232,10 @@ await new Promise((resolve, reject) => {
     }
 });
 
-const meta = new URL(import.meta.url).searchParams;
-const outputId = meta.get("output");
-const templateId = meta.get("template");
-
 const doctitle = document.title;
-const template = document.getElementById(templateId).content;
-const output = document.getElementById(outputId);
-const category = document.getElementById('category');
-const tag = document.getElementById('tag');
+const template = document.getElementById('search-result').content;
+const output = document.getElementById('search-output');
+const searchInput = document.getElementById('search-box');
 
 const h1s = document.getElementsByTagName('h1');
 
@@ -281,26 +247,25 @@ for (;;) {
     let response;
     if (location.pathname === '/search/'
         && request.method === 'GET') {
-        const [tagParams, categoryParams] = parseParams(location.searchParams);
-
-        const posts = findPosts(await db.force(), tagParams, categoryParams);
+        let query = location.searchParams.get("s");
+        if (query == null) {
+            query = "";
+        }
+        const posts = (await db.force()).search(query);
         const postList = render(template, posts);
 
-        const tags = Array.from(tagParams.values());
-        const cats = Array.from(categoryParams.values());
-
-        document.title = `${tags} ${cats} — ${doctitle}`;
+        document.title = `${query} — ${doctitle}`;
+        const h1 = h1s[0];
+        if (h1) {
+            h1.textContent = `${query} — Search`;
+        }
 
         output.setAttribute('hidden', 'hidden');
         output.replaceChildren(postList);
         output.removeAttribute('hidden');
 
-        for (const option of category.options) {
-            option.selected = categoryParams.has(option.value);
-        }
-        for (const option of tag.options) {
-            option.selected = tagParams.has(option.value);
-        }
+        searchInput.value = query ;
+
         response = new Response('', { status: 200, statusText: 'OK' });
     } else {
         response = new Response('', { status: 404, statusText: 'Not Found' });

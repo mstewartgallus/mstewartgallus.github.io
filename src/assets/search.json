@@ -1,51 +1,28 @@
 ---
 layout: none
 ---
-{
-    "post": [
-        {%- for post in site.posts -%}
-        {%- assign tags = post.tags | sort -%}
-        {%- assign categories = post.categories | sort -%}
-        {
-            "title": "{{ post.title | json }}",
-            "url": "{{ post.url | json }}",
-            "tags": [
-                {%- for tag in tags -%}
-                "{{ tag | json }}"
-                {%- unless forloop.last -%},{%- endunless -%}
-                {%- endfor -%}
-            ],
-            "categories": [
-                {%- for category in categories -%}
-                "{{ category | json }}"
-                {%- unless forloop.last -%},{%- endunless -%}
-                {%- endfor -%}
-            ],
-            "date": "{{ post.date | date: "%Y-%m-%d" }}"
-        }
-        {%- unless forloop.last -%},{%- endunless -%}
-        {%- endfor -%}
-    ],
-    "category": {
-        {%- for category in site.categories -%}
-        "{{ category[0] | json }}": [
-            {%- for post in category[1] -%}
-            {{ post.index | json }}
+[
+    {%- for post in site.posts -%}
+    {%- assign tags = post.tags | sort -%}
+    {%- assign categories = post.categories | sort -%}
+    {
+        "title": {{ post.title | jsonify }},
+        "content": {{ post.content | normalize_whitespace | strip | strip_html | jsonify }},
+        "url": {{ post.url | jsonify }},
+        "tags": [
+            {%- for tag in tags -%}
+            {{ tag | jsonify }}
             {%- unless forloop.last -%},{%- endunless -%}
             {%- endfor -%}
-        ]
-        {%- unless forloop.last -%},{% endunless -%}
-        {%- endfor -%}
-    },
-    "tag": {
-        {%- for tag in site.tags -%}
-        "{{ tag[0] | json }}": [
-            {%- for post in tag[1] -%}
-            {{ post.index | json }}
+        ],
+        "categories": [
+            {%- for category in categories -%}
+            {{ category | jsonify }}
             {%- unless forloop.last -%},{%- endunless -%}
             {%- endfor -%}
-        ]
-        {%- unless forloop.last -%},{%- endunless -%}
-        {%- endfor -%}
+        ],
+        "date": "{{ post.date | date: "%Y-%m-%d" }}"
     }
-}
+    {%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+]
