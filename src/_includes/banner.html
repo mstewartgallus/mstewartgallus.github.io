@@ -9,7 +9,7 @@
 
   <ul>
     {%- for page in pages %}
-    {%- if page.url == '/' -%}
+    {%- if page.url == '/' or page.url == '/search/' -%}
     {%- continue -%}
     {%- endif -%}
     <li

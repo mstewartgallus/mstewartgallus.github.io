@@ -27,8 +27,8 @@ button {
 }
 [role="search"] input {
     flex-grow: 1 ;
+    flex-shrink: 1 ;
 }
-
 
 @media (prefers-color-scheme: dark) {
     button:active {
