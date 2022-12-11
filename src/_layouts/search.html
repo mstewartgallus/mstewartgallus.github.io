@@ -1,32 +1,8 @@
 ---
 layout: page
 ---
-<meta name="robots" content="noindex">
-<link href="{% link assets/search.json %}"
-      rel="preload" as="fetch"
-      type="application/json" crossorigin>
-<template id="search-result">
-  <li>
-    <a class="search-url">
-      <span class="search-title">Title</span>
-    </a>
-
-    <dl class="search-keywords">
-      <div>
-        <dt>{{ site.data.strings.search.postDate }}</dt>
-        <dd>
-          <time class="search-date">
-            Date
-          </time>
-        </dd>
-      </div>
-    </dl>
-  </li>
-</template>
-<script type="module" defer async
-        src="{% link assets/search.mjs %}"></script>
 
 {{- content -}}
 
-<output for="search" id="search-output" aria-live="polite" hidden>
+<output is="search-output" for="search" id="search-output" aria-live="polite" hidden>
 </output>

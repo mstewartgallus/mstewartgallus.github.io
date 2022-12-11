@@ -1,7 +1,9 @@
 <main aria-describedby="title" itemprop="text">
   <header>
     <hgroup>
-      <h1 id="title" itemprop="name headline title">{{- page.title | escape -}}</h1>
+      <h1
+        {% if page.url == '/search/' %}is="search-h1"{% endif %}
+        id="title" itemprop="name headline title">{{- page.title | escape -}}</h1>
       {%- if page.subtitle -%}
       <p itemprop="subheading">{{- page.subtitle | escape -}}</p>
       {%- endif -%}

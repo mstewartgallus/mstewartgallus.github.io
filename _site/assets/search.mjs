@@ -1,5 +1,11 @@
 import Fuse from './vend/fuse.mjs' ;
 
+class NavigateEvent extends CustomEvent {
+    constructor(type, event) {
+        super(type, event);
+    }
+}
+
 class Queue {
     #events = [];
     #promise;
@@ -51,79 +57,6 @@ class Lazy {
     }
 }
 
-
-function intersect(X, Y) {
-    const Z = new Set();
-    for (const x of X) {
-        if (Y.has(x)) {
-            Z.add(x);
-        }
-    }
-    return Z;
-};
-
-function findPosts(fuse, query) {
-    return fuse.search(query)
-}
-
-function render(template, posts) {
-    const elems = posts.map(search => {
-        const post = search.item;
-        const title = post.title;
-        const date = post.date;
-        const url = post.url;
-
-        const cat = document.createElement("div");
-        if (post.categories.length !== 0) {
-            const listEntry = document.createElement("dt");
-            listEntry.textContent = "Category";
-            cat.append(listEntry);
-        }
-        for (const category of post.categories) {
-            const params = new URLSearchParams();
-            params.append("s", category);
-
-            const anchor = document.createElement("a");
-            anchor.textContent = category;
-            anchor.href = "/search/?" + params;
-
-            const listEntry = document.createElement("dd");
-            listEntry.append(anchor);
-            cat.append(listEntry);
-        }
-
-        const tagel = document.createElement("div");
-        if (post.tags.length !== 0) {
-            const listEntry = document.createElement("dt");
-            listEntry.textContent = "Tag";
-            tagel.append(listEntry);
-        }
-        for (const tag of post.tags) {
-            const params = new URLSearchParams();
-            params.append("s", tag);
-
-            const anchor = document.createElement("a");
-            anchor.textContent = "#" + tag;
-            anchor.href = "/search/?" + params;
-
-            const listEntry = document.createElement("dd");
-            listEntry.append(anchor);
-            tagel.append(listEntry);
-        }
-
-        const clone = template.cloneNode(true);
-        clone.querySelector(".search-title").textContent = title;
-        clone.querySelector(".search-url").href = url;
-        clone.querySelector(".search-date").textContent = date;
-        clone.querySelector(".search-keywords").append(cat, tagel);
-        return clone;
-    });
-
-    const postList = document.createElement("ul");
-    postList.append(...elems);
-    return postList;
-}
-
 const queue = new Queue();
 
 document.addEventListener('click', e => queue.push(e));
@@ -163,9 +96,11 @@ async function* requests() {
                 continue;
             }
 
-            const response = yield new Request(href);
+            const request = new Request(href);
+            history.pushState(null, '', request.url);
+
+            const response = yield request;
             if (response.ok) {
-                history.pushState(null, '', request.url);
                 event.preventDefault();
             }
             break;
@@ -193,9 +128,10 @@ async function* requests() {
                 options.body = formdata;
             }
             const request = new Request(url, options);
+            history.pushState(null, '', request.url);
+
             const response = yield request;
             if (response.ok) {
-                history.pushState(null, '', request.url);
                 event.preventDefault();
             }
             break;
@@ -214,70 +150,273 @@ async function fetchjson(str) {
 }
 
 const db = new Lazy(async () => {
-    const index = await fetchjson("/assets/index.json");
-    const search = await fetchjson("/assets/search.json");
+    const [index, search] = await Promise.all([
+        fetchjson("/assets/index.json"),
+        fetchjson("/assets/search.json")
+    ]);
     return new Fuse(search, options, Fuse.parseIndex(index));
 });
 
 
-await new Promise((resolve, reject) => {
-    document.addEventListener('DOMContentLoaded', (event) => resolve());
-    switch (document.readyState) {
-    case 'interactive':
-    case 'complete':
-        resolve();
-        break;
+function getQuery(doc) {
+    return new URL(doc.location.href).searchParams.get('s');
+}
+
+export class SearchH1Element extends HTMLHeadingElement {
+    #abort;
+    #query;
+    #slot;
+
+    constructor() {
+        super();
+
+        const shadow = this.attachShadow({
+            mode: "closed",
+            delegatesFocus: false
+        });
+
+        const doc = this.ownerDocument;
+        this.#query = doc.createElement('span');
+        this.#query.setAttribute('aria-live', 'polite');
+        this.#slot = doc.createElement('slot');
+        shadow.append(this.#query, this.#slot);
     }
-});
 
-const doctitle = document.title;
-const template = document.getElementById('search-result').content;
-const output = document.getElementById('search-output');
-const searchInput = document.getElementById('search-box');
+    #update() {
+        const doc = this.ownerDocument;
 
-const h1s = document.getElementsByTagName('h1');
+        const query = getQuery(doc);
+
+        if (query) {
+            this.#query.textContent = `${query} - `;
+        } else {
+            this.#query.textContent = '';
+        }
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
+
+        const abort = new AbortController();
+        this.#abort = abort;
+
+        this.#update();
+
+        this.ownerDocument.addEventListener('search-navigate', event => {
+            this.#update();
+        }, { 'passive': true, 'signal': abort.signal });
+    }
+
+    disconnectedCallback() {
+        this.#abort.abort();
+        this.#abort = null;
+    }
+
+    static {
+        customElements.define("search-h1", SearchH1Element, { 'extends': 'h1' });
+    }
+}
+
+export class SearchArticleElement extends HTMLElement {
+    constructor() {
+        super();
+
+        const template = this.ownerDocument.getElementById('search-result');
+
+        const shadow = this.attachShadow({
+            mode: "closed",
+            delegatesFocus: true
+        });
+        shadow.append(template.content.cloneNode(true));
+    }
+
+    static {
+        customElements.define("search-article", SearchArticleElement, { 'extends': 'article' });
+    }
+}
+
+// FIXME use shadow dom?
+export class SearchOutputElement extends HTMLOutputElement {
+    #abort;
+    #list;
+
+    constructor() {
+        super();
+
+        const doc = this.ownerDocument;
+        const list = doc.createElement('ul');
+
+        this.append(list);
+        this.#list = list;
+    }
+
+    async #update() {
+        const doc = this.ownerDocument;
+
+        let query = getQuery(doc);
+        if (!query) {
+            query = '';
+        }
+
+        const posts = (await db.force()).search(query).map(p => p.item);
+
+        const postList = posts.map(post => SearchOutputElement.#renderPost(doc, post));
+
+        this.#list.replaceChildren(...postList);
+        this.removeAttribute('hidden');
+
+    }
+
+    static #renderPost(doc, post) {
+        const url = post.url;
+
+        const catels = post.categories.map(category => {
+            const params = new URLSearchParams();
+            params.append("s", category);
+
+            const anchor = doc.createElement("a");
+            anchor.setAttribute('slot', 'category');
+            anchor.textContent = category;
+            anchor.href = "/search/?" + params;
+
+            return anchor;
+        });
+
+        const tagels = post.tags.map(tag => {
+            const params = new URLSearchParams();
+            params.append("s", tag);
+
+            const anchor = doc.createElement("a");
+            anchor.setAttribute('slot', 'tag');
+            anchor.textContent = "#" + tag;
+            anchor.href = "/search/?" + params;
+
+            return anchor;
+        });
+
+        const title = doc.createElement("a");
+        title.setAttribute('slot', 'title');
+        title.setAttribute('href', url);
+        title.textContent = post.title;
+
+        const date = doc.createElement("time");
+        date.setAttribute('slot', 'date');
+        date.textContent = post.date;
+
+        const article = doc.createElement("article", { 'is': 'search-article' });
+        article.append(title, date, ...catels, ...tagels);
+
+        const li = doc.createElement("li");
+        li.append(article);
+        return li;
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
+
+        const abort = new AbortController();
+        this.#abort = abort;
+
+        this.#update();
+
+        this.ownerDocument.addEventListener('search-navigate', async event => {
+            await this.#update();
+        }, { 'passive': true, 'signal': abort.signal });
+    }
+
+    disconnectedCallback() {
+        this.#abort.abort();
+        this.#abort = null;
+    }
+
+    static {
+        customElements.define("search-output", SearchOutputElement, { 'extends': 'output' });
+    }
+}
+
+export class SearchInputElement extends HTMLInputElement {
+    #abort;
+
+    constructor() {
+        super();
+    }
+
+    #update() {
+        const doc = this.ownerDocument;
+
+        let query = getQuery(doc);
+        if (!query) {
+            query = '';
+        }
+
+        this.value = query;
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
+
+        const abort = new AbortController();
+        this.#abort = abort;
+
+        this.#update();
+
+        this.ownerDocument.addEventListener('search-navigate', event => {
+            this.#update();
+        }, { 'passive': true, 'signal': abort.signal });
+    }
+
+    disconnectedCallback() {
+        this.#abort.abort();
+        this.#abort = null;
+    }
+
+    static {
+        customElements.define("search-input", SearchInputElement, { 'extends': 'input' });
+    }
+}
 
 history.scrollRestoration = 'manual';
 
-let isfirst = true;
+const doctitle = document.title;
+const h1s = document.getElementsByTagName('h1');
+
 const loop = await requests();
 let request = (await loop.next()).value;
+let isfirst = true;
 for (;;) {
     const location = new URL(request.url);
     let response;
     if (location.pathname === '/search/'
         && request.method === 'GET') {
-        let query = location.searchParams.get("s");
-        if (query == null) {
-            query = "";
+
+        document.dispatchEvent(new NavigateEvent('search-navigate'));
+
+        const query = getQuery(document);
+        if (query) {
+            document.title = `${query} — ${doctitle}`;
+        } else {
+            document.title = doctitle;
         }
 
-        searchInput.value = query ;
-        document.title = `${query} — ${doctitle}`;
-
-        const h1 = h1s[0];
-        if (h1) {
-            h1.textContent = `${query} — Search`;
+        if (!isfirst) {
+            const h1 = h1s[0];
+            if (h1) {
+                h1.setAttribute('tabindex', '-1');
+                h1.focus();
+            }
         }
-
-        const posts = (await db.force()).search(query);
-        const postList = render(template, posts);
-
-        output.replaceChildren(postList);
-        output.removeAttribute('hidden');
+        isfirst = false;
 
         response = new Response('', { status: 200, statusText: 'OK' });
     } else {
         response = new Response('', { status: 404, statusText: 'Not Found' });
     }
 
-    if (!isfirst) {
-        const h1 = h1s[0];
-        if (h1) {
-            h1.setAttribute('tabindex', '-1');
-            h1.focus();
-        }
-    }
-    isfirst = false;
     request = (await loop.next(response)).value;
 }

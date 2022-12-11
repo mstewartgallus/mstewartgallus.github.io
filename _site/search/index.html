@@ -9,7 +9,36 @@
   <title>Search&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
   <link rel="icon" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/assets/main.css">
-  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Words to Kick Your Teeth Out" ><link rel="canonical" href="https://mstewartgallus.github.io/search/">
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Words to Kick Your Teeth Out" ><meta name="robots" content="noindex">
+<link href="/assets/search.json"
+      rel="preload" as="fetch"
+      type="application/json" crossorigin>
+<link href="/assets/index.json"
+      rel="preload" as="fetch"
+      type="application/json" crossorigin>
+
+<template id="search-result">
+  <link rel="stylesheet" href="/assets/main.css">
+  <div>
+    <slot name="category"></slot> / <slot name="title" class="search-title">TITLE</slot>
+  </div>
+  <dl>
+    <div>
+      <dt>Post Date</dt>
+      <dd>
+        <slot name="date">DATE</slot>
+      </dd>
+    </div>
+    <div>
+      <dt>Tag</dt>
+      <slot name="tag"></slot>
+    </div>
+  </dl>
+</template>
+
+<script type="module" defer async
+        src="/assets/search.mjs"></script>
+<link rel="canonical" href="https://mstewartgallus.github.io/search/">
 <link rel="author" href="/about">
 <meta name="author" content="Molossus Spondee">
 <meta name="description" content="lol, lmao">
@@ -28,35 +57,16 @@
         itemid="https://mstewartgallus.github.io/search/"><main aria-describedby="title" itemprop="text">
   <header>
     <hgroup>
-      <h1 id="title" itemprop="name headline title">Search</h1></hgroup>
-  </header><meta name="robots" content="noindex">
-<link href="/assets/search.json"
-      rel="preload" as="fetch"
-      type="application/json" crossorigin>
-<template id="search-result">
-  <li>
-    <a class="search-url">
-      <span class="search-title">Title</span>
-    </a>
-
-    <dl class="search-keywords">
-      <div>
-        <dt>Post Date</dt>
-        <dd>
-          <time class="search-date">
-            Date
-          </time>
-        </dd>
-      </div>
-    </dl>
-  </li>
-</template>
-<script type="module" defer async
-        src="/assets/search.mjs"></script><output for="search" id="search-output" aria-live="polite" hidden>
+      <h1
+        is="search-h1"
+        id="title" itemprop="name headline title">Search</h1></hgroup>
+  </header><output is="search-output" for="search" id="search-output" aria-live="polite" hidden>
 </output>
 </main>
 <div id="sidebar"><form id="search" name="search" rel="search" role="search" action="/search/">
-  <input aria-labelledby="search-button" id="search-box" name="s" type="search" />
+  <input
+    is="search-input"
+    aria-labelledby="search-button" name="s" type="search" >
   <button id="search-button" type="submit">Search</button>
 </form>
 <nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
