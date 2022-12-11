@@ -237,6 +237,8 @@ const searchInput = document.getElementById('search-box');
 
 const h1s = document.getElementsByTagName('h1');
 
+history.scrollRestoration = 'manual';
+
 let isfirst = true;
 const loop = await requests();
 let request = (await loop.next()).value;
@@ -249,20 +251,20 @@ for (;;) {
         if (query == null) {
             query = "";
         }
-        const posts = (await db.force()).search(query);
-        const postList = render(template, posts);
 
+        searchInput.value = query ;
         document.title = `${query} — ${doctitle}`;
+
         const h1 = h1s[0];
         if (h1) {
             h1.textContent = `${query} — Search`;
         }
 
-        output.setAttribute('hidden', 'hidden');
+        const posts = (await db.force()).search(query);
+        const postList = render(template, posts);
+
         output.replaceChildren(postList);
         output.removeAttribute('hidden');
-
-        searchInput.value = query ;
 
         response = new Response('', { status: 200, statusText: 'OK' });
     } else {
