@@ -49,46 +49,56 @@ customElements.define("search-title", class extends HTMLTitleElement {
     }
 }, { 'extends': 'title' });
 
-DOMContentLoaded.then(() => {
-    const template = document.getElementById('search-h1').content;
+customElements.define("search-h1", class extends HTMLHeadingElement {
+    static observedAttributes = ['data-query'];
+    #query;
+    #shadow;
 
-    customElements.define("search-h1", class extends HTMLHeadingElement {
-        static observedAttributes = ['data-query'];
-        #query;
+    constructor() {
+        super();
 
-        constructor() {
-            const clone = template.cloneNode(true);
-            super();
+        this.#shadow = this.attachShadow({
+            mode: 'closed',
+            delegatesFocus: false
+        });
+    }
 
-            const shadow = this
-                  .attachShadow({
-                      mode: 'closed',
-                      delegatesFocus: false
-                  });
-            shadow.append(clone);
-            this.#query = shadow.getElementById('query');
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
         }
 
-        attributeChangedCallback(n, o, x) {
-            this.#query.textContent = x ? `${x} - ` : '';
+        const template = this.ownerDocument
+              .getElementById('search-h1')
+              .content;
+        this.#shadow.replaceChildren(template.cloneNode(true));
+        this.#query = this.#shadow.getElementById('query');
+    }
+
+    attributeChangedCallback(n, o, x) {
+        this.#query.textContent = x ? `${x} - ` : '';
+    }
+}, { 'extends': 'h1' });
+
+
+customElements.define("search-article", class extends HTMLElement {
+    #shadow;
+
+    constructor() {
+        super();
+        this.#shadow = this.attachShadow({ mode: 'closed' });
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
         }
-    }, { 'extends': 'h1' });
-});
 
-
-DOMContentLoaded.then(() => {
-    const template = document.getElementById('search-article').content;
-
-    customElements.define("search-article", class extends HTMLElement {
-        constructor() {
-            const clone = template.cloneNode(true);
-
-            super();
-
-            this.attachShadow({ mode: 'closed' }).append(clone);
-        }
-    }, { 'extends': 'article' });
-});
+        const template = this.ownerDocument
+              .getElementById('search-article').content;
+        this.#shadow.replaceChildren(template.cloneNode(true));
+    }
+}, { 'extends': 'article' });
 
 function renderPost(doc, post) {
     const title = Object.assign(
@@ -132,35 +142,43 @@ function renderPost(doc, post) {
     return li;
 }
 
-(async () => {
-    await DOMContentLoaded;
-    const fuse = await database;
+function renderPosts(fuse, query) {
+    const doc = document;
+    const posts = fuse
+          .search(query ?? '')
+          .map(post => renderPost(doc, post.item));
 
-    customElements.define("search-output", class extends HTMLOutputElement {
-        static observedAttributes = ['data-query'];
-        #list;
+    const list = document.createElement('ul');
+    list.append(...posts);
+    return list;
+}
 
-        constructor() {
-            super();
+customElements.define("search-results", class extends HTMLElement {
+    #shadow;
+    constructor() {
+        super();
+        this.#shadow = this.attachShadow({ mode: 'open' });
+    }
 
-            const doc = this.ownerDocument;
-            const list = doc.createElement('ul');
+    async #update(query) {
+        const fuse = await database;
+        const template = this.ownerDocument
+              .getElementById('search-results-template').content;
+        this.#shadow.replaceChildren(template.cloneNode(true),
+                                     renderPosts(fuse, this.dataset.query));
+    }
 
-            this.append(list);
-            this.#list = list;
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
         }
+        this.#update(this.dataset.query);
+    }
 
-        attributeChangedCallback(n, o, x) {
-            const doc = this.ownerDocument;
-            const posts = fuse
-                  .search(x ?? '')
-                  .map(post => renderPost(doc, post.item));
-
-            this.#list.replaceChildren(...posts);
-            this.removeAttribute('hidden');
-        }
-    }, { 'extends': 'output' });
-})();
+    attributeChangedCallback(n, o, x) {
+        this.#update(x);
+    }
+});
 
 customElements.define("search-body", class extends HTMLBodyElement {
     constructor() {
@@ -171,6 +189,9 @@ customElements.define("search-body", class extends HTMLBodyElement {
     }
 
     connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
         this.#request(new Request(this.ownerDocument.URL));
     }
 
@@ -188,8 +209,11 @@ customElements.define("search-body", class extends HTMLBodyElement {
     }
 
     #click(event) {
-        const tag = event.target;
+        // FIXME consider using event.target and faking results as a
+        // button?
+        const tag = event.composedPath()[0];
         if (tag.tagName != 'A') {
+            event.preventDefault();
             return;
         }
         const href = tag.href;
@@ -212,7 +236,7 @@ customElements.define("search-body", class extends HTMLBodyElement {
     }
 
     #submit(event) {
-        const form = event.target;
+        const form = event.composedPath()[0];
 
         let url = new URL(form.action, this.#origin());
         if (url.origin != this.#origin()) {
@@ -249,16 +273,21 @@ customElements.define("search-body", class extends HTMLBodyElement {
     }
 }, { 'extends': 'body' });
 
-function onsearch(query) {
+async function onsearch(query) {
     const title = document.getElementsByTagName('title')[0];
     const h1 = document.getElementById('title');
     const output = document.getElementById('search-output');
+    const results = document.getElementById('search-results');
     const input = document.getElementById('search-input');
 
     title && (title.dataset.query = query);
     h1 && (h1.dataset.query = query);
-    output && (output.dataset.query = query);
     input && (input.value = query);
+    results && (results.dataset.query = query);
+
+    if (output) {
+        output.removeAttribute('hidden');
+    }
 
     // FIXME a little awkward
     if (h1) {
