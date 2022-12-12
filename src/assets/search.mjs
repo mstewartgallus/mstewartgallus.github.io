@@ -332,24 +332,18 @@ async function* requests(events) {
     }
 }
 
-const events = [];
-let signal;
+let handler;
 
 const popevents = (async function* () {
     for (;;) {
-        let e;
-        while (e = events.pop()) {
-            yield e;
-        }
-        await new Promise(r => {
-            signal = r;
+        yield await new Promise(r => {
+            handler = r;
         });
     }
 })();
 
 function push(e) {
-    events.push(e);
-    signal();
+    handler(e);
 }
 
 document.addEventListener('click', push);
