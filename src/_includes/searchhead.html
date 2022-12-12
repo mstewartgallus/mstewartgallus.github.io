@@ -5,25 +5,6 @@
 <link href="{% link assets/index.json %}"
       rel="preload" as="fetch"
       type="application/json" crossorigin>
-
-<template id="search-result">
-  <link rel="stylesheet" href="{{ "assets/main.css" | relative_url }}">
-  <div>
-    <slot name="category"></slot> / <slot name="title" class="search-title">TITLE</slot>
-  </div>
-  <dl>
-    <div>
-      <dt>{{ site.data.strings.search.postDate }}</dt>
-      <dd>
-        <slot name="date">DATE</slot>
-      </dd>
-    </div>
-    <div>
-      <dt>Tag</dt>
-      <slot name="tag"></slot>
-    </div>
-  </dl>
-</template>
-
+{%- include searchtemplates.html -%}
 <script type="module" defer async
         src="{% link assets/search.mjs %}"></script>

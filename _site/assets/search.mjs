@@ -1,78 +1,270 @@
 import Fuse from './vend/fuse.mjs' ;
 
+async function fetchjson(url) {
+    return await ((await fetch(url)).json());
+}
+
+const index = fetchjson("/assets/index.json");
+const search = fetchjson("/assets/search.json");
+
+const options = Object.freeze({
+    ignoreLocation: true,
+    keys: ['title', 'content', 'tags', 'categories', 'date']
+});
+
+const database = (async () =>
+    new Fuse(await search, options,
+             Fuse.parseIndex(await index)))();
+
+function getQuery(doc) {
+    return new URL(doc.location.href).searchParams.get('s');
+}
+
+
 class NavigateEvent extends CustomEvent {
     constructor(type, event) {
         super(type, event);
     }
 }
 
-class Queue {
-    #events = [];
-    #promise;
-    #signal;
+class SearchH1Element extends HTMLHeadingElement {
+    #abort;
+    #query;
+
+    static #template = document.getElementById('search-h1').content;
 
     constructor() {
-        this.#promise = new Promise(r => {
-            this.#signal = r;
-        });
-    }
+        super();
 
-    push(e) {
-        this.#events.push(e);
-        this.#signal();
-    }
-
-    async pop() {
-        for (;;) {
-            const e = this.#events.pop();
-            if (e != null) {
-                return e;
-            }
-            await this.#promise;
-            this.#promise = new Promise(r => {
-                this.#signal = r;
+        const shadow = this
+            .attachShadow({
+                mode: 'closed',
+                delegatesFocus: false
             });
+        shadow.appendChild(SearchH1Element.#template.cloneNode(true));
+        this.#query = shadow.getElementById('query');
+    }
+
+    #update() {
+        const query = getQuery(this.ownerDocument);
+        this.#query.textContent = query ? `${query} - ` : '';
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
         }
+
+        const abort = new AbortController();
+        this.#abort = abort;
+
+        this.#update();
+
+        this.ownerDocument.addEventListener('search-navigate', event => {
+            this.#update();
+        }, { 'passive': true, 'signal': abort.signal });
+    }
+
+    disconnectedCallback() {
+        this.#abort.abort();
+        this.#abort = null;
+    }
+
+    static {
+        customElements.define("search-h1",
+                              SearchH1Element,
+                              { 'extends': 'h1' });
     }
 }
 
-class Lazy {
-    #fn;
-    #value;
-    #init = false;
+class SearchArticleElement extends HTMLElement {
+    static #template = document
+        .getElementById('search-article')
+        .content;
 
-    constructor(f) {
-        this.#fn = f;
+    constructor() {
+        super();
+
+        this
+            .attachShadow({
+                mode: 'closed',
+                delegatesFocus: true
+            })
+            .appendChild(SearchArticleElement.#template.cloneNode(true));
     }
 
-    async force() {
-        if (this.#init) {
-            return this.#value;
-        }
-        const value = await this.#fn();
-        this.#value = value;
-        this.#fn = null;
-        this.#init = true;
-        return value;
+    static {
+        customElements.define("search-article",
+                              SearchArticleElement,
+                              { 'extends': 'article' });
     }
 }
 
-const queue = new Queue();
+class SearchOutputElement extends HTMLOutputElement {
+    #abort;
+    #list;
 
-document.addEventListener('click', e => queue.push(e));
-document.addEventListener('submit', e => queue.push(e));
-window.addEventListener('popstate', e => queue.push(e));
+    constructor() {
+        super();
 
-async function* events() {
+        const doc = this.ownerDocument;
+        const list = doc.createElement('ul');
+
+        this.appendChild(list);
+        this.#list = list;
+    }
+
+    async #update() {
+        const doc = this.ownerDocument;
+
+        let query = getQuery(doc);
+        if (!query) {
+            query = '';
+        }
+
+        const posts = (await database)
+              .search(query)
+              .map(post => SearchOutputElement.#renderPost(doc, post.item));
+
+        this.#list.replaceChildren(...posts);
+        this.removeAttribute('hidden');
+
+    }
+
+    static #renderPost(doc, post) {
+        const title = doc.createElement("a");
+        title.setAttribute('slot', 'title');
+        title.href = post.url;
+        title.textContent = post.title;
+
+        const date = doc.createElement("time");
+        date.setAttribute('slot', 'date');
+        date.textContent = post.date;
+
+        const cats = post.categories.map(category => {
+            const params = new URLSearchParams({'s': category});
+            const anchor = doc.createElement("a");
+            anchor.setAttribute('slot', 'category');
+            anchor.textContent = category;
+            anchor.href = `?${params}`;
+            return anchor;
+        });
+
+        const tags = post.tags.map(tag => {
+            const params = new URLSearchParams({'s': tag});
+            const anchor = doc.createElement("a");
+            anchor.setAttribute('slot', 'tag');
+            anchor.textContent = `#${tag}`;
+            anchor.href = `?${params}`;
+            return anchor;
+        });
+
+        const article = doc.createElement("article", { 'is': 'search-article' });
+        article.append(title, date,
+                       ...cats,
+                       ...tags);
+
+        const li = doc.createElement("li");
+        li.appendChild(article);
+        return li;
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
+
+        const abort = new AbortController();
+        this.#abort = abort;
+
+        this.#update();
+
+        this.ownerDocument.addEventListener('search-navigate', async event => {
+            await this.#update();
+        }, { 'passive': true, 'signal': abort.signal });
+    }
+
+    disconnectedCallback() {
+        this.#abort.abort();
+        this.#abort = null;
+    }
+
+    static {
+        customElements.define("search-output",
+                              SearchOutputElement,
+                              { 'extends': 'output' });
+    }
+}
+
+class SearchInputElement extends HTMLInputElement {
+    #abort;
+
+    #update() {
+        this.value = getQuery(this.ownerDocument) ?? '';
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
+
+        const abort = new AbortController();
+        this.#abort = abort;
+
+        this.#update();
+
+        this.ownerDocument.addEventListener('search-navigate', event => {
+            this.#update();
+        }, { 'passive': true, 'signal': abort.signal });
+    }
+
+    disconnectedCallback() {
+        this.#abort.abort();
+        this.#abort = null;
+    }
+
+    static {
+        customElements.define("search-input",
+                              SearchInputElement,
+                              { 'extends': 'input' });
+    }
+}
+
+history.scrollRestoration = 'manual';
+
+const doctitle = document.title;
+
+document.addEventListener('search-navigate', () => {
+    const query = getQuery(document);
+    document.title =
+        query ?
+        `${query} — ${doctitle}` :
+        doctitle;
+});
+
+function *router() {
+    let request = yield;
     for (;;) {
-        yield await queue.pop();
+        const location = new URL(request.url);
+        let response;
+        if (location.pathname === '/search/'
+            && request.method === 'GET') {
+
+            setTimeout(() => {
+                document.dispatchEvent(new NavigateEvent('search-navigate'));
+            }, 0);
+
+            request = yield new Response('', { status: 200, statusText: 'OK' });
+        } else {
+            request = yield new Response('', { status: 404, statusText: 'Not Found' });
+        }
     }
 }
 
-async function* requests() {
+async function* requests(events) {
     yield new Request(window.location);
 
-    for await (const event of events()) {
+    for await (const event of events) {
         switch (event.type) {
         case 'popstate': {
             yield new Request(window.location);
@@ -97,10 +289,9 @@ async function* requests() {
             }
 
             const request = new Request(href);
-            history.pushState(null, '', request.url);
-
             const response = yield request;
             if (response.ok) {
+                history.pushState(null, '', request.url);
                 event.preventDefault();
             }
             break;
@@ -128,10 +319,9 @@ async function* requests() {
                 options.body = formdata;
             }
             const request = new Request(url, options);
-            history.pushState(null, '', request.url);
-
             const response = yield request;
             if (response.ok) {
+                history.pushState(null, '', request.url);
                 event.preventDefault();
             }
             break;
@@ -140,283 +330,47 @@ async function* requests() {
     }
 }
 
-const options = Object.freeze({
-    ignoreLocation: true,
-    keys: ['title', 'content', 'tags', 'categories', 'date']
-});
+const events = [];
+let signal;
 
-async function fetchjson(str) {
-    return await ((await fetch(str)).json());
-}
-
-const db = new Lazy(async () => {
-    const [index, search] = await Promise.all([
-        fetchjson("/assets/index.json"),
-        fetchjson("/assets/search.json")
-    ]);
-    return new Fuse(search, options, Fuse.parseIndex(index));
-});
-
-
-function getQuery(doc) {
-    return new URL(doc.location.href).searchParams.get('s');
-}
-
-export class SearchH1Element extends HTMLHeadingElement {
-    #abort;
-    #query;
-    #slot;
-
-    constructor() {
-        super();
-
-        const shadow = this.attachShadow({
-            mode: "closed",
-            delegatesFocus: false
+const popevents = (async function* () {
+    for (;;) {
+        let e;
+        while (e = events.pop()) {
+            yield e;
+        }
+        await new Promise(r => {
+            signal = r;
         });
-
-        const doc = this.ownerDocument;
-        this.#query = doc.createElement('span');
-        this.#query.setAttribute('aria-live', 'polite');
-        this.#slot = doc.createElement('slot');
-        shadow.append(this.#query, this.#slot);
     }
+})();
 
-    #update() {
-        const doc = this.ownerDocument;
-
-        const query = getQuery(doc);
-
-        if (query) {
-            this.#query.textContent = `${query} - `;
-        } else {
-            this.#query.textContent = '';
-        }
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-
-        const abort = new AbortController();
-        this.#abort = abort;
-
-        this.#update();
-
-        this.ownerDocument.addEventListener('search-navigate', event => {
-            this.#update();
-        }, { 'passive': true, 'signal': abort.signal });
-    }
-
-    disconnectedCallback() {
-        this.#abort.abort();
-        this.#abort = null;
-    }
-
-    static {
-        customElements.define("search-h1", SearchH1Element, { 'extends': 'h1' });
-    }
+function push(e) {
+    events.push(e);
+    signal();
 }
 
-export class SearchArticleElement extends HTMLElement {
-    constructor() {
-        super();
+document.addEventListener('click', push);
+document.addEventListener('submit', push);
+window.addEventListener('popstate', push);
 
-        const template = this.ownerDocument.getElementById('search-result');
-
-        const shadow = this.attachShadow({
-            mode: "closed",
-            delegatesFocus: true
-        });
-        shadow.append(template.content.cloneNode(true));
-    }
-
-    static {
-        customElements.define("search-article", SearchArticleElement, { 'extends': 'article' });
-    }
-}
-
-// FIXME use shadow dom?
-export class SearchOutputElement extends HTMLOutputElement {
-    #abort;
-    #list;
-
-    constructor() {
-        super();
-
-        const doc = this.ownerDocument;
-        const list = doc.createElement('ul');
-
-        this.append(list);
-        this.#list = list;
-    }
-
-    async #update() {
-        const doc = this.ownerDocument;
-
-        let query = getQuery(doc);
-        if (!query) {
-            query = '';
-        }
-
-        const posts = (await db.force()).search(query).map(p => p.item);
-
-        const postList = posts.map(post => SearchOutputElement.#renderPost(doc, post));
-
-        this.#list.replaceChildren(...postList);
-        this.removeAttribute('hidden');
-
-    }
-
-    static #renderPost(doc, post) {
-        const url = post.url;
-
-        const catels = post.categories.map(category => {
-            const params = new URLSearchParams();
-            params.append("s", category);
-
-            const anchor = doc.createElement("a");
-            anchor.setAttribute('slot', 'category');
-            anchor.textContent = category;
-            anchor.href = "/search/?" + params;
-
-            return anchor;
-        });
-
-        const tagels = post.tags.map(tag => {
-            const params = new URLSearchParams();
-            params.append("s", tag);
-
-            const anchor = doc.createElement("a");
-            anchor.setAttribute('slot', 'tag');
-            anchor.textContent = "#" + tag;
-            anchor.href = "/search/?" + params;
-
-            return anchor;
-        });
-
-        const title = doc.createElement("a");
-        title.setAttribute('slot', 'title');
-        title.setAttribute('href', url);
-        title.textContent = post.title;
-
-        const date = doc.createElement("time");
-        date.setAttribute('slot', 'date');
-        date.textContent = post.date;
-
-        const article = doc.createElement("article", { 'is': 'search-article' });
-        article.append(title, date, ...catels, ...tagels);
-
-        const li = doc.createElement("li");
-        li.append(article);
-        return li;
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-
-        const abort = new AbortController();
-        this.#abort = abort;
-
-        this.#update();
-
-        this.ownerDocument.addEventListener('search-navigate', async event => {
-            await this.#update();
-        }, { 'passive': true, 'signal': abort.signal });
-    }
-
-    disconnectedCallback() {
-        this.#abort.abort();
-        this.#abort = null;
-    }
-
-    static {
-        customElements.define("search-output", SearchOutputElement, { 'extends': 'output' });
-    }
-}
-
-export class SearchInputElement extends HTMLInputElement {
-    #abort;
-
-    constructor() {
-        super();
-    }
-
-    #update() {
-        const doc = this.ownerDocument;
-
-        let query = getQuery(doc);
-        if (!query) {
-            query = '';
-        }
-
-        this.value = query;
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-
-        const abort = new AbortController();
-        this.#abort = abort;
-
-        this.#update();
-
-        this.ownerDocument.addEventListener('search-navigate', event => {
-            this.#update();
-        }, { 'passive': true, 'signal': abort.signal });
-    }
-
-    disconnectedCallback() {
-        this.#abort.abort();
-        this.#abort = null;
-    }
-
-    static {
-        customElements.define("search-input", SearchInputElement, { 'extends': 'input' });
-    }
-}
-
-history.scrollRestoration = 'manual';
-
-const doctitle = document.title;
-const h1s = document.getElementsByTagName('h1');
-
-const loop = await requests();
+const routerLoop = router();
+const loop = await requests(popevents);
 let request = (await loop.next()).value;
+
 let isfirst = true;
+const h1s = document.getElementsByTagName('h1');
 for (;;) {
-    const location = new URL(request.url);
-    let response;
-    if (location.pathname === '/search/'
-        && request.method === 'GET') {
+    const response = routerLoop.next(request).value;
 
-        document.dispatchEvent(new NavigateEvent('search-navigate'));
-
-        const query = getQuery(document);
-        if (query) {
-            document.title = `${query} — ${doctitle}`;
-        } else {
-            document.title = doctitle;
+    if (!isfirst) {
+        const h1 = h1s[0];
+        if (h1) {
+            h1.setAttribute('tabindex', '-1');
+            h1.focus();
         }
-
-        if (!isfirst) {
-            const h1 = h1s[0];
-            if (h1) {
-                h1.setAttribute('tabindex', '-1');
-                h1.focus();
-            }
-        }
-        isfirst = false;
-
-        response = new Response('', { status: 200, statusText: 'OK' });
-    } else {
-        response = new Response('', { status: 404, statusText: 'Not Found' });
     }
+    isfirst = false;
 
     request = (await loop.next(response)).value;
 }

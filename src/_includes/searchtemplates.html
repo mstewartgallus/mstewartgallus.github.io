@@ -1,0 +1,26 @@
+<template id="search-h1">
+  <link rel="stylesheet" href="{{ "assets/main.css" | relative_url }}">
+  <span id="query" aria-live="polite"></span>
+  <slot>
+  </slot>
+</template>
+
+<template id="search-article">
+  <link rel="stylesheet" href="{{ "assets/main.css" | relative_url }}">
+  <div>
+    <slot name="category"></slot> / <slot name="title">TITLE</slot>
+  </div>
+  <dl>
+    <div>
+      <dt>{{ site.data.strings.search.postDate }}</dt>
+      <dd>
+        <slot name="date">DATE</slot>
+      </dd>
+    </div>
+    <div>
+      <dt>{{ site.data.strings.search.tag }}</dt>
+      <slot name="tag"></slot>
+    </div>
+  </dl>
+  <slot></slot>
+</template>

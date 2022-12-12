@@ -15,12 +15,17 @@
       type="application/json" crossorigin>
 <link href="/assets/index.json"
       rel="preload" as="fetch"
-      type="application/json" crossorigin>
+      type="application/json" crossorigin><template id="search-h1">
+  <link rel="stylesheet" href="/assets/main.css">
+  <span id="query" aria-live="polite"></span>
+  <slot>
+  </slot>
+</template>
 
-<template id="search-result">
+<template id="search-article">
   <link rel="stylesheet" href="/assets/main.css">
   <div>
-    <slot name="category"></slot> / <slot name="title" class="search-title">TITLE</slot>
+    <slot name="category"></slot> / <slot name="title">TITLE</slot>
   </div>
   <dl>
     <div>
@@ -34,8 +39,8 @@
       <slot name="tag"></slot>
     </div>
   </dl>
+  <slot></slot>
 </template>
-
 <script type="module" defer async
         src="/assets/search.mjs"></script>
 <link rel="canonical" href="https://mstewartgallus.github.io/search/">
@@ -60,7 +65,7 @@
       <h1
         is="search-h1"
         id="title" itemprop="name headline title">Search</h1></hgroup>
-  </header><output is="search-output" for="search" id="search-output" aria-live="polite" hidden>
+  </header><output is="search-output" for="search" aria-live="polite" hidden>
 </output>
 </main>
 <div id="sidebar"><form id="search" name="search" rel="search" role="search" action="/search/">
