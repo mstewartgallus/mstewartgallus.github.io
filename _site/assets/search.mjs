@@ -83,43 +83,47 @@ DOMContentLoaded.then(() => {
 
             super();
 
-            this.attachShadow({
-                mode: 'closed',
-            }).append(clone);
+            this.attachShadow({ mode: 'closed' }).append(clone);
         }
     }, { 'extends': 'article' });
 });
 
 function renderPost(doc, post) {
-    const title = doc.createElement("a");
-    title.slot = 'title';
-    title.href = post.url;
-    title.textContent = post.title;
+    const title = Object.assign(
+        doc.createElement('a'),
+        {
+            slot: 'title',
+            href: post.url,
+            textContent: post.title });
 
-    const date = doc.createElement("time");
-    date.slot = 'date';
-    date.textContent = post.date;
+    const date = Object.assign(
+        doc.createElement('time'),
+        { slot: 'date',
+          textContent: post.date });
 
     const cats = post.categories.map(category => {
         const params = new URLSearchParams({s: category});
-        const anchor = doc.createElement("a");
-        anchor.slot = 'category';
-        anchor.textContent = category;
-        anchor.href = `?${params}`;
-        return anchor;
+        return Object.assign(
+            doc.createElement("a"),
+            { slot: 'category',
+              textContent: category,
+              href: `?${params}` });
     });
 
     const tags = post.tags.map(tag => {
         const params = new URLSearchParams({s: tag});
-        const anchor = doc.createElement("a");
-        anchor.slot = 'tag';
-        anchor.textContent = `#${tag}`;
-        anchor.href = `?${params}`;
-        return anchor;
+        return Object.assign(
+            doc.createElement("a"),
+            {
+                slot: 'tag',
+                textContent: `#${tag}`,
+                href: `?${params}`
+            });
     });
 
     const article = doc.createElement("article", {is: 'search-article' });
-    article.append(title, date, ...cats, ...tags);
+    article.append(title, date,
+                   ...cats, ...tags);
 
     const li = doc.createElement("li");
     li.append(article);
@@ -254,6 +258,7 @@ function onsearch(query) {
     output && (output.dataset.query = query);
     input && (input.value = query);
 
+    // FIXME a little awkward
     if (h1) {
         h1.tabIndex = -1;
         h1.focus();
