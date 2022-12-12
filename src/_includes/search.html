@@ -1,6 +1,4 @@
 <form id="search" name="search" rel="search" role="search" action="{% link search.html %}">
-  <input
-    {% if page.url == '/search/' %}is="search-input"{% endif %}
-    aria-labelledby="search-button" name="s" type="search" >
+  <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
   <button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
 </form>

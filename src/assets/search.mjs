@@ -32,116 +32,7 @@ const DOMContentLoaded = (async () => {
     });
 })();
 
-class SearchCustomEvent extends CustomEvent {
-}
-
-class SearchBodyElement extends HTMLBodyElement {
-    constructor() {
-        super();
-        this.addEventListener('click', e => this.#clickCallback(e));
-        this.addEventListener('submit', e => this.#submitCallback(e));
-        this.addEventListener('popstate', e => this.#popstateCallback(e));
-    }
-
-    #searchCallback(query) {
-        const event = new SearchCustomEvent('search-custom',
-                                            { detail: query });
-        setTimeout(() => {
-            this.ownerDocument.dispatchEvent(event);
-
-            const h1 = this.ownerDocument.getElementsByTagName('h1')[0];
-            if (h1) {
-                h1.setAttribute('tabindex', '-1');
-                h1.focus();
-            }
-        }, 0);
-    }
-
-    #requestCallback(request) {
-        const location = new URL(request.url);
-        switch (true) {
-        case (location.pathname === '/search/'
-              && request.method === 'GET'): {
-                  const query = location.searchParams.get('s');
-                  this.#searchCallback(query);
-
-                  return new Response('', { status: 200, statusText: 'OK' });
-              }
-        }
-        return new Response('', { status: 404, statusText: 'Not Found' });
-    }
-
-    #clickCallback(event) {
-        const tag = event.target;
-        if (tag.tagName != 'A') {
-            return;
-        }
-        const href = tag.href;
-        if (!href) {
-            return;
-        }
-        if (event.button != 0) {
-            return;
-        }
-
-        if (tag.origin != this.#origin()) {
-            return;
-        }
-
-        const request = new Request(href);
-        const response = this.#requestCallback(request);
-        if (response.ok) {
-            this.ownerDocument.defaultView.history.pushState(null, '', request.url);
-            event.preventDefault();
-        }
-    }
-
-    #submitCallback(event) {
-        const form = event.target;
-
-        let url = new URL(form.action, this.#origin());
-        if (url.origin != this.#origin()) {
-            return;
-        }
-
-        const formdata = new FormData(form);
-        const options = {
-            method: form.method
-        };
-        if (form.method === 'get') {
-            const params = new URLSearchParams(formdata);
-            for (const [key, value] of url.searchParams) {
-                params.append(key, value);
-            }
-            url = new URL(url.origin + url.pathname + "?" + params);
-        } else {
-            options.body = formdata;
-        }
-        const request = new Request(url, options);
-        const response = this.#requestCallback(request);
-        if (response.ok) {
-            this.ownerDocument.defaultView.history.pushState(null, '', request.url);
-            event.preventDefault();
-        }
-    }
-
-    #popstateCallback(event) {
-        // FIXME get location from cb ?
-        this.#requestCallback(new Request(this.ownerDocument.location));
-    }
-
-    #origin() {
-        return this.ownerDocument.location.origin;
-    }
-}
-customElements.define("search-body", SearchBodyElement,
-                      { 'extends': 'body' });
-
-function getQuery(el) {
-    return new URL(el.ownerDocument.location).searchParams.get('s');
-}
-
-class SearchTitleElement extends HTMLTitleElement {
+customElements.define("search-title", class extends HTMLTitleElement {
     #title;
 
     constructor() {
@@ -149,31 +40,31 @@ class SearchTitleElement extends HTMLTitleElement {
         this.#title = this.text;
     }
 
-    // FIXME remove on disconnectedCallback ?
+    #update(query) {
+        this.text =
+            query ?
+            `${query} — ${this.#title}` :
+            this.#title;
+    }
+
+    static get observedAttributes() { return ['data-query']; }
+
+    attributeChangedCallback(name, old, val) {
+        this.#update(val);
+    }
+
     connectedCallback() {
         if (!this.isConnected) {
             return;
         }
-        this.ownerDocument.addEventListener('search-custom', e => {
-            this.#searchCallback(e.detail);
-        });
-        this.#searchCallback(getQuery(this));
+        this.#update(this.dataset.query);
     }
-
-    #searchCallback(query) {
-        this.text =
-            query ?
-            `${query} — ${this.#title}` :
-            doctitle;
-    }
-}
-customElements.define("search-title", SearchTitleElement,
-                      { 'extends': 'title' });
+}, { 'extends': 'title' });
 
 DOMContentLoaded.then(() => {
     const template = document.getElementById('search-h1').content;
 
-    class SearchH1Element extends HTMLHeadingElement {
+    customElements.define("search-h1", class extends HTMLHeadingElement {
         #query;
 
         constructor() {
@@ -188,29 +79,31 @@ DOMContentLoaded.then(() => {
             this.#query = shadow.getElementById('query');
         }
 
+        #update() {
+            const query = this.dataset.query;
+            this.#query.textContent = query ? `${query} - ` : '';
+        }
+
+        static get observedAttributes() { return ['data-query']; }
+
+        attributeChangedCallback(name, old, val) {
+            this.#update();
+        }
+
         connectedCallback() {
             if (!this.isConnected) {
                 return;
             }
-            this.ownerDocument.addEventListener('search-custom', e => {
-                this.#searchCallback(e.detail);
-            });
-            this.#searchCallback(getQuery(this));
+            this.#update();
         }
-
-        #searchCallback(query) {
-            this.#query.textContent = query ? `${query} - ` : '';
-        }
-    }
-    customElements.define("search-h1", SearchH1Element,
-                          { 'extends': 'h1' });
+    }, { 'extends': 'h1' });
 });
 
 
 DOMContentLoaded.then(() => {
     const template = document.getElementById('search-article').content;
 
-    class SearchArticleElement extends HTMLElement {
+    customElements.define("search-article", class extends HTMLElement {
         constructor() {
             super();
 
@@ -219,9 +112,7 @@ DOMContentLoaded.then(() => {
                 delegatesFocus: true
             }).append(template.cloneNode(true));
         }
-    }
-    customElements.define("search-article", SearchArticleElement,
-                          { 'extends': 'article' });
+    }, { 'extends': 'article' });
 });
 
 function renderPost(doc, post) {
@@ -264,7 +155,7 @@ function renderPost(doc, post) {
     await DOMContentLoaded;
     const fuse = await database;
 
-    class SearchOutputElement extends HTMLOutputElement {
+    customElements.define("search-output", class extends HTMLOutputElement {
         #list;
 
         constructor() {
@@ -277,17 +168,7 @@ function renderPost(doc, post) {
             this.#list = list;
         }
 
-        connectedCallback() {
-            if (!this.isConnected) {
-                return;
-            }
-            this.ownerDocument.addEventListener('search-custom', e => {
-                this.#searchCallback(e.detail);
-            });
-            this.#searchCallback(getQuery(this));
-        }
-
-        #searchCallback(query) {
+        #update(query) {
             const doc = this.ownerDocument;
             const posts = fuse
                   .search(query ?? '')
@@ -295,27 +176,163 @@ function renderPost(doc, post) {
 
             this.#list.replaceChildren(...posts);
             this.removeAttribute('hidden');
-
         }
-    }
-    customElements.define("search-output", SearchOutputElement,
-                          { 'extends': 'output' });
+
+        static get observedAttributes() { return ['data-query']; }
+
+        attributeChangedCallback(name, old, val) {
+            this.#update(val);
+        }
+
+        connectedCallback() {
+            if (!this.isConnected) {
+                return;
+            }
+            this.#update(this.dataset.query);
+        }
+    }, { 'extends': 'output' });
 })();
 
-class SearchInputElement extends HTMLInputElement {
+class SearchCustomEvent extends CustomEvent {
+}
+
+customElements.define("search-body", class extends HTMLBodyElement {
+    constructor() {
+        super();
+        this.addEventListener('click', e => this.#clickCallback(e));
+        this.addEventListener('submit', e => this.#submitCallback(e));
+        this.addEventListener('popstate', e => this.#popstateCallback(e));
+    }
+
     connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-        this.ownerDocument.addEventListener('search-custom', e => {
-            this.#searchCallback(e.detail);
-        });
-        this.#searchCallback(getQuery(this));
+        this.#requestCallback(new Request(this.ownerDocument.location));
     }
 
     #searchCallback(query) {
-        this.value = query ?? '';
+        const event = new SearchCustomEvent('search-custom',
+                                            { detail: query });
+        setTimeout(() => {
+            this.dispatchEvent(event);
+        }, 0);
+    }
+
+    #requestCallback(request) {
+        const location = new URL(request.url);
+
+        const route = {
+            '/search/': {
+                'GET': () => {
+                    const query = location.searchParams.get('s');
+                    this.#searchCallback(query);
+                }
+            }
+        };
+        const x = route[location.pathname];
+        if (!x)
+            return false;
+        const y = x[request.method];
+        if (!y)
+            return false;
+        y();
+        return true;
+    }
+
+    #clickCallback(event) {
+        const tag = event.target;
+        if (tag.tagName != 'A') {
+            return;
+        }
+        const href = tag.href;
+        if (!href) {
+            return;
+        }
+        if (event.button != 0) {
+            return;
+        }
+
+        if (tag.origin != this.#origin()) {
+            return;
+        }
+
+        const request = new Request(href);
+        if (this.#requestCallback(request)) {
+            this.ownerDocument.defaultView.history
+                .pushState(null, '', request.url);
+            event.preventDefault();
+        }
+    }
+
+    #submitCallback(event) {
+        const form = event.target;
+
+        let url = new URL(form.action, this.#origin());
+        if (url.origin != this.#origin()) {
+            return;
+        }
+
+        const formdata = new FormData(form);
+        const options = {
+            method: form.method
+        };
+        if (form.method === 'get') {
+            const params = new URLSearchParams(formdata);
+            for (const [key, value] of url.searchParams) {
+                params.append(key, value);
+            }
+            url = new URL(url.origin + url.pathname + "?" + params);
+        } else {
+            options.body = formdata;
+        }
+        const request = new Request(url, options);
+        if (this.#requestCallback(request)) {
+            this.ownerDocument.defaultView.history
+                .pushState(null, '', request.url);
+            event.preventDefault();
+        }
+    }
+
+    #popstateCallback(event) {
+        // FIXME get location from cb ?
+        this.#requestCallback(new Request(this.ownerDocument.location));
+    }
+
+    #origin() {
+        return this.ownerDocument.location.origin;
+    }
+}, { 'extends': 'body' });
+
+function onsearch(e) {
+    const query = e.detail;
+
+    const title = document.getElementsByTagName('title')[0];
+
+    const h1 = document.getElementById('title');
+
+    const output = document.getElementById('search-output');
+    const input = document.getElementById('search-input');
+
+    if (title) {
+        title.dataset.query = query;
+    }
+
+    if (h1) {
+        h1.dataset.query = query;
+    }
+
+    if (output) {
+        output.dataset.query = query;
+    }
+
+    if (input) {
+        input.value = query;
+    }
+
+    if (h1) {
+        h1.setAttribute('tabindex', '-1');
+        h1.focus();
     }
 }
-customElements.define("search-input", SearchInputElement,
-                      { 'extends': 'input' });
+
+DOMContentLoaded.then(() => {
+    document.body.addEventListener('search-custom', onsearch);
+});
