@@ -30,50 +30,46 @@ const DOMContentLoaded = (async () => {
     });
 })();
 
-function getQuery(doc) {
-    return new URL(doc.location.href).searchParams.get('s');
+const waiter = {
+    waiter: null,
+    signal: null
+};
+waiter.waiter = new Promise(r => {
+    waiter.signal = r;
+});
+
+function listen(cb) {
+    (async () => {
+        await new Promise(r => setTimeout(r, 0));
+        // so stupid
+        cb(new URL(document.location).searchParams.get('s'));
+
+        for (;;) {
+            const e = await waiter.waiter;
+            cb(e);
+        }
+    })();
 }
-
-
-class NavigateEvent extends CustomEvent {
-}
-
-function navmixin(elem) {
-    class NavigateMixinElement extends elem {
-        #abort;
-
-        navigateCallback() {
-        }
-
-        connectedCallback() {
-            if (!this.isConnected) {
-                return;
-            }
-
-            const abort = new AbortController();
-            this.#abort = abort;
-
-            this.navigateCallback();
-
-            this.ownerDocument.addEventListener('search-navigate', event => {
-                this.navigateCallback();
-            }, { 'passive': true, 'signal': abort.signal });
-        }
-
-        disconnectedCallback() {
-            this.#abort.abort();
-            this.#abort = null;
-        }
-    }
-    return NavigateMixinElement;
+function signal(e) {
+    const s = waiter.signal;
+    waiter.waiter = new Promise(r => {
+        waiter.signal = r;
+    });
+    setTimeout(() => {
+        s(e);
+    }, 0);
 }
 
 DOMContentLoaded.then(() => {
     const doctitle = document.title;
 
-    class SearchTitleElement extends navmixin(HTMLTitleElement) {
-        navigateCallback() {
-            const query = getQuery(document);
+    class SearchTitleElement extends HTMLTitleElement {
+        constructor() {
+            super();
+            listen(query => this.#update(query));
+        }
+
+        #update(query) {
             this.text =
                 query ?
                 `${query} — ${doctitle}` :
@@ -88,7 +84,7 @@ DOMContentLoaded.then(() => {
 DOMContentLoaded.then(() => {
     const template = document.getElementById('search-h1').content;
 
-    class SearchH1Element extends navmixin(HTMLHeadingElement) {
+    class SearchH1Element extends HTMLHeadingElement {
         #query;
         #isfirst;
 
@@ -103,10 +99,11 @@ DOMContentLoaded.then(() => {
             shadow.append(template.cloneNode(true));
             this.#isfirst = true;
             this.#query = shadow.getElementById('query');
+
+            listen(q => this.#update(q));
         }
 
-        navigateCallback() {
-            const query = getQuery(this.ownerDocument);
+        #update(query) {
             this.#query.textContent = query ? `${query} - ` : '';
 
             if (!this.#isfirst) {
@@ -181,7 +178,7 @@ function renderPost(doc, post) {
     await DOMContentLoaded;
     const fuse = await database;
 
-    class SearchOutputElement extends navmixin(HTMLOutputElement) {
+    class SearchOutputElement extends HTMLOutputElement {
         #list;
 
         constructor() {
@@ -192,18 +189,14 @@ function renderPost(doc, post) {
 
             this.appendChild(list);
             this.#list = list;
+
+            listen(q => this.#update(q));
         }
 
-        navigateCallback() {
+        #update(query) {
             const doc = this.ownerDocument;
-
-            let query = getQuery(doc);
-            if (!query) {
-                query = '';
-            }
-
             const posts = fuse
-                  .search(query)
+                  .search(query ?? '')
                   .map(post => renderPost(doc, post.item));
 
             this.#list.replaceChildren(...posts);
@@ -215,9 +208,14 @@ function renderPost(doc, post) {
                           { 'extends': 'output' });
 })();
 
-class SearchInputElement extends navmixin(HTMLInputElement) {
-    navigateCallback() {
-        this.value = getQuery(this.ownerDocument) ?? '';
+class SearchInputElement extends HTMLInputElement {
+    constructor() {
+        super();
+        listen(q => this.#update(q));
+    }
+
+    #update(query) {
+        this.value = query ?? '';
     }
 
     static {
@@ -228,17 +226,16 @@ class SearchInputElement extends navmixin(HTMLInputElement) {
 }
 
 
-function *router() {
+function *router(cb) {
     let request = yield;
+
     for (;;) {
         const location = new URL(request.url);
         let response;
         if (location.pathname === '/search/'
             && request.method === 'GET') {
 
-            setTimeout(() => {
-                document.dispatchEvent(new NavigateEvent('search-navigate'));
-            }, 0);
+            cb(location.searchParams.get('s'));
 
             request = yield new Response('', { status: 200, statusText: 'OK' });
         } else {
@@ -248,8 +245,6 @@ function *router() {
 }
 
 async function* requests(events) {
-    yield new Request(window.location);
-
     for await (const event of events) {
         switch (event.type) {
         case 'popstate': {
@@ -334,10 +329,13 @@ document.addEventListener('click', push);
 document.addEventListener('submit', push);
 window.addEventListener('popstate', push);
 
-const routerLoop = router();
+const routerLoop = router(signal);
+
+routerLoop.next();
 
 const loop = await requests(popevents);
 let request = (await loop.next()).value;
+
 for (;;) {
     const response = routerLoop.next(request).value;
     request = (await loop.next(response)).value;
