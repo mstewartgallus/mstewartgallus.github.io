@@ -1,5 +1,7 @@
 import Fuse from './vend/fuse.mjs' ;
 
+history.scrollRestoration = 'manual';
+
 async function fetchjson(url) {
     return await ((await fetch(url)).json());
 }
@@ -16,211 +18,206 @@ const database = (async () =>
     new Fuse(await search, options,
              Fuse.parseIndex(await index)))();
 
+const DOMContentLoaded = (async () => {
+    await new Promise(r => {
+        window.addEventListener('DOMContentLoaded', r);
+        switch (document.readyState) {
+        case 'interactive':
+        case 'complete':
+            r();
+            break;
+        }
+    });
+})();
+
 function getQuery(doc) {
     return new URL(doc.location.href).searchParams.get('s');
 }
 
 
 class NavigateEvent extends CustomEvent {
-    constructor(type, event) {
-        super(type, event);
-    }
 }
 
-class SearchH1Element extends HTMLHeadingElement {
-    #abort;
-    #query;
+function navmixin(elem) {
+    class NavigateMixinElement extends elem {
+        #abort;
 
-    static #template = document.getElementById('search-h1').content;
-
-    constructor() {
-        super();
-
-        const shadow = this
-            .attachShadow({
-                mode: 'closed',
-                delegatesFocus: false
-            });
-        shadow.appendChild(SearchH1Element.#template.cloneNode(true));
-        this.#query = shadow.getElementById('query');
-    }
-
-    #update() {
-        const query = getQuery(this.ownerDocument);
-        this.#query.textContent = query ? `${query} - ` : '';
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
+        navigateCallback() {
         }
 
-        const abort = new AbortController();
-        this.#abort = abort;
+        connectedCallback() {
+            if (!this.isConnected) {
+                return;
+            }
 
-        this.#update();
+            const abort = new AbortController();
+            this.#abort = abort;
 
-        this.ownerDocument.addEventListener('search-navigate', event => {
-            this.#update();
-        }, { 'passive': true, 'signal': abort.signal });
+            this.navigateCallback();
+
+            this.ownerDocument.addEventListener('search-navigate', event => {
+                this.navigateCallback();
+            }, { 'passive': true, 'signal': abort.signal });
+        }
+
+        disconnectedCallback() {
+            this.#abort.abort();
+            this.#abort = null;
+        }
     }
-
-    disconnectedCallback() {
-        this.#abort.abort();
-        this.#abort = null;
-    }
-
-    static {
-        customElements.define("search-h1",
-                              SearchH1Element,
-                              { 'extends': 'h1' });
-    }
+    return NavigateMixinElement;
 }
 
-class SearchArticleElement extends HTMLElement {
-    static #template = document
-        .getElementById('search-article')
-        .content;
+DOMContentLoaded.then(() => {
+    const doctitle = document.title;
 
-    constructor() {
-        super();
+    class SearchTitleElement extends navmixin(HTMLTitleElement) {
+        navigateCallback() {
+            const query = getQuery(document);
+            this.text =
+                query ?
+                `${query} — ${doctitle}` :
+                doctitle;
+        }
+    }
+    customElements.define("search-title",
+                          SearchTitleElement,
+                          { 'extends': 'title' });
+});
 
-        this
-            .attachShadow({
+DOMContentLoaded.then(() => {
+    const template = document.getElementById('search-h1').content;
+
+    class SearchH1Element extends navmixin(HTMLHeadingElement) {
+        #query;
+        #isfirst;
+
+        constructor() {
+            super();
+
+            const shadow = this
+                  .attachShadow({
+                      mode: 'closed',
+                      delegatesFocus: false
+                  });
+            shadow.append(template.cloneNode(true));
+            this.#isfirst = true;
+            this.#query = shadow.getElementById('query');
+        }
+
+        navigateCallback() {
+            const query = getQuery(this.ownerDocument);
+            this.#query.textContent = query ? `${query} - ` : '';
+
+            if (!this.#isfirst) {
+                this.#isfirst = false;
+                return;
+            }
+            this.setAttribute('tabindex', '-1');
+            this.focus();
+        }
+    }
+    customElements.define("search-h1", SearchH1Element,
+                          { 'extends': 'h1' });
+});
+
+
+DOMContentLoaded.then(() => {
+    const template = document.getElementById('search-article').content;
+
+    class SearchArticleElement extends HTMLElement {
+        constructor() {
+            super();
+
+            this.attachShadow({
                 mode: 'closed',
                 delegatesFocus: true
-            })
-            .appendChild(SearchArticleElement.#template.cloneNode(true));
+            }).append(template.cloneNode(true));
+        }
     }
+    customElements.define("search-article", SearchArticleElement,
+                          { 'extends': 'article' });
+});
 
-    static {
-        customElements.define("search-article",
-                              SearchArticleElement,
-                              { 'extends': 'article' });
-    }
+function renderPost(doc, post) {
+    const title = doc.createElement("a");
+    title.setAttribute('slot', 'title');
+    title.href = post.url;
+    title.textContent = post.title;
+
+    const date = doc.createElement("time");
+    date.setAttribute('slot', 'date');
+    date.textContent = post.date;
+
+    const cats = post.categories.map(category => {
+        const params = new URLSearchParams({'s': category});
+        const anchor = doc.createElement("a");
+        anchor.setAttribute('slot', 'category');
+        anchor.textContent = category;
+        anchor.href = `?${params}`;
+        return anchor;
+    });
+
+    const tags = post.tags.map(tag => {
+        const params = new URLSearchParams({'s': tag});
+        const anchor = doc.createElement("a");
+        anchor.setAttribute('slot', 'tag');
+        anchor.textContent = `#${tag}`;
+        anchor.href = `?${params}`;
+        return anchor;
+    });
+
+    const article = doc.createElement("article", { 'is': 'search-article' });
+    article.append(title, date,
+                   ...cats,
+                   ...tags);
+
+    const li = doc.createElement("li");
+    li.appendChild(article);
+    return li;
 }
 
-class SearchOutputElement extends HTMLOutputElement {
-    #abort;
-    #list;
+(async () => {
+    await DOMContentLoaded;
+    const fuse = await database;
 
-    constructor() {
-        super();
+    class SearchOutputElement extends navmixin(HTMLOutputElement) {
+        #list;
 
-        const doc = this.ownerDocument;
-        const list = doc.createElement('ul');
+        constructor() {
+            super();
 
-        this.appendChild(list);
-        this.#list = list;
-    }
+            const doc = this.ownerDocument;
+            const list = doc.createElement('ul');
 
-    async #update() {
-        const doc = this.ownerDocument;
-
-        let query = getQuery(doc);
-        if (!query) {
-            query = '';
+            this.appendChild(list);
+            this.#list = list;
         }
 
-        const posts = (await database)
-              .search(query)
-              .map(post => SearchOutputElement.#renderPost(doc, post.item));
+        navigateCallback() {
+            const doc = this.ownerDocument;
 
-        this.#list.replaceChildren(...posts);
-        this.removeAttribute('hidden');
+            let query = getQuery(doc);
+            if (!query) {
+                query = '';
+            }
 
-    }
+            const posts = fuse
+                  .search(query)
+                  .map(post => renderPost(doc, post.item));
 
-    static #renderPost(doc, post) {
-        const title = doc.createElement("a");
-        title.setAttribute('slot', 'title');
-        title.href = post.url;
-        title.textContent = post.title;
+            this.#list.replaceChildren(...posts);
+            this.removeAttribute('hidden');
 
-        const date = doc.createElement("time");
-        date.setAttribute('slot', 'date');
-        date.textContent = post.date;
-
-        const cats = post.categories.map(category => {
-            const params = new URLSearchParams({'s': category});
-            const anchor = doc.createElement("a");
-            anchor.setAttribute('slot', 'category');
-            anchor.textContent = category;
-            anchor.href = `?${params}`;
-            return anchor;
-        });
-
-        const tags = post.tags.map(tag => {
-            const params = new URLSearchParams({'s': tag});
-            const anchor = doc.createElement("a");
-            anchor.setAttribute('slot', 'tag');
-            anchor.textContent = `#${tag}`;
-            anchor.href = `?${params}`;
-            return anchor;
-        });
-
-        const article = doc.createElement("article", { 'is': 'search-article' });
-        article.append(title, date,
-                       ...cats,
-                       ...tags);
-
-        const li = doc.createElement("li");
-        li.appendChild(article);
-        return li;
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
         }
-
-        const abort = new AbortController();
-        this.#abort = abort;
-
-        this.#update();
-
-        this.ownerDocument.addEventListener('search-navigate', async event => {
-            await this.#update();
-        }, { 'passive': true, 'signal': abort.signal });
     }
+    customElements.define("search-output", SearchOutputElement,
+                          { 'extends': 'output' });
+})();
 
-    disconnectedCallback() {
-        this.#abort.abort();
-        this.#abort = null;
-    }
-
-    static {
-        customElements.define("search-output",
-                              SearchOutputElement,
-                              { 'extends': 'output' });
-    }
-}
-
-class SearchInputElement extends HTMLInputElement {
-    #abort;
-
-    #update() {
+class SearchInputElement extends navmixin(HTMLInputElement) {
+    navigateCallback() {
         this.value = getQuery(this.ownerDocument) ?? '';
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-
-        const abort = new AbortController();
-        this.#abort = abort;
-
-        this.#update();
-
-        this.ownerDocument.addEventListener('search-navigate', event => {
-            this.#update();
-        }, { 'passive': true, 'signal': abort.signal });
-    }
-
-    disconnectedCallback() {
-        this.#abort.abort();
-        this.#abort = null;
     }
 
     static {
@@ -230,17 +227,6 @@ class SearchInputElement extends HTMLInputElement {
     }
 }
 
-history.scrollRestoration = 'manual';
-
-const doctitle = document.title;
-
-document.addEventListener('search-navigate', () => {
-    const query = getQuery(document);
-    document.title =
-        query ?
-        `${query} — ${doctitle}` :
-        doctitle;
-});
 
 function *router() {
     let request = yield;
@@ -332,6 +318,10 @@ async function* requests(events) {
 
 let handler;
 
+function push(e) {
+    handler(e);
+}
+
 const popevents = (async function* () {
     for (;;) {
         yield await new Promise(r => {
@@ -340,31 +330,15 @@ const popevents = (async function* () {
     }
 })();
 
-function push(e) {
-    handler(e);
-}
-
 document.addEventListener('click', push);
 document.addEventListener('submit', push);
 window.addEventListener('popstate', push);
 
 const routerLoop = router();
+
 const loop = await requests(popevents);
 let request = (await loop.next()).value;
-
-let isfirst = true;
-const h1s = document.getElementsByTagName('h1');
 for (;;) {
     const response = routerLoop.next(request).value;
-
-    if (!isfirst) {
-        const h1 = h1s[0];
-        if (h1) {
-            h1.setAttribute('tabindex', '-1');
-            h1.focus();
-        }
-    }
-    isfirst = false;
-
     request = (await loop.next(response)).value;
 }

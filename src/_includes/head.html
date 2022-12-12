@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{- title -}}&thinsp;—&thinsp;{{- site_title -}}</title>
+  <title {% if page.url == '/search/' %}is="search-title"{% endif %}>{{- title -}}&thinsp;—&thinsp;{{- site_title -}}</title>
   <link rel="icon" href="{% link assets/favicon.svg %}">
   <link rel="stylesheet" href="{{ css }}">
   <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
