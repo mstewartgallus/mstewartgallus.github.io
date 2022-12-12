@@ -31,6 +31,7 @@ const DOMContentLoaded = (async () => {
 })();
 
 customElements.define("search-title", class extends HTMLTitleElement {
+    static observedAttributes = ['data-query'];
     #title;
 
     constructor() {
@@ -38,24 +39,11 @@ customElements.define("search-title", class extends HTMLTitleElement {
         this.#title = this.text;
     }
 
-    #update(query) {
+    attributeChangedCallback(n, o, x) {
         this.text =
-            query ?
-            `${query} — ${this.#title}` :
+            x ?
+            `${x} — ${this.#title}` :
             this.#title;
-    }
-
-    static get observedAttributes() { return ['data-query']; }
-
-    attributeChangedCallback(name, old, val) {
-        this.#update(val);
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-        this.#update(this.dataset.query);
     }
 }, { 'extends': 'title' });
 
@@ -63,9 +51,11 @@ DOMContentLoaded.then(() => {
     const template = document.getElementById('search-h1').content;
 
     customElements.define("search-h1", class extends HTMLHeadingElement {
+        static observedAttributes = ['data-query'];
         #query;
 
         constructor() {
+            const clone = template.cloneNode(true);
             super();
 
             const shadow = this
@@ -73,26 +63,12 @@ DOMContentLoaded.then(() => {
                       mode: 'closed',
                       delegatesFocus: false
                   });
-            shadow.append(template.cloneNode(true));
+            shadow.append(clone);
             this.#query = shadow.getElementById('query');
         }
 
-        #update() {
-            const query = this.dataset.query;
-            this.#query.textContent = query ? `${query} - ` : '';
-        }
-
-        static get observedAttributes() { return ['data-query']; }
-
-        attributeChangedCallback(name, old, val) {
-            this.#update();
-        }
-
-        connectedCallback() {
-            if (!this.isConnected) {
-                return;
-            }
-            this.#update();
+        attributeChangedCallback(n, o, x) {
+            this.#query.textContent = x ? `${x} - ` : '';
         }
     }, { 'extends': 'h1' });
 });
@@ -103,49 +79,50 @@ DOMContentLoaded.then(() => {
 
     customElements.define("search-article", class extends HTMLElement {
         constructor() {
+            const clone = template.cloneNode(true);
+
             super();
 
             this.attachShadow({
                 mode: 'closed',
-                delegatesFocus: true
-            }).append(template.cloneNode(true));
+            }).append(clone);
         }
     }, { 'extends': 'article' });
 });
 
 function renderPost(doc, post) {
     const title = doc.createElement("a");
-    title.setAttribute('slot', 'title');
+    title.slot = 'title';
     title.href = post.url;
     title.textContent = post.title;
 
     const date = doc.createElement("time");
-    date.setAttribute('slot', 'date');
+    date.slot = 'date';
     date.textContent = post.date;
 
     const cats = post.categories.map(category => {
-        const params = new URLSearchParams({'s': category});
+        const params = new URLSearchParams({s: category});
         const anchor = doc.createElement("a");
-        anchor.setAttribute('slot', 'category');
+        anchor.slot = 'category';
         anchor.textContent = category;
         anchor.href = `?${params}`;
         return anchor;
     });
 
     const tags = post.tags.map(tag => {
-        const params = new URLSearchParams({'s': tag});
+        const params = new URLSearchParams({s: tag});
         const anchor = doc.createElement("a");
-        anchor.setAttribute('slot', 'tag');
+        anchor.slot = 'tag';
         anchor.textContent = `#${tag}`;
         anchor.href = `?${params}`;
         return anchor;
     });
 
-    const article = doc.createElement("article", { 'is': 'search-article' });
+    const article = doc.createElement("article", {is: 'search-article' });
     article.append(title, date, ...cats, ...tags);
 
     const li = doc.createElement("li");
-    li.appendChild(article);
+    li.append(article);
     return li;
 }
 
@@ -154,6 +131,7 @@ function renderPost(doc, post) {
     const fuse = await database;
 
     customElements.define("search-output", class extends HTMLOutputElement {
+        static observedAttributes = ['data-query'];
         #list;
 
         constructor() {
@@ -162,80 +140,48 @@ function renderPost(doc, post) {
             const doc = this.ownerDocument;
             const list = doc.createElement('ul');
 
-            this.appendChild(list);
+            this.append(list);
             this.#list = list;
         }
 
-        #update(query) {
+        attributeChangedCallback(n, o, x) {
             const doc = this.ownerDocument;
             const posts = fuse
-                  .search(query ?? '')
+                  .search(x ?? '')
                   .map(post => renderPost(doc, post.item));
 
             this.#list.replaceChildren(...posts);
             this.removeAttribute('hidden');
         }
-
-        static get observedAttributes() { return ['data-query']; }
-
-        attributeChangedCallback(name, old, val) {
-            this.#update(val);
-        }
-
-        connectedCallback() {
-            if (!this.isConnected) {
-                return;
-            }
-            this.#update(this.dataset.query);
-        }
     }, { 'extends': 'output' });
 })();
-
-class SearchCustomEvent extends CustomEvent {
-}
 
 customElements.define("search-body", class extends HTMLBodyElement {
     constructor() {
         super();
-        this.addEventListener('click', e => this.#clickCallback(e));
-        this.addEventListener('submit', e => this.#submitCallback(e));
-        this.addEventListener('popstate', e => this.#popstateCallback(e));
+        this.addEventListener('click', e => this.#click(e));
+        this.addEventListener('submit', e => this.#submit(e));
+        this.addEventListener('popstate', e => this.#popstate(e));
     }
 
     connectedCallback() {
-        this.#requestCallback(new Request(this.ownerDocument.location));
+        this.#request(new Request(this.ownerDocument.URL));
     }
 
-    #searchCallback(query) {
-        const event = new SearchCustomEvent('search-custom',
-                                            { detail: query });
-        setTimeout(() => {
-            this.dispatchEvent(event);
-        }, 0);
-    }
-
-    #requestCallback(request) {
+    #request(request) {
         const location = new URL(request.url);
 
-        const route = {
+        return {
             '/search/': {
                 'GET': () => {
-                    const query = location.searchParams.get('s');
-                    this.#searchCallback(query);
+                    this.dataset.query = location.searchParams.get('s');
+                    return true;
                 }
             }
-        };
-        const x = route[location.pathname];
-        if (!x)
-            return false;
-        const y = x[request.method];
-        if (!y)
-            return false;
-        y();
-        return true;
+        }?.[location.pathname]?.[request.method]?.();
     }
 
-    #clickCallback(event) {
+    #click(event) {
         const tag = event.target;
         if (tag.tagName != 'A') {
             return;
@@ -252,15 +198,14 @@ customElements.define("search-body", class extends HTMLBodyElement {
             return;
         }
 
-        const request = new Request(href);
-        if (this.#requestCallback(request)) {
+        if (this.#request(new Request(href))) {
             this.ownerDocument.defaultView.history
-                .pushState(null, '', request.url);
+                .pushState(null, '', href);
             event.preventDefault();
         }
     }
 
-    #submitCallback(event) {
+    #submit(event) {
         const form = event.target;
 
         let url = new URL(form.action, this.#origin());
@@ -281,17 +226,16 @@ customElements.define("search-body", class extends HTMLBodyElement {
         } else {
             options.body = formdata;
         }
-        const request = new Request(url, options);
-        if (this.#requestCallback(request)) {
+
+        if (this.#request(new Request(url, options))) {
             this.ownerDocument.defaultView.history
-                .pushState(null, '', request.url);
+                .pushState(null, '', url);
             event.preventDefault();
         }
     }
 
-    #popstateCallback(event) {
-        // FIXME get location from cb ?
-        this.#requestCallback(new Request(this.ownerDocument.location));
+    #popstate(event) {
+        this.#request(new Request(this.ownerDocument.URL));
     }
 
     #origin() {
@@ -299,38 +243,37 @@ customElements.define("search-body", class extends HTMLBodyElement {
     }
 }, { 'extends': 'body' });
 
-function onsearch(e) {
-    const query = e.detail;
-
+function onsearch(query) {
     const title = document.getElementsByTagName('title')[0];
-
     const h1 = document.getElementById('title');
-
     const output = document.getElementById('search-output');
     const input = document.getElementById('search-input');
 
-    if (title) {
-        title.dataset.query = query;
-    }
+    title && (title.dataset.query = query);
+    h1 && (h1.dataset.query = query);
+    output && (output.dataset.query = query);
+    input && (input.value = query);
 
     if (h1) {
-        h1.dataset.query = query;
-    }
-
-    if (output) {
-        output.dataset.query = query;
-    }
-
-    if (input) {
-        input.value = query;
-    }
-
-    if (h1) {
-        h1.setAttribute('tabindex', '-1');
+        h1.tabIndex = -1;
         h1.focus();
     }
 }
 
+function onsearchdelay(query) {
+    setTimeout(() => onsearch(query), 0);
+}
+
+function onmutation(mutationList, observer) {
+    for (const mutation of mutationList) {
+        onsearchdelay(mutation.target.dataset.query);
+    }
+}
+
+const observer = new MutationObserver(onmutation);
+
 DOMContentLoaded.then(() => {
-    document.body.addEventListener('search-custom', onsearch);
+    const body = document.body;
+    onsearchdelay(body.dataset.query);
+    observer.observe(body, { attributeFilter: ['data-query'] });
 });
