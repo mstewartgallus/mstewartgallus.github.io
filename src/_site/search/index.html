@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"
+      itemscope
+      itemtype="https://schema.org/SearchResultsPage"
+      itemid="http://localhost:4000/search/"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title is="search-title">Search&thinsp;—&thinsp;</title>
+  <link rel="icon" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="" ><link type="preload" href="/assets/pagefind/pagefind.js" as="script">
+<link type="preload" href="/assets/pagefind/wasm.en-ca.pagefind" as="fetch" crossorigin><template id="search-h1">
+  <link rel="stylesheet" href="/assets/main.css">
+  <span id="query" aria-live="polite"></span>
+  <span>
+    <slot>
+    </slot>
+  </span>
+</template>
+
+<template id="search-article">
+  <link rel="stylesheet" href="/assets/main.css">
+  <div>
+    <slot name="category"></slot> / <slot name="title">TITLE</slot>
+  </div>
+  <dl>
+    <div>
+      <dt>Post Date</dt>
+      <dd>
+        <slot name="date">DATE</slot>
+      </dd>
+    </div>
+    <div>
+      <dt>Tag</dt>
+      <slot name="tag"></slot>
+    </div>
+  </dl>
+  <slot></slot>
+</template>
+<script type="module" defer async
+        src="/assets/search.mjs"></script>
+<link rel="canonical" href="http://localhost:4000/search/">
+<link rel="author" href="">
+<meta name="author" content="">
+<meta name="description" content="">
+<meta property="og:title" content="Search">
+<meta property="og:url" content="http://localhost:4000/search/">
+<meta property="og:type" content="website">
+<meta name="og:site_name" content="">
+<meta property="og:image" content="http://localhost:4000/assets/favicon.svg" >
+<meta property="og:description" content="">
+<meta property="og:profile" content="">
+<meta property="og:profile:username" content="">
+</head>
+<body itemscope
+        itemprop="mainEntity hasPart"
+        itemtype="https://schema.org/WebContent"
+        itemid="http://localhost:4000/search/"
+        is="search-body"
+        ><main aria-describedby="title" itemprop="text">
+  <header>
+    <hgroup>
+      <h1
+        is="search-h1"
+        id="title" itemprop="name headline title">Search</h1></hgroup>
+  </header><output id="search-output" for="search" aria-live="polite" hidden>
+  <search-results id="search-results"></search-results>
+</output>
+</main>
+<div id="sidebar"><form id="search" name="search" rel="search" role="search" action="/search/"
+      data-pagefind-ignore>
+  <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
+  <button id="search-button" type="submit">Search</button>
+</form>
+<nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
+  <header>
+    <hgroup>
+      <h2 id="breadcrumbs-title">Breadcrumbs</h2>
+    </hgroup>
+  </header><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/"
+         itemid="/"
+         itemprop="item"
+         itemscope itemtype="http://schema.org/WebSite"
+         ><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1"></li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="item"
+            itemid="http://localhost:4000/search/"
+            itemscope itemtype="https://schema.org/WebPage"><cite aria-current="page" itemprop="name">Search</cite></span>
+      <meta itemprop="position" content="2"></li>
+  </ol></nav>
+</div>
+</body>
+</html>

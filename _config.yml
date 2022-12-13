@@ -21,7 +21,6 @@ defaults:
       path: ""
     values:
       author: "mspondee"
-      layout: "default"
   -
     scope:
       path: "assets"
