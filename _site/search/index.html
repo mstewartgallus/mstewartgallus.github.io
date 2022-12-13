@@ -68,10 +68,44 @@
   <search-results id="search-results"></search-results>
 </output>
 </main>
-<div id="sidebar"><form id="search" name="search" rel="search" role="search" action="/search/">
-  <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
-  <button id="search-button" type="submit">Search</button>
-</form>
+<div id="sidebar"><form id="search" name="search" rel="search" role="search" action="/search/"><fieldset class="search-basic">
+    <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
+    <button id="search-button" type="submit">Search</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>Filters</legend>
+    <label for="category">Category</label>
+    <select id="category" name="category" multiple>
+      <option value="Poem">Poem</option>
+      <option value="Prose">Prose</option>
+      <option value="Web">Web</option></select>
+
+    <label for="tag">Tag</label>
+    <select id="tag" name="tag" multiple>
+      <option value="2018">#2018</option>
+      <option value="2019">#2019</option>
+      <option value="2021">#2021</option>
+      <option value="2022">#2022</option>
+      <option value="Accessibility">#Accessibility</option>
+      <option value="Autism">#Autism</option>
+      <option value="CSS">#CSS</option>
+      <option value="Coffee">#Coffee</option>
+      <option value="Creature">#Creature</option>
+      <option value="Dating">#Dating</option>
+      <option value="Dentist">#Dentist</option>
+      <option value="HTML">#HTML</option>
+      <option value="Hamster">#Hamster</option>
+      <option value="If+She+Breathes">#If She Breathes</option>
+      <option value="Poetry">#Poetry</option>
+      <option value="Rotations">#Rotations</option>
+      <option value="The+Night+Ghost">#The Night Ghost</option>
+      <option value="The+Ring+and+the+Cup">#The Ring and the Cup</option></select>
+  </fieldset>
+
+  <fieldset>
+    <button type="reset">Reset</button>
+  </fieldset></form>
 <nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
   <header>
     <hgroup>

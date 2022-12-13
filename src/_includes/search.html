@@ -1,4 +1,38 @@
+{%- assign categories = site.categories | sort -%}
+{%- assign tags = site.tags | sort -%}
+
 <form id="search" name="search" rel="search" role="search" action="{% link search.html %}">
-  <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
-  <button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
+  {%- if page.url == '/search/' -%}
+  <fieldset class="search-basic">
+    <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
+    <button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>Filters</legend>
+    <label for="category">Category</label>
+    <select id="category" name="category" multiple>
+      {%- for category in categories %}
+      <option value="{{ category[0] | cgi_escape }}">{{ category[0] | escape }}</option>
+      {%- endfor -%}
+    </select>
+
+    <label for="tag">Tag</label>
+    <select id="tag" name="tag" multiple>
+      {%- for tag in tags %}
+      <option value="{{ tag[0] | cgi_escape }}">#{{ tag[0] | escape }}</option>
+      {%- endfor -%}
+    </select>
+  </fieldset>
+
+  <fieldset>
+    <button type="reset">Reset</button>
+  </fieldset>
+  {%- else -%}
+
+  <div class="search-basic">
+    <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
+    <button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
+  </div>
+  {%- endif -%}
 </form>

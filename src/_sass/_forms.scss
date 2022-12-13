@@ -1,16 +1,22 @@
-button, input {
+label, button, input {
+    box-sizing: border-box ;
+    height: $line ;
+}
+
+button, input, select {
     @include prefix(appearance, none);
     background-color: transparent;
     color: inherit ;
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit ;
-
     border-color: currentcolor;
     border-style: none;
     border-width: 0.1em;
-    box-sizing: border-box ;
-    height: $line ;
+}
+
+select::after {
+    content: "X";
 }
 
 input {
@@ -20,14 +26,6 @@ input {
 button {
     border-style: solid ;
     padding-inline: 0.5em ;
-}
-
-[role="search"] {
-    display: flex ;
-}
-[role="search"] input {
-    flex-grow: 1 ;
-    flex-shrink: 1 ;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,4 +40,49 @@ button {
         background: black ;
         color: white ;
     }
+}
+
+fieldset {
+    border-color: currentcolor ;
+    border-style: none ;
+    border-inline-start-style: dashed ;
+    border-width: 0.1em ;
+    padding: 0;
+    padding-inline-start: 1em;
+    margin-block: $line ;
+
+    display: flex;
+    flex-direction: column ;
+}
+
+legend {
+    font-weight: bold ;
+}
+
+
+button {
+    align-self: start ;
+}
+
+label {
+    border-block-end-style: solid ;
+    border-width: 0.1em ;
+}
+
+
+select {
+    box-sizing: border-box ;
+    min-height: $line ;
+    max-height: 10 * $line ;
+}
+
+
+
+.search-basic {
+    display: flex ;
+    flex-direction: row ;
+}
+.search-basic input {
+    flex-grow: 1 ;
+    flex-shrink: 1 ;
 }
