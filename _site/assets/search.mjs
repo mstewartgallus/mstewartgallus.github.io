@@ -76,7 +76,7 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
         });
 
         const copy = this.ownerDocument.importNode(template, true);
-        shadow.replaceChildren(copy);
+        shadow.appendChild(copy);
         this.#query = shadow.getElementById('query');
     }
 
@@ -104,59 +104,70 @@ customElements.define("search-article", class extends HTMLElement {
 
         const copy = this.ownerDocument.importNode(template, true);
         this.attachShadow({ mode: 'closed' })
-            .append(copy);
+            .appendChild(copy);
         this.#init = true;
     }
 }, { 'extends': 'article' });
 
 function renderPost(doc, post) {
-    const title = Object.assign(
-        doc.createElement('a'),
-        {
-            slot: 'title',
-            href: post.url,
-            textContent: post.title });
+    const { title, url, date, tags, categories } = post;
 
-    const date = Object.assign(
-        doc.createElement('time'),
-        { slot: 'date',
-          textContent: post.date });
+    const frag = new DocumentFragment();
 
-    const cats = post.categories.map(category => {
+    frag.appendChild(
+        Object.assign(
+            doc.createElement('a'),
+            { slot: 'title',
+              href: url,
+              textContent: title }));
+
+    frag.appendChild(
+        Object.assign(
+            doc.createElement('time'),
+            { slot: 'date',
+              textContent: date }));
+
+    for (const category of categories) {
         const params = new URLSearchParams({s: category});
-        return Object.assign(
-            doc.createElement("a"),
-            { slot: 'category',
-              textContent: category,
-              href: `?${params}` });
-    });
+        frag.appendChild(
+            Object.assign(
+                doc.createElement("a"),
+                { slot: 'category',
+                  textContent: category,
+                  href: `?${params}` }));
+    }
 
-    const tags = post.tags.map(tag => {
+    for (const tag of tags) {
         const params = new URLSearchParams({s: tag});
-        return Object.assign(
-            doc.createElement("a"),
-            {
-                slot: 'tag',
-                textContent: `#${tag}`,
-                href: `?${params}`
-            });
-    });
+        frag.appendChild(
+            Object.assign(
+                doc.createElement("a"),
+                {
+                    slot: 'tag',
+                    textContent: `#${tag}`,
+                    href: `?${params}`
+                }));
+    }
 
     const article = doc.createElement("article", {is: 'search-article' });
-    article.append(title, date, ...cats, ...tags);
+    article.appendChild(frag);
 
     const li = doc.createElement("li");
-    li.append(article);
+    li.appendChild(article);
     return li;
 }
 
 function renderPosts(doc, fuse, query) {
     const posts = fuse
-          .search(query ?? '')
-          .map(post => renderPost(doc, post.item));
+          .search(query ?? '');
+
+    const frag = new DocumentFragment();
+    for (const post of posts) {
+        frag.appendChild(renderPost(doc, post.item));
+    }
 
     const list = doc.createElement('ul');
-    list.append(...posts);
+    list.appendChild(frag);
     return list;
 }
 
