@@ -41,7 +41,7 @@
          itemid="{% link search.html %}?s={{ category | cgi_escape }}"
          itemscope itemtype="https://schema.org/SearchResultsPage">
         {{- -}}
-        <span itemprop="name" data-pagefind-meta="category">{{- category | escape -}}</span>{{- -}}
+        <span itemprop="name" data-pagefind-filter="category">{{- category | escape -}}</span>{{- -}}
       </a>{{- -}}
       <meta itemprop="position" content="2">{{- -}}
     </li>

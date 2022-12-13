@@ -1,4 +1,9 @@
-const pagefind = await import('./pagefind/pagefind.js');
+const pathname = new URL(document.URL).pathname;
+
+function search(x) {
+    const params = new URLSearchParams({s: x});
+    return `${pathname}?${params}`;
+}
 
 history.scrollRestoration = 'manual';
 
@@ -116,19 +121,17 @@ function renderPost(doc, post) {
               textContent: date }));
 
     for (const category of categories) {
-        const params = new URLSearchParams({s: category});
         const anchor = doc.createElement('a');
         anchor.slot = 'category';
-        anchor.href = `?${params}`;
+        anchor.href = search(category);
         anchor.textContent = category;
         frag.appendChild(anchor);
     }
 
     for (const tag of tags) {
-        const params = new URLSearchParams({s: tag});
         const anchor = doc.createElement('a');
         anchor.slot = 'tag';
-        anchor.href = `?${params}`;
+        anchor.href = search(tag);
         anchor.textContent = `#${tag}`;
         frag.appendChild(anchor);
     }
@@ -228,17 +231,13 @@ customElements.define('search-body', class extends HTMLBodyElement {
         const form = event.target;
         const submitter = event.submitter;
 
-        let action;
-        let method;
-        if (submitter) {
-            action = submitter.formAction;
-            method = submitter.formMethod;
-            if (method == '') {
-                method = null;
-            }
-        }
-        action ??= form.action;
-        method ??= form.method;
+        // work around an incorrect action string for .formAction here
+        const action =
+              submitter?.getAttribute('formaction')
+              ?? form.action;
+        const method =
+              submitter?.getAttribute('method')
+              ?? form.method;
 
         let url = new URL(action, this.#origin());
         if (url.origin != this.#origin()) {
@@ -279,22 +278,19 @@ await DOMContentLoaded;
 const length = 10;
 
 function scrobble(post) {
-    console.log(post);
-    const { url, meta: { title, date, tags, category } } = post;
+    const { url, meta: { title, date }, filters: { tag, category } } = post;
     return {
         url: url,
         title: title,
         date: date,
-        categories: [category],
-        tags: tags.split("#").map(s => s.trim()).filter(s => s != ''),
+        categories: category,
+        tags: tag
     };
 }
-async function onsearch(query) {
-    const search = await pagefind.search(query);
-    const posts = (await Promise.all(search.results.slice(0, length)
-                                     .map(r => r.data())))
-          .map(scrobble);
 
+const pagefindpromise = import('./pagefind/pagefind.js');
+
+async function onsearch(query) {
     const title = document.getElementsByTagName('title')[0];
     const h1 = document.getElementById('title');
     const output = document.getElementById('search-output');
@@ -307,6 +303,13 @@ async function onsearch(query) {
     results && (results.dataset.query = query);
 
     if (output) {
+        const pagefind = await pagefindpromise;
+        const search = await pagefind.search(query);
+        const posts = (await Promise.all(search.results
+                                         .slice(0, length)
+                                         .map(r => r.data())))
+              .map(scrobble);
+
         const ul = renderPosts(document, posts);
         output.replaceChildren(ul);
         output.removeAttribute('hidden');

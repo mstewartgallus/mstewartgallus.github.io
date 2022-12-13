@@ -30,7 +30,8 @@ https://schema.org/WebPage
         itemprop="mainEntity hasPart"
         itemtype="{{ maintype }}"
         itemid="{{ page.url | absolute_url }}"
-        {% if page.url == '/search/' %}is="search-body"{% endif %}>
+        {% if page.url == '/search/' %}is="search-body"{% endif %}
+        {% if page.date -%}data-pagefind-body{%- endif -%}>
     {%- include main.html -%}
     {%- include sidebar.html -%}
   </body>

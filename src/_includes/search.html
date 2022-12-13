@@ -1,4 +1,5 @@
-<form id="search" name="search" rel="search" role="search" action="{% link search.html %}">
+<form id="search" name="search" rel="search" role="search" action="{% link search.html %}"
+      data-pagefind-ignore>
   <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
   <button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
 </form>

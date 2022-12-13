@@ -23,14 +23,14 @@
       <dd aria-hidden="true" id="post-date">
         {{- -}}
         <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished pubdate"
-              data-pagefind-meta="date">
+              data-pagefind-sort="date">
           {{- page.date | date: "%Y-%m-%d" -}}
         </time>
         {{- -}}
       </dd>
     </div>
     {%- if page.tags.size > 0 -%}
-    <div data-pagefind-meta="tags">
+    <div>
       <dt aria-hidden="true" id="tag-text" data-pagefind-ignore>Tag</dt>
       {%- for tag in page.tags -%}
       <dd>
@@ -39,7 +39,8 @@
            rel="tag" href="{% link search.html %}?s={{ tag | cgi_escape }}">
           {{- -}}
           #<span role="presentation"
-                 itemprop="keywords">{{- tag | escape -}}</span>
+                 itemprop="keywords"
+                 data-pagefind-filter="tag">{{- tag | escape -}}</span>
           {{- -}}
         </a>
         {{- -}}

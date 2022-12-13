@@ -1,7 +1,8 @@
 {%- assign pages = site.html_pages | where: "sitemap", nil | sort: "title" -%}
 <header id="banner" aria-describedby="banner-title"
         itemscope itemid="{% link index.html %}"
-        itemtype="http://schema.org/WebSite">
+        itemtype="http://schema.org/WebSite"
+        data-pagefind-ignore>
   <hgroup>
     <h2 id="banner-title" itemprop="name">{{ site.title | escape }}</h2>
     <p>{{ site.description | escape }}</p>
