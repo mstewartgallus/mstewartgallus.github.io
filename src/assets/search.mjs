@@ -20,16 +20,18 @@ const database = (async () =>
     new Fuse(await search, options,
              Fuse.parseIndex(await index)))();
 
-const DOMContentLoaded = (async () => {
-    switch (document.readyState) {
-    case 'interactive':
-    case 'complete':
-        return;
-    }
-    await new Promise(r => {
-        window.addEventListener('DOMContentLoaded', r);
-    });
-})();
+const DOMContentLoaded =
+      (() => {
+          switch (document.readyState) {
+          case 'interactive':
+          case 'complete':
+              return Promise.resolve(null);
+          default:
+              return new Promise(r => {
+                  window.addEventListener('DOMContentLoaded', r);
+              });
+          }
+      })();
 
 async function id(x) {
     await DOMContentLoaded;
@@ -198,7 +200,7 @@ customElements.define("search-body", class extends HTMLBodyElement {
         if (h1) {
             h1.tabIndex = -1;
             h1.focus();
-            // FIXME test out on screen reader, maybe try setTimeout?
+            // FIXME test out on screen reader, maybe try queueMicrotask?
             h1.blur();
         }
 
@@ -318,7 +320,7 @@ function onsearch(query) {
 }
 
 function onsearchdelay(query) {
-    setTimeout(() => onsearch(query), 0);
+    queueMicrotask(() => onsearch(query), 0);
 }
 
 function onmutation(mutationList, observer) {
