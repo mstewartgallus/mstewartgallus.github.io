@@ -290,14 +290,15 @@ customElements.define('search-body', class extends HTMLBodyElement {
 await DOMContentLoaded;
 
 const fuse = await database;
-const urlsArray = await urls;
+const metadata = await urls;
 
 function lookup(item, index) {
-    const url = urlsArray[index];
+    const url = metadata.urls[index];
+    const date = metadata.dates[index];
     return {
         title: item.title,
-        url: url.url,
-        date: url.date,
+        url: url,
+        date: date,
         tags: item.tags,
         categories: item.categories
     };
