@@ -102,26 +102,26 @@ customElements.define("search-article", class extends HTMLElement {
     }
 }, { 'extends': 'article' });
 
-function renderPost(doc, post) {
+function renderPost(post) {
     const { title, url, date, tags, categories } = post;
 
     const frag = new DocumentFragment();
 
     frag.appendChild(
         Object.assign(
-            doc.createElement('a'),
+            document.createElement('a'),
             { slot: 'title',
               href: url,
               textContent: title }));
 
     frag.appendChild(
         Object.assign(
-            doc.createElement('time'),
+            document.createElement('time'),
             { slot: 'date',
               textContent: date }));
 
     for (const category of categories) {
-        const anchor = doc.createElement('a');
+        const anchor = document.createElement('a');
         anchor.slot = 'category';
         anchor.href = search(category);
         anchor.textContent = category;
@@ -129,29 +129,51 @@ function renderPost(doc, post) {
     }
 
     for (const tag of tags) {
-        const anchor = doc.createElement('a');
+        const anchor = document.createElement('a');
         anchor.slot = 'tag';
         anchor.href = search(tag);
         anchor.textContent = `#${tag}`;
         frag.appendChild(anchor);
     }
 
-    const article = doc.createElement("article", {is: 'search-article' });
+    const article = document.createElement("article", {is: 'search-article' });
     article.appendChild(frag);
 
-    const li = doc.createElement("li");
+    const li = document.createElement("li");
     li.appendChild(article);
     return li;
 }
 
-function renderPosts(doc, posts) {
-    const frag = new DocumentFragment();
-    for (const post of posts) {
-        frag.appendChild(renderPost(doc, post));
-    }
+function fromPagefind(post) {
+    const { url, meta: { title, date }, filters: { tag, category } } = post;
+    return {
+        url: url,
+        title: title,
+        date: date,
+        categories: category ?? [],
+        tags: tag ?? []
+    };
+}
 
-    const list = doc.createElement('ul');
-    list.appendChild(frag);
+const pfimp = import('./pagefind/pagefind.js');
+
+async function findAndRenderPosts(query, options) {
+    const { limit, categories, tags } = options;
+
+    const filters = {
+        category: categories ?? [],
+        tag: tags ?? []
+    };
+    const search = await (await pfimp).search(query, { filters: filters });
+
+    const posts =
+          search.results.slice(0, limit)
+          .map(r =>
+              r.data()
+                  .then(post => renderPost(fromPagefind(post))));
+
+    const list = document.createElement('ul');
+    list.append(...await Promise.all(posts));
     return list;
 }
 
@@ -272,24 +294,6 @@ customElements.define('search-body', class extends HTMLBodyElement {
     }
 }, { 'extends': 'body' });
 
-
-await DOMContentLoaded;
-
-const length = 10;
-
-function scrobble(post) {
-    const { url, meta: { title, date }, filters: { tag, category } } = post;
-    return {
-        url: url,
-        title: title,
-        date: date,
-        categories: category,
-        tags: tag
-    };
-}
-
-const pagefindpromise = import('./pagefind/pagefind.js');
-
 async function onsearch(query) {
     const title = document.getElementsByTagName('title')[0];
     const h1 = document.getElementById('title');
@@ -303,14 +307,13 @@ async function onsearch(query) {
     results && (results.dataset.query = query);
 
     if (output) {
-        const pagefind = await pagefindpromise;
-        const search = await pagefind.search(query);
-        const posts = (await Promise.all(search.results
-                                         .slice(0, length)
-                                         .map(r => r.data())))
-              .map(scrobble);
-
-        const ul = renderPosts(document, posts);
+        // FIXME set options for tags/category
+        const ul = await findAndRenderPosts(query,
+                                            {
+                                                limit: 10,
+                                                tags: [],
+                                                categories: []
+                                            });
         output.replaceChildren(ul);
         output.removeAttribute('hidden');
     }
@@ -334,6 +337,8 @@ function onmutation(mutationList, observer) {
 }
 
 const observer = new MutationObserver(onmutation);
+
+await DOMContentLoaded;
 
 const body = document.body;
 observer.observe(body, { attributeFilter: ['data-query'] });
