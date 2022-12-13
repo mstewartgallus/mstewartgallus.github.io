@@ -18,8 +18,10 @@
       type="application/json" crossorigin><template id="search-h1">
   <link rel="stylesheet" href="/assets/main.css">
   <span id="query" aria-live="polite"></span>
-  <slot>
-  </slot>
+  <span>
+    <slot>
+    </slot>
+  </span>
 </template>
 
 <template id="search-article">
@@ -40,12 +42,6 @@
     </div>
   </dl>
   <slot></slot>
-</template>
-
-<template id="search-results-template">
-  <link rel="stylesheet" href="/assets/main.css">
-  <slot>
-  </slot>
 </template>
 <script type="module" defer async
         src="/assets/search.mjs"></script>

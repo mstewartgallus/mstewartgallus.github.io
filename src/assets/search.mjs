@@ -21,16 +21,20 @@ const database = (async () =>
              Fuse.parseIndex(await index)))();
 
 const DOMContentLoaded = (async () => {
+    switch (document.readyState) {
+    case 'interactive':
+    case 'complete':
+        return;
+    }
     await new Promise(r => {
         window.addEventListener('DOMContentLoaded', r);
-        switch (document.readyState) {
-        case 'interactive':
-        case 'complete':
-            r();
-            break;
-        }
     });
 })();
+
+async function id(x) {
+    await DOMContentLoaded;
+    return document.getElementById(x);
+}
 
 customElements.define("search-title", class extends HTMLTitleElement {
     static observedAttributes = ['data-query'];
@@ -49,6 +53,8 @@ customElements.define("search-title", class extends HTMLTitleElement {
     }
 }, { 'extends': 'title' });
 
+const searchH1 = id('search-h1');
+
 customElements.define("search-h1", class extends HTMLHeadingElement {
     static observedAttributes = ['data-query'];
     #query;
@@ -63,15 +69,13 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
         });
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         if (!this.isConnected) {
             return;
         }
 
-        const template = this.ownerDocument
-              .getElementById('search-h1')
-              .content;
-        this.#shadow.replaceChildren(template.cloneNode(true));
+        const copy = this.ownerDocument.importNode((await searchH1).content, true);
+        this.#shadow.replaceChildren(copy);
         this.#query = this.#shadow.getElementById('query');
     }
 
@@ -81,6 +85,8 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
 }, { 'extends': 'h1' });
 
 
+const searchArticle = id('search-article');
+
 customElements.define("search-article", class extends HTMLElement {
     #shadow;
 
@@ -89,14 +95,13 @@ customElements.define("search-article", class extends HTMLElement {
         this.#shadow = this.attachShadow({ mode: 'closed' });
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         if (!this.isConnected) {
             return;
         }
 
-        const template = this.ownerDocument
-              .getElementById('search-article').content;
-        this.#shadow.replaceChildren(template.cloneNode(true));
+        const copy = this.ownerDocument.importNode((await searchArticle).content, true);
+        this.#shadow.replaceChildren(copy);
     }
 }, { 'extends': 'article' });
 
@@ -134,55 +139,27 @@ function renderPost(doc, post) {
     });
 
     const article = doc.createElement("article", {is: 'search-article' });
-    article.append(title, date,
-                   ...cats, ...tags);
+    article.append(title, date, ...cats, ...tags);
 
     const li = doc.createElement("li");
     li.append(article);
     return li;
 }
 
-function renderPosts(fuse, query) {
-    const doc = document;
+function renderPosts(doc, fuse, query) {
     const posts = fuse
           .search(query ?? '')
           .map(post => renderPost(doc, post.item));
 
-    const list = document.createElement('ul');
+    const list = doc.createElement('ul');
     list.append(...posts);
     return list;
 }
 
-customElements.define("search-results", class extends HTMLElement {
-    #shadow;
-    constructor() {
-        super();
-        this.#shadow = this.attachShadow({ mode: 'open' });
-    }
-
-    async #update(query) {
-        const fuse = await database;
-        const template = this.ownerDocument
-              .getElementById('search-results-template').content;
-        this.#shadow.replaceChildren(template.cloneNode(true),
-                                     renderPosts(fuse, this.dataset.query));
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-        this.#update(this.dataset.query);
-    }
-
-    attributeChangedCallback(n, o, x) {
-        this.#update(x);
-    }
-});
-
 customElements.define("search-body", class extends HTMLBodyElement {
     constructor() {
         super();
+        this.addEventListener('hashchange', e => this.#hashchange(e));
         this.addEventListener('click', e => this.#click(e));
         this.addEventListener('submit', e => this.#submit(e));
         this.addEventListener('popstate', e => this.#popstate(e));
@@ -198,7 +175,7 @@ customElements.define("search-body", class extends HTMLBodyElement {
     #request(request) {
         const location = new URL(request.url);
 
-        return {
+        const success = {
             '/search/': {
                 'GET': () => {
                     this.dataset.query = location.searchParams.get('s');
@@ -206,25 +183,53 @@ customElements.define("search-body", class extends HTMLBodyElement {
                 }
             }
         }?.[location.pathname]?.[request.method]?.();
+
+        if (!success) {
+            return false;
+        }
+
+        // FIXME don't do this first time
+        // FIXME avoid setting tabIndex ?
+        const h1 = this.ownerDocument.getElementsByTagName('h1')[0];
+        if (h1) {
+            h1.tabIndex = -1;
+            h1.focus();
+            // FIXME test out on screen reader, maybe try setTimeout?
+            h1.blur();
+        }
+
+        return true;
+    }
+
+    #hashchange(event) {
+        if (this.#request(new Request(event.newURL))) {
+            event.preventDefault();
+        }
     }
 
     #click(event) {
-        // FIXME consider using event.target and faking results as a
-        // button?
-        const tag = event.composedPath()[0];
-        if (tag.tagName != 'A') {
-            event.preventDefault();
-            return;
-        }
-        const href = tag.href;
-        if (!href) {
-            return;
-        }
         if (event.button != 0) {
             return;
         }
 
-        if (tag.origin != this.#origin()) {
+        const tag = event.target;
+
+        const good = {
+            nodeName: 'A',
+            origin: this.#origin(),
+            username: '',
+            target: '',
+            password: '',
+            download: ''
+        };
+        for (const [k, v] of Object.entries(good)) {
+            if (tag[k] !== v) {
+                return;
+            }
+        }
+
+        const href = tag.href;
+        if (!href) {
             return;
         }
 
@@ -236,17 +241,28 @@ customElements.define("search-body", class extends HTMLBodyElement {
     }
 
     #submit(event) {
-        const form = event.composedPath()[0];
+        const form = event.target;
+        const submitter = event.submitter;
 
-        let url = new URL(form.action, this.#origin());
+        let action;
+        let method;
+        if (submitter) {
+            action = submitter.formAction;
+            method = submitter.formMethod;
+            if (method == '') {
+                method = null;
+            }
+        }
+        action ??= form.action;
+        method ??= form.method;
+
+        let url = new URL(action, this.#origin());
         if (url.origin != this.#origin()) {
             return;
         }
 
         const formdata = new FormData(form);
-        const options = {
-            method: form.method
-        };
+        const options = { method: method };
         if (form.method === 'get') {
             const params = new URLSearchParams(formdata);
             for (const [key, value] of url.searchParams) {
@@ -273,7 +289,12 @@ customElements.define("search-body", class extends HTMLBodyElement {
     }
 }, { 'extends': 'body' });
 
-async function onsearch(query) {
+
+await DOMContentLoaded;
+
+const fuse = await database;
+
+function onsearch(query) {
     const title = document.getElementsByTagName('title')[0];
     const h1 = document.getElementById('title');
     const output = document.getElementById('search-output');
@@ -286,13 +307,8 @@ async function onsearch(query) {
     results && (results.dataset.query = query);
 
     if (output) {
+        output.replaceChildren(renderPosts(document, fuse, query));
         output.removeAttribute('hidden');
-    }
-
-    // FIXME a little awkward
-    if (h1) {
-        h1.tabIndex = -1;
-        h1.focus();
     }
 }
 
@@ -306,10 +322,9 @@ function onmutation(mutationList, observer) {
     }
 }
 
+
 const observer = new MutationObserver(onmutation);
 
-DOMContentLoaded.then(() => {
-    const body = document.body;
-    onsearchdelay(body.dataset.query);
-    observer.observe(body, { attributeFilter: ['data-query'] });
-});
+const body = document.body;
+onsearchdelay(body.dataset.query);
+observer.observe(body, { attributeFilter: ['data-query'] });
