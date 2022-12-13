@@ -5,6 +5,13 @@ function search(x) {
     return `${pathname}?${params}`;
 }
 
+function toset(x) {
+    if (x == '') {
+        return new Set();
+    }
+    return new Set(x.split(' '));
+}
+
 history.scrollRestoration = 'manual';
 
 async function fetchjson(url) {
@@ -161,8 +168,8 @@ async function findAndRenderPosts(query, options) {
     const { limit, categories, tags } = options;
 
     const filters = {
-        category: categories ?? [],
-        tag: tags ?? []
+        category: Array.from(categories),
+        tag: Array.from(tags)
     };
     const search = await (await pfimp).search(query, { filters: filters });
 
@@ -199,11 +206,13 @@ customElements.define('search-body', class extends HTMLBodyElement {
 
     #request(request) {
         const location = new URL(request.url);
-
+        const params = location.searchParams;
         return {
             '/search/': {
                 'GET': () => {
-                    this.dataset.query = location.searchParams.get('s');
+                    this.dataset.query = params.get('s') ?? '';
+                    this.dataset.category = params.getAll('category').join(' ');
+                    this.dataset.tag = params.getAll('tag').join(' ');
                     return true;
                 }
             }
@@ -294,16 +303,33 @@ customElements.define('search-body', class extends HTMLBodyElement {
     }
 }, { 'extends': 'body' });
 
-async function onsearch(query) {
+async function onsearch(query, category, tag) {
+    const tags = toset(tag);
+    const categories = toset(category);
+
     const title = document.getElementsByTagName('title')[0];
     const h1 = document.getElementById('title');
     const output = document.getElementById('search-output');
     const results = document.getElementById('search-results');
     const input = document.getElementById('search-input');
 
+    const categoryEl = document.getElementById('category');
+    const tagEl = document.getElementById('tag');
+
+    input && (input.value = query);
+    if (categoryEl) {
+        for (const option of categoryEl.options) {
+            option.selected = categories.has(option.value);
+        }
+    }
+    if (tagEl) {
+        for (const option of tagEl.options) {
+            option.selected = tags.has(option.value);
+        }
+    }
+
     title && (title.dataset.query = query);
     h1 && (h1.dataset.query = query);
-    input && (input.value = query);
     results && (results.dataset.query = query);
 
     if (output) {
@@ -311,8 +337,8 @@ async function onsearch(query) {
         const ul = await findAndRenderPosts(query,
                                             {
                                                 limit: 10,
-                                                tags: [],
-                                                categories: []
+                                                tags: tags,
+                                                categories: categories
                                             });
         output.replaceChildren(ul);
         output.removeAttribute('hidden');
@@ -329,20 +355,28 @@ async function onsearch(query) {
     }
 }
 
-function onmutation(mutationList, observer) {
-    for (const mutation of mutationList) {
-        const query = mutation.target.dataset.query;
-        queueMicrotask(async () => onsearch(query));
-    }
-}
 
 const observer = new MutationObserver(onmutation);
 
 await DOMContentLoaded;
 
 const body = document.body;
-observer.observe(body, { attributeFilter: ['data-query'] });
+
+function onmutation(mutationList, observer) {
+    const query = body.dataset.query;
+    const category = body.dataset.category;
+    const tag = body.dataset.tag;
+    queueMicrotask(async () => onsearch(query, category, tag));
+}
+
+observer.observe(body, { attributeFilter: ['data-query', 'data-category', 'data-tag'] });
 
 // FIXME not sure why initialization should be like this
-const s = new URL(document.URL).searchParams.get('s');
-s && (body.dataset.query = s);
+const params = new URL(document.URL).searchParams;
+const s = params.get('s');
+const category = new Set(params.getAll('category'));
+const tag = new Set(params.getAll('tag'));
+
+body.dataset.query = s ?? '';
+body.dataset.category = Array.from(category).join(' ');
+body.dataset.tag = Array.from(tag).join(' ');
