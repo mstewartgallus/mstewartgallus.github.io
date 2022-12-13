@@ -56,25 +56,26 @@ const searchH1 = id('search-h1');
 customElements.define("search-h1", class extends HTMLHeadingElement {
     static observedAttributes = ['data-query'];
     #query;
-    #shadow;
-
-    constructor() {
-        super();
-
-        this.#shadow = this.attachShadow({
-            mode: 'closed',
-            delegatesFocus: false
-        });
-    }
 
     async connectedCallback() {
+        const template = (await searchH1).content;
+
         if (!this.isConnected) {
             return;
         }
 
-        const copy = this.ownerDocument.importNode((await searchH1).content, true);
-        this.#shadow.replaceChildren(copy);
-        this.#query = this.#shadow.getElementById('query');
+        if (this.#query) {
+            return;
+        }
+
+        const shadow = this.attachShadow({
+            mode: 'closed',
+            delegatesFocus: false
+        });
+
+        const copy = this.ownerDocument.importNode(template, true);
+        shadow.replaceChildren(copy);
+        this.#query = shadow.getElementById('query');
     }
 
     attributeChangedCallback(n, o, x) {
@@ -86,20 +87,23 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
 const searchArticle = id('search-article');
 
 customElements.define("search-article", class extends HTMLElement {
-    #shadow;
-
-    constructor() {
-        super();
-        this.#shadow = this.attachShadow({ mode: 'closed' });
-    }
+    #init = false;
 
     async connectedCallback() {
+        const template = (await searchArticle).content;
+
         if (!this.isConnected) {
             return;
         }
 
-        const copy = this.ownerDocument.importNode((await searchArticle).content, true);
-        this.#shadow.replaceChildren(copy);
+        if (this.#init) {
+            return;
+        }
+
+        const copy = this.ownerDocument.importNode(template, true);
+        this.attachShadow({ mode: 'closed' })
+            .append(copy);
+        this.#init = true;
     }
 }, { 'extends': 'article' });
 
@@ -305,7 +309,8 @@ function onsearch(query) {
     results && (results.dataset.query = query);
 
     if (output) {
-        output.replaceChildren(renderPosts(document, fuse, query));
+        const posts = renderPosts(document, fuse, query);
+        output.replaceChildren(posts);
         output.removeAttribute('hidden');
     }
 }
