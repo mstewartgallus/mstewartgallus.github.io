@@ -8,15 +8,16 @@ async function fetchjson(url) {
 
 const index = fetchjson("/assets/index.json");
 const search = fetchjson("/assets/search.json");
+const urls = fetchjson("/assets/urls.json");
 
 const options = Object.freeze({
     ignoreLocation: true,
     keys: ['title', 'content', 'tags', 'categories', 'date']
 });
 
-const database = (async () =>
-    new Fuse(await search, options,
-             Fuse.parseIndex(await index)))();
+const database = (async () => {
+    return new Fuse(await search, options, Fuse.parseIndex(await index));
+})();
 
 const readyState = document.readyState;
 const ready = readyState == 'interactive' || readyState == 'complete';
@@ -153,12 +154,10 @@ function renderPost(doc, post) {
     return li;
 }
 
-function renderPosts(doc, fuse, query) {
-    const posts = fuse.search(query ?? '');
-
+function renderPosts(doc, posts) {
     const frag = new DocumentFragment();
     for (const post of posts) {
-        frag.appendChild(renderPost(doc, post.item));
+        frag.appendChild(renderPost(doc, post));
     }
 
     const list = doc.createElement('ul');
@@ -291,6 +290,18 @@ customElements.define('search-body', class extends HTMLBodyElement {
 await DOMContentLoaded;
 
 const fuse = await database;
+const urlsArray = await urls;
+
+function lookup(item, index) {
+    const url = urlsArray[index];
+    return {
+        title: item.title,
+        url: url.url,
+        date: url.date,
+        tags: item.tags,
+        categories: item.categories
+    };
+}
 
 function onsearch(query) {
     const title = document.getElementsByTagName('title')[0];
@@ -305,8 +316,11 @@ function onsearch(query) {
     results && (results.dataset.query = query);
 
     if (output) {
-        const posts = renderPosts(document, fuse, query);
-        output.replaceChildren(posts);
+        const posts = fuse
+              .search(query ?? '', { limit: 10 })
+              .map(p => lookup(p.item, p.refIndex));
+        const ul = renderPosts(document, posts);
+        output.replaceChildren(ul);
         output.removeAttribute('hidden');
     }
 
