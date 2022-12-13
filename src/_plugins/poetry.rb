@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MSG
   def parsepoem(content)
     stanzas = []
@@ -12,7 +14,7 @@ module MSG
   end
 
   def tohtml(stanzas)
-    output = ""
+    output = String.new
     stanzas.each_with_index do |stanza, index|
       output << '<p class="stanza">'
       output << "\n"
@@ -33,7 +35,7 @@ module MSG
   end
 
   def tomarkdown(stanzas)
-    output = ''
+    output = String.new
     stanzano = 1
     stanzas.each do |stanza|
       output << stanzano.to_s << ". "

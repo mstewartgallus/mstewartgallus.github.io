@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Pagefind
   def self.process(site, payload)
     return if @processed
-    system "yarn run pagefind"
+    Process.wait (Process.spawn 'yarn', 'run', 'pagefind')
     @processed = true
   end
 end
