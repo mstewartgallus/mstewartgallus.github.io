@@ -1,7 +1,7 @@
 module RunNodeAfter
   def self.process(site, payload)
     return if @processed
-    system "node buildindex.mjs"
+    system "yarn run pagefind"
     @processed = true
   end
 end

@@ -1,4 +1,6 @@
-<main aria-describedby="title" itemprop="text">
+<main aria-describedby="title"
+      itemprop="text"
+      {% if page.date -%}data-pagefind-body{%- endif -%}>
   <header>
     <hgroup>
       <h1

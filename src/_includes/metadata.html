@@ -22,15 +22,16 @@
       <dt aria-describedby="post-date">{{- site.data.strings.metadata.postDate | escape -}}</dt>
       <dd aria-hidden="true" id="post-date">
         {{- -}}
-        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished pubdate">
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished pubdate"
+              data-pagefind-meta="date">
           {{- page.date | date: "%Y-%m-%d" -}}
         </time>
         {{- -}}
       </dd>
     </div>
     {%- if page.tags.size > 0 -%}
-    <div>
-      <dt aria-hidden="true" id="tag-text">Tag</dt>
+    <div data-pagefind-meta="tags">
+      <dt aria-hidden="true" id="tag-text" data-pagefind-ignore>Tag</dt>
       {%- for tag in page.tags -%}
       <dd>
         {{- -}}

@@ -1,28 +1,10 @@
-import Fuse from './vend/fuse.mjs' ;
+const pagefind = await import('./pagefind/pagefind.js');
 
 history.scrollRestoration = 'manual';
 
 async function fetchjson(url) {
     return await ((await fetch(url)).json());
 }
-
-const index = fetchjson("/assets/index.json");
-const search = fetchjson("/assets/search.json");
-const urls = fetchjson("/assets/urls.json");
-
-const options = Object.freeze({
-    ignoreLocation: true,
-    keys: ['title', 'content', 'tags', 'categories'],
-    getFn: (obj, path) => {
-        const value = Fuse.config.getFn(obj, path);
-        console.log(['get', obj, path, value]);
-        return value;
-    }
-});
-
-const database = (async () => {
-    return new Fuse(await search, options, Fuse.parseIndex(await index));
-})();
 
 const readyState = document.readyState;
 const ready = readyState == 'interactive' || readyState == 'complete';
@@ -294,22 +276,25 @@ customElements.define('search-body', class extends HTMLBodyElement {
 
 await DOMContentLoaded;
 
-const fuse = await database;
-const metadata = await urls;
+const length = 10;
 
-function lookup(item, index) {
-    const url = metadata.urls[index];
-    const date = metadata.dates[index];
+function scrobble(post) {
+    console.log(post);
+    const { url, meta: { title, date, tags, category } } = post;
     return {
-        title: item.title,
         url: url,
+        title: title,
         date: date,
-        tags: item.tags,
-        categories: item.categories
+        categories: [category],
+        tags: tags.split("#").map(s => s.trim()).filter(s => s != ''),
     };
 }
+async function onsearch(query) {
+    const search = await pagefind.search(query);
+    const posts = (await Promise.all(search.results.slice(0, length)
+                                     .map(r => r.data())))
+          .map(scrobble);
 
-function onsearch(query) {
     const title = document.getElementsByTagName('title')[0];
     const h1 = document.getElementById('title');
     const output = document.getElementById('search-output');
@@ -322,9 +307,6 @@ function onsearch(query) {
     results && (results.dataset.query = query);
 
     if (output) {
-        const posts = fuse
-              .search(query ?? '', { limit: 10 })
-              .map(p => lookup(p.item, p.refIndex));
         const ul = renderPosts(document, posts);
         output.replaceChildren(ul);
         output.removeAttribute('hidden');
@@ -344,7 +326,7 @@ function onsearch(query) {
 function onmutation(mutationList, observer) {
     for (const mutation of mutationList) {
         const query = mutation.target.dataset.query;
-        queueMicrotask(() => onsearch(query));
+        queueMicrotask(async () => onsearch(query));
     }
 }
 

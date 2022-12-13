@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "pagefind": "^0.10.4"
+  }
+}
