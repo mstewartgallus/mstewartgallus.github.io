@@ -18,18 +18,12 @@ const database = (async () =>
     new Fuse(await search, options,
              Fuse.parseIndex(await index)))();
 
-const DOMContentLoaded =
-      (() => {
-          switch (document.readyState) {
-          case 'interactive':
-          case 'complete':
-              return Promise.resolve(null);
-          default:
-              return new Promise(r => {
-                  window.addEventListener('DOMContentLoaded', r);
-              });
-          }
-      })();
+const readyState = document.readyState;
+const ready = readyState == 'interactive' || readyState == 'complete';
+const DOMContentLoaded = ready ? Promise.resolve(null) :
+      new Promise(r => {
+          window.addEventListener('DOMContentLoaded', r);
+      });
 
 async function id(x) {
     await DOMContentLoaded;
@@ -40,8 +34,15 @@ customElements.define("search-title", class extends HTMLTitleElement {
     static observedAttributes = ['data-query'];
     #title;
 
-    constructor() {
-        super();
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
+
+        if (this.#title) {
+            return;
+        }
+
         this.#title = this.text;
     }
 
@@ -103,8 +104,7 @@ customElements.define("search-article", class extends HTMLElement {
         }
 
         const copy = this.ownerDocument.importNode(template, true);
-        this.attachShadow({ mode: 'closed' })
-            .appendChild(copy);
+        this.attachShadow({ mode: 'closed' }).appendChild(copy);
         this.#init = true;
     }
 }, { 'extends': 'article' });
@@ -129,24 +129,20 @@ function renderPost(doc, post) {
 
     for (const category of categories) {
         const params = new URLSearchParams({s: category});
-        frag.appendChild(
-            Object.assign(
-                doc.createElement("a"),
-                { slot: 'category',
-                  textContent: category,
-                  href: `?${params}` }));
+        const anchor = doc.createElement('a');
+        anchor.slot = 'category';
+        anchor.href = `?${params}`;
+        anchor.textContent = category;
+        frag.appendChild(anchor);
     }
 
     for (const tag of tags) {
         const params = new URLSearchParams({s: tag});
-        frag.appendChild(
-            Object.assign(
-                doc.createElement("a"),
-                {
-                    slot: 'tag',
-                    textContent: `#${tag}`,
-                    href: `?${params}`
-                }));
+        const anchor = doc.createElement('a');
+        anchor.slot = 'tag';
+        anchor.href = `?${params}`;
+        anchor.textContent = `#${tag}`;
+        frag.appendChild(anchor);
     }
 
     const article = doc.createElement("article", {is: 'search-article' });
@@ -158,8 +154,7 @@ function renderPost(doc, post) {
 }
 
 function renderPosts(doc, fuse, query) {
-    const posts = fuse
-          .search(query ?? '');
+    const posts = fuse.search(query ?? '');
 
     const frag = new DocumentFragment();
     for (const post of posts) {
@@ -171,26 +166,30 @@ function renderPosts(doc, fuse, query) {
     return list;
 }
 
-customElements.define("search-body", class extends HTMLBodyElement {
-    constructor() {
-        super();
-        this.addEventListener('hashchange', e => this.#hashchange(e));
-        this.addEventListener('click', e => this.#click(e));
-        this.addEventListener('submit', e => this.#submit(e));
-        this.addEventListener('popstate', e => this.#popstate(e));
-    }
+customElements.define('search-body', class extends HTMLBodyElement {
+    #init = false;
 
     connectedCallback() {
         if (!this.isConnected) {
             return;
         }
-        this.#request(new Request(this.ownerDocument.URL));
+
+        if (this.#init) {
+            return;
+        }
+
+        this.addEventListener('hashchange', e => this.#hashchange(e));
+        this.addEventListener('click', e => this.#click(e));
+        this.addEventListener('submit', e => this.#submit(e));
+        this.addEventListener('popstate', e => this.#popstate(e));
+
+        this.#init = true;
     }
 
     #request(request) {
         const location = new URL(request.url);
 
-        const success = {
+        return {
             '/search/': {
                 'GET': () => {
                     this.dataset.query = location.searchParams.get('s');
@@ -198,22 +197,6 @@ customElements.define("search-body", class extends HTMLBodyElement {
                 }
             }
         }?.[location.pathname]?.[request.method]?.();
-
-        if (!success) {
-            return false;
-        }
-
-        // FIXME don't do this first time
-        // FIXME avoid setting tabIndex ?
-        const h1 = this.ownerDocument.getElementsByTagName('h1')[0];
-        if (h1) {
-            h1.tabIndex = -1;
-            h1.focus();
-            // FIXME test out on screen reader, maybe try queueMicrotask?
-            h1.blur();
-        }
-
-        return true;
     }
 
     #hashchange(event) {
@@ -326,21 +309,30 @@ function onsearch(query) {
         output.replaceChildren(posts);
         output.removeAttribute('hidden');
     }
-}
 
-function onsearchdelay(query) {
-    queueMicrotask(() => onsearch(query), 0);
+    // FIXME don't do this first time
+    // FIXME avoid setting tabIndex ?
+    // FIXME wrong location for logic
+    if (h1) {
+        h1.tabIndex = -1;
+        h1.focus();
+        // FIXME test out on screen reader, maybe try queueMicrotask?
+        h1.blur();
+    }
 }
 
 function onmutation(mutationList, observer) {
     for (const mutation of mutationList) {
-        onsearchdelay(mutation.target.dataset.query);
+        const query = mutation.target.dataset.query;
+        queueMicrotask(() => onsearch(query));
     }
 }
-
 
 const observer = new MutationObserver(onmutation);
 
 const body = document.body;
-onsearchdelay(body.dataset.query);
 observer.observe(body, { attributeFilter: ['data-query'] });
+
+// FIXME not sure why initialization should be like this
+const s = new URL(document.URL).searchParams.get('s');
+s && (body.dataset.query = s);
