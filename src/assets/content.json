@@ -1,0 +1,9 @@
+---
+layout: none
+---
+[
+    {%- for post in site.posts -%}
+    {{ post.content | normalize_whitespace | strip | strip_html | jsonify }}
+    {%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+]

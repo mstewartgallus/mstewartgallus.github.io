@@ -7,8 +7,6 @@ layout: none
     {%- assign categories = post.categories | sort -%}
     {
         "title": {{ post.title | jsonify }},
-        "content": {{ post.content | normalize_whitespace | strip | strip_html | jsonify }},
-        "url": {{ post.url | jsonify }},
         "tags": [
             {%- for tag in tags -%}
             {{ tag | jsonify }}

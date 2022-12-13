@@ -14,7 +14,12 @@ const urls = fetchjson("{% link assets/urls.json %}");
 
 const options = Object.freeze({
     ignoreLocation: true,
-    keys: ['title', 'content', 'tags', 'categories', 'date']
+    keys: ['title', 'content', 'tags', 'categories'],
+    getFn: (obj, path) => {
+        const value = Fuse.config.getFn(obj, path);
+        console.log(['get', obj, path, value]);
+        return value;
+    }
 });
 
 const database = (async () => {
