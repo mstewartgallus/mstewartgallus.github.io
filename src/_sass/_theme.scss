@@ -1,3 +1,12 @@
+main :is(header, figcaption) {
+    display: flex ;
+    inline-size: $paragraph-width ;
+    max-inline-size: 100% ;
+}
+main :is(header, figcaption) > :first-child {
+    flex-grow: 1 ;
+}
+
 .sr-only {
     @include sr-only ;
 }

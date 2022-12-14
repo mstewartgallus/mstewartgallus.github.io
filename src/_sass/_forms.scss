@@ -1,24 +1,20 @@
-label, button, input {
+fieldset, label, button, input, select, option {
+    all: unset ;
+    display: block ;
+}
+
+label, button, input, option {
     box-sizing: border-box ;
     height: $line ;
 }
 
-button, input, select {
-    @include prefix(appearance, none);
-    background-color: transparent;
-    color: inherit ;
-    font-size: inherit;
-    font-style: inherit;
-    font-weight: inherit ;
-    border-color: currentcolor;
-    border-style: none;
-    border-width: 0.1em;
+button, select {
+    cursor: pointer ;
 }
 
-select::after {
-    content: "X";
+label, input, button {
+    border-width: 0.08em;
 }
-
 input {
     border-block-end-style: solid ;
 }
@@ -43,11 +39,8 @@ button {
 }
 
 fieldset {
-    border-color: currentcolor ;
-    border-style: none ;
     border-inline-start-style: dashed ;
     border-width: 0.1em ;
-    padding: 0;
     padding-inline-start: 1em;
     margin-block: $line ;
 
@@ -56,6 +49,7 @@ fieldset {
 }
 
 legend {
+    all: unset ;
     font-weight: bold ;
 }
 
@@ -78,6 +72,12 @@ select {
 
 option {
     padding-inline-start: 1em ;
+}
+
+option:checked {
+    font-weight: bold ;
+    background-color: var(--color);
+    color: var(--background-color);
 }
 
 .search-basic {

@@ -1,11 +1,36 @@
-address, cite, abbr {
-    font-size: inherit;
-    font-style: inherit;
-    font-weight: inherit ;
+p,
+h1,h2,h3,h4,h5,h6,
+hr,
+figure, ficaption,
+menu, ul, li,
+pre,
+address, cite, abbr, time, address,
+span, div,
+hgroup,
+:root, header, footer, nav, body, main, aside, section, article {
+    all: unset ;
 }
 
-hr {
-    color: inherit ;
+:root {
+    color-scheme: light dark ;
+    background-color: Canvas ;
+    color: CanvasText ;
+}
+
+pre {
+    display: block ;
+    white-space: pre ;
+}
+
+div {
+    display: block ;
+}
+
+hgroup {
+    display: block ;
+}
+:root, header, nav, body, main, footer, aside, section, article {
+    display: block ;
 }
 
 :root {

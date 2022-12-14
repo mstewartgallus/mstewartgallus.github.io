@@ -22,7 +22,8 @@
       <dt aria-describedby="post-date">{{- site.data.strings.metadata.postDate | escape -}}</dt>
       <dd aria-hidden="true" id="post-date">
         {{- -}}
-        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished pubdate"
+        <time datetime="{{ page.date | date_to_xmlschema }}"
+              itemprop="datePublished pubdate"
               data-pagefind-meta="date" data-pagefind-sort="date">
           {{- page.date | date: "%Y-%m-%d" -}}
         </time>

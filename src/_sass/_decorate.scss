@@ -1,5 +1,4 @@
 :root {
-    color-scheme: light dark ;
     background-color: var(--background-color) ;
     color: var(--color) ;
 }
@@ -94,10 +93,6 @@ dl > div {
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 1em ;
-}
-
-dt {
-    flex-grow: 1 ;
 }
 
 hr {
