@@ -56,14 +56,16 @@ a {
 
     text-decoration-line: underline ;
     cursor: pointer ;
+}
 
+a {
     color: LinkText ;
-    :visited {
-        color: VisitedText ;
-    }
-    :active {
-        color: ActiveText ;
-    }
+}
+a:visited {
+    color: VisitedText ;
+}
+a:active {
+    color: ActiveText ;
 }
 
 li {
