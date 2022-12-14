@@ -1,4 +1,4 @@
-:where(:not(ol):not(a)) {
+:where(:not(ol):not(a):not(cite):not(ins):not(del):not(span)) {
     all: unset ;
 }
 
