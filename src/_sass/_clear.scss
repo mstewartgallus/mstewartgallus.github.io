@@ -1,17 +1,27 @@
-:where(:not(ol):not(a):not(cite):not(ins):not(del):not(span)) {
-    all: unset ;
-}
-
+::marker, ::after, ::before,
+base, head, style, script, link, meta, title,
+s, ins, del, em, i, b, strong
+br,
+blockquote,q,cite,abbr,address,
 p,
 hr,
 h1,h2,h2,h3,h4,h5,h6,
-menu, ol, ul, li,
-head, script, style,
-pre, figure,
-div,
+menu, ul, li,
+dl, dd, dt,
+small, sup, sub,
+time, var,
+kbd, mark, pre, code, figure, figcaption,
+span, div,
 hgroup,
-header, nav, body, main, footer, aside, section, article {
+header, nav, body, main, footer, aside, section, article,
+form, button, input, fieldset, legend, input, label, select, option, output,
+textarea, details, summary, dialog {
+    all: unset ;
     display: revert ;
+}
+
+em, i, b, strong, s {
+    font-style: revert ;
 }
 
 :root {
@@ -19,17 +29,18 @@ header, nav, body, main, footer, aside, section, article {
     color: revert ;
 }
 
+code, pre {
+    font-family: revert ;
+}
+
 pre {
-    white-space: pre ;
+    white-space: revert ;
 }
 
 :root {
     font-family: sans-serif ;
 }
 
-code, pre {
-    font-family: monospace ;
-}
 
 :root {
     color-scheme: light dark ;
