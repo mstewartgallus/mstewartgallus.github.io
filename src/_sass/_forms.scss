@@ -98,3 +98,18 @@ option:checked {
     background-color: var(--field-text);
     color: var(--field);
 }
+
+:is(button, select):focus-visible {
+    outline-offset: 0;
+    outline-width: 0.4em ;
+}
+
+button:focus-visible {
+    outline-offset: 0;
+    outline-width: 0.3em ;
+}
+
+select:focus-visible {
+    outline-offset: 0;
+    outline-width: 0.4em ;
+}
