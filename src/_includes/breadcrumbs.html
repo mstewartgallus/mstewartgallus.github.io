@@ -36,9 +36,9 @@
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <a rel="tag"
-         href="{% link search.html %}?s={{ category | cgi_escape }}"
+         href="{% link search.html %}?category={{ category | cgi_escape }}"
          itemprop="item"
-         itemid="{% link search.html %}?s={{ category | cgi_escape }}"
+         itemid="{% link search.html %}?category={{ category | cgi_escape }}"
          itemscope itemtype="https://schema.org/SearchResultsPage">
         {{- -}}
         <span itemprop="name" data-pagefind-filter="category">{{- category | escape -}}</span>{{- -}}

@@ -37,7 +37,7 @@
       <dd>
         {{- -}}
         <a aria-describedby="tag-text"
-           rel="tag" href="{% link search.html %}?s={{ tag | cgi_escape }}">
+           rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
           {{- -}}
           #<span role="presentation"
                  itemprop="keywords"
