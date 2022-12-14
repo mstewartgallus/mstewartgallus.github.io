@@ -53,22 +53,17 @@ menu, ul, ol {
 
 a {
     all: unset ;
-}
 
-:any-link {
     text-decoration-line: underline ;
     cursor: pointer ;
-}
 
-:link {
     color: LinkText ;
-}
-:visited {
-    color: VisitedText ;
-}
-
-:any-link:active {
-    color: ActiveText ;
+    :visited {
+        color: VisitedText ;
+    }
+    :active {
+        color: ActiveText ;
+    }
 }
 
 li {
