@@ -1,12 +1,12 @@
 const pathname = new URL(document.URL).pathname;
 
-function search(x) {
-    const params = new URLSearchParams({s: x});
+function search(p, x) {
+    const params = new URLSearchParams({[p]: x});
     return `${pathname}?${params}`;
 }
 
 function toset(x) {
-    if (x == '') {
+    if (!x || x == '') {
         return new Set();
     }
     return new Set(x.split(' '));
@@ -130,7 +130,7 @@ function renderPost(post) {
     for (const category of categories) {
         const anchor = document.createElement('a');
         anchor.slot = 'category';
-        anchor.href = search(category);
+        anchor.href = search('category', category);
         anchor.textContent = category;
         frag.appendChild(anchor);
     }
@@ -138,7 +138,7 @@ function renderPost(post) {
     for (const tag of tags) {
         const anchor = document.createElement('a');
         anchor.slot = 'tag';
-        anchor.href = search(tag);
+        anchor.href = search('tag', tag);
         anchor.textContent = `#${tag}`;
         frag.appendChild(anchor);
     }
@@ -167,16 +167,25 @@ function fromPagefind(post) {
 const pfimp = import('./pagefind/pagefind.js');
 
 async function findAndRenderPosts(query, options) {
-    const { limit, categories, tags } = options;
+    if ('' == query) {
+        query = null;
+    }
 
-    const filters = {
-        category: Array.from(categories),
-        tag: Array.from(tags)
-    };
-    const search = await (await pfimp).search(query, { filters: filters });
+    const { categories, tags } = options;
+
+    const filters = {};
+    if (categories) {
+        filters.category = Array.from(categories);
+    }
+    if (tags) {
+        filters.tag = Array.from(tags);
+    }
+    const search = await (await pfimp).search(query, {
+        filters: filters,
+        sort: {} });
 
     const posts =
-          search.results.slice(0, limit)
+          search.results
           .map(r =>
               r.data()
                   .then(post => renderPost(fromPagefind(post))));
@@ -212,9 +221,14 @@ customElements.define('search-body', class extends HTMLBodyElement {
         return {
             '/search/': {
                 'GET': () => {
-                    this.dataset.query = params.get('s') ?? '';
-                    this.dataset.category = params.getAll('category').join(' ');
-                    this.dataset.tag = params.getAll('tag').join(' ');
+                    const query = params.get('s');
+                    const category = new Set(params.getAll('category'));
+                    const tag = new Set(params.getAll('tag'));
+
+                    this.dataset.query = query ?? '';
+                    this.dataset.category = Array.from(category).join(' ');
+                    this.dataset.tag = Array.from(tag).join(' ');
+
                     return true;
                 }
             }
@@ -311,19 +325,23 @@ async function onsearch(query, category, tag) {
 
     const title = document.getElementsByTagName('title')[0];
     const h1 = document.getElementById('title');
+    const search = document.getElementById('search');
     const output = document.getElementById('search-output');
-    const results = document.getElementById('search-results');
     const input = document.getElementById('search-input');
 
     const categoryEl = document.getElementById('category');
     const tagEl = document.getElementById('tag');
 
+    search.reset();
+
     input && (input.value = query);
+
     if (categoryEl) {
         for (const option of categoryEl.options) {
             option.selected = categories.has(option.value);
         }
     }
+
     if (tagEl) {
         for (const option of tagEl.options) {
             option.selected = tags.has(option.value);
@@ -332,13 +350,11 @@ async function onsearch(query, category, tag) {
 
     title && (title.dataset.query = query);
     h1 && (h1.dataset.query = query);
-    results && (results.dataset.query = query);
 
     if (output) {
         // FIXME set options for tags/category
         const ul = await findAndRenderPosts(query,
                                             {
-                                                limit: 10,
                                                 tags: tags,
                                                 categories: categories
                                             });
