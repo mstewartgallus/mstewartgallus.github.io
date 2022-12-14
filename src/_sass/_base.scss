@@ -51,18 +51,22 @@ menu, ul, ol {
     display: block ;
 }
 
-:any-link {
+a {
     all: unset ;
+}
+
+:any-link {
     text-decoration-line: underline ;
     cursor: pointer ;
 }
 
-:any-link {
+:link {
     color: LinkText ;
 }
 :visited {
     color: VisitedText ;
 }
+
 :any-link:active {
     color: ActiveText ;
 }
