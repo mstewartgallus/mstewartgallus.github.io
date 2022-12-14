@@ -22,14 +22,3 @@
         --emphasis-color: #d07560 ;
     }
 }
-
-:root {
-    color-scheme: light dark ;
-
-    background-color: var(--background-color) ;
-    color: var(--color) ;
-}
-
-hr,h1,h2,h3,h4,h5,h6,figcaption, li::marker, li::before {
-    color: var(--emphasis-color);
-}

@@ -76,7 +76,9 @@ select {
     max-height: 10 * $line ;
 }
 
-
+option {
+    padding-inline-start: 1em ;
+}
 
 .search-basic {
     display: flex ;

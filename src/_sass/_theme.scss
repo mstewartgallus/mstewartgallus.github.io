@@ -2,7 +2,7 @@
     @include sr-only ;
 }
 
-[itemtype="https://schema.org/BreadcrumbList"] {
+.breadcrumb {
     all: unset ;
     padding: 0 ;
     margin: 0;
@@ -12,17 +12,18 @@
     inline-size: $paragraph-width ;
     max-inline-size: 100% ;
 }
-[itemtype="https://schema.org/BreadcrumbList"] li {
+.breadcrumb li {
     all: unset ;
 }
 
-[itemtype="https://schema.org/BreadcrumbList"] li::before {
+.breadcrumb li::before {
   display: inline-block;
   margin-right: 0.5em;
   transform: rotate(15deg);
   border-right: 0.1em solid currentcolor;
   height: 0.8em;
   content: "";
+  color: var(--emphasis-color);
 }
 
 #paging dl {

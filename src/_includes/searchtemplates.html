@@ -9,9 +9,10 @@
 
 <template id="search-article">
   <link rel="stylesheet" href="{{ "assets/main.css" | relative_url }}">
-  <div>
-    <slot name="category"></slot> / <slot name="title">TITLE</slot>
-  </div>
+  <ol class="breadcrumb">
+    <li><slot name="category"></slot></li>
+    <li><slot name="title">TITLE</slot></li>
+  </ol>
   <dl>
     <div>
       <dt>{{ site.data.strings.search.postDate }}</dt>

@@ -5,7 +5,7 @@
     </hgroup>
   </header>
   {%- if page.url == '/' -%}
-  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <span itemscope
             itemprop="item"
@@ -21,7 +21,7 @@
   {%- elsif page.categories.size > 0 -%}
   {%- assign categories = page.categories | sort -%}
   {%- for category in categories -%}
-  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <a href="{% link index.html %}"
          itemid="{% link index.html %}"
@@ -58,7 +58,7 @@
   </ol>
   {%- endfor -%}
   {%- else -%}
-  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
       <a href="{% link index.html %}"
          itemid="{% link index.html %}"
