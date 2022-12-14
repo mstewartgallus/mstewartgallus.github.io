@@ -152,7 +152,9 @@ function renderPost(post) {
 }
 
 function fromPagefind(post) {
-    const { url, meta: { title, date }, filters: { tag, category } } = post;
+    const { url,
+            meta: { title, date },
+            filters: { tag, category } } = post;
     return {
         url: url,
         title: title,
