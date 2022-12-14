@@ -1,38 +1,26 @@
-p,
-h1,h2,h3,h4,h5,h6,
-hr,
-figure, ficaption,
-dl, dd, dt,
-menu, ul, li, ::marker, ::after, ::before,
-pre,
-address, cite, abbr, time, address,
-ins, del,
-span, div,
-hgroup,
-:root, header, footer, nav, body, main, aside, section, article {
+:where(:not(ol):not(a)) {
     all: unset ;
 }
 
+p,
+hr,
+h1,h2,h2,h3,h4,h5,h6,
+menu, ol, ul, li,
+head, script, style,
+pre, figure,
+div,
+hgroup,
+header, nav, body, main, footer, aside, section, article {
+    display: revert ;
+}
+
 :root {
-    color-scheme: light dark ;
     background: revert ;
     color: revert ;
 }
 
 pre {
-    display: block ;
     white-space: pre ;
-}
-
-div {
-    display: block ;
-}
-
-hgroup {
-    display: block ;
-}
-:root, header, nav, body, main, footer, aside, section, article {
-    display: block ;
 }
 
 :root {
@@ -41,4 +29,8 @@ hgroup {
 
 code, pre {
     font-family: monospace ;
+}
+
+:root {
+    color-scheme: light dark ;
 }

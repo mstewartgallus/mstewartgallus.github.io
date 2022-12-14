@@ -16,21 +16,11 @@ $root-avg-font-size: ($min-font-size + $max-font-size) / 2 ;
     @include text-size-adjust(none);
 }
 
-p {
-    display: block ;
-}
-
 h1,h2,h3,h4,h5,h6 {
-    display: block ;
     font-weight: bold ;
 }
 
-figure {
-    display: block ;
-}
-
 hr {
-    display: block ;
     box-sizing: border-box ;
 
     border-block-end-style: solid ;
@@ -81,11 +71,6 @@ main h2 {
 
 main :is(figure, header, p) {
     margin-block: $line ;
-}
-
-:root, main, body {
-    padding: 0 ;
-    margin: 0 ;
 }
 
 @media screen {
