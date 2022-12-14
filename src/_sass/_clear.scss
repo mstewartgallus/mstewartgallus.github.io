@@ -1,39 +1,50 @@
-::marker, ::after, ::before,
-base, head, style, script, link, meta, title,
-s, ins, del, em, i, b, strong
-br,
-blockquote,q,cite,abbr,address,
+blockquote,
 p,
 hr,
 h1,h2,h2,h3,h4,h5,h6,
-menu, ul, li,
 dl, dd, dt,
-small, sup, sub,
-time, var,
-kbd, mark, pre, code, figure, figcaption,
-span, div,
+figure, figcaption,
+div,
 hgroup,
 header, nav, body, main, footer, aside, section, article,
 form, button, input, fieldset, legend, input, label, select, option, output,
-textarea, details, summary, dialog {
+textarea {
     all: unset ;
     display: revert ;
 }
 
+// resetting ol reversed up
+menu, ul, li {
+    all: unset ;
+    display: revert ;
+}
+
+::marker, ::after, ::before,
+span,
+cite,abbr,address,
+small, sup, sub, time {
+    all: unset ;
+}
+
 em, i, b, strong, s {
+    all: unset ;
     font-style: revert ;
 }
 
 :root {
+    all: unset ;
     background: revert ;
     color: revert ;
 }
 
-code, pre {
+code {
+    all: unset ;
     font-family: revert ;
 }
 
 pre {
+    all: unset ;
+    font-family: revert ;
     white-space: revert ;
 }
 
@@ -44,4 +55,21 @@ pre {
 
 :root {
     color-scheme: light dark ;
+}
+
+
+:link, :visited {
+    all: unset ;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+:link {
+    color: var(--link-text) ;
+}
+:visited {
+    color: var(--visited-text) ;
+}
+:link:active, :visited:active {
+    color: var(--active-text) ;
 }

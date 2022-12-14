@@ -32,7 +32,7 @@ main :is(header, figcaption) > :first-child {
   border-right: 0.1em solid currentcolor;
   height: 0.8em;
   content: "";
-  color: var(--emphasis-color);
+  color: var(--mark-text);
 }
 
 #paging dl {

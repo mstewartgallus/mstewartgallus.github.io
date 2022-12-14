@@ -1,14 +1,16 @@
 :root {
-    background-color: var(--background-color) ;
-    color: var(--color) ;
+    background-color: var(--canvas) ;
+    color: var(--canvas-text) ;
 }
 
 hr,h1,h2,h3,h4,h5,h6 {
-    color: var(--emphasis-color);
+    background-color: var(--mark);
+    color: var(--mark-text);
 }
 
 figcaption {
-    color: var(--emphasis-color);
+    background-color: var(--mark);
+    color: var(--mark-text);
 }
 
 :root {
@@ -26,7 +28,7 @@ header,h1,h2,h3,h4,h5,h6 {
     @include hyphens(manual) ;
 }
 
-time, code, pre, table, li::marker {
+time, code, pre, table, ::marker {
     font-variant-numeric: lining-nums tabular-nums;
 }
 
@@ -79,9 +81,10 @@ menu, ul, ol {
     padding-inline-start: 2em ;
 }
 
-li::marker {
+::marker {
     font-weight: bold ;
-    color: var(--emphasis-color);
+    background-color: var(--mark);
+    color: var(--mark-text);
 }
 
 dl, dt, dd {
@@ -114,7 +117,7 @@ hgroup > p {
         scroll-behavior: smooth ;
     }
     * {
-        transition: color 0.1s, background-color 0.1s ;
+        transition: color 0.05s, background-color 0.05s ;
     }
 }
 

@@ -24,11 +24,6 @@ button {
     padding-inline: 0.5em ;
 }
 
-button:active {
-    background-color: var(--color) ;
-    color: var(--background-color) ;
-}
-
 fieldset {
     border-inline-start-style: dashed ;
     border-width: 0.1em ;
@@ -40,7 +35,6 @@ fieldset {
 }
 
 legend {
-    all: unset ;
     font-weight: bold ;
 }
 
@@ -56,10 +50,10 @@ label {
 
 
 select {
-    overflow: hidden ;
+    overflow: auto ;
     box-sizing: border-box ;
     min-height: $line ;
-    max-height: 10 * $line ;
+    max-height: 4 * $line ;
 }
 
 option {
@@ -68,9 +62,8 @@ option {
 
 option:checked {
     font-weight: bold ;
-    background-color: var(--color);
-    color: var(--background-color);
 }
+
 
 .search-basic {
     display: flex ;
@@ -79,4 +72,29 @@ option:checked {
 .search-basic input {
     flex-grow: 1 ;
     flex-shrink: 1 ;
+}
+
+input {
+    background-color: var(--field);
+    color: var(--field-text);
+}
+
+button {
+    background-color: var(--button-face);
+    color: var(--button-text);
+    border-color: var(--button-border);
+}
+
+button:active {
+    background-color: var(--button-text) ;
+    color: var(--button-face) ;
+}
+
+option {
+    background-color: var(--field);
+    color: var(--field-text);
+}
+option:checked {
+    background-color: var(--field-text);
+    color: var(--field);
 }

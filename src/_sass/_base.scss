@@ -130,14 +130,16 @@ main :is(ul, ol) {
 }
 
 :is(h1,h2,h3,h4,h5,h6):target {
-    filter: invert(100%) ;
+    background-color: var(--highlight) ;
+    color: var(--highlight-text) ;
 }
 :target figcaption {
-    filter: invert(100%) ;
+    background-color: var(--highlight) ;
+    color: var(--highlight-text) ;
 }
 
 :focus-visible {
-    outline-color: Highlight ;
+    outline-color: var(--highlight) ;
     outline-style: solid ;
     outline-width: 0.19em ;
     outline-offset: 0.2em ;
