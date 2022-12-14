@@ -47,23 +47,9 @@ figcaption {
     font-weight: bold ;
 }
 
-menu, ul, ol {
+menu, ul {
     display: block ;
-}
-
-a {
-    text-decoration-line: underline ;
-    cursor: pointer ;
-}
-
-a {
-    color: LinkText ;
-}
-a:visited {
-    color: VisitedText ;
-}
-a:active {
-    color: ActiveText ;
+    list-style: revert ;
 }
 
 li {
@@ -79,7 +65,6 @@ hgroup p {
 }
 
 dl, dd, dt {
-    all: unset ;
     display: block ;
 }
 
@@ -166,9 +151,9 @@ main :is(ul, ol) {
     filter: invert(100%) ;
 }
 
-
-:focus {
+:focus-visible {
+    outline-color: Highlight ;
     outline-style: solid ;
-    outline-width: 0.15em ;
+    outline-width: 0.19em ;
     outline-offset: 0.2em ;
 }

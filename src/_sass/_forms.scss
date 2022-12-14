@@ -8,7 +8,7 @@ label, button, input, option {
     height: $line ;
 }
 
-button, select {
+button, select, option {
     cursor: pointer ;
 }
 
@@ -24,18 +24,9 @@ button {
     padding-inline: 0.5em ;
 }
 
-@media (prefers-color-scheme: dark) {
-    button:active {
-        background: white ;
-        color: black ;
-    }
-}
-
-@media (prefers-color-scheme: light) {
-    button:active {
-        background: black ;
-        color: white ;
-    }
+button:active {
+    background-color: var(--color) ;
+    color: var(--background-color) ;
 }
 
 fieldset {

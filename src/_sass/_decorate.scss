@@ -3,7 +3,11 @@
     color: var(--color) ;
 }
 
-hr,h1,h2,h3,h4,h5,h6,figcaption {
+hr,h1,h2,h3,h4,h5,h6 {
+    color: var(--emphasis-color);
+}
+
+figcaption {
     color: var(--emphasis-color);
 }
 
@@ -59,7 +63,7 @@ table {
   suffix: "\2003";
 }
 
-ul, ol {
+menu, ul, ol {
     margin-block: $line ;
 }
 
@@ -67,11 +71,11 @@ ol {
     list-style-type: nodot ;
 }
 
-ul {
+menu, ul {
     list-style-type: bullet ;
 }
 
-ul, ol {
+menu, ul, ol {
     padding-inline-start: 2em ;
 }
 

@@ -2,10 +2,12 @@ p,
 h1,h2,h3,h4,h5,h6,
 hr,
 figure, ficaption,
-menu, ul, li,
+dl, dd, dt,
+menu, ul, li, ::marker, ::after, ::before,
 pre,
 address, cite, abbr, time, address,
-div,
+ins, del,
+span, div,
 hgroup,
 :root, header, footer, nav, body, main, aside, section, article {
     all: unset ;
@@ -13,8 +15,8 @@ hgroup,
 
 :root {
     color-scheme: light dark ;
-    background-color: Canvas ;
-    color: CanvasText ;
+    background: revert ;
+    color: revert ;
 }
 
 pre {
