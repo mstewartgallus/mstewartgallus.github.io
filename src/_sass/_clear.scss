@@ -19,11 +19,6 @@ menu, ul, li {
     display: revert ;
 }
 
-::marker, ::after, ::before,
-span,
-small, sup, sub, time {
-    all: unset ;
-}
 
 // weirdness with link colors
 cite,abbr,address {
@@ -54,26 +49,4 @@ pre {
 
 :root {
     font-family: sans-serif ;
-}
-
-
-:root {
-    color-scheme: light dark ;
-}
-
-
-:link, :visited {
-    all: unset ;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-:link {
-    color: var(--link-text) ;
-}
-:visited {
-    color: var(--visited-text) ;
-}
-:link:active, :visited:active {
-    color: var(--active-text) ;
 }

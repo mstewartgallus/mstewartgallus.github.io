@@ -3,7 +3,8 @@
     color: var(--canvas-text) ;
 }
 
-header, figcaption {
+// FIXME not a semantic use
+h1,h2,h3,h4,h5,h6, figcaption, ::marker {
     background-color: var(--mark);
     color: var(--mark-text);
 }
@@ -78,8 +79,6 @@ menu, ul, ol {
 
 ::marker {
     font-weight: bold ;
-    background-color: var(--mark);
-    color: var(--mark-text);
 }
 
 dl, dt, dd {

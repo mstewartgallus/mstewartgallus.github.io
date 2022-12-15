@@ -1,3 +1,7 @@
+:root {
+    color-scheme: light dark ;
+}
+
 $root-avg-font-size: ($min-font-size + $max-font-size) / 2 ;
 
 @media screen {
@@ -16,13 +20,33 @@ $root-avg-font-size: ($min-font-size + $max-font-size) / 2 ;
     @include text-size-adjust(none);
 }
 
+
+@media screen {
+    :root {
+        display: flex ;
+        justify-content: start ;
+        padding-block-end: 3 * $line ;
+    }
+
+    body {
+        box-sizing: border-box ;
+        inline-size: fit-content ;
+        max-inline-size: 100% ;
+    }
+
+    main {
+        box-sizing: border-box ;
+        inline-size: $main-width ;
+        max-inline-size: 100% ;
+    }
+}
+
 h1,h2,h3,h4,h5,h6 {
     font-weight: bold ;
 }
 
 hr {
     box-sizing: border-box ;
-
     border-block-end-style: solid ;
     border-width: 0.1em ;
     margin-block: 0.5 * $line ;
@@ -31,6 +55,16 @@ hr {
 p {
     inline-size: $paragraph-width ;
     max-inline-size: 100% ;
+}
+
+:link {
+    color: var(--link-text) ;
+}
+:visited {
+    color: var(--visited-text) ;
+}
+:link:active, :visited:active {
+    color: var(--active-text) ;
 }
 
 figcaption {
@@ -46,14 +80,6 @@ li {
     display: list-item ;
 }
 
-hgroup {
-    max-inline-size: 100% ;
-}
-
-hgroup p {
-    margin-block: 0 ;
-}
-
 dl, dd, dt {
     display: block ;
 }
@@ -62,71 +88,13 @@ dd {
     margin-inline-start: 2em ;
 }
 
-main h1 {
-    font-size: scale(2) ;
-}
-main h2 {
-    font-size: scale(1) ;
+
+hgroup {
+    max-inline-size: 100% ;
 }
 
-main :is(figure, header, p) {
-    margin-block: $line ;
-}
-
-@media screen {
-    :root {
-        display: flex ;
-        justify-content: start ;
-        padding-block-end: 3 * $line ;
-    }
-
-    body {
-        box-sizing: border-box ;
-        inline-size: fit-content ;
-        max-inline-size: 100% ;
-    }
-
-    #sidebar > * {
-        margin-block: $line ;
-    }
-
-    main {
-        box-sizing: border-box ;
-        inline-size: $main-width ;
-        max-inline-size: 100% ;
-    }
-
-    // FIXME provide better fallbacks for fluid layout
-    :root {
-        padding-inline: 0.8rem ;
-        padding-inline:
-            lerp(0.8rem, 7rem,
-                 linstep(400px * $remperpx, 1000px * $remperpx,
-                         100vw));
-    }
-
-    :root {
-        padding-block-start:
-            lerp(0rem, $line,
-                     linstep($min-width, 1200px * $remperpx,
-                             100vw));
-    }
-}
-
-@media screen {
-    body {
-        padding-inline-start:
-            lerp(0rem, 2rem,
-                 linstep(400px * $remperpx, 600px * $remperpx,
-                         100vw));
-    }
-}
-
-main :is(ul, ol) {
-    padding-inline-start:
-            lerp(0rem, 2rem,
-                 #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
-                                    100vw) ")"});
+hgroup p {
+    margin-block: 0 ;
 }
 
 :is(h1,h2,h3,h4,h5,h6):target {
@@ -143,4 +111,50 @@ main :is(ul, ol) {
     outline-style: solid ;
     outline-width: 0.19em ;
     outline-offset: 0.2em ;
+}
+
+main h1 {
+    font-size: scale(2) ;
+}
+main h2 {
+    font-size: scale(1) ;
+}
+
+main :is(figure, header, p) {
+    margin-block: $line ;
+}
+
+@media screen {
+    // FIXME provide better fallbacks for fluid layout
+    :root {
+        padding-inline: 0.8rem ;
+        padding-inline:
+            lerp(0.8rem, 7rem,
+                 linstep(400px * $remperpx, 1000px * $remperpx,
+                         100vw));
+        padding-block-start:
+            lerp(0rem, $line,
+                     linstep($min-width, 1200px * $remperpx,
+                             100vw));
+    }
+
+    body {
+        padding-inline-start:
+            lerp(0rem, 2rem,
+                 linstep(400px * $remperpx, 600px * $remperpx,
+                         100vw));
+    }
+}
+
+@media screen {
+    #sidebar > * {
+        margin-block: $line ;
+    }
+}
+
+main :is(ul, ol) {
+    padding-inline-start:
+            lerp(0rem, 2rem,
+                 #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
+                                    100vw) ")"});
 }

@@ -4,6 +4,9 @@
 
     --gray-text: GrayText ;
 
+    --selected-item: SelectedItem ;
+    --selected-item-text: SelectedItemText ;
+
     --highlight: Highlight ;
     --highlight-text: HighlightText ;
 
@@ -29,11 +32,12 @@
 // Ensuring color legibility, T. H. Nilsson
 // https://files.upei.ca/arts/psychology/nilsson_color.pdf
 
-@media screen {
+@media screen and (forced-colors: none) {
     :root {
         --canvas: #fff3f7 ;
         --canvas-text: #232640 ;
 
+        // FIXME wrong use of the color TBH
         --mark: var(--canvas) ;
         --mark-text: #A02030 ;
 
@@ -52,7 +56,7 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) and (forced-colors: none) {
     :root {
         --canvas: #182013 ;
         --canvas-text: #d0cfb0 ;
