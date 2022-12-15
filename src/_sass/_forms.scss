@@ -65,16 +65,6 @@ option:checked {
     font-weight: bold ;
 }
 
-
-.search-basic {
-    display: flex ;
-    flex-direction: row ;
-}
-.search-basic input {
-    flex-grow: 1 ;
-    flex-shrink: 1 ;
-}
-
 input {
     background-color: var(--field);
     color: var(--field-text);
@@ -113,4 +103,19 @@ button:focus-visible {
 select:focus-visible {
     outline-offset: 0;
     outline-width: 0.4em ;
+}
+
+
+
+.search-basic {
+    display: flex ;
+    flex-direction: row ;
+    flex-wrap: wrap ;
+}
+.search-basic input {
+    flex-grow: 10 ;
+    flex-shrink: 10 ;
+}
+.search-basic button {
+    flex-shrink: 1 ;
 }
