@@ -218,27 +218,30 @@ customElements.define('search-body', class extends HTMLBodyElement {
     #request(request) {
         const location = new URL(request.url);
         const params = location.searchParams;
+
+        // FIXME consider using errors for control flow?
         return {
             '/search/': {
                 'GET': () => {
-                    const query = params.get('s');
-                    const category = new Set(params.getAll('category'));
-                    const tag = new Set(params.getAll('tag'));
+                    const query = params.get('s') ?? '';
+                    const category = Array.from(new Set(params.getAll('category'))).join('');
+                    const tag = Array.from(new Set(params.getAll('tag'))).join('');
 
-                    this.dataset.query = query ?? '';
-                    this.dataset.category = Array.from(category).join(' ');
-                    this.dataset.tag = Array.from(tag).join(' ');
+                    if (this.dataset.query !== query) {
+                        this.dataset.query = query;
+                    }
+
+                    if (this.dataset.category !== category) {
+                        this.dataset.category = category;
+                    }
+                    if (this.dataset.tag !== tag) {
+                        this.dataset.tag = tag;
+                    }
 
                     return true;
                 }
             }
         }?.[location.pathname]?.[request.method]?.();
-    }
-
-    #hashchange(event) {
-        if (this.#request(new Request(event.newURL))) {
-            event.preventDefault();
-        }
     }
 
     #click(event) {
@@ -268,10 +271,32 @@ customElements.define('search-body', class extends HTMLBodyElement {
         }
 
         if (this.#request(new Request(href))) {
-            this.ownerDocument.defaultView.history
-                .pushState(null, '', href);
+            this.ownerDocument.defaultView.history.pushState(null, '', href);
+            this.#hash(href);
             event.preventDefault();
         }
+    }
+
+    #hash(href) {
+        const hash = new URL(href).hash;
+        let id;
+        if (hash == '') {
+            // FIXME what if no id or h1?
+            const h1 = this.getElementsByTagName('h1')[0];
+            id = h1.id;
+        } else {
+            id = decodeURIComponent(hash.substring(1));
+        }
+
+        // FIXME test on screen readers
+        const elem = this.ownerDocument.getElementById(id);
+        if (!elem) {
+            return;
+        }
+
+        elem.tabIndex = -1;
+        elem.focus();
+        elem.blur();
     }
 
     #submit(event) {
@@ -304,14 +329,21 @@ customElements.define('search-body', class extends HTMLBodyElement {
         }
 
         if (this.#request(new Request(url, options))) {
-            this.ownerDocument.defaultView.history
-                .pushState(null, '', url);
+            this.ownerDocument.defaultView.history.pushState(null, '', url);
+            this.#hash(url);
             event.preventDefault();
         }
     }
 
     #popstate(event) {
-        this.#request(new Request(this.ownerDocument.URL));
+        const url = this.ownerDocument.URL;
+        this.#request(new Request(url));
+        this.#hash(url);
+    }
+
+    #hashchange(event) {
+        const url = this.ownerDocument.URL;
+        this.#hash(url);
     }
 
     #origin() {
@@ -360,16 +392,6 @@ async function onsearch(query, category, tag) {
                                             });
         output.replaceChildren(ul);
         output.removeAttribute('hidden');
-    }
-
-    // FIXME don't do this first time
-    // FIXME avoid setting tabIndex ?
-    // FIXME wrong location for logic
-    if (h1) {
-        h1.tabIndex = -1;
-        h1.focus();
-        // FIXME test out on screen reader, maybe try queueMicrotask?
-        h1.blur();
     }
 }
 
