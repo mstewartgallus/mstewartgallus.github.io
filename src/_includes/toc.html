@@ -1,0 +1,25 @@
+<nav id="toc">
+  <hgroup class="sr-only">
+    <h2 id="toc-title">{{ site.data.strings.toc.title | escape }}</h2>
+  </hgroup>
+  <ul>
+    <!-- FIXME bad code duplication -->
+    <li><a href="#content">Content</a></li>
+    {%- if page.url == '/' -%}
+    <li><a href="#banner">Banner</a></li>
+    {%- endif -%}
+    {%- if page.previous or page.next -%}
+    <li><a href="#paging">{{ site.data.strings.paging.title | escape }}</a></li>
+    {%- endif -%}
+    {%- if page.date -%}
+    <li><a href="#metadata">{{ site.data.strings.metadata.title | escape }}</a></li>
+    {%- endif -%}
+    {%- if page.tags > 0 -%}
+    <li><a href="#tags">{{ site.data.strings.tags.title | escape }}</a></li>
+    {%- endif -%}
+    {%- if page.url == '/search/' or page.url == '/' -%}
+    <li><a href="#search">{{ site.data.strings.search.title | escape }}</a></li>
+    {%- endif -%}
+    <li><a href="#breadcrumbs">{{ site.data.strings.breadcrumbs.title | escape }}</a></li>
+  </ul>
+</nav>

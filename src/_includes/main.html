@@ -1,5 +1,4 @@
-<main aria-describedby="title" itemprop="text"
-      {% if page.date -%}data-pagefind-body{%- endif -%}>
+<div>
   <header>
     <hgroup>
       <h1
@@ -11,9 +10,12 @@
     </hgroup>
   </header>
 
-  {%- if page.tags.size > 0 -%}
-  {%- include tags.html -%}
-  {%- endif -%}
+  {%- include toc.html -%}
 
-  {{- content -}}
-</main>
+  <main id="content"
+    aria-describedby="title"
+    {% if page.date -%}data-pagefind-body{%- endif -%} itemprop="text">
+
+    {{- content -}}
+  </main>
+</div>

@@ -21,7 +21,7 @@ main header {
     }
 }
 
-main :is(ul, ol) {
+main > :is(ul, ol) {
     padding-inline-start:
             lerp(0rem, 2rem,
                  #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
@@ -97,4 +97,24 @@ main :is(header, figcaption) > :first-child {
 :is(#paging, #search, #related, #breadcrumbs) header,
 #metadata hgroup {
     @include sr-only ;
+}
+
+@counter-style link {
+  system: cyclic;
+  symbols: "☞";
+  suffix: "\2003";
+}
+
+:is(#toc, #tags) ul {
+    all: unset ;
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1em ;
+}
+:is(#toc, #tags) li {
+    all: unset ;
+}
+
+#toc {
+    margin-block: $line ;
 }

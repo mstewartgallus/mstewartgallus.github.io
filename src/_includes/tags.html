@@ -2,20 +2,16 @@
   <hgroup class="sr-only">
     <h2 id="tags-title">{{ site.data.strings.tags.title | escape }}</h2>
   </hgroup>
-  <div class="sr-only">
-    <a href="#tags-skip">Skip Tags</a>
-  </div>
-  <div>
+  <ul>
   {%- for tag in page.tags %}
-    <a aria-describedby="tag-text"
+    <li><a aria-describedby="tag-text"
        rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
       {{- -}}
       #<span role="presentation"
              itemprop="keywords"
              data-pagefind-filter="tag">{{- tag | escape -}}</span>
       {{- -}}
-    </a>
+    </a></li>
   {%- endfor -%}
-  </div>
-  <span id="tags-skip"></span>
+  </ul>
 </footer>
