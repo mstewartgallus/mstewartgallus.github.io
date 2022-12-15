@@ -5,6 +5,9 @@ paging:
   title: "Paging"
   previous: "Previous"
   next: "Next"
+tags:
+  title: "Tags"
+  tag: "Tag"
 metadata:
   title: "Metadata"
   author: "Author"

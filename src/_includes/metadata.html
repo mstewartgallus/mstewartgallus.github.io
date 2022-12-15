@@ -1,5 +1,5 @@
 {%- assign author = site.data.author[page.author] -%}
-<footer id="metadata" aria-describedby="metadata-title">
+<footer id="metadata" aria-labelledby="metadata-title">
   <hgroup>
     <h2 id="metadata-title">{{ site.data.strings.metadata.title | escape }}</h2>
   </hgroup>
@@ -30,24 +30,5 @@
         {{- -}}
       </dd>
     </div>
-    {%- if page.tags.size > 0 -%}
-    <div>
-      <dt aria-hidden="true" id="tag-text">Tag</dt>
-      {%- for tag in page.tags -%}
-      <dd>
-        {{- -}}
-        <a aria-describedby="tag-text"
-           rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
-          {{- -}}
-          #<span role="presentation"
-                 itemprop="keywords"
-                 data-pagefind-filter="tag">{{- tag | escape -}}</span>
-          {{- -}}
-        </a>
-        {{- -}}
-      </dd>
-      {%- endfor -%}
-    </div>
-    {%- endif -%}
   </dl>
 </footer>

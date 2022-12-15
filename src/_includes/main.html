@@ -10,5 +10,10 @@
       {%- endif -%}
     </hgroup>
   </header>
+
+  {%- if page.tags.size > 0 -%}
+  {%- include tags.html -%}
+  {%- endif -%}
+
   {{- content -}}
 </main>
