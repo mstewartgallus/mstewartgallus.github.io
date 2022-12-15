@@ -61,17 +61,6 @@ h1,h2,h3,h4,h5,h6, figcaption, ::marker {
     color: var(--mark-text);
 }
 
-menu, ul, ol {
-    padding-inline-start: 2em ;
-}
-
-::marker {
-    font-weight: bold ;
-}
-
-menu, ul, ol {
-    margin-block: $line ;
-}
 
 @counter-style nodot {
   system: numeric;
@@ -84,12 +73,18 @@ menu, ul, ol {
   suffix: "\2003";
 }
 
+menu, ul, ol {
+    margin-block: $line ;
+    padding-inline-start: 2em ;
+    list-style-type: bullet ;
+}
+
 ol {
     list-style-type: nodot ;
 }
 
-menu, ul {
-    list-style-type: bullet ;
+::marker {
+    font-weight: bold ;
 }
 
 dl, dt, dd {
