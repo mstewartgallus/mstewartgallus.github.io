@@ -21,9 +21,13 @@ menu, ul, li {
 
 ::marker, ::after, ::before,
 span,
-cite,abbr,address,
 small, sup, sub, time {
     all: unset ;
+}
+
+// weirdness with link colors
+cite,abbr,address {
+    font-style: unset ;
 }
 
 em, i, b, strong, s {
