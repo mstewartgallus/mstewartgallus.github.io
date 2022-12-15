@@ -95,14 +95,6 @@ $line: ($ex-height * $lh * 1rem) / 1ex ;
     text-underline-position: $value ;
 }
 
-@mixin all-small-caps {
-    font-variant-caps: all-small-caps ;
-    letter-spacing: 0.07ch ;
-}
-@mixin small-caps {
-    font-variant-caps: small-caps ;
-    letter-spacing: 0.07ch ;
-}
 @mixin sr-only {
     :not(:focus-within) {
         position: absolute !important ;
@@ -117,14 +109,16 @@ $line: ($ex-height * $lh * 1rem) / 1ex ;
 
 @import "_vars.scss";
 @import "_clear.scss";
-@import "_base.scss";
-@import "_layout.scss";
+
+@import "_theme.scss";
+@import "_syntax.scss";
+@import "_poetry.scss";
 @import "_forms.scss";
 @import "_decorate.scss";
-@import "_poetry.scss";
-@import "_theme.scss";
+@import "_layout.scss";
+@import "_base.scss";
+
 @import "_print.scss";
-@import "_syntax.scss";
 
 // body {
 //     background: linear-gradient(grey, Canvas);

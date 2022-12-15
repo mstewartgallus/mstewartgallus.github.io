@@ -1,9 +1,5 @@
 blockquote,
-p,
-hr,
-h1,h2,h2,h3,h4,h5,h6,
 dl, dd, dt,
-figure, figcaption,
 div,
 hgroup,
 header, nav, body, main, footer, aside, section, article,
@@ -13,40 +9,19 @@ textarea {
     display: revert ;
 }
 
-// resetting ol reversed up
-menu, ul, li {
-    all: unset ;
-    display: revert ;
-}
-
-
 // weirdness with link colors
 cite,abbr,address {
     font-style: unset ;
 }
 
-em, i, b, strong, s {
-    all: unset ;
-    font-style: revert ;
-}
-
 :root {
-    all: unset ;
-    background: revert ;
-    color: revert ;
-}
-
-code {
-    all: unset ;
-    font-family: revert ;
+    margin: unset ;
 }
 
 pre {
-    all: unset ;
-    font-family: revert ;
-    white-space: revert ;
+    margin: 0 ;
 }
 
-:root {
-    font-family: sans-serif ;
+:focus-visible {
+    outline: auto ;
 }

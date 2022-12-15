@@ -1,3 +1,33 @@
+hgroup p {
+    margin-block: 0 ;
+}
+
+:is(h1,h2,h3,h4,h5,h6):target {
+    background-color: var(--highlight) ;
+    color: var(--highlight-text) ;
+}
+:target figcaption {
+    background-color: var(--highlight) ;
+    color: var(--highlight-text) ;
+}
+
+main header {
+    margin-block: $line ;
+}
+
+@media screen {
+    #sidebar > * {
+        margin-block: $line ;
+    }
+}
+
+main :is(ul, ol) {
+    padding-inline-start:
+            lerp(0rem, 2rem,
+                 #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
+                                    100vw) ")"});
+}
+
 main :is(header, figcaption) {
     display: flex ;
     inline-size: $paragraph-width ;

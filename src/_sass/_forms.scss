@@ -1,5 +1,6 @@
 fieldset, label, button, input, select, option {
-    all: unset ;
+    appearance: none ;
+    margin: unset ;
     display: block ;
 }
 
@@ -44,6 +45,7 @@ button {
 }
 
 label {
+    font-weight: bold ;
     border-block-end-style: solid ;
     border-width: 0.1em ;
 }
