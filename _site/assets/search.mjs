@@ -12,7 +12,7 @@ function toset(x) {
     return new Set(x.split(' '));
 }
 
-history.scrollRestoration = 'manual';
+// history.scrollRestoration = 'manual';
 
 async function fetchjson(url) {
     return await ((await fetch(url)).json());
@@ -351,22 +351,30 @@ customElements.define('search-body', class extends HTMLBodyElement {
     }
 }, { 'extends': 'body' });
 
-async function onsearch(query, category, tag) {
-    const tags = toset(tag);
-    const categories = toset(category);
+await DOMContentLoaded;
+
+const body = document.body;
+
+new MutationObserver(() => {
+    const query = body.dataset.query;
 
     const title = document.getElementsByTagName('title')[0];
     const h1 = document.getElementById('title');
-    const search = document.getElementById('search');
-    const output = document.getElementById('search-output');
     const input = document.getElementById('search-input');
 
+    input && (input.value = query);
+    title && (title.dataset.query = query);
+    h1 && (h1.dataset.query = query);
+}).observe(body, { attributeFilter: ['data-query'] });
+
+new MutationObserver(async () => {
+    const query = body.dataset.query;
+    const tags = toset(body.dataset.tag);
+    const categories = toset(body.dataset.category);
+
+    const output = document.getElementById('search-output');
     const categoryEl = document.getElementById('category');
     const tagEl = document.getElementById('tag');
-
-    search.reset();
-
-    input && (input.value = query);
 
     if (categoryEl) {
         for (const option of categoryEl.options) {
@@ -380,9 +388,6 @@ async function onsearch(query, category, tag) {
         }
     }
 
-    title && (title.dataset.query = query);
-    h1 && (h1.dataset.query = query);
-
     if (output) {
         // FIXME set options for tags/category
         const ul = await findAndRenderPosts(query,
@@ -393,23 +398,9 @@ async function onsearch(query, category, tag) {
         output.replaceChildren(ul);
         output.removeAttribute('hidden');
     }
-}
-
-
-const observer = new MutationObserver(onmutation);
-
-await DOMContentLoaded;
-
-const body = document.body;
-
-function onmutation(mutationList, observer) {
-    const query = body.dataset.query;
-    const category = body.dataset.category;
-    const tag = body.dataset.tag;
-    queueMicrotask(async () => onsearch(query, category, tag));
-}
-
-observer.observe(body, { attributeFilter: ['data-query', 'data-category', 'data-tag'] });
+}).observe(body, {
+    attributeFilter: ['data-query', 'data-category', 'data-tag']
+});
 
 // FIXME not sure why initialization should be like this
 const params = new URL(document.URL).searchParams;
