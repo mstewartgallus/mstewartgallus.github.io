@@ -181,8 +181,8 @@ async function findAndRenderPosts(query, options) {
         filters.tag = Array.from(tags);
     }
     const search = await (await pfimp).search(query, {
-        filters: filters,
-        sort: {} });
+        filters: filters
+    });
 
     const posts =
           search.results
@@ -193,6 +193,71 @@ async function findAndRenderPosts(query, options) {
     const list = document.createElement('ul');
     list.append(...await Promise.all(posts));
     return list;
+}
+
+function clickRequest(origin, event) {
+    if (event.button != 0) {
+        return;
+    }
+
+    const tag = event.target;
+
+    const good = {
+        nodeName: 'A',
+        origin: origin,
+        username: '',
+        target: '',
+        password: '',
+        download: ''
+    };
+    for (const [k, v] of Object.entries(good)) {
+        if (tag[k] !== v) {
+            return;
+        }
+    }
+
+    const href = tag.href;
+    if (!href) {
+        return;
+    }
+
+    return new Request(href);
+}
+
+function submitRequest(origin, event) {
+    const form = event.target;
+    const submitter = event.submitter;
+
+    // work around an incorrect action string for .formAction here
+    const action = submitter?.getAttribute('formaction') ?? form.action;
+    const method = submitter?.getAttribute('method') ?? form.method;
+
+    let url = new URL(action, origin);
+    if (url.origin != origin) {
+        return;
+    }
+
+    const formdata = new FormData(form);
+    const options = { method: method };
+    if (form.method === 'get') {
+        const params = new URLSearchParams(formdata);
+        for (const [key, value] of url.searchParams) {
+            params.append(key, value);
+        }
+        url = new URL(url.origin + url.pathname + "?" + params);
+    } else {
+        options.body = formdata;
+    }
+
+    return new Request(url, options);
+}
+
+function target(window, hash, fallback) {
+    if (hash == '') {
+        hash = fallback;
+    }
+
+    window.location.replace(hash);
 }
 
 customElements.define('search-body', class extends HTMLBodyElement {
@@ -207,7 +272,6 @@ customElements.define('search-body', class extends HTMLBodyElement {
             return;
         }
 
-        this.addEventListener('hashchange', e => this.#hashchange(e));
         this.addEventListener('click', e => this.#click(e));
         this.addEventListener('submit', e => this.#submit(e));
         this.addEventListener('popstate', e => this.#popstate(e));
@@ -215,7 +279,7 @@ customElements.define('search-body', class extends HTMLBodyElement {
         this.#init = true;
     }
 
-    #request(request) {
+    #serve(request) {
         const location = new URL(request.url);
         const params = location.searchParams;
 
@@ -244,106 +308,53 @@ customElements.define('search-body', class extends HTMLBodyElement {
         }?.[location.pathname]?.[request.method]?.();
     }
 
+    #target(url) {
+        // FIXME what if no id or h1?
+        const h1 = this.getElementsByTagName('h1')[0];
+        const fallback = '#' + encodeURIComponent(h1.id);
+
+        const hash = new URL(url).hash;
+
+        target(this.ownerDocument.defaultView, hash, fallback);
+    }
+
+    #request(request) {
+        const handled = this.#serve(request);
+        if (!handled) {
+            return false;
+        }
+
+        this.ownerDocument.defaultView.history.pushState(null, '', request.url);
+        this.#target(request.url);
+
+        return true;
+    }
+
     #click(event) {
-        if (event.button != 0) {
+        const request = clickRequest(this.#origin(), event);
+        if (!request) {
             return;
         }
 
-        const tag = event.target;
-
-        const good = {
-            nodeName: 'A',
-            origin: this.#origin(),
-            username: '',
-            target: '',
-            password: '',
-            download: ''
-        };
-        for (const [k, v] of Object.entries(good)) {
-            if (tag[k] !== v) {
-                return;
-            }
-        }
-
-        const href = tag.href;
-        if (!href) {
-            return;
-        }
-
-        if (this.#request(new Request(href))) {
-            this.ownerDocument.defaultView.history.pushState(null, '', href);
-            this.#hash(href);
+        if (this.#request(request)) {
             event.preventDefault();
         }
     }
 
-    #hash(href) {
-        const hash = new URL(href).hash;
-        let id;
-        if (hash == '') {
-            // FIXME what if no id or h1?
-            const h1 = this.getElementsByTagName('h1')[0];
-            id = h1.id;
-        } else {
-            id = decodeURIComponent(hash.substring(1));
-        }
-
-        // FIXME test on screen readers
-        const elem = this.ownerDocument.getElementById(id);
-        if (!elem) {
-            return;
-        }
-
-        elem.tabIndex = -1;
-        elem.focus();
-        elem.blur();
-    }
-
     #submit(event) {
-        const form = event.target;
-        const submitter = event.submitter;
-
-        // work around an incorrect action string for .formAction here
-        const action =
-              submitter?.getAttribute('formaction')
-              ?? form.action;
-        const method =
-              submitter?.getAttribute('method')
-              ?? form.method;
-
-        let url = new URL(action, this.#origin());
-        if (url.origin != this.#origin()) {
+        const request = submitRequest(this.#origin(), event);
+        if (!request) {
             return;
         }
 
-        const formdata = new FormData(form);
-        const options = { method: method };
-        if (form.method === 'get') {
-            const params = new URLSearchParams(formdata);
-            for (const [key, value] of url.searchParams) {
-                params.append(key, value);
-            }
-            url = new URL(url.origin + url.pathname + "?" + params);
-        } else {
-            options.body = formdata;
-        }
-
-        if (this.#request(new Request(url, options))) {
-            this.ownerDocument.defaultView.history.pushState(null, '', url);
-            this.#hash(url);
+        if (this.#request(request)) {
             event.preventDefault();
         }
     }
 
     #popstate(event) {
-        const url = this.ownerDocument.URL;
-        this.#request(new Request(url));
-        this.#hash(url);
-    }
-
-    #hashchange(event) {
-        const url = this.ownerDocument.URL;
-        this.#hash(url);
+        const url = this.ownerDocument.defaultView.location;
+        this.#serve(new Request(url));
     }
 
     #origin() {
@@ -355,26 +366,22 @@ await DOMContentLoaded;
 
 const body = document.body;
 
-new MutationObserver(() => {
-    const query = body.dataset.query;
-
-    const title = document.getElementsByTagName('title')[0];
-    const h1 = document.getElementById('title');
-    const input = document.getElementById('search-input');
-
-    input && (input.value = query);
-    title && (title.dataset.query = query);
-    h1 && (h1.dataset.query = query);
-}).observe(body, { attributeFilter: ['data-query'] });
-
 new MutationObserver(async () => {
     const query = body.dataset.query;
     const tags = toset(body.dataset.tag);
     const categories = toset(body.dataset.category);
 
+    const title = document.getElementsByTagName('title')[0];
+    const h1 = document.getElementById('title');
+    const input = document.getElementById('search-input');
+
     const output = document.getElementById('search-output');
     const categoryEl = document.getElementById('category');
     const tagEl = document.getElementById('tag');
+
+    input && (input.value = query);
+    title && (title.dataset.query = query);
+    h1 && (h1.dataset.query = query);
 
     if (categoryEl) {
         for (const option of categoryEl.options) {
