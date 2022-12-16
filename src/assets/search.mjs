@@ -313,11 +313,14 @@ function route(req) {
     const { method, url } = req;
     const { searchParams, pathname } = new URL(url);
 
-    return {
-        '/search/': {
-            'GET': () => search(searchParams)
+    switch (pathname) {
+    case '/search/':
+        switch (method) {
+        case 'GET':
+            return () => search(searchParams);
         }
-    }?.[pathname]?.[method];
+        break;
+    }
 }
 
 function target(url) {
