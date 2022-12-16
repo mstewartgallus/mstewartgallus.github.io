@@ -6,7 +6,7 @@ fieldset, label, button, input, select, option {
 
 label, button, input, option {
     box-sizing: border-box ;
-    height: $line ;
+    block-size: $line ;
 }
 
 button, select, option {
@@ -53,8 +53,8 @@ label {
 select {
     overflow: auto ;
     box-sizing: border-box ;
-    min-height: $line ;
-    max-height: 4 * $line ;
+    min-block-size: $line ;
+    max-block-size: 4 * $line ;
 }
 
 option {
