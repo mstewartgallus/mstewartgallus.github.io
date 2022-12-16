@@ -2,7 +2,7 @@ history.scrollRestoration = 'manual';
 
 const { origin, pathname, searchParams } = new URL(location);
 
-function search(p, x) {
+function searchlink(p, x) {
     const params = new URLSearchParams({[p]: x});
     return `${pathname}?${params}`;
 }
@@ -54,97 +54,91 @@ customElements.define("search-title", class extends HTMLTitleElement {
     }
 }, { 'extends': 'title' });
 
-const searchH1 = id('search-h1');
+(async () => {
+    await DOMContentLoaded;
+    const template = document.getElementById('search-h1').content;
 
-customElements.define("search-h1", class extends HTMLHeadingElement {
-    static observedAttributes = ['data-query'];
-    #query;
+    customElements.define("search-h1", class extends HTMLHeadingElement {
+        static observedAttributes = ['data-query'];
+        #query;
 
-    async connectedCallback() {
-        const template = (await searchH1).content;
+        connectedCallback() {
+            if (!this.isConnected) {
+                return;
+            }
 
-        if (!this.isConnected) {
-            return;
+            if (this.#query) {
+                return;
+            }
+
+            const shadow = this.attachShadow({
+                mode: 'closed',
+                delegatesFocus: false
+            });
+
+            const copy = this.ownerDocument.importNode(template, true);
+            shadow.appendChild(copy);
+            this.#query = shadow.getElementById('query');
         }
 
-        if (this.#query) {
-            return;
+        attributeChangedCallback(n, o, x) {
+            this.#query.textContent = x ? `${x} - ` : '';
         }
+    }, { 'extends': 'h1' });
+})();
 
-        const shadow = this.attachShadow({
-            mode: 'closed',
-            delegatesFocus: false
-        });
+(async () => {
+    const template = document.getElementById('search-article').content;
 
-        const copy = this.ownerDocument.importNode(template, true);
-        shadow.appendChild(copy);
-        this.#query = shadow.getElementById('query');
-    }
+    customElements.define("search-article", class extends HTMLElement {
+        #init = false;
 
-    attributeChangedCallback(n, o, x) {
-        this.#query.textContent = x ? `${x} - ` : '';
-    }
-}, { 'extends': 'h1' });
+        connectedCallback() {
+            if (!this.isConnected) {
+                return;
+            }
 
+            if (this.#init) {
+                return;
+            }
 
-const searchArticle = id('search-article');
+            const copy = this.ownerDocument.importNode(template, true);
+            this.attachShadow({ mode: 'closed' }).appendChild(copy);
 
-customElements.define("search-article", class extends HTMLElement {
-    #init = false;
-
-    async connectedCallback() {
-        const template = (await searchArticle).content;
-
-        if (!this.isConnected) {
-            return;
+            this.#init = true;
         }
-
-        if (this.#init) {
-            return;
-        }
-
-        const copy = this.ownerDocument.importNode(template, true);
-        this.attachShadow({ mode: 'closed' }).appendChild(copy);
-        this.#init = true;
-    }
-}, { 'extends': 'article' });
+    }, { 'extends': 'article' });
+})();
 
 function renderPost(post) {
     const { title, url, date, tags, categories } = post;
 
-    const frag = new DocumentFragment();
-
-    frag.appendChild(
+    const article = document.createElement("article", {is: 'search-article' });
+    article.append(
         Object.assign(
             document.createElement('a'),
             { slot: 'title',
               href: url,
-              textContent: title }));
-
-    frag.appendChild(
+              textContent: title }),
         Object.assign(
             document.createElement('time'),
             { slot: 'date',
-              textContent: date }));
-
-    for (const category of categories) {
-        const anchor = document.createElement('a');
-        anchor.slot = 'category';
-        anchor.href = search('category', category);
-        anchor.textContent = category;
-        frag.appendChild(anchor);
-    }
-
-    for (const tag of tags) {
-        const anchor = document.createElement('a');
-        anchor.slot = 'tag';
-        anchor.href = search('tag', tag);
-        anchor.textContent = `#${tag}`;
-        frag.appendChild(anchor);
-    }
-
-    const article = document.createElement("article", {is: 'search-article' });
-    article.appendChild(frag);
+              textContent: date }),
+        ...categories.map(
+            category =>
+            Object.assign(document.createElement('a'),
+                          {
+                              slot: 'category',
+                              href: searchlink('category', category),
+                              textContent: category
+                          })),
+        ...tags.map(tag =>
+            Object.assign(document.createElement('a'),
+                          {
+                              slot: 'tag',
+                              href: searchlink('tag', tag),
+                              textContent: `#${tag}`
+                          })));
 
     const li = document.createElement("li");
     li.appendChild(article);
@@ -276,8 +270,6 @@ function formatParams(params) {
 
 await DOMContentLoaded;
 
-const body = document.body;
-
 const title = document.getElementsByTagName('title')[0];
 const h1 = document.getElementById('title');
 const input = document.getElementById('search-input');
@@ -286,20 +278,51 @@ const output = document.getElementById('search-output');
 const categoryEl = document.getElementById('category');
 const tagEl = document.getElementById('tag');
 
-function serve(req) {
+async function search(searchParams) {
+    const { query, category, tag } = parseParams(searchParams);
+
+    input && (input.value = query);
+    title && (title.dataset.query = query);
+    h1 && (h1.dataset.query = query);
+
+    if (categoryEl) {
+        for (const option of categoryEl.options) {
+            option.selected = category.has(option.value);
+        }
+    }
+
+    if (tagEl) {
+        for (const option of tagEl.options) {
+            option.selected = tag.has(option.value);
+        }
+    }
+
+    if (output) {
+        // FIXME set options for tags/category
+        const ul = await findAndRenderPosts(query,
+                                            {
+                                                tags: tag,
+                                                categories: category
+                                            });
+        output.replaceChildren(ul);
+        output.removeAttribute('hidden');
+    }
+}
+
+function route(req) {
     const { method, url } = req;
     const { searchParams, pathname } = new URL(url);
 
     return {
         '/search/': {
-            'GET': () => parseParams(searchParams)
+            'GET': () => search(searchParams)
         }
-    }?.[pathname]?.[method]?.();
+    }?.[pathname]?.[method];
 }
 
 function target(url) {
-    // FIXME what if no id or h1?
-    const fallback = '#' + encodeURIComponent(h1.id);
+    // FIXME what to place here?
+    const fallback = '#';
 
     let { hash } = new URL(url);
     if (hash == '') {
@@ -315,8 +338,8 @@ function click(event) {
         return;
     }
 
-    const data = serve(r);
-    if (!data) {
+    const action = route(r);
+    if (!action) {
         return;
     }
 
@@ -325,7 +348,7 @@ function click(event) {
     history.pushState(null, '', r.url);
     target(r.url);
 
-    Object.assign(body.dataset, formatParams(data));
+    action();
 }
 
 function submit(event) {
@@ -334,8 +357,8 @@ function submit(event) {
         return;
     }
 
-    const data = serve(r);
-    if (!data) {
+    const action = route(r);
+    if (!action) {
         return;
     }
 
@@ -344,60 +367,24 @@ function submit(event) {
     history.pushState(null, '', r.url);
     target(r.url);
 
-    Object.assign(body.dataset, formatParams(data));
+    action();
 }
 
 function popstate(event) {
     const r = new Request(location);
-    const data = serve(r);
-    if (!data) {
+
+    const action = route(r);
+    if (!action) {
         return;
     }
 
     target(r.url);
 
-    Object.assign(body.dataset, formatParams(data));
+    action();
 }
 
 document.addEventListener('click', click);
 document.addEventListener('submit', submit);
 window.addEventListener('popstate', popstate);
 
-new MutationObserver(async () => {
-    const { query, tag, category } = body.dataset;
-    const tags = toset(tag);
-    const categories = toset(category);
-
-    input && (input.value = query);
-    title && (title.dataset.query = query);
-    h1 && (h1.dataset.query = query);
-
-    if (categoryEl) {
-        for (const option of categoryEl.options) {
-            option.selected = categories.has(option.value);
-        }
-    }
-
-    if (tagEl) {
-        for (const option of tagEl.options) {
-            option.selected = tags.has(option.value);
-        }
-    }
-
-    if (output) {
-        // FIXME set options for tags/category
-        const ul = await findAndRenderPosts(query,
-                                            {
-                                                tags: tags,
-                                                categories: categories
-                                            });
-        output.replaceChildren(ul);
-        output.removeAttribute('hidden');
-    }
-}).observe(body, {
-    attributeFilter: ['data-query', 'data-category', 'data-tag']
-});
-
-// FIXME not sure why initialization should be like this
-Object.assign(body.dataset,
-              formatParams(parseParams(searchParams)));
+await search(searchParams);
