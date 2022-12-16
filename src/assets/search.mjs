@@ -189,18 +189,13 @@ async function findAndRenderPosts(query, options) {
     return list;
 }
 
-function clickRequest(event) {
-    const { button, target: tag } = event;
-    if (button != 0) {
+function anchorRequest(anchor) {
+    const { href, nodeName, origin: tagOrigin } = anchor;
+    if (nodeName !== 'A') {
         return;
     }
 
-    const { href, nodeName, origin: tagOrigin } = tag;
-    if (nodeName != 'A') {
-        return;
-    }
-
-    if (tagOrigin != origin) {
+    if (tagOrigin !== origin) {
         return;
     }
 
@@ -223,42 +218,26 @@ function clickRequest(event) {
     return new Request(href);
 }
 
-function keydownRequest(event) {
-    if (event.isComposing || event.keyCode === 229) {
+function clickRequest(event) {
+    const { button, target } = event;
+    if (button != 0) {
         return;
     }
 
-    const { keyCode, target: tag } = event;
+    return anchorRequest(target);
+}
+
+function keydownRequest(event) {
+    const { isComposing, keyCode, target: tag } = event;
+    if (isComposing) {
+        return;
+    }
+
     if (keyCode != 13) {
         return;
     }
 
-    const { href, nodeName, origin: tagOrigin } = tag;
-    if (nodeName != 'A') {
-        return;
-    }
-
-    if (tagOrigin != origin) {
-        return;
-    }
-
-    const good = {
-        username: '',
-        target: '',
-        password: '',
-        download: ''
-    };
-    for (const [k, v] of Object.entries(good)) {
-        if (tag[k] !== v) {
-            return;
-        }
-    }
-
-    if (!href) {
-        return;
-    }
-
-    return new Request(href);
+    return anchorRequest(target);
 }
 
 function submitRequest(event) {
@@ -271,7 +250,7 @@ function submitRequest(event) {
     let url = new URL(action, origin);
     const { origin: urlOrigin, pathname, searchParams } = url;
     if (urlOrigin != origin) {
-        throw new RequestError('bad origin');
+        return;
     }
 
     const formdata = new FormData(form);
@@ -294,15 +273,6 @@ function parseParams(params) {
         query: params.get('s') ?? '',
         category: new Set(params.getAll('category')),
         tag: new Set(params.getAll('tag'))
-    };
-}
-
-function formatParams(params) {
-    const { query, category, tag } = params;
-    return {
-        query: query,
-        category: Array.from(category).join(' '),
-        tag: Array.from(tag).join(' ')
     };
 }
 
