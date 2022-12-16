@@ -2,6 +2,7 @@
 <header id="banner" aria-describedby="banner-title"
         itemscope itemid="{% link index.html %}"
         itemtype="http://schema.org/WebSite">
+  <meta itemprop="url" content="{% link index.html %}">
   <hgroup>
     <h2 id="banner-title" itemprop="name">{{ site.title | escape }}</h2>
     <p>{{ site.description | escape }}</p>
