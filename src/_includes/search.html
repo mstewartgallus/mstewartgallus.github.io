@@ -2,7 +2,6 @@
 {%- assign tags = site.tags | sort -%}
 
 <form id="search" name="search" rel="search" role="search" action="{% link search.html %}">
-  {%- if page.url == '/search/' -%}
   <fieldset class="search-basic">
     <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
     <button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
@@ -28,11 +27,4 @@
   <fieldset>
     <button type="reset">Reset</button>
   </fieldset>
-  {%- else -%}
-
-  <div class="search-basic">
-    <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
-    <button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
-  </div>
-  {%- endif -%}
 </form>

@@ -17,7 +17,7 @@
     {%- if page.tags > 0 -%}
     <li><a href="#tags">{{ site.data.strings.tags.title | escape }}</a></li>
     {%- endif -%}
-    {%- if page.url == '/search/' or page.url == '/' -%}
+    {%- if page.url == '/search/' -%}
     <li><a href="#search">{{ site.data.strings.search.title | escape }}</a></li>
     {%- endif -%}
     <li><a href="#breadcrumbs">{{ site.data.strings.breadcrumbs.title | escape }}</a></li>

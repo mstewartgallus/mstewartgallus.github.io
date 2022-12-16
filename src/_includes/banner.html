@@ -30,4 +30,14 @@
         Subscribe</a>
     </li>
   </ul>
+
+  <form rel="search" role="search" action="{% link search.html %}"
+        itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+    <meta itemprop="target" content="{% link search.html %}?s={search_term_string}" >
+    <div class="search-basic">
+      <input aria-labelledby="search-button" name="s" type="search" required
+             itemprop="query-input">
+      <button type="submit">{{ site.data.strings.search.submit | escape }}</button>
+    </div>
+  </form>
 </header>

@@ -39,7 +39,7 @@
   </hgroup>
   <ul>
     <!-- FIXME bad code duplication -->
-    <li><a href="#main">Main</a></li><li><a href="#banner">Banner</a></li><li><a href="#search">Search</a></li><li><a href="#breadcrumbs">Breadcrumbs</a></li>
+    <li><a href="#main">Main</a></li><li><a href="#banner">Banner</a></li><li><a href="#breadcrumbs">Breadcrumbs</a></li>
   </ul>
 </nav>
 <main id="main"
@@ -454,11 +454,17 @@
         Subscribe</a>
     </li>
   </ul>
+
+  <form rel="search" role="search" action="/search/"
+        itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+    <meta itemprop="target" content="/search/?s={search_term_string}" >
+    <div class="search-basic">
+      <input aria-labelledby="search-button" name="s" type="search" required
+             itemprop="query-input">
+      <button type="submit">Search</button>
+    </div>
+  </form>
 </header>
-<form id="search" name="search" rel="search" role="search" action="/search/"><div class="search-basic">
-    <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
-    <button id="search-button" type="submit">Search</button>
-  </div></form>
 <nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
   <header>
     <hgroup>
