@@ -1,3 +1,5 @@
+window.history.scrollRestoration = 'manual';
+
 const pathname = new URL(document.URL).pathname;
 
 function search(p, x) {
@@ -366,22 +368,18 @@ await DOMContentLoaded;
 
 const body = document.body;
 
+const title = document.getElementsByTagName('title')[0];
+const h1 = document.getElementById('title');
+const input = document.getElementById('search-input');
+
+const output = document.getElementById('search-output');
+const categoryEl = document.getElementById('category');
+const tagEl = document.getElementById('tag');
+
 new MutationObserver(async () => {
     const query = body.dataset.query;
     const tags = toset(body.dataset.tag);
     const categories = toset(body.dataset.category);
-
-    const title = document.getElementsByTagName('title')[0];
-    const h1 = document.getElementById('title');
-    const input = document.getElementById('search-input');
-
-    const output = document.getElementById('search-output');
-    const categoryEl = document.getElementById('category');
-    const tagEl = document.getElementById('tag');
-
-    input && (input.value = query);
-    title && (title.dataset.query = query);
-    h1 && (h1.dataset.query = query);
 
     if (categoryEl) {
         for (const option of categoryEl.options) {
@@ -408,6 +406,14 @@ new MutationObserver(async () => {
 }).observe(body, {
     attributeFilter: ['data-query', 'data-category', 'data-tag']
 });
+
+new MutationObserver(async () => {
+    const query = body.dataset.query;
+
+    input && (input.value = query);
+    title && (title.dataset.query = query);
+    h1 && (h1.dataset.query = query);
+}).observe(body, { attributeFilter: ['data-query'] });
 
 // FIXME not sure why initialization should be like this
 const params = new URL(document.URL).searchParams;

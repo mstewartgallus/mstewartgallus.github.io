@@ -1,6 +1,7 @@
 <main id="main"
       aria-describedby="title"
-      {% if page.date -%}data-pagefind-body{%- endif -%} itemprop="text">
+      itemprop="text"
+      {% if page.date -%}data-pagefind-body{%- endif %}>
 
   {{- content -}}
 </main>
