@@ -205,7 +205,7 @@ function anchorRequest(anchor) {
         download: ''
     };
     for (const [k, v] of Object.entries(good)) {
-        if (tag[k] !== v) {
+        if (anchor[k] !== v) {
             return;
         }
     }
@@ -227,7 +227,7 @@ function clickRequest(event) {
 }
 
 function keydownRequest(event) {
-    const { isComposing, keyCode, target: tag } = event;
+    const { isComposing, keyCode, target } = event;
     if (isComposing) {
         return;
     }
