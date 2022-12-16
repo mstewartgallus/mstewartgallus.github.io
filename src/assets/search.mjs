@@ -88,9 +88,9 @@ customElements.define("search-title", class extends HTMLTitleElement {
 })();
 
 (async () => {
-    const template = document.getElementById('search-article').content;
+    const template = document.getElementById('search-result').content;
 
-    customElements.define("search-article", class extends HTMLElement {
+    customElements.define("search-result", class extends HTMLElement {
         #init = false;
 
         connectedCallback() {
@@ -107,14 +107,14 @@ customElements.define("search-title", class extends HTMLTitleElement {
 
             this.#init = true;
         }
-    }, { 'extends': 'article' });
+    });
 })();
 
 function renderPost(post) {
     const { title, url, date, tags, categories } = post;
 
-    const article = document.createElement("article", {is: 'search-article' });
-    article.append(
+    const result = document.createElement("search-result");
+    result.append(
         Object.assign(
             document.createElement('a'),
             { slot: 'title',
@@ -139,9 +139,8 @@ function renderPost(post) {
                               href: searchlink('tag', tag),
                               textContent: `#${tag}`
                           })));
-
     const li = document.createElement("li");
-    li.appendChild(article);
+    li.append(result);
     return li;
 }
 

@@ -7,8 +7,13 @@
   </span>
 </template>
 
-<template id="search-article">
+<template id="search-result">
   <link rel="stylesheet" href="{{ "assets/main.css" | relative_url }}">
+  <style>
+    :host {
+        display: block ;
+    }
+  </style>
   <ol class="breadcrumb">
     <li><slot name="category"></slot></li>
     <li><slot name="title">TITLE</slot></li>
