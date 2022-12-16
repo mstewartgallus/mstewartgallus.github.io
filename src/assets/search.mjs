@@ -1,6 +1,6 @@
-window.history.scrollRestoration = 'manual';
+history.scrollRestoration = 'manual';
 
-const pathname = new URL(document.URL).pathname;
+const { origin, pathname, searchParams } = new URL(location);
 
 function search(p, x) {
     const params = new URLSearchParams({[p]: x});
@@ -13,8 +13,6 @@ function toset(x) {
     }
     return new Set(x.split(' '));
 }
-
-// history.scrollRestoration = 'manual';
 
 async function fetchjson(url) {
     return await ((await fetch(url)).json());
@@ -197,16 +195,22 @@ async function findAndRenderPosts(query, options) {
     return list;
 }
 
-function clickRequest(origin, event) {
-    if (event.button != 0) {
+function clickRequest(event) {
+    const { button, target: tag } = event;
+    if (button != 0) {
         return;
     }
 
-    const tag = event.target;
+    const { href, nodeName, origin: tagOrigin } = tag;
+    if (nodeName != 'A') {
+        return;
+    }
+
+    if (tagOrigin != origin) {
+        return;
+    }
 
     const good = {
-        nodeName: 'A',
-        origin: origin,
         username: '',
         target: '',
         password: '',
@@ -218,7 +222,6 @@ function clickRequest(origin, event) {
         }
     }
 
-    const href = tag.href;
     if (!href) {
         return;
     }
@@ -226,27 +229,27 @@ function clickRequest(origin, event) {
     return new Request(href);
 }
 
-function submitRequest(origin, event) {
-    const form = event.target;
-    const submitter = event.submitter;
+function submitRequest(event) {
+    const { submitter, target: form } = event;
 
     // work around an incorrect action string for .formAction here
     const action = submitter?.getAttribute('formaction') ?? form.action;
     const method = submitter?.getAttribute('method') ?? form.method;
 
     let url = new URL(action, origin);
-    if (url.origin != origin) {
-        return;
+    const { origin: urlOrigin, pathname, searchParams } = url;
+    if (urlOrigin != origin) {
+        throw new RequestError('bad origin');
     }
 
     const formdata = new FormData(form);
     const options = { method: method };
-    if (form.method === 'get') {
+    if (method === 'get') {
         const params = new URLSearchParams(formdata);
-        for (const [key, value] of url.searchParams) {
+        for (const [key, value] of searchParams) {
             params.append(key, value);
         }
-        url = new URL(url.origin + url.pathname + "?" + params);
+        url = new URL(urlOrigin + pathname + "?" + params);
     } else {
         options.body = formdata;
     }
@@ -254,115 +257,22 @@ function submitRequest(origin, event) {
     return new Request(url, options);
 }
 
-function target(window, hash, fallback) {
-    if (hash == '') {
-        hash = fallback;
-    }
-
-    window.location.replace(hash);
+function parseParams(params) {
+    return {
+        query: params.get('s') ?? '',
+        category: new Set(params.getAll('category')),
+        tag: new Set(params.getAll('tag'))
+    };
 }
 
-customElements.define('search-body', class extends HTMLBodyElement {
-    #init = false;
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-
-        if (this.#init) {
-            return;
-        }
-
-        this.addEventListener('click', e => this.#click(e));
-        this.addEventListener('submit', e => this.#submit(e));
-        this.addEventListener('popstate', e => this.#popstate(e));
-
-        this.#init = true;
-    }
-
-    #serve(request) {
-        const location = new URL(request.url);
-        const params = location.searchParams;
-
-        // FIXME consider using errors for control flow?
-        return {
-            '/search/': {
-                'GET': () => {
-                    const query = params.get('s') ?? '';
-                    const category = Array.from(new Set(params.getAll('category'))).join('');
-                    const tag = Array.from(new Set(params.getAll('tag'))).join('');
-
-                    if (this.dataset.query !== query) {
-                        this.dataset.query = query;
-                    }
-
-                    if (this.dataset.category !== category) {
-                        this.dataset.category = category;
-                    }
-                    if (this.dataset.tag !== tag) {
-                        this.dataset.tag = tag;
-                    }
-
-                    return true;
-                }
-            }
-        }?.[location.pathname]?.[request.method]?.();
-    }
-
-    #target(url) {
-        // FIXME what if no id or h1?
-        const h1 = this.getElementsByTagName('h1')[0];
-        const fallback = '#' + encodeURIComponent(h1.id);
-
-        const hash = new URL(url).hash;
-
-        target(this.ownerDocument.defaultView, hash, fallback);
-    }
-
-    #request(request) {
-        const handled = this.#serve(request);
-        if (!handled) {
-            return false;
-        }
-
-        this.ownerDocument.defaultView.history.pushState(null, '', request.url);
-        this.#target(request.url);
-
-        return true;
-    }
-
-    #click(event) {
-        const request = clickRequest(this.#origin(), event);
-        if (!request) {
-            return;
-        }
-
-        if (this.#request(request)) {
-            event.preventDefault();
-        }
-    }
-
-    #submit(event) {
-        const request = submitRequest(this.#origin(), event);
-        if (!request) {
-            return;
-        }
-
-        if (this.#request(request)) {
-            event.preventDefault();
-        }
-    }
-
-    #popstate(event) {
-        const url = this.ownerDocument.defaultView.location;
-        this.#serve(new Request(url));
-    }
-
-    #origin() {
-        return this.ownerDocument.location.origin;
-    }
-}, { 'extends': 'body' });
+function formatParams(params) {
+    const { query, category, tag } = params;
+    return {
+        query: query,
+        category: Array.from(category).join(' '),
+        tag: Array.from(tag).join(' ')
+    };
+}
 
 await DOMContentLoaded;
 
@@ -376,10 +286,91 @@ const output = document.getElementById('search-output');
 const categoryEl = document.getElementById('category');
 const tagEl = document.getElementById('tag');
 
+function serve(req) {
+    const { method, url } = req;
+    const { searchParams, pathname } = new URL(url);
+
+    return {
+        '/search/': {
+            'GET': () => parseParams(searchParams)
+        }
+    }?.[pathname]?.[method]?.();
+}
+
+function target(url) {
+    // FIXME what if no id or h1?
+    const fallback = '#' + encodeURIComponent(h1.id);
+
+    let { hash } = new URL(url);
+    if (hash == '') {
+        hash = fallback;
+    }
+
+    location.replace(hash);
+}
+
+function click(event) {
+    const r = clickRequest(event);
+    if (!r) {
+        return;
+    }
+
+    const data = serve(r);
+    if (!data) {
+        return;
+    }
+
+    event.preventDefault();
+
+    history.pushState(null, '', r.url);
+    target(r.url);
+
+    Object.assign(body.dataset, formatParams(data));
+}
+
+function submit(event) {
+    const r = submitRequest(event);
+    if (!r) {
+        return;
+    }
+
+    const data = serve(r);
+    if (!data) {
+        return;
+    }
+
+    event.preventDefault();
+
+    history.pushState(null, '', r.url);
+    target(r.url);
+
+    Object.assign(body.dataset, formatParams(data));
+}
+
+function popstate(event) {
+    const r = new Request(location);
+    const data = serve(r);
+    if (!data) {
+        return;
+    }
+
+    target(r.url);
+
+    Object.assign(body.dataset, formatParams(data));
+}
+
+document.addEventListener('click', click);
+document.addEventListener('submit', submit);
+window.addEventListener('popstate', popstate);
+
 new MutationObserver(async () => {
-    const query = body.dataset.query;
-    const tags = toset(body.dataset.tag);
-    const categories = toset(body.dataset.category);
+    const { query, tag, category } = body.dataset;
+    const tags = toset(tag);
+    const categories = toset(category);
+
+    input && (input.value = query);
+    title && (title.dataset.query = query);
+    h1 && (h1.dataset.query = query);
 
     if (categoryEl) {
         for (const option of categoryEl.options) {
@@ -407,20 +398,6 @@ new MutationObserver(async () => {
     attributeFilter: ['data-query', 'data-category', 'data-tag']
 });
 
-new MutationObserver(async () => {
-    const query = body.dataset.query;
-
-    input && (input.value = query);
-    title && (title.dataset.query = query);
-    h1 && (h1.dataset.query = query);
-}).observe(body, { attributeFilter: ['data-query'] });
-
 // FIXME not sure why initialization should be like this
-const params = new URL(document.URL).searchParams;
-const s = params.get('s');
-const category = new Set(params.getAll('category'));
-const tag = new Set(params.getAll('tag'));
-
-body.dataset.query = s ?? '';
-body.dataset.category = Array.from(category).join(' ');
-body.dataset.tag = Array.from(tag).join(' ');
+Object.assign(body.dataset,
+              formatParams(parseParams(searchParams)));
