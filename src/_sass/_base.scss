@@ -14,7 +14,10 @@ p {
 :visited { color: var(--visited-text) ; }
 :any-link:active { color: var(--active-text) ; }
 
-time, code, pre, table, ::marker {
+// FIXME should form controls be tabular or just lining?
+time, code, pre,
+table, ::marker,
+select, option, button, input {
     font-variant-numeric: lining-nums tabular-nums;
 }
 
