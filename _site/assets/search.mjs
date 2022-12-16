@@ -223,6 +223,44 @@ function clickRequest(event) {
     return new Request(href);
 }
 
+function keydownRequest(event) {
+    if (event.isComposing || event.keyCode === 229) {
+        return;
+    }
+
+    const { keyCode, target: tag } = event;
+    if (keyCode != 13) {
+        return;
+    }
+
+    const { href, nodeName, origin: tagOrigin } = tag;
+    if (nodeName != 'A') {
+        return;
+    }
+
+    if (tagOrigin != origin) {
+        return;
+    }
+
+    const good = {
+        username: '',
+        target: '',
+        password: '',
+        download: ''
+    };
+    for (const [k, v] of Object.entries(good)) {
+        if (tag[k] !== v) {
+            return;
+        }
+    }
+
+    if (!href) {
+        return;
+    }
+
+    return new Request(href);
+}
+
 function submitRequest(event) {
     const { submitter, target: form } = event;
 
@@ -335,6 +373,25 @@ function target(url) {
     location.replace(hash);
 }
 
+function keydown(event) {
+    const r = keydownRequest(event);
+    if (!r) {
+        return;
+    }
+
+    const action = route(r);
+    if (!action) {
+        return;
+    }
+
+    event.preventDefault();
+
+    history.pushState(null, '', r.url);
+    target(r.url);
+
+    action();
+}
+
 function click(event) {
     const r = clickRequest(event);
     if (!r) {
@@ -387,6 +444,8 @@ function popstate(event) {
 }
 
 document.addEventListener('click', click);
+document.addEventListener('keydown', keydown);
+
 document.addEventListener('submit', submit);
 window.addEventListener('popstate', popstate);
 
