@@ -7,13 +7,6 @@ function searchlink(p, x) {
     return `${pathname}?${params}`;
 }
 
-function toset(x) {
-    if (!x || x == '') {
-        return new Set();
-    }
-    return new Set(x.split(' '));
-}
-
 async function fetchjson(url) {
     return await ((await fetch(url)).json());
 }
@@ -52,7 +45,6 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
         this.#query.textContent = x ? `${x} - ` : '';
     }
 }, { 'extends': 'h1' });
-
 
 customElements.define("search-result", class extends HTMLElement {
     #init = false;
