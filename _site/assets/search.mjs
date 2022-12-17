@@ -328,7 +328,6 @@ async function search(searchParams) {
                                                 categories: category
                                             });
         output.replaceChildren(ul);
-        output.removeAttribute('hidden');
     }
 }
 

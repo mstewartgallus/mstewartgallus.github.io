@@ -29,8 +29,7 @@ https://schema.org/WebPage
   <body itemscope
         itemprop="mainEntity hasPart"
         itemtype="{{ maintype }}"
-        itemid="{{ page.url | absolute_url }}"
-        {% if page.url == '/search/' %}is="search-body"{% endif %}>
+        itemid="{{ page.url | absolute_url }}">
     {%- include main.html -%}
 
     {%- include sidebar.html -%}
