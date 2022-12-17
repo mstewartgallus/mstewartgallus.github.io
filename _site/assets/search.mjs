@@ -223,13 +223,14 @@ function modifierKey(event) {
 }
 
 function clickRequest(event) {
-    const { button, target } = event;
+    const { button, buttons, target } = event;
 
     if (modifierKey(event)) {
         return;
     }
 
-    if (button != 0) {
+    // filter to non modifier, non chorded mouse clicks
+    if (button != 0 || buttons != 0) {
         return;
     }
 
