@@ -125,6 +125,11 @@ blockquote p {
     margin: 0 ;
 }
 
+header,h1,h2,h3,h4,h5,h6 {
+    font-variant-numeric: proportional-nums lining-nums ;
+    @include hyphens(manual) ;
+}
+
 :focus-visible {
     outline-color: var(--highlight) ;
     outline-style: solid ;
@@ -132,9 +137,9 @@ blockquote p {
     outline-offset: 0.2em ;
 }
 
-header,h1,h2,h3,h4,h5,h6 {
-    font-variant-numeric: proportional-nums lining-nums ;
-    @include hyphens(manual) ;
+::selection {
+    background-color: var(--selected-item);
+    color: var(--selected-item-text);
 }
 
 :root {

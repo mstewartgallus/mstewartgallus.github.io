@@ -37,15 +37,23 @@
         --canvas: #fff3f7 ;
         --canvas-text: #232640 ;
 
+        --gray-text: gray ;
+
+        --mark: yellow ;
         // FIXME wrong use of the color TBH
-        --mark: var(--canvas) ;
         --mark-text: #A02030 ;
+
+        --selected-item: #304070 ;
+        --selected-item-text: white ;
 
         // Ripped from
         // https://html.spec.whatwg.org/multipage/rendering.html#phrasing-content-3
         --link-text:  #0000EE ;
         --visited-text: #551A8B ;
         --active-text: #FF0000 ;
+
+        --highlight: #008030 ;
+        --highlight-text: black ;
 
         --field: white ;
         --field-text: black ;
@@ -61,12 +69,20 @@
         --canvas: #182013 ;
         --canvas-text: #d0cfb0 ;
 
-        --mark: var(--canvas) ;
+        --gray-text: gray ;
+
+        --mark: yellow ;
         --mark-text: #d07560 ;
+
+        --selected-item: #20E0FF ;
+        --selected-item-text: black ;
 
         --link-text:  #C0C0FF ;
         --visited-text: #F0A0FF ;
         --active-text: #FF3060 ;
+
+        --highlight: #20FF00 ;
+        --highlight-text: white ;
 
         --field: var(--canvas) ;
         --field-text: var(--canvas-text) ;
