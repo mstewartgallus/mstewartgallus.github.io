@@ -75,13 +75,12 @@ customElements.define("search-result", class extends HTMLElement {
     }
 });
 
-function renderPost(post) {
+function renderPost(post, result) {
     const { title, url, date, tags, categories, excerpt } = post;
 
     const exc = document.createElement("div");
     exc.innerHTML = excerpt;
 
-    const result = document.createElement("search-result");
     result.append(
         Object.assign(
             document.createElement('a'),
@@ -108,7 +107,6 @@ function renderPost(post) {
                               textContent: `#${tag}`
                           })),
         exc);
-    return result;
 }
 
 function fromPagefind(post) {
@@ -144,24 +142,13 @@ async function findPosts(query, options) {
     return (await (await pfimp).search(query, { filters: filters })).results;
 }
 
-async function renderPosts(search) {
-    const list = document.createElement('ul');
-
-    const length = search.length;
-    const entries = [];
-    for (let ii = 0; ii < length; ++ii) {
-        entries.push(document.createElement('li'));
-    }
-
-    list.append(...entries);
-
-    const renders = search.map((r, ix) =>
-        r.data().then(post => {
-            entries[ix].append(renderPost(fromPagefind(post)));
-        }));
-    await Promise.all(renders);
-
-    return list;
+async function renderPosts(search, results) {
+    await Promise.all(
+        search.map((r, ix) =>
+            r.data()
+                .then(post => {
+                    renderPost(fromPagefind(post), results[ix]);
+                })));
 }
 
 function anchorRequest(anchor) {
@@ -380,7 +367,7 @@ async function search(searchParams) {
     const { query, category, tag } = parseParams(searchParams);
 
     // FIXME set options for tags/category
-    const posts = findPosts(query, {
+    const postsPs = findPosts(query, {
         tags: tag,
         categories: category
     });
@@ -422,8 +409,24 @@ async function search(searchParams) {
     }
 
     if (output) {
-        const ul = await renderPosts(await posts);
+        const posts = await postsPs;
+
+        const ul = document.createElement('ul');
+
+        const lis = posts.map(() => document.createElement('li'));
+        ul.append(...lis);
+
+        const results = lis.map(li => {
+            const result = document.createElement('search-result');
+            li.append(result);
+            return result;
+        });
+
+        // FIXME aria-busy has poor support
+        output.ariaBusy = true;
         output.replaceChildren(ul);
+        await renderPosts(posts, results);
+        output.ariaBusy = false;
     }
 }
 
