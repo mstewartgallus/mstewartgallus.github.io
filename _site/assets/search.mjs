@@ -263,7 +263,7 @@ function route(req) {
     case '/search/':
         switch (method) {
         case 'GET':
-            return () => search(searchParams);
+            return (async () => await search(searchParams));
         }
         break;
     }
@@ -287,7 +287,7 @@ function target(url) {
     targeting = false;
 }
 
-function keydown(event) {
+async function keydown(event) {
     const r = keydownRequest(event);
     if (!r) {
         return;
@@ -301,12 +301,13 @@ function keydown(event) {
     event.preventDefault();
 
     history.pushState(null, '', r.url);
-    target(r.url);
 
-    action();
+    await action();
+
+    target(r.url);
 }
 
-function click(event) {
+async function click(event) {
     const r = clickRequest(event);
     if (!r) {
         return;
@@ -320,12 +321,13 @@ function click(event) {
     event.preventDefault();
 
     history.pushState(null, '', r.url);
-    target(r.url);
 
-    action();
+    await action();
+
+    target(r.url);
 }
 
-function submit(event) {
+async function submit(event) {
     const r = submitRequest(event);
     if (!r) {
         return;
@@ -339,12 +341,13 @@ function submit(event) {
     event.preventDefault();
 
     history.pushState(null, '', r.url);
-    target(r.url);
 
-    action();
+    await action();
+
+    target(r.url);
 }
 
-function popstate(event) {
+async function popstate(event) {
     if (targeting) {
         return;
     }
@@ -356,9 +359,9 @@ function popstate(event) {
         return;
     }
 
-    target(r.url);
+    await action();
 
-    action();
+    target(r.url);
 }
 
 const doctitle = document.title;
