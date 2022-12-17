@@ -232,7 +232,6 @@ function clickRequest(event) {
     if (button != 0) {
         return;
     }
-    console.log(['click', event]);
 
     return anchorRequest(target);
 }
@@ -250,8 +249,6 @@ function keydownRequest(event) {
     if (key !== "Enter") {
         return;
     }
-
-    console.log(['enter', event]);
 
     return anchorRequest(target);
 }
