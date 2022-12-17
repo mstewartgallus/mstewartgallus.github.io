@@ -1,3 +1,5 @@
+const pfimp = import('./pagefind/pagefind.js');
+
 history.scrollRestoration = 'manual';
 
 const { origin, pathname, searchParams } = new URL(location);
@@ -117,31 +119,6 @@ function fromPagefind(post) {
         tags: tag ?? []
     };
 }
-
-const pfimp = import('./pagefind/pagefind.js');
-
-async function preloadPosts(query, options) {
-    if ('' == query) {
-        query = null;
-    }
-
-    const { categories, tags } = options;
-
-    const filters = {};
-    if (categories) {
-        filters.category = Array.from(categories);
-    }
-    if (tags) {
-        filters.tag = Array.from(tags);
-    }
-
-    (await pfimp).preload(query, { filters: filters });
-}
-
-(() => {
-    const { query, tag, category } = parseParams(searchParams);
-    preloadPosts(query, { tag: tag, category: category });
-})();
 
 async function findPosts(query, options) {
     if ('' == query) {
@@ -393,27 +370,33 @@ function popstate(event) {
 
 const doctitle = document.title;
 
-switch (document.readyState) {
-case 'interactive':
-case 'complete':
-    break;
-
-default:
-    await new Promise(r => {
-        window.addEventListener('DOMContentLoaded', r);
-    });
-    break;
-}
-
-const h1 = document.getElementById('title');
-const input = document.getElementById('search-input');
-
-const output = document.getElementById('search-output');
-const categoryEl = document.getElementById('category');
-const tagEl = document.getElementById('tag');
-
 async function search(searchParams) {
     const { query, category, tag } = parseParams(searchParams);
+
+    // FIXME set options for tags/category
+    const posts = findPosts(query, {
+        tags: tag,
+        categories: category
+    });
+
+    switch (document.readyState) {
+    case 'interactive':
+    case 'complete':
+        break;
+
+    default:
+        await new Promise(r => {
+            window.addEventListener('DOMContentLoaded', r);
+        });
+        break;
+    }
+
+    const h1 = document.getElementById('title');
+    const input = document.getElementById('search-input');
+
+    const output = document.getElementById('search-output');
+    const categoryEl = document.getElementById('category');
+    const tagEl = document.getElementById('tag');
 
     input && (input.value = query);
     h1 && (h1.dataset.query = query);
@@ -433,12 +416,7 @@ async function search(searchParams) {
     }
 
     if (output) {
-        // FIXME set options for tags/category
-        const posts = await findPosts(query,{
-            tags: tag,
-            categories: category
-        });
-        const ul = await renderPosts(posts);
+        const ul = await renderPosts(await posts);
         output.replaceChildren(ul);
     }
 }
