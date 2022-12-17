@@ -105,7 +105,10 @@ select:focus-visible {
     outline-width: 0.4em ;
 }
 
-
+input {
+    inline-size: 20ch;
+    max-inline-size: 100%;
+}
 
 .search-basic {
     display: flex ;
