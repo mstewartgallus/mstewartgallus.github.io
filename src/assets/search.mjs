@@ -280,19 +280,17 @@ function target(url) {
         hash = fallback;
     }
 
+    const h1 = document.getElementsByTagName('h1')[0];
+    if (h1) {
+        h1.tabIndex = -1;
+        h1.focus();
+    }
+
     // This is a little ugly but replace can trigger popstate (at
     // least in Chrome) and lead to a stack overflow
     targeting = true;
     location.replace(hash);
     targeting = false;
-
-    const h1 = document.getElementsByTagName('h1')[0];
-    if (h1) {
-        // FIXME experiment
-        h1.tabIndex = -1;
-        h1.focus();
-        h1.blur();
-    }
 }
 
 async function keydown(event) {
