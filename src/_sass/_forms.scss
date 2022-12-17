@@ -119,3 +119,9 @@ select:focus-visible {
 .search-basic button {
     flex-shrink: 1 ;
 }
+
+// reduce cumulative layout shift
+#search-output {
+    display: block ;
+    min-block-size: 10 * $line ;
+}
