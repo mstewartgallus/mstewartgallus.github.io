@@ -26,6 +26,8 @@
 
     --field: Field ;
     --field-text: FieldText ;
+
+    --emphasis-text: #A02030 ;
 }
 
 // black/pink and dark green/yellow is most legible ?
@@ -40,8 +42,7 @@
         --gray-text: gray ;
 
         --mark: yellow ;
-        // FIXME wrong use of the color TBH
-        --mark-text: #A02030 ;
+        --mark-text: black ;
 
         --selected-item: #304070 ;
         --selected-item-text: white ;
@@ -71,8 +72,10 @@
 
         --gray-text: gray ;
 
-        --mark: yellow ;
-        --mark-text: #d07560 ;
+        --mark: #A08000 ;
+        --mark-text: white ;
+
+        --emphasis-text: #d07560 ;
 
         --selected-item: #20E0FF ;
         --selected-item-text: black ;

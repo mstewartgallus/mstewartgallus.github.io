@@ -60,8 +60,7 @@ hgroup {
 }
 
 h1,h2,h3,h4,h5,h6, figcaption, ::marker {
-    // FIXME not a semantic use
-    color: var(--mark-text);
+    color: var(--emphasis-text);
 }
 
 
@@ -128,6 +127,11 @@ blockquote p {
 header,h1,h2,h3,h4,h5,h6 {
     font-variant-numeric: proportional-nums lining-nums ;
     @include hyphens(manual) ;
+}
+
+mark {
+    background-color: var(--mark);
+    color: var(--mark-text);
 }
 
 :focus-visible {

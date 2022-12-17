@@ -62,7 +62,7 @@ main :is(header, figcaption) > :first-child {
   border-right: 0.1em solid currentcolor;
   height: 0.8em;
   content: "";
-  color: var(--mark-text);
+  color: var(--emphasis-text);
 }
 
 #paging dl {
@@ -117,10 +117,4 @@ main :is(header, figcaption) > :first-child {
 
 #toc {
     margin-block: $line ;
-}
-
-.snippet {
-    max-block-size: 2 * $line;
-    text-overflow: ellipses ;
-    overflow: auto ;
 }
