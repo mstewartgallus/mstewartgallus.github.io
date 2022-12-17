@@ -110,9 +110,7 @@ function renderPost(post) {
                               href: searchlink('tag', tag),
                               textContent: `#${tag}`
                           })));
-    const li = document.createElement("li");
-    li.append(result);
-    return li;
+    return result;
 }
 
 function fromPagefind(post) {
@@ -144,18 +142,27 @@ async function findAndRenderPosts(query, options) {
     if (tags) {
         filters.tag = Array.from(tags);
     }
-    const search = await (await pfimp).search(query, {
-        filters: filters
-    });
-
-    const posts =
-          search.results
-          .map(r =>
-              r.data()
-                  .then(post => renderPost(fromPagefind(post))));
 
     const list = document.createElement('ul');
-    list.append(...await Promise.all(posts));
+
+    const search = (await (await pfimp).search(query, {
+        filters: filters
+    })).results;
+
+    const length = search.length;
+    const entries = [];
+    for (let ii = 0; ii < length; ++ii) {
+        entries.push(document.createElement('li'));
+    }
+
+    list.append(...entries);
+
+    const renders = search.map((r, ix) =>
+        r.data().then(post => {
+            entries[ix].append(renderPost(fromPagefind(post)));
+        }));
+    await Promise.all(renders);
+
     return list;
 }
 

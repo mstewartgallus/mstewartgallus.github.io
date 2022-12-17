@@ -30,9 +30,9 @@ ms@2.1.2:
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
 pagefind@^0.10.4:
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/pagefind/-/pagefind-0.10.4.tgz#903182ed3b5534a78ea0c2e14e12e2377cc4f5eb"
-  integrity sha512-JNaP0blX3mUDkJEUyPDXXbS2TWHZAJRu898tEg4jnbwENiar7h6jc1Mu3iRENaGFiULiwi8asJtifGFKXAObAw==
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/pagefind/-/pagefind-0.10.5.tgz#c1c1c9d13082083bb77cf3ca30176ceacf957a72"
+  integrity sha512-5c57c1wJYYuJt/thzupMySf4Gzt6QTPx5JoTqk3LL4VDzV/2AGWMA9rmnA5mNvtI9aZzHVbv3zNWV3l44VjsSQ==
   dependencies:
     https-proxy-agent "^5.0.0"
     proxy-from-env "^1.1.0"
