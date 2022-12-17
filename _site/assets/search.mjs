@@ -285,6 +285,14 @@ function target(url) {
     targeting = true;
     location.replace(hash);
     targeting = false;
+
+    const h1 = document.getElementsByTagName('h1')[0];
+    if (h1) {
+        // FIXME experiment
+        h1.tabIndex = -1;
+        h1.focus();
+        h1.blur();
+    }
 }
 
 async function keydown(event) {
