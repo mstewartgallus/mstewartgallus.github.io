@@ -388,6 +388,7 @@ async function search(searchParams) {
     const input = document.getElementById('search-input');
 
     const output = document.getElementById('search-output');
+    const list = document.getElementById('search-list');
     const categoryEl = document.getElementById('category');
     const tagEl = document.getElementById('tag');
 
@@ -411,20 +412,20 @@ async function search(searchParams) {
     if (output) {
         const posts = await postsPs;
 
-        const ul = document.createElement('ul');
-
+        // FIXME reuse nodes?
         const lis = posts.map(() => document.createElement('li'));
-        ul.append(...lis);
-
-        const results = lis.map(li => {
-            const result = document.createElement('search-result');
-            li.append(result);
-            return result;
-        });
 
         // FIXME aria-busy has poor support
         output.ariaBusy = true;
-        output.replaceChildren(ul);
+
+        list.replaceChildren(...lis);
+
+        const results = lis.map(li => {
+            const result = document.createElement('search-result');
+            li.replaceChildren(result);
+            return result;
+        });
+
         await renderPosts(posts, results);
         output.ariaBusy = false;
     }
