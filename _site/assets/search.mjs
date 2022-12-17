@@ -18,85 +18,68 @@ async function fetchjson(url) {
     return await ((await fetch(url)).json());
 }
 
-const readyState = document.readyState;
-const ready = readyState == 'interactive' || readyState == 'complete';
-const DOMContentLoaded = ready ? Promise.resolve(null) :
-      new Promise(r => {
-          window.addEventListener('DOMContentLoaded', r);
-      });
+customElements.define("search-h1", class extends HTMLHeadingElement {
+    static observedAttributes = ['data-query'];
+    #query;
+    #shadow;
 
-async function id(x) {
-    await DOMContentLoaded;
-    return document.getElementById(x);
-}
+    constructor() {
+        super();
 
-(async () => {
-    await DOMContentLoaded;
-    const template = document.getElementById('search-h1').content;
+        this.#shadow = this.attachShadow({
+            mode: 'closed',
+            delegatesFocus: false
+        });
+    }
 
-    customElements.define("search-h1", class extends HTMLHeadingElement {
-        static observedAttributes = ['data-query'];
-        #query;
-        #shadow;
-
-        constructor() {
-            super();
-
-            this.#shadow = this.attachShadow({
-                mode: 'closed',
-                delegatesFocus: false
-            });
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
         }
 
-        connectedCallback() {
-            if (!this.isConnected) {
-                return;
-            }
-
-            if (this.#query) {
-                return;
-            }
-
-            const copy = this.ownerDocument.importNode(template, true);
-            this.#shadow.appendChild(copy);
-            this.#query = this.#shadow.getElementById('query');
+        if (this.#query) {
+            return;
         }
 
-        attributeChangedCallback(n, o, x) {
-            this.#query.textContent = x ? `${x} - ` : '';
+        const template = this.ownerDocument.getElementById('search-h1').content;
+
+        const copy = this.ownerDocument.importNode(template, true);
+        this.#shadow.appendChild(copy);
+        this.#query = this.#shadow.getElementById('query');
+    }
+
+    attributeChangedCallback(n, o, x) {
+        this.#query.textContent = x ? `${x} - ` : '';
+    }
+}, { 'extends': 'h1' });
+
+
+customElements.define("search-result", class extends HTMLElement {
+    #init = false;
+    #shadow;
+
+    constructor() {
+        super();
+        this.#shadow = this.attachShadow({ mode: 'closed' });
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
         }
-    }, { 'extends': 'h1' });
-})();
 
-(async () => {
-    await DOMContentLoaded;
-    const template = document.getElementById('search-result').content;
-
-    customElements.define("search-result", class extends HTMLElement {
-        #init = false;
-        #shadow;
-
-        constructor() {
-            super();
-            this.#shadow = this.attachShadow({ mode: 'closed' });
+        if (this.#init) {
+            return;
         }
 
-        connectedCallback() {
-            if (!this.isConnected) {
-                return;
-            }
+        const template = this.ownerDocument.getElementById('search-result').content;
 
-            if (this.#init) {
-                return;
-            }
+        const copy = this.ownerDocument.importNode(template, true);
+        this.#shadow.appendChild(copy);
 
-            const copy = this.ownerDocument.importNode(template, true);
-            this.#shadow.appendChild(copy);
-
-            this.#init = true;
-        }
-    });
-})();
+        this.#init = true;
+    }
+});
 
 function renderPost(post) {
     const { title, url, date, tags, categories } = post;
@@ -388,7 +371,17 @@ function popstate(event) {
 
 const doctitle = document.title;
 
-await DOMContentLoaded;
+switch (document.readyState) {
+case 'interactive':
+case 'complete':
+    break;
+
+default:
+    await new Promise(r => {
+        window.addEventListener('DOMContentLoaded', r);
+    });
+    break;
+}
 
 const h1 = document.getElementById('title');
 const input = document.getElementById('search-input');
