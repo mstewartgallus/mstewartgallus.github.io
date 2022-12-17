@@ -112,6 +112,18 @@ figure {
     overflow: auto ;
 }
 
+blockquote {
+    margin: 0 ;
+}
+
+// Temporary hacks for greentext
+blockquote p::before {
+    content: '>\2003' ;
+}
+
+blockquote p {
+    margin: 0 ;
+}
 
 :focus-visible {
     outline-color: var(--highlight) ;
