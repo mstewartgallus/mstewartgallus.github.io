@@ -30,30 +30,6 @@ async function id(x) {
     return document.getElementById(x);
 }
 
-customElements.define("search-title", class extends HTMLTitleElement {
-    static observedAttributes = ['data-query'];
-    #title;
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-
-        if (this.#title) {
-            return;
-        }
-
-        this.#title = this.text;
-    }
-
-    attributeChangedCallback(n, o, x) {
-        this.text =
-            x ?
-            `${x} — ${this.#title}` :
-            this.#title;
-    }
-}, { 'extends': 'title' });
-
 (async () => {
     await DOMContentLoaded;
     const template = document.getElementById('search-h1').content;
@@ -61,6 +37,16 @@ customElements.define("search-title", class extends HTMLTitleElement {
     customElements.define("search-h1", class extends HTMLHeadingElement {
         static observedAttributes = ['data-query'];
         #query;
+        #shadow;
+
+        constructor() {
+            super();
+
+            this.#shadow = this.attachShadow({
+                mode: 'closed',
+                delegatesFocus: false
+            });
+        }
 
         connectedCallback() {
             if (!this.isConnected) {
@@ -71,14 +57,9 @@ customElements.define("search-title", class extends HTMLTitleElement {
                 return;
             }
 
-            const shadow = this.attachShadow({
-                mode: 'closed',
-                delegatesFocus: false
-            });
-
             const copy = this.ownerDocument.importNode(template, true);
-            shadow.appendChild(copy);
-            this.#query = shadow.getElementById('query');
+            this.#shadow.appendChild(copy);
+            this.#query = this.#shadow.getElementById('query');
         }
 
         attributeChangedCallback(n, o, x) {
@@ -88,10 +69,17 @@ customElements.define("search-title", class extends HTMLTitleElement {
 })();
 
 (async () => {
+    await DOMContentLoaded;
     const template = document.getElementById('search-result').content;
 
     customElements.define("search-result", class extends HTMLElement {
         #init = false;
+        #shadow;
+
+        constructor() {
+            super();
+            this.#shadow = this.attachShadow({ mode: 'closed' });
+        }
 
         connectedCallback() {
             if (!this.isConnected) {
@@ -103,7 +91,7 @@ customElements.define("search-title", class extends HTMLTitleElement {
             }
 
             const copy = this.ownerDocument.importNode(template, true);
-            this.attachShadow({ mode: 'closed' }).appendChild(copy);
+            this.#shadow.appendChild(copy);
 
             this.#init = true;
         }
@@ -291,45 +279,6 @@ function parseParams(params) {
     };
 }
 
-await DOMContentLoaded;
-
-const title = document.getElementsByTagName('title')[0];
-const h1 = document.getElementById('title');
-const input = document.getElementById('search-input');
-
-const output = document.getElementById('search-output');
-const categoryEl = document.getElementById('category');
-const tagEl = document.getElementById('tag');
-
-async function search(searchParams) {
-    const { query, category, tag } = parseParams(searchParams);
-
-    input && (input.value = query);
-    title && (title.dataset.query = query);
-    h1 && (h1.dataset.query = query);
-
-    if (categoryEl) {
-        for (const option of categoryEl.options) {
-            option.selected = category.has(option.value);
-        }
-    }
-
-    if (tagEl) {
-        for (const option of tagEl.options) {
-            option.selected = tag.has(option.value);
-        }
-    }
-
-    if (output) {
-        // FIXME set options for tags/category
-        const ul = await findAndRenderPosts(query,
-                                            {
-                                                tags: tag,
-                                                categories: category
-                                            });
-        output.replaceChildren(ul);
-    }
-}
 
 function route(req) {
     const { method, url } = req;
@@ -437,10 +386,52 @@ function popstate(event) {
     action();
 }
 
+const doctitle = document.title;
+
+await DOMContentLoaded;
+
+const h1 = document.getElementById('title');
+const input = document.getElementById('search-input');
+
+const output = document.getElementById('search-output');
+const categoryEl = document.getElementById('category');
+const tagEl = document.getElementById('tag');
+
+async function search(searchParams) {
+    const { query, category, tag } = parseParams(searchParams);
+
+    input && (input.value = query);
+    h1 && (h1.dataset.query = query);
+
+    document.title = `${query} — ${doctitle}`;
+
+    if (categoryEl) {
+        for (const option of categoryEl.options) {
+            option.selected = category.has(option.value);
+        }
+    }
+
+    if (tagEl) {
+        for (const option of tagEl.options) {
+            option.selected = tag.has(option.value);
+        }
+    }
+
+    if (output) {
+        // FIXME set options for tags/category
+        const ul = await findAndRenderPosts(query,
+                                            {
+                                                tags: tag,
+                                                categories: category
+                                            });
+        output.replaceChildren(ul);
+    }
+}
+
 document.addEventListener('click', click);
 document.addEventListener('keydown', keydown);
 
 document.addEventListener('submit', submit);
 window.addEventListener('popstate', popstate);
 
-await search(searchParams);
+search(searchParams);
