@@ -120,7 +120,7 @@ function fromPagefind(post) {
 
 const pfimp = import('./pagefind/pagefind.js');
 
-async function findAndRenderPosts(query, options) {
+async function preloadPosts(query, options) {
     if ('' == query) {
         query = null;
     }
@@ -135,11 +135,34 @@ async function findAndRenderPosts(query, options) {
         filters.tag = Array.from(tags);
     }
 
-    const list = document.createElement('ul');
+    (await pfimp).preload(query, { filters: filters });
+}
 
-    const search = (await (await pfimp).search(query, {
-        filters: filters
-    })).results;
+(() => {
+    const { query, tag, category } = parseParams(searchParams);
+    preloadPosts(query, { tag: tag, category: category });
+})();
+
+async function findPosts(query, options) {
+    if ('' == query) {
+        query = null;
+    }
+
+    const { categories, tags } = options;
+
+    const filters = {};
+    if (categories) {
+        filters.category = Array.from(categories);
+    }
+    if (tags) {
+        filters.tag = Array.from(tags);
+    }
+
+    return (await (await pfimp).search(query, { filters: filters })).results;
+}
+
+async function renderPosts(search) {
+    const list = document.createElement('ul');
 
     const length = search.length;
     const entries = [];
@@ -411,11 +434,11 @@ async function search(searchParams) {
 
     if (output) {
         // FIXME set options for tags/category
-        const ul = await findAndRenderPosts(query,
-                                            {
-                                                tags: tag,
-                                                categories: category
-                                            });
+        const posts = await findPosts(query,{
+            tags: tag,
+            categories: category
+        });
+        const ul = await renderPosts(posts);
         output.replaceChildren(ul);
     }
 }
