@@ -27,14 +27,14 @@
     }
   </style>
   <ol class="breadcrumb">
-    <li><slot name="category"></slot></li>
-    <li><slot name="title">TITLE</slot></li>
+    <li><slot name="category"><a>Prose</a></slot></li>
+    <li><slot name="title"><a>Title</a></slot></li>
   </ol>
   <dl>
     <div>
       <dt>Post Date</dt>
       <dd>
-        <slot name="date">DATE</slot>
+        <slot name="date"><time>20YY-MM-DD</time></slot>
       </dd>
     </div>
     <div>
@@ -71,8 +71,13 @@
       <h1
         is="search-h1"
         id="title" itemprop="name headline title">Search</h1></hgroup>
-  </header><output id="search-output" for="search" aria-live="polite">
+  </header><!-- Dummy content to reduce CLS -->
+<output id="search-output" for="search" aria-live="polite">
   <ul>
+    <li><search-result></search-result></li>
+    <li><search-result></search-result></li>
+    <li><search-result></search-result></li>
+    <li><search-result></search-result></li>
   </ul>
 </output>
 </main>

@@ -15,14 +15,14 @@
     }
   </style>
   <ol class="breadcrumb">
-    <li><slot name="category"></slot></li>
-    <li><slot name="title">TITLE</slot></li>
+    <li><slot name="category"><a>Prose</a></slot></li>
+    <li><slot name="title"><a>Title</a></slot></li>
   </ol>
   <dl>
     <div>
       <dt>{{ site.data.strings.search.postDate }}</dt>
       <dd>
-        <slot name="date">DATE</slot>
+        <slot name="date"><time>20YY-MM-DD</time></slot>
       </dd>
     </div>
     <div>
