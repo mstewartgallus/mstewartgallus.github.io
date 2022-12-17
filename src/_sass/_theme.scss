@@ -118,3 +118,9 @@ main :is(header, figcaption) > :first-child {
 #toc {
     margin-block: $line ;
 }
+
+.snippet {
+    max-block-size: 2 * $line;
+    text-overflow: ellipses ;
+    overflow: auto ;
+}

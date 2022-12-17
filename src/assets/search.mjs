@@ -76,7 +76,10 @@ customElements.define("search-result", class extends HTMLElement {
 });
 
 function renderPost(post) {
-    const { title, url, date, tags, categories } = post;
+    const { title, url, date, tags, categories, excerpt } = post;
+
+    const exc = document.createElement("div");
+    exc.innerHTML = excerpt;
 
     const result = document.createElement("search-result");
     result.append(
@@ -103,12 +106,14 @@ function renderPost(post) {
                               slot: 'tag',
                               href: searchlink('tag', tag),
                               textContent: `#${tag}`
-                          })));
+                          })),
+        exc);
     return result;
 }
 
 function fromPagefind(post) {
     const { url,
+            excerpt,
             meta: { title, date },
             filters: { tag, category } } = post;
     return {
@@ -116,7 +121,8 @@ function fromPagefind(post) {
         title: title,
         date: date,
         categories: category ?? [],
-        tags: tag ?? []
+        tags: tag ?? [],
+        excerpt
     };
 }
 
