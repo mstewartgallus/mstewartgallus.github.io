@@ -415,8 +415,8 @@ async function search(searchParams) {
         // FIXME reuse nodes?
         const lis = posts.map(() => document.createElement('li'));
 
-        // FIXME aria-busy has poor support
-        output.ariaBusy = true;
+        // FIXME consider the inert attribute?
+        output.ariaHidden = "true";
 
         list.replaceChildren(...lis);
 
@@ -427,7 +427,7 @@ async function search(searchParams) {
         });
 
         await renderPosts(posts, results);
-        output.ariaBusy = false;
+        output.ariaHidden = "false";
     }
 }
 
