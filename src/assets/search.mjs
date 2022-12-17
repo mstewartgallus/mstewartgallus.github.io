@@ -217,7 +217,7 @@ function anchorRequest(anchor) {
     return new Request(href);
 }
 
-function special(event) {
+function modifierKey(event) {
     const { ctrlKey, altKey, shiftKey, metaKey } = event;
     return ctrlKey || altKey || shiftKey || metaKey;
 }
@@ -225,7 +225,7 @@ function special(event) {
 function clickRequest(event) {
     const { button, target } = event;
 
-    if (special(event)) {
+    if (modifierKey(event)) {
         return;
     }
 
@@ -242,7 +242,8 @@ function keydownRequest(event) {
     if (isComposing) {
         return;
     }
-    if (special(event)) {
+
+    if (modifierKey(event)) {
         return;
     }
 
