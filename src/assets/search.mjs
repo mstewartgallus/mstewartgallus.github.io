@@ -217,24 +217,41 @@ function anchorRequest(anchor) {
     return new Request(href);
 }
 
+function special(event) {
+    const { ctrlKey, altKey, shiftKey, metaKey } = event;
+    return ctrlKey || altKey || shiftKey || metaKey;
+}
+
 function clickRequest(event) {
     const { button, target } = event;
+
+    if (special(event)) {
+        return;
+    }
+
     if (button != 0) {
         return;
     }
+    console.log(['click', event]);
 
     return anchorRequest(target);
 }
 
 function keydownRequest(event) {
-    const { isComposing, keyCode, target } = event;
+    const { isComposing, key, target } = event;
+
     if (isComposing) {
         return;
     }
-
-    if (keyCode != 13) {
+    if (special(event)) {
         return;
     }
+
+    if (key !== "Enter") {
+        return;
+    }
+
+    console.log(['enter', event]);
 
     return anchorRequest(target);
 }
