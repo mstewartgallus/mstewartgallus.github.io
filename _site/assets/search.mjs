@@ -346,6 +346,8 @@ function route(req) {
     }
 }
 
+let targeting = false;
+
 function target(url) {
     // FIXME what to place here?
     const fallback = '#';
@@ -355,7 +357,11 @@ function target(url) {
         hash = fallback;
     }
 
+    // This is a little ugly but replace can trigger popstate (at
+    // least in Chrome) and lead to a stack overflow
+    targeting = true;
     location.replace(hash);
+    targeting = false;
 }
 
 function keydown(event) {
@@ -416,6 +422,10 @@ function submit(event) {
 }
 
 function popstate(event) {
+    if (targeting) {
+        return;
+    }
+
     const r = new Request(location);
 
     const action = route(r);
