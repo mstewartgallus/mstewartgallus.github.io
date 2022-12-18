@@ -120,7 +120,7 @@ main :is(header, figcaption) > :first-child {
 .greentext > li::before {
     display: inline-block ;
     margin-inline-end: 1ch;
-    transform: rotate(-45deg);
+    transform: rotate(-45deg) skew(14deg, 14deg);
     border-block-end: 0.2ch solid currentcolor;
     border-inline-end: 0.2ch solid currentcolor;
     block-size: 1ex;
