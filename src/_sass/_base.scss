@@ -111,19 +111,6 @@ figure {
     overflow: auto ;
 }
 
-blockquote {
-    margin: 0 ;
-}
-
-// Temporary hacks for greentext
-blockquote p::before {
-    content: '>\2003' ;
-}
-
-blockquote p {
-    margin: 0 ;
-}
-
 header,h1,h2,h3,h4,h5,h6 {
     font-variant-numeric: proportional-nums lining-nums ;
     @include hyphens(manual) ;

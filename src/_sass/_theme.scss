@@ -118,3 +118,17 @@ main :is(header, figcaption) > :first-child {
 #toc {
     margin-block: $line ;
 }
+
+.greentext {
+    all: unset ;
+    display: block ;
+    padding-inline-start: 1ch ;
+    border-color: var(--emphasis-text) ;
+    border-width: 1ch ;
+    border-inline-start-style: dotted ;
+}
+
+.greentext p {
+    all: unset ;
+    display: block ;
+}
