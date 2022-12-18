@@ -1,7 +1,9 @@
 ---
 title: The Best Coffee
 date: 2022-10-31 20:06 -0800
-tags: Coffee
+tags:
+- Coffee
+- Vancouver
 ---
 The best coffee in Vancouver is a matter of taste. However, the best
 coffee per dollar is objective fact.

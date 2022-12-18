@@ -1,7 +1,10 @@
 ---
 title: Emotion Exercise
 date: 2022-10-19 17:14 -0800
-tags: "2019"
+tags:
+- '2019'
+- Anxiety
+- Panic
 ---
 
 I feel a great heaviness about my eyes and tension is jamming needles in my jaw.
