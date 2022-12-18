@@ -1,0 +1,28 @@
+[[./search.mjs::history.scrollRestoration]]
+
+FIXME unsure about scroll restoration.
+
+[[./search.mjs::function clickRequest(]]
+
+Filter to non modifier, non chorded mouse clicks.
+
+[[./search.mjs::function submitRequest(]]
+
+work around an incorrect action string for .formAction here.
+
+[[./search.mjs::function target(]]
+
+FIXME what to place for the fallback/default target here?
+
+[[./search.mjs::targeting = true]]
+
+This is a little ugly but replace can trigger popstate (at least in
+Chrome) and lead to a stack overflow.
+
+[[./search.mjs::h1.focus()]]
+
+Timeout then blur?
+
+[[./search.mjs::function search()]]
+
+FIXME set options for tags/category in parseParams.

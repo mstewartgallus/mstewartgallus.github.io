@@ -192,7 +192,6 @@ function clickRequest(event) {
         return;
     }
 
-    // filter to non modifier, non chorded mouse clicks
     if (button != 0 || buttons != 0) {
         return;
     }
@@ -221,7 +220,6 @@ function keydownRequest(event) {
 function submitRequest(event) {
     const { submitter, target: form } = event;
 
-    // work around an incorrect action string for .formAction here
     const action = submitter?.getAttribute('formaction') ?? form.action;
     const method = submitter?.getAttribute('method') ?? form.method;
 
@@ -272,7 +270,6 @@ function route(req) {
 let targeting = false;
 
 function target(url) {
-    // FIXME what to place here?
     const fallback = '#';
 
     let { hash } = new URL(url);
@@ -280,8 +277,6 @@ function target(url) {
         hash = fallback;
     }
 
-    // This is a little ugly but replace can trigger popstate (at
-    // least in Chrome) and lead to a stack overflow
     targeting = true;
     location.replace(hash);
     targeting = false;
@@ -290,7 +285,6 @@ function target(url) {
     if (h1) {
         h1.tabIndex = -1;
         h1.focus();
-        // Timeout then blur?
     }
 }
 
@@ -376,7 +370,6 @@ const doctitle = document.title;
 async function search(searchParams) {
     const { query, category, tag } = parseParams(searchParams);
 
-    // FIXME set options for tags/category
     const postsPs = findPosts(query, {
         tags: tag,
         categories: category
@@ -422,10 +415,8 @@ async function search(searchParams) {
     if (output) {
         const posts = await postsPs;
 
-        // FIXME reuse nodes?
         const lis = posts.map(() => document.createElement('li'));
 
-        // FIXME consider the inert attribute?
         output.ariaHidden = "true";
 
         list.replaceChildren(...lis);
