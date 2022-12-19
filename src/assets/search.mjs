@@ -344,6 +344,26 @@ async function search(searchParams) {
 
     if (list) {
         const lis = Array.from(list.getElementsByTagName('li'));
+
+        for (let ii = 0; ii < lis.length; ++ii) {
+            const li = lis[ii];
+
+            const output = li.getElementsByTagName('output')[0];
+            if (!output) {
+                continue;
+            }
+            const anchor = output.getElementsByTagName('a')[0];
+            if (!anchor) {
+                continue;
+            }
+
+            // FIXME figure out aria-busy portability nonsense
+            li.classList.add('busy');
+
+            anchor.textContent = '';
+            delete anchor.href;
+        }
+
         const posts = (await postsPs).slice(0, lis.length);
 
         for (let ii = 0; ii < lis.length; ++ii) {
@@ -359,23 +379,17 @@ async function search(searchParams) {
             }
 
             const postPs = posts[ii];
+            if (!postPs) {
+                continue;
+            }
+
             (async () => {
-                let post = null;
-                if (postPs) {
-                    post = fromPagefind(await postPs.data());
-                }
+                const post = fromPagefind(await postPs.data());
 
-                // FIXME figure out aria-busy nonsense
-                output.setAttribute('aria-hidden', true);
+                anchor.href = post.url;
+                anchor.textContent = post.title;
 
-                if (post) {
-                    anchor.href = post.url;
-                    anchor.textContent = post.title;
-                } else {
-                    anchor.textContent = '';
-                    delete anchor.href;
-                }
-                output.setAttribute('aria-hidden', false);
+                li.classList.remove('busy');
             })();
         }
     }

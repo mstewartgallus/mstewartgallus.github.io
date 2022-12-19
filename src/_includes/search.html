@@ -16,7 +16,7 @@
     {%- endfor -%}
   </fieldset>
 
-  <fieldset id="tag">
+  <fieldset id="tag" tabindex="0">
     <legend>Tag</legend>
     {%- for tag in tags %}
     <input id="tag-{{ tag[0] | cgi_escape }}" type="checkbox" name="tag"

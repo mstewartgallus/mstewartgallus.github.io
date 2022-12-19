@@ -145,3 +145,7 @@ main :is(header, figcaption) > :first-child {
     symbols: "▼";
     suffix: "\2003";
 }
+
+.busy {
+    visibility: hidden ;
+}
