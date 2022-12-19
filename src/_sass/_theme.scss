@@ -21,8 +21,7 @@ main header {
     }
 }
 
-main > :is(ul, ol),
-main > output > :is(ul, ol) {
+main > :is(ul, ol) {
     padding-inline-start:
             lerp(0rem, 2rem,
                  #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,

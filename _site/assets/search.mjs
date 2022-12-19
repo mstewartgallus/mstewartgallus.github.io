@@ -49,13 +49,6 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
 }, { 'extends': 'h1' });
 
 
-function renderPost(post, result) {
-    const { title, url } = post;
-
-    result.href = url;
-    result.textContent = title;
-}
-
 function fromPagefind(post) {
     const { url,
             excerpt,
@@ -87,15 +80,6 @@ async function findPosts(query, options) {
     }
 
     return (await (await pfimp).search(query, { filters: filters })).results;
-}
-
-async function renderPosts(search, results) {
-    await Promise.all(
-        search.map((r, ix) =>
-            r.data()
-                .then(post => {
-                    renderPost(fromPagefind(post), results[ix]);
-                })));
 }
 
 function anchorRequest(anchor) {
@@ -337,7 +321,6 @@ async function search(searchParams) {
     const h1 = document.getElementById('title');
     const input = document.getElementById('search-input');
 
-    const output = document.getElementById('search-output');
     const list = document.getElementById('search-list');
     const categoryEl = document.getElementById('category');
     const tagEl = document.getElementById('tag');
@@ -359,22 +342,42 @@ async function search(searchParams) {
         }
     }
 
-    if (output) {
-        const posts = await postsPs;
+    if (list) {
+        const lis = Array.from(list.getElementsByTagName('li'));
+        const posts = (await postsPs).slice(0, lis.length);
 
-        const lis = posts.map(() => document.createElement('li'));
-        const results = lis.map(li => {
-            const result = document.createElement('a');
-            result.textContent = 'Search Result';
-            li.replaceChildren(result);
-            return result;
-        });
+        for (let ii = 0; ii < lis.length; ++ii) {
+            const li = lis[ii];
 
-        await renderPosts(posts, results);
+            const output = li.getElementsByTagName('output')[0];
+            if (!output) {
+                continue;
+            }
+            const anchor = output.getElementsByTagName('a')[0];
+            if (!anchor) {
+                continue;
+            }
 
-        output.setAttribute('aria-hidden', 'true');
-        list.replaceChildren(...lis);
-        output.setAttribute('aria-hidden', 'false');
+            const postPs = posts[ii];
+            (async () => {
+                let post = null;
+                if (postPs) {
+                    post = fromPagefind(await postPs.data());
+                }
+
+                // FIXME figure out aria-busy nonsense
+                output.setAttribute('aria-hidden', true);
+
+                if (post) {
+                    anchor.href = post.url;
+                    anchor.textContent = post.title;
+                } else {
+                    anchor.textContent = '';
+                    delete anchor.href;
+                }
+                output.setAttribute('aria-hidden', false);
+            })();
+        }
     }
 }
 
