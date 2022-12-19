@@ -160,7 +160,6 @@ label {
     align-items: end ;
     column-gap: 1em ;
     width: fit-content ;
-    min-width: 17em ;
 }
 
 .search-basic {
@@ -179,18 +178,17 @@ label {
 // reduce cumulative layout shift
 #search-output {
     display: block ;
-    min-block-size: 10 * $line ;
+    min-block-size: 5 * $line ;
 }
-
-fieldset {
-    overflow: auto ;
-    max-height: 80vh ;
-}
-
 
 #category, #tag {
     display: grid ;
     grid-template-columns: auto 1fr ;
     column-gap: 1em ;
     width: fit-content ;
+}
+
+#tag {
+    overflow: auto ;
+    max-height: 80vh ;
 }
