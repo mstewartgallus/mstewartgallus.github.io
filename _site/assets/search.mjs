@@ -359,8 +359,6 @@ async function search(searchParams) {
 
             // FIXME figure out aria-busy portability nonsense
             li.classList.add('busy');
-
-            anchor.textContent = '';
             delete anchor.href;
         }
 

@@ -146,6 +146,19 @@ main :is(header, figcaption) > :first-child {
     suffix: "\2003";
 }
 
+// FIXME the animation is intended to reduce flickering
+// so how should I handle prefers reduced motion?
 .busy {
     visibility: hidden ;
+}
+
+.busy {
+    opacity: 0 ;
+    transition: visibility 0s linear 0.5s,
+                opacity 0.5s;
+}
+
+#search-list li {
+    transition: visibility 0s linear 0s,
+                opacity 0.3s;
 }
