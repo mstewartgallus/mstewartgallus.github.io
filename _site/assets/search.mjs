@@ -417,7 +417,7 @@ async function search(searchParams) {
 
         const lis = posts.map(() => document.createElement('li'));
 
-        output.ariaHidden = "true";
+        output.setAttribute('aria-hidden', 'true');
 
         list.replaceChildren(...lis);
 
@@ -428,7 +428,8 @@ async function search(searchParams) {
         });
 
         await renderPosts(posts, results);
-        output.ariaHidden = "false";
+
+        output.setAttribute('aria-hidden', 'false');
     }
 }
 
