@@ -358,8 +358,7 @@ async function search(searchParams) {
             }
 
             // FIXME figure out aria-busy portability nonsense
-            li.classList.add('busy');
-            delete anchor.href;
+            li.setAttribute('aria-hidden', 'true');
         }
 
         const posts = (await postsPs).slice(0, lis.length);
@@ -387,7 +386,7 @@ async function search(searchParams) {
                 anchor.href = post.url;
                 anchor.textContent = post.title;
 
-                li.classList.remove('busy');
+                li.setAttribute('aria-hidden', 'false');
             })();
         }
     }
