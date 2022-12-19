@@ -27,6 +27,12 @@ main > :is(ul, ol) {
                  #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
                                     100vw) ")"});
 }
+main > output > :is(ul, ol) {
+    padding-inline-start:
+            lerp(0rem, 2rem,
+                 #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
+                                    100vw) ")"});
+}
 
 main :is(header, figcaption) {
     display: flex ;
@@ -133,4 +139,26 @@ main :is(header, figcaption) > :first-child {
     display: block ;
     list-style-position: inside ;
     color: var(--green-text) ;
+}
+
+.tag-bag {
+    display: flex ;
+    flex-wrap: wrap ;
+    width: fit-content ;
+    column-gap: 1ch ;
+}
+
+#search-list {
+    list-style: none ;
+}
+
+@counter-style detail {
+    system: cyclic;
+    symbols: "▶";
+    suffix: "\2003";
+}
+@counter-style opendetail {
+    system: cyclic;
+    symbols: "▼";
+    suffix: "\2003";
 }

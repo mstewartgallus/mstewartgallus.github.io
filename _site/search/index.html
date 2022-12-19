@@ -23,28 +23,44 @@
   <link rel="stylesheet" href="/assets/main.css">
   <style>
     :host {
-        display: block ;
+        display: contents ;
+    }
+    .top {
+        display: flex ;
+        flex-wrap: wrap ;
+        column-gap: 1em ;
+        justify-content: space-between ;
+    }
+    .breadcrumb {
+        width: fit-content ;
+        flex-shrink: 1 ;
+    }
+    summary {
+        list-style: detail ;
+    }
+    details[open] summary {
+        list-style: opendetail ;
+    }
+    summary {
+        list-style-position: outside ;
     }
   </style>
-  <ol class="breadcrumb">
-    <li><slot name="category"><a>Prose</a></slot></li>
-    <li><slot name="title"><a>Title</a></slot></li>
-  </ol>
-  <dl>
-    <div>
-      <dt>Post Date</dt>
-      <dd>
+  <details>
+    <summary>
+      <div class="top">
+        <ol class="breadcrumb">
+          <li><slot name="category"><a>Prose</a></slot></li>
+          <li><slot name="title"><a>Title</a></slot></li>
+        </ol>
         <slot name="date"><time>20YY-MM-DD</time></slot>
-      </dd>
-    </div>
-    <div>
-      <dt>Tag</dt>
+      </div>
+    </summary>
+    <div class="tag-bag">
       <slot name="tag"></slot>
     </div>
-  </dl>
-  <details>
-    <summary>Snippet</summary>
-    <slot></slot>
+    <div>
+      <slot></slot>
+    </div>
   </details>
 </template>
 <script type="module" defer async

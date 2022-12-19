@@ -1,7 +1,11 @@
+dl {
+    width: fit-content ;
+}
 dl > div {
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 1em ;
+    width: fit-content ;
 }
 
 hgroup p {
