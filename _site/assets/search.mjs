@@ -48,65 +48,12 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
     }
 }, { 'extends': 'h1' });
 
-customElements.define("search-result", class extends HTMLElement {
-    #init = false;
-    #shadow;
-
-    constructor() {
-        super();
-        this.#shadow = this.attachShadow({ mode: 'closed' });
-    }
-
-    connectedCallback() {
-        if (!this.isConnected) {
-            return;
-        }
-
-        if (this.#init) {
-            return;
-        }
-
-        const template = this.ownerDocument.getElementById('search-result').content;
-
-        const copy = this.ownerDocument.importNode(template, true);
-        this.#shadow.appendChild(copy);
-
-        this.#init = true;
-    }
-});
 
 function renderPost(post, result) {
-    const { title, url, date, tags, categories, excerpt } = post;
+    const { title, url } = post;
 
-    const exc = document.createElement("div");
-    exc.innerHTML = excerpt;
-
-    result.append(
-        Object.assign(
-            document.createElement('a'),
-            { slot: 'title',
-              href: url,
-              textContent: title }),
-        Object.assign(
-            document.createElement('time'),
-            { slot: 'date',
-              textContent: date }),
-        ...categories.map(
-            category =>
-            Object.assign(document.createElement('a'),
-                          {
-                              slot: 'category',
-                              href: searchlink('category', category),
-                              textContent: category
-                          })),
-        ...tags.map(tag =>
-            Object.assign(document.createElement('a'),
-                          {
-                              slot: 'tag',
-                              href: searchlink('tag', tag),
-                              textContent: `#${tag}`
-                          })),
-        exc);
+    result.href = url;
+    result.textContent = title;
 }
 
 function fromPagefind(post) {
@@ -416,19 +363,17 @@ async function search(searchParams) {
         const posts = await postsPs;
 
         const lis = posts.map(() => document.createElement('li'));
-
-        output.setAttribute('aria-hidden', 'true');
-
-        list.replaceChildren(...lis);
-
         const results = lis.map(li => {
-            const result = document.createElement('search-result');
+            const result = document.createElement('a');
+            result.textContent = 'Search Result';
             li.replaceChildren(result);
             return result;
         });
 
         await renderPosts(posts, results);
 
+        output.setAttribute('aria-hidden', 'true');
+        list.replaceChildren(...lis);
         output.setAttribute('aria-hidden', 'false');
     }
 }

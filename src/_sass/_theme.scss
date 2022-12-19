@@ -21,12 +21,7 @@ main header {
     }
 }
 
-main > :is(ul, ol) {
-    padding-inline-start:
-            lerp(0rem, 2rem,
-                 #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
-                                    100vw) ")"});
-}
+main > :is(ul, ol),
 main > output > :is(ul, ol) {
     padding-inline-start:
             lerp(0rem, 2rem,
@@ -139,17 +134,6 @@ main :is(header, figcaption) > :first-child {
     display: block ;
     list-style-position: inside ;
     color: var(--green-text) ;
-}
-
-.tag-bag {
-    display: flex ;
-    flex-wrap: wrap ;
-    width: fit-content ;
-    column-gap: 1ch ;
-}
-
-#search-list {
-    list-style: none ;
 }
 
 @counter-style detail {
