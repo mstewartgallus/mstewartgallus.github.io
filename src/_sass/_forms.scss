@@ -2,6 +2,7 @@ fieldset, label, button, input, select, option {
     appearance: none ;
     margin: unset ;
     display: block ;
+    border: unset ;
 }
 
 label, button, input, option {
@@ -13,10 +14,14 @@ button, select, option {
     cursor: pointer ;
 }
 
+input {
+    font: inherit ;
+}
+
 label, input, button {
     border-width: 0.08em;
 }
-input {
+input[type="search"] {
     border-block-end-style: solid ;
 }
 
@@ -44,11 +49,6 @@ button {
     align-self: start ;
 }
 
-label {
-    font-weight: bold ;
-    border-block-end-style: solid ;
-    border-width: 0.1em ;
-}
 
 select {
     overflow: auto ;
@@ -105,9 +105,62 @@ select:focus-visible {
     outline-width: 0.4em ;
 }
 
-input {
+input[type="search"] {
     inline-size: 20ch;
     max-inline-size: 100%;
+}
+
+input[type="checkbox"] {
+    block-size: 1.4em ;
+    inline-size: 2em ;
+
+    appearance: none ;
+
+    border-style: solid ;
+    border-width: 0.1ch ;
+
+    font-weight: bold ;
+
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+    text-align: center ;
+}
+
+
+input[type="checkbox"] {
+    border-color: var(--button-border) ;
+    background-color: var(--button-face) ;
+    color: var(--button-text) ;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--accent-color) ;
+    color: var(--accent-color-text) ;
+
+    border: unset ;
+}
+
+// FIXME i18n
+// FIXME use display list-item ?
+input[type="checkbox"]::after {
+    display: table-cell ;
+    vertical-align: middle ;
+    content: "" ;
+}
+input[type="checkbox"]:checked::after {
+    content: "✓" ;
+}
+
+
+label {
+    display: flex ;
+    flex-wrap: wrap ;
+    justify-content: space-between ;
+    align-items: end ;
+    column-gap: 1em ;
+    width: fit-content ;
+    min-width: 17em ;
 }
 
 .search-basic {
@@ -127,4 +180,17 @@ input {
 #search-output {
     display: block ;
     min-block-size: 10 * $line ;
+}
+
+fieldset {
+    overflow: auto ;
+    max-height: 80vh ;
+}
+
+
+#category, #tag {
+    display: grid ;
+    grid-template-columns: auto 1fr ;
+    column-gap: 1em ;
+    max-width: 26em ;
 }

@@ -7,24 +7,21 @@
     <button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
   </fieldset>
 
-  <fieldset>
-    <legend>Filters</legend>
-    <label for="category">Category</label>
-    <select id="category" name="category" multiple>
-      {%- for category in categories %}
-      <option value="{{ category[0] | cgi_escape }}">{{ category[0] | escape }}</option>
-      {%- endfor -%}
-    </select>
-
-    <label for="tag">Tag</label>
-    <select id="tag" name="tag" multiple>
-      {%- for tag in tags %}
-      <option value="{{ tag[0] | cgi_escape }}">#{{ tag[0] | escape }}</option>
-      {%- endfor -%}
-    </select>
+  <fieldset id="category">
+    <legend>Category</legend>
+    {%- for category in categories %}
+    <input id="category-{{ category[0] | cgi_escape }}" type="checkbox" name="category"
+           value="{{ category[0] | cgi_escape }}">
+    <label for="category-{{ category[0] | cgi_escape }}">{{ category[0] | escape }}</label>
+    {%- endfor -%}
   </fieldset>
 
-  <fieldset>
-    <button type="reset">Reset</button>
+  <fieldset id="tag">
+    <legend>Tag</legend>
+    {%- for tag in tags %}
+    <input id="tag-{{ tag[0] | cgi_escape }}" type="checkbox" name="tag"
+           value="{{ tag[0] | cgi_escape }}">
+    <label for="tag-{{ tag[0] | cgi_escape }}">#{{ tag[0] | escape }}</label>
+    {%- endfor -%}
   </fieldset>
 </form>

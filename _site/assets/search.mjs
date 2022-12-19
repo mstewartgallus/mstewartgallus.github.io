@@ -348,14 +348,14 @@ async function search(searchParams) {
     document.title = `${query} — ${doctitle}`;
 
     if (categoryEl) {
-        for (const option of categoryEl.options) {
-            option.selected = category.has(option.value);
+        for (const option of categoryEl.elements) {
+            option.checked = category.has(option.value);
         }
     }
 
     if (tagEl) {
-        for (const option of tagEl.options) {
-            option.selected = tag.has(option.value);
+        for (const option of tagEl.elements) {
+            option.checked = tag.has(option.value);
         }
     }
 
