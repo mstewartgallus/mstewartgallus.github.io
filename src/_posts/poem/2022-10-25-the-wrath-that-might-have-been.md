@@ -7,12 +7,14 @@ tags:
 - Dysphoria
 - Panic
 ---
-
+{% poem %}
 At the rising of the sun,
 From their hovels creep the working men
 And crawling from the forest muck, crawling from its den
 To the city&thinsp;—&thinsp;a sick thing wanders in
+{% endpoem %}
 
+{% poem %}
 It is almost like a man
 a rotten starving man
 
@@ -59,3 +61,4 @@ With its mighty club it strikes
 And all the earth it shakes
 And in seventy pieces tears
 the wrath that might have been
+{% endpoem %}

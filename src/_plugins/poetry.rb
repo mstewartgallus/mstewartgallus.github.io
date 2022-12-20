@@ -3,7 +3,7 @@
 module MSG
   def parsepoem(content)
     stanzas = []
-    content.chomp.each_line("\n\n") do |par|
+    content.strip.chomp.each_line("\n\n") do |par|
       stanza = []
       par.chomp.each_line do |line|
         stanza << line.chomp
@@ -34,39 +34,8 @@ module MSG
     output.freeze
   end
 
-  def tomarkdown(stanzas)
-    output = String.new
-    stanzano = 1
-    stanzas.each do |stanza|
-      output << stanzano.to_s << ". "
-      stanzano = 1 + stanzano
-
-      start = true
-      lineno = 1
-      stanza.each do |line|
-        if not start then
-          output << "\n"
-          output << "   "
-        end
-        start = false
-        output << lineno.to_s << '. ' << line
-        lineno = 1 + lineno
-      end
-      output << "\n"
-      output << "   {:.stanza}"
-      output << "\n"
-    end
-    output << "{:.stanzas}"
-    # FIXME wrap with .poem
-    output.freeze
-  end
-
   def poemtohtml(content)
     tohtml(parsepoem(content))
-  end
-
-  def poemtomarkdown(content)
-    tomarkdown(parsepoem(content))
   end
 end
 
@@ -74,7 +43,6 @@ module Jekyll
   class PoemConverter < Converter
     include MSG
 
-    safe true
     priority :low
 
     def matches(ext)
@@ -95,8 +63,9 @@ class PoemBlock < Liquid::Block
   include MSG
 
   def render(context)
-    text = super
-    poemtomarkdown(text)
+    content = Liquid::Template.parse(super).render context
+
+    poemtohtml(content)
   end
 end
 

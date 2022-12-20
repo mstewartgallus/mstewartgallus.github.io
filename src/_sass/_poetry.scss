@@ -2,11 +2,11 @@
     all: unset ;
     display: block ;
     margin-block: $line ;
+    @include hyphens(manual) ;
 }
+
 .line {
     all: unset ;
     display: inline-block ;
     text-align-last: end ;
-
-    @include hyphens(manual) ;
 }

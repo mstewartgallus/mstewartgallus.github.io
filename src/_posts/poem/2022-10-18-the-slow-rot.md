@@ -15,12 +15,15 @@ tags:
 - Wayland
 ---
 
+{% poem %}
 The slow rot
 lived or died, it's hard to tell
 And fires lost away&thinsp;—&thinsp;down to hell
 And as wind trow to take&thinsp;—&thinsp;hero's hearth
 To slimy lair&thinsp;—&thinsp;past danger's berth
+{% endpoem %}
 
+{% poem %}
 The shepherd, lay, in drunken stupor
 As wind waste fire back away
 So the nimble thief he plot to fire hold
@@ -46,3 +49,4 @@ Hands deep pocketed inside his guts
 The thief struck with cuts and cuts
 And heart in hand took torch to scour
 So doctor kills doctor kills doctor's power!
+{% endpoem %}

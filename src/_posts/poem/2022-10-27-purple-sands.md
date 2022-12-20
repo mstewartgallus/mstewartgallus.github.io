@@ -6,9 +6,12 @@ tags:
 - '2022'
 - Strange
 ---
+{% poem %}
 in a land of purple sands&thinsp;—&thinsp;a glasswork city grew
 cathedrals of stained glass&thinsp;—&thinsp;and a likewise people too
+{% endpoem %}
 
+{% poem %}
 from the land the Glassmen sprung&thinsp;—&thinsp;as flowers from the earth
 linked as one&thinsp;—&thinsp;one people all from birth
 
@@ -23,4 +26,4 @@ strange clothing, tantalizing hips and thighs
 
 a stranger wandered in&thinsp;—&thinsp;she had a voice you could not know
 a heart they could not recall&thinsp;—&thinsp;and so much blood
-
+{% endpoem %}

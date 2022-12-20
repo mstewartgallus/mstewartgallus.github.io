@@ -12,13 +12,16 @@ tags:
 - Vancouver
 ---
 
+{% poem %}
 The bungler in the grip of the demon held
 To his crypt by strange means is compelled
 And sleeping as a corpse in darkness rotting
 He dreams forth the red eyed thing
 So rises from the sleeper's breath
 Comes the Night Ghost&thinsp;—&thinsp;who brings death!
+{% endpoem %}
 
+{% poem %}
 The Night Ghost climbs, as a shadow leaping, overtop the manor wall
 And through an open window goes, as a chilling fog
 To the room of the sleeper he creeps
@@ -29,3 +32,4 @@ And on her chest, as a choking darkness sits
 The Night Ghost; by the window watching, giant as a shadow standing
 She claps &lt;clap sound effect&gt; turning on the light
 And The Night Ghost, as the darkness in the day, vanishes from all sight.
+{% endpoem %}

@@ -133,6 +133,7 @@ main :is(header, figcaption) > :first-child {
     display: block ;
     list-style-position: inside ;
     color: var(--green-text) ;
+    @hyphens(manual);
 }
 
 @counter-style detail {

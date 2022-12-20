@@ -5,6 +5,8 @@ tags:
 - '2019'
 - Vancouver
 ---
+
+{% poem %}
 The sky was grey and sweaty
 and three fat mothers talked and smoked.
 A little kid lay on the ground
@@ -13,3 +15,4 @@ and next to him a little child
 held an Apple iPad in his stroller.
 The wind brought the traffic stink to me
 and I felt relief a little colder.
+{% endpoem %}

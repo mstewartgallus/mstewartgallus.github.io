@@ -8,40 +8,54 @@ tags:
 - Vancouver
 - Waterfront
 ---
-
+{% poem %}
 <q>I know a secret</q>
 the creature said
 He sat there on the cobblestones
 in the darkness, just out of sight
 of the yellow sodium light
+{% endpoem %}
 
+{% poem %}
 We sat there for a while
 Me on the bench, him by the sea
 The wind not much
 by the waterfront
+{% endpoem %}
 
+{% poem %}
 The creature spoke again
-<q>a few years back,
+{% endpoem %}
+
+> {% poem %}
+a few years back,
 I was sitting not far from here
 in the darkness, just out of sight
-a man raped a girl under cover of the night</q>
-
-<q>I know a secret,
+a man raped a girl under cover of the night
+{% endpoem %}
+>
+> {% poem %}
+I know a secret,
 for I see very well,
 even under&thinsp;—&thinsp;the night.
 These eyes catch many things
-I will never tell.</q>
-
-<q>The truth came out
+I will never tell.
+{% endpoem %}
+> 
+> {% poem %}
+The truth came out
 decades later at the trial
 Your courts&thinsp;—&thinsp;are not like ours
 We have eyes&thinsp;—&thinsp;which catch
 The beating of the heart
-Whispers&thinsp;—&thinsp;inside the throat</q>
-
-<q>I saw an old man ill and dying
+Whispers&thinsp;—&thinsp;inside the throat
+{% endpoem %}
+> 
+> {% poem %}
+I saw an old man ill and dying
 too rich and sick for jail
 When he was coughing sputum up
 I was sitting there
 I know a secret
-and I will never tell</q>
+and I will never tell
+{% endpoem %}
