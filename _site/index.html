@@ -461,9 +461,10 @@
         itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
     <meta itemprop="target" content="/search/?s={s}" >
     <div class="search-basic">
-      <input aria-labelledby="search-button" name="s" type="search" required
-             itemprop="query-input">
-      <button id="search-button" type="submit">Search</button>
+      <label for="search-input">Query</label>:
+      <input id="search-input" name="s" type="search" required
+             itemprop="query-input"
+             ><button type="submit">Search</button>
     </div>
   </form>
 </header>

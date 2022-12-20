@@ -57,8 +57,9 @@
 </main>
 <div id="sidebar"><form id="search" name="search" rel="search" role="search" action="/search/">
   <fieldset class="search-basic">
-    <input id="search-input" aria-labelledby="search-button" name="s" type="search" >
-    <button id="search-button" type="submit">Search</button>
+    <label for="search-input">Query</label>:
+    <input id="search-input" name="s" type="search"
+           ><button id="search-button" type="submit">Search</button>
   </fieldset>
 
   <fieldset id="category">

@@ -166,16 +166,11 @@ label {
 }
 
 .search-basic {
-    display: flex ;
-    flex-direction: row ;
-    flex-wrap: wrap ;
+    display: block ;
+    width: fit-content ;
 }
-.search-basic input {
-    flex-grow: 10 ;
-    flex-shrink: 10 ;
-}
-.search-basic button {
-    flex-shrink: 1 ;
+.search-basic :is(label, input, button) {
+    display: inline-block ;
 }
 
 // reduce cumulative layout shift
