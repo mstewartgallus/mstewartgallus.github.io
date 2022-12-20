@@ -24,7 +24,7 @@ module MSG
           output << '<br>'
         end
         first = false
-        output << '<span role="presentation" class="line">'
+        output << '<span role="presentation" class="line" markdown="span">'
         output << line
         output << '</span>'
       end
@@ -34,7 +34,36 @@ module MSG
     output.freeze
   end
 
+  def tokd(stanzas)
+    output = String.new
+    stanzas.each_with_index do |stanza|
+      output << ''
+      first = true
+      stanza.each do |line|
+        if not first then
+          output << '\\\\'
+          output << "\n"
+        end
+        first = false
+        output << '<span>'
+        output << line
+        output << '</span>'
+        output << '{:.line role="presentation"}'
+      end
+      output << "\n"
+      output << "^"
+      output << "\n"
+      output << '{:.stanza}'
+      output << "\n\n"
+    end
+    output.freeze
+  end
+
   def poemtohtml(content)
+    tohtml(parsepoem(content))
+  end
+
+  def poemtokd(content)
     tohtml(parsepoem(content))
   end
 end
@@ -65,7 +94,8 @@ class PoemBlock < Liquid::Block
   def render(context)
     content = Liquid::Template.parse(super).render context
 
-    poemtohtml(content)
+    kd = poemtokd(content)
+    kd
   end
 end
 
