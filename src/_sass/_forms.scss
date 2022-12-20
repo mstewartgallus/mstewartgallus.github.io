@@ -31,9 +31,6 @@ button {
 }
 
 fieldset {
-    // help with scrolling on mobile
-    background-color: var(--canvas) ;
-
     border-inline-start-style: dashed ;
     border-width: 0.1em ;
     padding-inline-start: 1em;
@@ -188,5 +185,5 @@ label {
 
 #tag {
     overflow: auto ;
-    max-height: 80vh ;
+    max-height: 20 * $line ;
 }
