@@ -44,7 +44,7 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
     }
 
     attributeChangedCallback(n, o, x) {
-        this.#query.textContent = x ? `${x} - ` : '';
+        this.#query.textContent = x ? `${x}\u2009—\u2009` : '';
     }
 }, { 'extends': 'h1' });
 
