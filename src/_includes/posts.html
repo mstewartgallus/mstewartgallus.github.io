@@ -1,7 +1,7 @@
 <ol reversed>
   {%- for post in site.posts %}
-  <li>
-    <ins
+  <li
+    ><ins
       datetime="{{ post.date | date_to_xmlschema }}"
       itemprop="hasPart blogPost"
       itemscope
