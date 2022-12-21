@@ -20,7 +20,7 @@
     </div>
     {%- endif -%}
     {%- if page.next.url -%}
-    <div class="next">
+    <div class="next">{{- -}}
       <dt>{{- -}}
         <a href="{{page.next.url}}" aria-describedby="next-page" rel="prev">
           {{- site.data.strings.paging.next | escape -}}
