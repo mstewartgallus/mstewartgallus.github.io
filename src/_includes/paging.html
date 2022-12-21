@@ -6,23 +6,31 @@
   </header>
   <dl>
     {%- if page.previous.url -%}
-    <div class="previous">
-      <dt>
+    <div class="previous">{{- -}}
+      <dt>{{- -}}
         <a href="{{page.previous.url}}" aria-describedby="previous-page" rel="next">
-          {{ site.data.strings.paging.previous | escape }}
+          {{- site.data.strings.paging.previous | escape -}}
         </a>
       </dt>
-      <dd aria-hidden="true" id="previous-page"><cite>{{ page.previous.title | escape }}</cite></dd>
+      <dd aria-hidden="true" id="previous-page">{{- -}}
+        <cite>
+          {{- page.previous.title | escape -}}
+        </cite>{{- -}}
+      </dd>
     </div>
     {%- endif -%}
     {%- if page.next.url -%}
     <div class="next">
-      <dt>
+      <dt>{{- -}}
         <a href="{{page.next.url}}" aria-describedby="next-page" rel="prev">
-          {{ site.data.strings.paging.next | escape }}
-        </a>
-      </dt>
-      <dd aria-hidden="true" id="next-page"><cite>{{ page.next.title | escape }}</cite></dd>
+          {{- site.data.strings.paging.next | escape -}}
+        </a>{{- -}}
+      </dt>{{- -}}
+      <dd aria-hidden="true" id="next-page">{{- -}}
+        <cite>
+          {{- page.next.title | escape -}}
+        </cite>{{- -}}
+      </dd>{{- -}}
     </div>
     {%- endif -%}
   </dl>
