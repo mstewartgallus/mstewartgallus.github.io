@@ -12,8 +12,8 @@
           {{- site.data.strings.paging.previous | escape -}}
         </a>
       </dt>
-      <dd aria-hidden="true" id="previous-page">{{- -}}
-        <cite>
+      <dd id="previous-page">{{- -}}
+        <cite role="presentation">
           {{- page.previous.title | escape -}}
         </cite>{{- -}}
       </dd>
@@ -26,8 +26,8 @@
           {{- site.data.strings.paging.next | escape -}}
         </a>{{- -}}
       </dt>{{- -}}
-      <dd aria-hidden="true" id="next-page">{{- -}}
-        <cite>
+      <dd id="next-page">{{- -}}
+        <cite role="presentation">
           {{- page.next.title | escape -}}
         </cite>{{- -}}
       </dd>{{- -}}

@@ -7,20 +7,20 @@
     <div itemprop="creator author" itemscope itemtype="https://schema.org/Person">
       <dt>
         {{- -}}
-        <a aria-describedby="author" rel="author" href="{{ author.url | relative_url }}" itemprop="url">
+        <a rel="author" href="{{ author.url | relative_url }}" itemprop="url">
           {{- site.data.strings.metadata.author | escape -}}
         </a>
         {{- -}}
       </dt>
-      <dd translate="no" aria-hidden="true">@{{- -}}
-        <span aria-hidden="true" id="author" itemprop="name">
+      <dd translate="no">@{{- -}}
+        <span id="author" itemprop="name" role="presentation">
           {{- author.name | escape -}}
         </span>
       </dd>
     </div>
     <div>
       <dt aria-describedby="post-date">{{- site.data.strings.metadata.postDate | escape -}}</dt>
-      <dd aria-hidden="true" id="post-date">
+      <dd id="post-date">
         {{- -}}
         <time datetime="{{ page.date | date_to_xmlschema }}"
               itemprop="datePublished pubdate"

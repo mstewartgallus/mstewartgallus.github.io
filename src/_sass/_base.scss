@@ -57,6 +57,10 @@ hgroup {
 
     background-color: var(--canvas) ;
     color: var(--canvas-text) ;
+
+    // Make the caret seeable with caret browsing?  Need to figure out
+    // a better UX here/experiment on different platforms
+    caret-color: var(--highlight) ;
 }
 
 h1,h2,h3,h4,h5,h6, figcaption, ::marker {
