@@ -8,8 +8,7 @@
     <a aria-describedby="tag-text"
        rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
       {{- -}}
-      #<span role="presentation"
-             itemprop="keywords"
+      #<span itemprop="keywords"
              data-pagefind-filter="tag">{{- tag | escape -}}</span>
       {{- -}}
     </a>{{- -}}
