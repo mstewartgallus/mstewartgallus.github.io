@@ -20,3 +20,10 @@ search:
   tag: "Tag"
   submit: "Search"
   postDate: "Post Date"
+sidebar:
+  search:
+    title: "Search"
+    query: "Query"
+    category: "Category"
+    tag: "Tag"
+    submit: "Search"
