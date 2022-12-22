@@ -15,11 +15,13 @@ label, button, input, option {
 }
 
 label, input, button {
+    border-radius: 0.01ch ;
     border-width: 0.08em;
 }
 input[type="search"] {
     border-block-end-style: solid ;
 }
+
 
 button {
     border-style: solid ;
@@ -27,6 +29,8 @@ button {
 }
 
 fieldset {
+    border-radius: 0.01ch ;
+
     border-inline-start-style: dashed ;
     border-width: 0.1em ;
     padding-inline-start: 1em;

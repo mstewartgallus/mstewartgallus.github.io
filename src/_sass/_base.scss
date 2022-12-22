@@ -14,6 +14,8 @@ p {
 :visited { color: var(--visited-text) ; }
 :any-link:active { color: var(--active-text) ; }
 
+:any-link { border-radius: 0.01ch ; }
+
 // FIXME should form controls be tabular or just lining?
 time, code, pre,
 table, ::marker,
@@ -126,7 +128,7 @@ mark {
     outline-color: var(--highlight) ;
     outline-style: solid ;
     outline-width: 0.19em ;
-    outline-offset: 0.2em ;
+    outline-offset: 0.23em ;
 }
 
 ::selection {
