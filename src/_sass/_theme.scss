@@ -37,10 +37,6 @@ main :is(header, figcaption) > :first-child {
     flex-grow: 1 ;
 }
 
-.sr-only {
-    @include sr-only ;
-}
-
 .breadcrumb {
     all: unset ;
     padding: 0 ;
@@ -84,9 +80,18 @@ main :is(header, figcaption) > :first-child {
     text-align: end ;
 }
 
-:is(#paging, #search, #related, #breadcrumbs) header,
-:is(#metadata, #tags) hgroup {
-    @include sr-only ;
+
+.sr-only {
+    position: relative !important ;
+}
+.sr-only:not(:focus-within) {
+    position: absolute !important ;
+    left: -10000px !important ;
+    top: auto !important ;
+    width: 1px !important ;
+    height: 1px !important ;
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px) !important ;
+    overflow: hidden !important ;
 }
 
 :is(#toc, #tags) ul {
