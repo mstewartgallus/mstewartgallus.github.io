@@ -8,13 +8,12 @@
         font-size: 11pt ;
     }
 
-    body > :is(header, nav) {
+    #paging, #search, #related, #breadcrumbs, #tags {
         display: none ;
     }
 
-    a {
+    :any-link {
         text-decoration: none ;
-        color: inherit ;
     }
 
     // Hide bookmark links?

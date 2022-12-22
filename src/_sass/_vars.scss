@@ -31,8 +31,23 @@
     --field: Field ;
     --field-text: FieldText ;
 
-    --emphasis-text: hsl(353deg 67% 38%);
-    --green-text: hsl(120deg 100% 13%);
+    --emphasis-text: CanvasText ;
+    --green-text: CanvasText ;
+}
+
+@media print {
+    :root {
+        --link-text: CanvasText ;
+        --visited-text: CanvasText ;
+        --active-text: CanvasText ;
+    }
+}
+
+@media screen {
+    :root {
+        --emphasis-text: hsl(353deg 67% 38%);
+        --green-text: hsl(120deg 100% 13%);
+    }
 }
 
 // black/pink and dark green/yellow is most legible ?
@@ -73,7 +88,7 @@
     }
 }
 
-@media (prefers-color-scheme: dark) and (forced-colors: none) {
+@media screen and (prefers-color-scheme: dark) and (forced-colors: none) {
     :root {
         --canvas: hsl(97deg 25% 10%);
         --canvas-text: hsl(58deg 25% 75%);
