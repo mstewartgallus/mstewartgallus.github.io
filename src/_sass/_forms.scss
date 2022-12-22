@@ -1,9 +1,12 @@
 fieldset, label, button, input, select, option {
-    appearance: none ;
     margin: unset ;
     display: block ;
     border: unset ;
     font: inherit ;
+}
+
+input, button, select, option {
+    appearance: none ;
 }
 
 label, button, input, option {
@@ -107,8 +110,7 @@ input[type="checkbox"] {
     block-size: 1.4em ;
     inline-size: 2em ;
 
-    appearance: none ;
-
+    border-radius: 0.1ch ;
     border-style: solid ;
     border-width: 0.1ch ;
 
@@ -154,6 +156,21 @@ label {
     column-gap: 1em ;
     width: fit-content ;
 }
+
+input {
+    transition: background-color 0.2s, color 0.2s ;
+}
+input:checked {
+    transition: background-color 0.1s, color 0.1s ;
+}
+
+button {
+    transition: background-color 0.2s, color 0.2s ;
+}
+button:active {
+    transition: background-color 0.1s, color 0.1s ;
+}
+
 
 .search-basic {
     display: block ;

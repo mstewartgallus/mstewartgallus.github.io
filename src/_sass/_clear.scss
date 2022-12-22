@@ -1,9 +1,7 @@
 dl, dd, dt,
 div,
 hgroup,
-header, nav, body, main, footer, aside, section, article,
-form, fieldset, legend, output,
-textarea {
+header, nav, body, main, footer, aside, section, article {
     all: unset ;
     display: revert ;
 }
@@ -19,4 +17,8 @@ cite,abbr,address {
 
 pre {
     margin: 0 ;
+}
+
+form, fieldset, legend, output {
+    margin: 0;
 }

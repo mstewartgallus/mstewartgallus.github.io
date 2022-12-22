@@ -58,6 +58,8 @@ hgroup {
     background-color: var(--canvas) ;
     color: var(--canvas-text) ;
 
+    accent-color: var(--accent-color) ;
+
     // Make the caret seeable with caret browsing?  Need to figure out
     // a better UX here/experiment on different platforms
     caret-color: var(--highlight) ;
