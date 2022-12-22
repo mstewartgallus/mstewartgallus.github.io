@@ -3,19 +3,12 @@ fieldset, label, button, input, select, option {
     margin: unset ;
     display: block ;
     border: unset ;
+    font: inherit ;
 }
 
 label, button, input, option {
     box-sizing: border-box ;
     block-size: $line ;
-}
-
-button, select, option {
-    cursor: pointer ;
-}
-
-input {
-    font: inherit ;
 }
 
 label, input, button {
