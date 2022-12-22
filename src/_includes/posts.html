@@ -1,18 +1,15 @@
 <ol reversed>
   {%- for post in site.posts %}
-  <li>{{- -}}
-    <ins
-      datetime="{{ post.date | date_to_xmlschema }}"
-      itemprop="hasPart blogPost"
-      itemscope
-      itemtype="http://schema.org/BlogPosting"
-      itemid="{{ post.url | absolute_url }}">
-      <a itemprop="url" href="{{ post.url | relative_url }}">{{- -}}
-        <span itemprop="name headline">
-          {{- post.title | escape -}}
-        </span>{{- -}}
-      </a>{{- -}}
-    </ins>{{- -}}
+  <li
+    itemprop="hasPart blogPost"
+    itemscope
+    itemtype="http://schema.org/BlogPosting"
+    itemid="{{ post.url | absolute_url }}">{{- -}}
+    <a itemprop="url" href="{{ post.url | relative_url }}">{{- -}}
+      <span itemprop="name headline">
+        {{- post.title | escape -}}
+      </span>{{- -}}
+    </a>{{- -}}
   </li>
   {%- endfor -%}
 </ol>
