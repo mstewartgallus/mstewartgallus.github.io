@@ -1,3 +1,7 @@
+// Unfortunately lab/oklab and such aren't so supported yet. HSL is
+// easier to make relatively consistent lightness but still not
+// perceptually uniform.
+
 :root {
     --canvas: Canvas ;
     --canvas-text: CanvasText ;
@@ -27,8 +31,8 @@
     --field: Field ;
     --field-text: FieldText ;
 
-    --emphasis-text: #A02030 ;
-    --green-text: #004000 ;
+    --emphasis-text: hsl(353deg 67% 38%);
+    --green-text: hsl(120deg 100% 13%);
 }
 
 // black/pink and dark green/yellow is most legible ?
@@ -37,27 +41,27 @@
 
 @media screen and (forced-colors: none) {
     :root {
-        --canvas: #fff3f7 ;
-        --canvas-text: #232640 ;
+        --canvas: hsl(340deg 100% 98%);
+        --canvas-text: hsl(234deg 29% 19%);
 
-        --gray-text: gray ;
+        --gray-text: grey ;
 
         --mark: yellow ;
         --mark-text: black ;
 
-        --accent-color: #003020 ;
+        --accent-color: hsl(160deg 100% 9%);
         --accent-color-text: white ;
 
-        --selected-item: #304070 ;
+        --selected-item: hsl(225deg 40% 31%);
         --selected-item-text: white ;
 
         // Ripped from
         // https://html.spec.whatwg.org/multipage/rendering.html#phrasing-content-3
-        --link-text:  #0000EE ;
-        --visited-text: #551A8B ;
-        --active-text: #FF0000 ;
+        --link-text: hsl(240deg 100% 47%);
+        --visited-text: hsl(271deg 68% 32%);
+        --active-text: hsl(0deg 100% 50%);
 
-        --highlight: #008030 ;
+        --highlight: hsl(143deg 100% 25%);
         --highlight-text: black ;
 
         --field: white ;
@@ -71,32 +75,32 @@
 
 @media (prefers-color-scheme: dark) and (forced-colors: none) {
     :root {
-        --canvas: #182013 ;
-        --canvas-text: #d0cfb0 ;
+        --canvas: hsl(97deg 25% 10%);
+        --canvas-text: hsl(58deg 25% 75%);
 
         --gray-text: gray ;
 
-        --mark: #A08000 ;
+        --mark: hsl(48deg 100% 31%);
         --mark-text: white ;
 
-        --emphasis-text: #d07560 ;
-        --green-text: #A0FF40 ;
+        --emphasis-text: hsl(11deg 54% 60%);
+        --green-text: hsl(90deg 100% 63%);
 
-        --accent-color: #A0FF30 ;
+        --accent-color: hsl(88deg 100% 59%);
         --accent-color-text: black ;
 
-        --selected-item: #20E0FF ;
+        --selected-item: hsl(188deg 100% 56%);
         --selected-item-text: black ;
 
-        --link-text:  #C0C0FF ;
-        --visited-text: #F0A0FF ;
-        --active-text: #FF3060 ;
+        --link-text: hsl(240deg 100% 88%);
+        --visited-text: hsl(291deg 100% 81%);
+        --active-text: hsl(346deg 100% 59%);
 
-        --highlight: #20FF00 ;
+        --highlight: hsl(112deg 100% 50%);
         --highlight-text: white ;
 
-        --field: var(--canvas) ;
-        --field-text: var(--canvas-text) ;
+        --field: hsl(97deg 25% 10%);
+        --field-text: hsl(58deg 25% 75%);
 
         --button-face: black ;
         --button-text: white ;
