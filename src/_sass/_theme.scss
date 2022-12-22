@@ -65,7 +65,7 @@ main :is(header, figcaption) > :first-child {
   color: var(--emphasis-text);
 }
 
-#paging dl {
+#paging div {
     all: unset ;
     max-inline-size: 100% ;
     display: flex ;
@@ -74,28 +74,18 @@ main :is(header, figcaption) > :first-child {
     justify-content: space-between ;
 }
 
-#paging dl > div {
-    all: unset ;
-    display: flex ;
-    flex-direction: column ;
-}
-#paging dl > div {
-    flex-grow: 1 ;
-    flex-shrink: 1 ;
-}
-
-#paging dl > div.previous {
+#paging div > .previous {
     justify-self: start ;
     align-items: start ;
 }
-#paging dl > div.next {
+#paging div > .next {
     justify-self: end ;
     align-items: end ;
     text-align: end ;
 }
 
 :is(#paging, #search, #related, #breadcrumbs) header,
-#metadata hgroup {
+:is(#metadata, #tags) hgroup {
     @include sr-only ;
 }
 

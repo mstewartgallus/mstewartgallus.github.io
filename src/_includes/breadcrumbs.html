@@ -7,11 +7,12 @@
   {%- if page.url == '/' -%}
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span itemscope
+      <span aria-current="page"
+            itemscope
             itemprop="item"
             itemid="{% link index.html %}"
             itemtype="http://schema.org/WebSite">{{- -}}
-        <span aria-current="page" itemprop="name">
+        <span itemprop="name">
           {{- site.data.strings.breadcrumbs.root | escape -}}
         </span>{{- -}}
       </span>{{- -}}
@@ -46,10 +47,11 @@
       <meta itemprop="position" content="2">{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span itemprop="item"
+      <span aria-current="page"
+            itemprop="item"
             itemid="{{ page.url | relative_url }}"
             itemscope itemtype="https://schema.org/BlogPosting">{{- -}}
-        <cite aria-current="page" itemprop="name">
+        <cite itemprop="name">
           {{- page.title | escape -}}
         </cite>{{- -}}
       </span>{{- -}}
@@ -72,10 +74,11 @@
       <meta itemprop="position" content="1">{{- -}}
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span itemprop="item"
+      <span aria-current="page"
+            itemprop="item"
             itemid="{{ page.url | absolute_url }}"
             itemscope itemtype="https://schema.org/WebPage">{{- -}}
-        <cite aria-current="page" itemprop="name">
+        <cite itemprop="name">
           {{- page.title | escape -}}
         </cite>{{- -}}
       </span>{{- -}}

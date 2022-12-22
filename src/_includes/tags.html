@@ -1,13 +1,11 @@
 <footer id="tags" aria-labelledby="tags-title">
-  <hgroup class="sr-only">
+  <hgroup>
     <h2 id="tags-title">{{ site.data.strings.tags.title | escape }}</h2>
   </hgroup>
   <ul>
   {%- for tag in page.tags %}
   <li>{{- -}}
-    <a aria-describedby="tag-text"
-       rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">
-      {{- -}}
+    <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">{{- -}}
       #<span itemprop="keywords"
              data-pagefind-filter="tag">{{- tag | escape -}}</span>
       {{- -}}

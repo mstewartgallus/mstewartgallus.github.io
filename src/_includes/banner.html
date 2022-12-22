@@ -18,17 +18,20 @@
       itemscope
       itemtype="http://schema.org/WebPage"
       itemid="{{ page.url | absolute_url }}">
-      <a itemprop="url" href="{{ page.url | relative_url }}">
-        <span itemprop="name headline">{{- page.title | default: page.url | escape -}}</span>
+      <a itemprop="url" href="{{ page.url | relative_url }}">{{- -}}
+        <span itemprop="name headline">
+          {{- page.title | default: page.url | escape -}}
+        </span>{{- -}}
       </a>
     </li>
     {%- endfor -%}
 
-    <li>
+    <li>{{- -}}
       <a type="application/atom+xml" rel="alternate"
          href="{{ "/feed.xml" | relative_url }}"
-         title="{{ site.title | escape }}">
-        Subscribe</a>
+         title="{{ site.title | escape }}">{{- -}}
+        Subscribe{{- -}}
+      </a>
     </li>
   </ul>
 
@@ -38,8 +41,8 @@
     <div class="search-basic">
       <label for="search-input">Query</label>:
       <input id="search-input" name="s" type="search" required
-             itemprop="query-input"
-             ><button type="submit">{{ site.data.strings.search.submit | escape }}</button>
+             itemprop="query-input">{{- -}}
+      <button type="submit">{{ site.data.strings.search.submit | escape }}</button>
     </div>
   </form>
 </header>

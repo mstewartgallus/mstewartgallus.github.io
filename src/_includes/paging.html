@@ -4,34 +4,18 @@
       <h2 id="paging-title">{{ site.data.strings.paging.title | escape }}</h2>
     </hgroup>
   </header>
-  <dl>
+
+  <div>
     {%- if page.previous.url -%}
-    <div class="previous">{{- -}}
-      <dt>{{- -}}
-        <a href="{{page.previous.url}}" aria-describedby="previous-page" rel="next">
-          {{- site.data.strings.paging.previous | escape -}}
-        </a>
-      </dt>
-      <dd id="previous-page">{{- -}}
-        <cite>
-          {{- page.previous.title | escape -}}
-        </cite>{{- -}}
-      </dd>
-    </div>
+    <a class="previous" href="{{page.previous.url}}" rel="next">
+      {{- site.data.strings.paging.previous | escape -}}: <cite>{{ page.previous.title | escape -}}</cite>
+    </a>
     {%- endif -%}
+
     {%- if page.next.url -%}
-    <div class="next">{{- -}}
-      <dt>{{- -}}
-        <a href="{{page.next.url}}" aria-describedby="next-page" rel="prev">
-          {{- site.data.strings.paging.next | escape -}}
-        </a>{{- -}}
-      </dt>{{- -}}
-      <dd id="next-page">{{- -}}
-        <cite>
-          {{- page.next.title | escape -}}
-        </cite>{{- -}}
-      </dd>{{- -}}
-    </div>
+    <a class="next" href="{{page.next.url}}" rel="prev">
+      {{- site.data.strings.paging.next | escape -}}: <cite>{{- page.next.title | escape -}}</cite>
+    </a>
     {%- endif -%}
-  </dl>
+  </div>
 </nav>

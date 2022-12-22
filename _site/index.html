@@ -281,14 +281,10 @@
       itemscope
       itemtype="http://schema.org/WebPage"
       itemid="https://mstewartgallus.github.io/about/">
-      <a itemprop="url" href="/about/">
-        <span itemprop="name headline">About the Author</span>
-      </a>
-    </li><li>
-      <a type="application/atom+xml" rel="alternate"
+      <a itemprop="url" href="/about/"><span itemprop="name headline">About the Author</span></a>
+    </li><li><a type="application/atom+xml" rel="alternate"
          href="/feed.xml"
-         title="Words to Kick Your Teeth Out">
-        Subscribe</a>
+         title="Words to Kick Your Teeth Out">Subscribe</a>
     </li>
   </ul>
 
@@ -298,8 +294,7 @@
     <div class="search-basic">
       <label for="search-input">Query</label>:
       <input id="search-input" name="s" type="search" required
-             itemprop="query-input"
-             ><button type="submit">Search</button>
+             itemprop="query-input"><button type="submit">Search</button>
     </div>
   </form>
 </header>
@@ -309,10 +304,11 @@
       <h2 id="breadcrumbs-title">Breadcrumbs</h2>
     </hgroup>
   </header><ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemscope
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span aria-current="page"
+            itemscope
             itemprop="item"
             itemid="/"
-            itemtype="http://schema.org/WebSite"><span aria-current="page" itemprop="name">Home</span></span><meta itemprop="position" content="1"></li>
+            itemtype="http://schema.org/WebSite"><span itemprop="name">Home</span></span><meta itemprop="position" content="1"></li>
   </ol></nav>
 </div>
 </body>

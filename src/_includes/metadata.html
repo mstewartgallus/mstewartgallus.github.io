@@ -3,32 +3,22 @@
   <hgroup>
     <h2 id="metadata-title">{{ site.data.strings.metadata.title | escape }}</h2>
   </hgroup>
-  <dl>
-    <div itemprop="creator author" itemscope itemtype="https://schema.org/Person">
-      <dt>
-        {{- -}}
-        <a rel="author" href="{{ author.url | relative_url }}" itemprop="url">
-          {{- site.data.strings.metadata.author | escape -}}
-        </a>
-        {{- -}}
-      </dt>
-      <dd translate="no">@{{- -}}
-        <span id="author" itemprop="name">
-          {{- author.name | escape -}}
-        </span>
-      </dd>
-    </div>
-    <div>
-      <dt aria-describedby="post-date">{{- site.data.strings.metadata.postDate | escape -}}</dt>
-      <dd id="post-date">
-        {{- -}}
-        <time datetime="{{ page.date | date_to_xmlschema }}"
-              itemprop="datePublished pubdate"
-              data-pagefind-meta="date" data-pagefind-sort="date">
-          {{- page.date | date: "%Y-%m-%d" -}}
-        </time>
-        {{- -}}
-      </dd>
-    </div>
-  </dl>
+
+  <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+    <a rel="author" href="{{ author.url | relative_url }}" itemprop="url">
+      {{- site.data.strings.metadata.author | escape }}:
+      @<span id="author" itemprop="name" translate="no">
+        {{- author.name | escape -}}
+      </span>
+    </a>
+  </address>
+
+  <div>
+    {{- site.data.strings.metadata.postDate | escape -}}:
+    <time datetime="{{ page.date | date_to_xmlschema }}"
+          itemprop="datePublished pubdate"
+          data-pagefind-meta="date" data-pagefind-sort="date">
+      {{- page.date | date: "%Y-%m-%d" -}}
+    </time>
+  </div>
 </footer>
