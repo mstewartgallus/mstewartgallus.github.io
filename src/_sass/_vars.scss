@@ -43,21 +43,16 @@
     }
 }
 
-@media screen {
-    :root {
-        --emphasis-text: hsl(353deg 67% 38%);
-        --green-text: hsl(120deg 100% 13%);
-    }
-}
-
 // black/pink and dark green/yellow is most legible ?
 // Ensuring color legibility, T. H. Nilsson
 // https://files.upei.ca/arts/psychology/nilsson_color.pdf
-
 @media screen and (forced-colors: none) {
     :root {
         --canvas: hsl(340deg 100% 98%);
-        --canvas-text: hsl(234deg 29% 19%);
+        --canvas-text: hsl(234deg 100% 15%);
+
+        --emphasis-text: hsl(353deg 100% 25%);
+        --green-text: hsl(120deg 100% 8%);
 
         --gray-text: grey ;
 
@@ -90,15 +85,15 @@
 
 @media screen and (prefers-color-scheme: dark) and (forced-colors: none) {
     :root {
-        --canvas: hsl(97deg 25% 10%);
-        --canvas-text: hsl(58deg 25% 75%);
+        --canvas: hsl(97deg 70% 7%);
+        --canvas-text: hsl(58deg 50% 75%);
 
         --gray-text: gray ;
 
         --mark: hsl(48deg 100% 31%);
         --mark-text: white ;
 
-        --emphasis-text: hsl(11deg 54% 60%);
+        --emphasis-text: hsl(11deg 64% 55%);
         --green-text: hsl(90deg 100% 63%);
 
         --accent-color: hsl(88deg 100% 59%);
@@ -114,8 +109,8 @@
         --highlight: hsl(112deg 100% 50%);
         --highlight-text: white ;
 
-        --field: hsl(97deg 25% 10%);
-        --field-text: hsl(58deg 25% 75%);
+        --field: hsl(250deg 80% 10%);
+        --field-text: hsl(270deg 70% 90%);
 
         --button-face: black ;
         --button-text: white ;
