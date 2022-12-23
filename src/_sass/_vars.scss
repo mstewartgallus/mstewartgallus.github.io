@@ -48,11 +48,11 @@
 // https://files.upei.ca/arts/psychology/nilsson_color.pdf
 @media screen and (forced-colors: none) {
     :root {
-        --canvas: hsl(340deg 100% 98%);
-        --canvas-text: hsl(234deg 100% 15%);
+        --canvas: hsl(340deg 30% 97%);
+        --canvas-text: hsl(234deg 50% 3%);
 
-        --emphasis-text: hsl(353deg 100% 25%);
-        --green-text: hsl(120deg 100% 8%);
+        --emphasis-text: hsl(353deg 70% 34%);
+        --green-text: hsl(120deg 30% 9%);
 
         --gray-text: grey ;
 
@@ -85,16 +85,16 @@
 
 @media screen and (prefers-color-scheme: dark) and (forced-colors: none) {
     :root {
-        --canvas: hsl(97deg 70% 7%);
-        --canvas-text: hsl(58deg 50% 75%);
+        --canvas: hsl(97deg 25% 7%);
+        --canvas-text: hsl(58deg 33% 70%);
 
         --gray-text: gray ;
 
         --mark: hsl(48deg 100% 31%);
         --mark-text: white ;
 
-        --emphasis-text: hsl(11deg 64% 55%);
-        --green-text: hsl(90deg 100% 63%);
+        --emphasis-text: hsl(11deg 42% 53%);
+        --green-text: hsl(90deg 43% 69%);
 
         --accent-color: hsl(88deg 100% 59%);
         --accent-color-text: black ;
@@ -103,10 +103,10 @@
         --selected-item-text: black ;
 
         --link-text: hsl(240deg 100% 88%);
-        --visited-text: hsl(291deg 100% 81%);
+        --visited-text: hsl(291deg 68% 81%);
         --active-text: hsl(346deg 100% 59%);
 
-        --highlight: hsl(112deg 100% 50%);
+        --highlight: hsl(112deg 90% 50%);
         --highlight-text: white ;
 
         --field: hsl(250deg 80% 10%);
