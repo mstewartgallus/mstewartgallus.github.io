@@ -82,72 +82,6 @@ async function findPosts(query, options) {
     return (await (await pfimp).search(query, { filters: filters })).results;
 }
 
-function anchorRequest(anchor) {
-    const { href, nodeName, origin: tagOrigin } = anchor;
-    if (nodeName !== 'A') {
-        return;
-    }
-
-    if (tagOrigin !== origin) {
-        return;
-    }
-
-    const good = {
-        username: '',
-        target: '',
-        password: '',
-        download: ''
-    };
-    for (const [k, v] of Object.entries(good)) {
-        if (anchor[k] !== v) {
-            return;
-        }
-    }
-
-    if (!href) {
-        return;
-    }
-
-    return new Request(href);
-}
-
-function modifierKey(event) {
-    const { ctrlKey, altKey, shiftKey, metaKey } = event;
-    return ctrlKey || altKey || shiftKey || metaKey;
-}
-
-function clickRequest(event) {
-    const { button, buttons, target } = event;
-
-    if (modifierKey(event)) {
-        return;
-    }
-
-    if (button != 0 || buttons != 0) {
-        return;
-    }
-
-    return anchorRequest(target);
-}
-
-function keydownRequest(event) {
-    const { isComposing, key, target } = event;
-
-    if (isComposing) {
-        return;
-    }
-
-    if (modifierKey(event)) {
-        return;
-    }
-
-    if (key !== "Enter") {
-        return;
-    }
-
-    return anchorRequest(target);
-}
-
 function submitRequest(event) {
     const { submitter, target: form } = event;
 
@@ -175,42 +109,31 @@ function submitRequest(event) {
     return new Request(url, options);
 }
 
-function parseParams(params) {
-    return {
-        query: params.get('s') ?? '',
-        category: new Set(params.getAll('category')),
-        tag: new Set(params.getAll('tag'))
-    };
-}
-
-
-function route(req) {
-    const { method, url } = req;
-    const { searchParams, pathname } = new URL(url);
-
-    switch (pathname) {
-    case '/search/':
-        switch (method) {
-        case 'GET':
-            return (async () => await search(searchParams));
-        }
-        break;
-    }
-}
-
 let targeting = false;
 
 function target(url) {
-    const fallback = '#';
-
     let { hash } = new URL(url);
+
     if (hash == '') {
-        hash = fallback;
+        hash = '#';
     }
 
     targeting = true;
     location.replace(hash);
     targeting = false;
+}
+
+async function genericSubmit(event) {
+    const r = submitRequest(event);
+    if (!r) {
+        return;
+    }
+
+    event.preventDefault();
+
+    history.pushState(null, '', r.url);
+
+    target(r.url);
 
     const h1 = document.getElementsByTagName('h1')[0];
     if (h1) {
@@ -219,183 +142,154 @@ function target(url) {
     }
 }
 
-async function keydown(event) {
-    const r = keydownRequest(event);
-    if (!r) {
+function setInput(event) {
+    const params = new URL(window.location).searchParams;
+    const query = params.get('s') ?? '';
+
+    const input = document.getElementById('search-input');
+    if (!input) {
         return;
     }
 
-    const action = route(r);
-    if (!action) {
-        return;
-    }
-
-    event.preventDefault();
-
-    history.pushState(null, '', r.url);
-
-    await action();
-
-    target(r.url);
+    input.value = query;
 }
 
-async function click(event) {
-    const r = clickRequest(event);
-    if (!r) {
+function setTag(event) {
+    const params = new URL(window.location).searchParams;
+    const tag = new Set(params.getAll('tag'));
+
+    const tagEl = document.getElementById('tag');
+    if (!tagEl) {
         return;
     }
 
-    const action = route(r);
-    if (!action) {
-        return;
+    for (const option of tagEl.elements) {
+        option.checked = tag.has(option.value);
     }
-
-    event.preventDefault();
-
-    history.pushState(null, '', r.url);
-
-    await action();
-
-    target(r.url);
 }
 
-async function submit(event) {
-    const r = submitRequest(event);
-    if (!r) {
+function setCategory(event) {
+    const params = new URL(window.location).searchParams;
+    const category = new Set(params.getAll('category'));
+
+    const categoryEl = document.getElementById('category');
+    if (!categoryEl) {
         return;
     }
 
-    const action = route(r);
-    if (!action) {
-        return;
+    for (const option of categoryEl.elements) {
+        option.checked = category.has(option.value);
     }
-
-    event.preventDefault();
-
-    history.pushState(null, '', r.url);
-
-    await action();
-
-    target(r.url);
-}
-
-async function popstate(event) {
-    if (targeting) {
-        return;
-    }
-
-    const r = new Request(location);
-
-    const action = route(r);
-    if (!action) {
-        return;
-    }
-
-    await action();
-
-    target(r.url);
 }
 
 const doctitle = document.title;
 
-async function search(searchParams) {
-    const { query, category, tag } = parseParams(searchParams);
+function setTitle(event) {
+    const form = event.target;
+    const data = new FormData(form);
+    const query = data.get('s') ?? '';
+
+    document.title = `${query} — ${doctitle}`;
+}
+
+function setH1(event) {
+    const form = event.target;
+    const data = new FormData(form);
+    const query = data.get('s') ?? '';
+
+    const h1 = document.getElementById('title');
+    if (!h1) {
+        return;
+    }
+
+    h1.dataset.query = query;
+}
+
+async function renderList(event) {
+    const form = event.target;
+    const data = new FormData(form);
+
+    const query = data.get('s') ?? '';
+    const category = data.getAll('category');
+    const tag = data.getAll('tag');
 
     const postsPs = findPosts(query, {
         tags: tag,
         categories: category
     });
 
-    switch (document.readyState) {
-    case 'interactive':
-    case 'complete':
-        break;
-
-    default:
-        await new Promise(r => {
-            window.addEventListener('DOMContentLoaded', r);
-        });
-        break;
-    }
-
-    const h1 = document.getElementById('title');
-    const input = document.getElementById('search-input');
-
     const list = document.getElementById('search-list');
-    const categoryEl = document.getElementById('category');
-    const tagEl = document.getElementById('tag');
-
-    input && (input.value = query);
-    h1 && (h1.dataset.query = query);
-
-    document.title = `${query} — ${doctitle}`;
-
-    if (categoryEl) {
-        for (const option of categoryEl.elements) {
-            option.checked = category.has(option.value);
-        }
+    if (!list) {
+        return;
     }
 
-    if (tagEl) {
-        for (const option of tagEl.elements) {
-            option.checked = tag.has(option.value);
+    const lis = Array.from(list.getElementsByTagName('li'));
+
+    for (let ii = 0; ii < lis.length; ++ii) {
+        const li = lis[ii];
+
+        const output = li.getElementsByTagName('output')[0];
+        if (!output) {
+            continue;
         }
+        const anchor = output.getElementsByTagName('a')[0];
+        if (!anchor) {
+            continue;
+        }
+
+        // FIXME figure out aria-busy portability nonsense
+        li.setAttribute('aria-hidden', 'true');
     }
 
-    if (list) {
-        const lis = Array.from(list.getElementsByTagName('li'));
+    const posts = (await postsPs).slice(0, lis.length);
 
-        for (let ii = 0; ii < lis.length; ++ii) {
-            const li = lis[ii];
+    for (let ii = 0; ii < lis.length; ++ii) {
+        const li = lis[ii];
 
-            const output = li.getElementsByTagName('output')[0];
-            if (!output) {
-                continue;
-            }
-            const anchor = output.getElementsByTagName('a')[0];
-            if (!anchor) {
-                continue;
-            }
-
-            // FIXME figure out aria-busy portability nonsense
-            li.setAttribute('aria-hidden', 'true');
+        const output = li.getElementsByTagName('output')[0];
+        if (!output) {
+            continue;
+        }
+        const anchor = output.getElementsByTagName('a')[0];
+        if (!anchor) {
+            continue;
         }
 
-        const posts = (await postsPs).slice(0, lis.length);
-
-        for (let ii = 0; ii < lis.length; ++ii) {
-            const li = lis[ii];
-
-            const output = li.getElementsByTagName('output')[0];
-            if (!output) {
-                continue;
-            }
-            const anchor = output.getElementsByTagName('a')[0];
-            if (!anchor) {
-                continue;
-            }
-
-            const postPs = posts[ii];
-            if (!postPs) {
-                continue;
-            }
-
-            (async () => {
-                const post = fromPagefind(await postPs.data());
-
-                anchor.href = post.url;
-                anchor.textContent = post.title;
-
-                li.setAttribute('aria-hidden', 'false');
-            })();
+        const postPs = posts[ii];
+        if (!postPs) {
+            continue;
         }
+
+        const post = fromPagefind(await postPs.data());
+
+        anchor.href = post.url;
+        anchor.textContent = post.title;
+
+        li.setAttribute('aria-hidden', 'false');
     }
 }
 
-document.addEventListener('click', click);
-document.addEventListener('keydown', keydown);
+switch (document.readyState) {
+case 'interactive':
+case 'complete':
+    break;
 
-document.addEventListener('submit', submit);
-window.addEventListener('popstate', popstate);
+default:
+    await new Promise(r => {
+        window.addEventListener('DOMContentLoaded', r);
+    });
+    break;
+}
 
-search(searchParams);
+document.addEventListener('submit', genericSubmit);
+
+window.addEventListener('popstate', setInput);
+window.addEventListener('popstate', setCategory);
+window.addEventListener('popstate', setTag);
+
+window.dispatchEvent(new PopStateEvent('popstate'));
+
+const search = document.getElementById('search');
+search.addEventListener('submit', setTitle);
+search.addEventListener('submit', renderList);
+search.requestSubmit();
