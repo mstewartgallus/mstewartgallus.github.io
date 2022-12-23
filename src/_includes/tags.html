@@ -1,8 +1,6 @@
-<footer id="tags" aria-labelledby="tags-title">
-  <hgroup class="sr-only">
-    <h2 id="tags-title">{{ site.data.strings.tags.title | escape }}</h2>
-  </hgroup>
-  <ul>
+<div class="sr-only"><a href="#tags-end">Skip Tags</a></div>
+
+<ul class="tags">
   {%- for tag in page.tags %}
   <li>{{- -}}
     <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">{{- -}}
@@ -12,5 +10,6 @@
     </a>{{- -}}
   </li>
   {%- endfor -%}
-  </ul>
-</footer>
+</ul>
+
+<span id="tags-end"></span>

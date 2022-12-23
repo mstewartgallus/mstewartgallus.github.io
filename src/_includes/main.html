@@ -2,6 +2,7 @@
       aria-describedby="title"
       itemprop="text"
       {% if page.date -%}data-pagefind-body{%- endif %}>
+
   <header>
     <hgroup>
       <h1
@@ -11,6 +12,10 @@
       <p itemprop="subheading">{{- page.subtitle | escape -}}</p>
       {%- endif -%}
     </hgroup>
+
+    {%- if page.tags.size > 0 -%}
+    {%- include tags.html -%}
+    {%- endif -%}
   </header>
 
   {{- content -}}

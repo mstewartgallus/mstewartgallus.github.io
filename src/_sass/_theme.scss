@@ -28,13 +28,13 @@ main > :is(ul, ol) {
                                     100vw) ")"});
 }
 
-main :is(header, figcaption) {
-    display: flex ;
-    inline-size: $paragraph-width ;
-    max-inline-size: 100% ;
+header {
+    position: relative ;
 }
-main :is(header, figcaption) > :first-child {
-    flex-grow: 1 ;
+main [rel~="bookmark"] {
+    position: absolute ;
+    right: 0 ;
+    top: 0;
 }
 
 .breadcrumb {
@@ -82,7 +82,14 @@ main :is(header, figcaption) > :first-child {
 
 
 .sr-only {
-    position: relative !important ;
+    position: fixed !important ;
+    display: block ;
+    left: 1em ;
+    top: $line ;
+    z-index: 1000 ;
+    background-color: var(--canvas);
+    padding-inline: 1ch ;
+    padding-block-end: 0.8ch ;
 }
 .sr-only:not(:focus-within) {
     position: absolute !important ;
@@ -94,13 +101,21 @@ main :is(header, figcaption) > :first-child {
     overflow: hidden !important ;
 }
 
-:is(#toc, #tags) ul {
+ul.tags {
+    all: unset ;
+    display: flex ;
+    margin-block: $line ;
+    flex-wrap: wrap ;
+    column-gap: 1em ;
+}
+
+:is(#toc) ul {
     all: unset ;
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 1em ;
 }
-:is(#toc, #tags) li {
+:is(#toc, .tags) li {
     all: unset ;
 }
 
