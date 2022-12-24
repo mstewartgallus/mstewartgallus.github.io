@@ -46,7 +46,7 @@ customElements.define("search-h1", class extends HTMLElement {
         this.#shadow.appendChild(copy);
         this.#query = this.#shadow.getElementById('query');
         this.#focus = this.#shadow.getElementById('focus');
-        this.doctitle = this.ownerDocument.title;
+        this.#doctitle = this.ownerDocument.title;
     }
 
     disconnectedCallback() {
