@@ -1,5 +1,24 @@
 <template id="search-h1">
   <link rel="stylesheet" href="{{ "assets/main.css" | relative_url }}">
-  <output form="search" for="search-input" id="query"></output>
-  <span><slot></slot></span>
+  <div tabindex="-1" id="focus">
+    <output for="search-input" id="query"></output>
+    <span><slot></slot></span>
+  </div>
+</template>
+
+<template id="search-results">
+  <link rel="stylesheet" href="{{ "assets/main.css" | relative_url }}">
+  <ol id="search-list">
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+  </ol>
 </template>

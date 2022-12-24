@@ -13,8 +13,27 @@
   <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Words to Kick Your Teeth Out" ><link type="modulepreload" href="/assets/pagefind/pagefind.js">
 <link type="preload" href="/assets/pagefind/wasm.en-ca.pagefind" as="fetch" crossorigin><template id="search-h1">
   <link rel="stylesheet" href="/assets/main.css">
-  <output form="search" for="search-input" id="query"></output>
-  <span><slot></slot></span>
+  <div tabindex="-1" id="focus">
+    <output for="search-input" id="query"></output>
+    <span><slot></slot></span>
+  </div>
+</template>
+
+<template id="search-results">
+  <link rel="stylesheet" href="/assets/main.css">
+  <ol id="search-list">
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+    <li aria-hidden="true"><output for="search-input tag category"><a></a></output></li>
+  </ol>
 </template>
 <script type="module" defer async
         src="/assets/search.mjs"></script>
@@ -37,32 +56,18 @@
         itemid="https://mstewartgallus.github.io/search/"><main id="main"
       aria-describedby="title"
       itemprop="text"
-      >
-
+      ><form id="search" name="search" rel="search" action="/search/">
   <header>
     <hgroup>
-      <h1
-        is="search-h1"
-        id="title" itemprop="name headline title">Search</h1></hgroup></header><ol id="search-list">
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-</ol>
-</main>
-<div id="sidebar"><form id="search" name="search" rel="search" role="search" action="/search/">
-  <header class="sr-only">
-    <hgroup>
-      <h2 id="search-title" itemprop="name">Search</h2>
-    </hgroup>
+      <h1 id="title" itemprop="name headline title">
+        <search-h1>Search</search-h1>
+      </h1></hgroup>
   </header>
+
+  <div></div>
+
+  <search-results>
+  </search-results>
 
   <fieldset class="search-basic">
     <label for="search-input">Query</label>:
@@ -247,7 +252,8 @@
            value="Wotan">
     <label for="tag-Wotan">#Wotan</label></fieldset>
 </form>
-<nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
+</main>
+<div id="sidebar"><nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
   <header class="sr-only">
     <hgroup>
       <h2 id="breadcrumbs-title">Breadcrumbs</h2>

@@ -1,19 +1,51 @@
 ---
 layout: page
 ---
+{%- assign categories = site.categories | sort -%}
+{%- assign tags = site.tags | sort -%}
 
-{{- content -}}
+<form id="search" name="search" rel="search" action="{% link search.html %}">
+  <header>
+    <hgroup>
+      <h1 id="title" itemprop="name headline title">
+        <search-h1>
+          {{- page.title | escape -}}
+        </search-h1>
+      </h1>
+      {%- if page.subtitle -%}
+      <p itemprop="subheading">{{- page.subtitle | escape -}}</p>
+      {%- endif -%}
+    </hgroup>
+  </header>
 
-<ol id="search-list">
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
+  <div>
+  {{- content -}}
+  </div>
 
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-    <li aria-hidden="true"><output for="search-input tag category" form="search"><a></a></output></li>
-</ol>
+  <search-results>
+  </search-results>
+
+  <fieldset class="search-basic">
+    <label for="search-input">{{ site.data.strings.sidebar.search.query | escape }}</label>:
+    <input id="search-input" name="s" type="search"
+           ><button id="search-button" type="submit">{{ site.data.strings.sidebar.search.submit | escape }}</button>
+  </fieldset>
+
+  <fieldset id="category">
+    <legend>{{ site.data.strings.sidebar.search.category | escape }}</legend>
+    {%- for category in categories %}
+    <input id="category-{{ category[0] | cgi_escape }}" type="checkbox" name="category"
+           value="{{ category[0] | cgi_escape }}">
+    <label for="category-{{ category[0] | cgi_escape }}">{{ category[0] | escape }}</label>
+    {%- endfor -%}
+  </fieldset>
+
+  <fieldset id="tag" tabindex="0">
+    <legend>{{ site.data.strings.sidebar.search.tag | escape }}</legend>
+    {%- for tag in tags %}
+    <input id="tag-{{ tag[0] | cgi_escape }}" type="checkbox" name="tag"
+           value="{{ tag[0] | cgi_escape }}">
+    <label for="tag-{{ tag[0] | cgi_escape }}">#{{ tag[0] | escape }}</label>
+    {%- endfor -%}
+  </fieldset>
+</form>

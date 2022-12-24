@@ -13,18 +13,22 @@ async function fetchjson(url) {
     return await ((await fetch(url)).json());
 }
 
-customElements.define("search-h1", class extends HTMLHeadingElement {
-    static observedAttributes = ['data-query'];
+customElements.define("search-h1", class extends HTMLElement {
+    static formAssociated = true;
+
     #query;
+    #focus;
+    #abort;
+    #doctitle;
+
     #shadow;
+    #internals;
 
     constructor() {
         super();
 
-        this.#shadow = this.attachShadow({
-            mode: 'closed',
-            delegatesFocus: false
-        });
+        this.#shadow = this.attachShadow({mode: 'closed'});
+        this.#internals = this.attachInternals();
     }
 
     connectedCallback() {
@@ -41,13 +45,153 @@ customElements.define("search-h1", class extends HTMLHeadingElement {
         const copy = this.ownerDocument.importNode(template, true);
         this.#shadow.appendChild(copy);
         this.#query = this.#shadow.getElementById('query');
+        this.#focus = this.#shadow.getElementById('focus');
+        this.doctitle = this.ownerDocument.title;
     }
 
-    attributeChangedCallback(n, o, x) {
-        this.#query.textContent = x ? `${x}\u2009—\u2009` : '';
+    disconnectedCallback() {
+        this.#query = null;
+        this.#focus = null;
     }
-}, { 'extends': 'h1' });
 
+    formAssociatedCallback(form) {
+        if (!form) {
+            this.#abort.abort();
+            return;
+        }
+        const abort = new AbortController();
+        this.#abort = abort;
+        form.addEventListener('submit',
+                              e => this.#update(),
+                              { signal: abort.signal }
+                             );
+    }
+
+    #update() {
+        if (!this.#query) {
+            return;
+        }
+
+        const data = new FormData(this.#internals.form);
+
+        const query = data.get('s') ?? '';
+
+        this.#query.textContent = query ? `${query}\u2009—\u2009` : '';
+
+        this.ownerDocument.title = `${query} — ${this.#doctitle}`;
+
+        // FIXME don't focus first time
+        this.#focus.focus();
+    }
+});
+
+customElements.define("search-results", class extends HTMLElement {
+    static formAssociated = true;
+
+    #posts;
+
+    #list;
+    #abort;
+
+    #internals;
+    #shadow;
+
+    constructor() {
+        super();
+
+        this.#shadow = this.attachShadow({mode: 'closed'});
+        this.#internals = this.attachInternals();
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
+
+        if (this.#list) {
+            return;
+        }
+
+        const template = this.ownerDocument.getElementById('search-results').content;
+
+        const copy = this.ownerDocument.importNode(template, true);
+        this.#shadow.replaceChildren(copy);
+        this.#list = this.#shadow.getElementById('search-list');
+    }
+
+    disconnectedCallback() {
+        this.#list = null;
+    }
+
+    formAssociatedCallback(form) {
+        if (!form) {
+            this.#abort.abort();
+            return;
+        }
+        const abort = new AbortController();
+        this.#abort = abort;
+        form.addEventListener('submit',
+                              async e => await this.#query(),
+                              { signal: abort.signal });
+    }
+
+    async #query() {
+        this.#busy();
+
+        const data = new FormData(this.#internals.form);
+
+        const query = data.get('s') ?? '';
+        const tag = data.getAll('tag');
+        const category = data.getAll('category');
+
+        this.#posts = findPosts(query, {
+            tags: tag,
+            categories: category
+        });
+
+        await this.#render();
+    }
+
+    #busy() {
+        const lis = Array.from(this.#list.getElementsByTagName('li'));
+
+        for (let ii = 0; ii < lis.length; ++ii) {
+            const li = lis[ii];
+            li.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    async #render() {
+        const lis = Array.from(this.#list.getElementsByTagName('li'));
+
+        const posts = (await this.#posts).slice(0, lis.length);
+
+        for (let ii = 0; ii < lis.length; ++ii) {
+            const li = lis[ii];
+
+            const output = li.getElementsByTagName('output')[0];
+            if (!output) {
+                continue;
+            }
+            const anchor = output.getElementsByTagName('a')[0];
+            if (!anchor) {
+                continue;
+            }
+
+            const postPs = posts[ii];
+            if (!postPs) {
+                continue;
+            }
+
+            const post = fromPagefind(await postPs.data());
+
+            anchor.href = post.url;
+            anchor.textContent = post.title;
+
+            li.setAttribute('aria-hidden', 'false');
+        }
+    }
+});
 
 function fromPagefind(post) {
     const { url,
@@ -134,17 +278,11 @@ async function genericSubmit(event) {
     history.pushState(null, '', r.url);
 
     target(r.url);
-
-    const h1 = document.getElementsByTagName('h1')[0];
-    if (h1) {
-        h1.tabIndex = -1;
-        h1.focus();
-    }
 }
 
 function setInput(event) {
-    const params = new URL(window.location).searchParams;
-    const query = params.get('s') ?? '';
+    const { searchParams } = new URL(window.location);
+    const query = searchParams.get('s') ?? '';
 
     const input = document.getElementById('search-input');
     if (!input) {
@@ -155,8 +293,8 @@ function setInput(event) {
 }
 
 function setTag(event) {
-    const params = new URL(window.location).searchParams;
-    const tag = new Set(params.getAll('tag'));
+    const { searchParams } = new URL(window.location);
+    const tag = new Set(searchParams.getAll('tag'));
 
     const tagEl = document.getElementById('tag');
     if (!tagEl) {
@@ -169,8 +307,8 @@ function setTag(event) {
 }
 
 function setCategory(event) {
-    const params = new URL(window.location).searchParams;
-    const category = new Set(params.getAll('category'));
+    const { searchParams } = new URL(window.location);
+    const category = new Set(searchParams.getAll('category'));
 
     const categoryEl = document.getElementById('category');
     if (!categoryEl) {
@@ -182,92 +320,7 @@ function setCategory(event) {
     }
 }
 
-const doctitle = document.title;
-
-function setTitle(event) {
-    const form = event.target;
-    const data = new FormData(form);
-    const query = data.get('s') ?? '';
-
-    document.title = `${query} — ${doctitle}`;
-}
-
-function setH1(event) {
-    const form = event.target;
-    const data = new FormData(form);
-    const query = data.get('s') ?? '';
-
-    const h1 = document.getElementById('title');
-    if (!h1) {
-        return;
-    }
-
-    h1.dataset.query = query;
-}
-
-async function renderList(event) {
-    const form = event.target;
-    const data = new FormData(form);
-
-    const query = data.get('s') ?? '';
-    const category = data.getAll('category');
-    const tag = data.getAll('tag');
-
-    const postsPs = findPosts(query, {
-        tags: tag,
-        categories: category
-    });
-
-    const list = document.getElementById('search-list');
-    if (!list) {
-        return;
-    }
-
-    const lis = Array.from(list.getElementsByTagName('li'));
-
-    for (let ii = 0; ii < lis.length; ++ii) {
-        const li = lis[ii];
-
-        const output = li.getElementsByTagName('output')[0];
-        if (!output) {
-            continue;
-        }
-        const anchor = output.getElementsByTagName('a')[0];
-        if (!anchor) {
-            continue;
-        }
-
-        // FIXME figure out aria-busy portability nonsense
-        li.setAttribute('aria-hidden', 'true');
-    }
-
-    const posts = (await postsPs).slice(0, lis.length);
-
-    for (let ii = 0; ii < lis.length; ++ii) {
-        const li = lis[ii];
-
-        const output = li.getElementsByTagName('output')[0];
-        if (!output) {
-            continue;
-        }
-        const anchor = output.getElementsByTagName('a')[0];
-        if (!anchor) {
-            continue;
-        }
-
-        const postPs = posts[ii];
-        if (!postPs) {
-            continue;
-        }
-
-        const post = fromPagefind(await postPs.data());
-
-        anchor.href = post.url;
-        anchor.textContent = post.title;
-
-        li.setAttribute('aria-hidden', 'false');
-    }
-}
+document.addEventListener('submit', genericSubmit);
 
 switch (document.readyState) {
 case 'interactive':
@@ -281,8 +334,6 @@ default:
     break;
 }
 
-document.addEventListener('submit', genericSubmit);
-
 window.addEventListener('popstate', setInput);
 window.addEventListener('popstate', setCategory);
 window.addEventListener('popstate', setTag);
@@ -290,6 +341,4 @@ window.addEventListener('popstate', setTag);
 window.dispatchEvent(new PopStateEvent('popstate'));
 
 const search = document.getElementById('search');
-search.addEventListener('submit', setTitle);
-search.addEventListener('submit', renderList);
 search.requestSubmit();
