@@ -1,23 +1,21 @@
-<div id="sidebar">
-  {%- if page.url == '/' -%}
-  {%- include banner.html -%}
-  {%- endif -%}
+{%- if page.url == '/' -%}
+<li>{%- include banner.html -%}</li>
+{%- endif -%}
 
-  {%- if page.url == '/search/' -%}
-  {%- include search.html -%}
-  {%- endif -%}
+{%- if page.url == '/search/' -%}
+<li>{%- include search.html -%}</li>
+{%- endif -%}
 
-  {%- if page.previous.url or page.next.url -%}
-  {%- include paging.html -%}
-  {%- endif -%}
+{%- if page.previous.url or page.next.url -%}
+<li>{%- include paging.html -%}</li>
+{%- endif -%}
 
-  {%- if page.date -%}
-  {%- include metadata.html -%}
-  {%- endif -%}
+{%- if page.date -%}
+<li>{%- include metadata.html -%}</li>
+{%- endif -%}
 
-  {%- include breadcrumbs.html -%}
+<li>{%- include breadcrumbs.html -%}</li>
 
-  {%- if false -%}
-  {%- include related.html -%}
-  {%- endif -%}
-</div>
+{%- if false -%}
+<li>{%- include related.html -%}</li>
+{%- endif -%}

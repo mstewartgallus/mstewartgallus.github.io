@@ -5,66 +5,65 @@ layout: body
 {%- assign tags = site.tags | sort -%}
 
 <form id="search" name="search" rel="search" action="{% link search.html %}">
-  <main id="main"
-        aria-describedby="title"
-        {% if page.date -%}data-pagefind-body{%- endif %}>
-    <header>
-      <hgroup>
-        <h1 id="title">
-          <search-h1>
-            {{- page.title | escape -}}
-          </search-h1>
-        </h1>
-        {%- if page.subtitle -%}
-        <p>{{- page.subtitle | escape -}}</p>
-        {%- endif -%}
-      </hgroup>
-    </header>
+  <ul class="feature-first">
+    <li>
+      <main id="main"
+            aria-describedby="title"
+            {% if page.date -%}data-pagefind-body{%- endif %}>
+        <header>
+          <hgroup>
+            <h1 id="title">
+              <search-h1>
+                {{- page.title | escape -}}
+              </search-h1>
+            </h1>
+            {%- if page.subtitle -%}
+            <p>{{- page.subtitle | escape -}}</p>
+            {%- endif -%}
+          </hgroup>
+        </header>
 
-    <div>
-      {{- content -}}
-    </div>
+        <div>
+          {{- content -}}
+        </div>
 
-    <search-results>
-    </search-results>
-  </main>
+        <search-results>
+        </search-results>
+      </main>
+    </li>
+    <li>
+      <section aria-labelledby="controls-title">
+        <header class="sr-only">
+          <hgroup>
+            <h2 id="controls-title">Controls</h2>
+          </hgroup>
+        </header>
 
-  <div id="sidebar">
-    <section aria-labelledby="controls-title">
-      <header class="sr-only">
-        <hgroup>
-          <h2 id="controls-title">Controls</h2>
-        </hgroup>
-      </header>
+        <fieldset class="search-basic">
+          <label for="search-input">{{ site.data.strings.sidebar.search.query | escape }}</label>
+          <input id="search-input" name="s" type="search"
+                 ><button id="search-button" type="submit">{{ site.data.strings.sidebar.search.submit | escape }}</button>
+        </fieldset>
 
-      <fieldset class="search-basic">
-        <label for="search-input">{{ site.data.strings.sidebar.search.query | escape }}</label>
-        <input id="search-input" name="s" type="search"
-               ><button id="search-button" type="submit">{{ site.data.strings.sidebar.search.submit | escape }}</button>
-      </fieldset>
+        <fieldset id="category">
+          <legend>{{ site.data.strings.sidebar.search.category | escape }}</legend>
+          {%- for category in categories %}
+          <input id="category-{{ category[0] | cgi_escape }}" type="checkbox" name="category"
+                 value="{{ category[0] | cgi_escape }}">
+          <label for="category-{{ category[0] | cgi_escape }}">{{ category[0] | escape }}</label>
+          {%- endfor -%}
+        </fieldset>
 
-      <fieldset id="category">
-        <legend>{{ site.data.strings.sidebar.search.category | escape }}</legend>
-        {%- for category in categories %}
-        <input id="category-{{ category[0] | cgi_escape }}" type="checkbox" name="category"
-               value="{{ category[0] | cgi_escape }}">
-        <label for="category-{{ category[0] | cgi_escape }}">{{ category[0] | escape }}</label>
-        {%- endfor -%}
-      </fieldset>
-
-      <fieldset id="tag" tabindex="0">
-        <legend>{{ site.data.strings.sidebar.search.tag | escape }}</legend>
-        {%- for tag in tags %}
-        <input id="tag-{{ tag[0] | cgi_escape }}" type="checkbox" name="tag"
-               value="{{ tag[0] | cgi_escape }}">
-        <label for="tag-{{ tag[0] | cgi_escape }}">#{{ tag[0] | escape }}</label>
-        {%- endfor -%}
-      </fieldset>
-    </section>
-
+        <fieldset id="tag" tabindex="0">
+          <legend>{{ site.data.strings.sidebar.search.tag | escape }}</legend>
+          {%- for tag in tags %}
+          <input id="tag-{{ tag[0] | cgi_escape }}" type="checkbox" name="tag"
+                 value="{{ tag[0] | cgi_escape }}">
+          <label for="tag-{{ tag[0] | cgi_escape }}">#{{ tag[0] | escape }}</label>
+          {%- endfor -%}
+        </fieldset>
+      </section>
+    </li>
     {%- include sidebar.html -%}
-  </div>
-
-  <div class="clearer"></div>
-
+  </ul>
 </form>
