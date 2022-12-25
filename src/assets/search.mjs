@@ -256,10 +256,9 @@ function target(hash) {
     targeting = true;
 
     if (hash == '') {
-        document.documentElement.focus();
-    } else {
-        location.replace(hash);
+        hash = '#rt';
     }
+    location.replace(hash);
 
     targeting = false;
 }
