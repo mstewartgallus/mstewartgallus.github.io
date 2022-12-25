@@ -39,7 +39,7 @@
         itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
     <meta itemprop="target" content="{% link search.html %}?s={s}" >
     <div class="search-basic">
-      <label for="search-input">Query</label>:
+      <label for="search-input">Query:</label>
       <input id="search-input" name="s" type="search" required
              itemprop="query-input">{{- -}}
       <button type="submit">{{ site.data.strings.search.submit | escape }}</button>

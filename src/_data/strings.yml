@@ -23,7 +23,7 @@ search:
 sidebar:
   search:
     title: "Search"
-    query: "Query"
+    query: "Query:"
     category: "Category"
     tag: "Tag"
     submit: "Search"
