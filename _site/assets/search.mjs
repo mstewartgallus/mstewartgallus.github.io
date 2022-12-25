@@ -244,6 +244,10 @@ function submitRequest(event) {
         options.body = formdata;
     }
 
+    if (url.hash == '') {
+        url = new URL(url + '#rt');
+    }
+
     return new Request(url, options);
 }
 
@@ -255,9 +259,6 @@ function target(hash) {
     }
     targeting = true;
 
-    if (hash == '') {
-        hash = '#rt';
-    }
     location.replace(hash);
 
     targeting = false;
