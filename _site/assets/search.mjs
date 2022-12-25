@@ -1,9 +1,3 @@
-const root = '#rt';
-
-if (window.location.hash === '') {
-    window.location.replace(root);
-}
-
 const pfimp = import('./pagefind/pagefind.js');
 
 history.scrollRestoration = 'manual';
@@ -256,11 +250,16 @@ function submitRequest(event) {
 let targeting = false;
 
 function target(hash) {
+    if (hash == '') {
+        hash = '#';
+    }
+
     if (targeting) {
         return;
     }
     targeting = true;
 
+    document.documentElement.focus({ preventScroll: true });
     location.replace(hash);
 
     targeting = false;
@@ -280,11 +279,12 @@ function setURLSubmit(event) {
 
     event.preventDefault();
 
-    const url = new URL(r.url);
-    let { hash, searchParams } = url;
-    if (hash == '') {
-        hash = root;
+    let url = r.url;
+    if (new URL(url).hash == '') {
+        url = url + '#';
     }
+
+    const { hash, searchParams } = new URL(url);
 
     const query = searchParams.get('s') ?? '';
     const title = query !== '' ? `${query}\u2009—\u2009${doctitle}` : '';
@@ -293,11 +293,11 @@ function setURLSubmit(event) {
 
     // FIXME detect replace request
     // dedup as a temporary hack
-    if (url.toString() === new URL(window.location).toString()) {
+    if (url === window.location.toString()) {
         return;
     }
 
-    history.pushState(null, '', hashless(url));
+    history.pushState(null, '', url);
     target(hash);
 }
 
