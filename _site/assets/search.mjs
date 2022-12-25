@@ -149,18 +149,12 @@ customElements.define("search-results", class extends HTMLElement {
         for (let ii = 0; ii < len; ++ii) {
             const li = entries[ii];
 
-            const output = li.getElementsByTagName('output')[0];
-            if (!output) {
-                continue;
-            }
-
-            const anchor = output.getElementsByTagName('a')[0];
+            const anchor = li.getElementsByTagName('a')[0];
             if (!anchor) {
                 return;
             }
 
             li.setAttribute('aria-hidden', 'true');
-            output.setAttribute('aria-busy', 'true');
             anchor.removeAttribute('href');
         }
     }
@@ -174,12 +168,7 @@ customElements.define("search-results", class extends HTMLElement {
         const waiters = posts.map((postPs, ii) => (async () => {
             const li = entries[ii];
 
-            const output = li.getElementsByTagName('output')[0];
-            if (!output) {
-                return;
-            }
-
-            const anchor = output.getElementsByTagName('a')[0];
+            const anchor = li.getElementsByTagName('a')[0];
             if (!anchor) {
                 return;
             }
@@ -193,15 +182,7 @@ customElements.define("search-results", class extends HTMLElement {
         await Promise.all(waiters);
 
         for (let ii = 0; ii < len; ++ii) {
-            const li = entries[ii];
-
-            const output = li.getElementsByTagName('output')[0];
-            if (!output) {
-                continue;
-            }
-
-            output.setAttribute('aria-busy', 'false');
-            li.setAttribute('aria-hidden', 'false');
+            entries[ii].setAttribute('aria-hidden', 'false');
         }
     }
 });
