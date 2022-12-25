@@ -24,7 +24,8 @@ https://schema.org/WebPage
 <html lang="{{ page.lang | default: site.lang | default: "en" }}"
       itemscope
       itemtype="{{ pagetype }}"
-      itemid="{{ page.url | absolute_url }}">
+      itemid="{{ page.url | absolute_url }}"
+      tabindex="-1">
   {%- include head.html -%}
   <body itemscope
         itemprop="mainEntity hasPart"

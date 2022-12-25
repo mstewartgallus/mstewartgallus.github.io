@@ -80,8 +80,8 @@ customElements.define("search-h1", class extends HTMLElement {
 
         this.ownerDocument.title = `${query} — ${this.#doctitle}`;
 
-        // FIXME don't focus first time
-        this.#focus.focus();
+        // // FIXME don't focus first time
+        // this.#focus.focus();
     }
 });
 
@@ -166,6 +166,7 @@ customElements.define("search-results", class extends HTMLElement {
 
         const posts = (await this.#posts).slice(0, lis.length);
 
+        // FIXME wait for everything to load before rendering?
         for (let ii = 0; ii < lis.length; ++ii) {
             const li = lis[ii];
 
@@ -255,19 +256,22 @@ function submitRequest(event) {
 
 let targeting = false;
 
-function target(url) {
-    let { hash } = new URL(url);
+function target(hash) {
+    if (targeting) {
+        return;
+    }
+    targeting = true;
 
     if (hash == '') {
-        hash = '#';
+        document.documentElement.focus();
+    } else {
+        location.replace(hash);
     }
 
-    targeting = true;
-    location.replace(hash);
     targeting = false;
 }
 
-async function genericSubmit(event) {
+function genericSubmit(event) {
     const r = submitRequest(event);
     if (!r) {
         return;
@@ -276,8 +280,7 @@ async function genericSubmit(event) {
     event.preventDefault();
 
     history.pushState(null, '', r.url);
-
-    target(r.url);
+    target(new URL(r.url).hash);
 }
 
 function setInput(event) {
@@ -321,6 +324,9 @@ function setCategory(event) {
 }
 
 document.addEventListener('submit', genericSubmit);
+window.addEventListener('popstate', () => {
+    target(window.location.hash);
+});
 
 switch (document.readyState) {
 case 'interactive':
