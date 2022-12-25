@@ -15,12 +15,6 @@ main header {
     margin-block: $line ;
 }
 
-@media screen {
-    #sidebar > * {
-        margin-block: $line ;
-    }
-}
-
 main > :is(ul, ol) {
     padding-inline-start:
             lerp(0rem, 2rem,

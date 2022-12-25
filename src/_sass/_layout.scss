@@ -2,10 +2,12 @@
     #sidebar {
         flex-grow: 1 ;
         flex-shrinK: 1 ;
+
+        display: flex ;
+        flex-direction: column ;
+        row-gap: $line ;
     }
-    main > :first-child {
-        margin-block-start: 0 ;
-    }
+
     #paging {
         inline-size: $paragraph-width ;
         max-inline-size: 100% ;
@@ -13,11 +15,5 @@
     #sidebar {
         inline-size: $side-width ;
         max-inline-size: 100% ;
-    }
-    #sidebar > :first-child {
-        margin-block-start: 0 ;
-    }
-    #sidebar > :last-child {
-        margin-block-end: 0 ;
     }
 }
