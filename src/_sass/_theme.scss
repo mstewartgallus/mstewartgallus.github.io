@@ -11,10 +11,6 @@ hgroup p {
     margin-block: 0 ;
 }
 
-main header {
-    margin-block: $line ;
-}
-
 main > :is(ul, ol) {
     padding-inline-start:
             lerp(0rem, 2rem,
@@ -98,7 +94,7 @@ main [rel~="bookmark"] {
 ul.tags {
     all: unset ;
     display: flex ;
-    margin-block: $line ;
+    margin-block-start: $line ;
     flex-wrap: wrap ;
     column-gap: 1em ;
 }
