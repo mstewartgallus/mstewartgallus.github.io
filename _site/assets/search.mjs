@@ -247,22 +247,9 @@ function submitRequest(event) {
     return new Request(url, options);
 }
 
-let targeting = false;
-
-function target(hash) {
-    if (hash == '') {
-        hash = '#';
-    }
-
-    if (targeting) {
-        return;
-    }
-    targeting = true;
-
+function target() {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     document.documentElement.focus({ preventScroll: true });
-    location.replace(hash);
-
-    targeting = false;
 }
 
 const doctitle = document.title;
@@ -280,9 +267,6 @@ function setURLSubmit(event) {
     event.preventDefault();
 
     let url = r.url;
-    if (new URL(url).hash == '') {
-        url = url + '#';
-    }
 
     const { hash, searchParams } = new URL(url);
 
@@ -294,11 +278,11 @@ function setURLSubmit(event) {
     // FIXME detect replace request
     // dedup as a temporary hack
     if (url === window.location.toString()) {
-        return;
+        history.replaceState(null, '', url);
+    } else {
+        history.pushState(null, '', url);
     }
-
-    history.pushState(null, '', url);
-    target(hash);
+    target();
 }
 
 function setInput(event) {
