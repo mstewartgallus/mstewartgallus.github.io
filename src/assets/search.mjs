@@ -17,9 +17,7 @@ customElements.define("search-h1", class extends HTMLElement {
     static formAssociated = true;
 
     #query;
-    #focus;
     #abort;
-    #doctitle;
 
     #shadow;
     #internals;
@@ -45,13 +43,10 @@ customElements.define("search-h1", class extends HTMLElement {
         const copy = this.ownerDocument.importNode(template, true);
         this.#shadow.appendChild(copy);
         this.#query = this.#shadow.getElementById('query');
-        this.#focus = this.#shadow.getElementById('focus');
-        this.#doctitle = this.ownerDocument.title;
     }
 
     disconnectedCallback() {
         this.#query = null;
-        this.#focus = null;
     }
 
     formAssociatedCallback(form) {
@@ -63,8 +58,7 @@ customElements.define("search-h1", class extends HTMLElement {
         this.#abort = abort;
         form.addEventListener('submit',
                               e => this.#update(),
-                              { signal: abort.signal }
-                             );
+                              { signal: abort.signal });
     }
 
     #update() {
@@ -76,12 +70,7 @@ customElements.define("search-h1", class extends HTMLElement {
 
         const query = data.get('s') ?? '';
 
-        this.#query.textContent = query ? `${query}\u2009—\u2009` : '';
-
-        this.ownerDocument.title = `${query} — ${this.#doctitle}`;
-
-        // // FIXME don't focus first time
-        // this.#focus.focus();
+        this.#query.textContent = query !== '' ? `${query}\u2009—\u2009` : '';
     }
 });
 
@@ -90,7 +79,7 @@ customElements.define("search-results", class extends HTMLElement {
 
     #posts;
 
-    #list;
+    #entries;
     #abort;
 
     #internals;
@@ -108,7 +97,7 @@ customElements.define("search-results", class extends HTMLElement {
             return;
         }
 
-        if (this.#list) {
+        if (this.#entries) {
             return;
         }
 
@@ -116,11 +105,13 @@ customElements.define("search-results", class extends HTMLElement {
 
         const copy = this.ownerDocument.importNode(template, true);
         this.#shadow.replaceChildren(copy);
-        this.#list = this.#shadow.getElementById('search-list');
+
+        const list = this.#shadow.getElementById('search-list');
+        this.#entries = Array.from(list.getElementsByTagName('li'));
     }
 
     disconnectedCallback() {
-        this.#list = null;
+        this.#entries = null;
     }
 
     formAssociatedCallback(form) {
@@ -153,42 +144,63 @@ customElements.define("search-results", class extends HTMLElement {
     }
 
     #busy() {
-        const lis = Array.from(this.#list.getElementsByTagName('li'));
-
-        for (let ii = 0; ii < lis.length; ++ii) {
-            const li = lis[ii];
-            li.setAttribute('aria-hidden', 'true');
-        }
-    }
-
-    async #render() {
-        const lis = Array.from(this.#list.getElementsByTagName('li'));
-
-        const posts = (await this.#posts).slice(0, lis.length);
-
-        // FIXME wait for everything to load before rendering?
-        for (let ii = 0; ii < lis.length; ++ii) {
-            const li = lis[ii];
+        const entries = this.#entries;
+        const len = entries.length;
+        for (let ii = 0; ii < len; ++ii) {
+            const li = entries[ii];
 
             const output = li.getElementsByTagName('output')[0];
             if (!output) {
                 continue;
             }
+
             const anchor = output.getElementsByTagName('a')[0];
             if (!anchor) {
-                continue;
+                return;
             }
 
-            const postPs = posts[ii];
-            if (!postPs) {
-                continue;
+            li.setAttribute('aria-hidden', 'true');
+            output.setAttribute('aria-busy', 'true');
+            anchor.removeAttribute('href');
+        }
+    }
+
+    async #render() {
+        const entries = this.#entries;
+        const posts = (await this.#posts).slice(0, this.#entries.length);
+
+        const len = posts.length;
+
+        const waiters = posts.map((postPs, ii) => (async () => {
+            const li = entries[ii];
+
+            const output = li.getElementsByTagName('output')[0];
+            if (!output) {
+                return;
+            }
+
+            const anchor = output.getElementsByTagName('a')[0];
+            if (!anchor) {
+                return;
             }
 
             const post = fromPagefind(await postPs.data());
 
             anchor.href = post.url;
             anchor.textContent = post.title;
+        })());
 
+        await Promise.all(waiters);
+
+        for (let ii = 0; ii < len; ++ii) {
+            const li = entries[ii];
+
+            const output = li.getElementsByTagName('output')[0];
+            if (!output) {
+                continue;
+            }
+
+            output.setAttribute('aria-busy', 'false');
             li.setAttribute('aria-hidden', 'false');
         }
     }
@@ -271,7 +283,9 @@ function target(hash) {
     targeting = false;
 }
 
-function genericSubmit(event) {
+const doctitle = document.title;
+
+function setURLSubmit(event) {
     const r = submitRequest(event);
     if (!r) {
         return;
@@ -279,8 +293,18 @@ function genericSubmit(event) {
 
     event.preventDefault();
 
-    history.pushState(null, '', r.url);
-    target(new URL(r.url).hash);
+    const { url } = r;
+    const { hash, searchParams } = new URL(url);
+    const query = searchParams.get('s') ?? '';
+    const title = query !== '' ? `${query}\u2009—\u2009${doctitle}` : '';
+
+    document.title = title;
+    // FIXME detect replace request
+    // dedup as a temporary hack
+    if (url !== window.location.toString()) {
+        history.pushState(null, '', url);
+    }
+    target(hash);
 }
 
 function setInput(event) {
@@ -323,10 +347,7 @@ function setCategory(event) {
     }
 }
 
-document.addEventListener('submit', genericSubmit);
-window.addEventListener('popstate', () => {
-    target(window.location.hash);
-});
+document.addEventListener('submit', setURLSubmit);
 
 switch (document.readyState) {
 case 'interactive':
@@ -344,7 +365,11 @@ window.addEventListener('popstate', setInput);
 window.addEventListener('popstate', setCategory);
 window.addEventListener('popstate', setTag);
 
-window.dispatchEvent(new PopStateEvent('popstate'));
-
 const search = document.getElementById('search');
-search.requestSubmit();
+
+window.addEventListener('popstate', () => {
+    // FIXME make this replace/not push
+    search.requestSubmit();
+});
+
+window.dispatchEvent(new PopStateEvent('popstate'));
