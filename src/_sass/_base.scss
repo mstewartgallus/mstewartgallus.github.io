@@ -182,12 +182,6 @@ mark {
         max-inline-size: 100% ;
     }
 
-    main {
-        box-sizing: border-box ;
-        inline-size: $main-width ;
-        max-inline-size: 100% ;
-    }
-
     // FIXME provide better fallbacks for fluid layout
     :root {
         padding-inline: 0.8rem ;

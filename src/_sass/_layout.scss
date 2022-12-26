@@ -1,10 +1,17 @@
 @media screen {
+    main {
+        box-sizing: border-box ;
+        inline-size: $main-width ;
+        max-inline-size: 100% ;
+    }
+
     .nav {
         padding: 0;
         margin: 0;
     }
     .nav > li {
         display: block;
+        max-inline-size: 100% ;
     }
 
     .nav {
@@ -20,6 +27,7 @@
     }
     .sidebar > li {
         display: block;
+        max-inline-size: 100% ;
     }
 
     .sidebar {
