@@ -37,7 +37,7 @@ a man raped a girl under cover of the night
 > {% poem %}
 I know a secret,
 for I see very well,
-even under&thinsp;—&thinsp;the night.
+even under&thinsp;---&thinsp;the night.
 These eyes catch many things
 I will never tell.
 {% endpoem %}
@@ -45,10 +45,10 @@ I will never tell.
 > {% poem %}
 The truth came out
 decades later at the trial
-Your courts&thinsp;—&thinsp;are not like ours
-We have eyes&thinsp;—&thinsp;which catch
+Your courts&thinsp;---&thinsp;are not like ours
+We have eyes&thinsp;---&thinsp;which catch
 The beating of the heart
-Whispers&thinsp;—&thinsp;inside the throat
+Whispers&thinsp;---&thinsp;inside the throat
 {% endpoem %}
 > 
 > {% poem %}

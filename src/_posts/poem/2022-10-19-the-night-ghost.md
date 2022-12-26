@@ -18,7 +18,7 @@ To his crypt by strange means is compelled
 And sleeping as a corpse in darkness rotting
 He dreams forth the red eyed thing
 So rises from the sleeper's breath
-Comes the Night Ghost&thinsp;—&thinsp;who brings death!
+Comes the Night Ghost&thinsp;---&thinsp;who brings death!
 {% endpoem %}
 
 {% poem %}
