@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-12-26T15:03:48-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>mspondee</name></author><entry><title type="html">Hausos</title><link href="https://mstewartgallus.github.io/poem/2022/12/25/hausos/" rel="alternate" type="text/html" title="Hausos" /><published>2022-12-25T22:00:00-08:00</published><updated>2022-12-25T22:00:00-08:00</updated><id>https://mstewartgallus.github.io/poem/2022/12/25/hausos</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/12/25/hausos/"><![CDATA[<p class="stanza"><span role="presentation" class="line">As the dawn sun over waves</span><br /><span role="presentation" class="line">crashing upon the shore.</span><br /><span role="presentation" class="line">As lovely as a love goddess</span><br /><span role="presentation" class="line">ten times more.</span></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-12-26T15:17:29-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>mspondee</name></author><entry><title type="html">Hausos</title><link href="https://mstewartgallus.github.io/poem/2022/12/25/hausos/" rel="alternate" type="text/html" title="Hausos" /><published>2022-12-25T22:00:00-08:00</published><updated>2022-12-25T22:00:00-08:00</updated><id>https://mstewartgallus.github.io/poem/2022/12/25/hausos</id><content type="html" xml:base="https://mstewartgallus.github.io/poem/2022/12/25/hausos/"><![CDATA[<p class="stanza"><span role="presentation" class="line">As the dawn sun over waves</span><br /><span role="presentation" class="line">crashing upon the shore.</span><br /><span role="presentation" class="line">As lovely as a love goddess</span><br /><span role="presentation" class="line">ten times more.</span></p>
 
 <p class="stanza"><span role="presentation" class="line">She threw me with a kiss.</span><br /><span role="presentation" class="line">She struck me with a dart.</span><br /><span role="presentation" class="line">Music of the harp</span><br /><span role="presentation" class="line">arrows&thinsp;&#8212;&thinsp;that do no harm&thinsp;&#8212;&thinsp;sting the heart.</span></p>
 <p class="stanza"><span role="presentation" class="line">I set my heart in a ship of stone.</span><br /><span role="presentation" class="line">I enter a deep and dreamless sleep.</span><br /><span role="presentation" class="line">And over the floor I creep</span><br /><span role="presentation" class="line">twisting and turning and winding and burning.</span></p>]]></content><author><name>mspondee</name></author><category term="Poem" /><category term="Adam" /><category term="Artemis" /><category term="Cupid" /><category term="Eve" /><category term="Hausos" /><category term="Hawah" /><category term="Psyche" /><category term="Venus" /><summary type="html"><![CDATA[As the dawn sun over wavescrashing upon the shore.As lovely as a love goddessten times more.]]></summary></entry><entry><title type="html">Nevertheless, Molossus Spondee Coded</title><link href="https://mstewartgallus.github.io/prose/2022/12/17/nevertheless/" rel="alternate" type="text/html" title="Nevertheless, Molossus Spondee Coded" /><published>2022-12-17T12:28:00-08:00</published><updated>2022-12-17T12:28:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/12/17/nevertheless</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/12/17/nevertheless/"><![CDATA[<p><a href="https://dev.to/mspondee/nevertheless-molossus-spondee-coded-1nll">Originally posted at dev.to</a>.</p>
@@ -133,9 +133,9 @@ stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.</p>
 
   <figure id="markupa">
-<figcaption><div>Markup A</div><a href="#markupa" rel="bookmark">#</a></figcaption>
+    <figcaption><div>Markup A</div><a href="#markupa" rel="bookmark">#</a></figcaption>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
     <span class="nt">&lt;ol&gt;</span>
         <span class="nt">&lt;li&gt;</span>Roses are red<span class="nt">&lt;/li&gt;</span>
@@ -145,20 +145,20 @@ break elements.</p>
     <span class="nt">&lt;/ol&gt;</span>
 <span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ol&gt;</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <figure id="markupb">
-<figcaption><div>Markup B</div><a href="#markupb" rel="bookmark">#</a></figcaption>
+    <figcaption><div>Markup B</div><a href="#markupb" rel="bookmark">#</a></figcaption>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"stanza"</span><span class="nt">&gt;</span>Roses are red<span class="nt">&lt;br&gt;</span>
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"stanza"</span><span class="nt">&gt;</span>Roses are red<span class="nt">&lt;br&gt;</span>
 Violets are blue,<span class="nt">&lt;br&gt;</span>
 Sugar is sweet<span class="nt">&lt;br&gt;</span>
 And so are you.<span class="nt">&lt;/p&gt;</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <p><a href="#markupa"><cite>Markup A</cite></a> is hard to navigate as each line in
 an ordered list must be manually tracked through.  As well <q>line
@@ -171,9 +171,9 @@ a <code class="language-plaintext highlighter-rouge">presentation</code> role do
 cruft in Firefox’s accessibility inspector.</p>
 
   <figure id="markupa2">
-<figcaption><div>Markup A'</div><a href="#markupa2" rel="bookmark">#</a></figcaption>
+    <figcaption><div>Markup A'</div><a href="#markupa2" rel="bookmark">#</a></figcaption>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
     <span class="nt">&lt;ol</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;li</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>Roses are red<span class="nt">&lt;/li&gt;</span>
@@ -183,14 +183,14 @@ cruft in Firefox’s accessibility inspector.</p>
     <span class="nt">&lt;/ol&gt;</span>
 <span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ol&gt;</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <figure id="markupa3">
-<figcaption><div>Markup A''</div><a href="#markupa3" rel="bookmark">#</a></figcaption>
+    <figcaption><div>Markup A''</div><a href="#markupa3" rel="bookmark">#</a></figcaption>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
     <span class="nt">&lt;ol</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;li</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>Roses are red<span class="nt">&lt;/li&gt;</span>
@@ -200,9 +200,9 @@ cruft in Firefox’s accessibility inspector.</p>
     <span class="nt">&lt;/ol&gt;</span>
 <span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ol&gt;</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <p>As a <i>nuclear</i> solution you can markup the text for graphical
 display using the <code class="language-plaintext highlighter-rouge">graphic</code> role as in <a href="#markupn"><cite>Markup
@@ -213,9 +213,9 @@ text, is not usually translated by automated tools and doesn’t let you
 embed more markup as appropriate.</p>
 
   <figure id="markupn">
-<figcaption><div>Markup N</div><a href="#markupn" rel="bookmark">#</a></figcaption>
+    <figcaption><div>Markup N</div><a href="#markupn" rel="bookmark">#</a></figcaption>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">role=</span><span class="s">"img"</span> <span class="na">aria-details=</span><span class="s">"transcript"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
@@ -236,9 +236,9 @@ embed more markup as appropriate.</p>
    And so are you.<span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/figcaption&gt;</span>
 <span class="nt">&lt;/figure&gt;</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <p>In some setups <a href="#markupb"><cite>Markup B</cite></a> sounds yucky.  Ending
 and starting words in separate lines like <i>red</i> and
@@ -249,31 +249,31 @@ However, on Firefox this hack breaks up lines into separate areas to
 track through.</p>
 
   <figure id="markupb2">
-<figcaption>      <div>Markup B’ <abbr title="HyperText Markup Language">HTML</abbr></div>
+    <figcaption>      <div>Markup B’ <abbr title="HyperText Markup Language">HTML</abbr></div>
 <a href="#markupb2" rel="bookmark">#</a></figcaption>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>Roses are red<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>; <span class="nt">&lt;/span&gt;&lt;br&gt;</span>
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>Roses are red<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>; <span class="nt">&lt;/span&gt;&lt;br&gt;</span>
 Violets are blue,<span class="nt">&lt;br&gt;</span>
 Sugar is sweet<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>; <span class="nt">&lt;/span&gt;&lt;br&gt;</span>
 And so are you.<span class="nt">&lt;/p&gt;</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <figure id="markupb3">
-<figcaption>      <div>Markup B’ <abbr title="Cascading Style Sheets">CSS</abbr></div>
+    <figcaption>      <div>Markup B’ <abbr title="Cascading Style Sheets">CSS</abbr></div>
 <a href="#markupb3" rel="bookmark">#</a></figcaption>
 
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.sr-only</span> <span class="p">{</span>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.sr-only</span> <span class="p">{</span>
    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span> <span class="p">;</span>
    <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span> <span class="p">;</span>
    <span class="nl">font-size</span><span class="p">:</span> <span class="m">1px</span> <span class="p">;</span>
    <span class="nl">line-height</span><span class="p">:</span> <span class="m">1px</span> <span class="p">;</span>
    <span class="nl">color</span><span class="p">:</span> <span class="nb">transparent</span> <span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <p>No revisions of <a href="#markupa"><cite>Markup A</cite></a> or <a href="#markupb"><cite>Markup B</cite></a> ensure
 proper pronunciation of stress and sounds.  Only American English is
@@ -313,16 +313,16 @@ something like <a href="#indentcss"><cite>Indent <abbr title="Cascading Style Sh
 hanging indent layout is not really correct.</p>
 
   <figure id="indentcss">
-<figcaption>      <div>Indent <abbr title="Cascading Style Sheets">CSS</abbr></div>
+    <figcaption>      <div>Indent <abbr title="Cascading Style Sheets">CSS</abbr></div>
 <a href="#indentcss" rel="bookmark">#</a></figcaption>
 
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.line</span> <span class="p">{</span>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.line</span> <span class="p">{</span>
    <span class="nl">text-indent</span><span class="p">:</span> <span class="m">-4ch</span> <span class="p">;</span>
    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">4ch</span> <span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <p>You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text <em>within</em> the
@@ -331,10 +331,10 @@ line block to the right.  Something like <a href="#alignlastcss"><cite>Align Las
 even this layout fails when you overflow multiple lines.</p>
 
   <figure id="alignlastcss">
-<figcaption>      <div>Align Last <abbr title="Cascading Style Sheets">CSS</abbr></div>
+    <figcaption>      <div>Align Last <abbr title="Cascading Style Sheets">CSS</abbr></div>
 <a href="#alignlastcss" rel="bookmark">#</a></figcaption>
 
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.stanza</span> <span class="p">{</span>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.stanza</span> <span class="p">{</span>
    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span> <span class="p">;</span>
    <span class="nl">flex-direction</span><span class="p">:</span> <span class="n">column</span> <span class="p">;</span>
    <span class="nl">align-items</span><span class="p">:</span> <span class="n">start</span> <span class="p">;</span>
@@ -343,9 +343,9 @@ even this layout fails when you overflow multiple lines.</p>
    <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span> <span class="p">;</span>
    <span class="nl">text-align-last</span><span class="p">:</span> <span class="n">end</span> <span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
   <p><a href="#example"><cite>Example</cite></a> and <a href="#examplecode"><cite>Example Code</cite></a> are similar to
 the current compromise I use on this site.</p>
@@ -376,9 +376,9 @@ the current compromise I use on this site.</p>
 </figure>
 
   <figure id="examplecode">
-<figcaption><div>Example Code</div><a href="#examplecode" rel="bookmark">#</a></figcaption>
+    <figcaption><div>Example Code</div><a href="#examplecode" rel="bookmark">#</a></figcaption>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
 <span class="nf">#scope</span> <span class="nt">p</span> <span class="p">{</span>
    <span class="nl">text-indent</span><span class="p">:</span> <span class="m">0</span> <span class="p">;</span>
    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span> <span class="p">;</span>
@@ -396,9 +396,9 @@ the current compromise I use on this site.</p>
   <span class="nt">&lt;span&gt;</span>aaaaaaaaaaaaaaaa.<span class="nt">&lt;/span&gt;</span>
 <span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-</figure>
+  </figure>
 
 </section>
 <section aria-labelledby="conclusion">  <header>    <hgroup>      <h2 id="conclusion">Conclusion</h2>

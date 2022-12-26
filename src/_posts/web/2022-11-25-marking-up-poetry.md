@@ -19,12 +19,12 @@ reader yourself.
 {:#accessibility}
 
 {% capture markupb %}
-```html
+~~~ html
 <p class="stanza">Roses are red<br>
 Violets are blue,<br>
 Sugar is sweet<br>
 And so are you.</p>
-```
+~~~
 {% endcapture %}
 
 {% capture markupa %}
@@ -129,16 +129,16 @@ In [<cite>Markup B</cite>](#markupb) poems are sequences of stanzas,
 stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.
 
-<figure>
+<figure markdown="1">
 <figcaption>Markup A</figcaption>
-{{ markupa | markdownify }}
+{{ markupa }}
 </figure>
 {:#markupa}
 
 
-<figure>
+<figure markdown="1">
 <figcaption>Markup B</figcaption>
-{{ markupb | markdownify }}
+{{ markupb }}
 </figure>
 {:#markupb}
 
@@ -152,15 +152,15 @@ the `presentation` role in a list item for a list already marked with
 a `presentation` role doesn't do much, but such markup can reduce
 cruft in Firefox's accessibility inspector.
 
-<figure>
+<figure markdown="1">
 <figcaption>Markup A'</figcaption>
-{{ markupa2 | markdownify }}
+{{ markupa2 }}
 </figure>
 {:#markupa2}
 
-<figure>
+<figure markdown="1">
 <figcaption>Markup A''</figcaption>
-{{ markupa3 | markdownify }}
+{{ markupa3 }}
 </figure>
 {:#markupa3}
 
@@ -174,9 +174,9 @@ here. `aria-label` has a tendency to work poorly with newlines in
 text, is not usually translated by automated tools and doesn't let you
 embed more markup as appropriate.
 
-<figure>
+<figure markdown="1">
 <figcaption>Markup N</figcaption>
-{{ markupn | markdownify }}
+{{ markupn }}
 </figure>
 {:#markupn}
 
@@ -188,15 +188,15 @@ A'</cite>](#markupb2) and [<cite>Markup B' CSS</cite>](#markupb3) to work around
 However, on Firefox this hack breaks up lines into separate areas to
 track through.
 
-<figure>
+<figure markdown="1">
 <figcaption markdown="span">Markup B' HTML</figcaption>
-{{ markupb2 | markdownify }}
+{{ markupb2 }}
 </figure>
 {:#markupb2}
 
-<figure>
+<figure markdown="1">
 <figcaption markdown="span">Markup B' CSS</figcaption>
-{{ markupb3 | markdownify }}
+{{ markupb3 }}
 </figure>
 {:#markupb3}
 
@@ -260,9 +260,9 @@ You can approximate a poetry layout with a hanging indent layout
 something like [<cite>Indent CSS</cite>](#indentcss).  However, a
 hanging indent layout is not really correct.
 
-<figure>
+<figure markdown="1">
 <figcaption markdown="span">Indent CSS</figcaption>
-{{ indentcss | markdownify }}
+{{ indentcss }}
 </figure>
 {:#indentcss}
 
@@ -272,9 +272,9 @@ line block to the right.  Something like [<cite>Align Last
 CSS</cite>](#alignlastcss) almost works for a poetry layout.  However,
 even this layout fails when you overflow multiple lines.
 
-<figure>
+<figure markdown="1">
 <figcaption markdown="span">Align Last CSS</figcaption>
-{{ alignlastcss | markdownify }}
+{{ alignlastcss }}
 </figure>
 {:#alignlastcss}
 
@@ -333,9 +333,9 @@ the current compromise I use on this site.
 </figure>
 {:#example}
 
-<figure>
+<figure markdown="1">
 <figcaption>Example Code</figcaption>
-{{ examplecode | markdownify }}
+{{ examplecode }}
 </figure>
 {:#examplecode}
 
