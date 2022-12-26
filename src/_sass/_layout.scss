@@ -1,29 +1,32 @@
 @media screen {
-    .feature-first {
+    .nav {
         padding: 0;
         margin: 0;
     }
-    .feature-first > li {
+    .nav > li {
         display: block;
-        margin-block: $line ;
-    }
-    .feature-first > :first-child {
-        margin-block-start: 0 ;
-    }
-    .feature-first > :last-child {
-        margin-block-end: 0 ;
     }
 
-    .feature-first {
-        column-count: 2 ;
-        column-width: $paragraph-width ;
-
+    .nav {
+        display: flex ;
         column-gap: 1rem ;
+        row-gap: $line ;
+        flex-wrap: wrap ;
     }
 
-    .feature-first > :first-child {
-        break-after: always ;
-        break-inside: avoid ;
+    .sidebar {
+        padding: 0;
+        margin: 0;
+    }
+    .sidebar > li {
+        display: block;
+    }
+
+    .sidebar {
+        display: flex ;
+        column-gap: 1rem ;
+        row-gap: $line ;
+        flex-direction: column ;
     }
 
     #paging {
