@@ -17,7 +17,7 @@ The clock 9:19 an hour behind
 
 {% poem %}
 Paper scrunching, crackling
-Fans, the <abbr role="presentation">AC</abbr>? humming
+Fans, the AC? humming
 Keypresses tapping
 
 The textured chiclet keyboard
@@ -26,3 +26,5 @@ Soft dry socks warm my feet
 
 Coffee stale on my tongue
 {% endpoem %}
+
+*[AC]: Air Conditioner

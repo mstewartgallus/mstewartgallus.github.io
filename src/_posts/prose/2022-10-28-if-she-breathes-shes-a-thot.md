@@ -36,9 +36,9 @@ I fell asleep.
 
 The supernatural intruded slowly.
 
-The first night when I was wanking away at 12&nbsp;<abbr>AM</abbr>
-imagining my ass being penetrated I heard a loud buzzing sound like
-wasps.  I put it down to nerves.
+The first night when I was wanking away at 12&nbsp;AM imagining my ass
+being penetrated I heard a loud buzzing sound like wasps.  I put it
+down to nerves.
 
 Steadily the phenomenon added up.  A loud hum at the midnight hours.
 When I rested before bed a sound like bells.  When I looked out one
@@ -146,3 +146,5 @@ me as if I was buried beneath the earth or there was a flickering red,
 black, yellow vast expanse behind my closed eyelids.
 
 I thought for a while I was free of Must.
+
+*[AM]: Ante Meridiem

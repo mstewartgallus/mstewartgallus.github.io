@@ -146,8 +146,7 @@ break elements.
 an ordered list must be manually tracked through.  As well <q>line
 <var>m</var> of <var>n</var></q> is repeated for every line of
 [<cite>Markup A</cite>](#markupa).  You can use the `presentation`
-<abbr title="Accessible Rich Internet Applications">ARIA</abbr> role
-as in [<cite>Markup A</cite>](#markupa2) and [<cite>Markup
+ARIA role as in [<cite>Markup A</cite>](#markupa2) and [<cite>Markup
 A''</cite>](#markupa3) to ameliorate the problem.  By the spec using
 the `presentation` role in a list item for a list already marked with
 a `presentation` role doesn't do much, but such markup can reduce
@@ -185,19 +184,18 @@ In some setups [<cite>Markup B</cite>](#markupb) sounds yucky.  Ending
 and starting words in separate lines like <i>red</i> and
 <i>Violets</i> run together.  You might include extra punctuation
 annotated with a screen-reader-only class as with [<cite>Markup
-A'</cite>](#markupb2) and [<cite>Markup B'
-<abbr>CSS</abbr></cite>](#markupb3) to work around this issue.
+A'</cite>](#markupb2) and [<cite>Markup B' CSS</cite>](#markupb3) to work around this issue.
 However, on Firefox this hack breaks up lines into separate areas to
 track through.
 
 <figure>
-<figcaption>Markup B' <abbr title="HyperText Markup Language">HTML</abbr></figcaption>
+<figcaption markdown="span">Markup B' HTML</figcaption>
 {{ markupb2 | markdownify }}
 </figure>
 {:#markupb2}
 
 <figure>
-<figcaption>Markup B' <abbr title="Cascading Style Sheets">CSS</abbr></figcaption>
+<figcaption markdown="span">Markup B' CSS</figcaption>
 {{ markupb3 | markdownify }}
 </figure>
 {:#markupb3}
@@ -259,11 +257,11 @@ layout for overlong lines is to align the first line ragged right and
 all other lines ragged left.
 
 You can approximate a poetry layout with a hanging indent layout
-something like [<cite>Indent <abbr>CSS</abbr></cite>](#indentcss).  However, a
+something like [<cite>Indent CSS</cite>](#indentcss).  However, a
 hanging indent layout is not really correct.
 
 <figure>
-<figcaption>Indent <abbr>CSS</abbr></figcaption>
+<figcaption markdown="span">Indent CSS</figcaption>
 {{ indentcss | markdownify }}
 </figure>
 {:#indentcss}
@@ -271,11 +269,11 @@ hanging indent layout is not really correct.
 You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text *within* the
 line block to the right.  Something like [<cite>Align Last
-<abbr>CSS</abbr></cite>](#alignlastcss) almost works for a poetry layout.
-However, even this layout fails when you overflow multiple lines.
+CSS</cite>](#alignlastcss) almost works for a poetry layout.  However,
+even this layout fails when you overflow multiple lines.
 
 <figure>
-<figcaption>Align Last <abbr>CSS</abbr></figcaption>
+<figcaption markdown="span">Align Last CSS</figcaption>
 {{ alignlastcss | markdownify }}
 </figure>
 {:#alignlastcss}
@@ -363,9 +361,17 @@ started with screen readers but they might be a little old.
 ## And One More Thing
 {:#onemorething}
 
-As of this blog post, the [<cite><abbr>CSS</abbr> Speech
+As of this blog post, the [<cite>CSS Speech
 Module</cite>](https://www.w3.org/TR/css-speech-1/) has never really
 gone anywhere.  Perhaps in the future the `voice-stress`,
 `voice-duration` (for long syllables), `voice-pitch` (for pitch
 accent) and `pause` properties would solve these sort of accessibility
 problems.
+
+*[HTML]: HyperText Markup Language
+
+*[CSS]: Cascading Style Sheets
+
+*[ARIA]: Accessible Rich Internet Applications
+
+

@@ -36,7 +36,7 @@ tags:
 - I began to suffer at college
 - I sat in a haze at the library through exams for courses I hadn't been to all semester
 - but I pushed through
-- I got an Associate's Degree in <abbr>CS</abbr>
+- I got an Associate's Degree in CS
 - I worked part time 10 hours a week
 - barely
 - are a job that didn't really use my skills
@@ -72,3 +72,5 @@ already punishment enough.
 
 Things are getting better. I'm working more. I hope I'll be able to
 get a job making real use of my coding skills eventually.
+
+*[CS]: Computer Science
