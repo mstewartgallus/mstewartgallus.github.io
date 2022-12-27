@@ -2,6 +2,10 @@
 // easier to make relatively consistent lightness but still not
 // perceptually uniform.
 
+// https://accessiblepalette.com/?lightness=97,79,75,23,11,57.8,48,40.2,31.8,10&b90000=1,29&dc0000=1,0&744e42=1,0&eed15c=1,-30&00FF00=1,0&0000c1=1,-20&ff00ce=1,0&2b3429=1,0
+
+// rework colors bleh
+
 :root {
     --canvas: Canvas ;
     --canvas-text: CanvasText ;
@@ -48,52 +52,50 @@
 // https://files.upei.ca/arts/psychology/nilsson_color.pdf
 @media screen and (forced-colors: none) {
     :root {
-        --canvas: hsl(340deg 30% 97%);
-        --canvas-text: hsl(234deg 50% 3%);
+        --canvas: #FFF4F1 ;
+        --canvas-text: black ;
 
-        --emphasis-text: hsl(353deg 70% 34%);
-        --green-text: hsl(120deg 30% 9%);
+        --emphasis-text: #6B180A ;
+        --green-text: #003A00 ;
 
         --gray-text: grey ;
 
         --mark: yellow ;
         --mark-text: black ;
 
-        --accent-color: hsl(160deg 100% 9%);
+        --accent-color: #2D1200 ;
         --accent-color-text: white ;
 
         --selected-item: hsl(225deg 40% 31%);
         --selected-item-text: white ;
 
-        // Ripped from
-        // https://html.spec.whatwg.org/multipage/rendering.html#phrasing-content-3
-        --link-text: hsl(240deg 100% 47%);
-        --visited-text: hsl(271deg 68% 32%);
+        --link-text: #0024CD ;
+        --visited-text: #5F1B4E ;
         --active-text: hsl(0deg 100% 50%);
 
-        --highlight: hsl(143deg 100% 25%);
+        --highlight: #003A00 ;
         --highlight-text: black ;
 
-        --field: white ;
-        --field-text: black ;
+        --field: #FFF2D6 ;
+        --field-text: #2D1200 ;
 
-        --button-face: white ;
-        --button-text: black ;
-        --button-border: black ;
+        --button-face: #FFF2D6 ;
+        --button-text: #2D1200 ;
+        --button-border: #2D1200 ;
     }
 }
 
 @media screen and (prefers-color-scheme: dark) and (forced-colors: none) {
     :root {
-        --canvas: hsl(97deg 25% 7%);
-        --canvas-text: hsl(58deg 33% 70%);
+        --canvas: #1A1F19 ;
+        --canvas-text: #FFEFCC ;
 
-        --gray-text: gray ;
+        --gray-text: #A3A7A1 ;
 
         --mark: hsl(48deg 100% 31%);
         --mark-text: white ;
 
-        --emphasis-text: hsl(11deg 42% 53%);
+        --emphasis-text: #FFA088 ;
         --green-text: hsl(90deg 43% 69%);
 
         --accent-color: hsl(88deg 100% 59%);
@@ -102,11 +104,11 @@
         --selected-item: hsl(188deg 100% 56%);
         --selected-item-text: black ;
 
-        --link-text: hsl(240deg 100% 88%);
-        --visited-text: hsl(291deg 68% 81%);
+        --link-text: #CBBCF2 ;
+        --visited-text: #FFA8E3 ;
         --active-text: hsl(346deg 100% 59%);
 
-        --highlight: hsl(112deg 90% 50%);
+        --highlight: #17E30E ;
         --highlight-text: white ;
 
         --field: hsl(250deg 80% 10%);

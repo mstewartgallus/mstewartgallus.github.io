@@ -107,12 +107,14 @@ ul.tags {
     content: "";
 }
 
-.greentext {
-    color: var(--green-text) ;
-}
 
 .greentext {
     all: unset ;
+}
+.greentext {
+    color: var(--green-text) ;
+}
+.greentext {
     display: block ;
     list-style-position: inside ;
     @include hyphens(manual);
