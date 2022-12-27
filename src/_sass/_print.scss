@@ -1,15 +1,15 @@
+@page {
+    size: A4 portrait ;
+    margin: 1.5in 0 ;
+}
+
 @media print {
-    @page {
-        size: A4 portrait ;
-        margin: 1.5in 0 ;
-    }
     :root {
         padding-inline-start: 1.5in ;
-        // font-size: 11pt ;
         font-size: 18px * $remperpx;
     }
 
-    #paging, #search, #related, #breadcrumbs, #tags {
+    #paging, #search, #related, #breadcrumbs {
         display: none ;
     }
 
@@ -29,8 +29,6 @@
 
 h1, h2, h3, h4, h5, h6 {
     break-inside: avoid ;
-}
-h1, h2, h3, h4, h5, h6 {
     break-after: avoid ;
 }
 

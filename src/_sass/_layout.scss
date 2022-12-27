@@ -1,44 +1,31 @@
-@media screen {
-    main {
-        box-sizing: border-box ;
-        inline-size: $main-width ;
-        max-inline-size: 100% ;
-    }
+.nav {
+    padding: 0;
+    margin: 0;
+}
+.nav > li {
+    display: block;
+    max-inline-size: 100% ;
+}
 
-    .nav {
-        padding: 0;
-        margin: 0;
-    }
-    .nav > li {
-        display: block;
-        max-inline-size: 100% ;
-    }
+.nav {
+    display: flex ;
+    column-gap: 1rem ;
+    row-gap: $line ;
+    flex-wrap: wrap ;
+}
 
-    .nav {
-        display: flex ;
-        column-gap: 1rem ;
-        row-gap: $line ;
-        flex-wrap: wrap ;
-    }
+.sidebar {
+    padding: 0;
+    margin: 0;
+}
+.sidebar > li {
+    display: contents;
+    max-inline-size: 100% ;
+}
 
-    .sidebar {
-        padding: 0;
-        margin: 0;
-    }
-    .sidebar > li {
-        display: block;
-        max-inline-size: 100% ;
-    }
-
-    .sidebar {
-        display: flex ;
-        column-gap: 1rem ;
-        row-gap: $line ;
-        flex-direction: column ;
-    }
-
-    #paging {
-        inline-size: $paragraph-width ;
-        max-inline-size: 100% ;
-    }
+.sidebar {
+    display: flex ;
+    column-gap: 1rem ;
+    row-gap: $line ;
+    flex-direction: column ;
 }

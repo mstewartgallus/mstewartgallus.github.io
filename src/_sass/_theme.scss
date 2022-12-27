@@ -37,13 +37,16 @@ main [rel~="bookmark"] {
 }
 
 .breadcrumb li::before {
+    color: var(--emphasis-text);
+}
+
+.breadcrumb li::before {
   display: inline-block;
   margin-inline-end: 0.5em;
   transform: rotate(15deg);
   border-inline-end: 0.1em solid currentcolor;
   block-size: 0.8em;
   content: "";
-  color: var(--emphasis-text);
 }
 
 .sr-only {
@@ -105,10 +108,13 @@ ul.tags {
 }
 
 .greentext {
+    color: var(--green-text) ;
+}
+
+.greentext {
     all: unset ;
     display: block ;
     list-style-position: inside ;
-    color: var(--green-text) ;
     @include hyphens(manual);
 }
 

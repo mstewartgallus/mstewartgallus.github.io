@@ -9,6 +9,43 @@ input, button, select, option {
     appearance: none ;
 }
 
+
+input {
+    background-color: var(--field);
+    color: var(--field-text);
+}
+
+button {
+    background-color: var(--button-face);
+    color: var(--button-text);
+    border-color: var(--button-border);
+}
+
+button:active {
+    background-color: var(--button-text) ;
+    color: var(--button-face) ;
+}
+
+option {
+    background-color: var(--field);
+    color: var(--field-text);
+}
+option:checked {
+    background-color: var(--field-text);
+    color: var(--field);
+}
+
+input[type="checkbox"] {
+    border-color: var(--button-border) ;
+    background-color: var(--button-face) ;
+    color: var(--button-text) ;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--accent-color) ;
+    color: var(--accent-color-text) ;
+}
+
 label, button, input, option {
     box-sizing: border-box ;
     block-size: $line ;
@@ -65,30 +102,6 @@ option:checked {
     font-weight: bold ;
 }
 
-input {
-    background-color: var(--field);
-    color: var(--field-text);
-}
-
-button {
-    background-color: var(--button-face);
-    color: var(--button-text);
-    border-color: var(--button-border);
-}
-
-button:active {
-    background-color: var(--button-text) ;
-    color: var(--button-face) ;
-}
-
-option {
-    background-color: var(--field);
-    color: var(--field-text);
-}
-option:checked {
-    background-color: var(--field-text);
-    color: var(--field);
-}
 
 :is(button, select):focus-visible {
     outline-offset: 0;
@@ -127,16 +140,7 @@ input[type="checkbox"] {
 }
 
 
-input[type="checkbox"] {
-    border-color: var(--button-border) ;
-    background-color: var(--button-face) ;
-    color: var(--button-text) ;
-}
-
 input[type="checkbox"]:checked {
-    background-color: var(--accent-color) ;
-    color: var(--accent-color-text) ;
-
     border: unset ;
 }
 

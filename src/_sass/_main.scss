@@ -3,7 +3,7 @@
 // default ratio on browsers is 1rem = 16px
 $remperpx: 1rem / 16px ;
 
-// Noto Sans aspect ratio :(
+// Noto Sans x height :(
 $ex-height: 0.536 ;
 
 $paragraph-width: 50.7ch ;
@@ -95,9 +95,6 @@ $line: ($ex-height * $lh * 1rem) / 1ex ;
     text-underline-position: $value ;
 }
 
-@import "_vars.scss";
-@import "_clear.scss";
-
 @import "_theme.scss";
 @import "_syntax.scss";
 @import "_poetry.scss";
@@ -107,6 +104,8 @@ $line: ($ex-height * $lh * 1rem) / 1ex ;
 @import "_base.scss";
 
 @import "_print.scss";
+
+@import "_vars.scss";
 
 // body {
 //     background: linear-gradient(grey, Canvas);

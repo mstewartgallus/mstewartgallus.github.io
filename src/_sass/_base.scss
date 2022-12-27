@@ -1,12 +1,43 @@
-p {
-    margin-block: $line ;
-    inline-size: $paragraph-width ;
-    max-inline-size: 100% ;
+::selection {
+    background-color: var(--selected-item);
+    color: var(--selected-item-text);
+}
+
+:focus-visible {
+    outline-color: var(--highlight) ;
 }
 
 :link { color: var(--link-text) ; }
 :visited { color: var(--visited-text) ; }
 :any-link:active { color: var(--active-text) ; }
+
+mark {
+    background-color: var(--mark);
+    color: var(--mark-text);
+}
+
+h1,h2,h3,h4,h5,h6, figcaption, ::marker {
+    color: var(--emphasis-text);
+}
+
+:root {
+    color-scheme: light dark ;
+
+    background-color: var(--canvas) ;
+    color: var(--canvas-text) ;
+
+    accent-color: var(--accent-color) ;
+
+    // Make the caret seeable with caret browsing?  Need to figure out
+    // a better UX here/experiment on different platforms
+    caret-color: var(--highlight) ;
+}
+
+p {
+    margin-block: $line ;
+    inline-size: $paragraph-width ;
+    max-inline-size: 100% ;
+}
 
 :any-link { border-radius: 0.01ch ; }
 
@@ -27,10 +58,16 @@ sub { font-variant-position: sub ; }
 sup { font-variant-position: super ; }
 
 abbr {
-    text-decoration: none ;
+    text-decoration: unset ;
     font-variant-caps: all-small-caps ;
 }
-cite { font-variant-caps: small-caps ; }
+address {
+    font-style: unset ;
+}
+cite {
+    font-style: unset ;
+    font-variant-caps: small-caps ;
+}
 
 table { border-collapse: collapse ; }
 
@@ -41,8 +78,9 @@ hr {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    margin: 0 ;
+    margin: unset ;
     font-size: inherit ;
+    font-style: normal ;
 }
 
 h1 { font-size: scale(2) ; }
@@ -50,26 +88,15 @@ h2 { font-size: scale(1) ; }
 
 hgroup {
     max-inline-size: 100% ;
+    margin: unset ;
+}
+
+hgroup {
+    font-style: italic;
 }
 
 blockquote {
     margin-block: $line ;
-}
-:root {
-    color-scheme: light dark ;
-
-    background-color: var(--canvas) ;
-    color: var(--canvas-text) ;
-
-    accent-color: var(--accent-color) ;
-
-    // Make the caret seeable with caret browsing?  Need to figure out
-    // a better UX here/experiment on different platforms
-    caret-color: var(--highlight) ;
-}
-
-h1,h2,h3,h4,h5,h6, figcaption, ::marker {
-    color: var(--emphasis-text);
 }
 
 
@@ -124,24 +151,10 @@ header,h1,h2,h3,h4,h5,h6 {
     @include hyphens(manual) ;
 }
 
-mark {
-    background-color: var(--mark);
-    color: var(--mark-text);
-}
-
-
-* {
-    outline-color: var(--highlight) ;
+:focus-visible {
     outline-width: 0.18rem ;
     outline-offset: 0.23em ;
-}
-:focus-visible {
     outline-style: solid ;
-}
-
-::selection {
-    background-color: var(--selected-item);
-    color: var(--selected-item-text);
 }
 
 :root {
@@ -175,18 +188,32 @@ mark {
     @include text-size-adjust(none);
 }
 
+:root, body {
+    margin: unset;
+    padding: unset;
+}
+
+:root {
+    display: flex ;
+    justify-content: start ;
+}
+
+body {
+    box-sizing: border-box ;
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+}
+
+main {
+    display: block ;
+    box-sizing: border-box ;
+    inline-size: $main-width ;
+    max-inline-size: 100% ;
+}
 
 @media screen {
     :root {
-        display: flex ;
-        justify-content: start ;
         padding-block-end: 3 * $line ;
-    }
-
-    body {
-        box-sizing: border-box ;
-        inline-size: fit-content ;
-        max-inline-size: 100% ;
     }
 
     // FIXME provide better fallbacks for fluid layout
