@@ -6,7 +6,7 @@ layout: body
 
 <form id="search" name="search" rel="search" action="{% link search.html %}">
   <ul class="nav" role="presentation">
-    <li>
+    <li role="presentation">
       <main id="main"
             aria-describedby="title"
             {% if page.date -%}data-pagefind-body{%- endif %}>
@@ -31,6 +31,6 @@ layout: body
         </search-results>
       </main>
     </li>
-    <li>{%- include sidebar.html -%}</li>
+    <li role="presentation">{%- include sidebar.html -%}</li>
   </ul>
 </form>

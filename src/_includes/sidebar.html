@@ -1,23 +1,23 @@
 <ul class="sidebar" role="presentation">
   {%- if page.url == '/' -%}
-  <li>{%- include banner.html -%}</li>
+  <li role="presentation">{%- include banner.html -%}</li>
   {%- endif -%}
 
   {%- if page.url == '/search/' -%}
-  <li>{%- include search.html -%}</li>
+  <li role="presentation">{%- include search.html -%}</li>
   {%- endif -%}
 
   {%- if page.previous.url or page.next.url -%}
-  <li>{%- include paging.html -%}</li>
+  <li role="presentation">{%- include paging.html -%}</li>
   {%- endif -%}
 
   {%- if page.date -%}
-  <li>{%- include metadata.html -%}</li>
+  <li role="presentation">{%- include metadata.html -%}</li>
   {%- endif -%}
 
-  <li>{%- include breadcrumbs.html -%}</li>
+  <li role="presentation">{%- include breadcrumbs.html -%}</li>
 
   {%- if false -%}
-  <li>{%- include related.html -%}</li>
+  <li role="presentation">{%- include related.html -%}</li>
   {%- endif -%}
 </ul>
