@@ -130,11 +130,13 @@ mark {
 }
 
 
-:focus-visible {
+* {
     outline-color: var(--highlight) ;
-    outline-style: solid ;
     outline-width: 0.18rem ;
     outline-offset: 0.23em ;
+}
+:focus-visible {
+    outline-style: solid ;
 }
 
 ::selection {

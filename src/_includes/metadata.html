@@ -4,21 +4,31 @@
     <h2 id="metadata-title">{{ site.data.strings.metadata.title | escape }}</h2>
   </hgroup>
 
-  <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
-    <a rel="author" href="{{ author.url | relative_url }}" itemprop="url">
-      {{- site.data.strings.metadata.author | escape }}:
-      @<span id="author" itemprop="name" translate="no">
-        {{- author.name | escape -}}
-      </span>
-    </a>
-  </address>
+  <dl>
+    <div>
+      <dt>{{- site.data.strings.metadata.postDate | escape -}}</dt>
+      <dd><time datetime="{{ page.date | date_to_xmlschema }}"
+                itemprop="datePublished pubdate"
+                data-pagefind-meta="date" data-pagefind-sort="date">
+          {{- page.date | date: "%Y-%m-%d" -}}
+      </time></dd>
+    </div>
+  </dl>
 
-  <div>
-    {{- site.data.strings.metadata.postDate | escape -}}:
-    <time datetime="{{ page.date | date_to_xmlschema }}"
-          itemprop="datePublished pubdate"
-          data-pagefind-meta="date" data-pagefind-sort="date">
-      {{- page.date | date: "%Y-%m-%d" -}}
-    </time>
-  </div>
+  <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+    <dl>
+      <div>
+        <dt>{{- -}}
+          <a rel="author" href="{{ author.url | relative_url }}" itemprop="url">
+            {{- site.data.strings.metadata.author | escape }}
+          </a>{{- -}}
+        </dt>
+        <dd>
+          @<span id="author" itemprop="name" translate="no">
+            {{- author.name | escape -}}
+          </span>
+        </dd>
+      </div>
+    </dl>
+  </address>
 </footer>

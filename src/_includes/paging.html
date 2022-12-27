@@ -5,17 +5,27 @@
     </hgroup>
   </header>
 
-  <div>
+  <dl>
     {%- if page.previous.url -%}
-    <a class="previous" href="{{page.previous.url}}" rel="next">
-      {{- site.data.strings.paging.previous | escape -}}: <cite>{{ page.previous.title | escape -}}</cite>
-    </a>
+    <div>
+      <dt>
+        <a class="previous" href="{{page.previous.url}}" rel="next">
+          {{- site.data.strings.paging.previous | escape -}}
+        </a>
+      </dt>
+      <dd><cite>{{ page.previous.title | escape -}}</cite></dd>
+    </div>
     {%- endif -%}
 
     {%- if page.next.url -%}
-    <a class="next" href="{{page.next.url}}" rel="prev">
-      {{- site.data.strings.paging.next | escape -}}: <cite>{{- page.next.title | escape -}}</cite>
-    </a>
+    <div>
+      <dt>
+        <a class="next" href="{{page.next.url}}" rel="prev">
+          {{- site.data.strings.paging.next | escape -}}
+        </a>
+      </dt>
+      <dd><cite>{{- page.next.title | escape -}}</cite></dd>
+    </div>
     {%- endif -%}
-  </div>
+  </dl>
 </nav>

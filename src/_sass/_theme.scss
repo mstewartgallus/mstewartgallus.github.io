@@ -46,33 +46,14 @@ main [rel~="bookmark"] {
   color: var(--emphasis-text);
 }
 
-#paging div {
-    all: unset ;
-    max-inline-size: 100% ;
-    display: flex ;
-    flex-wrap: wrap ;
-    column-gap: 1ch ;
-    justify-content: space-between ;
-}
-
-#paging div > .previous {
-    justify-self: start ;
-    align-items: start ;
-}
-#paging div > .next {
-    justify-self: end ;
-    align-items: end ;
-    text-align: end ;
-}
-
-
 .sr-only {
     position: absolute ;
     display: block ;
     z-index: 1000 ;
     background-color: var(--canvas);
-    padding-inline: 1ch ;
-    padding-block-end: 0.8ch ;
+    outline-offset: 0 ;
+    padding-inline: 1em ;
+    padding-block-end: 0.5 * $line ;
 }
 .sr-only:not(:focus-within) {
     position: absolute !important ;
@@ -87,10 +68,10 @@ main [rel~="bookmark"] {
 ul.tags {
     all: unset ;
     display: flex ;
-    margin-block: $line ;
+    margin-block-end: $line ;
     flex-wrap: wrap ;
     column-gap: 1em ;
-    inline-size: $main-width ;
+    inline-size: $paragraph-width ;
     max-inline-size: 100% ;
 }
 
