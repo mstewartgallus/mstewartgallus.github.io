@@ -1,10 +1,13 @@
-{%- if page.tags.size > 0 -%}
 {%- comment -%}
 FIXME reconsider whether to conditionally include a skip link
 {%- endcomment -%}
+{%- if page.tags.size > 0 -%}
 <div>
   <a class="sr-only" href="#title">Skip to Main Content</a>
 </div>
+{%- endif -%}
+
+{%- if page.tags.size > 0 -%}
 {%- include tags.html -%}
 {%- endif -%}
 
