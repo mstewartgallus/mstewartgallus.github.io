@@ -16,19 +16,18 @@
   </dl>
 
   <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
-    <dl>
-      <div>
-        <dt>{{- -}}
-          <a rel="author" href="{{ author.url | relative_url }}" itemprop="url">
-            {{- site.data.strings.metadata.author | escape }}
-          </a>{{- -}}
-        </dt>
-        <dd>
-          @<span id="author" itemprop="name" translate="no">
-            {{- author.name | escape -}}
-          </span>
-        </dd>
-      </div>
-    </dl>
+    <a rel="author"
+       href="{{ author.url | relative_url }}"
+       aria-describedby="author"
+       itemprop="url">
+      {{- site.data.strings.metadata.author | escape }}
+      &emsp;@<span
+               id="author"
+               aria-hidden="true"
+               translate="no"
+               itemprop="name">
+        {{- author.name | escape -}}
+      </span>
+    </a>
   </address>
 </footer>

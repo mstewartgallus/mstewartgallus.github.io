@@ -5,27 +5,23 @@
     </hgroup>
   </header>
 
-  <dl>
-    {%- if page.previous.url -%}
-    <div>
-      <dt>
-        <a class="previous" href="{{page.previous.url}}" rel="next">
-          {{- site.data.strings.paging.previous | escape -}}
-        </a>
-      </dt>
-      <dd><cite>{{ page.previous.title | escape -}}</cite></dd>
-    </div>
-    {%- endif -%}
+  {%- if page.previous.url -%}
+  <div>
+    <a href="{{page.previous.url}}" rel="next" aria-describedby="previous">
+      {{- site.data.strings.paging.previous | escape -}}
+      &emsp;<cite aria-hidden="true" id="previous">
+        {{ page.previous.title | escape -}}
+      </cite></a>
+  </div>
+  {%- endif -%}
 
-    {%- if page.next.url -%}
-    <div>
-      <dt>
-        <a class="next" href="{{page.next.url}}" rel="prev">
-          {{- site.data.strings.paging.next | escape -}}
-        </a>
-      </dt>
-      <dd><cite>{{- page.next.title | escape -}}</cite></dd>
-    </div>
-    {%- endif -%}
-  </dl>
+  {%- if page.next.url -%}
+  <div>
+    <a href="{{page.next.url}}" rel="prev" aria-describedby="next">
+      {{- site.data.strings.paging.next | escape -}}
+      &emsp;<cite aria-hidden="true" id="next">
+        {{- page.next.title | escape -}}
+      </cite></a>
+  </div>
+  {%- endif -%}
 </nav>
