@@ -1,7 +1,7 @@
 <footer aria-labelledby="tags-title">
   <div class="sr-only" id="tags-title">Tags</div>
   <ul class="tags">
-    {%- for tag in page.tags %}
+    {%- for tag in page.tags -%}
     <li>{{- -}}
       <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">{{- -}}
         #<span itemprop="keywords"
