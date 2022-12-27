@@ -4,16 +4,14 @@
     <h2 id="metadata-title">{{ site.data.strings.metadata.title | escape }}</h2>
   </hgroup>
 
-  <dl>
-    <div>
-      <dt>{{- site.data.strings.metadata.postDate | escape -}}</dt>
-      <dd><time datetime="{{ page.date | date_to_xmlschema }}"
+  <div>
+    {{- site.data.strings.metadata.postDate | escape -}}
+    &emsp;<time datetime="{{ page.date | date_to_xmlschema }}"
                 itemprop="datePublished pubdate"
                 data-pagefind-meta="date" data-pagefind-sort="date">
-          {{- page.date | date: "%Y-%m-%d" -}}
-      </time></dd>
-    </div>
-  </dl>
+      {{- page.date | date: "%Y-%m-%d" -}}
+    </time>
+  </div>
 
   <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
     <a rel="author"
