@@ -1,9 +1,9 @@
+{%- capture title -%}
+{{- site.data.strings.breadcrumbs.title | escape -}}
+{%- endcapture -%}
 <nav id="breadcrumbs" aria-labelledby="breadcrumbs-title">
-  <header class="sr-only">
-    <hgroup>
-      <h2 id="breadcrumbs-title">{{ site.data.strings.breadcrumbs.title | escape }}</h2>
-    </hgroup>
-  </header>
+  {%- include subheader.html id='breadcrumbs-title' title=title -%}
+
   {%- if page.url == '/' -%}
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}

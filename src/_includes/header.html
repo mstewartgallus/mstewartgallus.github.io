@@ -1,8 +1,8 @@
 <header>
   <hgroup>
-    <h1 tabindex="-1" id="title" itemprop="name headline title">{{- page.title | escape -}}</h1>
-    {%- if page.subtitle -%}
-    <p itemprop="subheading">{{- page.subtitle | escape -}}</p>
+    <h1 tabindex="-1" id="title" itemprop="name headline title">{{- include.title -}}</h1>
+    {%- if include.subtitle -%}
+    <p itemprop="subheading">{{- include.subtitle -}}</p>
     {%- endif -%}
   </hgroup>
 </header>

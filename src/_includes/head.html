@@ -21,9 +21,7 @@
   <link href="{{page.next.url}}" title="{{ page.next.title | escape }}" rel="prev">
   {%- endif -%}
 
-  {%- if page.url == '/search/' -%}
-  {%- include searchhead.html -%}
-  {%- endif -%}
+  {{- include.content -}}
 
   {%- include seo.html -%}
 </head>

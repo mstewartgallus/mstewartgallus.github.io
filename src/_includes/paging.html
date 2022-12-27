@@ -1,26 +1,25 @@
+{%- capture title -%}
+{{- site.data.strings.paging.title | escape -}}
+{%- endcapture -%}
 <nav id="paging" aria-labelledby="paging-title">
-  <header class="sr-only">
-    <hgroup>
-      <h2 id="paging-title">{{ site.data.strings.paging.title | escape }}</h2>
-    </hgroup>
-  </header>
+  {%- include subheader.html id='paging-title' title=title -%}
 
-  {%- if page.previous.url -%}
+  {%- if include.previous.url -%}
   <div>
-    <a href="{{page.previous.url}}" rel="next" aria-describedby="previous">
+    <a href="{{include.previous.url}}" rel="next" aria-describedby="previous">
       {{- site.data.strings.paging.previous | escape -}}
       &emsp;<cite aria-hidden="true" id="previous">
-        {{ page.previous.title | escape -}}
+        {{ include.previous.title | escape -}}
       </cite></a>
   </div>
   {%- endif -%}
 
-  {%- if page.next.url -%}
+  {%- if include.next.url -%}
   <div>
-    <a href="{{page.next.url}}" rel="prev" aria-describedby="next">
+    <a href="{{include.next.url}}" rel="prev" aria-describedby="next">
       {{- site.data.strings.paging.next | escape -}}
       &emsp;<cite aria-hidden="true" id="next">
-        {{- page.next.title | escape -}}
+        {{- include.next.title | escape -}}
       </cite></a>
   </div>
   {%- endif -%}

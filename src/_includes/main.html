@@ -1,21 +1,9 @@
-{%- comment -%}
-FIXME reconsider whether to conditionally include a skip link
-{%- endcomment -%}
-{%- if page.tags.size > 0 -%}
-<div>
-  <a class="sr-only" href="#title">Skip to Main Content</a>
-</div>
-{%- endif -%}
-
-{%- if page.tags.size > 0 -%}
-{%- include tags.html -%}
-{%- endif -%}
-
 <main id="main"
       aria-describedby="title"
       itemprop="text"
       {% if page.date -%}data-pagefind-body{%- endif %}>
-  {%- include header.html -%}
 
-  {{- content -}}
+  {%- include header.html title=include.title subtitle=include.subtitle -%}
+
+  {{- include.content -}}
 </main>

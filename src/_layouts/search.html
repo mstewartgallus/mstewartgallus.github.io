@@ -1,27 +1,20 @@
----
-layout: body
----
 {%- assign categories = site.categories | sort -%}
 {%- assign tags = site.tags | sort -%}
 
+{%- capture title -%}
+<search-h1>
+  {{- page.title | escape -}}
+</search-h1>
+{%- endcapture -%}
+
+{%- capture body -%}
 <form id="search" name="search" rel="search" action="{% link search.html %}">
   <ul class="nav" role="presentation">
     <li role="presentation">
       <main id="main"
             aria-describedby="title"
             {% if page.date -%}data-pagefind-body{%- endif %}>
-        <header>
-          <hgroup>
-            <h1 id="title">
-              <search-h1>
-                {{- page.title | escape -}}
-              </search-h1>
-            </h1>
-            {%- if page.subtitle -%}
-            <p>{{- page.subtitle | escape -}}</p>
-            {%- endif -%}
-          </hgroup>
-        </header>
+        {%- include header.html title=title -%}
 
         <div>
           {{- content -}}
@@ -34,3 +27,6 @@ layout: body
     <li role="presentation">{%- include sidebar.html -%}</li>
   </ul>
 </form>
+{%- endcapture -%}
+
+{%- include document.html content=body -%}

@@ -1,7 +1,31 @@
----
-layout: body
----
+{%- capture title -%}
+{{- page.title | escape -}}
+{%- endcapture -%}
+
+{%- capture subtitle -%}
+{{- page.subtitle | escape -}}
+{%- endcapture -%}
+
+{%- capture body -%}
 <ul class="nav" role="presentation">
-  <li role="presentation">{%- include main.html -%}</li>
+  <li role="presentation">
+    {%- comment -%}
+    FIXME reconsider whether to conditionally include a skip link
+    {%- endcomment -%}
+
+    {%- if page.tags.size > 0 -%}
+    <div>
+      <a class="sr-only" href="#title">Skip to Main Content</a>
+    </div>
+    {%- endif -%}
+
+    {%- if page.tags.size > 0 -%}
+    {%- include tags.html -%}
+    {%- endif -%}
+
+    {%- include main.html title=title subtitle=subtitle content=content -%}
+  </li>
   <li role="presentation">{%- include sidebar.html -%}</li>
 </ul>
+{%- endcapture -%}
+{%- include document.html content=body -%}
