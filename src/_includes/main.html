@@ -1,3 +1,13 @@
+{%- if page.tags.size > 0 -%}
+{%- comment -%}
+FIXME reconsider whether to conditionally include a skip link
+{%- endcomment -%}
+<div>
+  <a href="#title">Skip to Main Content</a>
+</div>
+{%- include tags.html -%}
+{%- endif -%}
+
 <main id="main"
       aria-describedby="title"
       itemprop="text"

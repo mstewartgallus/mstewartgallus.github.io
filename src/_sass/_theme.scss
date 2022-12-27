@@ -67,10 +67,8 @@ main [rel~="bookmark"] {
 
 
 .sr-only {
-    position: fixed !important ;
+    position: absolute ;
     display: block ;
-    left: 1em ;
-    top: $line ;
     z-index: 1000 ;
     background-color: var(--canvas);
     padding-inline: 1ch ;
@@ -89,9 +87,11 @@ main [rel~="bookmark"] {
 ul.tags {
     all: unset ;
     display: flex ;
-    margin-block-start: $line ;
+    margin-block: $line ;
     flex-wrap: wrap ;
     column-gap: 1em ;
+    inline-size: $main-width ;
+    max-inline-size: 100% ;
 }
 
 :is(#toc) ul {

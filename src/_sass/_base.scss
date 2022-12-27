@@ -115,6 +115,10 @@ figure {
     overflow: auto ;
 }
 
+h1,h2,h3,h4,h5,h6 {
+    border-radius: 0.01ch ;
+}
+
 header,h1,h2,h3,h4,h5,h6 {
     font-variant-numeric: proportional-nums lining-nums ;
     @include hyphens(manual) ;
@@ -125,10 +129,11 @@ mark {
     color: var(--mark-text);
 }
 
+
 :focus-visible {
     outline-color: var(--highlight) ;
     outline-style: solid ;
-    outline-width: 0.19em ;
+    outline-width: 0.18rem ;
     outline-offset: 0.23em ;
 }
 
