@@ -1,11 +1,8 @@
 {%- assign pages = site.html_pages | where: "sitemap", nil | sort: "title" -%}
-<header id="banner" aria-describedby="banner-title"
-        itemscope itemid="{% link index.html %}"
-        itemtype="http://schema.org/WebSite">
-  <meta itemprop="url" content="{% link index.html %}">
+<header id="banner" aria-describedby="banner-title">
   <hgroup>
-    <h2 id="banner-title" itemprop="name">{{ site.title | escape }}</h2>
-    <p>{{ site.description | escape }}</p>
+    <h2 id="banner-title">{{- site.title | escape -}}</h2>
+    <p>{{- site.description | escape -}}</p>
   </hgroup>
 
   <ul>
@@ -13,35 +10,20 @@
     {%- if page.url == '/' or page.url == '/search/' -%}
     {%- continue -%}
     {%- endif -%}
-    <li
-      itemprop="hasPart"
-      itemscope
-      itemtype="http://schema.org/WebPage"
-      itemid="{{ page.url | absolute_url }}">
-      <a itemprop="url" href="{{ page.url | relative_url }}">{{- -}}
-        <span itemprop="name headline">
-          {{- page.title | default: page.url | escape -}}
-        </span>{{- -}}
-      </a>
-    </li>
+    <li><a href="{{ page.url | relative_url }}">
+        {{- page.title | default: page.url | escape -}}
+    </a></li>
     {%- endfor -%}
 
-    <li>{{- -}}
-      <a type="application/atom+xml" rel="alternate"
+    <li><a type="application/atom+xml" rel="alternate"
          href="{{ "/feed.xml" | relative_url }}"
-         title="{{ site.title | escape }}">{{- -}}
-        Subscribe{{- -}}
-      </a>
-    </li>
+         title="{{ site.title | escape }}">Subscribe</a></li>
   </ul>
 
-  <form rel="search" role="search" action="{% link search.html %}"
-        itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
-    <meta itemprop="target" content="{% link search.html %}?s={s}" >
+  <form rel="search" role="search" action="{% link search.html %}">
     <div class="search-basic">
       <label for="search-input">Query&emsp;</label>
-      <input id="search-input" name="s" type="search" required
-             itemprop="query-input">{{- -}}
+      <input id="search-input" name="s" type="search" required>{{- -}}
       <button type="submit">{{ site.data.strings.search.submit | escape }}</button>
     </div>
   </form>

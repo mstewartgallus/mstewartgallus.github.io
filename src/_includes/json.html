@@ -1,0 +1,95 @@
+{%- if page.url == '/' -%}
+<script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ site.title | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "url": {{ "/" | absolute_url | jsonify }},
+      "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "{% link search.html %}?s={s}"
+          },
+          "query-input": "required s=s"
+      }
+  }
+</script>
+{%- endif -%}
+
+{%- if page.date -%}
+{%- assign author = site.data.author[page.author] -%}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ page.title | jsonify }},
+    "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+    "author": [{
+        "@type": "Person",
+        "name": {{ author.name | jsonify }} ,
+        "url": {{ author.url | relative_url | jsonify }}
+    }]
+}
+</script>
+{%- endif -%}
+
+{%- if page.url == '/' -%}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": {{ site.data.strings.breadcrumbs.root | jsonify }},
+        "item": {{ '/' | relative_url | jsonify }}
+    }]
+}
+</script>
+{%- elsif page.categories.size > 0 -%}
+{%- assign categories = page.categories | sort -%}
+{%- for category in categories -%}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": {{ site.data.strings.breadcrumbs.root | jsonify }},
+        "item": {{ '/' | relative_url | jsonify }}
+    },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ category | jsonify }},
+        "item": "{% link search.html %}?category={{ category | cgi_escape }}"
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ page.title | jsonify }},
+        "item": {{ page.url | jsonify }}
+    }]
+}
+</script>
+{%- endfor -%}
+{%- else -%}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": {{ site.data.strings.breadcrumbs.root | jsonify }},
+        "item": {{ '/' | relative_url | jsonify }}
+    },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ page.title | jsonify }},
+        "item": {{ page.url | jsonify }}
+    }]
+}
+</script>
+{%- endif -%}

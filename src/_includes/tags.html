@@ -4,8 +4,7 @@
     {%- for tag in page.tags -%}
     <li>{{- -}}
       <a rel="tag" href="{% link search.html %}?tag={{ tag | cgi_escape }}">{{- -}}
-        #<span itemprop="keywords"
-               data-pagefind-filter="tag">{{- tag | escape -}}</span>
+        #<span data-pagefind-filter="tag">{{- tag | escape -}}</span>
         {{- -}}
       </a>{{- -}}
     </li>

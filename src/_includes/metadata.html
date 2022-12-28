@@ -7,22 +7,18 @@
   <div>
     {{- site.data.strings.metadata.postDate | escape -}}
     &emsp;<time datetime="{{ page.date | date_to_xmlschema }}"
-                itemprop="datePublished pubdate"
                 data-pagefind-meta="date" data-pagefind-sort="date">
       {{- page.date | date: "%Y-%m-%d" -}}
     </time>
   </div>
 
-  <address itemprop="creator author" itemscope itemtype="https://schema.org/Person">
+  <address>
     <a rel="author"
        href="{{ author.url | relative_url }}"
-       aria-describedby="author"
-       itemprop="url">
+       aria-describedby="author">
       {{- site.data.strings.metadata.author | escape }}
       &emsp;<span aria-hidden="true"
-                  id="author">@<span
-                                 translate="no"
-                                 itemprop="name">
+                  id="author">@<span translate="no">
           {{- author.name | escape -}}
         </span>
       </span>

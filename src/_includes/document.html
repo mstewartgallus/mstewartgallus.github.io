@@ -1,25 +1,3 @@
-{%- capture maintype -%}
-{%- if page.collection == 'posts' -%}
-https://schema.org/BlogPosting
-{%- elsif page.name == 'index.html' -%}
-https://schema.org/Blog
-{%- else -%}
-https://schema.org/WebContent
-{%- endif -%}
-{%- endcapture -%}
-
-{%- capture pagetype -%}
-{%- if page.name == 'about.html' -%}
-https://schema.org/AboutPage
-{%- elsif page.name == 'search.html' -%}
-https://schema.org/SearchResultsPage
-{%- elsif page.collection == 'posts' -%}
-https://schema.org/ItemPage
-{%- else -%}
-https://schema.org/WebPage
-{%- endif -%}
-{%- endcapture -%}
-
 {%- capture extrahead -%}
 {%- if page.url == '/search/' -%}
 {%- include searchhead.html -%}
@@ -27,15 +5,9 @@ https://schema.org/WebPage
 {%- endcapture -%}
 
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}"
-      itemscope
-      itemtype="{{ pagetype }}"
-      itemid="{{ page.url | absolute_url }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
   {%- include head.html content=extrahead -%}
-  <body itemscope
-        itemprop="mainEntity hasPart"
-        itemtype="{{ maintype }}"
-        itemid="{{ page.url | absolute_url }}">
+  <body>
     {{- include.content -}}
   </body>
 </html>

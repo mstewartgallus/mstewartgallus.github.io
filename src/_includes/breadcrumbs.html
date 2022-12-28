@@ -5,84 +5,37 @@
   {%- include subheader.html id='breadcrumbs-title' title=title -%}
 
   {%- if page.url == '/' -%}
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span aria-current="page"
-            itemscope
-            itemprop="item"
-            itemid="{% link index.html %}"
-            itemtype="http://schema.org/WebSite">{{- -}}
-        <span itemprop="name">
-          {{- site.data.strings.breadcrumbs.root | escape -}}
-        </span>{{- -}}
-      </span>{{- -}}
-      <meta itemprop="position" content="1">{{- -}}
+  <ol class="breadcrumb">
+    <li aria-current="page">
+      {{- site.data.strings.breadcrumbs.root | escape -}}
     </li>
   </ol>
   {%- elsif page.categories.size > 0 -%}
   {%- assign categories = page.categories | sort -%}
   {%- for category in categories -%}
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <a href="{% link index.html %}"
-         itemid="{% link index.html %}"
-         itemprop="item"
-         itemscope itemtype="http://schema.org/WebSite"
-         >{{- -}}
-        <span itemprop="name">
-          {{- site.data.strings.breadcrumbs.root | escape -}}
-        </span>{{- -}}
+  <ol class="breadcrumb">
+    <li>{{- -}}
+      <a href="{% link index.html %}">
+        {{- site.data.strings.breadcrumbs.root | escape -}}
       </a>{{- -}}
-      <meta itemprop="position" content="1">{{- -}}
     </li>
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <a rel="tag"
-         href="{% link search.html %}?category={{ category | cgi_escape }}"
-         itemprop="item"
-         itemid="{% link search.html %}?category={{ category | cgi_escape }}"
-         itemscope itemtype="https://schema.org/SearchResultsPage">
-        {{- -}}
-        <span itemprop="name" data-pagefind-filter="category">{{- category | escape -}}</span>{{- -}}
-      </a>{{- -}}
-      <meta itemprop="position" content="2">{{- -}}
-    </li>
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span aria-current="page"
-            itemprop="item"
-            itemid="{{ page.url | relative_url }}"
-            itemscope itemtype="https://schema.org/BlogPosting">{{- -}}
-        <cite itemprop="name">
-          {{- page.title | escape -}}
-        </cite>{{- -}}
-      </span>{{- -}}
-      <meta itemprop="position" content="3">{{- -}}
-    </li>
+    <li><a rel="tag"
+           href="{% link search.html %}?category={{ category | cgi_escape }}"
+           data-pagefind-filter="category">
+        {{- category | escape -}}
+    </a></li>
+    <li aria-current="page"><cite>{{- page.title | escape -}}</cite></li>
   </ol>
   {%- endfor -%}
   {%- else -%}
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <a href="{% link index.html %}"
-         itemid="{% link index.html %}"
-         itemprop="item"
-         itemscope itemtype="http://schema.org/WebSite"
-         >{{- -}}
-        <span itemprop="name">
-          {{- site.data.strings.breadcrumbs.root | escape -}}
-        </span>{{- -}}
-      </a>
-      <meta itemprop="position" content="1">{{- -}}
-    </li>
-    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">{{- -}}
-      <span aria-current="page"
-            itemprop="item"
-            itemid="{{ page.url | absolute_url }}"
-            itemscope itemtype="https://schema.org/WebPage">{{- -}}
-        <cite itemprop="name">
-          {{- page.title | escape -}}
-        </cite>{{- -}}
-      </span>{{- -}}
-      <meta itemprop="position" content="2">{{- -}}
+  <ol class="breadcrumb">
+    <li><a href="{% link index.html %}">
+        {{- site.data.strings.breadcrumbs.root | escape -}}
+      </a></li>
+    <li aria-current="page">{{- -}}
+      <cite>
+        {{- page.title | escape -}}
+      </cite>{{- -}}
     </li>
   </ol>
   {%- endif -%}
