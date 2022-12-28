@@ -10,9 +10,9 @@
           "@type": "SearchAction",
           "target": {
               "@type": "EntryPoint",
-              "urlTemplate": "{{ link search.html | absolute_url }}?s={s}"
+              "urlTemplate": "{{ '/search.html' | absolute_url }}?s={s}"
           },
-          "query-input": "required s=s",
+          "query-input": "required s=s"
           "valueName": "s"
       }
   }
@@ -65,7 +65,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": {{ category | jsonify }},
-        "item": "{{ link search.html | absolute_url }}?category={{ category | cgi_escape }}"
+        "item": "{{ '/search.html' | absolute_url }}?category={{ category | cgi_escape }}"
     },{
         "@type": "ListItem",
         "position": 3,
