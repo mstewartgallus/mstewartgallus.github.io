@@ -48,10 +48,11 @@ header {
     position: absolute ;
     display: block ;
     z-index: 1000 ;
-    background-color: var(--canvas);
-    outline-offset: 0 ;
+    background-color: var(--highlight) ;
+    color: var(--highlight-text) ;
+    border-radius: 0.6ch ;
     padding-inline: 1em ;
-    padding-block-end: 0.5 * $line ;
+    padding-block: 0.5 * $line ;
 }
 .sr-only:not(:focus-within) {
     position: absolute !important ;

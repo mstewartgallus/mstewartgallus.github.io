@@ -4,7 +4,7 @@
 }
 
 :focus-visible {
-    outline-color: var(--highlight) ;
+    outline-color: var(--highlight-text) ;
 }
 
 :link { color: var(--link-text) ; }
@@ -30,7 +30,7 @@ h1,h2,h3,h4,h5,h6, figcaption, ::marker {
 
     // Make the caret seeable with caret browsing?  Need to figure out
     // a better UX here/experiment on different platforms
-    caret-color: var(--highlight) ;
+    caret-color: var(--highlight-text) ;
 }
 
 p {
