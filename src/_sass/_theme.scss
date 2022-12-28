@@ -16,11 +16,6 @@ main > :is(ul, ol) {
 header {
     position: relative ;
 }
-main [rel~="bookmark"] {
-    position: absolute ;
-    right: 0 ;
-    top: 0;
-}
 
 .breadcrumb {
     all: unset ;

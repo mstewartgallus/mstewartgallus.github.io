@@ -45,6 +45,10 @@ p {
     transition: color 0.05s ;
 }
 
+pre {
+    margin: 0;
+}
+
 // FIXME should form controls be tabular or just lining?
 time, code, pre,
 table, ::marker,

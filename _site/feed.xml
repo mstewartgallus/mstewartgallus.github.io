@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-12-27T18:55:01-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>mspondee</name></author><entry><title type="html">Cleanup Crew</title><link href="https://mstewartgallus.github.io/prose/2022/12/27/cleanup/" rel="alternate" type="text/html" title="Cleanup Crew" /><published>2022-12-27T18:54:00-08:00</published><updated>2022-12-27T18:54:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/12/27/cleanup</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/12/27/cleanup/"><![CDATA[<p><q>Any peanut allergies?</q> I say.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-CA"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://mstewartgallus.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mstewartgallus.github.io/" rel="alternate" type="text/html" hreflang="en-CA" /><updated>2022-12-28T12:50:38-08:00</updated><id>https://mstewartgallus.github.io/feed.xml</id><title type="html">Words to Kick Your Teeth Out</title><subtitle>lol, lmao</subtitle><author><name>mspondee</name></author><entry><title type="html">Cleanup Crew</title><link href="https://mstewartgallus.github.io/prose/2022/12/27/cleanup/" rel="alternate" type="text/html" title="Cleanup Crew" /><published>2022-12-27T18:54:00-08:00</published><updated>2022-12-27T18:54:00-08:00</updated><id>https://mstewartgallus.github.io/prose/2022/12/27/cleanup</id><content type="html" xml:base="https://mstewartgallus.github.io/prose/2022/12/27/cleanup/"><![CDATA[<p><q>Any peanut allergies?</q> I say.</p>
 
 <p><q>It’s a mild anxiolytic.  The sesame seed oil suspension can cause
 an allergic reaction</q> I explain.</p>
@@ -151,9 +151,9 @@ reader yourself.</p>
 
 <p><b>Special thanks to the kind people who helped edit this post.</b></p>
 
-<section aria-labelledby="accessibility">  <header>    <hgroup>      <h2 id="accessibility">Accessibility</h2>
+<section aria-labelledby="accessibility">  <header>    <hgroup>      <h2 id="accessibility"><a href="#accessibility" rel="bookmark">Accessibility</a></h2>
 </hgroup>
-<a href="#accessibility" aria-describedby="accessibility" rel="bookmark">§</a></header>
+</header>
 
   <p>The art of the spoken word is not accessible to the visually impaired.
 Most markup navigates awkwardly, does not insert appropriate pauses
@@ -166,7 +166,7 @@ stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.</p>
 
   <figure id="markupa">
-    <figcaption><div>Markup A</div><a href="#markupa" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#markupa" rel="bookmark">Markup A</a></figcaption>
 
     <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
@@ -183,7 +183,7 @@ break elements.</p>
   </figure>
 
   <figure id="markupb">
-    <figcaption><div>Markup B</div><a href="#markupb" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#markupb" rel="bookmark">Markup B</a></figcaption>
 
     <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"stanza"</span><span class="nt">&gt;</span>Roses are red<span class="nt">&lt;br&gt;</span>
 Violets are blue,<span class="nt">&lt;br&gt;</span>
@@ -204,7 +204,7 @@ a <code class="language-plaintext highlighter-rouge">presentation</code> role do
 cruft in Firefox’s accessibility inspector.</p>
 
   <figure id="markupa2">
-    <figcaption><div>Markup A'</div><a href="#markupa2" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#markupa2" rel="bookmark">Markup A'</a></figcaption>
 
     <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
@@ -221,7 +221,7 @@ cruft in Firefox’s accessibility inspector.</p>
   </figure>
 
   <figure id="markupa3">
-    <figcaption><div>Markup A''</div><a href="#markupa3" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#markupa3" rel="bookmark">Markup A''</a></figcaption>
 
     <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">"poem"</span> <span class="na">role=</span><span class="s">"presentation"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;li&gt;</span>
@@ -246,7 +246,7 @@ text, is not usually translated by automated tools and doesn’t let you
 embed more markup as appropriate.</p>
 
   <figure id="markupn">
-    <figcaption><div>Markup N</div><a href="#markupn" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#markupn" rel="bookmark">Markup N</a></figcaption>
 
     <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">role=</span><span class="s">"img"</span> <span class="na">aria-details=</span><span class="s">"transcript"</span><span class="nt">&gt;</span>
@@ -282,8 +282,7 @@ However, on Firefox this hack breaks up lines into separate areas to
 track through.</p>
 
   <figure id="markupb2">
-    <figcaption>      <div>Markup B’ <abbr title="HyperText Markup Language">HTML</abbr></div>
-<a href="#markupb2" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#markupb2" rel="bookmark">Markup B’ <abbr title="HyperText Markup Language">HTML</abbr></a></figcaption>
 
     <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>Roses are red<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>; <span class="nt">&lt;/span&gt;&lt;br&gt;</span>
 Violets are blue,<span class="nt">&lt;br&gt;</span>
@@ -294,8 +293,7 @@ And so are you.<span class="nt">&lt;/p&gt;</span>
   </figure>
 
   <figure id="markupb3">
-    <figcaption>      <div>Markup B’ <abbr title="Cascading Style Sheets">CSS</abbr></div>
-<a href="#markupb3" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#markupb3" rel="bookmark">Markup B’ <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
 
     <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.sr-only</span> <span class="p">{</span>
    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span> <span class="p">;</span>
@@ -333,9 +331,9 @@ that such glyphs might be pronounced in common screen readers as
 something like <q>Unicode character 591</q>.</p>
 
 </section>
-<section aria-labelledby="presentation">  <header>    <hgroup>      <h2 id="presentation">Presentation</h2>
+<section aria-labelledby="presentation">  <header>    <hgroup>      <h2 id="presentation"><a href="#presentation" rel="bookmark">Presentation</a></h2>
 </hgroup>
-<a href="#presentation" aria-describedby="presentation" rel="bookmark">§</a></header>
+</header>
 
   <p>Laying out poetry on small formats is awkward.  In print the standard
 layout for overlong lines is to align the first line ragged right and
@@ -346,8 +344,7 @@ something like <a href="#indentcss"><cite>Indent <abbr title="Cascading Style Sh
 hanging indent layout is not really correct.</p>
 
   <figure id="indentcss">
-    <figcaption>      <div>Indent <abbr title="Cascading Style Sheets">CSS</abbr></div>
-<a href="#indentcss" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#indentcss" rel="bookmark">Indent <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
 
     <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.line</span> <span class="p">{</span>
    <span class="nl">text-indent</span><span class="p">:</span> <span class="m">-4ch</span> <span class="p">;</span>
@@ -364,8 +361,7 @@ line block to the right.  Something like <a href="#alignlastcss"><cite>Align Las
 even this layout fails when you overflow multiple lines.</p>
 
   <figure id="alignlastcss">
-    <figcaption>      <div>Align Last <abbr title="Cascading Style Sheets">CSS</abbr></div>
-<a href="#alignlastcss" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#alignlastcss" rel="bookmark">Align Last <abbr title="Cascading Style Sheets">CSS</abbr></a></figcaption>
 
     <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.stanza</span> <span class="p">{</span>
    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span> <span class="p">;</span>
@@ -384,7 +380,7 @@ even this layout fails when you overflow multiple lines.</p>
 the current compromise I use on this site.</p>
 
   <figure id="example">
-<figcaption><div>Example</div><a href="#example" rel="bookmark">#</a></figcaption>
+<figcaption><a href="#example" rel="bookmark">Example</a></figcaption>
 
 <style>
 #scope p {
@@ -409,7 +405,7 @@ the current compromise I use on this site.</p>
 </figure>
 
   <figure id="examplecode">
-    <figcaption><div>Example Code</div><a href="#examplecode" rel="bookmark">#</a></figcaption>
+    <figcaption><a href="#examplecode" rel="bookmark">Example Code</a></figcaption>
 
     <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
 <span class="nf">#scope</span> <span class="nt">p</span> <span class="p">{</span>
@@ -434,16 +430,16 @@ the current compromise I use on this site.</p>
   </figure>
 
 </section>
-<section aria-labelledby="conclusion">  <header>    <hgroup>      <h2 id="conclusion">Conclusion</h2>
+<section aria-labelledby="conclusion">  <header>    <hgroup>      <h2 id="conclusion"><a href="#conclusion" rel="bookmark">Conclusion</a></h2>
 </hgroup>
-<a href="#conclusion" aria-describedby="conclusion" rel="bookmark">§</a></header>
+</header>
 
   <p>You should use the <code class="language-plaintext highlighter-rouge">audio</code> element to markup poetry.</p>
 
 </section>
-<section aria-labelledby="tryit">  <header>    <hgroup>      <h2 id="tryit">Try It</h2>
+<section aria-labelledby="tryit">  <header>    <hgroup>      <h2 id="tryit"><a href="#tryit" rel="bookmark">Try It</a></h2>
 </hgroup>
-<a href="#tryit" aria-describedby="tryit" rel="bookmark">§</a></header>
+</header>
 
   <p>Personally I found Android TalkBack to be the easiest screen reader to
 get started with. <a href="https://www.a11yproject.com">The helpful
@@ -458,9 +454,9 @@ started with screen readers but they might be a little old.</p>
   </ul>
 
 </section>
-<section aria-labelledby="onemorething">  <header>    <hgroup>      <h2 id="onemorething">And One More Thing</h2>
+<section aria-labelledby="onemorething">  <header>    <hgroup>      <h2 id="onemorething"><a href="#onemorething" rel="bookmark">And One More Thing</a></h2>
 </hgroup>
-<a href="#onemorething" aria-describedby="onemorething" rel="bookmark">§</a></header>
+</header>
 
   <p>As of this blog post, the <a href="https://www.w3.org/TR/css-speech-1/"><cite><abbr title="Cascading Style Sheets">CSS</abbr> Speech
 Module</cite></a> has never really

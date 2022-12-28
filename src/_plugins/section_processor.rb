@@ -46,16 +46,9 @@ module Kramdown
 
         if id != nil
         then
-          text = Element.new :text
-          text.value = '§'
-
-          a = Element.new :a, nil, {
-                            'href' => '#' + id,
-                            'aria-describedby' => id,
-                            'rel' => 'bookmark'}
-          a.children = [text]
-
-          header.children.push a
+          a = Element.new :a, nil, {'href' => '#' + id,'rel' => 'bookmark'}
+          a.children = el.children
+          el.children = [a]
         end
 
         sect = Section.new level, current, attributes
@@ -94,16 +87,9 @@ module Kramdown
         return
       end
 
-      span = Element.new :html_element, 'div'
-      span.children = caption.children
-      caption.children = [span]
-
-      text = Element.new :text
-      text.value = '#'
-
       a = Element.new :a, nil, {'href' => '#' + id, 'rel' => 'bookmark'}
-      a.children = [text]
-      caption.children.push a
+      a.children = caption.children
+      caption.children = [a]
     end
   end
 
