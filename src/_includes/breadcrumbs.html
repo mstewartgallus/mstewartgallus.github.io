@@ -32,11 +32,7 @@
     <li><a href="{% link index.html %}">
         {{- site.data.strings.breadcrumbs.root | escape -}}
       </a></li>
-    <li aria-current="page">{{- -}}
-      <cite>
-        {{- page.title | escape -}}
-      </cite>{{- -}}
-    </li>
+    <li aria-current="page"><cite>{{- page.title | escape -}}</cite></li>
   </ol>
   {%- endif -%}
 </nav>

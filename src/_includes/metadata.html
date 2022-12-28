@@ -18,9 +18,9 @@
        aria-describedby="author">
       {{- site.data.strings.metadata.author | escape }}
       &emsp;<span aria-hidden="true"
-                  id="author">@<span translate="no">
-          {{- author.name | escape -}}
-        </span>
+                  id="author"
+                  translate="no">@
+        {{- author.name | escape -}}
       </span>
     </a>
   </address>
