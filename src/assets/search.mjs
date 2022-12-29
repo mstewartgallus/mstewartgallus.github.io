@@ -1,5 +1,5 @@
-import {} from './h1.mjs';
-import {} from './results.mjs';
+import './h1.mjs';
+import './results.mjs';
 
 history.scrollRestoration = 'manual';
 
@@ -67,7 +67,7 @@ function setURLSubmit(event) {
 }
 
 function setInput(event) {
-    const { searchParams } = new URL(window.location);
+    const { searchParams } = new URL(location);
     const query = searchParams.get('s') ?? '';
 
     const input = document.getElementById('search-input');
@@ -79,7 +79,7 @@ function setInput(event) {
 }
 
 function setTag(event) {
-    const { searchParams } = new URL(window.location);
+    const { searchParams } = new URL(location);
     const tag = new Set(searchParams.getAll('tag'));
 
     const tagEl = document.getElementById('tag');
@@ -93,7 +93,7 @@ function setTag(event) {
 }
 
 function setCategory(event) {
-    const { searchParams } = new URL(window.location);
+    const { searchParams } = new URL(location);
     const category = new Set(searchParams.getAll('category'));
 
     const categoryEl = document.getElementById('category');
@@ -108,6 +108,16 @@ function setCategory(event) {
 
 document.addEventListener('submit', setURLSubmit);
 
+window.addEventListener('popstate', setInput);
+window.addEventListener('popstate', setCategory);
+window.addEventListener('popstate', setTag);
+
+window.addEventListener('popstate', () => {
+    document.getElementById('search')
+        .requestSubmit();
+});
+
+
 switch (document.readyState) {
 case 'interactive':
 case 'complete':
@@ -119,16 +129,5 @@ default:
     });
     break;
 }
-
-window.addEventListener('popstate', setInput);
-window.addEventListener('popstate', setCategory);
-window.addEventListener('popstate', setTag);
-
-const search = document.getElementById('search');
-
-window.addEventListener('popstate', () => {
-    // FIXME make this replace/not push
-    search.requestSubmit();
-});
 
 window.dispatchEvent(new PopStateEvent('popstate'));

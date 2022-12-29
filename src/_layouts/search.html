@@ -2,7 +2,7 @@
 {%- assign tags = site.tags | sort -%}
 
 {%- capture title -%}
-<search-h1>
+<search-h1 query="s">
   {{- page.title | escape -}}
 </search-h1>
 {%- endcapture -%}
@@ -20,7 +20,7 @@
           {{- content -}}
         </div>
 
-        <search-results>
+        <search-results query="s" tag="tag" category="category">
         </search-results>
       </main>
     </li>

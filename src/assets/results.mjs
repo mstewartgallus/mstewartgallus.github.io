@@ -6,20 +6,15 @@ const [results, resultscss] = await Promise.all([
     html('./results.html', import.meta.url),
     css('./results.css', import.meta.url)]);
 
-function searchlink(p, x) {
-    const params = new URLSearchParams({[p]: x});
-    return `${pathname}?${params}`;
-}
-
 function fromPagefind(post) {
     const { url,
             excerpt,
             meta: { title, date },
             filters: { tag, category } } = post;
     return {
-        url: url,
-        title: title,
-        date: date,
+        url,
+        title,
+        date,
         categories: category ?? [],
         tags: tag ?? [],
         excerpt
@@ -41,14 +36,14 @@ async function findPosts(query, options) {
         filters.tag = Array.from(tags);
     }
 
-    return (await pf.search(query, { filters: filters })).results;
+    return (await pf.search(query, { filters })).results;
 }
 
 export default class SearchResults extends HTMLElement {
     static formAssociated = true;
+    static observedAttributes = ['query', 'tag', 'category'];
 
-    #posts;
-
+    #list;
     #entries;
     #abort;
 
@@ -64,8 +59,19 @@ export default class SearchResults extends HTMLElement {
         this.#shadow.replaceChildren(results.cloneNode(true));
         this.#shadow.adoptedStyleSheets = [resultscss];
 
-        const list = this.#shadow.getElementById('search-list');
-        this.#entries = Array.from(list.getElementsByTagName('li'));
+        this.#list = this.#shadow.getElementById('search-list');
+        this.#entries = Array.from(this.#list.getElementsByTagName('li'));
+    }
+
+    connectedCallback() {
+        for (const prop of SearchResults.observedAttributes) {
+            if (!this.hasOwnProperty(prop)) {
+                continue;
+            }
+            const value = this[prop];
+            delete this[prop];
+            this[prop] = value;
+        }
     }
 
     formAssociatedCallback(form) {
@@ -76,28 +82,27 @@ export default class SearchResults extends HTMLElement {
         const abort = new AbortController();
         this.#abort = abort;
         form.addEventListener('submit',
-                              async e => await this.#query(),
+                              async e => await this.#submit(e),
                               { signal: abort.signal });
     }
 
-    async #query() {
-        this.#busy();
+    async #submit(event) {
+        const data = new FormData(event.target);
 
-        const data = new FormData(this.#internals.form);
+        const query = data.get(this.query) ?? '';
+        const tags = data.getAll(this.tag);
+        const categories = data.getAll(this.category);
 
-        const query = data.get('s') ?? '';
-        const tag = data.getAll('tag');
-        const category = data.getAll('category');
+        const posts = findPosts(query, { tags, categories });
 
-        this.#posts = findPosts(query, {
-            tags: tag,
-            categories: category
-        });
+        this.#clean();
 
-        await this.#render();
+        await this.#render(posts);
     }
 
-    #busy() {
+    #clean() {
+        this.#list.setAttribute('aria-hidden', 'true');
+
         const entries = this.#entries;
         const len = entries.length;
         for (let ii = 0; ii < len; ++ii) {
@@ -109,35 +114,56 @@ export default class SearchResults extends HTMLElement {
             }
 
             li.setAttribute('aria-hidden', 'true');
+
             anchor.removeAttribute('href');
         }
     }
 
-    async #render() {
+    async #render(postsPs) {
         const entries = this.#entries;
-        const posts = (await this.#posts).slice(0, this.#entries.length);
+        const posts = (await postsPs).slice(0, this.#entries.length);
 
         const len = posts.length;
 
-        const waiters = posts.map((postPs, ii) => (async () => {
+        const waiters = posts.map((postPs, ii) => {
             const li = entries[ii];
-
             const anchor = li.getElementsByTagName('a')[0];
-            if (!anchor) {
-                return;
-            }
 
-            const post = fromPagefind(await postPs.data());
-
-            anchor.href = post.url;
-            anchor.textContent = post.title;
-        })());
+            return (async () => {
+                const post = fromPagefind(await postPs.data());
+                anchor.href = post.url;
+                anchor.textContent = post.title;
+            })();
+        });
 
         await Promise.all(waiters);
 
         for (let ii = 0; ii < len; ++ii) {
             entries[ii].setAttribute('aria-hidden', 'false');
         }
+
+        this.#list.setAttribute('aria-hidden', 'false');
+    }
+
+    get query() {
+        return this.getAttribute('query');
+    }
+    set query(x) {
+        this.setAttribute('query', x);
+    }
+
+    get tag() {
+        return this.getAttribute('tag');
+    }
+    set tag(x) {
+        this.setAttribute('tag', x);
+    }
+
+    get category() {
+        return this.getAttribute('category');
+    }
+    set category(x) {
+        this.setAttribute('category', x);
     }
 }
 
