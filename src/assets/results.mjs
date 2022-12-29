@@ -1,16 +1,14 @@
 import html from './html.mjs';
 import css from './css.mjs';
 import * as pf from './pagefind/pagefind.js';
-const results = await html('./results.html', import.meta.url);
-const resultscss = await css('./results.css', import.meta.url);
+
+const [results, resultscss] = await Promise.all([
+    html('./results.html', import.meta.url),
+    css('./results.css', import.meta.url)]);
 
 function searchlink(p, x) {
     const params = new URLSearchParams({[p]: x});
     return `${pathname}?${params}`;
-}
-
-async function fetchjson(url) {
-    return await ((await fetch(url)).json());
 }
 
 function fromPagefind(post) {
