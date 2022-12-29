@@ -1,0 +1,11 @@
+[aria-hidden="false"],
+[aria-hidden="false"] * {
+    opacity: 1 ;
+    transition: opacity 0.3s;
+}
+
+[aria-hidden="true"],
+[aria-hidden="true"] * {
+    opacity: 0 ;
+    transition: opacity 2s;
+}

@@ -127,20 +127,3 @@ ul.tags {
     suffix: "\2003";
 }
 
-
-// FIXME the animation is intended to reduce flickering
-// so how should I handle prefers reduced motion?
-
-#search-list {
-    [aria-hidden="false"],
-    [aria-hidden="false"] * {
-        opacity: 1 ;
-        transition: opacity 0.3s;
-    }
-
-    [aria-hidden="true"],
-    [aria-hidden="true"] * {
-        opacity: 0 ;
-        transition: opacity 2s;
-    }
-}
