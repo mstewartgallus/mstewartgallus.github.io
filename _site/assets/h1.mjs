@@ -1,6 +1,6 @@
 import html from './html.mjs';
 
-const h1 = await html('./h1.html', import.meta.url);
+const h1 = await html(import.meta.resolve('./h1.html'));
 
 export default class SearchH1 extends HTMLElement {
     static formAssociated = true;
@@ -22,6 +22,7 @@ export default class SearchH1 extends HTMLElement {
         this.#query = this.#shadow.getElementById('query');
 
         this.#internals.ariaLive = 'polite';
+        this.#internals.ariaAtomic = true;
     }
 
     connectedCallback() {

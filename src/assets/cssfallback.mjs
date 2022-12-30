@@ -6,9 +6,7 @@ const options = { mode: 'cors', headers };
 
 const csss = new Map();
 
-export default async function css(url, base) {
-    url = new URL(url, base).href;
-
+export default async function css(url) {
     let promise = csss.get(url);
     if (promise) {
         return await promise;

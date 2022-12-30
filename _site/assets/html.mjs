@@ -6,8 +6,7 @@ const options = { mode: 'cors', headers };
 
 const htmls = new Map();
 
-export default async function html(url, base) {
-    url = new URL(url, base).href;
+export default async function html(url) {
     let promise = htmls.get(url);
     if (promise) {
         return await promise;

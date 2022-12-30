@@ -1,4 +1,3 @@
-export default async function css(url, base) {
-    url = new URL(url, base);
+export default async function css(url) {
     return (await import(url, { assert: { type: 'css' } })).default;
 }

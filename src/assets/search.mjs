@@ -38,6 +38,8 @@ function submitRequest(event) {
     return new Request(url, options);
 }
 
+let first = true;
+
 function setURLSubmit(event) {
     const r = submitRequest(event);
     if (!r) {
@@ -45,6 +47,11 @@ function setURLSubmit(event) {
     }
 
     event.preventDefault();
+
+    if (first) {
+        first = false;
+        return;
+    }
 
     let url = r.url;
 

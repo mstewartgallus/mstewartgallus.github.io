@@ -3,8 +3,8 @@ import css from './css.mjs';
 import * as pf from './pagefind/pagefind.js';
 
 const [results, resultscss] = await Promise.all([
-    html('./results.html', import.meta.url),
-    css('./results.css', import.meta.url)]);
+    html(import.meta.resolve('./results.html')),
+    css(import.meta.resolve('./results.css'))]);
 
 function fromPagefind(post) {
     const { url,
