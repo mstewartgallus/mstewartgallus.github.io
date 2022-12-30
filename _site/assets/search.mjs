@@ -6,7 +6,7 @@ history.scrollRestoration = 'manual';
 const { origin, pathname, searchParams } = new URL(location);
 
 function target() {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    scrollTo({ top: 0, behavior: 'instant' });
     document.documentElement.focus({ preventScroll: true });
 }
 
@@ -31,7 +31,7 @@ function submitRequest(event) {
         for (const [key, value] of searchParams) {
             params.append(key, value);
         }
-        url = new URL(urlOrigin + pathname + "?" + params);
+        url = new URL(pathname + "?" + params, origin);
     } else {
         options.body = formdata;
     }
@@ -113,8 +113,7 @@ window.addEventListener('popstate', setCategory);
 window.addEventListener('popstate', setTag);
 
 window.addEventListener('popstate', () => {
-    document.getElementById('search')
-        .requestSubmit();
+    document.getElementById('search').requestSubmit();
 });
 
 

@@ -5,7 +5,8 @@
 {%- endcapture -%}
 
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}"
+      tabindex="-1">
   {%- include head.html content=extrahead -%}
   <body>
     {{- include.content -}}

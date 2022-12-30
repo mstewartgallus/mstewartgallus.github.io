@@ -11,10 +11,7 @@ function fromPagefind(post) {
             excerpt,
             meta: { title, date },
             filters: { tag, category } } = post;
-    return {
-        url,
-        title,
-        date,
+    return { url, title, date,
         categories: category ?? [],
         tags: tag ?? [],
         excerpt
