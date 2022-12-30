@@ -6,8 +6,7 @@ history.scrollRestoration = 'manual';
 const { origin, pathname, searchParams } = new URL(location);
 
 function target() {
-    scrollTo({ top: 0, behavior: 'instant' });
-    document.documentElement.focus({ preventScroll: true });
+    document.getElementById('skip-link').focus();
 }
 
 const doctitle = document.title;

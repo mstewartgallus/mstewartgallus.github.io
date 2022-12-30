@@ -9,6 +9,10 @@
       tabindex="-1">
   {%- include head.html content=extrahead -%}
   <body>
+    <div class="sr-only">
+      <a id="skip-link" href="#title">Skip to Main Content</a>
+    </div>
+
     {{- include.content -}}
   </body>
 </html>

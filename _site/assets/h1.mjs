@@ -20,6 +20,8 @@ export default class SearchH1 extends HTMLElement {
 
         this.#shadow.replaceChildren(h1.cloneNode(true));
         this.#query = this.#shadow.getElementById('query');
+
+        this.#internals.ariaLive = 'polite';
     }
 
     connectedCallback() {
