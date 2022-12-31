@@ -4,6 +4,7 @@ date: 2022-10-22 19:18 -0800
 tags:
 - '2019'
 - '2022'
+places:
 - Downtown
 - Vancouver
 - Waterfront

@@ -3,6 +3,7 @@ title: Grounding
 date: 2022-11-11 13:15 -0800
 tags:
 - '2021'
+places:
 - Downtown
 - Vancouver
 ---

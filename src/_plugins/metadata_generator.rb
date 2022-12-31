@@ -3,15 +3,17 @@ module Jekyll
         safe true
         priority :low
         def generate(site)
-          characters = Set::new
-          site.posts.docs.each do |post|
-            c = post.data['characters']
-            if c.nil? then next end
-            characters.merge(c)
+          for meta in ['places', 'characters'] do
+            set = Set::new
+            site.posts.docs.each do |post|
+              c = post.data[meta]
+              if c.nil? then next end
+              set.merge(c)
+            end
+            array = set.to_a
+            array.sort!
+            site.config[meta] = array
           end
-          array = characters.to_a
-          array.sort!
-          site.config['characters'] = array
         end
     end
 end

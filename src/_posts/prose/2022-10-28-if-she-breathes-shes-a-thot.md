@@ -9,6 +9,7 @@ tags:
 - NSFW
 - Panic
 - Transgender
+places:
 - Vancouver
 ---
 Like a pug in an oxygen mask I lied down on the carpet by the air

@@ -3,11 +3,12 @@ title: Night Walk
 date: 2022-10-21 19:00 -0800
 tags:
 - Anxiety
-- Downtown
 - Dysphoria
 - NSFW
 - Panic
 - Transgender
+places:
+- Downtown
 - Vancouver
 ---
 Ollie pulled down his long sleeved shirt and stared at his pasty dry

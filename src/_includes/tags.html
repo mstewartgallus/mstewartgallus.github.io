@@ -17,5 +17,13 @@
       </a>{{- -}}
     </li>
     {%- endfor -%}
+    {%- for c in page.places -%}
+    <li>{{- -}}
+      <a rel="tag" href="{% link search.html %}?tag={{ c | cgi_escape }}">{{- -}}
+        #<span data-pagefind-filter="tag">{{- c | escape -}}</span>
+        {{- -}}
+      </a>{{- -}}
+    </li>
+    {%- endfor -%}
   </ul>
 </footer>
