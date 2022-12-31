@@ -194,7 +194,7 @@ button:active {
     min-block-size: 5 * $line ;
 }
 
-#character, #category, #tag {
+#character, #category, #tag, #place {
     display: grid ;
     grid-template-columns: auto 1fr ;
     column-gap: 1em ;

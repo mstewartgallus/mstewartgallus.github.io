@@ -10,11 +10,12 @@ function fromPagefind(post) {
     const { url,
             excerpt,
             meta: { title, date },
-            filters: { tag, character, category } } = post;
+            filters: { tag, character, place, category } } = post;
     return { url, title, date,
         categories: category ?? [],
         tag: tag ?? [],
         character: character ?? [],
+        place: place ?? [],
         excerpt
     };
 }
@@ -24,7 +25,7 @@ async function findPosts(query, options) {
         query = null;
     }
 
-    const { category, tag, character } = options;
+    const { category, tag, place, character } = options;
 
     const filters = {};
     if (category) {
@@ -36,13 +37,16 @@ async function findPosts(query, options) {
     if (character) {
         filters.character = Array.from(character);
     }
+    if (place) {
+        filters.place = Array.from(place);
+    }
 
     return (await pf.search(query, { filters })).results;
 }
 
 export default class SearchResults extends HTMLElement {
     static formAssociated = true;
-    static observedAttributes = ['query', 'tag', 'character', 'category'];
+    static observedAttributes = ['query', 'tag', 'character', 'place', 'category'];
 
     #list;
     #entries;
@@ -94,8 +98,9 @@ export default class SearchResults extends HTMLElement {
         const tag = data.getAll(this.tag);
         const character = data.getAll(this.character);
         const category = data.getAll(this.category);
+        const place = data.getAll(this.place);
 
-        const posts = findPosts(query, { tag, category, character });
+        const posts = findPosts(query, { tag, category, character, place });
 
         this.#clean();
 
@@ -166,6 +171,13 @@ export default class SearchResults extends HTMLElement {
     }
     set character(x) {
         this.setAttribute('character', x);
+    }
+
+    get place() {
+        return this.getAttribute('place');
+    }
+    set place(x) {
+        this.setAttribute('place', x);
     }
 
     get category() {

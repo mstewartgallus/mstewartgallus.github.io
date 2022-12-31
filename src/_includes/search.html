@@ -23,6 +23,15 @@
     {%- endfor -%}
   </fieldset>
 
+  <fieldset id="place">
+    <legend>Place</legend>
+    {%- for place in site.places %}
+    <input id="place-{{ place | cgi_escape }}" type="checkbox" name="place"
+           value="{{ place | cgi_escape }}">
+    <label for="place-{{ place | cgi_escape }}">#{{ place | escape }}</label>
+    {%- endfor -%}
+  </fieldset>
+
   <fieldset id="character" tabindex="0">
     <legend>Character</legend>
     {%- for character in site.characters %}

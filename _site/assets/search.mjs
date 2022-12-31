@@ -104,9 +104,15 @@ function setSelect(id, name) {
 document.addEventListener('submit', setURLSubmit);
 
 window.addEventListener('popstate', setInput);
-window.addEventListener('popstate', setSelect('category', 'category'));
-window.addEventListener('popstate', setSelect('tag', 'tag'));
-window.addEventListener('popstate', setSelect('character', 'character'));
+
+for (const [k, v] of [
+    ['category', 'category'],
+    ['tag', 'tag'],
+    ['character', 'character'],
+    ['place', 'place']
+]) {
+    window.addEventListener('popstate', setSelect(k, v));
+}
 
 window.addEventListener('popstate', () => {
     document.getElementById('search').requestSubmit();
