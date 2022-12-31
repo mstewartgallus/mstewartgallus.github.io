@@ -13,7 +13,9 @@
     FIXME reconsider whether to conditionally include a skip link
     {%- endcomment -%}
 
+    {%- if page.tags.size > 0 -%}
     {%- include tags.html -%}
+    {%- endif -%}
 
     {%- include main.html title=title subtitle=subtitle content=content -%}
   </li>
