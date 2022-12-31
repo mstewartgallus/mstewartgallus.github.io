@@ -1,3 +1,6 @@
+{%- assign categories = site.categories | sort -%}
+{%- assign tags = site.tags | sort -%}
+
 <section aria-labelledby="controls-title">
   <header class="sr-only">
     <hgroup>
@@ -17,6 +20,15 @@
     <input id="category-{{ category[0] | cgi_escape }}" type="checkbox" name="category"
            value="{{ category[0] | cgi_escape }}">
     <label for="category-{{ category[0] | cgi_escape }}">{{ category[0] | escape }}</label>
+    {%- endfor -%}
+  </fieldset>
+
+  <fieldset id="character">
+    <legend>Character</legend>
+    {%- for character in site.characters %}
+    <input id="character-{{ character | cgi_escape }}" type="checkbox" name="character"
+           value="{{ character | cgi_escape }}">
+    <label for="character-{{ character | cgi_escape }}">#{{ character | escape }}</label>
     {%- endfor -%}
   </fieldset>
 

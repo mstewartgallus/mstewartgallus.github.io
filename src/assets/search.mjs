@@ -84,39 +84,29 @@ function setInput(event) {
     input.value = query;
 }
 
-function setTag(event) {
-    const { searchParams } = new URL(location);
-    const tag = new Set(searchParams.getAll('tag'));
+function setSelect(id, name) {
+    return event => {
+        const { searchParams } = new URL(location);
+        const set = new Set(searchParams.getAll(name));
 
-    const tagEl = document.getElementById('tag');
-    if (!tagEl) {
-        return;
-    }
+        const el = document.getElementById(id);
+        if (!el) {
+            return;
+        }
 
-    for (const option of tagEl.elements) {
-        option.checked = tag.has(option.value);
-    }
+        for (const option of el.elements) {
+            option.checked = set.has(option.value);
+        }
+    };
 }
 
-function setCategory(event) {
-    const { searchParams } = new URL(location);
-    const category = new Set(searchParams.getAll('category'));
-
-    const categoryEl = document.getElementById('category');
-    if (!categoryEl) {
-        return;
-    }
-
-    for (const option of categoryEl.elements) {
-        option.checked = category.has(option.value);
-    }
-}
 
 document.addEventListener('submit', setURLSubmit);
 
 window.addEventListener('popstate', setInput);
-window.addEventListener('popstate', setCategory);
-window.addEventListener('popstate', setTag);
+window.addEventListener('popstate', setSelect('category', 'category'));
+window.addEventListener('popstate', setSelect('tag', 'tag'));
+window.addEventListener('popstate', setSelect('character', 'character'));
 
 window.addEventListener('popstate', () => {
     document.getElementById('search').requestSubmit();

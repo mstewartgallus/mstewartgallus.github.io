@@ -1,6 +1,3 @@
-{%- assign categories = site.categories | sort -%}
-{%- assign tags = site.tags | sort -%}
-
 {%- capture title -%}
 <search-h1 query="s">
   {{- page.title | escape -}}
@@ -20,7 +17,7 @@
           {{- content -}}
         </div>
 
-        <search-results query="s" tag="tag" category="category">
+        <search-results query="s" tag="tag" category="category" character="character">
         </search-results>
       </main>
     </li>

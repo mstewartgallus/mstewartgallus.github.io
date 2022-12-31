@@ -11,8 +11,8 @@
     {%- endfor -%}
     {%- for c in page.characters -%}
     <li>{{- -}}
-      <a rel="tag" href="{% link search.html %}?tag={{ c | cgi_escape }}">{{- -}}
-        #<span data-pagefind-filter="tag">{{- c | escape -}}</span>
+      <a rel="tag" href="{% link search.html %}?character={{ c | cgi_escape }}">{{- -}}
+        #<span data-pagefind-filter="character">{{- c | escape -}}</span>
         {{- -}}
       </a>{{- -}}
     </li>

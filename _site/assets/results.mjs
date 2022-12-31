@@ -10,10 +10,11 @@ function fromPagefind(post) {
     const { url,
             excerpt,
             meta: { title, date },
-            filters: { tag, category } } = post;
+            filters: { tag, character, category } } = post;
     return { url, title, date,
         categories: category ?? [],
-        tags: tag ?? [],
+        tag: tag ?? [],
+        character: character ?? [],
         excerpt
     };
 }
@@ -23,14 +24,17 @@ async function findPosts(query, options) {
         query = null;
     }
 
-    const { categories, tags } = options;
+    const { category, tag, character } = options;
 
     const filters = {};
-    if (categories) {
-        filters.category = Array.from(categories);
+    if (category) {
+        filters.category = Array.from(category);
     }
-    if (tags) {
-        filters.tag = Array.from(tags);
+    if (tag) {
+        filters.tag = Array.from(tag);
+    }
+    if (character) {
+        filters.character = Array.from(character);
     }
 
     return (await pf.search(query, { filters })).results;
@@ -38,7 +42,7 @@ async function findPosts(query, options) {
 
 export default class SearchResults extends HTMLElement {
     static formAssociated = true;
-    static observedAttributes = ['query', 'tag', 'category'];
+    static observedAttributes = ['query', 'tag', 'character', 'category'];
 
     #list;
     #entries;
@@ -87,10 +91,11 @@ export default class SearchResults extends HTMLElement {
         const data = new FormData(event.target);
 
         const query = data.get(this.query) ?? '';
-        const tags = data.getAll(this.tag);
-        const categories = data.getAll(this.category);
+        const tag = data.getAll(this.tag);
+        const character = data.getAll(this.character);
+        const category = data.getAll(this.category);
 
-        const posts = findPosts(query, { tags, categories });
+        const posts = findPosts(query, { tag, category, character });
 
         this.#clean();
 
@@ -154,6 +159,13 @@ export default class SearchResults extends HTMLElement {
     }
     set tag(x) {
         this.setAttribute('tag', x);
+    }
+
+    get character() {
+        return this.getAttribute('character');
+    }
+    set character(x) {
+        this.setAttribute('character', x);
     }
 
     get category() {

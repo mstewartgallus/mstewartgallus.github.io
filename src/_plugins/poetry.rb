@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
 module MSG
   def parsepoem(content)
     stanzas = []
-    content.strip.chomp.each_line("\n\n") do |par|
+    content.chomp.each_line("\n\n") do |par|
       stanza = []
       par.chomp.each_line do |line|
         stanza << line.chomp
@@ -14,46 +12,49 @@ module MSG
   end
 
   def tohtml(stanzas)
-    output = String.new
-    stanzas.each_with_index do |stanza, index|
-      output << '<p class="stanza">'
-      first = true
+    output = ""
+    output << '<ol class="poem">'
+    stanzas.each do |stanza|
+      output << '<li>'
+      output << '<ol class="stanza" role="presentation">'
       stanza.each do |line|
-        if not first then
-          output << '<br>'
-        end
-        first = false
-        output << '<span role="presentation" class="line" markdown="span">'
+        output << '<li>'
         output << line
-        output << '</span>'
+        output << '</li>'
+        output << "\n"
       end
-      output << '</p>'
+      output << '</ol>'
+      output << "\n"
+      output << "</li>"
     end
+    output << "</ol>"
     output.freeze
   end
 
-  def tokd(stanzas)
-    output = String.new
-    stanzas.each_with_index do |stanza|
-      output << ''
-      first = true
+  def tomarkdown(stanzas)
+    output = ''
+    stanzano = 1
+    stanzas.each do |stanza|
+      output << stanzano.to_s << ". "
+      stanzano = 1 + stanzano
+
+      start = true
+      lineno = 1
       stanza.each do |line|
-        if not first then
-          output << '\\\\'
+        if not start then
           output << "\n"
+          output << "   "
         end
-        first = false
-        output << '<span>'
-        output << line
-        output << '</span>'
-        output << '{:.line role="presentation"}'
+        start = false
+        output << lineno.to_s << '. ' << line
+        lineno = 1 + lineno
       end
       output << "\n"
-      output << "^"
+      output << "   {:.stanza}"
       output << "\n"
-      output << '{:.stanza}'
-      output << "\n\n"
     end
+    output << "{:.stanzas}"
+    # FIXME wrap with .poem
     output.freeze
   end
 
@@ -61,8 +62,8 @@ module MSG
     tohtml(parsepoem(content))
   end
 
-  def poemtokd(content)
-    tohtml(parsepoem(content))
+  def poemtomarkdown(content)
+    tomarkdown(parsepoem(content))
   end
 end
 
@@ -70,6 +71,7 @@ module Jekyll
   class PoemConverter < Converter
     include MSG
 
+    safe true
     priority :low
 
     def matches(ext)
@@ -90,10 +92,8 @@ class PoemBlock < Liquid::Block
   include MSG
 
   def render(context)
-    content = Liquid::Template.parse(super).render context
-
-    kd = poemtokd(content)
-    kd
+    text = super
+    poemtomarkdown(text)
   end
 end
 

@@ -17,6 +17,7 @@ related:
 search:
   title: "Search"
   category: "Category"
+  character: "Character"
   tag: "Tag"
   submit: "Search"
   postDate: "Post Date"
