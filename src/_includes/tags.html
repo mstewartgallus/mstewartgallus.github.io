@@ -9,21 +9,5 @@
       </a>{{- -}}
     </li>
     {%- endfor -%}
-    {%- for c in page.characters -%}
-    <li>{{- -}}
-      <a rel="tag" href="{% link search.html %}?character={{ c | cgi_escape }}">{{- -}}
-        #<span data-pagefind-filter="character">{{- c | escape -}}</span>
-        {{- -}}
-      </a>{{- -}}
-    </li>
-    {%- endfor -%}
-    {%- for c in page.places -%}
-    <li>{{- -}}
-      <a rel="tag" href="{% link search.html %}?place={{ c | cgi_escape }}">{{- -}}
-        #<span data-pagefind-filter="place">{{- c | escape -}}</span>
-        {{- -}}
-      </a>{{- -}}
-    </li>
-    {%- endfor -%}
   </ul>
 </footer>
