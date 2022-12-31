@@ -23,7 +23,7 @@
     {%- endfor -%}
   </fieldset>
 
-  <fieldset id="character">
+  <fieldset id="character" tabindex="0">
     <legend>Character</legend>
     {%- for character in site.characters %}
     <input id="character-{{ character | cgi_escape }}" type="checkbox" name="character"

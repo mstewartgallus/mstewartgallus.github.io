@@ -194,14 +194,14 @@ button:active {
     min-block-size: 5 * $line ;
 }
 
-#category, #tag {
+#character, #category, #tag {
     display: grid ;
     grid-template-columns: auto 1fr ;
     column-gap: 1em ;
     width: fit-content ;
 }
 
-#tag {
+#character, #tag {
     overflow: auto ;
     max-height: 20 * $line ;
 }
