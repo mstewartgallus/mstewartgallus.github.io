@@ -6,6 +6,8 @@ tags:
 - Anxiety
 - Dysphoria
 - Panic
+characters:
+- The Wrath
 ---
 {% poem %}
 At the rising of the sun,

@@ -4,15 +4,10 @@ date: 2022-10-18 18:32:00 -0800
 tags:
 - '2019'
 - Anxiety
-- Apollo
 - Dysphoria
-- Hephaestus
-- Hermes
-- Mercury
 - Panic
-- Uranus
-- Volund
-- Wayland
+characters:
+- The Slow Rot
 ---
 
 {% poem %}

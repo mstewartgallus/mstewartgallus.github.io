@@ -3,6 +3,7 @@ title: Hunter Hunter
 date: 2022-11-03 16:56 -0800
 tags:
 - '2018'
+characters:
 - Artemis
 - Eros
 ---

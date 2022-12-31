@@ -8,8 +8,9 @@ tags:
 - Dysphoria
 - Panic
 - Sleep Paralysis
-- The Night Ghost
 - Vancouver
+characters:
+- The Night Ghost
 ---
 
 {% poem %}
