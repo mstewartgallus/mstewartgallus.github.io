@@ -20,25 +20,9 @@ function fromPagefind(post) {
     };
 }
 
-async function findPosts(query, options) {
+async function findPosts(query, filters) {
     if ('' == query) {
         query = null;
-    }
-
-    const { category, tag, place, character } = options;
-
-    const filters = {};
-    if (category) {
-        filters.category = Array.from(category);
-    }
-    if (tag) {
-        filters.tag = Array.from(tag);
-    }
-    if (character) {
-        filters.character = Array.from(character);
-    }
-    if (place) {
-        filters.place = Array.from(place);
     }
 
     return (await pf.search(query, { filters })).results;
