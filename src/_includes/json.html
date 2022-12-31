@@ -31,7 +31,10 @@
         "@type": "Person",
         "name": {{ author.name | jsonify }} ,
         "url": {{ author.url | relative_url | jsonify }}
-    }]
+    }],
+    "articleSection": {{ page.categories | first | jsonify }},
+    "keywords": {{ page.tags | jsonify }},
+    "character": {{ page.characters | jsonify }}
 }
 </script>
 {%- endif -%}
