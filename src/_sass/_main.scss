@@ -3,10 +3,6 @@
 // default ratio on browsers is 1rem = 16px
 $remperpx: 1rem / 16px ;
 
-$paragraph-width: 50.7ch ;
-$main-width: 64.3ch ;
-$side-width: 37.2ch ;
-
 $min: (
     width: 320px * $remperpx,
     font-size: 19px * $remperpx,
@@ -67,9 +63,6 @@ $max-scale: map-get($max, scale) ;
                      linstep($min-width, $max-width, 100vw));
 }
 
-$ex-height: var(--ex-height) ;
-$line: var(--line-height) ;
-
 @mixin prefix($property, $value) {
     -moz-#{$property}: $value;
     -ms-#{$property}: $value;
@@ -79,15 +72,6 @@ $line: var(--line-height) ;
 
 @mixin hyphens($value) {
     @include prefix(hyphens, $value);
-}
-@mixin text-size-adjust($value) {
-    -moz-text-size-adjust: $value ;
-    -webkit-text-size-adjust: $value ;
-    text-size-adjust: $value ;
-}
-@mixin text-underline-position($value) {
-    -webkit-text-underline-position: $value ;
-    text-underline-position: $value ;
 }
 
 @import "_theme";
@@ -104,5 +88,5 @@ $line: var(--line-height) ;
 
 // body {
 //     background: linear-gradient(grey, Canvas);
-//     background-size: 100% $line ;
+//     background-size: 100% var(--line-height) ;
 // }

@@ -1,9 +1,13 @@
 :root {
     /* Noto Sans x height :( */
     --ex-height: 0.536rem ;
+
     /* Compute legible line height in terms of rems */
     /* https://www.smashingmagazine.com/2020/07/css-techniques-legibility/ */
     --line-height: calc(var(--ex-height) / 0.32) ;
+
+    --paragraph-width: 50.7ch ;
+    --main-width: 64.3ch ;
 }
 
 /* Unfortunately lab/oklab and such aren't so supported yet. HSL is */

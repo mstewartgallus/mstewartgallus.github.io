@@ -6,12 +6,6 @@ hgroup p {
     margin-block: 0 ;
 }
 
-main > :is(ul, ol) {
-    padding-inline-start:
-            lerp(0rem, 2rem,
-                 #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
-                                    100vw) ")"});
-}
 
 header {
     position: relative ;
@@ -24,7 +18,7 @@ header {
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 1ch ;
-    inline-size: $paragraph-width ;
+    inline-size: var(--paragraph-width) ;
     max-inline-size: 100% ;
 }
 .breadcrumb li {
@@ -67,10 +61,10 @@ header {
 ul.tags {
     all: unset ;
     display: flex ;
-    margin-block-end: $line ;
+    margin-block-end: var(--line-height) ;
     flex-wrap: wrap ;
     column-gap: 1em ;
-    inline-size: $paragraph-width ;
+    inline-size: var(--paragraph-width) ;
     max-inline-size: 100% ;
 }
 
@@ -85,7 +79,7 @@ ul.tags {
 }
 
 #toc {
-    margin-block: $line ;
+    margin-block: var(--line-height) ;
 }
 
 .greentext > li {
@@ -130,4 +124,11 @@ ul.tags {
 
 #notice {
     margin-block-end: var(--line-height) ;
+}
+
+main > :is(ul, ol) {
+    padding-inline-start:
+            lerp(0rem, 2rem,
+                 #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
+                                    100vw) ")"});
 }

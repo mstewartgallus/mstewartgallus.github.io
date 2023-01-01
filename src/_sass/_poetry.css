@@ -1,0 +1,16 @@
+.stanza {
+    all: unset ;
+    display: block ;
+    margin-block: var(--line-height) ;
+
+    -moz-hyphens: manual ;
+    -ms-hyphens: manual ;
+    -webkit-hyphens: manual ;
+    hyphens: manual ;
+}
+
+.line {
+    all: unset ;
+    display: inline-block ;
+    text-align-last: end ;
+}
