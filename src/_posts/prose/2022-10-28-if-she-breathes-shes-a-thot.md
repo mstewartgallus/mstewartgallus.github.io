@@ -2,12 +2,12 @@
 title: If She Breathes She's a Thot
 subtitle: or I was a Teenage Incel Force Femmed by a Vampire
 date: 2022-10-28 13:17 -0800
-tags:
-- Anxiety
+notice:
 - Dysphoria
-- If She Breathes
 - NSFW
 - Panic
+tags:
+- If She Breathes
 - Transgender
 places:
 - Vancouver

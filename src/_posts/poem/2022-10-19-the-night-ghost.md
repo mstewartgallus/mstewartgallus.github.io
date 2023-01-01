@@ -1,16 +1,15 @@
 ---
 title: The Night Ghost
 date: 2022-10-19 12:00 -0800
+notice:
+- Dysphoria
 tags:
 - '2019'
-- Anxiety
-- Downtown
-- Dysphoria
-- Panic
 - Sleep Paralysis
 characters:
 - The Night Ghost
 places:
+- Downtown
 - Vancouver
 ---
 

@@ -1,11 +1,10 @@
 ---
 title: "The Slow Rot"
 date: 2022-10-18 18:32:00 -0800
+notice:
+- Dysphoria
 tags:
 - '2019'
-- Anxiety
-- Dysphoria
-- Panic
 characters:
 - The Slow Rot
 ---

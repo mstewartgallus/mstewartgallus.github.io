@@ -3,7 +3,7 @@ module Jekyll
         safe true
         priority :low
         def generate(site)
-          for meta in ['places', 'characters'] do
+          for meta in ['notice', 'places', 'characters'] do
             set = Set::new
             site.posts.docs.each do |post|
               c = post.data[meta]

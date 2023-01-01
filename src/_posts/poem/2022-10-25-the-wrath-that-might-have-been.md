@@ -1,11 +1,10 @@
 ---
 title: The Wrath That Might Have Been
 date: 2022-10-25 11:25 -0800
+notice:
+- Dysphoria
 tags:
 - '2019'
-- Anxiety
-- Dysphoria
-- Panic
 characters:
 - The Wrath
 ---

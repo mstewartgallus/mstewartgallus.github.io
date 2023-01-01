@@ -1,11 +1,12 @@
 ---
 title: Nevertheless, Molossus Spondee Coded
 date: 2022-12-17 12:28 -0800
+notice:
+- Dysphoria
+- Sad
 tags:
 - '2020'
 - Auto
-- Dysphoria
-- Sad
 - She Coded
 places:
 - Vancouver

@@ -1,0 +1,10 @@
+<footer aria-labelledby="notice-title" id="notice">
+  <div class="sr-only" id="notice-title">Notice</div>
+  <ul class="tags">
+    {%- for notice in page.notice -%}
+    <li data-pagefind-filter="notice">
+        {{- notice | escape -}}
+    </li>
+    {%- endfor -%}
+  </ul>
+</footer>

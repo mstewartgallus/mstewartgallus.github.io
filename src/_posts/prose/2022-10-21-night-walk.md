@@ -1,11 +1,11 @@
 ---
 title: Night Walk
 date: 2022-10-21 19:00 -0800
-tags:
-- Anxiety
+notice:
 - Dysphoria
 - NSFW
 - Panic
+tags:
 - Transgender
 places:
 - Downtown
