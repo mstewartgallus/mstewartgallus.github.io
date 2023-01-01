@@ -250,6 +250,21 @@ main {
         clamp(var(--font-size-0),
               var(--font-size-0) + var(--t) * var(--delta-font-size),
               var(--font-size-1)) ;
+}
 
+:root {
+    --ratio-1: calc(4/3) ;
+    --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
+}
+
+:root {
     font-size: var(--font-size) ;
+}
+
+h1 {
+    font-size: calc(var(--ratio-2) * 1rem);
+}
+
+h2 {
+    font-size: calc(var(--ratio-1) * 1rem);
 }
