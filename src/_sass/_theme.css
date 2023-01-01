@@ -107,11 +107,6 @@ ul.tags {
 .greentext {
     display: block ;
     list-style-position: inside ;
-
-    -moz-hyphens: manual ;
-    -ms-hyphens: manual ;
-    -webkit-hyphens: manual ;
-    hyphens: manual ;
 }
 
 @counter-style detail {

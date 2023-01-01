@@ -87,9 +87,6 @@ h1,h2,h3,h4,h5,h6 {
     font-style: normal ;
 }
 
-h1 { font-size: scale(2) ; }
-h2 { font-size: scale(1) ; }
-
 hgroup {
     max-inline-size: 100% ;
     margin: unset ;
@@ -152,11 +149,6 @@ h1,h2,h3,h4,h5,h6 {
 
 header,h1,h2,h3,h4,h5,h6 {
     font-variant-numeric: proportional-nums lining-nums ;
-
-    -moz-hyphens: manual ;
-    -ms-hyphens: manual ;
-    -webkit-hyphens: manual ;
-    hyphens: manual ;
 }
 
 :focus-visible {
@@ -166,14 +158,14 @@ header,h1,h2,h3,h4,h5,h6 {
 }
 
 :root {
-    font-family: sans-serif ;
-
     /* more legible hyperlinks */
     -webkit-text-underline-position: under ;
     text-underline-position: under ;
-
+    font-family: sans-serif ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
+}
 
+p {
     -moz-hyphens: auto ;
     -ms-hyphens: auto ;
     -webkit-hyphens: auto ;

@@ -2,11 +2,6 @@
     all: unset ;
     display: block ;
     margin-block: var(--line-height) ;
-
-    -moz-hyphens: manual ;
-    -ms-hyphens: manual ;
-    -webkit-hyphens: manual ;
-    hyphens: manual ;
 }
 
 .line {
