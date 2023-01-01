@@ -52,13 +52,14 @@ label, button, input, option {
 }
 
 label, input, button {
-    border-radius: 0.01ch ;
-    border-width: 0.08em;
-}
-input[type="search"] {
-    border-block-end-style: solid ;
+    border-radius: 0.1ch ;
+    border-width: #{"max(" 1px "," 0.07em ")"};
 }
 
+input[type="search"] {
+    border-style: solid ;
+    padding-inline: 0.5em ;
+}
 
 button {
     border-style: solid ;
@@ -81,10 +82,6 @@ legend {
     font-weight: bold ;
 }
 
-
-button {
-    align-self: start ;
-}
 
 
 select {
@@ -181,11 +178,10 @@ button:active {
 
 
 .search-basic {
-    display: block ;
-    width: fit-content ;
-}
-.search-basic :is(label, input, button) {
-    display: inline-block ;
+    display: flex ;
+    column-gap: 1em ;
+    flex-wrap: wrap ;
+    align-items: start ;
 }
 
 // reduce cumulative layout shift
