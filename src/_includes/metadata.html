@@ -4,51 +4,69 @@
     <h2 id="metadata-title">{{ site.data.strings.metadata.title | escape }}</h2>
   </hgroup>
 
-  <div>
-    {{- site.data.strings.metadata.postDate | escape -}}
-    &emsp;<time datetime="{{ page.date | date_to_xmlschema }}"
-                data-pagefind-meta="date" data-pagefind-sort="date">
-      {{- page.date | date: "%Y-%m-%d" -}}
-    </time>
-  </div>
+  <dl>
+    <div>
+      <dt>{{- site.data.strings.metadata.postDate | escape -}}</dt>
+      <dd>{{- -}}
+        <time datetime="{{ page.date | date_to_xmlschema }}"
+              data-pagefind-meta="date" data-pagefind-sort="date">
+          {{- page.date | date: "%Y-%m-%d" -}}
+        </time>{{- -}}
+      </dd>
+    </div>
 
-  <address>
-    <a rel="author"
-       href="{{ author.url | relative_url }}"
-       aria-describedby="author">
-      {{- site.data.strings.metadata.author | escape }}
-      &emsp;<span aria-hidden="true"
-                  id="author"
-                  translate="no">@
-        {{- author.name | escape -}}
-      </span>
-    </a>
-  </address>
+    <div>
+      <dt>{{- site.data.strings.metadata.author | escape -}}</dt>
+      <dd>{{- -}}
+        <a rel="author"
+           href="{{ author.url | relative_url }}"
+           aria-describedby="author"
+           translate="no">
+          {{- author.name | escape -}}
+        </a>{{- -}}
+      </dd>
+    </div>
 
-  <ul class="tags">
-    {%- for c in page.tags -%}
-    <li>{{- -}}
-      <a rel="tag" href="{% link search.html %}?tag={{ c | cgi_escape }}">{{- -}}
-        #<span data-pagefind-filter="tag">{{- c | escape -}}</span>
-        {{- -}}
-      </a>{{- -}}
-    </li>
-    {%- endfor -%}
-    {%- for c in page.characters -%}
-    <li>{{- -}}
-      <a rel="tag" href="{% link search.html %}?character={{ c | cgi_escape }}">{{- -}}
-        #<span data-pagefind-filter="character">{{- c | escape -}}</span>
-        {{- -}}
-      </a>{{- -}}
-    </li>
-    {%- endfor -%}
-    {%- for c in page.places -%}
-    <li>{{- -}}
-      <a rel="tag" href="{% link search.html %}?place={{ c | cgi_escape }}">{{- -}}
-        #<span data-pagefind-filter="place">{{- c | escape -}}</span>
-        {{- -}}
-      </a>{{- -}}
-    </li>
-    {%- endfor -%}
-  </ul>
+    {%- if page.tags.size > 0 -%}
+    <div>
+      <dt>Tag</dt>
+      {%- for c in page.tags -%}
+      <dd>{{- -}}
+        <a rel="tag" href="{% link search.html %}?tag={{ c | cgi_escape }}"
+           data-pagefind-filter="tag">
+          {{- c | escape -}}
+        </a>{{- -}}
+      </dd>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    {%- if page.characters.size > 0 -%}
+    <div>
+      <dt>Person</dt>
+      {%- for c in page.characters -%}
+      <dd>{{- -}}
+        <a rel="tag" href="{% link search.html %}?character={{ c | cgi_escape }}"
+           data-pagefind-filter="character">
+          {{- c | escape -}}
+        </a>{{- -}}
+      </dd>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    {%- if page.places.size > 0 -%}
+    <div>
+      <dt>Place</dt>
+      {%- for c in page.places -%}
+      <dd>{{- -}}
+        <a rel="tag" href="{% link search.html %}?place={{ c | cgi_escape }}"
+           data-pagefind-filter="place">
+          {{- c | escape -}}
+        </a>{{- -}}
+      </dd>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </dl>
 </footer>
