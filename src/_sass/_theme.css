@@ -52,7 +52,7 @@ header {
     color: var(--highlight-text) ;
     border-radius: 0.6ch ;
     padding-inline: 1em ;
-    padding-block: 0.5 * $line ;
+    padding-block: calc(0.5 * var(--line-height)) ;
 }
 .sr-only:not(:focus-within) {
     position: absolute !important ;
@@ -129,5 +129,5 @@ ul.tags {
 
 
 #notice {
-    margin-block-end: $line ;
+    margin-block-end: var(--line-height) ;
 }

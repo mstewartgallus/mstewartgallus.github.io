@@ -217,7 +217,7 @@ main {
 
 @media screen {
     :root {
-        padding-block-end: 3 * $line ;
+        padding-block-end: calc(3 * var(--line-height)) ;
     }
 
     // FIXME provide better fallbacks for fluid layout

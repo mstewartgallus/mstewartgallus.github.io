@@ -3,9 +3,6 @@
 // default ratio on browsers is 1rem = 16px
 $remperpx: 1rem / 16px ;
 
-// Noto Sans x height :(
-$ex-height: 0.536 ;
-
 $paragraph-width: 50.7ch ;
 $main-width: 64.3ch ;
 $side-width: 37.2ch ;
@@ -70,10 +67,8 @@ $max-scale: map-get($max, scale) ;
                      linstep($min-width, $max-width, 100vw));
 }
 
-// Compute legible line height in terms of rems
-// https://www.smashingmagazine.com/2020/07/css-techniques-legibility/
-$lh: (1ex / 0.32) ;
-$line: ($ex-height * $lh * 1rem) / 1ex ;
+$ex-height: var(--ex-height) ;
+$line: var(--line-height) ;
 
 @mixin prefix($property, $value) {
     -moz-#{$property}: $value;

@@ -48,7 +48,7 @@ input[type="checkbox"]:checked {
 
 label, button, input, option {
     box-sizing: border-box ;
-    block-size: $line ;
+    block-size: var(--line-height) ;
 }
 
 label, input, button {
@@ -72,7 +72,7 @@ fieldset {
     border-inline-start-style: dashed ;
     border-width: 0.1em ;
     padding-inline-start: 1em;
-    margin-block: $line ;
+    margin-block: var(--line-height) ;
 
     display: flex;
     flex-direction: column ;
@@ -82,22 +82,6 @@ legend {
     font-weight: bold ;
 }
 
-
-
-select {
-    overflow: auto ;
-    box-sizing: border-box ;
-    min-block-size: $line ;
-    max-block-size: 4 * $line ;
-}
-
-option {
-    padding-inline-start: 1em ;
-}
-
-option:checked {
-    font-weight: bold ;
-}
 
 
 :is(button, select):focus-visible {
@@ -184,12 +168,6 @@ button:active {
     align-items: start ;
 }
 
-// reduce cumulative layout shift
-#search-output {
-    display: block ;
-    min-block-size: 5 * $line ;
-}
-
 #character, #category, #tag, #place {
     display: grid ;
     grid-template-columns: auto 1fr ;
@@ -199,5 +177,5 @@ button:active {
 
 #character, #tag {
     overflow: auto ;
-    max-height: 20 * $line ;
+    max-height: calc(20 * var(--line-height)) ;
 }
