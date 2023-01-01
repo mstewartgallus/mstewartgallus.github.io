@@ -107,7 +107,11 @@ ul.tags {
 .greentext {
     display: block ;
     list-style-position: inside ;
-    @include hyphens(manual);
+
+    -moz-hyphens: manual ;
+    -ms-hyphens: manual ;
+    -webkit-hyphens: manual ;
+    hyphens: manual ;
 }
 
 @counter-style detail {
@@ -124,11 +128,4 @@ ul.tags {
 
 #notice {
     margin-block-end: var(--line-height) ;
-}
-
-main > :is(ul, ol) {
-    padding-inline-start:
-            lerp(0rem, 2rem,
-                 #{"(1rem - " linstep(400px * $remperpx, 600px * $remperpx,
-                                    100vw) ")"});
 }

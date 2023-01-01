@@ -1,79 +1,5 @@
 @charset "utf-8";
 
-// default ratio on browsers is 1rem = 16px
-$remperpx: 1rem / 16px ;
-
-$min: (
-    width: 320px * $remperpx,
-    font-size: 19px * $remperpx,
-    scale: 4/3
-) ;
-$max: (
-    width: 2400px * $remperpx,
-    font-size: 24px * $remperpx,
-    scale: 3/2
-) ;
-
-$min-width: map-get($min, width) ;
-$max-width: map-get($max, width) ;
-
-$max-font-size: map-get($max, font-size) ;
-$min-font-size: map-get($min, font-size) ;
-
-$min-scale: map-get($min, scale) ;
-$max-scale: map-get($max, scale) ;
-
-@function pow($x, $n) {
-    @if $n < 0 {
-        $n: -$n ;
-        $x: 1/$x ;
-    }
-    $p: 1 ;
-    @for $i from 0 to $n {
-        $p: $p * $x ;
-    }
-    @return $p ;
-}
-
-@function clamp($a, $t, $b) {
-    @return #{"clamp(" $a ", " $t ", " $b ")"};
-}
-
-// $t is between 0 and 1 rem
-@function lerp($a, $b, $t) {
-    $A: $a / 1rem;
-    $B: $b / 1rem;
-    $C: $B - $A ;
-    @return clamp($a,
-                  $a " + " $C " * (" $t ")",
-                  $b);
-}
-// outputs between 0 and 1 rem
-@function linstep($a, $b, $x) {
-    $A: $a / 1rem;
-    $B: $b / 1rem;
-    $c: 1/($B - $A) ;
-    @return clamp(0rem,
-                  #{"((" $x ") * " $c " - " $a * $c ")"},
-                  1rem);
-}
-
-@function scale($n) {
-    @return lerp(pow($min-scale, $n) * 1rem, pow($max-scale, $n) * 1rem,
-                     linstep($min-width, $max-width, 100vw));
-}
-
-@mixin prefix($property, $value) {
-    -moz-#{$property}: $value;
-    -ms-#{$property}: $value;
-    -webkit-#{$property}: $value;
-    #{$property}: $value;
-}
-
-@mixin hyphens($value) {
-    @include prefix(hyphens, $value);
-}
-
 @import "_theme";
 @import "_syntax";
 @import "_poetry";
@@ -85,6 +11,8 @@ $max-scale: map-get($max, scale) ;
 @import "_print";
 
 @import "_vars";
+
+@import "_sass";
 
 // body {
 //     background: linear-gradient(grey, Canvas);
