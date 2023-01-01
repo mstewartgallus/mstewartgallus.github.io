@@ -95,17 +95,17 @@ $line: ($ex-height * $lh * 1rem) / 1ex ;
     text-underline-position: $value ;
 }
 
-@import "_theme.scss";
-@import "_syntax.scss";
-@import "_poetry.scss";
-@import "_forms.scss";
-@import "_decorate.scss";
-@import "_layout.scss";
-@import "_base.scss";
+@import "_theme";
+@import "_syntax";
+@import "_poetry";
+@import "_forms";
+@import "_decorate";
+@import "_layout";
+@import "_base";
 
-@import "_print.scss";
+@import "_print";
 
-@import "_vars.scss";
+@import "_vars";
 
 // body {
 //     background: linear-gradient(grey, Canvas);

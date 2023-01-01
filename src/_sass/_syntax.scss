@@ -1,11 +1,11 @@
 @media only screen and (prefers-color-scheme: dark) {
-    @import "_syntax-dark.scss";
+    @import "_syntax-dark";
 }
 @media only screen and (prefers-color-scheme: light) {
-    @import "_syntax-light.scss";
+    @import "_syntax-light";
 }
 @media print {
-    @import "_syntax-print.scss";
+    @import "_syntax-print";
 }
 
 .highlight {
