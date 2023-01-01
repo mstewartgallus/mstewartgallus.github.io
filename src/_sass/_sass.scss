@@ -3,12 +3,10 @@ $remperpx: 1rem / 16px ;
 
 $min: (
     width: 320px * $remperpx,
-    font-size: 19px * $remperpx,
     scale: 4/3
 ) ;
 $max: (
     width: 2400px * $remperpx,
-    font-size: 24px * $remperpx,
     scale: 3/2
 ) ;
 
@@ -63,15 +61,6 @@ $max-scale: map-get($max, scale) ;
 
 h1 { font-size: scale(2) ; }
 h2 { font-size: scale(1) ; }
-
-@media screen {
-    :root {
-        font-size: 0.5 * ($min-font-size + $max-font-size) ;
-        font-size:
-            lerp($min-font-size, $max-font-size,
-                 linstep($min-width, $max-width, 100vw));
-    }
-}
 
 @media screen {
     // FIXME provide better fallbacks for fluid layout

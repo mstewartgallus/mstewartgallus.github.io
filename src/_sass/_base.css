@@ -221,3 +221,35 @@ main {
         margin-block-start: var(--line-height) ;
     }
 }
+
+
+
+:root {
+    /* default ratio on browsers is 1rem = 16px */
+    --remperpx: calc(1rem / 16) ;
+
+    --min-width: 320 ;
+    --max-width: 2400 ;
+
+    --min-font-size: 19 ;
+    --max-font-size: 24 ;
+
+    --delta-font-size: calc(var(--max-font-size) - var(--min-font-size)) ;
+    --delta-width: calc(var(--max-width) - var(--min-width)) ;
+
+    --inv-delta-width: calc(1 / var(--delta-width)) ;
+
+    --t0: calc(0rem - var(--min-width) * var(--remperpx) * var(--inv-delta-width)) ;
+    --font-size-0: var(--min-font-size) * var(--remperpx) ;
+    --font-size-1: var(--max-font-size) * var(--remperpx) ;
+
+    --t: clamp(0rem,
+               var(--t0) + 100vw * var(--inv-delta-width),
+               1rem);
+    --font-size:
+        clamp(var(--font-size-0),
+              var(--font-size-0) + var(--t) * var(--delta-font-size),
+              var(--font-size-1)) ;
+
+    font-size: var(--font-size) ;
+}
