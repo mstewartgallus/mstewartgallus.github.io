@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Night Ghost&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -58,15 +59,32 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        data-pagefind-body>
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">The Night Ghost</h1><p></p></hgroup>
-    </header><footer aria-labelledby="notice-title" id="notice">
+<main slot="main" id="main" aria-describedby="title"
+      data-pagefind-body>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">The Night Ghost</h1><p></p></hgroup>
+  </header><footer aria-labelledby="notice-title" id="notice">
   <dl>
     <div>
       <dt id="notice-title">Notice</dt><dd data-pagefind-filter="notice">Dysphoria</dd></div>
@@ -76,9 +94,7 @@
 
 <p class="stanza"><span role="presentation" class="line">The Night Ghost climbs, as a shadow leaping, overtop the manor wall</span><br /><span role="presentation" class="line">And through an open window goes, as a chilling fog</span><br /><span role="presentation" class="line">To the room of the sleeper he creeps</span><br /><span role="presentation" class="line">And as a swarm of bugs, overtop her stomach crawls</span><br /><span role="presentation" class="line">And on her chest, as a choking darkness sits</span></p>
 <p class="stanza"><span role="presentation" class="line">&#8216;Til she wakes with a gasp</span><br /><span role="presentation" class="line">The Night Ghost; by the window watching, giant as a shadow standing</span><br /><span role="presentation" class="line">She claps &lt;clap sound effect&gt; turning on the light</span><br /><span role="presentation" class="line">And The Night Ghost, as the darkness in the day, vanishes from all sight.</span></p>
-</main>
-
-  <div class="sidebar"><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
+</main><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
   <hgroup>
     <h2 id="paging-title">Paging</h2></hgroup>
 </header>
@@ -126,7 +142,5 @@
            data-pagefind-filter="place">Downtown</a></dd><dd><a rel="tag" href="/search/?place=Vancouver"
            data-pagefind-filter="place">Vancouver</a></dd></div></dl>
 </footer>
-</div>
-</div>
 </body>
 </html>

@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grounding&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -58,23 +59,38 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        data-pagefind-body>
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">Grounding</h1><p></p></hgroup>
-    </header><p class="stanza"><span role="presentation" class="line">A lamp hanging over head</span><br /><span role="presentation" class="line">The overcast sky outside</span><br /><span role="presentation" class="line">The felt cap across the desk</span><br /><span role="presentation" class="line">A man in the seat aside across from me</span><br /><span role="presentation" class="line">The clock 9:19 an hour behind</span></p>
+<main slot="main" id="main" aria-describedby="title"
+      data-pagefind-body>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">Grounding</h1><p></p></hgroup>
+  </header><p class="stanza"><span role="presentation" class="line">A lamp hanging over head</span><br /><span role="presentation" class="line">The overcast sky outside</span><br /><span role="presentation" class="line">The felt cap across the desk</span><br /><span role="presentation" class="line">A man in the seat aside across from me</span><br /><span role="presentation" class="line">The clock 9:19 an hour behind</span></p>
 
 <p class="stanza"><span role="presentation" class="line">Paper scrunching, crackling</span><br /><span role="presentation" class="line">Fans, the <abbr title="Air Conditioner">AC</abbr>? humming</span><br /><span role="presentation" class="line">Keypresses tapping</span></p>
 <p class="stanza"><span role="presentation" class="line">The textured chiclet keyboard</span><br /><span role="presentation" class="line">On my wrist, smooth greenwood beads</span><br /><span role="presentation" class="line">Soft dry socks warm my feet</span></p>
 <p class="stanza"><span role="presentation" class="line">Coffee stale on my tongue</span></p>
 
-</main>
-
-  <div class="sidebar"><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
+</main><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
   <hgroup>
     <h2 id="paging-title">Paging</h2></hgroup>
 </header>
@@ -119,7 +135,5 @@
            data-pagefind-filter="place">Downtown</a></dd><dd><a rel="tag" href="/search/?place=Vancouver"
            data-pagefind-filter="place">Vancouver</a></dd></div></dl>
 </footer>
-</div>
-</div>
 </body>
 </html>

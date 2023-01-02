@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Night Walk&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -58,15 +59,32 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        data-pagefind-body>
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">Night Walk</h1><p></p></hgroup>
-    </header><footer aria-labelledby="notice-title" id="notice">
+<main slot="main" id="main" aria-describedby="title"
+      data-pagefind-body>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">Night Walk</h1><p></p></hgroup>
+  </header><footer aria-labelledby="notice-title" id="notice">
   <dl>
     <div>
       <dt id="notice-title">Notice</dt><dd data-pagefind-filter="notice">Dysphoria</dd><dd data-pagefind-filter="notice">NSFW</dd><dd data-pagefind-filter="notice">Panic</dd></div>
@@ -147,9 +165,7 @@ cock. I touch my chest and I think of shiny goddesses.</p>
 
 <p>Ollie orgasmed face down grinding his hips against his bed and hand
 and staining the sheets with clear fluid and a foul smell.</p>
-</main>
-
-  <div class="sidebar"><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
+</main><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
   <hgroup>
     <h2 id="paging-title">Paging</h2></hgroup>
 </header>
@@ -194,7 +210,5 @@ and staining the sheets with clear fluid and a foul smell.</p>
            data-pagefind-filter="place">Downtown</a></dd><dd><a rel="tag" href="/search/?place=Vancouver"
            data-pagefind-filter="place">Vancouver</a></dd></div></dl>
 </footer>
-</div>
-</div>
 </body>
 </html>

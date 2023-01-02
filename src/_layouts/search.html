@@ -16,7 +16,9 @@
 
 {%- capture body -%}
 <form id="search" name="search" rel="search" action="{% link search.html %}">
-  {%- include body.html title=title subtitle=subtitle content=results -%}
+  <div>
+    {%- include body.html title=title subtitle=subtitle content=results -%}
+  </div>
 </form>
 {%- endcapture -%}
 

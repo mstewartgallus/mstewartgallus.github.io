@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Marking Up Poetry&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -58,15 +59,32 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        data-pagefind-body>
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">Marking Up Poetry</h1><p></p></hgroup>
-    </header><p>Common poetry markup is inaccessible, unsemantic and doesn’t display
+<main slot="main" id="main" aria-describedby="title"
+      data-pagefind-body>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">Marking Up Poetry</h1><p></p></hgroup>
+  </header><p>Common poetry markup is inaccessible, unsemantic and doesn’t display
 well. I am not skilled in accessibility and I don’t have good
 solutions.  See <a href="#tryit"><cite>Try It</cite></a> if you want to try out a screen
 reader yourself.</p>
@@ -388,9 +406,7 @@ accent) and <code class="language-plaintext highlighter-rouge">pause</code> prop
 problems.</p>
 
 </section>
-</main>
-
-  <div class="sidebar"><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
+</main><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
   <hgroup>
     <h2 id="paging-title">Paging</h2></hgroup>
 </header>
@@ -435,7 +451,5 @@ problems.</p>
            data-pagefind-filter="tag">CSS</a></dd><dd><a rel="tag" href="/search/?tag=Accessibility"
            data-pagefind-filter="tag">Accessibility</a></dd></div></dl>
 </footer>
-</div>
-</div>
 </body>
 </html>

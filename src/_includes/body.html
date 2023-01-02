@@ -1,42 +1,56 @@
-<div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        {% if page.date -%}data-pagefind-body{%- endif %}>
+<template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">{{- include.title -}}</h1>
-        {%- if include.subtitle -%}
-        <p>{{- include.subtitle -}}</p>
-        {%- endif -%}
-      </hgroup>
-    </header>
+<main slot="main" id="main" aria-describedby="title"
+      {% if page.date -%}data-pagefind-body{%- endif %}>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">{{- include.title -}}</h1>
+      {%- if include.subtitle -%}
+      <p>{{- include.subtitle -}}</p>
+      {%- endif -%}
+    </hgroup>
+  </header>
 
-    {%- if page.notice.size > 0 -%}
-    {%- include notice.html -%}
-    {%- endif -%}
+  {%- if page.notice.size > 0 -%}
+  {%- include notice.html -%}
+  {%- endif -%}
 
-    {{- include.content -}}
-  </main>
+  {{- include.content -}}
+</main>
 
-  <div class="sidebar">
-    {%- if page.url == '/' -%}
-    {%- include banner.html -%}
-    {%- include search.html -%}
-    {%- endif -%}
+{%- if page.url == '/' -%}
+{%- include banner.html -%}
+{%- include search.html -%}
+{%- endif -%}
 
-    {%- if page.url == '/search/' -%}
-    {%- include searchfull.html -%}
-    {%- endif -%}
+{%- if page.url == '/search/' -%}
+{%- include searchfull.html -%}
+{%- endif -%}
 
-    {%- if page.previous.url or page.next.url -%}
-    {%- include paging.html previous=page.previous next=page.next -%}
-    {%- endif -%}
+{%- if page.previous.url or page.next.url -%}
+{%- include paging.html previous=page.previous next=page.next -%}
+{%- endif -%}
 
-    {%- include breadcrumbs.html -%}
+{%- include breadcrumbs.html -%}
 
-    {%- if page.date -%}
-    {%- include metadata.html author=page.author -%}
-    {%- endif -%}
-  </div>
-</div>
+{%- if page.date -%}
+{%- include metadata.html author=page.author -%}
+{%- endif -%}

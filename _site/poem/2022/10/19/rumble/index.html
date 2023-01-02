@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rumble&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -58,15 +59,32 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        data-pagefind-body>
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">Rumble</h1><p></p></hgroup>
-    </header><p class="stanza"><span role="presentation" class="line">A man walked into town</span><br /><span role="presentation" class="line">Bound up in a brown coat</span><br /><span role="presentation" class="line">When he talked you could see</span><br /><span role="presentation" class="line">Beneath his broad hat</span><br /><span role="presentation" class="line">A cigarillo glow</span><br /><span role="presentation" class="line">Red then black then red</span></p>
+<main slot="main" id="main" aria-describedby="title"
+      data-pagefind-body>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">Rumble</h1><p></p></hgroup>
+  </header><p class="stanza"><span role="presentation" class="line">A man walked into town</span><br /><span role="presentation" class="line">Bound up in a brown coat</span><br /><span role="presentation" class="line">When he talked you could see</span><br /><span role="presentation" class="line">Beneath his broad hat</span><br /><span role="presentation" class="line">A cigarillo glow</span><br /><span role="presentation" class="line">Red then black then red</span></p>
 
 <p class="stanza"><span role="presentation" class="line">His face all bandaged</span><br /><span role="presentation" class="line">The left arm just gone</span><br /><span role="presentation" class="line">And the man had a limp when he walked</span><br /><span role="presentation" class="line">Gauze and splints that talked</span></p>
 <p class="stanza"><span role="presentation" class="line">I was younger then</span><br /><span role="presentation" class="line">I kicked rocks across the road</span><br /><span role="presentation" class="line">while the sun beat down</span><br /><span role="presentation" class="line">Now I&#8217;m no educated man</span></p>
@@ -74,9 +92,7 @@
 <p class="stanza"><span role="presentation" class="line">I was not in the rumble</span><br /><span role="presentation" class="line">A coward keeps his legs to run</span><br /><span role="presentation" class="line">But when the violence was over</span><br /><span role="presentation" class="line">I was the hacksaw</span><br /><span role="presentation" class="line">The young carpenter&#8217;s son</span></p>
 <p class="stanza"><span role="presentation" class="line">And when the rumble was over</span><br /><span role="presentation" class="line">I did not know who was dead</span><br /><span role="presentation" class="line">I found gauze and splints and bones</span><br /><span role="presentation" class="line">And I found a sieve full of lead</span></p>
 <p class="stanza"><span role="presentation" class="line">A man walked out of town</span><br /><span role="presentation" class="line">His face all bandaged</span><br /><span role="presentation" class="line">The left arm just gone</span><br /><span role="presentation" class="line">And he had a limp when he walked</span><br /><span role="presentation" class="line">Gauze and splints that talked</span></p>
-</main>
-
-  <div class="sidebar"><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
+</main><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
   <hgroup>
     <h2 id="paging-title">Paging</h2></hgroup>
 </header>
@@ -119,7 +135,5 @@
            data-pagefind-filter="tag">2019</a></dd><dd><a rel="tag" href="/search/?tag=Western"
            data-pagefind-filter="tag">Western</a></dd></div></dl>
 </footer>
-</div>
-</div>
 </body>
 </html>

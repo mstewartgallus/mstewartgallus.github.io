@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Good Boy&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -58,15 +59,32 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        data-pagefind-body>
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">Good Boy</h1><p></p></hgroup>
-    </header><footer aria-labelledby="notice-title" id="notice">
+<main slot="main" id="main" aria-describedby="title"
+      data-pagefind-body>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">Good Boy</h1><p></p></hgroup>
+  </header><footer aria-labelledby="notice-title" id="notice">
   <dl>
     <div>
       <dt id="notice-title">Notice</dt><dd data-pagefind-filter="notice">NSFW</dd></div>
@@ -114,9 +132,7 @@ you?</q></p>
 <p><q>You try me and these chicken nuggies show just how much of a big boy
 I am</q></p>
 
-</main>
-
-  <div class="sidebar"><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
+</main><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
   <hgroup>
     <h2 id="paging-title">Paging</h2></hgroup>
 </header>
@@ -161,7 +177,5 @@ I am</q></p>
            data-pagefind-filter="tag">Empty Spaces</a></dd><dd><a rel="tag" href="/search/?tag=Transgender"
            data-pagefind-filter="tag">Transgender</a></dd></div></dl>
 </footer>
-</div>
-</div>
 </body>
 </html>

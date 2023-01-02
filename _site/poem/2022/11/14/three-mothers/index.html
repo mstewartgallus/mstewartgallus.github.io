@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Three Mothers&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -58,18 +59,33 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        data-pagefind-body>
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">Three Mothers</h1><p></p></hgroup>
-    </header><p class="stanza"><span role="presentation" class="line">The sky was grey and sweaty</span><br /><span role="presentation" class="line">and three fat mothers talked and smoked.</span><br /><span role="presentation" class="line">A little kid lay on the ground</span><br /><span role="presentation" class="line">and played with the newest Nintendo toy</span><br /><span role="presentation" class="line">and next to him a little child</span><br /><span role="presentation" class="line">held an Apple iPad in his stroller.</span><br /><span role="presentation" class="line">The wind brought the traffic stink to me</span><br /><span role="presentation" class="line">and I felt relief a little colder.</span></p>
-</main>
-
-  <div class="sidebar"><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
+<main slot="main" id="main" aria-describedby="title"
+      data-pagefind-body>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">Three Mothers</h1><p></p></hgroup>
+  </header><p class="stanza"><span role="presentation" class="line">The sky was grey and sweaty</span><br /><span role="presentation" class="line">and three fat mothers talked and smoked.</span><br /><span role="presentation" class="line">A little kid lay on the ground</span><br /><span role="presentation" class="line">and played with the newest Nintendo toy</span><br /><span role="presentation" class="line">and next to him a little child</span><br /><span role="presentation" class="line">held an Apple iPad in his stroller.</span><br /><span role="presentation" class="line">The wind brought the traffic stink to me</span><br /><span role="presentation" class="line">and I felt relief a little colder.</span></p>
+</main><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
   <hgroup>
     <h2 id="paging-title">Paging</h2></hgroup>
 </header>
@@ -113,7 +129,5 @@
       <dt>Place</dt><dd><a rel="tag" href="/search/?place=Vancouver"
            data-pagefind-filter="place">Vancouver</a></dd></div></dl>
 </footer>
-</div>
-</div>
 </body>
 </html>

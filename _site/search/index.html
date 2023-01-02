@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Search&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -42,21 +43,37 @@
     }]
 }
 </script></head>
-  <body><form id="search" name="search" rel="search" action="/search/"><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        >
+  <body><form id="search" name="search" rel="search" action="/search/">
+  <div><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title"><search-h1 query="s">Search</search-h1></h1></hgroup>
-    </header><div></div>
+<main slot="main" id="main" aria-describedby="title"
+      >
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title"><search-h1 query="s">Search</search-h1></h1></hgroup>
+  </header><div></div>
 
 <search-results query="s"
                 tag="tag" category="category" character="character" place="place">
-</search-results></main>
-
-  <div class="sidebar"><section aria-labelledby="controls-title">
+</search-results></main><section aria-labelledby="controls-title">
   <header class="sr-only">
     <hgroup>
       <h2 id="controls-title">Controls</h2>
@@ -278,7 +295,6 @@
     <li><a href="/">Home</a></li>
     <li aria-current="page"><cite>Search</cite></li>
   </ol></nav>
-</div>
 </div>
 </form></body>
 </html>

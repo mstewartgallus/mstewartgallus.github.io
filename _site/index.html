@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Posts&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -49,15 +50,32 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        >
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">Posts</h1><p></p></hgroup>
-    </header><ol reversed>
+<main slot="main" id="main" aria-describedby="title"
+      >
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">Posts</h1><p></p></hgroup>
+  </header><ol reversed>
   <li>
     <a href="/prose/2022/12/27/cleanup/">Cleanup Crew</a>
   </li>
@@ -163,9 +181,7 @@
   <li>
     <a href="/poem/2022/10/18/the-quest/">The Quest</a>
   </li></ol>
-</main>
-
-  <div class="sidebar"><header id="banner" aria-describedby="banner-title">
+</main><header id="banner" aria-describedby="banner-title">
   <hgroup>
     <h2 id="banner-title">Words to Kick Your Teeth Out</h2>
     <p>lol, lmao</p>
@@ -193,7 +209,5 @@
 <ol class="breadcrumb">
     <li aria-current="page">Home</li>
   </ol></nav>
-</div>
-</div>
 </body>
 </html>

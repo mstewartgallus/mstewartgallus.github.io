@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About the Author&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -37,15 +38,32 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        >
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">About the Author</h1><p></p></hgroup>
-    </header><address id="mspondee"
+<main slot="main" id="main" aria-describedby="title"
+      >
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">About the Author</h1><p></p></hgroup>
+  </header><address id="mspondee"
          itemProp="author mainEntity" itemType="http://schema.org/Person" itemscope>
   <p>My pen name is <span translate="no">Molossus Spondee</span>. This
     is my personal blog mostly for posting silly poetry.</p>
@@ -101,9 +119,7 @@
       <dd id="mspondee-4"
           aria-hidden="true">mstewartgallus</dd>
     </div></dl>
-</address></main>
-
-  <div class="sidebar"><nav id="breadcrumbs" aria-labelledby="breadcrumbs-title"><header class="sr-only">
+</address></main><nav id="breadcrumbs" aria-labelledby="breadcrumbs-title"><header class="sr-only">
   <hgroup>
     <h2 id="breadcrumbs-title">Breadcrumbs</h2></hgroup>
 </header>
@@ -111,7 +127,5 @@
     <li><a href="/">Home</a></li>
     <li aria-current="page"><cite>About the Author</cite></li>
   </ol></nav>
-</div>
-</div>
 </body>
 </html>

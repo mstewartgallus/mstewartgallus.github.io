@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wotan&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
 <link rel="stylesheet" href="/assets/main.css">
+<script type="module" src="/assets/main.mjs"></script>
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
@@ -58,24 +59,39 @@
     }]
 }
 </script></head>
-  <body><div class="nav">
-  <main id="main"
-        aria-describedby="title"
-        data-pagefind-body>
+  <body><template shadowroot="closed">
+  <style>
+    :host {
+        display: flex ;
+    }
+    :host([hidden]) {
+        display: none ;
+    }
+    :host {
+        flex-wrap: wrap ;
+        column-gap: 1rem ;
+    }
+    div {
+        max-inline-size: 100% ;
+    }
+  </style>
+  <div><slot name="main"></slot></div>
+  <div id="sidebar"><slot></slot></div>
+</template>
 
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">Wotan</h1><p></p></hgroup>
-    </header><p class="stanza"><span role="presentation" class="line">Of those all&thinsp;&#8212;&thinsp;that Wotan call, number in good homeless men</span><br /><span role="presentation" class="line">to Valhalla they go&thinsp;&#8212;&thinsp;was one-eye I know&thinsp;&#8212;&thinsp;a hobo they ken</span></p>
+<main slot="main" id="main" aria-describedby="title"
+      data-pagefind-body>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">Wotan</h1><p></p></hgroup>
+  </header><p class="stanza"><span role="presentation" class="line">Of those all&thinsp;&#8212;&thinsp;that Wotan call, number in good homeless men</span><br /><span role="presentation" class="line">to Valhalla they go&thinsp;&#8212;&thinsp;was one-eye I know&thinsp;&#8212;&thinsp;a hobo they ken</span></p>
 
 <p class="stanza"><span role="presentation" class="line">For too many of hobos have talking heads</span><br /><span role="presentation" class="line">And starved nine days without bread</span></p>
 <p class="stanza"><span role="presentation" class="line">Have you slept in the rain? &#8216;Neath a tree?</span><br /><span role="presentation" class="line">I&#8217;ll show you the runes&thinsp;&#8212;&thinsp;the triangle hands</span></p>
 <p class="stanza"><span role="presentation" class="line">And all hobo&#8217;s of old&thinsp;&#8212;&thinsp;the railroad rode</span><br /><span role="presentation" class="line">You think Sleipnir was fast as the line?</span></p>
 <p class="stanza"><span role="presentation" class="line">And a Norse god of old&thinsp;&#8212;&thinsp;should know how to drink</span><br /><span role="presentation" class="line">So who would you have?&thinsp;&#8212;&thinsp;The drunk or the erg&#8217;?</span></p>
 <p class="stanza"><span role="presentation" class="line">For a thief and a king&thinsp;&#8212;&thinsp;a warrior&#8217;s dirge!</span></p>
-</main>
-
-  <div class="sidebar"><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
+</main><nav id="paging" aria-labelledby="paging-title"><header class="sr-only">
   <hgroup>
     <h2 id="paging-title">Paging</h2></hgroup>
 </header>
@@ -123,7 +139,5 @@
            data-pagefind-filter="place">Downtown</a></dd><dd><a rel="tag" href="/search/?place=Vancouver"
            data-pagefind-filter="place">Vancouver</a></dd></div></dl>
 </footer>
-</div>
-</div>
 </body>
 </html>
