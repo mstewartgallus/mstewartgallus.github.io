@@ -34,7 +34,8 @@
     }],
     "articleSection": {{ page.categories | first | jsonify }},
     "keywords": {{ page.tags | jsonify }},
-    "character": {{ page.characters | jsonify }}
+    "character": {{ page.characters | jsonify }},
+    "contentLocation": {{ page.places | jsonify }}
 }
 </script>
 {%- endif -%}

@@ -61,7 +61,7 @@
     }
   </style>
   <div><slot name="main"></slot></div>
-  <div id="sidebar"><slot></slot></div>
+  <div><slot></slot></div>
 </template>
 
 <main slot="main" id="main" aria-describedby="title"
@@ -81,7 +81,7 @@
   </header>
 
   <fieldset class="search-basic">
-    <label for="search-input">Query&emsp;</label>
+    <label for="search-input">Query</label>
     <input id="search-input" name="s" type="search"
            ><button id="search-button" type="submit">Search</button>
   </fieldset>
