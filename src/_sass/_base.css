@@ -225,36 +225,45 @@ main {
 
 
 :root {
-    /* default ratio on browsers is 1rem = 16px */
-    --remperpx: calc(1rem / 16) ;
-
     --min-width: 320 ;
     --max-width: 2400 ;
+}
 
-    --min-font-size: 19 ;
-    --max-font-size: 24 ;
 
-    --delta-font-size: calc(var(--max-font-size) - var(--min-font-size)) ;
-    --delta-width: calc(var(--max-width) - var(--min-width)) ;
+:root {
+    /* default ratio on browsers is 1rem = 16px */
+    --remperpx: calc(1 / 16) ;
 
-    --inv-delta-width: calc(1 / var(--delta-width)) ;
+    --min-width-rem: calc(var(--min-width) * var(--remperpx)) ;
+    --max-width-rem: calc(var(--max-width) * var(--remperpx)) ;
+    --delta-width-rem: calc(var(--max-width-rem) - var(--min-width-rem)) ;
 
-    --t0: calc(0rem - var(--min-width) * var(--remperpx) * var(--inv-delta-width)) ;
-    --font-size-0: var(--min-font-size) * var(--remperpx) ;
-    --font-size-1: var(--max-font-size) * var(--remperpx) ;
+    --inv-delta-width-rem: calc(1 / var(--delta-width-rem)) ;
 
-    --t: clamp(0rem,
-               var(--t0) + 100vw * var(--inv-delta-width),
-               1rem);
-    --font-size:
-        clamp(var(--font-size-0),
-              var(--font-size-0) + var(--t) * var(--delta-font-size),
-              var(--font-size-1)) ;
+
+    --t0: calc(0 - var(--min-width-rem) * var(--inv-delta-width-rem)) ;
+}
+
+:root {
+    --t: clamp(0rem, var(--t0) * 1rem + 100vw * var(--inv-delta-width-rem), 1rem) ;
 }
 
 :root {
     --ratio-1: calc(4/3) ;
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
+}
+
+:root {
+    --min-font-size: 19 ;
+    --max-font-size: 24 ;
+
+    --min-font-size-rem: calc(var(--min-font-size) * var(--remperpx));
+    --max-font-size-rem: calc(var(--max-font-size) * var(--remperpx));
+    --delta-font-size-rem: calc(var(--max-font-size-rem) - var(--min-font-size-rem)) ;
+
+    --font-size:
+        calc(var(--min-font-size-rem) * 1rem + var(--t) * var(--delta-font-size-rem)) ;
+
 }
 
 :root {
@@ -267,4 +276,11 @@ h1 {
 
 h2 {
     font-size: calc(var(--ratio-1) * 1rem);
+}
+
+@media screen {
+    :root {
+        padding-inline: calc(1rem + 5 * var(--t)) ;
+        padding-block-start: calc(var(--t) * var(--line-ratio)) ;
+    }
 }

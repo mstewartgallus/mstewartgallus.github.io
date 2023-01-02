@@ -27,19 +27,6 @@ $min-width: 320px * $remperpx ;
 }
 
 @media screen {
-    // FIXME provide better fallbacks for fluid layout
-    :root {
-        padding-inline: 0.8rem ;
-        padding-inline:
-            lerp(0.8rem, 6rem,
-                 linstep(320px * $remperpx, 1200px * $remperpx,
-                         100vw));
-        padding-block-start:
-            lerp(0rem, var(--line-height),
-                     linstep($min-width, 1200px * $remperpx,
-                             100vw));
-    }
-
     body {
         padding-inline-start:
             lerp(0rem, 1.5rem,

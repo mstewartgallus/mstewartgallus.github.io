@@ -1,10 +1,11 @@
 :root {
     /* Noto Sans x height :( */
-    --ex-height: 0.536rem ;
+    --ex-height: 0.536 ;
 
     /* Compute legible line height in terms of rems */
     /* https://www.smashingmagazine.com/2020/07/css-techniques-legibility/ */
-    --line-height: calc(var(--ex-height) / 0.32) ;
+    --line-ratio: calc(var(--ex-height) / 0.32) ;
+    --line-height: calc(var(--line-ratio) * 1rem) ;
 
     --paragraph-width: 50.7ch ;
     --main-width: 64.3ch ;
