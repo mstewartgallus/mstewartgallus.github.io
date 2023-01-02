@@ -10,12 +10,11 @@
     --paragraph-width: 50.7ch ;
     --main-width: 64.3ch ;
 
-    /* default ratio on browsers is 1rem = 16px */
-    --min-width: calc(320 / 16) ;
-    --max-width: calc(1800 / 16) ;
+    --min-width: 320 ;
+    --max-width: 1800 ;
 
-    --min-font-size: calc(19 / 16) ;
-    --max-font-size: calc(24 / 16) ;
+    --min-font-size: 19 ;
+    --max-font-size: 24 ;
 
     --ratio-1: calc(4/3) ;
 }

@@ -112,3 +112,14 @@ ul.tags {
 #notice {
     margin-block-end: var(--line) ;
 }
+
+
+:root {
+    /* default ratio on browsers is 1rem = 16px */
+    --s: clamp(0rem, (600rem - 1600vw) / 100, 1rem) ;
+}
+
+main > :is(ul, ol) {
+    padding-inline-start: 2rem ;
+    padding-inline-start: calc(2 * var(--s));
+}

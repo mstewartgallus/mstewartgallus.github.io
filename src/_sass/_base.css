@@ -222,10 +222,12 @@ main {
     }
 }
 
+/* default ratio on browsers is 1rem = 16px */
 :root {
-    --delta-width: calc(var(--max-width) - var(--min-width)) ;
-
-    --t: clamp(0rem, (100vw - var(--min-width) * 1rem) / var(--delta-width), 1rem) ;
+    --t: clamp(0rem,
+               (1600vw - var(--min-width) * 1rem)
+                   / (var(--max-width) - var(--min-width)),
+               1rem) ;
 }
 
 
@@ -233,16 +235,14 @@ main {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
-:root {
-    --delta-font-size: calc(var(--max-font-size) - var(--min-font-size)) ;
-
-    --font-size:
-        calc(var(--min-font-size) * 1rem + var(--t) * var(--delta-font-size)) ;
-
-}
+/* default ratio on browsers is 1rem = 16px */
 
 :root {
-    font-size: var(--font-size) ;
+    font-size:
+        calc(
+            (var(--min-font-size) * 1rem
+            + var(--t) * (var(--max-font-size) - var(--min-font-size))) / 16
+        ) ;
 }
 
 h1 {
@@ -264,13 +264,4 @@ h2 {
     body {
         padding-inline-start: calc(4 * var(--t));
     }
-}
-
-:root {
-    /* default ratio on browsers is 1rem = 16px */
-    --s: clamp(0rem, (100vw - (400rem / 16)) / (200rem / 16), 1rem) ;
-}
-
-main > :is(ul, ol) {
-    padding-inline-start: calc(2 * (1rem - var(--s)));
 }
