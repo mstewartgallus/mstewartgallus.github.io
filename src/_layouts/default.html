@@ -7,19 +7,16 @@
 {%- endcapture -%}
 
 {%- capture body -%}
-<ul class="nav" role="presentation">
-  <li role="presentation">
-    {%- comment -%}
-    FIXME reconsider whether to conditionally include a skip link
-    {%- endcomment -%}
-
+<div class="nav">
+  <div>
     {%- if page.notice.size > 0 -%}
     {%- include notice.html -%}
     {%- endif -%}
 
     {%- include main.html title=title subtitle=subtitle content=content -%}
-  </li>
-  <li role="presentation">{%- include sidebar.html -%}</li>
-</ul>
+  </div>
+
+  {%- include sidebar.html -%}
+</div>
 {%- endcapture -%}
 {%- include document.html content=body -%}
