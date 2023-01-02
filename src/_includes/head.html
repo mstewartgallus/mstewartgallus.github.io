@@ -3,25 +3,20 @@
 {%- assign feed = "/feed.xml" | relative_url -%}
 {%- assign site_title = site.title -%}
 {%- assign title = page.title | default: site_title -%}
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{- title -}}&thinsp;—&thinsp;{{- site_title -}}</title>
-  <link rel="stylesheet" href="{{ css }}">
-  <link rel="icon" href="{% link assets/favicon.svg %}">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#6000A0">
-  <link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
 
-  {%- if page.previous.url -%}
-  <link href="{{page.previous.url}}" title="{{ page.previous.title | escape }}" rel="next">
-  {%- endif -%}
-  {%- if page.next.url -%}
-  <link href="{{page.next.url}}" title="{{ page.next.title | escape }}" rel="prev">
-  {%- endif -%}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{- title -}}&thinsp;—&thinsp;{{- site_title -}}</title>
+<link rel="stylesheet" href="{{ css }}">
+<link rel="icon" href="{% link assets/favicon.svg %}">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#6000A0">
+<link type="application/atom+xml" rel="alternate" href="{{ feed }}" title="{{ site_title }}" >
 
-  {{- include.content -}}
-
-  {%- include seo.html -%}
-</head>
+{%- if page.previous.url -%}
+<link href="{{page.previous.url}}" title="{{ page.previous.title | escape }}" rel="next">
+{%- endif -%}
+{%- if page.next.url -%}
+<link href="{{page.next.url}}" title="{{ page.next.title | escape }}" rel="prev">
+{%- endif -%}

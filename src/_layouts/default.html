@@ -7,16 +7,7 @@
 {%- endcapture -%}
 
 {%- capture body -%}
-<div class="nav">
-  <div>
-    {%- if page.notice.size > 0 -%}
-    {%- include notice.html -%}
-    {%- endif -%}
-
-    {%- include main.html title=title subtitle=subtitle content=content -%}
-  </div>
-
-  {%- include sidebar.html -%}
-</div>
+{%- include body.html title=title subtitle=subtitle content=content -%}
 {%- endcapture -%}
+
 {%- include document.html content=body -%}

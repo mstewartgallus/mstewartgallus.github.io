@@ -6,7 +6,7 @@ history.scrollRestoration = 'manual';
 const { origin, pathname, searchParams } = new URL(location);
 
 function target() {
-    document.getElementById('skip-link').focus();
+    document.getElementById('title').focus();
 }
 
 const doctitle = document.title;

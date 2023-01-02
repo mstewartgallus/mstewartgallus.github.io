@@ -1,13 +1,13 @@
-{%- capture extrahead -%}
-{%- if page.url == '/search/' -%}
-{%- include searchhead.html -%}
-{%- endif -%}
-{%- endcapture -%}
-
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}"
       tabindex="-1">
-  {%- include head.html content=extrahead -%}
+  <head>
+    {%- include head.html -%}
+    {%- if page.url == '/search/' -%}
+    {%- include searchhead.html -%}
+    {%- endif -%}
+    {%- include seo.html -%}
+  </head>
   <body>
     {{- include.content -}}
   </body>

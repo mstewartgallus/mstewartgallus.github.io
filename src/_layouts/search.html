@@ -4,25 +4,19 @@
 </search-h1>
 {%- endcapture -%}
 
+{%- capture results -%}
+<div>
+  {{- content -}}
+</div>
+
+<search-results query="s"
+                tag="tag" category="category" character="character" place="place">
+</search-results>
+{%- endcapture -%}
+
 {%- capture body -%}
 <form id="search" name="search" rel="search" action="{% link search.html %}">
-  <div class="nav">
-    <main id="main"
-          aria-describedby="title"
-          {% if page.date -%}data-pagefind-body{%- endif %}>
-      {%- include header.html title=title -%}
-
-      <div>
-        {{- content -}}
-      </div>
-
-      <search-results query="s"
-                      tag="tag" category="category" character="character" place="place">
-      </search-results>
-    </main>
-
-    {%- include sidebar.html -%}
-  </div>
+  {%- include body.html title=title subtitle=subtitle content=results -%}
 </form>
 {%- endcapture -%}
 
