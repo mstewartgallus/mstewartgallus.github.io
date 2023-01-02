@@ -256,7 +256,7 @@ h2 {
 @media screen {
     :root {
         padding-inline: calc(1rem + 5 * var(--t)) ;
-        padding-block-start: calc(var(--t) * var(--line-ratio)) ;
+        padding-block-start: calc(var(--t) * var(--line-height)) ;
     }
 }
 
