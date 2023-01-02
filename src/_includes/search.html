@@ -2,6 +2,7 @@
 {{- site.data.strings.search.title | escape -}}
 {%- endcapture -%}
 <form rel="search" role="search" action="{% link search.html %}"
+      id="controls"
       aria-labelledby="search-title">
   {%- include subheader.html id='search-title' title=title -%}
 
