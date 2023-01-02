@@ -6,24 +6,23 @@
 
 {%- capture body -%}
 <form id="search" name="search" rel="search" action="{% link search.html %}">
-  <ul class="nav" role="presentation">
-    <li role="presentation">
-      <main id="main"
-            aria-describedby="title"
-            {% if page.date -%}data-pagefind-body{%- endif %}>
-        {%- include header.html title=title -%}
+  <div class="nav">
+    <main id="main"
+          aria-describedby="title"
+          {% if page.date -%}data-pagefind-body{%- endif %}>
+      {%- include header.html title=title -%}
 
-        <div>
-          {{- content -}}
-        </div>
+      <div>
+        {{- content -}}
+      </div>
 
-        <search-results query="s"
-                        tag="tag" category="category" character="character" place="place">
-        </search-results>
-      </main>
-    </li>
-    <li role="presentation">{%- include sidebar.html -%}</li>
-  </ul>
+      <search-results query="s"
+                      tag="tag" category="category" character="character" place="place">
+      </search-results>
+    </main>
+
+    {%- include sidebar.html -%}
+  </div>
 </form>
 {%- endcapture -%}
 

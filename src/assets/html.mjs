@@ -1,5 +1,5 @@
 const headers = {
-    'Content-Type': 'text/html'
+    'Accept': 'text/html'
 };
 
 const options = { mode: 'cors', headers };

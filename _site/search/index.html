@@ -43,22 +43,19 @@
 }
 </script></head>
 <body><form id="search" name="search" rel="search" action="/search/">
-  <ul class="nav" role="presentation">
-    <li role="presentation">
-      <main id="main"
-            aria-describedby="title"
-            ><header>
+  <div class="nav">
+    <main id="main"
+          aria-describedby="title"
+          ><header>
   <hgroup>
     <h1 tabindex="-1" id="title"><search-h1 query="s">Search</search-h1></h1></hgroup>
 </header>
 <div></div>
 
-        <search-results query="s"
-                        tag="tag" category="category" character="character" place="place">
-        </search-results>
-      </main>
-    </li>
-    <li role="presentation"><ul class="sidebar" role="presentation"><li role="presentation"><section aria-labelledby="controls-title">
+      <search-results query="s"
+                      tag="tag" category="category" character="character" place="place">
+      </search-results>
+    </main><ul class="sidebar" role="presentation"><li role="presentation"><section aria-labelledby="controls-title">
   <header class="sr-only">
     <hgroup>
       <h2 id="controls-title">Controls</h2>
@@ -281,7 +278,6 @@
     <li aria-current="page"><cite>Search</cite></li>
   </ol></nav>
 </li></ul>
-</li>
-  </ul>
+</div>
 </form></body>
 </html>
