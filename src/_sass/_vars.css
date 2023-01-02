@@ -9,6 +9,14 @@
 
     --paragraph-width: 50.7ch ;
     --main-width: 64.3ch ;
+
+    --min-width: 320 ;
+    --max-width: 1800 ;
+
+    --min-font-size: 19 ;
+    --max-font-size: 24 ;
+
+    --ratio-1: calc(4/3) ;
 }
 
 /* Unfortunately lab/oklab and such aren't so supported yet. HSL is */

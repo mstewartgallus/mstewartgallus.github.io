@@ -222,41 +222,29 @@ main {
     }
 }
 
-
-
-:root {
-    --min-width: 320 ;
-    --max-width: 2400 ;
-}
-
-
 :root {
     /* default ratio on browsers is 1rem = 16px */
     --remperpx: calc(1 / 16) ;
+}
 
+:root {
     --min-width-rem: calc(var(--min-width) * var(--remperpx)) ;
     --max-width-rem: calc(var(--max-width) * var(--remperpx)) ;
     --delta-width-rem: calc(var(--max-width-rem) - var(--min-width-rem)) ;
 
     --inv-delta-width-rem: calc(1 / var(--delta-width-rem)) ;
 
+    --t0: calc((0 - var(--min-width-rem) * var(--inv-delta-width-rem)) * 1rem) ;
 
-    --t0: calc(0 - var(--min-width-rem) * var(--inv-delta-width-rem)) ;
+    --t: clamp(0rem, var(--t0) + 100vw * var(--inv-delta-width-rem), 1rem) ;
 }
 
-:root {
-    --t: clamp(0rem, var(--t0) * 1rem + 100vw * var(--inv-delta-width-rem), 1rem) ;
-}
 
 :root {
-    --ratio-1: calc(4/3) ;
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
 :root {
-    --min-font-size: 19 ;
-    --max-font-size: 24 ;
-
     --min-font-size-rem: calc(var(--min-font-size) * var(--remperpx));
     --max-font-size-rem: calc(var(--max-font-size) * var(--remperpx));
     --delta-font-size-rem: calc(var(--max-font-size-rem) - var(--min-font-size-rem)) ;
@@ -283,4 +271,18 @@ h2 {
         padding-inline: calc(1rem + 5 * var(--t)) ;
         padding-block-start: calc(var(--t) * var(--line-ratio)) ;
     }
+}
+
+@media screen {
+    body {
+        padding-inline-start: calc(4 * var(--t));
+    }
+}
+
+:root {
+    --s: clamp(0rem, (100vw - 400 * var(--remperpx) * 1rem) / (200 * var(--remperpx)), 1rem) ;
+}
+
+main > :is(ul, ol) {
+    padding-inline-start: calc(2 * (1rem - var(--s)));
 }

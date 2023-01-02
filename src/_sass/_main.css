@@ -12,9 +12,7 @@
 
 @import "_vars";
 
-@import "_sass";
-
-// body {
-//     background: linear-gradient(grey, Canvas);
-//     background-size: 100% var(--line-height) ;
-// }
+/* body { */
+/*      background: linear-gradient(grey, Canvas); */
+/*      background-size: 100% var(--line-height) ; */
+/* } */

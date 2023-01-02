@@ -109,18 +109,6 @@ ul.tags {
     list-style-position: inside ;
 }
 
-@counter-style detail {
-    system: cyclic;
-    symbols: "▶";
-    suffix: "\2003";
-}
-@counter-style opendetail {
-    system: cyclic;
-    symbols: "▼";
-    suffix: "\2003";
-}
-
-
 #notice {
     margin-block-end: var(--line-height) ;
 }
