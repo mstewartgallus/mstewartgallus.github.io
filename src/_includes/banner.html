@@ -19,12 +19,4 @@
          href="{{ "/feed.xml" | relative_url }}"
          title="{{ site.title | escape }}">Subscribe</a></li>
   </ul>
-
-  <form rel="search" role="search" action="{% link search.html %}">
-    <div class="search-basic">
-      <label for="search-input">Query&emsp;</label>
-      <input id="search-input" name="s" type="search" required>{{- -}}
-      <button type="submit">{{ site.data.strings.search.submit | escape }}</button>
-    </div>
-  </form>
 </header>

@@ -1,11 +1,42 @@
 <div class="nav">
-  <div>
+  <main id="main"
+        aria-describedby="title"
+        {% if page.date -%}data-pagefind-body{%- endif %}>
+
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">{{- include.title -}}</h1>
+        {%- if include.subtitle -%}
+        <p>{{- include.subtitle -}}</p>
+        {%- endif -%}
+      </hgroup>
+    </header>
+
     {%- if page.notice.size > 0 -%}
     {%- include notice.html -%}
     {%- endif -%}
 
-    {%- include main.html title=include.title subtitle=include.subtitle content=include.content -%}
-  </div>
+    {{- include.content -}}
+  </main>
 
-  {%- include sidebar.html -%}
+  <div class="sidebar">
+    {%- if page.url == '/' -%}
+    {%- include banner.html -%}
+    {%- include search.html -%}
+    {%- endif -%}
+
+    {%- if page.url == '/search/' -%}
+    {%- include searchfull.html -%}
+    {%- endif -%}
+
+    {%- if page.previous.url or page.next.url -%}
+    {%- include paging.html previous=page.previous next=page.next -%}
+    {%- endif -%}
+
+    {%- include breadcrumbs.html -%}
+
+    {%- if page.date -%}
+    {%- include metadata.html author=page.author -%}
+    {%- endif -%}
+  </div>
 </div>

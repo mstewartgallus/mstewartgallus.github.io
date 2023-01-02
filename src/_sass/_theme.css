@@ -123,3 +123,18 @@ main > :is(ul, ol) {
     padding-inline-start: 2rem ;
     padding-inline-start: calc(2 * var(--s));
 }
+
+#notice {
+    margin-block: var(--line) ;
+}
+
+:where(#banner, #breadcrumbs, #paging, #metadata, #search) {
+    margin-block: var(--line) ;
+}
+
+.sidebar > :first-child {
+    margin-block-start: 0 ;
+}
+.sidebar > :last-child {
+    margin-block-end: 0 ;
+}

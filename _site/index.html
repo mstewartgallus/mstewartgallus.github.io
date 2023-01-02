@@ -50,13 +50,14 @@
 }
 </script></head>
   <body><div class="nav">
-  <div><main id="main"
-      aria-describedby="title"
-      ><header>
-  <hgroup>
-    <h1 tabindex="-1" id="title">Posts</h1><p></p></hgroup>
-</header>
-<ol reversed>
+  <main id="main"
+        aria-describedby="title"
+        >
+
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">Posts</h1><p></p></hgroup>
+    </header><ol reversed>
   <li>
     <a href="/prose/2022/12/27/cleanup/">Cleanup Crew</a>
   </li>
@@ -163,7 +164,8 @@
     <a href="/poem/2022/10/18/the-quest/">The Quest</a>
   </li></ol>
 </main>
-</div><ul class="sidebar" role="presentation"><li role="presentation"><header id="banner" aria-describedby="banner-title">
+
+  <div class="sidebar"><header id="banner" aria-describedby="banner-title">
   <hgroup>
     <h2 id="banner-title">Words to Kick Your Teeth Out</h2>
     <p>lol, lmao</p>
@@ -173,22 +175,25 @@
          href="/feed.xml"
          title="Words to Kick Your Teeth Out">Subscribe</a></li>
   </ul>
-
-  <form rel="search" role="search" action="/search/">
-    <div class="search-basic">
-      <label for="search-input">Query&emsp;</label>
-      <input id="search-input" name="s" type="search" required><button type="submit">Search</button>
-    </div>
-  </form>
 </header>
-</li><li role="presentation"><nav id="breadcrumbs" aria-labelledby="breadcrumbs-title"><header class="sr-only">
+<form rel="search" role="search" action="/search/"
+      aria-labelledby="search-title"><header class="sr-only">
+  <hgroup>
+    <h2 id="search-title">Search</h2></hgroup>
+</header>
+<div class="search-basic">
+    <label for="search-input">Query&emsp;</label>
+    <input id="search-input" name="s" type="search" required><button type="submit">Search</button>
+  </div>
+</form>
+<nav id="breadcrumbs" aria-labelledby="breadcrumbs-title"><header class="sr-only">
   <hgroup>
     <h2 id="breadcrumbs-title">Breadcrumbs</h2></hgroup>
 </header>
 <ol class="breadcrumb">
     <li aria-current="page">Home</li>
   </ol></nav>
-</li></ul>
+</div>
 </div>
 </body>
 </html>
