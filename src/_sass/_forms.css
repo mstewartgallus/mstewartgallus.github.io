@@ -48,7 +48,7 @@ input[type="checkbox"]:checked {
 
 label, button, input, option {
     box-sizing: border-box ;
-    block-size: var(--line-height) ;
+    block-size: var(--line) ;
 }
 
 label, input, button {
@@ -72,7 +72,7 @@ fieldset {
     border-inline-start-style: dashed ;
     border-width: 0.1em ;
     padding-inline-start: 1em;
-    margin-block: var(--line-height) ;
+    margin-block: var(--line) ;
 
     display: flex;
     flex-direction: column ;
@@ -177,5 +177,5 @@ button:active {
 
 #character, #tag {
     overflow: auto ;
-    max-height: calc(20 * var(--line-height)) ;
+    max-height: calc(20 * var(--line)) ;
 }

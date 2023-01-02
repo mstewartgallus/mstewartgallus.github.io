@@ -46,7 +46,7 @@ header {
     color: var(--highlight-text) ;
     border-radius: 0.6ch ;
     padding-inline: 1em ;
-    padding-block: calc(0.5 * var(--line-height)) ;
+    padding-block: calc(0.5 * var(--line)) ;
 }
 .sr-only:not(:focus-within) {
     position: absolute !important ;
@@ -61,7 +61,7 @@ header {
 ul.tags {
     all: unset ;
     display: flex ;
-    margin-block-end: var(--line-height) ;
+    margin-block-end: var(--line) ;
     flex-wrap: wrap ;
     column-gap: 1em ;
     inline-size: var(--paragraph-width) ;
@@ -79,7 +79,7 @@ ul.tags {
 }
 
 #toc {
-    margin-block: var(--line-height) ;
+    margin-block: var(--line) ;
 }
 
 .greentext > li {
@@ -110,5 +110,5 @@ ul.tags {
 }
 
 #notice {
-    margin-block-end: var(--line-height) ;
+    margin-block-end: var(--line) ;
 }

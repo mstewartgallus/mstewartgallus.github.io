@@ -34,7 +34,7 @@ h1,h2,h3,h4,h5,h6, figcaption, ::marker {
 }
 
 p {
-    margin-block: var(--line-height) ;
+    margin-block: var(--line) ;
     inline-size: var(--paragraph-width) ;
     max-inline-size: 100% ;
 }
@@ -78,7 +78,7 @@ table { border-collapse: collapse ; }
 hr {
     height: unset ;
     border: unset ;
-    margin-block: var(--line-height) ;
+    margin-block: var(--line) ;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -97,7 +97,7 @@ hgroup {
 }
 
 blockquote {
-    margin-block: var(--line-height) ;
+    margin-block: var(--line) ;
 }
 
 
@@ -113,7 +113,7 @@ blockquote {
 }
 
 menu, ul, ol {
-    margin-block: var(--line-height) ;
+    margin-block: var(--line) ;
     padding-inline-start: 2em ;
     list-style-type: bullet ;
 }
@@ -138,7 +138,7 @@ figcaption {
 }
 figure {
     margin-inline: 0 ;
-    margin-block: var(--line-height) ;
+    margin-block: var(--line) ;
     position: relative ;
     overflow: auto ;
 }
@@ -179,7 +179,7 @@ p {
 }
 
 :root {
-    line-height: var(--line-height) ;
+    line-height: var(--line) ;
     font-size-adjust: var(--ex-height) ;
 }
 
@@ -215,28 +215,17 @@ main {
 
 @media screen {
     :root {
-        padding-block-end: calc(3 * var(--line-height)) ;
+        padding-block-end: calc(3 * var(--line)) ;
     }
     body {
-        margin-block-start: var(--line-height) ;
+        margin-block-start: var(--line) ;
     }
 }
 
 :root {
-    /* default ratio on browsers is 1rem = 16px */
-    --remperpx: calc(1 / 16) ;
-}
+    --delta-width: calc(var(--max-width) - var(--min-width)) ;
 
-:root {
-    --min-width-rem: calc(var(--min-width) * var(--remperpx)) ;
-    --max-width-rem: calc(var(--max-width) * var(--remperpx)) ;
-    --delta-width-rem: calc(var(--max-width-rem) - var(--min-width-rem)) ;
-
-    --inv-delta-width-rem: calc(1 / var(--delta-width-rem)) ;
-
-    --t0: calc((0 - var(--min-width-rem) * var(--inv-delta-width-rem)) * 1rem) ;
-
-    --t: clamp(0rem, var(--t0) + 100vw * var(--inv-delta-width-rem), 1rem) ;
+    --t: clamp(0rem, (100vw - var(--min-width) * 1rem) / var(--delta-width), 1rem) ;
 }
 
 
@@ -245,12 +234,10 @@ main {
 }
 
 :root {
-    --min-font-size-rem: calc(var(--min-font-size) * var(--remperpx));
-    --max-font-size-rem: calc(var(--max-font-size) * var(--remperpx));
-    --delta-font-size-rem: calc(var(--max-font-size-rem) - var(--min-font-size-rem)) ;
+    --delta-font-size: calc(var(--max-font-size) - var(--min-font-size)) ;
 
     --font-size:
-        calc(var(--min-font-size-rem) * 1rem + var(--t) * var(--delta-font-size-rem)) ;
+        calc(var(--min-font-size) * 1rem + var(--t) * var(--delta-font-size)) ;
 
 }
 
@@ -280,7 +267,8 @@ h2 {
 }
 
 :root {
-    --s: clamp(0rem, (100vw - 400 * var(--remperpx) * 1rem) / (200 * var(--remperpx)), 1rem) ;
+    /* default ratio on browsers is 1rem = 16px */
+    --s: clamp(0rem, (100vw - (400rem / 16)) / (200rem / 16), 1rem) ;
 }
 
 main > :is(ul, ol) {

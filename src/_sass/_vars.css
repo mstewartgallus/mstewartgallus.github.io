@@ -4,17 +4,18 @@
 
     /* Compute legible line height in terms of rems */
     /* https://www.smashingmagazine.com/2020/07/css-techniques-legibility/ */
-    --line-ratio: calc(var(--ex-height) / 0.32) ;
-    --line-height: calc(var(--line-ratio) * 1rem) ;
+    --line-height: calc(var(--ex-height) / 0.32) ;
+    --line: calc(var(--line-height) * 1rem) ;
 
     --paragraph-width: 50.7ch ;
     --main-width: 64.3ch ;
 
-    --min-width: 320 ;
-    --max-width: 1800 ;
+    /* default ratio on browsers is 1rem = 16px */
+    --min-width: calc(320 / 16) ;
+    --max-width: calc(1800 / 16) ;
 
-    --min-font-size: 19 ;
-    --max-font-size: 24 ;
+    --min-font-size: calc(19 / 16) ;
+    --max-font-size: calc(24 / 16) ;
 
     --ratio-1: calc(4/3) ;
 }

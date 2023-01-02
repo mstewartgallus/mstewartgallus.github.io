@@ -10,7 +10,7 @@
 .nav {
     display: flex ;
     column-gap: 1rem ;
-    row-gap: var(--line-height) ;
+    row-gap: var(--line) ;
     flex-wrap: wrap ;
 }
 
@@ -26,6 +26,6 @@
 .sidebar {
     display: flex ;
     column-gap: 1rem ;
-    row-gap: var(--line-height) ;
+    row-gap: var(--line) ;
     flex-direction: column ;
 }
