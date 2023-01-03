@@ -1,19 +1,19 @@
 {%- assign categories = site.categories | sort -%}
 {%- assign tags = site.tags | sort -%}
 
+{%- capture title -%}
+{{- site.data.strings.search.title | escape -}}
+{%- endcapture -%}
+
 <form role="search" aria-labelledby="search-title" id="search"
       rel="search" role="search" action="{% link search.html %}"
       aria-labelledby="search-title">
-  <header class="sr-only">
-    <hgroup>
-      <h2 id="search-title">Controls</h2>
-    </hgroup>
-  </header>
+  {%- include subheader.html id='search-title' title=title -%}
 
   <fieldset class="search-basic">
-    <label for="search-input">{{ site.data.strings.sidebar.search.query | escape }}</label>
+    <label for="search-input">{{ site.data.strings.search.query | escape }}</label>
     <input id="search-input" name="s" type="search"
-           ><button id="search-button" type="submit">{{ site.data.strings.sidebar.search.submit | escape }}</button>
+           ><button id="search-button" type="submit">{{ site.data.strings.search.submit | escape }}</button>
   </fieldset>
 
   <fieldset id="category">
@@ -26,7 +26,7 @@
   </fieldset>
 
   <fieldset id="place">
-    <legend>Place</legend>
+    <legend>{{ site.data.strings.search.place | escape }}</legend>
     {%- for place in site.places %}
     <input id="place-{{ place | escape }}" type="checkbox" name="place"
            value="{{ place | escape }}">
@@ -35,7 +35,7 @@
   </fieldset>
 
   <fieldset id="character" tabindex="0">
-    <legend>Character</legend>
+    <legend>{{ site.data.strings.search.character | escape }}</legend>
     {%- for character in site.characters %}
     <input id="character-{{ character | escape }}" type="checkbox" name="character"
            value="{{ character | escape }}">
@@ -44,7 +44,7 @@
   </fieldset>
 
   <fieldset id="tag" tabindex="0">
-    <legend>{{ site.data.strings.sidebar.search.tag | escape }}</legend>
+    <legend>{{ site.data.strings.search.tag | escape }}</legend>
     {%- for tag in tags %}
     <input id="tag-{{ tag[0] | escape }}" type="checkbox" name="tag"
            value="{{ tag[0] | escape }}">

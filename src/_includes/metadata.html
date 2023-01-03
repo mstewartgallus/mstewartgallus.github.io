@@ -28,7 +28,7 @@
 
     {%- if page.tags.size > 0 -%}
     <div>
-      <dt>Tag</dt>
+      <dt>{{- site.data.strings.metadata.tag | escape -}}</dt>
       {%- for c in page.tags -%}
       <dd>{{- -}}
         <a rel="tag" href="{% link search.html %}?tag={{ c | url_encode }}"
@@ -42,7 +42,7 @@
 
     {%- if page.characters.size > 0 -%}
     <div>
-      <dt>Person</dt>
+      <dt>{{- site.data.strings.metadata.character | escape -}}</dt>
       {%- for c in page.characters -%}
       <dd>{{- -}}
         <a rel="tag" href="{% link search.html %}?character={{ c | url_encode }}"
@@ -56,7 +56,7 @@
 
     {%- if page.places.size > 0 -%}
     <div>
-      <dt>Place</dt>
+      <dt>{{- site.data.strings.metadata.place | escape -}}</dt>
       {%- for c in page.places -%}
       <dd>{{- -}}
         <a rel="tag" href="{% link search.html %}?place={{ c | url_encode }}"

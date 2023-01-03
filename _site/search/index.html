@@ -55,21 +55,18 @@
                 tag="tag" category="category" character="character" place="place">
 </search-results></main><form role="search" aria-labelledby="search-title" id="search"
       rel="search" role="search" action="/search/"
-      aria-labelledby="search-title">
-  <header class="sr-only">
-    <hgroup>
-      <h2 id="search-title">Controls</h2>
-    </hgroup>
-  </header>
-
-  <fieldset class="search-basic">
+      aria-labelledby="search-title"><header class="sr-only">
+  <hgroup>
+    <h2 id="search-title">Search</h2></hgroup>
+</header>
+<fieldset class="search-basic">
     <label for="search-input">Query</label>
     <input id="search-input" name="s" type="search"
            ><button id="search-button" type="submit">Search</button>
   </fieldset>
 
   <fieldset id="category">
-    <legend>Category</legend>
+    <legend></legend>
     <input id="category-Poem" type="checkbox" name="category"
            value="Poem">
     <label for="category-Poem">Poem</label>
@@ -99,7 +96,7 @@
     <label for="place-Waterfront">#Waterfront</label></fieldset>
 
   <fieldset id="character" tabindex="0">
-    <legend>Character</legend>
+    <legend>Person</legend>
     <input id="character-Artemis" type="checkbox" name="character"
            value="Artemis">
     <label for="character-Artemis">#Artemis</label>

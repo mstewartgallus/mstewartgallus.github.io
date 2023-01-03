@@ -1,3 +1,5 @@
+banner:
+  subscribe: "Subscribe"
 breadcrumbs:
   title: "Breadcrumbs"
   root: "Home"
@@ -12,19 +14,15 @@ metadata:
   title: "Metadata"
   author: "Author"
   postDate: "Post Date"
-related:
-  title: "Related Posts"
+  category: "Category"
+  character: "Person"
+  place: "Place"
+  tag: "Tag"
 search:
   title: "Search"
+  query: "Query"
   category: "Category"
-  character: "Character"
+  character: "Person"
+  place: "Place"
   tag: "Tag"
   submit: "Search"
-  postDate: "Post Date"
-sidebar:
-  search:
-    title: "Search"
-    query: "Query"
-    category: "Category"
-    tag: "Tag"
-    submit: "Search"

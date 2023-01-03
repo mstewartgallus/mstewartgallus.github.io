@@ -17,6 +17,7 @@
 
     <li><a type="application/atom+xml" rel="alternate"
          href="{{ "/feed.xml" | relative_url }}"
-         title="{{ site.title | escape }}">Subscribe</a></li>
+           title="{{ site.title | escape }}">
+        {{- site.data.strings.banner.subscribe | escape -}}</a></li>
   </ul>
 </header>
