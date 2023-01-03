@@ -50,32 +50,13 @@
     }]
 }
 </script></head>
-  <body><template shadowroot="closed">
-  <style>
-    :host {
-        display: flex ;
-    }
-    :host([hidden]) {
-        display: none ;
-    }
-    :host {
-        flex-wrap: wrap ;
-        column-gap: 1rem ;
-    }
-    div {
-        max-inline-size: 100% ;
-    }
-  </style>
-  <div><slot name="main"></slot></div>
-  <div><slot></slot></div>
-</template>
-
-<main slot="main" id="main" aria-describedby="title"
-      >
-  <header>
-    <hgroup>
-      <h1 tabindex="-1" id="title">Posts</h1><p></p></hgroup>
-  </header><ol reversed>
+  <body><div class="nav">
+  <main id="main" aria-describedby="title"
+        >
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">Posts</h1><p></p></hgroup>
+    </header><ol reversed>
   <li>
     <a href="/prose/2022/12/27/cleanup/">Cleanup Crew</a>
   </li>
@@ -210,5 +191,6 @@
 <ol class="breadcrumb">
     <li aria-current="page">Home</li>
   </ol></nav>
+</div>
 </body>
 </html>

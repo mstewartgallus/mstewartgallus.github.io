@@ -60,32 +60,13 @@
     }]
 }
 </script></head>
-  <body><template shadowroot="closed">
-  <style>
-    :host {
-        display: flex ;
-    }
-    :host([hidden]) {
-        display: none ;
-    }
-    :host {
-        flex-wrap: wrap ;
-        column-gap: 1rem ;
-    }
-    div {
-        max-inline-size: 100% ;
-    }
-  </style>
-  <div><slot name="main"></slot></div>
-  <div><slot></slot></div>
-</template>
-
-<main slot="main" id="main" aria-describedby="title"
-      data-pagefind-body>
-  <header>
-    <hgroup>
-      <h1 tabindex="-1" id="title">I Know a Secret</h1><p></p></hgroup>
-  </header><footer id="notice">
+  <body><div class="nav">
+  <main id="main" aria-describedby="title"
+        data-pagefind-body>
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">I Know a Secret</h1><p></p></hgroup>
+    </header><footer id="notice">
   <dl>
     <div>
       <dt>Notice</dt><dd data-pagefind-filter="notice">Sexual Assault</dd></div>
@@ -153,5 +134,6 @@
            data-pagefind-filter="place">Vancouver</a></dd><dd><a rel="tag" href="/search/?place=Waterfront"
            data-pagefind-filter="place">Waterfront</a></dd></div></dl>
 </footer>
+</div>
 </body>
 </html>

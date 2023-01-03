@@ -60,32 +60,13 @@
     }]
 }
 </script></head>
-  <body><template shadowroot="closed">
-  <style>
-    :host {
-        display: flex ;
-    }
-    :host([hidden]) {
-        display: none ;
-    }
-    :host {
-        flex-wrap: wrap ;
-        column-gap: 1rem ;
-    }
-    div {
-        max-inline-size: 100% ;
-    }
-  </style>
-  <div><slot name="main"></slot></div>
-  <div><slot></slot></div>
-</template>
-
-<main slot="main" id="main" aria-describedby="title"
-      data-pagefind-body>
-  <header>
-    <hgroup>
-      <h1 tabindex="-1" id="title">Cleanup Crew</h1><p></p></hgroup>
-  </header><p><q>Any peanut allergies?</q> I say.</p>
+  <body><div class="nav">
+  <main id="main" aria-describedby="title"
+        data-pagefind-body>
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">Cleanup Crew</h1><p></p></hgroup>
+    </header><p><q>Any peanut allergies?</q> I say.</p>
 
 <p><q>It’s a mild anxiolytic.  The sesame seed oil suspension can cause
 an allergic reaction</q> I explain.</p>
@@ -165,5 +146,6 @@ spamming the company chat with the usual garbage.</p>
            data-pagefind-filter="place">Downtown</a></dd><dd><a rel="tag" href="/search/?place=Vancouver"
            data-pagefind-filter="place">Vancouver</a></dd></div></dl>
 </footer>
+</div>
 </body>
 </html>

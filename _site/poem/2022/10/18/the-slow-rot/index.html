@@ -60,32 +60,13 @@
     }]
 }
 </script></head>
-  <body><template shadowroot="closed">
-  <style>
-    :host {
-        display: flex ;
-    }
-    :host([hidden]) {
-        display: none ;
-    }
-    :host {
-        flex-wrap: wrap ;
-        column-gap: 1rem ;
-    }
-    div {
-        max-inline-size: 100% ;
-    }
-  </style>
-  <div><slot name="main"></slot></div>
-  <div><slot></slot></div>
-</template>
-
-<main slot="main" id="main" aria-describedby="title"
-      data-pagefind-body>
-  <header>
-    <hgroup>
-      <h1 tabindex="-1" id="title">The Slow Rot</h1><p></p></hgroup>
-  </header><footer id="notice">
+  <body><div class="nav">
+  <main id="main" aria-describedby="title"
+        data-pagefind-body>
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">The Slow Rot</h1><p></p></hgroup>
+    </header><footer id="notice">
   <dl>
     <div>
       <dt>Notice</dt><dd data-pagefind-filter="notice">Dysphoria</dd></div>
@@ -142,5 +123,6 @@
       <dt>Person</dt><dd><a rel="tag" href="/search/?character=The+Slow+Rot"
            data-pagefind-filter="character">The Slow Rot</a></dd></div></dl>
 </footer>
+</div>
 </body>
 </html>

@@ -127,7 +127,3 @@ main > :is(ul, ol) {
 #notice {
     margin-block: var(--line) ;
 }
-
-#banner, #breadcrumbs, #paging, #metadata, #controls {
-    margin-block-end: var(--line) ;
-}

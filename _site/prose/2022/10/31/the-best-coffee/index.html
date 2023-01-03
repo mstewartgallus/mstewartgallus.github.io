@@ -60,32 +60,13 @@
     }]
 }
 </script></head>
-  <body><template shadowroot="closed">
-  <style>
-    :host {
-        display: flex ;
-    }
-    :host([hidden]) {
-        display: none ;
-    }
-    :host {
-        flex-wrap: wrap ;
-        column-gap: 1rem ;
-    }
-    div {
-        max-inline-size: 100% ;
-    }
-  </style>
-  <div><slot name="main"></slot></div>
-  <div><slot></slot></div>
-</template>
-
-<main slot="main" id="main" aria-describedby="title"
-      data-pagefind-body>
-  <header>
-    <hgroup>
-      <h1 tabindex="-1" id="title">The Best Coffee</h1><p></p></hgroup>
-  </header><p>The best coffee in Vancouver is a matter of taste. However, the best
+  <body><div class="nav">
+  <main id="main" aria-describedby="title"
+        data-pagefind-body>
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">The Best Coffee</h1><p></p></hgroup>
+    </header><p>The best coffee in Vancouver is a matter of taste. However, the best
 coffee per dollar is objective fact.</p>
 
 <p>The problem with chain fast food coffee is not poor quality but rather
@@ -169,5 +150,6 @@ underneath highway overpasses.</p>
       <dt>Place</dt><dd><a rel="tag" href="/search/?place=Vancouver"
            data-pagefind-filter="place">Vancouver</a></dd></div></dl>
 </footer>
+</div>
 </body>
 </html>

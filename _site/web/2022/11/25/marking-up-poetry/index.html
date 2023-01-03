@@ -60,32 +60,13 @@
     }]
 }
 </script></head>
-  <body><template shadowroot="closed">
-  <style>
-    :host {
-        display: flex ;
-    }
-    :host([hidden]) {
-        display: none ;
-    }
-    :host {
-        flex-wrap: wrap ;
-        column-gap: 1rem ;
-    }
-    div {
-        max-inline-size: 100% ;
-    }
-  </style>
-  <div><slot name="main"></slot></div>
-  <div><slot></slot></div>
-</template>
-
-<main slot="main" id="main" aria-describedby="title"
-      data-pagefind-body>
-  <header>
-    <hgroup>
-      <h1 tabindex="-1" id="title">Marking Up Poetry</h1><p></p></hgroup>
-  </header><p>Common poetry markup is inaccessible, unsemantic and doesn’t display
+  <body><div class="nav">
+  <main id="main" aria-describedby="title"
+        data-pagefind-body>
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">Marking Up Poetry</h1><p></p></hgroup>
+    </header><p>Common poetry markup is inaccessible, unsemantic and doesn’t display
 well. I am not skilled in accessibility and I don’t have good
 solutions.  See <a href="#tryit"><cite>Try It</cite></a> if you want to try out a screen
 reader yourself.</p>
@@ -452,5 +433,6 @@ problems.</p>
            data-pagefind-filter="tag">CSS</a></dd><dd><a rel="tag" href="/search/?tag=Accessibility"
            data-pagefind-filter="tag">Accessibility</a></dd></div></dl>
 </footer>
+</div>
 </body>
 </html>

@@ -230,7 +230,6 @@ main {
                1rem) ;
 }
 
-
 :root {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }

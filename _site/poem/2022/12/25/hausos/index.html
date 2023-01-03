@@ -60,32 +60,13 @@
     }]
 }
 </script></head>
-  <body><template shadowroot="closed">
-  <style>
-    :host {
-        display: flex ;
-    }
-    :host([hidden]) {
-        display: none ;
-    }
-    :host {
-        flex-wrap: wrap ;
-        column-gap: 1rem ;
-    }
-    div {
-        max-inline-size: 100% ;
-    }
-  </style>
-  <div><slot name="main"></slot></div>
-  <div><slot></slot></div>
-</template>
-
-<main slot="main" id="main" aria-describedby="title"
-      data-pagefind-body>
-  <header>
-    <hgroup>
-      <h1 tabindex="-1" id="title">Hausos</h1><p></p></hgroup>
-  </header><p class="stanza"><span role="presentation" class="line">As the dawn sun over waves</span><br /><span role="presentation" class="line">crashing upon the shore.</span><br /><span role="presentation" class="line">As lovely as a love goddess</span><br /><span role="presentation" class="line">ten times more.</span></p>
+  <body><div class="nav">
+  <main id="main" aria-describedby="title"
+        data-pagefind-body>
+    <header>
+      <hgroup>
+        <h1 tabindex="-1" id="title">Hausos</h1><p></p></hgroup>
+    </header><p class="stanza"><span role="presentation" class="line">As the dawn sun over waves</span><br /><span role="presentation" class="line">crashing upon the shore.</span><br /><span role="presentation" class="line">As lovely as a love goddess</span><br /><span role="presentation" class="line">ten times more.</span></p>
 
 <p class="stanza"><span role="presentation" class="line">She threw me with a kiss.</span><br /><span role="presentation" class="line">She struck me with a dart.</span><br /><span role="presentation" class="line">Music of the harp</span><br /><span role="presentation" class="line">arrows&thinsp;&#8212;&thinsp;that do no harm&thinsp;&#8212;&thinsp;sting the heart.</span></p>
 <p class="stanza"><span role="presentation" class="line">I set my heart in a ship of stone.</span><br /><span role="presentation" class="line">I enter a deep and dreamless sleep.</span><br /><span role="presentation" class="line">And over the floor I creep</span><br /><span role="presentation" class="line">twisting and turning and winding and burning.</span></p>
@@ -138,5 +119,6 @@
       <dt>Place</dt><dd><a rel="tag" href="/search/?place=Sessr%C3%BAmnir"
            data-pagefind-filter="place">Sessrúmnir</a></dd></div></dl>
 </footer>
+</div>
 </body>
 </html>
