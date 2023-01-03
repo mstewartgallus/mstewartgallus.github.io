@@ -31,7 +31,7 @@
       <dt>Tag</dt>
       {%- for c in page.tags -%}
       <dd>{{- -}}
-        <a rel="tag" href="{% link search.html %}?tag={{ c | cgi_escape }}"
+        <a rel="tag" href="{% link search.html %}?tag={{ c | url_encode }}"
            data-pagefind-filter="tag">
           {{- c | escape -}}
         </a>{{- -}}
@@ -45,7 +45,7 @@
       <dt>Person</dt>
       {%- for c in page.characters -%}
       <dd>{{- -}}
-        <a rel="tag" href="{% link search.html %}?character={{ c | cgi_escape }}"
+        <a rel="tag" href="{% link search.html %}?character={{ c | url_encode }}"
            data-pagefind-filter="character">
           {{- c | escape -}}
         </a>{{- -}}
@@ -59,7 +59,7 @@
       <dt>Place</dt>
       {%- for c in page.places -%}
       <dd>{{- -}}
-        <a rel="tag" href="{% link search.html %}?place={{ c | cgi_escape }}"
+        <a rel="tag" href="{% link search.html %}?place={{ c | url_encode }}"
            data-pagefind-filter="place">
           {{- c | escape -}}
         </a>{{- -}}

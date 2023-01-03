@@ -20,7 +20,7 @@
       </a>{{- -}}
     </li>
     <li><a rel="tag"
-           href="{% link search.html %}?category={{ category | cgi_escape }}"
+           href="{% link search.html %}?category={{ category | url_encode }}"
            data-pagefind-filter="category">
         {{- category | escape -}}
     </a></li>

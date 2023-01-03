@@ -19,36 +19,36 @@
   <fieldset id="category">
     <legend>{{ site.data.strings.sidebar.search.category | escape }}</legend>
     {%- for category in categories %}
-    <input id="category-{{ category[0] | cgi_escape }}" type="checkbox" name="category"
-           value="{{ category[0] | cgi_escape }}">
-    <label for="category-{{ category[0] | cgi_escape }}">{{ category[0] | escape }}</label>
+    <input id="category-{{ category[0] | escape }}" type="checkbox" name="category"
+           value="{{ category[0] | escape }}">
+    <label for="category-{{ category[0] | escape }}">{{ category[0] | escape }}</label>
     {%- endfor -%}
   </fieldset>
 
   <fieldset id="place">
     <legend>Place</legend>
     {%- for place in site.places %}
-    <input id="place-{{ place | cgi_escape }}" type="checkbox" name="place"
-           value="{{ place | cgi_escape }}">
-    <label for="place-{{ place | cgi_escape }}">#{{ place | escape }}</label>
+    <input id="place-{{ place | escape }}" type="checkbox" name="place"
+           value="{{ place | escape }}">
+    <label for="place-{{ place | escape }}">#{{ place | escape }}</label>
     {%- endfor -%}
   </fieldset>
 
   <fieldset id="character" tabindex="0">
     <legend>Character</legend>
     {%- for character in site.characters %}
-    <input id="character-{{ character | cgi_escape }}" type="checkbox" name="character"
-           value="{{ character | cgi_escape }}">
-    <label for="character-{{ character | cgi_escape }}">#{{ character | escape }}</label>
+    <input id="character-{{ character | escape }}" type="checkbox" name="character"
+           value="{{ character | escape }}">
+    <label for="character-{{ character | escape }}">#{{ character | escape }}</label>
     {%- endfor -%}
   </fieldset>
 
   <fieldset id="tag" tabindex="0">
     <legend>{{ site.data.strings.sidebar.search.tag | escape }}</legend>
     {%- for tag in tags %}
-    <input id="tag-{{ tag[0] | cgi_escape }}" type="checkbox" name="tag"
-           value="{{ tag[0] | cgi_escape }}">
-    <label for="tag-{{ tag[0] | cgi_escape }}">#{{ tag[0] | escape }}</label>
+    <input id="tag-{{ tag[0] | escape }}" type="checkbox" name="tag"
+           value="{{ tag[0] | escape }}">
+    <label for="tag-{{ tag[0] | escape }}">#{{ tag[0] | escape }}</label>
     {%- endfor -%}
   </fieldset>
 </form>

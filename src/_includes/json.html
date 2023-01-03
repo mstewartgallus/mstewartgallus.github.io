@@ -69,7 +69,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": {{ category | jsonify }},
-        "item": "{{ '/search.html' | absolute_url }}?category={{ category | cgi_escape }}"
+        "item": "{{ '/search.html' | absolute_url }}?category={{ category | url_encode }}"
     },{
         "@type": "ListItem",
         "position": 3,
