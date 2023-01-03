@@ -1,10 +1,12 @@
 {%- assign categories = site.categories | sort -%}
 {%- assign tags = site.tags | sort -%}
 
-<section aria-labelledby="controls-title" id="controls">
+<form role="search" aria-labelledby="search-title" id="search"
+      rel="search" role="search" action="{% link search.html %}"
+      aria-labelledby="search-title">
   <header class="sr-only">
     <hgroup>
-      <h2 id="controls-title">Controls</h2>
+      <h2 id="search-title">Controls</h2>
     </hgroup>
   </header>
 
@@ -49,4 +51,4 @@
     <label for="tag-{{ tag[0] | cgi_escape }}">#{{ tag[0] | escape }}</label>
     {%- endfor -%}
   </fieldset>
-</section>
+</form>

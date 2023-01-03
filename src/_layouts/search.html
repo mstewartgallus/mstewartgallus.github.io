@@ -1,5 +1,5 @@
 {%- capture title -%}
-<search-h1 query="s">
+<search-h1 form="search" query="s">
   {{- page.title | escape -}}
 </search-h1>
 {%- endcapture -%}
@@ -9,15 +9,14 @@
   {{- content -}}
 </div>
 
-<search-results query="s"
+<search-results form="search"
+                query="s"
                 tag="tag" category="category" character="character" place="place">
 </search-results>
 {%- endcapture -%}
 
 {%- capture body -%}
-<form id="search" name="search" rel="search" action="{% link search.html %}">
-  {%- include body.html title=title subtitle=subtitle content=results -%}
-</form>
+{%- include body.html title=title subtitle=subtitle content=results -%}
 {%- endcapture -%}
 
 {%- include document.html content=body -%}

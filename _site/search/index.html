@@ -43,20 +43,22 @@
     }]
 }
 </script></head>
-  <body><form id="search" name="search" rel="search" action="/search/"><div class="nav">
-  <main id="main" aria-describedby="title"
-        >
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title"><search-h1 query="s">Search</search-h1></h1></hgroup>
-    </header><div></div>
+  <body><main id="main" aria-describedby="title"
+      >
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title"><search-h1 form="search" query="s">Search</search-h1></h1></hgroup>
+  </header><div></div>
 
-<search-results query="s"
+<search-results form="search"
+                query="s"
                 tag="tag" category="category" character="character" place="place">
-</search-results></main><section aria-labelledby="controls-title" id="controls">
+</search-results></main><form role="search" aria-labelledby="search-title" id="search"
+      rel="search" role="search" action="/search/"
+      aria-labelledby="search-title">
   <header class="sr-only">
     <hgroup>
-      <h2 id="controls-title">Controls</h2>
+      <h2 id="search-title">Controls</h2>
     </hgroup>
   </header>
 
@@ -266,7 +268,7 @@
     <input id="tag-Western" type="checkbox" name="tag"
            value="Western">
     <label for="tag-Western">#Western</label></fieldset>
-</section>
+</form>
 <nav id="breadcrumbs" aria-labelledby="breadcrumbs-title"><header class="sr-only">
   <hgroup>
     <h2 id="breadcrumbs-title">Breadcrumbs</h2></hgroup>
@@ -275,6 +277,5 @@
     <li><a href="/">Home</a></li>
     <li aria-current="page"><cite>Search</cite></li>
   </ol></nav>
-</div>
-</form></body>
+</body>
 </html>

@@ -1,4 +1,4 @@
-.nav {
+body {
     inline-size: fit-content;
     max-inline-size: 100% ;
 
@@ -6,18 +6,18 @@
     row-gap: var(--line) ;
 }
 
-.nav {
+body {
     flex-direction: column ;
 }
 
-.nav {
+body {
     grid-template-columns:
         [main] minmax(var(--paragraph-width), auto)
         [sidebar] minmax(30ch, 1fr) ;
     grid-auto-flow: dense ;
 }
 
-:where(.nav > *) {
+:where(body > *) {
     grid-column: sidebar ;
 }
 
@@ -27,11 +27,11 @@ main {
     grid-row-end: span 4 ;
 }
 
-.nav {
+body {
     display: flex ;
 }
 @media (min-width: 130ch) {
-    .nav {
+    body {
         display: grid ;
     }
 }

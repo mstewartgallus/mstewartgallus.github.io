@@ -1,38 +1,36 @@
-<div class="nav">
-  <main id="main" aria-describedby="title"
-        {% if page.date -%}data-pagefind-body{%- endif %}>
-    <header>
-      <hgroup>
-        <h1 tabindex="-1" id="title">{{- include.title -}}</h1>
-        {%- if include.subtitle -%}
-        <p>{{- include.subtitle -}}</p>
-        {%- endif -%}
-      </hgroup>
-    </header>
+<main id="main" aria-describedby="title"
+      {% if page.date -%}data-pagefind-body{%- endif %}>
+  <header>
+    <hgroup>
+      <h1 tabindex="-1" id="title">{{- include.title -}}</h1>
+      {%- if include.subtitle -%}
+      <p>{{- include.subtitle -}}</p>
+      {%- endif -%}
+    </hgroup>
+  </header>
 
-    {%- if page.notice.size > 0 -%}
-    {%- include notice.html -%}
-    {%- endif -%}
-
-    {{- include.content -}}
-  </main>
-
-  {%- if page.url == '/' -%}
-  {%- include banner.html -%}
-  {%- include search.html -%}
+  {%- if page.notice.size > 0 -%}
+  {%- include notice.html -%}
   {%- endif -%}
 
-  {%- if page.url == '/search/' -%}
-  {%- include searchfull.html -%}
-  {%- endif -%}
+  {{- include.content -}}
+</main>
 
-  {%- if page.previous.url or page.next.url -%}
-  {%- include paging.html previous=page.previous next=page.next -%}
-  {%- endif -%}
+{%- if page.url == '/' -%}
+{%- include banner.html -%}
+{%- include search.html -%}
+{%- endif -%}
 
-  {%- include breadcrumbs.html -%}
+{%- if page.url == '/search/' -%}
+{%- include searchfull.html -%}
+{%- endif -%}
 
-  {%- if page.date -%}
-  {%- include metadata.html author=page.author -%}
-  {%- endif -%}
-</div>
+{%- if page.previous.url or page.next.url -%}
+{%- include paging.html previous=page.previous next=page.next -%}
+{%- endif -%}
+
+{%- include breadcrumbs.html -%}
+
+{%- if page.date -%}
+{%- include metadata.html author=page.author -%}
+{%- endif -%}
