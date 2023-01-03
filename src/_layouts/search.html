@@ -15,8 +15,4 @@
 </search-results>
 {%- endcapture -%}
 
-{%- capture body -%}
-{%- include body.html title=title subtitle=subtitle content=results -%}
-{%- endcapture -%}
-
-{%- include document.html content=body -%}
+{%- include document.html title=title subtitle=subtitle content=results -%}

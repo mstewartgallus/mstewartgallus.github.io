@@ -6,8 +6,4 @@
 {{- page.subtitle | escape -}}
 {%- endcapture -%}
 
-{%- capture body -%}
-{%- include body.html title=title subtitle=subtitle content=content -%}
-{%- endcapture -%}
-
-{%- include document.html content=body -%}
+{%- include document.html title=title subtitle=subtitle content=content -%}
