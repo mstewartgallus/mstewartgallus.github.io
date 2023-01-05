@@ -4,13 +4,7 @@
 }
 
 @media print {
-    #paging, #search, #related, #breadcrumbs {
-        display: none ;
-    }
-}
-
-@media print {
-    // Hide bookmark links?
+    /* Hide bookmark links? */
     :any-link:is([rel~="bookmark"]) {
         display: none ;
     }
@@ -18,29 +12,4 @@
         content: "\2003" attr(href) ;
         white-space: nowrap ;
     }
-}
-
-@media print {
-    :any-link {
-        text-decoration: none ;
-    }
-}
-
-
-h1, h2, h3, h4, h5, h6 {
-    break-inside: avoid ;
-    break-after: avoid ;
-}
-
-figure {
-    break-inside: avoid ;
-}
-
-hr {
-    break-before: avoid ;
-}
-
-:root {
-    widows: 2 ;
-    orphans: 2 ;
 }

@@ -1,14 +1,10 @@
-#toc {
-    width: 100% ;
+#notice {
+    margin-block: var(--line) ;
 }
 
-hgroup p {
-    margin-block: 0 ;
-}
-
-
-header {
-    position: relative ;
+#paging, #search, #breadcrumbs {
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
 }
 
 .breadcrumb {
@@ -18,7 +14,7 @@ header {
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 1ch ;
-    inline-size: var(--paragraph-width) ;
+    inline-size: fit-content ;
     max-inline-size: 100% ;
 }
 .breadcrumb li {
@@ -68,20 +64,6 @@ ul.tags {
     max-inline-size: 100% ;
 }
 
-:is(#toc) ul {
-    all: unset ;
-    display: flex ;
-    flex-wrap: wrap ;
-    column-gap: 1em ;
-}
-:is(#toc, .tags) li {
-    all: unset ;
-}
-
-#toc {
-    margin-block: var(--line) ;
-}
-
 .greentext > li {
     all: unset ;
     display: block ;
@@ -109,14 +91,8 @@ ul.tags {
     list-style-position: inside ;
 }
 
-#notice {
-    margin-block-end: var(--line) ;
-}
-
-
-:root {
-    /* default ratio on browsers is 1rem = 16px */
-    --s: clamp(0rem, (600rem - 1600vw) / 100, 1rem) ;
+hgroup p {
+    margin-block: 0 ;
 }
 
 main > :is(ul, ol) {
@@ -124,6 +100,11 @@ main > :is(ul, ol) {
     padding-inline-start: calc(2 * var(--s));
 }
 
-#notice {
-    margin-block: var(--line) ;
+header {
+    position: relative ;
+}
+
+:root {
+    /* default ratio on browsers is 1rem = 16px */
+    --s: clamp(0rem, (600rem - 1600vw) / 100, 1rem) ;
 }

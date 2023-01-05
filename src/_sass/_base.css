@@ -10,19 +10,42 @@
     outline-style: solid ;
 }
 
-:link { color: var(--link-text) ; }
-:visited { color: var(--visited-text) ; }
 :any-link:active { color: var(--active-text) ; }
 
 :any-link:active {
     transition: color 0.05s ;
 }
 
+@media print {
+    :any-link {
+        text-decoration: none ;
+    }
+}
+
+:link { color: var(--link-text) ; }
+:visited { color: var(--visited-text) ; }
+
 :any-link { border-radius: 0.01ch ; }
 
 mark {
     background-color: var(--mark);
     color: var(--mark-text);
+}
+
+sub { font-variant-position: sub ; }
+sup { font-variant-position: super ; }
+
+abbr {
+    text-decoration: unset ;
+    font-variant-caps: all-small-caps ;
+}
+cite {
+    font-style: unset ;
+    font-variant-caps: small-caps ;
+}
+
+address {
+    font-style: unset ;
 }
 
 p {
@@ -40,29 +63,20 @@ pre {
     margin: 0;
 }
 
-sub { font-variant-position: sub ; }
-sup { font-variant-position: super ; }
-
-abbr {
-    text-decoration: unset ;
-    font-variant-caps: all-small-caps ;
-}
-address {
-    font-style: unset ;
-}
-cite {
-    font-style: unset ;
-    font-variant-caps: small-caps ;
-}
-
 table { border-collapse: collapse ; }
 
 hr {
-    height: unset ;
+    block-size: 0 ;
     border: unset ;
     margin-block: var(--line) ;
+
+    break-before: avoid ;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    break-inside: avoid ;
+    break-after: avoid ;
+}
 
 h1,h2,h3,h4,h5,h6, figcaption, ::marker {
     color: var(--emphasis-text);
@@ -84,6 +98,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 hgroup {
+    inline-size: fit-content ;
     max-inline-size: 100% ;
     margin: unset ;
 
@@ -123,18 +138,29 @@ dl, dt, dd {
     margin: unset ;
 }
 
+@media print {
+    figcaption {
+        position: sticky ;
+        left: 0 ;
+    }
+
+    figure {
+        position: relative ;
+        overflow: auto ;
+
+        overflow: auto ;
+    }
+}
+
 figcaption {
     font-weight: bold ;
-
-    position: sticky ;
-    left: 0 ;
 }
 
 figure {
     margin-inline: 0 ;
     margin-block: var(--line) ;
-    position: relative ;
-    overflow: auto ;
+
+    break-inside: avoid ;
 }
 
 
@@ -157,28 +183,38 @@ header,h1,h2,h3,h4,h5,h6 {
 main {
     display: block ;
     box-sizing: border-box ;
+
     inline-size: var(--main-width) ;
     max-inline-size: 100% ;
 }
 
-body {
-    margin: unset;
-    padding: unset;
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
 }
 
 @media screen {
     body {
-        margin-block-start: var(--line) ;
+        margin: 0 ;
+        padding: 0 ;
+        margin-block-start: var(--line);
         padding-inline-start: calc(4 * var(--t));
     }
 }
 
 body {
     box-sizing: border-box ;
-    inline-size: fit-content ;
+
+    display: flex ;
+    flex-direction: column ;
+
+    row-gap: var(--line) ;
+
+    inline-size: fit-content;
     max-inline-size: 100% ;
 }
-
 
 @media (prefers-reduced-motion: no-preference) {
     :root {
@@ -186,10 +222,12 @@ body {
     }
 }
 
-
 @media print {
     :root {
-        font-size: 18px ;
+        font-size: 14pt ;
+
+        padding-block: 1.5in ;
+        padding-inline: 1.5in 0 ;
     }
 }
 
@@ -201,29 +239,13 @@ body {
                 (var(--min-font-size) * 1rem
                  + var(--t) * (var(--max-font-size) - var(--min-font-size))) / 16
             ) ;
-    }
-}
 
-:root {
-    margin: unset;
-    padding: unset;
-
-    box-sizing: border-box ;
-    inline-size: 100% ;
-}
-
-@media print {
-    :root {
-        padding-block: 1.5in ;
-        padding-inline-start: 1.5in ;
-    }
-}
-
-@media screen {
-    :root {
-        padding-inline-start: calc(1rem + 5 * var(--t)) ;
-        padding-block-start: calc(var(--t) * var(--line-height)) ;
-        padding-block-end: calc(3 * var(--line)) ;
+        padding-inline:
+            calc(1rem + 5 * var(--t))
+            1rem ;
+        padding-block:
+            calc(var(--t) * var(--line-height))
+            calc(3 * var(--line)) ;
     }
 }
 
@@ -231,8 +253,14 @@ body {
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone ;
 
+    widows: 2 ;
+    orphans: 2 ;
+
     display: flex ;
-    justify-content: flex-start ;
+    margin: 0;
+
+    box-sizing: border-box ;
+    inline-size: 100% ;
 
     line-height: var(--line) ;
     font-size-adjust: var(--ex-height) ;
