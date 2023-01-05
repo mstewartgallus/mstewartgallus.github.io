@@ -10,9 +10,8 @@
     outline-style: solid ;
 }
 
-:any-link:active { color: var(--active-text) ; }
-
 :any-link:active {
+    color: var(--active-text) ;
     transition: color 0.05s ;
 }
 
@@ -48,8 +47,10 @@ address {
     font-style: unset ;
 }
 
+
 p {
-    margin-block: var(--line) ;
+    margin: 0;
+
     inline-size: var(--paragraph-width) ;
     max-inline-size: 100% ;
 
@@ -294,4 +295,17 @@ body {
                    / (var(--max-width) - var(--min-width)),
                1rem) ;
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
+}
+
+menu, ol, ul, address, figure, p, hr, blockquote, #notice {
+    margin: 0 ;
+}
+blockquote {
+    margin-inline-start: 1rem ;
+}
+
+section, main, blockquote {
+    display: flex ;
+    flex-direction: column ;
+    row-gap: var(--line) ;
 }

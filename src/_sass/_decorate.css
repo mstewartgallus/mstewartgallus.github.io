@@ -1,7 +1,3 @@
-hgroup p {
-    margin: unset ;
-}
-
 dl > div {
     display: flex ;
     flex-wrap: wrap ;

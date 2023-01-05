@@ -7,5 +7,4 @@
 .stanza {
     all: unset ;
     display: block ;
-    margin-block: var(--line) ;
 }
