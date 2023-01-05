@@ -32,7 +32,6 @@ export default class SearchResults extends HTMLElement {
     static formAssociated = true;
     static observedAttributes = ['query', 'tag', 'character', 'place', 'category'];
 
-    #list;
     #entries;
     #abort;
 
@@ -48,8 +47,8 @@ export default class SearchResults extends HTMLElement {
         this.#shadow.replaceChildren(results.cloneNode(true));
         this.#shadow.adoptedStyleSheets = [resultscss];
 
-        this.#list = this.#shadow.getElementById('search-list');
-        this.#entries = Array.from(this.#list.getElementsByTagName('li'));
+        const list = this.#shadow.getElementById('search-list');
+        this.#entries = Array.from(list.getElementsByTagName('li'));
     }
 
     connectedCallback() {
@@ -86,35 +85,27 @@ export default class SearchResults extends HTMLElement {
 
         const posts = findPosts(query, { tag, category, character, place });
 
+        this.#internals.ariaHidden = true;
+
         this.#clean();
 
         await this.#render(posts);
+
+        this.#internals.ariaHidden = false;
     }
 
     #clean() {
-        this.#list.setAttribute('aria-hidden', 'true');
-
-        const entries = this.#entries;
-        const len = entries.length;
-        for (let ii = 0; ii < len; ++ii) {
-            const li = entries[ii];
-
+        for (const li of this.#entries) {
             const anchor = li.getElementsByTagName('a')[0];
-            if (!anchor) {
-                return;
-            }
 
             li.setAttribute('aria-hidden', 'true');
-
-            anchor.removeAttribute('href');
+            anchor?.removeAttribute('href');
         }
     }
 
     async #render(postsPs) {
         const entries = this.#entries;
-        const posts = (await postsPs).slice(0, this.#entries.length);
-
-        const len = posts.length;
+        const posts = (await postsPs).slice(0, entries.length);
 
         const waiters = posts.map((postPs, ii) => {
             const li = entries[ii];
@@ -129,11 +120,9 @@ export default class SearchResults extends HTMLElement {
 
         await Promise.all(waiters);
 
-        for (let ii = 0; ii < len; ++ii) {
+        for (let ii = 0; ii < posts.length; ++ii) {
             entries[ii].setAttribute('aria-hidden', 'false');
         }
-
-        this.#list.setAttribute('aria-hidden', 'false');
     }
 
     get query() {

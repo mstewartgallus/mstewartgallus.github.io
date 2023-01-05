@@ -1,3 +1,7 @@
+fieldset, label, button, input {
+    border: unset ;
+}
+
 .search-basic {
     display: flex ;
     column-gap: 1em ;
@@ -108,7 +112,6 @@ input, button {
 fieldset, label, button, input {
     margin: unset ;
     display: block ;
-    border: unset ;
     font: inherit ;
 }
 
