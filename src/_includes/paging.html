@@ -4,23 +4,27 @@
 <nav id="paging" aria-labelledby="paging-title">
   {%- include subheader.html id='paging-title' title=title -%}
 
-  {%- if include.previous.url -%}
-  <div>
-    <a href="{{include.previous.url}}" rel="next" aria-describedby="previous">
-      {{- site.data.strings.paging.previous | escape -}}
-      &emsp;<cite aria-hidden="true" id="previous">
-        {{ include.previous.title | escape -}}
-      </cite></a>
-  </div>
-  {%- endif -%}
+  <dl>
+    {%- if include.previous.url -%}
+    <div>
+      <dd>{{- -}}
+        <a href="{{include.previous.url}}" rel="next">
+          {{- site.data.strings.paging.previous | escape -}}
+        </a>{{- -}}
+      </dd>
+      <dt><cite>{{ include.previous.title | escape -}}</cite></dt>
+    </div>
+    {%- endif -%}
 
-  {%- if include.next.url -%}
-  <div>
-    <a href="{{include.next.url}}" rel="prev" aria-describedby="next">
-      {{- site.data.strings.paging.next | escape -}}
-      &emsp;<cite aria-hidden="true" id="next">
-        {{- include.next.title | escape -}}
-      </cite></a>
-  </div>
-  {%- endif -%}
+    {%- if include.next.url -%}
+    <div>
+      <dd>{{- -}}
+        <a href="{{include.next.url}}" rel="prev">
+          {{- site.data.strings.paging.next | escape -}}
+        </a>{{- -}}
+      </dd>
+      <dt><cite>{{ include.next.title | escape -}}</cite></dt>
+    </div>
+    {%- endif -%}
+  </dl>
 </nav>

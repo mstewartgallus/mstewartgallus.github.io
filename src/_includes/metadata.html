@@ -17,10 +17,9 @@
 
     <div>
       <dt>{{- site.data.strings.metadata.author | escape -}}</dt>
-      <dd>{{- -}}
+      <dd translate="no">{{- -}}
         <a rel="author"
-           href="{{ author.url | relative_url }}"
-           translate="no">
+           href="{{ author.url | relative_url }}">
           {{- author.name | escape -}}
         </a>{{- -}}
       </dd>
