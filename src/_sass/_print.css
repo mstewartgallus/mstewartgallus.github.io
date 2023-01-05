@@ -1,22 +1,15 @@
 @page {
     size: A4 portrait ;
-    margin: 1.5in 0 ;
+    margin: 0 0 ;
 }
 
 @media print {
-    :root {
-        padding-inline-start: 1.5in ;
-        font-size: 18px ;
-    }
-
     #paging, #search, #related, #breadcrumbs {
         display: none ;
     }
+}
 
-    :any-link {
-        text-decoration: none ;
-    }
-
+@media print {
     // Hide bookmark links?
     :any-link:is([rel~="bookmark"]) {
         display: none ;
@@ -26,6 +19,13 @@
         white-space: nowrap ;
     }
 }
+
+@media print {
+    :any-link {
+        text-decoration: none ;
+    }
+}
+
 
 h1, h2, h3, h4, h5, h6 {
     break-inside: avoid ;

@@ -5,58 +5,40 @@
 
 :focus-visible {
     outline-color: var(--highlight-text) ;
+    outline-width: 0.18rem ;
+    outline-offset: 0.23em ;
+    outline-style: solid ;
 }
 
 :link { color: var(--link-text) ; }
 :visited { color: var(--visited-text) ; }
 :any-link:active { color: var(--active-text) ; }
 
+:any-link:active {
+    transition: color 0.05s ;
+}
+
+:any-link { border-radius: 0.01ch ; }
+
 mark {
     background-color: var(--mark);
     color: var(--mark-text);
-}
-
-h1,h2,h3,h4,h5,h6, figcaption, ::marker {
-    color: var(--emphasis-text);
-}
-
-:root {
-    color-scheme: light dark ;
-
-    background-color: var(--canvas) ;
-    color: var(--canvas-text) ;
-
-    accent-color: var(--accent-color) ;
-
-    /* Make the caret seeable with caret browsing?  Need to figure out */
-    /* a better UX here/experiment on different platforms */
-    caret-color: var(--highlight-text) ;
 }
 
 p {
     margin-block: var(--line) ;
     inline-size: var(--paragraph-width) ;
     max-inline-size: 100% ;
-}
 
-:any-link { border-radius: 0.01ch ; }
-
-:any-link:active {
-    transition: color 0.05s ;
+    -moz-hyphens: auto ;
+    -ms-hyphens: auto ;
+    -webkit-hyphens: auto ;
+    hyphens: auto ;
 }
 
 pre {
     margin: 0;
 }
-
-/* FIXME should form controls be tabular or just lining? */
-time, code, pre,
-table, ::marker,
-select, option, button, input {
-    font-variant-numeric: lining-nums tabular-nums;
-}
-
-sub, sup { vertical-align: inherit ; }
 
 sub { font-variant-position: sub ; }
 sup { font-variant-position: super ; }
@@ -81,6 +63,20 @@ hr {
     margin-block: var(--line) ;
 }
 
+
+h1,h2,h3,h4,h5,h6, figcaption, ::marker {
+    color: var(--emphasis-text);
+}
+
+/* FIXME should form controls be tabular or just lining? */
+time, code, pre,
+table, ::marker,
+select, option, button, input {
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+sub, sup { vertical-align: inherit ; }
+
 h1,h2,h3,h4,h5,h6 {
     margin: unset ;
     font-size: inherit ;
@@ -90,16 +86,13 @@ h1,h2,h3,h4,h5,h6 {
 hgroup {
     max-inline-size: 100% ;
     margin: unset ;
-}
 
-hgroup {
     font-style: italic;
 }
 
 blockquote {
     margin-block: var(--line) ;
 }
-
 
 @counter-style nodot {
   system: numeric;
@@ -112,18 +105,18 @@ blockquote {
   suffix: "\2003";
 }
 
-menu, ul, ol {
-    margin-block: var(--line) ;
-    padding-inline-start: 2em ;
-    list-style-type: bullet ;
-}
-
 ol {
     list-style-type: nodot ;
 }
 
 ::marker {
     font-weight: bold ;
+}
+
+:where(menu, ul, ol) {
+    margin-block: var(--line) ;
+    padding-inline-start: 2em ;
+    list-style-type: bullet ;
 }
 
 dl, dt, dd {
@@ -136,11 +129,21 @@ figcaption {
     position: sticky ;
     left: 0 ;
 }
+
 figure {
     margin-inline: 0 ;
     margin-block: var(--line) ;
     position: relative ;
     overflow: auto ;
+}
+
+
+h1 {
+    font-size: calc(var(--ratio-2) * 1rem);
+}
+
+h2 {
+    font-size: calc(var(--ratio-1) * 1rem);
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -151,53 +154,23 @@ header,h1,h2,h3,h4,h5,h6 {
     font-variant-numeric: proportional-nums lining-nums ;
 }
 
-:focus-visible {
-    outline-width: 0.18rem ;
-    outline-offset: 0.23em ;
-    outline-style: solid ;
+main {
+    display: block ;
+    box-sizing: border-box ;
+    inline-size: var(--main-width) ;
+    max-inline-size: 100% ;
 }
 
-:root {
-    /* more legible hyperlinks */
-    -webkit-text-underline-position: under ;
-    text-underline-position: under ;
-    font-family: sans-serif ;
-    font-variant-numeric: proportional-nums oldstyle-nums ;
-}
-
-p {
-    -moz-hyphens: auto ;
-    -ms-hyphens: auto ;
-    -webkit-hyphens: auto ;
-    hyphens: auto ;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    :root {
-        scroll-behavior: smooth ;
-    }
-}
-
-:root {
-    line-height: var(--line) ;
-    font-size-adjust: var(--ex-height) ;
-}
-
-
-:root {
-    -moz-text-size-adjust: none ;
-    -webkit-text-size-adjust: none ;
-    text-size-adjust: none ;
-}
-
-:root, body {
+body {
     margin: unset;
     padding: unset;
 }
 
-:root {
-    display: flex ;
-    justify-content: start ;
+@media screen {
+    body {
+        margin-block-start: var(--line) ;
+        padding-inline-start: calc(4 * var(--t));
+    }
 }
 
 body {
@@ -206,61 +179,91 @@ body {
     max-inline-size: 100% ;
 }
 
-main {
-    display: block ;
-    box-sizing: border-box ;
-    inline-size: var(--main-width) ;
-    max-inline-size: 100% ;
+
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth ;
+    }
+}
+
+
+@media print {
+    :root {
+        font-size: 18px ;
+    }
 }
 
 @media screen {
     :root {
-        padding-block-end: calc(3 * var(--line)) ;
-    }
-    body {
-        margin-block-start: var(--line) ;
+        /* default ratio on browsers is 1rem = 16px */
+        font-size:
+            calc(
+                (var(--min-font-size) * 1rem
+                 + var(--t) * (var(--max-font-size) - var(--min-font-size))) / 16
+            ) ;
     }
 }
 
-/* default ratio on browsers is 1rem = 16px */
+:root {
+    margin: unset;
+    padding: unset;
+
+    box-sizing: border-box ;
+    inline-size: 100% ;
+}
+
+@media print {
+    :root {
+        padding-block: 1.5in ;
+        padding-inline-start: 1.5in ;
+    }
+}
+
+@media screen {
+    :root {
+        padding-inline-start: calc(1rem + 5 * var(--t)) ;
+        padding-block-start: calc(var(--t) * var(--line-height)) ;
+        padding-block-end: calc(3 * var(--line)) ;
+    }
+}
+
+:root {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone ;
+
+    display: flex ;
+    justify-content: flex-start ;
+
+    line-height: var(--line) ;
+    font-size-adjust: var(--ex-height) ;
+
+    /* more legible hyperlinks */
+    -webkit-text-underline-position: under ;
+    text-underline-position: under ;
+
+    font-family: sans-serif ;
+    font-variant-numeric: proportional-nums oldstyle-nums ;
+
+    -moz-text-size-adjust: none ;
+    -webkit-text-size-adjust: none ;
+    text-size-adjust: none ;
+
+    color-scheme: light dark ;
+
+    background-color: var(--canvas) ;
+    color: var(--canvas-text) ;
+
+    accent-color: var(--accent-color) ;
+
+    /* Make the caret seeable with caret browsing?  Need to figure out */
+    /* a better UX here/experiment on different platforms */
+    caret-color: var(--highlight-text) ;
+}
+
 :root {
     --t: clamp(0rem,
                (1600vw - var(--min-width) * 1rem)
                    / (var(--max-width) - var(--min-width)),
                1rem) ;
-}
-
-:root {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
-}
-
-/* default ratio on browsers is 1rem = 16px */
-
-:root {
-    font-size:
-        calc(
-            (var(--min-font-size) * 1rem
-            + var(--t) * (var(--max-font-size) - var(--min-font-size))) / 16
-        ) ;
-}
-
-h1 {
-    font-size: calc(var(--ratio-2) * 1rem);
-}
-
-h2 {
-    font-size: calc(var(--ratio-1) * 1rem);
-}
-
-@media screen {
-    :root {
-        padding-inline: calc(1rem + 5 * var(--t)) ;
-        padding-block-start: calc(var(--t) * var(--line-height)) ;
-    }
-}
-
-@media screen {
-    body {
-        padding-inline-start: calc(4 * var(--t));
-    }
 }

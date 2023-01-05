@@ -1,24 +1,25 @@
-fieldset, label, button, input, select, option {
-    margin: unset ;
-    display: block ;
-    border: unset ;
-    font: inherit ;
+.search-basic {
+    display: flex ;
+    column-gap: 1em ;
+    flex-wrap: wrap ;
+    align-items: flex-start ;
 }
 
-input, button, select, option {
-    appearance: none ;
+#character, #category, #tag, #place {
+    display: grid ;
+    grid-template-columns: auto 1fr ;
+    column-gap: 1em ;
+    inline-size: fit-content ;
 }
 
-
-input {
-    background-color: var(--field);
-    color: var(--field-text);
+#character, #tag {
+    overflow: auto ;
+    max-block-size: calc(20 * var(--line)) ;
 }
 
-button {
-    background-color: var(--button-face);
-    color: var(--button-text);
-    border-color: var(--button-border);
+button:focus-visible {
+    outline-offset: 0;
+    outline-width: 0.3em ;
 }
 
 button:active {
@@ -26,13 +27,18 @@ button:active {
     color: var(--button-face) ;
 }
 
-option {
-    background-color: var(--field);
-    color: var(--field-text);
+button {
+    background-color: var(--button-face);
+    color: var(--button-text);
+    border-color: var(--button-border);
+
+    border-style: solid ;
+    padding-inline: 0.5em ;
 }
-option:checked {
-    background-color: var(--field-text);
-    color: var(--field);
+
+input[type="checkbox"]:checked {
+    background-color: var(--accent-color) ;
+    color: var(--accent-color-text) ;
 }
 
 input[type="checkbox"] {
@@ -41,30 +47,79 @@ input[type="checkbox"] {
     color: var(--button-text) ;
 }
 
-input[type="checkbox"]:checked {
-    background-color: var(--accent-color) ;
-    color: var(--accent-color-text) ;
+input[type="search"] {
+    border-style: solid ;
+    padding-inline: 0.5em ;
+
+    inline-size: 20ch;
+    max-inline-size: 100%;
 }
 
-label, button, input, option {
+/* FIXME i18n */
+/* FIXME use display list-item ? */
+input[type="checkbox"]:checked::after {
+    content: "✓" ;
+}
+input[type="checkbox"]::after {
+    display: table-cell ;
+    vertical-align: middle ;
+    content: "" ;
+}
+
+
+input[type="checkbox"]:checked {
+    border: unset ;
+
+    transition: background-color 0.1s, color 0.1s ;
+}
+
+input[type="checkbox"] {
+    block-size: 1.4em ;
+    inline-size: 2em ;
+
+    border-style: solid ;
+
+    font-weight: bold ;
+
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+    text-align: center ;
+
+    transition: background-color 0.2s, color 0.2s ;
+}
+
+button:active {
+    transition: background-color 0.1s, color 0.1s ;
+}
+button {
+    transition: background-color 0.2s, color 0.2s ;
+}
+
+input {
+    background-color: var(--field);
+    color: var(--field-text);
+}
+
+input, button {
+    appearance: none ;
+}
+
+fieldset, label, button, input {
+    margin: unset ;
+    display: block ;
+    border: unset ;
+    font: inherit ;
+}
+
+label, button, input {
     box-sizing: border-box ;
     block-size: var(--line) ;
-}
 
-label, input, button {
     border-radius: 0.1ch ;
     border-width: calc(max(1px, 0.07em));
 }
 
-input[type="search"] {
-    border-style: solid ;
-    padding-inline: 0.5em ;
-}
-
-button {
-    border-style: solid ;
-    padding-inline: 0.5em ;
-}
 
 fieldset {
     border-radius: 0.01ch ;
@@ -80,102 +135,4 @@ fieldset {
 
 legend {
     font-weight: bold ;
-}
-
-
-
-:is(button, select):focus-visible {
-    outline-offset: 0;
-    outline-width: 0.4em ;
-}
-
-button:focus-visible {
-    outline-offset: 0;
-    outline-width: 0.3em ;
-}
-
-select:focus-visible {
-    outline-offset: 0;
-    outline-width: 0.4em ;
-}
-
-input[type="search"] {
-    inline-size: 20ch;
-    max-inline-size: 100%;
-}
-
-input[type="checkbox"] {
-    block-size: 1.4em ;
-    inline-size: 2em ;
-
-    border-radius: 0.1ch ;
-    border-style: solid ;
-    border-width: 0.1ch ;
-
-    font-weight: bold ;
-
-    display: flex ;
-    justify-content: center ;
-    align-items: center ;
-    text-align: center ;
-}
-
-
-input[type="checkbox"]:checked {
-    border: unset ;
-}
-
-/* FIXME i18n */
-/* FIXME use display list-item ? */
-input[type="checkbox"]::after {
-    display: table-cell ;
-    vertical-align: middle ;
-    content: "" ;
-}
-input[type="checkbox"]:checked::after {
-    content: "✓" ;
-}
-
-
-label {
-    display: flex ;
-    flex-wrap: wrap ;
-    justify-content: space-between ;
-    align-items: end ;
-    column-gap: 1em ;
-    width: fit-content ;
-}
-
-input {
-    transition: background-color 0.2s, color 0.2s ;
-}
-input:checked {
-    transition: background-color 0.1s, color 0.1s ;
-}
-
-button {
-    transition: background-color 0.2s, color 0.2s ;
-}
-button:active {
-    transition: background-color 0.1s, color 0.1s ;
-}
-
-
-.search-basic {
-    display: flex ;
-    column-gap: 1em ;
-    flex-wrap: wrap ;
-    align-items: start ;
-}
-
-#character, #category, #tag, #place {
-    display: grid ;
-    grid-template-columns: auto 1fr ;
-    column-gap: 1em ;
-    width: fit-content ;
-}
-
-#character, #tag {
-    overflow: auto ;
-    max-height: calc(20 * var(--line)) ;
 }

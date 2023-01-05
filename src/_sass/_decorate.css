@@ -1,13 +1,14 @@
-dl {
-    width: fit-content ;
+hgroup p {
+    margin: unset ;
 }
+
 dl > div {
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 1em ;
-    width: fit-content ;
+    inline-size: fit-content ;
 }
 
-hgroup p {
-    margin: unset ;
+dl {
+    inline-size: fit-content ;
 }
