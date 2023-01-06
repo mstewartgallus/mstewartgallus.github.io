@@ -1,10 +1,6 @@
-import html from './html.mjs';
-import css from './css.mjs';
+import doc from './results.html.mjs';
+import css from './results.css.mjs';
 import * as pf from './pagefind/pagefind.js';
-
-const [doc, resultscss] = await Promise.all([
-    html(import.meta.resolve('./results.html')),
-    css(import.meta.resolve('./results.css'))]);
 
 const results = doc.getElementById('results').content;
 
@@ -47,7 +43,7 @@ export default class SearchResults extends HTMLElement {
         this.#internals = this.attachInternals();
 
         this.#shadow.replaceChildren(results.cloneNode(true));
-        this.#shadow.adoptedStyleSheets = [resultscss];
+        this.#shadow.adoptedStyleSheets = [css];
 
         const list = this.#shadow.getElementById('search-list');
         this.#entries = Array.from(list.getElementsByTagName('li'));

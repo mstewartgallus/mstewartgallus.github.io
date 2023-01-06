@@ -1,6 +1,5 @@
-import html from './html.mjs';
+import doc from './h1.html.mjs';
 
-const doc = await html(import.meta.resolve('./h1.html'));
 const h1 = doc.getElementById('h1').content;
 
 export default class SearchH1 extends HTMLElement {
