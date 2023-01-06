@@ -2,9 +2,11 @@ import html from './html.mjs';
 import css from './css.mjs';
 import * as pf from './pagefind/pagefind.js';
 
-const [results, resultscss] = await Promise.all([
+const [doc, resultscss] = await Promise.all([
     html(import.meta.resolve('./results.html')),
     css(import.meta.resolve('./results.css'))]);
+
+const results = doc.getElementById('results').content;
 
 function fromPagefind(post) {
     const { url,

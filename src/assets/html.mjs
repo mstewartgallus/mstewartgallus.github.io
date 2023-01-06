@@ -12,17 +12,27 @@ export default async function html(url) {
         return await promise;
     }
 
-    const template = document.createElement('template');
+    const req = new XMLHttpRequest();
+    promise = new Promise(r => {
+        req.addEventListener("load", () => {
+            r(req.responseXML);
+        });
+    });
+    req.open("GET", url);
+    req.responseType = "document";
+    req.send();
 
-    promise = (async () => {
-        const r = await fetch(url, options);
-        if (!r.ok) {
-            throw r;
-        }
-        const t = await r.text();
-        template.innerHTML = t;
-        return template.content;
-    })();
+    // const template = document.createElement('template');
+
+    // promise = (async () => {
+    //     const r = await fetch(url, options);
+    //     if (!r.ok) {
+    //         throw r;
+    //     }
+    //     const t = await r.text();
+    //     template.innerHTML = t;
+    //     return template.content;
+    // })();
     htmls.set(url, promise);
     return await promise;
 }

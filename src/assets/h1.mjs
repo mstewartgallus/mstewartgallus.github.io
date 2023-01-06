@@ -1,6 +1,7 @@
 import html from './html.mjs';
 
-const h1 = await html(import.meta.resolve('./h1.html'));
+const doc = await html(import.meta.resolve('./h1.html'));
+const h1 = doc.getElementById('h1').content;
 
 export default class SearchH1 extends HTMLElement {
     static formAssociated = true;
