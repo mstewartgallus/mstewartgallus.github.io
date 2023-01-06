@@ -1,4 +1,4 @@
-import doc from './h1.html.mjs';
+import doc from './html.mjs?src=./h1.html';
 
 const h1 = doc.getElementById('h1').content;
 
