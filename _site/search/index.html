@@ -9,11 +9,42 @@
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
-<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Words to Kick Your Teeth Out" ><script type="importmap">
-{
-    "imports": {
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Words to Kick Your Teeth Out" ><script>
+(() => {
+    'use strict';
+
+    const htmlname = 'loadhtml';
+
+    async function html(url) {
+        const req = new XMLHttpRequest();
+        const promise = new Promise(r => {
+            req.addEventListener("load", () => {
+                r(req.responseXML);
+            });
+        });
+        req.open("GET", url);
+        req.responseType = "document";
+        req.send();
+        return await promise;
+    };
+
+    window[htmlname] = html;
+
+    function shim(src) {
+        src = JSON.stringify(src);
+        return `export default await ${htmlname}(${src});`;
     }
-}
+    const htmls = ['/assets/results.html', '/assets/h1.html'];
+    const imports = {};
+    for (const html of htmls) {
+        imports[html] = URL.createObjectURL(new Blob([shim(html)], { type: 'text/javascript' }));
+    }
+
+    const im = document.createElement('script');
+    im.type = 'importmap';
+    im.textContent = JSON.stringify({ imports });
+    document.currentScript.after(im);
+})();
 </script>
 
 <script>

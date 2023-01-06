@@ -1,4 +1,4 @@
-import doc from './html.mjs?src=./results.html';
+import doc from './results.html';
 import css from './results.css' assert { type: 'css' };
 import * as pf from './pagefind/pagefind.js';
 
