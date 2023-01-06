@@ -1,5 +1,5 @@
 import doc from './results.html.mjs';
-import css from './results.css.mjs';
+import css from './results.css' assert { type: 'css' };
 import * as pf from './pagefind/pagefind.js';
 
 const results = doc.getElementById('results').content;
