@@ -51,7 +51,7 @@ address {
 p {
     margin: 0;
 
-    inline-size: var(--paragraph-width) ;
+    inline-size: var(--measure) ;
     max-inline-size: 100% ;
 
     -moz-hyphens: auto ;

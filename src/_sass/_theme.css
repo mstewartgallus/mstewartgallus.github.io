@@ -60,7 +60,7 @@ ul.tags {
     margin-block-end: var(--line) ;
     flex-wrap: wrap ;
     column-gap: 1em ;
-    inline-size: var(--paragraph-width) ;
+    inline-size: var(--measure) ;
     max-inline-size: 100% ;
 }
 

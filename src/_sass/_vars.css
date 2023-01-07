@@ -7,8 +7,8 @@
     --line-height: calc(var(--ex-height) / 0.32) ;
     --line: calc(var(--line-height) * 1rem) ;
 
-    --paragraph-width: 50.7ch ;
-    --main-width: 64.3ch ;
+    --measure: 29.75757rem ;
+    --main-width: 33.353535rem ;
 
     --min-width: 320 ;
     --max-width: 1800 ;
