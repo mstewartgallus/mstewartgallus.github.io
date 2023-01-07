@@ -297,15 +297,15 @@ body {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
-menu, ol, ul, address, figure, p, hr, blockquote, #notice {
-    margin: 0 ;
-}
-blockquote {
-    margin-inline-start: 1rem ;
+blockquote, hr, p {
+    margin: 0;
+    margin-block-start: var(--line) ;
 }
 
-section, main, blockquote {
-    display: flex ;
-    flex-direction: column ;
-    row-gap: var(--line) ;
+blockquote {
+    margin-inline-start: 2rem ;
+}
+
+header {
+    margin-block-end: var(--line) ;
 }

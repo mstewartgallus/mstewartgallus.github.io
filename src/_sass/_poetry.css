@@ -3,8 +3,3 @@
     display: inline-block ;
     text-align-last: end ;
 }
-
-.stanza {
-    all: unset ;
-    display: block ;
-}
