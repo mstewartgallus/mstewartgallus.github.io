@@ -49,8 +49,7 @@ address {
 
 
 p {
-    margin: 0;
-
+    margin-block: var(--line);
     inline-size: var(--measure) ;
     max-inline-size: 100% ;
 
@@ -208,10 +207,7 @@ main {
 body {
     box-sizing: border-box ;
 
-    display: flex ;
-    flex-direction: column ;
-
-    row-gap: var(--line) ;
+    display: body ;
 
     inline-size: fit-content;
     max-inline-size: 100% ;
@@ -297,15 +293,14 @@ body {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
-blockquote, hr, p {
-    margin: 0;
-    margin-block-start: var(--line) ;
+dl, header {
+    margin-block: var(--line) ;
 }
 
-blockquote {
-    margin-inline-start: 2rem ;
+#paging, #metadata, #search, #banner {
+    margin-block: var(--line) ;
 }
 
-header {
-    margin-block-end: var(--line) ;
+body {
+    margin-block-start: calc(0 - var(--line)) ;
 }
