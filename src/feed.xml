@@ -1,11 +1,13 @@
 ---
+layout: none
+permalink: /feed/
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="/assets/feed.xsl" type="text/xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>{{ site.title | xml_escape }}</title>
-  <link title="Atom Feed" href="{{ '/feed.xml' | absolute_url }}" rel="self"/>
-  <link title="Web Page" href="{{ '/' | absolute_url }}" rel="alternate"/>
+  <link title="Atom Feed" href="{% link feed.xml %}" rel="self"/>
+  <link title="Web Page" href="{% link index.html %}" rel="alternate"/>
   <subtitle>{{ site.description | xml_escape }}</subtitle>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
   <id>{{ site.url | xml_escape }}/</id>
@@ -21,8 +23,8 @@
     <link rel="alternate" href="{{ post.url | absolute_url }}"/>
     <updated>{{ post.date | date_to_xmlschema }}</updated>
     <id>{{ post.id | absolute_url }}</id>
-    <summary>{{ post.description | xml_escape }}</summary>
-    <content type="html">{{ post.content | xml_escape }}</content>
+    <summary type="html">{{ post.description | default: post.excerpt }}</summary>
+    <content type="html">{{ post.content }}</content>
   </entry>
   {% endfor %}
 </feed>

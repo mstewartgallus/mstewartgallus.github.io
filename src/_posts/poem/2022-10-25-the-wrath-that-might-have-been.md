@@ -12,7 +12,7 @@ characters:
 At the rising of the sun,
 From their hovels creep the working men
 And crawling from the forest muck, crawling from its den
-To the city&thinsp;---&thinsp;a sick thing wanders in
+To the city&#x2009;---&#x2009;a sick thing wanders in
 {% endpoem %}
 
 {% poem %}
@@ -43,15 +43,15 @@ How mighty must it once have been?
 This thing that struggles now to walk
 
 It should rage and shout
-Should&thinsp;---&thinsp;if sickness sound had not forgot
+Should&#x2009;---&#x2009;if sickness sound had not forgot
 It rages
 Silent as the lifeless streets around
 
-At red dusk&thinsp;---&thinsp;smoggy, tired, nervous hot
+At red dusk&#x2009;---&#x2009;smoggy, tired, nervous hot
 It finds a fallen pole
 It stoops to lift the cudgel
 It lifts, tendons stretched taught
-It lifts&thinsp;---&thinsp;and stops, falls&thinsp;---&thinsp;on old pains caught
+It lifts&#x2009;---&#x2009;and stops, falls&#x2009;---&#x2009;on old pains caught
 
 From icy chills and sweat
 It boils fever fire hot

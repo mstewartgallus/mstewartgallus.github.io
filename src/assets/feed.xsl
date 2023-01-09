@@ -1,3 +1,5 @@
+---
+---
 <xsl:stylesheet
     version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -15,19 +17,8 @@
         <title><xsl:value-of select="atom:feed/atom:title"/></title>
         <meta name="color-scheme" content="light dark"/>
         <meta name="theme-color" content="#6000A0"/>
-        <style type="text/css">
-          :root {
-            font-family: sans-serif ;
-            color-scheme: light dark ;
-
-            padding-inline: 1rem ;
-            padding-block: 1rem 4rem ;
-
-            text-underline-position: under ;
-
-            line-height: 1.9rem ;
-            }
-        </style>
+        <link rel="stylesheet" href="{% link assets/main.scss %}"/>
+        <link rel="icon" href="{% link assets/favicon.svg %}"/>
       </head>
       <body>
         <xsl:apply-templates select="atom:feed" />
@@ -36,20 +27,19 @@
   </xsl:template>
 
   <xsl:template match="atom:feed">
-    <header>
-      <hgroup>
-        <h1><xsl:value-of select="atom:title"/></h1>
-
-        <p><a>
-          <xsl:attribute name="href">
-            <xsl:value-of select="atom:link[@rel='alternate']/@href"/>
-          </xsl:attribute>
-          <xsl:value-of select="atom:link[@rel='alternate']/@title"/>
-        </a>
-        </p>
-      </hgroup>
-    </header>
     <main>
+      <header>
+        <hgroup>
+          <h1>
+            <a>
+              <xsl:attribute name="href">
+                <xsl:value-of select="atom:link[@rel='alternate']/@href"/>
+              </xsl:attribute>
+              Posts
+            </a>
+          </h1>
+        </hgroup>
+      </header>
       <ol reversed="reversed">
         <xsl:apply-templates select="atom:entry" />
       </ol>
@@ -58,10 +48,11 @@
 
   <xsl:template match="atom:entry">
     <li>
-      <a>
+      <a rel="bookmark">
         <xsl:attribute name="href">
           <xsl:value-of select="atom:id"/>
         </xsl:attribute>
+
         <xsl:value-of select="atom:title"/>
       </a>
     </li>

@@ -12,9 +12,9 @@ characters:
 {% poem %}
 The slow rot
 lived or died, it's hard to tell
-And fires lost away&thinsp;---&thinsp;down to hell
-And as wind trow to take&thinsp;---&thinsp;hero's hearth
-To slimy lair&thinsp;---&thinsp;past danger's berth
+And fires lost away&#x2009;---&#x2009;down to hell
+And as wind trow to take&#x2009;---&#x2009;hero's hearth
+To slimy lair&#x2009;---&#x2009;past danger's berth
 {% endpoem %}
 
 {% poem %}
@@ -35,7 +35,7 @@ He bit, swallowed, spit
 
 But thief rallied, brandished knife and struck
 Yet the wound was
-Not hot and bleeding&thinsp;---&thinsp;but rotting, eating
+Not hot and bleeding&#x2009;---&#x2009;but rotting, eating
 The orc only coughed and shook
 And yet more the cunning man he ate and took
 

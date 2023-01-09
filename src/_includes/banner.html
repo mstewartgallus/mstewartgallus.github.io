@@ -7,7 +7,7 @@
 
   <ul>
     {%- for page in pages %}
-    {%- if page.url == '/' or page.url == '/search/' -%}
+    {%- if page.url == '/feed/' or page.url == '/' or page.url == '/search/' -%}
     {%- continue -%}
     {%- endif -%}
     <li><a href="{{ page.url | relative_url }}">
@@ -16,7 +16,7 @@
     {%- endfor -%}
 
     <li><a type="application/atom+xml" rel="alternate"
-         href="{{ "/feed.xml" | relative_url }}"
+         href="{% link feed.xml %}"
            title="{{ site.title | escape }}">
         {{- site.data.strings.banner.subscribe | escape -}}</a></li>
   </ul>
