@@ -40,7 +40,7 @@ a man raped a girl under cover of the night
 > {% poem %}
 I know a secret,
 for I see very well,
-even under&#x2009;---&#x2009;the night.
+even under ‖ the night.
 These eyes catch many things
 I will never tell.
 {% endpoem %}
@@ -48,10 +48,10 @@ I will never tell.
 > {% poem %}
 The truth came out
 decades later at the trial
-Your courts&#x2009;---&#x2009;are not like ours
-We have eyes&#x2009;---&#x2009;which catch
+Your courts ‖ are not like ours
+We have eyes ‖ which catch
 The beating of the heart
-Whispers&#x2009;---&#x2009;inside the throat
+Whispers ‖ inside the throat
 {% endpoem %}
 > 
 > {% poem %}

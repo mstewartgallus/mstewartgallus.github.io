@@ -6,7 +6,7 @@ module MSG
     content.strip.chomp.each_line("\n\n") do |par|
       stanza = []
       par.chomp.each_line do |line|
-        stanza << line.chomp
+        stanza << line.split("‖").map { |s| s.chomp }
       end
       stanzas << stanza
     end
@@ -24,7 +24,15 @@ module MSG
         end
         first = false
         output << '<span role="presentation" class="line" markdown="span">'
-        output << line
+        firstpart = true
+        line.each do |part|
+          if not firstpart then
+            # em dash and thin spaces
+            output << '&#x2009;&#x2014;&#x2009;'
+          end
+          firstpart = false
+          output << part
+        end
         output << '</span>'
       end
       output << '</p>'

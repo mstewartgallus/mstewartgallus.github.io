@@ -8,20 +8,20 @@ characters:
 - Eros
 ---
 {% poem %}
-Hunter, hunter&#x2009;---&#x2009;I hunt for one like thee
-Hunter, hunter&#x2009;---&#x2009;why have you wounded me?
-Hunter, hunter&#x2009;---&#x2009;so strong and fair
+Hunter, hunter ‖ I hunt for one like thee
+Hunter, hunter ‖ why have you wounded me?
+Hunter, hunter ‖ so strong and fair
 You surpass Eros in dread accuracy
 {% endpoem %}
 
 {% poem %}
-Hunter, hunter&#x2009;---&#x2009;where are your painless arrows?
-Hunter, hunter&#x2009;---&#x2009;I dream to hunt for gallows
-Hunter, hunter&#x2009;---&#x2009;of wild lands
+Hunter, hunter ‖ where are your painless arrows?
+Hunter, hunter ‖ I dream to hunt for gallows
+Hunter, hunter ‖ of wild lands
 The hunt has hunted me through straits and narrows
 
-Hunter, hunter&#x2009;---&#x2009;can you find my path?
-Hunter, hunter&#x2009;---&#x2009;through woods and thorns
-Hunter, hunter&#x2009;---&#x2009;of the silver moon
+Hunter, hunter ‖ can you find my path?
+Hunter, hunter ‖ through woods and thorns
+Hunter, hunter ‖ of the silver moon
 a stag implores you gut by its own horns
 {% endpoem %}
