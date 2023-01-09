@@ -7,7 +7,6 @@ url: "https://mstewartgallus.github.io"
 lang: "en-CA"
 
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
 
 source: src
