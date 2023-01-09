@@ -6,7 +6,7 @@ module MSG
     content.strip.chomp.each_line("\n\n") do |par|
       stanza = []
       par.chomp.each_line do |line|
-        stanza << line.split("‖").map { |s| s.chomp }
+        stanza << line.split("‖").map { |s| s.strip }
       end
       stanzas << stanza
     end
