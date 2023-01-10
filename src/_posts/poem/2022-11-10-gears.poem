@@ -9,18 +9,14 @@ characters:
 - Hermes
 - Thoth
 ---
-{% poem %}
 Ceaseless pacing ‖ close behind
 Gears colliding clash and ‖ grind
 In the ‖ factory they dance and screech
 Haephestus hand ‖ mother, machine and man
-{% endpoem %}
 
-{% poem %}
 Words become javelins of ‖ war
 Hermes-Thoth no ‖ angel anymore
 The ‖ industrial disease of men
  ‖ Behold the rape of ink and pen
 
 Words at war with ‖ mind become the demon tyrant of mankind
-{% endpoem %}

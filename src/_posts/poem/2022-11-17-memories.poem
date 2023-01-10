@@ -6,14 +6,11 @@ notice:
 places:
 - Vancouver
 ---
-{% poem %}
 I feel nostalgic for
 The warmth of ‖ the hospital bed
 The cold wet quiet ‖ of fresh snow
 And other memories from long ago
-{% endpoem %}
 
-{% poem %}
 I remember
 The chocolate sandwiched ice cream bar
 Cheap freezies ‖ in elementary school
@@ -23,4 +20,3 @@ Falling asleep to the rain outside
 Masturbation in the dark
 Things in the bath
 And other things of that nature
-{% endpoem %}

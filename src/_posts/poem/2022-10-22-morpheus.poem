@@ -6,11 +6,8 @@ tags:
 characters:
 - Morpheus
 ---
-{% poem %}
 Oh formless one
-{% endpoem %}
 
-{% poem %}
 sing me, send me pleasant sights ‖ sing me, send me horrid frights
 
 show me darkness ‖ and dawning of the day
@@ -47,4 +44,3 @@ a red and swollen sky ‖ beating like a drum
 the battle ground ‖ just a fantasy
 
 let me dream it all ‖ dream dreams dreaming dreams for me
-{% endpoem %}

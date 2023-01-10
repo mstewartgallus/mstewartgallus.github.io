@@ -9,7 +9,6 @@ characters:
 - Pluto
 - Mnemosyne
 ---
-{% poem %}
 Give me a wish ‖ and I will wish you well
 I will give you ‖ a magic spell
 I'm in a mood, rather wicked
@@ -24,4 +23,3 @@ Liquid of the Mnemosyne
 Drink and dream
 And all ugly things in your sight
 Bitter words I will write
-{% endpoem %}

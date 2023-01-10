@@ -7,14 +7,11 @@ characters:
 - Artemis
 - Eros
 ---
-{% poem %}
 Hunter, hunter ‖ I hunt for one like thee
 Hunter, hunter ‖ why have you wounded me?
 Hunter, hunter ‖ so strong and fair
 You surpass Eros in dread accuracy
-{% endpoem %}
 
-{% poem %}
 Hunter, hunter ‖ where are your painless arrows?
 Hunter, hunter ‖ I dream to hunt for gallows
 Hunter, hunter ‖ of wild lands
@@ -24,4 +21,3 @@ Hunter, hunter ‖ can you find my path?
 Hunter, hunter ‖ through woods and thorns
 Hunter, hunter ‖ of the silver moon
 a stag implores you gut by its own horns
-{% endpoem %}

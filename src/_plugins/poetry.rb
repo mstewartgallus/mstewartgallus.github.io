@@ -11,9 +11,6 @@ module Kramdown
 end
 
 module MSG
-  # em dash and thin spaces
-  CAESURA = '&#x2009;&#x2014;&#x2009;'
-
   class Poem
     attr_reader :stanzas
 

@@ -6,16 +6,12 @@ notice:
 tags:
 - '2019'
 ---
-{% poem %}
 Tired, hot ‖ both my arms and more
 Wheels in my head ‖ unbalanced turning
 My nose and nasal tunnels ‖ itchy, sore
 Dry throat ‖ cracked and burning
-{% endpoem %}
 
-{% poem %}
 My poor stomach ‖ rolling, churning
 Hot, ugly ‖ a fever in my head
 I should have stayed in bed
-{% endpoem %}
 

@@ -10,12 +10,9 @@ characters:
 - Two
 - Mammon
 ---
-{% poem %}
 Two found the castle ‖ and petitioned the dragon at
 his court ‖ where the beast crouched atop his horde of gold 
-{% endpoem %}
 
-{% poem %}
 Lord Mammon ‖ by right of property and on appeal to your convictions?
 Might you gift the ring I should inherit?
 
@@ -51,4 +48,3 @@ And tumbled across the harsh desert sands
 
 Blown about and about and about and about
 Singing and sighing and laughing and crying
-{% endpoem %}
