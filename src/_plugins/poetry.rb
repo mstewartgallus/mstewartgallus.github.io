@@ -1,76 +1,101 @@
 # frozen_string_literal: true
 
+
+require 'kramdown'
+
+module Kramdown
+  module MyUtils
+    def self.section(doc)
+    end
+  end
+end
+
 module MSG
+  # em dash and thin spaces
+  CAESURA = '&#x2009;&#x2014;&#x2009;'
+
+  class Poem
+    attr_reader :stanzas
+
+    def initialize(stanzas)
+      @stanzas = stanzas.freeze
+    end
+  end
+
+  class Stanza
+    attr_reader :lines
+
+    def initialize(lines)
+      @lines = lines.freeze
+    end
+  end
+
+  class Line
+    attr_reader :parts
+
+    def initialize(parts)
+      @parts = parts.freeze
+    end
+  end
+
   def parsepoem(content)
     stanzas = []
     content.strip.chomp.each_line("\n\n") do |par|
       stanza = []
       par.chomp.each_line do |line|
-        stanza << line.split("‖").map { |s| s.strip }
+        stanza << Line::new(line.split("‖").map { |s| s.strip })
       end
-      stanzas << stanza
+      stanzas << Stanza::new(stanza)
     end
-    stanzas
+    Poem::new(stanzas)
   end
 
-  def tohtml(stanzas)
-    output = String.new
-    stanzas.each_with_index do |stanza, index|
-      output << '<p class="stanza">'
+  def tokramdown(poem)
+    doc = Kramdown::Document::new('')
+    doc.root.children = poem.stanzas.map do |stanza|
+      paragraph = Kramdown::Element.new :p, nil, {'class' => 'stanza'}
       first = true
-      stanza.each do |line|
+      stanza.lines.each do |line|
         if not first then
-          output << '<br>'
+          paragraph.children.push Kramdown::Element.new :br
         end
         first = false
-        output << '<span role="presentation" class="line" markdown="span">'
         firstpart = true
-        line.each do |part|
+        span = Kramdown::Element.new :html_element, 'span', {
+                                       'class' => 'line',
+                                       'role' => 'presentation'
+                                       },
+                                     {:category => :span,
+                                      :content_model => :span,
+                                     :markdown => :span}
+        line.parts.each do |part|
           if not firstpart then
-            # em dash and thin spaces
-            output << '&#x2009;&#x2014;&#x2009;'
+            # thin spaces
+            span.children.push (Kramdown::Element.new :entity,
+                                                      Kramdown::Utils::Entities.entity(8201)),
+                               (Kramdown::Element.new :typographic_sym, :mdash),
+                               (Kramdown::Element.new :entity,
+                                                      Kramdown::Utils::Entities.entity(8201))
           end
           firstpart = false
-          output << part
-        end
-        output << '</span>'
-      end
-      output << '</p>'
-    end
-    output.freeze
-  end
 
-  def tokd(stanzas)
-    output = String.new
-    stanzas.each_with_index do |stanza|
-      output << ''
-      first = true
-      stanza.each do |line|
-        if not first then
-          output << '\\\\'
-          output << "\n"
+          # awful hack
+          nodes = Kramdown::Document::new(part).root.children[0].children
+          span.children.push *nodes
         end
-        first = false
-        output << '<span>'
-        output << line
-        output << '</span>'
-        output << '{:.line role="presentation"}'
+        paragraph.children.push span
       end
-      output << "\n"
-      output << "^"
-      output << "\n"
-      output << '{:.stanza}'
-      output << "\n\n"
+      paragraph
     end
-    output.freeze
+    doc
   end
 
   def poemtohtml(content)
-    tohtml(parsepoem(content))
+    tokramdown(parsepoem(content)).to_html
   end
 
   def poemtokd(content)
-    tohtml(parsepoem(content))
+    tokramdown(parsepoem(content)).to_kramdown
   end
 end
 
@@ -99,9 +124,7 @@ class PoemBlock < Liquid::Block
 
   def render(context)
     content = Liquid::Template.parse(super).render context
-
-    kd = poemtokd(content)
-    kd
+    poemtokd(content)
   end
 end
 

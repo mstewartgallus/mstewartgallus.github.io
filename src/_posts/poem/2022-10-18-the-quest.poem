@@ -12,12 +12,9 @@ characters:
 - Two
 ---
 
-{% poem %}
 war lost, Two was exiled and turned to banditry
 where he assailed souls from all sides
-{% endpoem %}
 
-{% poem %}
 till one day dreaming Two's heart rose up
 and sleeping in a cave he had a dream
 
@@ -46,4 +43,3 @@ the weighty load you carry, wealth or burning coal
 
 all sorrow then ‖ just dust of men, thunder
 the beating of the heart and ‖ the singing soul
-{% endpoem %}

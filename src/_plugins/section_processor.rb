@@ -7,7 +7,7 @@ module Kramdown
     attr_reader :level, :parent
 
     def initialize(level, parent, attr = nil)
-      super :html_element, 'section', attr
+      super :html_element, 'section', attr, {:category => :block, :content_model => :block}
       @level = level
       @parent = parent
     end
@@ -38,10 +38,11 @@ module Kramdown
           attributes['aria-labelledby'] = id
         end
 
-        hgroup = Element.new :html_element, 'hgroup'
+        hgroup = Element.new :html_element, 'hgroup', nil, {:category => :block, :content_model => :block}
+
         hgroup.children.push el
 
-        header = Element.new :html_element, 'header'
+        header = Element.new :html_element, 'header', nil, {:category => :block, :content_model => :block}
         header.children.push hgroup
 
         if id != nil
