@@ -3,89 +3,21 @@
       tabindex="-1">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Search&thinsp;—&thinsp;Words to Kick Your Teeth Out</title>
-<link rel="stylesheet" href="/assets/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Search&thinsp;—&thinsp;Words to Kick Your Teeth Out</title><link rel="stylesheet" href="/assets/main.css">
 <link rel="icon" href="/assets/favicon.svg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#6000A0">
-<link type="application/atom+xml" rel="alternate" href="/feed/" title="Words to Kick Your Teeth Out" ><script>
-(() => {
-    'use strict';
-
-    const htmlname = 'loadhtml';
-
-    async function html(url) {
-        const req = new XMLHttpRequest();
-        const promise = new Promise(r => {
-            req.addEventListener("load", () => {
-                r(req.responseXML);
-            });
-        });
-        req.open("GET", url);
-        req.responseType = "document";
-        req.send();
-        return await promise;
-    };
-
-    window[htmlname] = html;
-
-    function shim(src) {
-        src = JSON.stringify(src);
-        return `export default await ${htmlname}(${src});`;
-    }
-    const htmls = ['/assets/results.html', '/assets/h1.html'];
-    const imports = {};
-    for (const html of htmls) {
-        imports[html] = URL.createObjectURL(new Blob([shim(html)], { type: 'text/javascript' }));
-    }
-
-    const im = document.createElement('script');
-    im.type = 'importmap';
-    im.textContent = JSON.stringify({ imports });
-    document.currentScript.after(im);
-})();
-</script>
-
-<script>
-window.esmsInitOptions = { polyfillEnable: ['css-modules', 'json-modules'] }
-</script>
-
-<script async src="https://ga.jspm.io/npm:es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-
-<link type="modulepreload" href="/assets/pagefind/pagefind.js">
+<link type="application/atom+xml" rel="alternate" href="/feed/" title="Words to Kick Your Teeth Out" ><link type="modulepreload" href="/assets/pagefind/pagefind.js">
 <link type="preload" href="/assets/pagefind/wasm.en-ca.pagefind" as="fetch" crossorigin>
-
-<script type="module" defer async
-        src="/assets/search.mjs"></script>
 <link rel="canonical" href="https://mstewartgallus.github.io/search/">
-<link rel="author" href="/about">
-<meta name="author" content="Molossus Spondee">
-<meta name="description" content="lol, lmao">
-<meta property="og:title" content="Search">
+<link rel="author" href="https://mstewartgallus.github.io/about">
+<meta name="author" content="Molossus Spondee"><meta property="og:title" content="Search">
 <meta property="og:url" content="https://mstewartgallus.github.io/search/">
 <meta property="og:type" content="website">
 <meta name="og:site_name" content="Words to Kick Your Teeth Out">
-<meta property="og:image" content="https://mstewartgallus.github.io/assets/favicon.svg" >
-<meta property="og:description" content="lol, lmao">
-<meta property="og:profile" content="Molossus Spondee">
-<meta property="og:profile:username" content="Molossus Spondee"><script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "/"
-    },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Search",
-        "item": "/search/"
-    }]
-}
-</script></head>
+<meta property="og:image" content="/assets/favicon.svg" ><meta property="og:profile" content="Molossus Spondee">
+<meta property="og:profile:username" content="Molossus Spondee">
+</head>
   <body>
     <main id="main" aria-describedby="title"
           >
@@ -320,6 +252,23 @@ window.esmsInitOptions = { polyfillEnable: ['css-modules', 'json-modules'] }
     <li><a href="/">Home</a></li>
     <li aria-current="page"><cite>Search</cite></li>
   </ol></nav>
-</div>
-  </body>
+</div><script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "/"
+    },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Search",
+        "item": "/search/"
+    }]
+}
+</script><link type="modulepreload" href="/assets/pagefind/pagefind.js">
+<link type="preload" href="/assets/pagefind/wasm.en-ca.pagefind" as="fetch" crossorigin>
+</body>
 </html>

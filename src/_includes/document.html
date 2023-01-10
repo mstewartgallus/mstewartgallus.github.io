@@ -47,5 +47,9 @@
       {%- include metadata.html author=page.author -%}
       {%- endif -%}
     </div>
+    {%- include foot.html -%}
+    {%- if page.url == '/search/' -%}
+    {%- include searchhead.html -%}
+    {%- endif -%}
   </body>
 </html>
