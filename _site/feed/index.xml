@@ -5,7 +5,7 @@
   <link title="Atom Feed" href="/feed/" rel="self"/>
   <link title="Web Page" href="/" rel="alternate"/>
   <subtitle>lol, lmao</subtitle>
-  <updated>2023-01-10T15:23:31-08:00</updated>
+  <updated>2023-01-11T11:30:04-08:00</updated>
   <id>https://mstewartgallus.github.io/</id>
 
   <author>
@@ -13,6 +13,21 @@
     <email></email>
   </author>
 
+  
+  <entry>
+    <title>The Drunkard Sat</title>
+    <link rel="alternate" href="https://mstewartgallus.github.io/poem/2023/01/11/the-man-sat/"/>
+    <updated>2023-01-11T11:26:00-08:00</updated>
+    <id>https://mstewartgallus.github.io/poem/2023/01/11/the-man-sat</id>
+    <summary type="html"><p class="stanza"><span class="line" role="presentation">The drunkard sat</span><br /><span class="line" role="presentation">No he’s not drunk — that’s the problem he’s got.</span></p>
+</summary>
+    <content type="html"><p class="stanza"><span class="line" role="presentation">The drunkard sat</span><br /><span class="line" role="presentation">No he’s not drunk — that’s the problem he’s got.</span></p>
+<p class="stanza"><span class="line" role="presentation">The man sat — cold and stiff</span><br /><span class="line" role="presentation">He pulled a cup to his lips.</span></p>
+<p class="stanza"><span class="line" role="presentation">His hair was well kempt — his demeanor — calm</span><br /><span class="line" role="presentation">He was not drunk — and he drunk on and on.</span></p>
+<p class="stanza"><span class="line" role="presentation">He had good shoes — his pants were not old and faded — clearly someone cared</span><br /><span class="line" role="presentation">The man sat and drank — and he stared.</span></p>
+<p class="stanza"><span class="line" role="presentation">His face did not look aged or sick</span><br /><span class="line" role="presentation">Only blue eyes — he drank — it did not stick.</span></p>
+</content>
+  </entry>
   
   <entry>
     <title>Cleanup Crew</title>
