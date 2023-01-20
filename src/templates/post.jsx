@@ -11,7 +11,8 @@ import Metadata from "../components/metadata.jsx";
 import Page from "../components/page.jsx";
 import Paging from "../components/paging.jsx";
 import Poem from "../components/poem.jsx";
-import SeoPost from "../components/seo-post.jsx";
+import SeoPostFoot from "../components/seo-post-foot.jsx";
+import SeoPostHead from "../components/seo-post-head.jsx";
 import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
 import { search } from "../utils/search.js";
@@ -73,7 +74,7 @@ export const Head = ({ location: {pathname}, data: { post }}) => {
     return <>
                <HeadBasic pathname={pathname} />
                <Title>{title}</Title>
-               <SeoPost
+               <SeoPostHead
                    title={title}
                    date={dateXml}
                    author={author}
@@ -101,39 +102,50 @@ const BlogPost = ({
 }) => {
     const id = React.useId();
 
-    return <Page>
-               <main data-pagefind-body aria-describedby={id}>
-                   <header>
-                       <hgroup>
-                           <h1 id={id}>{title}</h1>
-                           {
-                               subtitle && <p>{subtitle}</p>
-                           }
-                       </hgroup>
-                       <Notice notice={notice} />
-                   </header>
-                   <Content category={category} content={content}>
-                       {children}
-                   </Content>
-               </main>
-               <Sidebar>
-                   <Paging
-                       previous={previous?.metadata?.title}
-                       next={next?.metadata?.title}
-                       phref={previous?.metadata?.slug}
-                       nhref={next?.metadata?.slug} />
-                   <Metadata
-                       author={author}
-                       dateDisplay={dateDisplay} dateXml={dateXml}
-                       tags={tags} places={places} people={people}
-                   />
-                   <Breadcrumbs>
-                       <li><Link to="/">Home</Link></li>
-                       <li><Category category={category} /></li>
-                       <li aria-current="page"><cite>{title}</cite></li>
-                   </Breadcrumbs>
-               </Sidebar>
-           </Page>;
+    return <>
+               <Page>
+                   <main data-pagefind-body aria-describedby={id}>
+                       <header>
+                           <hgroup>
+                               <h1 id={id}>{title}</h1>
+                               {
+                                   subtitle && <p>{subtitle}</p>
+                               }
+                           </hgroup>
+                           <Notice notice={notice} />
+                       </header>
+                       <Content category={category} content={content}>
+                           {children}
+                       </Content>
+                   </main>
+                   <Sidebar>
+                       <Paging
+                           previous={previous?.metadata?.title}
+                           next={next?.metadata?.title}
+                           phref={previous?.metadata?.slug}
+                           nhref={next?.metadata?.slug} />
+                       <Metadata
+                           author={author}
+                           dateDisplay={dateDisplay} dateXml={dateXml}
+                           tags={tags} places={places} people={people}
+                       />
+                       <Breadcrumbs>
+                           <li><Link to="/">Home</Link></li>
+                           <li><Category category={category} /></li>
+                           <li aria-current="page"><cite>{title}</cite></li>
+                       </Breadcrumbs>
+                   </Sidebar>
+               </Page>
+               <SeoPostFoot
+                   title={title}
+                   date={dateXml}
+                   author={author}
+                   category={category}
+                   tags={tags}
+                   people={people}
+                   places={places}
+               />
+           </>;
 };
 
 export default BlogPost;

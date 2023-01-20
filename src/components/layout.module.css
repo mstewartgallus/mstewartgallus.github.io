@@ -17,6 +17,11 @@
 }
 
 .layout {
+    box-sizing: border-box;
+    max-inline-size: 100% ;
+}
+
+.layout {
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone ;
 

@@ -5,6 +5,9 @@
 }
 
 .page {
+    box-sizing: border-box;
+    max-inline-size: 100% ;
+
     flex-wrap: wrap ;
     column-gap: 1em ;
 }
