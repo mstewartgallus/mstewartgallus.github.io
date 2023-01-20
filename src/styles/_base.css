@@ -253,10 +253,6 @@ dl, header {
     margin: 0;
 }
 
-body {
-    inline-size: fit-content ;
-}
-
 :root {
     background-color: var(--canvas) ;
 }
