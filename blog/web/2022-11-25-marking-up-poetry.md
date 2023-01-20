@@ -1,32 +1,35 @@
 ---
 title: Marking Up Poetry
-date: 2022-11-25 13:26 0800
+date: 2022-11-25 13:26 -0800
 tags:
-- 'Poetry'
-- 'HTML'
-- 'CSS'
-- 'Accessibility'
+- Poetry
+- HTML
+- CSS
+- Accessibility
 ---
 
 Common poetry markup is inaccessible, unsemantic and doesn't display
 well. I am not skilled in accessibility and I don't have good
-solutions.  See [<cite>Try It</cite>](#tryit) if you want to try out a screen
+solutions.  See [<cite>Try It</cite>](#try-it) if you want to try out a screen
 reader yourself.
 
-<b>Special thanks to the kind people who helped edit this post.</b>
+**Special thanks to the kind people who helped edit this post.**
 
-## Accessibility {#accessibility}
+## Accessibility
 
-{% capture markupb %}
-~~~ html
-<p class="stanza">Roses are red<br>
-Violets are blue,<br>
-Sugar is sweet<br>
-And so are you.</p>
-~~~
-{% endcapture %}
+The art of the spoken word is not accessible to the visually impaired.
+Most markup navigates awkwardly, does not insert appropriate pauses
+for breath, and mispronounces stress and sounds.  Consider
+[<cite>Markup A</cite>](#markupa) and [<cite>Markup
+B</cite>](#markupb).  In [<cite>Markup A</cite>](#markupa) a poem is
+an ordered list of stanzas and stanzas are ordered lists of verses.
+In [<cite>Markup B</cite>](#markupb) poems are sequences of stanzas,
+stanzas are paragraphs and lines in a paragraph are separated by line
+break elements.
 
-{% capture markupa %}
+
+<figure id="markupa">
+<figcaption>Markup A</figcaption>
 ```html
 <ol class="poem">
 <li>
@@ -39,9 +42,31 @@ And so are you.</p>
 </li>
 </ol>
 ```
-{% endcapture %}
+</figure>
 
-{% capture markupa2 %}
+
+<figure id="markupb">
+<figcaption>Markup B</figcaption>
+~~~ html
+<p class="stanza">Roses are red<br>
+Violets are blue,<br>
+Sugar is sweet<br>
+And so are you.</p>
+~~~
+</figure>
+
+[<cite>Markup A</cite>](#markupa) is hard to navigate as each line in
+an ordered list must be manually tracked through.  As well <q>line
+<var>m</var> of <var>n</var></q> is repeated for every line of
+[<cite>Markup A</cite>](#markupa).  You can use the `presentation`
+ARIA role as in [<cite>Markup A</cite>](#markupa2) and [<cite>Markup
+A3</cite>](#markupa3) to ameliorate the problem.  By the spec using
+the `presentation` role in a list item for a list already marked with
+a `presentation` role doesn't do much, but such markup can reduce
+cruft in Firefox's accessibility inspector.
+
+<figure id="markupa2">
+<figcaption>Markup A2</figcaption>
 ```html
 <ol class="poem">
 <li>
@@ -54,9 +79,11 @@ And so are you.</p>
 </li>
 </ol>
 ```
-{% endcapture %}
+</figure>
 
-{% capture markupa3 %}
+
+<figure id="markupa3">
+<figcaption>Markup A3</figcaption>
 ```html
 <ol class="poem" role="presentation">
 <li>
@@ -69,9 +96,18 @@ And so are you.</p>
 </li>
 </ol>
 ```
-{% endcapture %}
+</figure>
 
-{% capture markupn %}
+As a <i>nuclear</i> solution you can markup the text for graphical
+display using the `graphic` role as in [<cite>Markup
+N</cite>](#markupn).  I advise use of the ~~`aria-labelledby`~~
+`aria-details` (2022-11-28) attribute instead of the `aria-label`
+attribute here. `aria-label` has a tendency to work poorly with
+newlines in text, is not usually translated by automated tools and
+doesn't let you embed more markup as appropriate.
+
+<figure id="markupn">
+<figcaption>Markup N</figcaption>
 ```html
 <figure>
 <div role="img" aria-details="transcript">
@@ -95,18 +131,28 @@ And so are you.</p>
 </figcaption>
 </figure>
 ```
-{% endcapture %}
+</figure>
 
-{% capture markupb2 %}
+In some setups [<cite>Markup B</cite>](#markupb) sounds yucky.  Ending
+and starting words in separate lines like <i>red</i> and
+<i>Violets</i> run together.  You might include extra punctuation
+annotated with a screen-reader-only class as with [<cite>Markup
+B HTML</cite>](#markupb2) and [<cite>Markup B CSS</cite>](#markupb3) to work around this issue.
+However, on Firefox this hack breaks up lines into separate areas to
+track through.
+
+<figure id="markupb2">
+<figcaption>Markup B HTML</figcaption>
 ```html
 <p>Roses are red<span class="sr-only">; </span><br>
 Violets are blue,<br>
 Sugar is sweet<span class="sr-only">; </span><br>
 And so are you.</p>
 ```
-{% endcapture %}
+</figure>
 
-{% capture markupb3 %}
+<figure id="markupb3">
+<figcaption>Markup B CSS</figcaption>
 ```css
 .sr-only {
    display: inline-block ;
@@ -116,88 +162,7 @@ And so are you.</p>
    color: transparent ;
 }
 ```
-{% endcapture %}
-
-The art of the spoken word is not accessible to the visually impaired.
-Most markup navigates awkwardly, does not insert appropriate pauses
-for breath, and mispronounces stress and sounds.  Consider
-[<cite>Markup A</cite>](#markupa) and [<cite>Markup
-B</cite>](#markupb).  In [<cite>Markup A</cite>](#markupa) a poem is
-an ordered list of stanzas and stanzas are ordered lists of verses.
-In [<cite>Markup B</cite>](#markupb) poems are sequences of stanzas,
-stanzas are paragraphs and lines in a paragraph are separated by line
-break elements.
-
-<figure markdown="1">
-<figcaption>Markup A</figcaption>
-{{ markupa }}
 </figure>
-{:#markupa}
-
-
-<figure markdown="1">
-<figcaption>Markup B</figcaption>
-{{ markupb }}
-</figure>
-{:#markupb}
-
-[<cite>Markup A</cite>](#markupa) is hard to navigate as each line in
-an ordered list must be manually tracked through.  As well <q>line
-<var>m</var> of <var>n</var></q> is repeated for every line of
-[<cite>Markup A</cite>](#markupa).  You can use the `presentation`
-ARIA role as in [<cite>Markup A</cite>](#markupa2) and [<cite>Markup
-A''</cite>](#markupa3) to ameliorate the problem.  By the spec using
-the `presentation` role in a list item for a list already marked with
-a `presentation` role doesn't do much, but such markup can reduce
-cruft in Firefox's accessibility inspector.
-
-<figure markdown="1">
-<figcaption>Markup A'</figcaption>
-{{ markupa2 }}
-</figure>
-{:#markupa2}
-
-<figure markdown="1">
-<figcaption>Markup A''</figcaption>
-{{ markupa3 }}
-</figure>
-{:#markupa3}
-
-As a <i>nuclear</i> solution you can markup the text for graphical
-display using the `graphic` role as in [<cite>Markup
-N</cite>](#markupn).  I advise use of the <s><code
-class="language-plaintext
-highlighter-rouge">aria-labelledby</code></s> `aria-details`
-(2022-11-28) attribute instead of the `aria-label` attribute
-here. `aria-label` has a tendency to work poorly with newlines in
-text, is not usually translated by automated tools and doesn't let you
-embed more markup as appropriate.
-
-<figure markdown="1">
-<figcaption>Markup N</figcaption>
-{{ markupn }}
-</figure>
-{:#markupn}
-
-In some setups [<cite>Markup B</cite>](#markupb) sounds yucky.  Ending
-and starting words in separate lines like <i>red</i> and
-<i>Violets</i> run together.  You might include extra punctuation
-annotated with a screen-reader-only class as with [<cite>Markup
-A'</cite>](#markupb2) and [<cite>Markup B' CSS</cite>](#markupb3) to work around this issue.
-However, on Firefox this hack breaks up lines into separate areas to
-track through.
-
-<figure markdown="1">
-<figcaption markdown="span">Markup B' HTML</figcaption>
-{{ markupb2 }}
-</figure>
-{:#markupb2}
-
-<figure markdown="1">
-<figcaption markdown="span">Markup B' CSS</figcaption>
-{{ markupb3 }}
-</figure>
-{:#markupb3}
 
 No revisions of [<cite>Markup A</cite>](#markupa) or [<cite>Markup B</cite>](#markupb) ensure
 proper pronunciation of stress and sounds.  Only American English is
@@ -223,20 +188,35 @@ marking up the prosody but I have not explored this option.  I worry
 that such glyphs might be pronounced in common screen readers as
 something like <q>Unicode character 591</q>.
 
+## Presentation
 
-## Presentation {#presentation}
+Laying out poetry on small formats is awkward.  In print the standard
+layout for overlong lines is to align the first line ragged right and
+all other lines ragged left.
 
-{% capture indentcss %}
+You can approximate a poetry layout with a hanging indent layout
+something like [<cite>Indent CSS</cite>](#indentcss).  However, a
+hanging indent layout is not really correct.
+
+<figure id="indentcss">
+<figcaption>Indent CSS</figcaption>
 ```css
 .line {
    text-indent: -4ch ;
    margin-left: 4ch ;
 }
 ```
-{% endcapture %}
+</figure>
 
 
-{% capture alignlastcss %}
+You can approximate a poetry layout on the web by aligning every line
+block to the left but aligning the last line of the text *within* the
+line block to the right.  Something like [<cite>Align Last
+CSS</cite>](#alignlastcss) almost works for a poetry layout.  However,
+even this layout fails when you overflow multiple lines.
+
+<figure id="alignlastcss">
+<figcaption>Align Last CSS</figcaption>
 ```css
 .stanza {
    display: flex ;
@@ -248,57 +228,14 @@ something like <q>Unicode character 591</q>.
    text-align-last: end ;
 }
 ```
-{% endcapture %}
-
-Laying out poetry on small formats is awkward.  In print the standard
-layout for overlong lines is to align the first line ragged right and
-all other lines ragged left.
-
-You can approximate a poetry layout with a hanging indent layout
-something like [<cite>Indent CSS</cite>](#indentcss).  However, a
-hanging indent layout is not really correct.
-
-<figure markdown="1">
-<figcaption markdown="span">Indent CSS</figcaption>
-{{ indentcss }}
 </figure>
-{:#indentcss}
 
-You can approximate a poetry layout on the web by aligning every line
-block to the left but aligning the last line of the text *within* the
-line block to the right.  Something like [<cite>Align Last
-CSS</cite>](#alignlastcss) almost works for a poetry layout.  However,
-even this layout fails when you overflow multiple lines.
 
-<figure markdown="1">
-<figcaption markdown="span">Align Last CSS</figcaption>
-{{ alignlastcss }}
-</figure>
-{:#alignlastcss}
+[<cite>Example Code</cite>](#examplecode) is similar to the current
+compromise I use on this site.
 
-{% capture example %}
-<style>
-#scope p {
-   text-indent: 0 ;
-   padding: 0 ;
-}
-#scope p > span {
-   display: inline-block ;
-   text-align-last: end ;
-   pause: medium medium ;
-}
-</style>
-<div id="scope" lang="en-CA">
-<p>
-  <span>Roses are red</span><br>
-  <span>Violets are blue</span><br>
-  <span>Sugar is sweet</span><br>
-  <span>aaaaaaaaaaaaaaaa.</span>
-</p>
-</div>
-{% endcapture %}
-
-{% capture examplecode %}
+<figure id="examplecode">
+<figcaption>Example Code</figcaption>
 ```html
 <style>
 #scope p {
@@ -319,42 +256,26 @@ even this layout fails when you overflow multiple lines.
 </p>
 </div>
 ```
-{% endcapture %}
-
-
-[<cite>Example</cite>](#example) and [<cite>Example Code</cite>](#examplecode) are similar to
-the current compromise I use on this site.
-
-<figure>
-<figcaption>Example</figcaption>
-{{ example }}
 </figure>
-{:#example}
-
-<figure markdown="1">
-<figcaption>Example Code</figcaption>
-{{ examplecode }}
-</figure>
-{:#examplecode}
 
 
-## Conclusion {#conclusion}
+## Conclusion
 
 You should use the `audio` element to markup poetry.
 
-## Try It {#tryit}
+## Try It
 
 Personally I found Android TalkBack to be the easiest screen reader to
-get started with. <a href="https://www.a11yproject.com">The helpful
-<cite>A11y Project</cite> blog</a> has a number of guides on getting
+get started with. [The helpful <cite>A11y Project</cite>
+blog](https://www.a11yproject.com) has a number of guides on getting
 started with screen readers but they might be a little old.
 
-- <a href="https://www.a11yproject.com/posts/getting-started-with-orca"><cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite></a>
-- <a href="https://www.a11yproject.com/posts/getting-started-with-voiceover-ios"><cite>Getting Started with VoiceOver on iOS</cite></a>
-- <a href="https://www.a11yproject.com/posts/getting-started-with-nvda"><cite>Getting Started with NVDA</cite></a>
-- <a href="https://www.a11yproject.com/posts/getting-started-with-voiceover"><cite>Getting Started with MacOS VoiceOver</cite></a>
+- [<cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite>](https://www.a11yproject.com/posts/getting-started-with-orca)
+- [<cite>Getting Started with VoiceOver on iOS</cite>](https://www.a11yproject.com/posts/getting-started-with-voiceover-ios)
+- [<cite>Getting Started with NVDA</cite>](https://www.a11yproject.com/posts/getting-started-with-nvda)
+- [<cite>Getting Started with MacOS VoiceOver</cite>](https://www.a11yproject.com/posts/getting-started-with-voiceover)
 
-## And One More Thing {#onemorething}
+## And One More Thing
 
 As of this blog post, the [<cite>CSS Speech
 Module</cite>](https://www.w3.org/TR/css-speech-1/) has never really
@@ -368,5 +289,3 @@ problems.
 *[CSS]: Cascading Style Sheets
 
 *[ARIA]: Accessible Rich Internet Applications
-
-

@@ -63,7 +63,7 @@ places:
 - but soon the choking rage came back
 - eventually I bought a skirt
 - and it was when I put it on I had to admit I was trans
-{:.greentext role="presentation"}
+
 
 There's no conclusion here except maybe things didn't have to be like
 this and you don't really know what handicaps people are struggling
