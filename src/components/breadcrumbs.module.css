@@ -1,0 +1,30 @@
+.breadcrumbs {
+    margin-block: var(--line);
+}
+
+.breadcrumb {
+    all: unset ;
+    padding: 0 ;
+    margin: 0;
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1ch ;
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+}
+.breadcrumb li {
+    all: unset ;
+}
+
+.breadcrumb li::before {
+    color: var(--emphasis-text);
+}
+
+.breadcrumb li::before {
+  display: inline-block;
+  margin-inline-end: 0.5em;
+  transform: rotate(15deg);
+  border-inline-end: 0.1em solid currentcolor;
+  block-size: 0.8em;
+  content: "";
+}

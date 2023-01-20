@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+@import "./_syntax-dark.css" screen and (prefers-color-scheme: dark);
+@import "./_syntax-light.css" screen and (prefers-color-scheme: light);
+@import "./_syntax-print.css" print;
+
+.highlight {
+    background-color: transparent ;
+}

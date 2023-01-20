@@ -1,0 +1,5 @@
+type SiteSiteMetadata {
+  title: String
+  description: String
+  siteUrl: String
+}

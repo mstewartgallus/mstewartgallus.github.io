@@ -1,0 +1,5 @@
+.l {
+    all: unset ;
+    display: inline-block ;
+    text-align-last: end ;
+}

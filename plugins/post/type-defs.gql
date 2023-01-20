@@ -1,0 +1,45 @@
+type Mdx implements Node {
+  frontmatter: Frontmatter
+}
+
+type Frontmatter {
+  title: String
+  subtitle: String
+  description: String
+  date: Date @dateformat
+  notice: [String!]
+  tags: [String!]
+  places: [String!]
+  people: [String!]
+}
+
+type MdxContent {
+  contentFilePath: String!
+}
+
+type PoemContent {
+  body: [[[String!]!]!]!
+}
+
+union Content = MdxContent | PoemContent
+
+type Metadata {
+  date: Date! @dateformat
+  category: String!
+  slug: String!
+  title: String!
+  subtitle: String
+  notice: [String!]!
+  tags: [String!]!
+  places: [String!]!
+  people: [String!]!
+}
+
+type Post implements Node {
+  id: ID!
+  next: Post
+  previous: Post
+  date: Date! @dateformat @proxy(from: "metadata.date")
+  metadata: Metadata!
+  content: Content!
+}

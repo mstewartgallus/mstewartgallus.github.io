@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+.sr-only {
+    position: absolute ;
+    display: block ;
+    z-index: 1000 ;
+    background-color: var(--highlight) ;
+    color: var(--highlight-text) ;
+    border-radius: 0.6ch ;
+    padding-inline: 1em ;
+    padding-block: calc(0.5 * var(--line)) ;
+}
+.sr-only:not(:focus-within) {
+    position: absolute !important ;
+    left: -10000px !important ;
+    top: auto !important ;
+    width: 1px !important ;
+    height: 1px !important ;
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px) !important ;
+    overflow: hidden !important ;
+}
+
+.greentext > li {
+    all: unset ;
+    display: block ;
+}
+.greentext > li::before {
+    display: inline-block ;
+    margin-inline-end: 1ch;
+    transform: rotate(-45deg) skew(14deg, 14deg);
+    border-block-end: 0.2ch solid currentcolor;
+    border-inline-end: 0.2ch solid currentcolor;
+    block-size: 1ex;
+    inline-size: 1ex;
+    content: "";
+}
+
+.greentext {
+    all: unset ;
+}
+.greentext {
+    color: var(--green-text) ;
+}
+.greentext {
+    display: block ;
+    list-style-position: inside ;
+}
+
+hgroup p {
+    margin-block: 0 ;
+}
+
+main > :is(ul, ol) {
+    padding-inline-start: 2rem ;
+    padding-inline-start: calc(2 * var(--s));
+}
+
+:root {
+    /* default ratio on browsers is 1rem = 16px */
+    --s: clamp(0rem, (600rem - 1600vw) / 100, 1rem) ;
+}
