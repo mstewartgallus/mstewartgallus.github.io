@@ -1,3 +1,0 @@
-Sitemap: https://mstewartgallus.github.io/sitemap.xml
-User-agent: *
-Disallow: /search/
