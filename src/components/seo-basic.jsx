@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useSiteMetadata } from '../hooks/use-site-metadata.js';
-import favicon from '../assets/favicon.svg';
+import favicon from '../images/favicon.svg';
 
 const author = {
     name: "Molly Stewart-Gallus",

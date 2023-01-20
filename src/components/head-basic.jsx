@@ -1,7 +1,7 @@
 import * as React from "react";
 import SeoBasic from './seo-basic.jsx';
 import { useAbsolute } from '../hooks/use-absolute.js';
-import favicon from '../assets/favicon.svg';
+import favicon from '../images/favicon.svg';
 
 export const HeadBasic = ({pathname}) => {
     const url = useAbsolute(pathname);

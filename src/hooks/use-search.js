@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Pagefind  from '../utils/pagefind.js';
+import * as Pagefind from '../utils/pagefind.js';
 
 const signal = () => {
     let sig;

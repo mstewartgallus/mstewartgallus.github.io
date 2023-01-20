@@ -30,9 +30,7 @@ const feed = {
             },
             query: `
               {
-                allPost(
-                  sort: { order: DESC, fields: [date] },
-                ) {
+                allPost(sort: { date: DESC }) {
                   nodes {
                     metadata {
                       title

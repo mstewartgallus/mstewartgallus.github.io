@@ -235,10 +235,10 @@ dl, header {
     caret-color: var(--highlight-text) ;
 }
 
+/* FIXME not valid CSS */
 :root {
     --t: clamp(0rem,
-               (1600vw - var(--min-width) * 1rem)
-                   / (var(--max-width) - var(--min-width)),
+               (1600vw - var(--min-width) * 1rem) / var(--width-delta),
                1rem) ;
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }

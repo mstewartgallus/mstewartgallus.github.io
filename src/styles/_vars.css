@@ -13,7 +13,11 @@
     --main-width: 33.353535rem ;
 
     --min-width: 320 ;
-    --max-width: 1800 ;
+    /* to work around weird CSS silliness with division
+     * we need a <number>
+     */
+    --width-delta: 1500 ;
+    --max-width: calc(var(--min-width) + var(--width-delta)) ;
 
     --min-font-size: 19 ;
     --max-font-size: 24 ;
