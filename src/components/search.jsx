@@ -8,6 +8,7 @@ const Search = () => {
     const titleId = `${id}-title`;
     const inputId = `${id}-input`;
     const onSubmit = event => {
+        event.preventDefault();
         navigate(SearchURL.search(...new FormData(event.target)));
     };
     return <form className={search} aria-describedby={titleId}
