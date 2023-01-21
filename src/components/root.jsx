@@ -15,6 +15,10 @@ const reducer = (state = initialState, action) => {
 const store = createStore(reducer);
 
 export const Root = ({ children }) =>
-<Provider store={store}>{children}</Provider>;
+<React.StrictMode>
+    <Provider store={store}>
+        {children}
+    </Provider>
+</React.StrictMode>;
 
 export default Root;
