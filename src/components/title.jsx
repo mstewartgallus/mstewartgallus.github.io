@@ -1,15 +1,16 @@
 import * as React from "react";
 import { useSiteMetadata } from "../hooks/use-site-metadata.js";
 
-export const Title = ({ children }) => {
-    let title = useSiteMetadata().title;
-    if (children !== null) {
-        title = `${children}\u2009\u2014\u2009${title}`;
+const sep = "\u2009\u2014\u2009";
+
+export const Title = ({ title }) => {
+    let siteTitle = useSiteMetadata().title;
+
+    let str = siteTitle;
+    if (title !== null || title !== '') {
+        str = `${title}${sep}${siteTitle}`;
     }
-    return <>
-        <title>{title}</title>
-        <meta property="og:title" content={title} />
-        </>;
+    return <title>{str}</title>;
 };
 
 export default Title;

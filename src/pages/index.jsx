@@ -6,6 +6,7 @@ import JsonLd from "../components/json-ld.jsx";
 import Page from "../components/page.jsx";
 import PostList from "../components/post-list.jsx";
 import Search from "../components/search.jsx";
+import SeoBasic from "../components/seo-basic.jsx";
 import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
@@ -32,15 +33,21 @@ const useJSON = () => {
     };
 };
 
-export const Head = ({location: {pathname}}) =>
-<>
-    <HeadBasic pathname={pathname} />
-    <Title>Table of Contents</Title>
-    <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
-</>;
+const title = "Table of Contents";
 
-const IndexPage = () => {
+export const Head = ({location: {pathname}}) => {
+    const url = useAbsolute(pathname);
+    return <>
+               <HeadBasic />
+               <Title title={title}/>
+               <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
+               <SeoBasic title={title} url={url} />
+           </>;
+};
+
+const IndexPage = props => {
     const id = React.useId();
+    const json = useJSON();
     return <>
                <Page>
                    <main aria-describedby={id}>
@@ -59,7 +66,7 @@ const IndexPage = () => {
                        </Breadcrumbs>
                    </Sidebar>
                </Page>
-               <JsonLd srcdoc={useJSON()} />
+               <JsonLd srcdoc={json} />
            </>;
 };
 

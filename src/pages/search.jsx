@@ -1,15 +1,14 @@
 import * as React from "react";
-import { navigate, Link } from "gatsby";
+import { Link } from "gatsby";
+import { onSubmitNavigate } from "../utils/navigate.js";
 import Breadcrumbs from "../components/breadcrumbs.jsx";
 import HeadBasic from "../components/head-basic.jsx";
-import Option from "../components/option.jsx";
 import Page from "../components/page.jsx";
-import Select from "../components/select.jsx";
+import { Select, Option } from "../components/select.jsx";
 import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
 import { usePostTags } from "../hooks/use-post-tags.js";
 import { useSearch } from "../hooks/use-search.js";
-import * as Search from "../utils/search.js";
 import { search, query } from "./search.module.css";
 
 const Query = ({value, onChange}) => {
@@ -26,17 +25,14 @@ const Query = ({value, onChange}) => {
 };
 
 const TagSelect = ({all, name, onChange, selected, children}) => {
-    const [getter, setter] = React.useState(new Set(selected));
-
     const onChangeOption = event => {
         const { target: { checked, value } } = event;
-        const next = new Set(getter);
+        const next = new Set(selected);
         if (checked) {
             next.add(value);
         } else {
             next.delete(value);
         }
-        setter(next);
         onChange(next);
     }
     return <Select name={name}>
@@ -45,7 +41,7 @@ const TagSelect = ({all, name, onChange, selected, children}) => {
             all.map(opt =>
                 <Option key={opt}
                         onChange={onChangeOption}
-                        selected={getter.has(opt)}
+                        selected={selected?.has(opt)}
                         value={opt}>
                     {opt}
                 </Option>)
@@ -79,25 +75,40 @@ const reducer = (state, action) => {
     }
 };
 
-export const Head = ({location: {pathname, search}}) => {
-    const { s } = parseParams(search);
-    const title = s === '' ? 'Search' : `${s}\u2009\u2014\u2009Search`;
+const sep = "\u2009\u2014\u2009";
+
+export const Head = () => {
+    const title = "Search";
     return <>
-               <HeadBasic pathname={pathname} />
-               <Title>{title}</Title>
+               <HeadBasic />
+               <Title title={title} />
            </>;
 };
 
-const SearchPage = ({ location }) => {
-    const xs = parseParams(location.search);
+const emptyQuery = {
+    s: '',
+    category: new Set(),
+    tag: new Set(),
+    place: new Set(),
+    person: new Set()
+};
 
+
+const SearchPage = ({ location: { search: params } }) => {
     const id = React.useId();
     const tags = usePostTags();
 
-    const [query, setQuery] = React.useState(xs);
-    const [state, dispatch] = React.useReducer(reducer, xs);
+    const [query, setQuery] = React.useState(emptyQuery);
 
-    const links = useSearch(query);
+    const [state, dispatch] = React.useReducer(reducer, query);
+
+    const [links, setSearch] = useSearch();
+
+    React.useEffect(() => {
+        const query = parseParams(params);
+        setQuery(query);
+        setSearch(query);
+    }, [params, setSearch]);
 
     const set = (name, value) => dispatch({type: 'set', name, value});
     const onChangeS = event => set('s', event.target.value);
@@ -106,25 +117,9 @@ const SearchPage = ({ location }) => {
     const onChangePlace = value => set('place', value);
     const onChangePerson = value => set('person', value);
 
-    const onSubmit = event => {
-        event.preventDefault();
-
-        // FIXME just go where it was going to go anyhow
-        setQuery(state);
-
-        navigate(
-            Search.search(
-                ['s', state.s],
-                ...Array.from(state.category).map(c => ['category', c]),
-                ...Array.from(state.tag).map(c => ['tag', c]),
-                ...Array.from(state.person).map(c => ['person', c]),
-                ...Array.from(state.place).map(c => ['place', c]))
-        );
-    };
-
     const titleId = `${id}-title`;
     const searchId = `${id}-search`;
-    const heading = xs.s === '' ? 'Search' : `${xs.s}\u2009\u2014\u2009Search`;
+    const heading = query.s === '' ? 'Search' : `${query.s}${sep}Search`;
     return <Page>
                <main aria-describedby={titleId}>
                    <header>
@@ -138,7 +133,7 @@ const SearchPage = ({ location }) => {
                <Sidebar>
                    <form className={search} aria-describedby={searchId} role="search" rel="search"
                          action="/search"
-                         onSubmit={onSubmit}>
+                         onSubmit={onSubmitNavigate}>
                <header className="sr-only">
                    <hgroup>
                        <h2 id={searchId}>Search</h2>

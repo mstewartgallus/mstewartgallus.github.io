@@ -7,13 +7,14 @@ const author = {
     url: "/about"
 };
 
-export const SeoBasic = ({url}) => {
+export const SeoBasic = ({url, title}) => {
     const site = useSiteMetadata();
 
     return <>
                <link rel="canonical" href={url} />
                <meta name="description" content={site.description} />
                <meta name="og:site_name" content={site.title} />
+               <meta property="og:title" content={title} />
                <meta property="og:image" content={favicon} />
                <meta property="og:url" content={url} />
                <meta property="og:description" content={site.description} />

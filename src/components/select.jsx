@@ -1,7 +1,7 @@
 import * as React from "react";
-import { select } from "./select.module.css";
+import { select, option } from "./select.module.css";
 
-export const SelectContext = React.createContext(null);
+const SelectContext = React.createContext(null);
 
 export const Select = ({ name, children }) =>
 <fieldset className={select}>
@@ -10,4 +10,16 @@ export const Select = ({ name, children }) =>
     </SelectContext.Provider>
 </fieldset>;
 
-export default Select;
+export const Option = ({ children, onChange, selected, value }) => {
+    const id = React.useId();
+    const name = React.useContext(SelectContext);
+
+    return <div className={option}>
+               <input id={id}
+                      type="checkbox" name={name} value={value}
+                      onChange={onChange}
+                      checked={selected}
+               />
+               <label htmlFor={id}>{children}</label>
+           </div>;
+};

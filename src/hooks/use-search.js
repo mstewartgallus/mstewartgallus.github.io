@@ -16,6 +16,12 @@ const pagefindToPost = ({ url, meta: { title } }) => ({
 
 const pagefindQuery = query => {
     let {s, category, tag, place, person} = query;
+
+    category = Array.from(category);
+    tag = Array.from(tag);
+    place = Array.from(place);
+    person = Array.from(person);
+
     if (s === '') {
         s = null;
     }
@@ -36,8 +42,20 @@ const pagefindQuery = query => {
     return [s, { filters }];
 };
 
-export const useSearch = query => {
-    const [links, setLinks] = React.useState([]);
+
+const emptyQuery = {
+    s: '',
+    category: new Set(),
+    tag: new Set(),
+    place: new Set(),
+    person: new Set()
+};
+
+const mt = Object.freeze([]);
+
+export const useSearch = () => {
+    const [query, setQuery] = React.useState(emptyQuery);
+    const [links, setLinks] = React.useState(mt);
 
     React.useEffect(() => {
         const [signaled, setSignal] = signal();
@@ -59,5 +77,5 @@ export const useSearch = query => {
         return setSignal;
     }, [query]);
 
-    return links;
+    return [links, setQuery];
 };

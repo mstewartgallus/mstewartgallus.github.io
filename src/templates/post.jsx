@@ -12,9 +12,11 @@ import Page from "../components/page.jsx";
 import Paging from "../components/paging.jsx";
 import Poem from "../components/poem.jsx";
 import SeoPostFoot from "../components/seo-post-foot.jsx";
+import SeoBasic from "../components/seo-basic.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
 import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
+import { useAbsolute } from "../hooks/use-absolute.js";
 import { search } from "../utils/search.js";
 
 const Category = ({category}) => {
@@ -63,7 +65,7 @@ const Content = ({category, content, children}) => {
 };
 
 const author = {
-    name: "Molly Stewart-Gallus",
+    name: "Molossus Spondee",
     url: "/about/"
 };
 
@@ -71,9 +73,11 @@ export const Head = ({ location: {pathname}, data: { post }}) => {
     const {
         title, dateXml, category, tags, places, people
     } = post.metadata;
+    const url = useAbsolute(pathname);
     return <>
-               <HeadBasic pathname={pathname} />
-               <Title>{title}</Title>
+               <HeadBasic/>
+               <Title title={title} />
+               <SeoBasic title={title} url={url} />
                <SeoPostHead
                    title={title}
                    date={dateXml}

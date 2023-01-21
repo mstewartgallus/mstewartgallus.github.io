@@ -5,9 +5,9 @@ import Page from "../components/page.jsx";
 import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
 
-export const Head = ({location: {pathname}}) => <>
-  <HeadBasic pathname={pathname} />
-  <Title>Not found</Title>
+export const Head = () => <>
+  <HeadBasic/>
+  <Title title="Not found" />
 </>;
 
 const NotFoundPage = () => {

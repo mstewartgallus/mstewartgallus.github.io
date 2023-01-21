@@ -3,13 +3,19 @@ import { Link } from "gatsby";
 import Breadcrumbs from "../components/breadcrumbs.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Page from "../components/page.jsx";
+import SeoBasic from "../components/seo-basic.jsx";
 import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
+import { useAbsolute } from "../hooks/use-absolute.js";
+
+const title = "About the Author";
 
 export const Head = ({location: {pathname}}) => {
+    const url = useAbsolute(pathname);
     return <>
-               <HeadBasic pathname={pathname} />
-               <Title>About the Author</Title>
+               <HeadBasic />
+               <SeoBasic url={url} title={title} />
+               <Title>{title}</Title>
            </>;
 };
 
