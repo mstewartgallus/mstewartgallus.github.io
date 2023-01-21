@@ -54,6 +54,9 @@ const config = {
         siteUrl: "https://mstewartgallus.github.io"
     },
     graphqlTypegen: true,
+    flags: {
+        DEV_SSR: true
+    },
     plugins: [
         "gatsby-plugin-sitemap",
         {
@@ -94,7 +97,6 @@ const config = {
         "pagefind",
         "post",
         "site",
-        "render",
     ]
 };
 

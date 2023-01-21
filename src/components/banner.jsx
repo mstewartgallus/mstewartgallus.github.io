@@ -14,7 +14,7 @@ const Banner = () => {
           </hgroup>
 
           <ul>
-            <li><Link type="application/atom+xml" rel="alternate" to="/feed.xml">Subscribe</Link></li>
+            <li><a type="application/atom+xml" rel="alternate" href="/feed.xml">Subscribe</a></li>
             <li><Link to="/about">About the Author</Link></li>
           </ul>
         </header>;

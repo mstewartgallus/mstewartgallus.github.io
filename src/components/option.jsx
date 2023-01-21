@@ -3,8 +3,9 @@ import { option } from "./option.module.css";
 import { SelectContext } from "./select.jsx";
 
 export const Option = ({ children, onChange, selected, value }) => {
+    const id = React.useId();
     const name = React.useContext(SelectContext);
-    const [getSelected, setSelected] = React.useState(selected ?? false);
+    const [getSelected, setSelected] = React.useState(selected);
 
     const onChangeHook = (event) => {
         setSelected(event.target.checked);
@@ -12,12 +13,11 @@ export const Option = ({ children, onChange, selected, value }) => {
         onChange(event);
     };
 
-    const id = React.useId();
     return <div className={option}>
                <input id={id}
                       type="checkbox" name={name} value={value}
                       onChange={onChangeHook}
-                      checked={getSelected}
+                      checked={getSelected ?? false}
                />
                <label htmlFor={id}>{children}</label>
            </div>;
