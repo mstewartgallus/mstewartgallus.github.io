@@ -243,12 +243,6 @@ dl, header {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    :root {
-        scroll-behavior: smooth ;
-    }
-}
-
 :root, body {
     margin: 0;
 }

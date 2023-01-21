@@ -98,7 +98,7 @@ export const Head = () => {
                <HeadBasic />
                <Title title={title} />
                <link rel="modulepreload" href="/static/pagefind/pagefind.js" />
-               <link rel="preload" href="/static/pagefind/wasm.unknown.pagefind"
+               <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
                      as="fetch" crossOrigin="crossorigin"
                      type="application/octet-stream"
                />
