@@ -1,0 +1,26 @@
+.green > li::before {
+    display: inline-block ;
+    margin-inline-end: 1ch;
+    transform: rotate(-45deg) skew(14deg, 14deg);
+    border-block-end: 0.2ch solid currentcolor;
+    border-inline-end: 0.2ch solid currentcolor;
+    block-size: 1ex;
+    inline-size: 1ex;
+    content: "";
+}
+
+.green > li {
+    all: unset ;
+    display: block ;
+}
+
+.green {
+    all: unset ;
+    display: block ;
+    list-style-position: inside ;
+}
+
+/* FIXME */
+.green {
+    color: var(--green-text) ;
+}

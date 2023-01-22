@@ -20,32 +20,6 @@
     overflow: hidden !important ;
 }
 
-.greentext > li {
-    all: unset ;
-    display: block ;
-}
-.greentext > li::before {
-    display: inline-block ;
-    margin-inline-end: 1ch;
-    transform: rotate(-45deg) skew(14deg, 14deg);
-    border-block-end: 0.2ch solid currentcolor;
-    border-inline-end: 0.2ch solid currentcolor;
-    block-size: 1ex;
-    inline-size: 1ex;
-    content: "";
-}
-
-.greentext {
-    all: unset ;
-}
-.greentext {
-    color: var(--green-text) ;
-}
-.greentext {
-    display: block ;
-    list-style-position: inside ;
-}
-
 hgroup p {
     margin-block: 0 ;
 }

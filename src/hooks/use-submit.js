@@ -1,7 +1,8 @@
+import * as React from "react";
 import { navigate } from "gatsby";
 
 export const useSubmit = () => {
-    return async event => {
+    return React.useCallback(async event => {
         const nativeEvent = event.nativeEvent;
         const form = event.target;
         const submitter = nativeEvent.submitter;
@@ -34,5 +35,5 @@ export const useSubmit = () => {
 
         // FIXME what if external url ?
         await navigate(url);
-    };
+    }, []);
 };

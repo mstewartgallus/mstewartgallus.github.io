@@ -27,7 +27,7 @@ const Query = ({value, onChange}) => {
 };
 
 const TagSelect = ({all, name, onChange, selected, children}) => {
-    const onChangeOption = event => {
+    const onChangeOption = React.useCallback(event => {
         const { target: { checked, value } } = event;
         const next = new Set(selected);
         if (checked) {
@@ -36,7 +36,8 @@ const TagSelect = ({all, name, onChange, selected, children}) => {
             next.delete(value);
         }
         onChange(next);
-    }
+    }, [onChange, selected]);
+
     return <Select name={name}>
         {children}
         {
@@ -50,13 +51,14 @@ const TagSelect = ({all, name, onChange, selected, children}) => {
         }</Select>;
 };
 
-const LinkList = ({links}) =>
-<ul>{
-    links.map(({value, href}) =>
-        <li key={href}>
-            <Link to={href}>{value}</Link>
-        </li>)
-}</ul>;
+const LinkList = React.memo(({links}) =>
+    <ul>{
+        links.map(({value, href}) =>
+            <li key={href}>
+                <Link to={href}>{value}</Link>
+            </li>)
+    }</ul>
+);
 
 const parseParams = search => {
     const params = new URLSearchParams(search);
@@ -127,13 +129,14 @@ const SearchForm = () => {
         dispatch({type: 'query', query });
     }, [location]);
 
-    const set = (name, value) => dispatch({type: 'set', name, value});
+    const set = React.useCallback((name, value) => dispatch({type: 'set', name, value}),
+                                  [dispatch]);
 
-    const onChangeS = event => set('s', event.target.value);
-    const onChangeCat = value => set('category', value);
-    const onChangeTag = value => set('tag', value);
-    const onChangePlace = value => set('place', value);
-    const onChangePerson = value => set('person', value);
+    const onChangeS = React.useCallback(event => set('s', event.target.value), [set]);
+    const onChangeCat = React.useCallback(value => set('category', value), [set]);
+    const onChangeTag = React.useCallback(value => set('tag', value), [set]);
+    const onChangePlace = React.useCallback(value => set('place', value), [set]);
+    const onChangePerson = React.useCallback(value => set('person', value), [set]);
 
     return <form className={search} aria-describedby={id} role="search" rel="search"
                  action="/search"
@@ -169,6 +172,7 @@ const PostList = () => {
         const query = parseParams(location.search);
         setSearch(query);
     }, [location, setSearch]);
+
     return <LinkList links={links}/>;
 };
 

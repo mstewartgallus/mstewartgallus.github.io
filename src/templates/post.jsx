@@ -5,14 +5,15 @@ import Breadcrumbs from "../components/breadcrumbs.jsx";
 import { Caesura } from "../components/caesura.jsx";
 import { H1, H2, H3, H4, H5, H6 } from "../components/heading.jsx";
 import HeadBasic from "../components/head-basic.jsx";
+import Green from "../components/green.jsx";
 import L from "../components/l.jsx";
 import Lg from "../components/lg.jsx";
 import Metadata from "../components/metadata.jsx";
 import Page from "../components/page.jsx";
 import Paging from "../components/paging.jsx";
 import Poem from "../components/poem.jsx";
-import SeoPostFoot from "../components/seo-post-foot.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
+import SeoPostFoot from "../components/seo-post-foot.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
 import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
@@ -38,6 +39,7 @@ const Notice = ({notice}) =>
     </dl>;
 
 const shortcodes = {
+    Green,
     Lg, L, Caesura,
     H1, H2, H3, H4, H5, H6
 };
