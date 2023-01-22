@@ -85,8 +85,8 @@ const useTitle = () => {
     const location = useLocation();
     const [title, setTitle] = React.useState('Search');
     React.useEffect(() => {
-        const s = new URLSearchParams(location.search).get('s');
-        const newTitle = search !== null && search !== '' ? `${s}${sep}Search` : "Search";
+        const s = new URLSearchParams(location.search).get('s') ?? '';
+        const newTitle = s === '' ? "Search" : `${s}${sep}Search`;
         setTitle(newTitle);
     }, [location]);
     return title;
@@ -113,24 +113,19 @@ const emptyQuery = {
     person: new Set()
 };
 
-
-const SearchPage = () => {
+const SearchForm = () => {
     const id = React.useId();
     const tags = usePostTags();
 
     const [state, dispatch] = React.useReducer(reducer, emptyQuery);
 
-    const [links, setSearch] = useSearch();
     const onSubmit = useSubmit();
-
-    const title = useTitle();
 
     const location = useLocation();
     React.useEffect(() => {
         const query = parseParams(location.search);
         dispatch({type: 'query', query });
-        setSearch(query);
-    }, [location, setSearch]);
+    }, [location]);
 
     const set = (name, value) => dispatch({type: 'set', name, value});
 
@@ -140,26 +135,12 @@ const SearchPage = () => {
     const onChangePlace = value => set('place', value);
     const onChangePerson = value => set('person', value);
 
-    const titleId = `${id}-title`;
-    const searchId = `${id}-search`;
-
-    return <Page>
-               <main aria-describedby={titleId}>
-                   <header>
-                       <hgroup>
-                           <h1 id={titleId}>{title}</h1>
-                       </hgroup>
-                   </header>
-
-                   <LinkList links={links}/>
-               </main>
-               <Sidebar>
-                   <form className={search} aria-describedby={searchId} role="search" rel="search"
-                         action="/search"
-                         onSubmit={onSubmit}>
+    return <form className={search} aria-describedby={id} role="search" rel="search"
+                 action="/search"
+                 onSubmit={onSubmit}>
                <header className="sr-only">
                    <hgroup>
-                       <h2 id={searchId}>Search</h2>
+                       <h2 id={id}>Search</h2>
                    </hgroup>
                </header>
 
@@ -177,7 +158,37 @@ const SearchPage = () => {
                <TagSelect name="tag" all={tags.tags} selected={state.tag} onChange={onChangeTag}>
                    <legend>Tags</legend>
                </TagSelect>
-           </form>
+           </form>;
+};
+
+const PostList = () => {
+    const [links, setSearch] = useSearch();
+    const location = useLocation();
+
+    React.useEffect(() => {
+        const query = parseParams(location.search);
+        setSearch(query);
+    }, [location, setSearch]);
+    return <LinkList links={links}/>;
+};
+
+const SearchPage = () => {
+    const id = React.useId();
+
+    const title = useTitle();
+
+    return <Page>
+               <main aria-describedby={id}>
+                   <header>
+                       <hgroup>
+                           <h1 id={id}>{title}</h1>
+                       </hgroup>
+                   </header>
+
+                   <PostList />
+               </main>
+               <Sidebar>
+                   <SearchForm />
                    <Breadcrumbs>
                        <li><Link to="/">Home</Link></li>
                        <li aria-current="page"><cite>Search</cite></li>
