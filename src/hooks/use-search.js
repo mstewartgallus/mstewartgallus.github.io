@@ -43,21 +43,17 @@ const pagefindQuery = query => {
 };
 
 
-const emptyQuery = {
-    s: '',
-    category: new Set(),
-    tag: new Set(),
-    place: new Set(),
-    person: new Set()
-};
-
 const mt = Object.freeze([]);
 
 export const useSearch = () => {
-    const [query, setQuery] = React.useState(emptyQuery);
+    const [query, setQuery] = React.useState(null);
     const [links, setLinks] = React.useState(mt);
 
     React.useEffect(() => {
+        if (query === null) {
+            return;
+        }
+
         const [signaled, setSignal] = signal();
         const maybe = ps => Promise.any([ps, signaled]);
 
