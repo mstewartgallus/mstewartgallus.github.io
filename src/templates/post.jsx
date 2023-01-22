@@ -1,14 +1,9 @@
 import * as React from "react";
-import { MDXProvider } from "@mdx-js/react";
 import { Link, graphql } from "gatsby";
 import Breadcrumbs from "../components/breadcrumbs.jsx";
-import { Caesura } from "../components/caesura.jsx";
-import { H1, H2, H3, H4, H5, H6 } from "../components/heading.jsx";
 import HeadBasic from "../components/head-basic.jsx";
-import Green from "../components/green.jsx";
-import L from "../components/l.jsx";
-import Lg from "../components/lg.jsx";
 import Metadata from "../components/metadata.jsx";
+import { CategoryProvider } from "../components/category.jsx";
 import Page from "../components/page.jsx";
 import Paging from "../components/paging.jsx";
 import Poem from "../components/poem.jsx";
@@ -38,27 +33,11 @@ const Notice = ({notice}) =>
         </div>
     </dl>;
 
-const shortcodes = {
-    Green,
-    Lg, L, Caesura,
-    H1, H2, H3, H4, H5, H6
-};
-const poem = { ul: Lg, li: L };
-const autolinkHeadings = { h1: H1, h2: H2, h3: H3, h4: H4, h5: H5, h6: H6 };
-
-const defaultComponents = { ...shortcodes, ...autolinkHeadings };
-
-const components = {
-    "Poem": { ...defaultComponents, ...poem },
-    "Prose": defaultComponents,
-    "Web": defaultComponents
-};
-
-const Content = ({category, content, children}) => {
+const Content = ({content, children}) => {
     const type = content.__typename;
     switch (type) {
     case 'MdxContent':
-        return <MDXProvider components={components[category]}>{children}</MDXProvider>;
+        return children;
     case 'PoemContent':
         return <Poem poem={content.body} />;
     default:
@@ -120,9 +99,11 @@ const BlogPost = ({
                            </hgroup>
                            <Notice notice={notice} />
                        </header>
-                       <Content category={category} content={content}>
-                           {children}
-                       </Content>
+                       <CategoryProvider value={category}>
+                           <Content content={content}>
+                               {children}
+                           </Content>
+                       </CategoryProvider>
                    </main>
                    <Sidebar>
                        <Paging
