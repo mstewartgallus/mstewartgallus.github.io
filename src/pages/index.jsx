@@ -3,6 +3,7 @@ import Banner from "../components/banner.jsx";
 import Breadcrumbs from "../components/breadcrumbs.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
+import Main from "../components/main.jsx";
 import Page from "../components/page.jsx";
 import PostList from "../components/post-list.jsx";
 import Search from "../components/search.jsx";
@@ -46,18 +47,12 @@ export const Head = ({location: {pathname}}) => {
 };
 
 const IndexPage = props => {
-    const id = React.useId();
     const json = useJSON();
     return <>
                <Page>
-                   <main aria-describedby={id}>
-                       <header>
-                           <hgroup>
-                               <h1 id={id}>Posts</h1>
-                           </hgroup>
-                       </header>
+                   <Main title="Posts">
                        <PostList />
-                   </main>
+                   </Main>
                    <Sidebar>
                        <Banner />
                        <Search />

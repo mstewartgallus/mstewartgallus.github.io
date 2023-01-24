@@ -4,6 +4,7 @@ import { Link } from "gatsby";
 
 import Breadcrumbs from "../components/breadcrumbs.jsx";
 import HeadBasic from "../components/head-basic.jsx";
+import Main from  "../components/main.jsx";
 import Page from "../components/page.jsx";
 import { Select, Option } from "../components/select.jsx";
 import Sidebar from "../components/sidebar.jsx";
@@ -182,15 +183,9 @@ const SearchPage = () => {
     const title = useTitle();
 
     return <Page>
-               <main aria-describedby={id}>
-                   <header>
-                       <hgroup>
-                           <h1 id={id}>{title}</h1>
-                       </hgroup>
-                   </header>
-
+               <Main title={title}>
                    <PostList />
-               </main>
+               </Main>
                <Sidebar>
                    <SearchForm />
                    <Breadcrumbs>
