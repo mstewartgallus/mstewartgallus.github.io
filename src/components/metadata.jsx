@@ -1,50 +1,38 @@
 import * as React from "react";
 import { Link } from "gatsby";
-import { search } from "../utils/search.js";
+import LinkPerson from "./link-person.jsx";
+import LinkPlace from "./link-place.jsx";
+import LinkTag from "./link-tag.jsx";
 import { metadata } from "./metadata.module.css";
 
-const Place = ({place}) => {
-    const to = search(['place', place]);
-    return <Link to={to}
-                 rel="tag"
-                 data-pagefind-filter="place">{place}</Link>;
-};
 const PlaceList = ({places}) =>
       places && places.length > 0 &&
     <div>
         <dt>Place</dt>
         {
             places.map(p =>
-                <dd key={p}><Place place={p}/></dd>
+                <dd key={p}><LinkPlace place={p}/></dd>
             )
         }
     </div>;
 
-const Tag = ({tag}) => {
-    const to = search(['tag', tag]);
-    return <Link to={to} rel="tag" data-pagefind-filter="tag">{tag}</Link>;
-};
 const TagList = ({tags}) =>
       tags && tags.length > 0 &&
     <div>
         <dt>Tag</dt>
         {
             tags.map(t =>
-                <dd key={t}><Tag tag={t} /></dd>)
+                <dd key={t}><LinkTag tag={t} /></dd>)
         }
     </div>;
 
-const Person = ({person}) => {
-    const to = search(['person', person]);
-    return <Link to={to} rel="tag" data-pagefind-filter="person">{person}</Link>;
-};
 const PeopleList = ({people}) =>
       people && people.length > 0 &&
     <div>
         <dt>People</dt>
         {
             people.map(p =>
-                <dd key={p}><Person person={p}/></dd>
+                <dd key={p}><LinkPerson person={p}/></dd>
             )
         }
     </div>;

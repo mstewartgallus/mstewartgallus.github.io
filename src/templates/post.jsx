@@ -15,9 +15,8 @@ const Content = ({content, children, previous, next, metadata}) => {
         return children;
     case 'PoemContent':
         return <PostPoem previous={previous} next={next}
-                         metadata={metadata}>
-                   {content.body}
-               </PostPoem>;
+                         metadata={metadata}
+                         poem={content.body} />;
     default:
         throw new Error(`unknown type: ${type}`);
     }
