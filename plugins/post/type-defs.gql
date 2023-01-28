@@ -33,6 +33,7 @@ type Metadata {
   tags: [String!]!
   places: [String!]!
   people: [String!]!
+  description: String
 }
 
 type Post implements Node {

@@ -13,8 +13,8 @@ const useTitle = title => {
     return`${title}${sep}${siteTitle}`;
 };
 
-export const Title = ({ title }) => {
-    const fullTitle = useTitle(title);
+export const Title = ({ children }) => {
+    const fullTitle = useTitle(children);
     return <title>{fullTitle}</title>;
 };
 

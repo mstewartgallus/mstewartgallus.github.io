@@ -40,7 +40,7 @@ export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
     return <>
                <HeadBasic />
-               <Title title={title}/>
+               <Title>{title}</Title>
                <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
                <SeoBasic title={title} url={url} />
            </>;

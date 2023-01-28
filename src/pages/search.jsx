@@ -99,7 +99,7 @@ export const Head = () => {
     const title = useTitle();
     return <>
                <HeadBasic />
-               <Title title={title} />
+               <Title>{title}</Title>
                <link rel="modulepreload" href="/static/pagefind/pagefind.js" />
                <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
                      as="fetch" crossOrigin="crossorigin"
@@ -178,8 +178,6 @@ const PostList = () => {
 };
 
 const SearchPage = () => {
-    const id = React.useId();
-
     const title = useTitle();
 
     return <Page>

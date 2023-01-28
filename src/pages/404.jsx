@@ -8,7 +8,7 @@ import Title from "../components/title.jsx";
 
 export const Head = () => <>
   <HeadBasic/>
-  <Title title="Not found" />
+  <Title>Not found</Title>
 </>;
 
 const NotFoundPage = () =>

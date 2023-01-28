@@ -30,13 +30,13 @@ const author = {
 
 export const Head = ({ location: {pathname}, data: { post: { metadata }}}) => {
     const {
-        title, dateXml, category, tags, places, people
+        description, title, dateXml, category, tags, places, people
     } = metadata;
     const url = useAbsolute(pathname);
     return <>
                <HeadBasic/>
-               <Title title={title} />
-               <SeoBasic title={title} url={url} />
+               <Title>{title}</Title>
+               <SeoBasic description={description} title={title} url={url} />
                <SeoPostHead
                    title={title}
                    date={dateXml}
@@ -56,8 +56,8 @@ const BlogPost = ({
     const { previous, next, content, metadata } = post;
 
     const {
-        category, dateXml, dateDisplay, title, subtitle,
-        notice, tags, places, people
+        category, dateXml, title,
+        tags, places, people
     } = metadata;
 
     return <>
@@ -99,6 +99,7 @@ query BlogPostById($id: String!) {
     metadata {
       dateDisplay: date(formatString: "YYYY-MM-DD")
       dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")
+      description
       title
       subtitle
       category

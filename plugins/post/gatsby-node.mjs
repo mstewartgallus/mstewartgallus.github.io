@@ -44,7 +44,7 @@ const slugOf = ({ category, name }) => {
 };
 
 const metadata = frontmatter => {
-    let { name, category, date, title, subtitle, notice, tags, people, places } = frontmatter;
+    let { description, name, category, date, title, subtitle, notice, tags, people, places } = frontmatter;
 
     if (!category) {
         throw new Error("no category");
@@ -63,7 +63,7 @@ const metadata = frontmatter => {
 
     const slug = slugOf({ category, date, name });
 
-    return { slug, date, category, title, subtitle, notice, tags, places, people };
+    return { description, slug, date, category, title, subtitle, notice, tags, places, people };
 };
 
 const parsePoem = source => {
@@ -88,8 +88,13 @@ const postNodeOfPoemFile = async ({ node, loadNodeContent }) => {
 
     const ast = parsePoem(content);
 
+    const description = ast[0]
+          .slice(0, 2)
+          .map(x => x.join('\u2009\u2014\u2009'))
+          .join('\n');
+
     return {
-        metadata: metadata({ name, category, ...data }),
+        metadata: metadata({ name, category, description, ...data }),
         content: {
             __typename: 'PoemContent',
             body: ast
