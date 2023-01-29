@@ -52,14 +52,12 @@ const TagSelect = ({all, name, onChange, selected, children}) => {
         }</Select>;
 };
 
-const LinkList = React.memo(({links}) =>
-    <ul>{
-        links.map(({value, href}) =>
-            <li key={href}>
-                <Link to={href}>{value}</Link>
-            </li>)
-    }</ul>
-);
+const LinkList = ({links}) =>
+      links.map(({value, href}) =>
+          <li key={href}>
+              <Link to={href}>{value}</Link>
+          </li>);
+
 
 const parseParams = search => {
     const params = new URLSearchParams(search);
@@ -97,15 +95,15 @@ const useTitle = () => {
 
 export const Head = () => {
     const title = useTitle();
-    return <>
-               <HeadBasic />
-               <Title>{title}</Title>
-               <link rel="modulepreload" href="/static/pagefind/pagefind.js" />
-               <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
-                     as="fetch" crossOrigin="crossorigin"
-                     type="application/octet-stream"
-               />
-           </>;
+    return [
+        <HeadBasic />,
+        <Title>{title}</Title>,
+        <link rel="modulepreload" href="/static/pagefind/pagefind.js" />,
+        <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
+              as="fetch" crossOrigin="crossorigin"
+              type="application/octet-stream"
+        />
+    ];
 };
 
 const emptyQuery = {
@@ -174,7 +172,7 @@ const PostList = () => {
         setSearch(query);
     }, [location, setSearch]);
 
-    return <LinkList links={links}/>;
+    return <ul><LinkList links={links}/></ul>;
 };
 
 const SearchPage = () => {

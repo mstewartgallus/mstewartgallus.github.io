@@ -5,36 +5,40 @@ import LinkPlace from "./link-place.jsx";
 import LinkTag from "./link-tag.jsx";
 import { metadata } from "./metadata.module.css";
 
+const Places = ({places}) =>
+      places.map(p =>
+          <dd key={p}><LinkPlace place={p}/></dd>
+      );
+
+const Tags = ({tags}) =>
+      tags.map(t =>
+          <dd key={t}><LinkTag tag={t}/></dd>
+      );
+
+const People = ({people}) =>
+      people.map(p =>
+          <dd key={p}><LinkPerson person={p}/></dd>
+      );
+
 const PlaceList = ({places}) =>
       places && places.length > 0 &&
     <div>
         <dt>Place</dt>
-        {
-            places.map(p =>
-                <dd key={p}><LinkPlace place={p}/></dd>
-            )
-        }
+        <Places places={places} />
     </div>;
 
 const TagList = ({tags}) =>
       tags && tags.length > 0 &&
     <div>
         <dt>Tag</dt>
-        {
-            tags.map(t =>
-                <dd key={t}><LinkTag tag={t} /></dd>)
-        }
+        <Tags tags={tags} />
     </div>;
 
 const PeopleList = ({people}) =>
       people && people.length > 0 &&
     <div>
         <dt>People</dt>
-        {
-            people.map(p =>
-                <dd key={p}><LinkPerson person={p}/></dd>
-            )
-        }
+        <People people={people} />
     </div>;
 
 export const Metadata = ({

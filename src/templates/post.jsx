@@ -32,20 +32,19 @@ export const Head = ({ location: {pathname}, data: { post: { metadata }}}) => {
         description, title, dateXml, category, tags, places, people
     } = metadata;
     const url = useAbsolute(pathname);
-    return <>
-               <HeadBasic/>
-               <Title>{title}</Title>
-               <SeoBasic description={description} title={title} url={url} />
-               <SeoPostHead
-                   title={title}
-                   date={dateXml}
-                   author={author}
-                   category={category}
-                   tags={tags}
-                   people={people}
-                   places={places}
-               />
-           </>;
+    return [
+        <HeadBasic/>,
+        <Title>{title}</Title>,
+        <SeoBasic description={description} title={title} url={url} />,
+        <SeoPostHead
+            title={title}
+            date={dateXml}
+            author={author}
+            category={category}
+            tags={tags}
+            people={people}
+            places={places}
+        />];
 };
 
 const BlogPost = ({

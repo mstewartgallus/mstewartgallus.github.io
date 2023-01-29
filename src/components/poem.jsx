@@ -5,22 +5,27 @@ import L from "./l.jsx";
 import Lg from "./lg.jsx";
 import Seg from "./seg.jsx";
 
+const key = x => C.map(x, y => y);
+
 const Line = ({ line }) =>
-      C.map(line, (segment, segno) =>
+      key(line.map((segment, segno) =>
           [
               segno > 0 && <Caesura />,
               <Seg>{segment}</Seg>
-          ]);
+          ]));
 
 const Stanza = ({ stanza }) =>
-      C.map(stanza
-            .map(line => <Line line={line} />),
-            line => <L>{line}</L>);
+      key(stanza.map(line =>
+          <L>
+              <Line line={line} />
+          </L>));
 
 // FIXME has to be a better method of keying
 export const Poem = ({ poem }) =>
-C.map(poem.map(stanza => <Stanza stanza={stanza} />),
-      stanza => <Lg>{stanza}</Lg>);
+key(poem.map(stanza =>
+    <Lg>
+        <Stanza stanza={stanza} />
+    </Lg>));
 
 
 export default Poem;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import Notice from "../components/notice.jsx";
+import ListNotice from "./list-notice.jsx";
 
 export const Main = ({children, title, subtitle, notice}) => {
     const id = React.useId();
@@ -11,7 +11,7 @@ export const Main = ({children, title, subtitle, notice}) => {
                            subtitle && <p>{subtitle}</p>
                        }
                    </hgroup>
-                   <Notice notice={notice} />
+                   <ListNotice notice={notice} />
                </header>
                {children}
            </main>;

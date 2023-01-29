@@ -11,6 +11,7 @@ import SeoBasic from "../components/seo-basic.jsx";
 import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
+import { usePostList } from "../hooks/use-post-list.js";
 import { useSiteMetadata } from "../hooks/use-site-metadata.js";
 
 const useJSON = () => {
@@ -38,20 +39,20 @@ const title = "Table of Contents";
 
 export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
-    return <>
-               <HeadBasic />
-               <Title>{title}</Title>
-               <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
-               <SeoBasic title={title} url={url} />
-           </>;
+    return [
+        <HeadBasic />,
+        <Title>{title}</Title>,
+        <link type="application/atom+xml" rel="alternate" href="/feed.xml" />,
+        <SeoBasic title={title} url={url} />];
 };
 
 const IndexPage = props => {
     const json = useJSON();
+    const posts = usePostList();
     return <>
                <Page>
                    <Main title="Posts">
-                       <PostList />
+                       <PostList posts={posts} />
                    </Main>
                    <Sidebar>
                        <Banner />
