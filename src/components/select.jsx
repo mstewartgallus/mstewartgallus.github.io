@@ -3,8 +3,8 @@ import { select, option } from "./select.module.css";
 
 const SelectContext = React.createContext(null);
 
-export const Select = ({ name, children }) =>
-<fieldset className={select}>
+export const Select = ({ name, children, onChange }) =>
+<fieldset className={select} onChange={onChange}>
     <SelectContext.Provider value={name}>
         {children}
     </SelectContext.Provider>

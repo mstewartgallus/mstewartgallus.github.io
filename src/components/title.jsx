@@ -1,20 +1,14 @@
 import * as React from "react";
 import { useSiteMetadata } from "../hooks/use-site-metadata.js";
-
-const sep = "\u2009\u2014\u2009";
-
-const useTitle = title => {
-    const site = useSiteMetadata();
-    const siteTitle = site.title;
-
-    if (title === null || title === '') {
-        return siteTitle;
-    }
-    return`${title}${sep}${siteTitle}`;
-};
+import separator from "../utils/separator.js";
 
 export const Title = ({ children }) => {
-    const fullTitle = useTitle(children);
+    const site = useSiteMetadata();
+
+    const array = React.Children.toArray(children);
+    array.push(site.title);
+    const fullTitle = array.join(separator);
+
     return <title>{fullTitle}</title>;
 };
 
