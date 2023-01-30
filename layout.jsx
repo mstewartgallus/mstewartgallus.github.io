@@ -1,9 +1,25 @@
 import * as React from "react";
+import { Provider } from "react-redux";
+import { MDXProvider } from "@mdx-js/react";
 import Layout from "./src/components/layout.jsx";
-import Root from "./src/components/root.jsx";
+import { MDXWrapper } from "./src/components/mdx-wrapper.jsx";
+import * as Store from "./src/state/store.js";
 
-export const wrapRootElement = ({ element }) =>
-<Root>{element}</Root>;
+const components = { wrapper: MDXWrapper };
 
-export const wrapPageElement = ({ element, props }) =>
-<Layout {...props}>{element}</Layout>;
+export const wrapRootElement = ({ element }) => {
+    // Create a different store per SSR page
+    const store = Store.createStore();
+
+    return <React.StrictMode>
+               <Provider store={store}>
+                   <MDXProvider components={components}>
+                       {element}
+                   </MDXProvider>
+               </Provider>
+           </React.StrictMode>;
+};
+
+export const wrapPageElement = ({ element, props }) => {
+    return <Layout {...props}>{element}</Layout>;
+};

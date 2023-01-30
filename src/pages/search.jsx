@@ -137,15 +137,15 @@ export const Head = ({location}) => {
         setTitle(title);
     }, [location]);
 
-    return [
-        <HeadBasic />,
-        <Title>{title}</Title>,
-        <link rel="modulepreload" href="/static/pagefind/pagefind.js" />,
+    return <>
+        <HeadBasic />
+        <Title>{title}</Title>
+        <link rel="modulepreload" href="/static/pagefind/pagefind.js" />
         <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
               as="fetch" crossOrigin="crossOrigin"
               type="application/octet-stream"
         />
-    ];
+    </>;
 };
 
 const SearchPage = ({location}) => {
@@ -153,24 +153,23 @@ const SearchPage = ({location}) => {
     const onSubmit = useSubmit();
 
     const [state, dispatch] = React.useReducer(reducer, emptyQuery);
-    const [title, setTitle] = React.useState(['Search']);
+    const [query, setQuery] = React.useState(null);
     const tags = usePostTags();
 
     React.useEffect(() => {
-        const query = parseParams(location.search);
-        setSearch(query);
+        setSearch(parseParams(location.search));
     }, [location, setSearch]);
 
     React.useEffect(() => {
-        const s = parseParams(location.search).s;
-        const title =
-              (s === '' || s === null) ? ['Search'] :
-              [s, separator, 'Search'];
-        setTitle(title);
+        setQuery(parseParams(location.search).s);
     }, [location]);
 
     const set = React.useCallback((name, value) => dispatch({type: 'set', name, value}),
                                   [dispatch]);
+
+    const hasQuery = query !== '' && query !== null;
+    const title =
+          <>{hasQuery && <>{query}{separator}</>}Search</>;
 
     return <Page>
                <Main title={title}>

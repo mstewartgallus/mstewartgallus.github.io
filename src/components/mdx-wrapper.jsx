@@ -10,10 +10,11 @@ export const MDXWrapper = ({
             metadata
         }
     }
-}) =>
-<PostMDX previous={previous?.metadata} next={next?.metadata}
-         metadata={metadata}>
-    {children}
-</PostMDX>;
+}) => {
+    return <PostMDX previous={previous?.metadata} next={next?.metadata}
+                    metadata={metadata}>
+               {children}
+           </PostMDX>;
+};
 
-export default PostMDX;
+export default MDXWrapper;

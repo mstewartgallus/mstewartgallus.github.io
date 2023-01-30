@@ -9,10 +9,10 @@ const key = x => C.map(x, y => y);
 
 const Line = ({ line }) =>
       key(line.map((segment, segno) =>
-          [
-              segno > 0 && <Caesura />,
+          <>
+              {segno > 0 && <Caesura />}
               <Seg>{segment}</Seg>
-          ]));
+          </>));
 
 const Stanza = ({ stanza }) =>
       key(stanza.map(line =>

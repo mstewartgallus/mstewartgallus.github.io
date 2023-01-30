@@ -43,8 +43,9 @@ const breadcrumbs = ({
     }]
 });
 
-export const SeoPostFoot = props => [
-    <JsonLd srcdoc={breadcrumbs(props)} />,
-    <JsonLd srcdoc={blogPosting(props)} />];
+export const SeoPostFoot = props => <>
+    <JsonLd srcdoc={breadcrumbs(props)} />
+    <JsonLd srcdoc={blogPosting(props)} />
+</>;
 
 export default SeoPostFoot;
