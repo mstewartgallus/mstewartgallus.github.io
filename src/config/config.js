@@ -69,6 +69,7 @@ const config = {
                }
             }
         },
+        "gatsby-transformer-yaml",
         {
             resolve: "gatsby-source-filesystem",
             options: {

@@ -22,6 +22,7 @@
         "gatsby-plugin-mdx": "^5.4.0",
         "gatsby-plugin-sitemap": "^6.4.0",
         "gatsby-source-filesystem": "^5.4.0",
+        "gatsby-transformer-yaml": "^5.5.0",
         "pagefind": "^0.10.6",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",

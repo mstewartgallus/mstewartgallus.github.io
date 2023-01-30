@@ -7,6 +7,7 @@ import { mkResolve } from "../../src/utils/resolve.js";
 const resolve = mkResolve(import.meta);
 
 const typeDefs = resolve('./type-defs.gql');
+const authors = resolve('./authors.yml');
 const mdxTemplate = resolve('../../src/templates/post.jsx');
 const poemTemplate = resolve('../../src/templates/post.jsx');
 
@@ -44,7 +45,12 @@ const slugOf = ({ category, name }) => {
 };
 
 const metadata = frontmatter => {
-    let { description, name, category, date, title, subtitle, notice, tags, people, places } = frontmatter;
+    let {
+        description, name, category, date,
+        title, subtitle,
+        notice, tags, people, places,
+        author
+    } = frontmatter;
 
     if (!category) {
         throw new Error("no category");
@@ -63,7 +69,12 @@ const metadata = frontmatter => {
 
     const slug = slugOf({ category, date, name });
 
-    return { description, slug, date, category, title, subtitle, notice, tags, places, people };
+    return {
+        description, slug, date, category,
+        title, subtitle,
+        notice, tags, places, people,
+        author
+    };
 };
 
 const parsePoem = source => {
@@ -80,13 +91,12 @@ const parsePoem = source => {
     });
 };
 
-const postNodeOfPoemFile = async ({ node, loadNodeContent }) => {
-    const category = node.sourceInstanceName;
-    const name = node.name;
+const postNodeOfPoem = async ({ node, getNode }) => {
+    const parent = getNode(node.parent);
+    const category = parent.sourceInstanceName;
+    const name = parent.name;
 
-    const { content, data } = frontmatter(await loadNodeContent(node));
-
-    const ast = parsePoem(content);
+    const ast = node.body;
 
     const description = ast[0]
           .slice(0, 2)
@@ -94,7 +104,7 @@ const postNodeOfPoemFile = async ({ node, loadNodeContent }) => {
           .join('\n');
 
     return {
-        metadata: metadata({ name, category, description, ...data }),
+        metadata: metadata({ name, category, description, ...node.frontmatter }),
         content: {
             __typename: 'PoemContent',
             body: ast
@@ -114,6 +124,19 @@ const postNodeOfMdx = async ({ node, getNode }) => {
             __typename: 'MdxContent',
             contentFilePath
         }
+    };
+};
+
+const poemNodeOfFile = async ({ node, loadNodeContent }) => {
+    const name = node.name;
+
+    const { content, data } = frontmatter(await loadNodeContent(node));
+
+    const ast = parsePoem(content);
+
+    return {
+        frontmatter: data,
+        body: ast
     };
 };
 
@@ -157,7 +180,7 @@ const previous = async (source, args, context, info) => {
     return null;
 };
 
-const onCreateFileNode = async props => {
+const onCreatePoemNode = async props => {
     const {
         node,
         actions,
@@ -165,11 +188,7 @@ const onCreateFileNode = async props => {
         createNodeId,
         getNode
     } = props;
-    if (node.extension !== 'poem') {
-        return;
-    }
-
-    const post = await postNodeOfPoemFile(props);
+    const post = await postNodeOfPoem(props);
     const postNode = {
         ...post,
         children: [],
@@ -204,6 +223,37 @@ const onCreateMdxNode = async ({
     };
     await actions.createNode(postNode);
     await actions.createParentChildLink({ parent: node, child: postNode });
+};
+
+const onCreatePoemFileNode = async props => {
+    const {
+        node,
+        actions,
+        createContentDigest,
+        createNodeId,
+        getNode
+    } = props;
+    const poem = await poemNodeOfFile(props);
+    const poemNode = {
+        ...poem,
+        children: [],
+        parent: node.id,
+        id: createNodeId(`${node.id} >>> POEM`),
+        internal: {
+            type: 'Poem',
+            contentDigest: createContentDigest(poem)
+        }
+    };
+    await actions.createNode(poemNode);
+    await actions.createParentChildLink({ parent: node, child: poemNode });
+};
+
+const onCreateFileNode = async props => {
+    const { node } = props;
+    switch (node.extension) {
+    case "poem":
+        return await onCreatePoemFileNode(props);
+    }
 };
 
 const usePostList = async ({graphql, reporter}) => {
@@ -253,6 +303,8 @@ export const onCreateNode = async props => {
     switch (props.node.internal.type) {
         case 'Mdx':
             return await onCreateMdxNode(props);
+        case 'Poem':
+            return await onCreatePoemNode(props);
         case 'File':
             return await onCreateFileNode(props);
     }
