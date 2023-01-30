@@ -97,6 +97,7 @@ const config = {
         },
         "pagefind",
         "transformer-poem",
+        "transformer-post",
         "post",
         "site",
     ]
