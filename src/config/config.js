@@ -98,6 +98,7 @@ const config = {
         "pagefind",
         "transformer-poem",
         "transformer-post",
+        "transformer-index",
         "post",
         "site",
     ]

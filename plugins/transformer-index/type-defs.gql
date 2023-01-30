@@ -1,0 +1,11 @@
+type Index implements Node {
+  id: ID!
+  label: String!
+}
+
+type Link implements Node {
+  id: ID!
+  index: Index!
+  node: Post!
+  date: Date! @dateformat
+}
