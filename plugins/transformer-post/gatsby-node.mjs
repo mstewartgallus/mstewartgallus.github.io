@@ -96,46 +96,6 @@ const postNodeOfMdx = async ({ node, getNode }) => {
     };
 };
 
-const next = async (source, args, context, info) => {
-    const { id, metadata: { date } } = source;
-    const { entries } = await context.nodeModel.findAll({
-        type: 'Post',
-        query: {
-            limit: 1,
-            sort: { fields: ['date'], order: ['ASC'] },
-            filter: {
-                id: { ne: id },
-                date: { gte: date }
-            }
-        }
-    });
-    const x = Array.from(entries);
-    if (x.length > 0) {
-        return x[0];
-    }
-    return null;
-};
-
-const previous = async (source, args, context, info) => {
-    const { id, metadata: { date } } = source;
-    const { entries } = await context.nodeModel.findAll({
-        type: 'Post',
-        query: {
-            limit: 1,
-            sort: { fields: ['date'], order: ['DESC'] },
-            filter: {
-                id: { ne: id },
-                date: { lte: date }
-            }
-        }
-    });
-    const x = Array.from(entries);
-    if (x.length > 0) {
-        return x[0];
-    }
-    return null;
-};
-
 const onCreatePoemNode = async props => {
     const {
         node,
@@ -205,13 +165,4 @@ export const onCreateNode = async props => {
         case 'Poem':
             return await onCreatePoemNode(props);
     }
-};
-
-export const createResolvers = async ({ createResolvers }) => {
-    await createResolvers({
-        Post: {
-            next: { type: 'Post', resolve: next },
-            previous: { type: 'Post', resolve: previous }
-        }
-    });
 };

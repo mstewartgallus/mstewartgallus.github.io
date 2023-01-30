@@ -18,24 +18,28 @@ const feed = {
 `,
     feeds: [
         {
-            serialize: ({ query: { site, allPost } }) => {
+            serialize: ({ query: { site, allLink } }) => {
                 const siteUrl = site.siteMetadata.siteUrl;
-                return allPost.nodes.map(node => {
-                    return Object.assign({}, node.metadata, {
-                        url: siteUrl + node.metadata.slug,
-                        guid: siteUrl + node.metadata.slug,
+                return allLink.nodes.map(node => {
+                    const { metadata } = node.post;
+                    return {
+                        ...metadata,
+                        url: siteUrl + metadata.slug,
+                        guid: siteUrl + metadata.slug,
                         custom_elements: []
-                    });
+                    };
                 });
             },
             query: `
               {
-                allPost(sort: { date: DESC }) {
+                allLink(sort: { date: DESC }) {
                   nodes {
-                    metadata {
-                      title
-                      date
-                      slug
+                    post {
+                      metadata {
+                        title
+                        date
+                        slug
+                      }
                     }
                   }
                 }

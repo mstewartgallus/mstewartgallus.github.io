@@ -49,9 +49,19 @@ export const Head = ({ location: {pathname}, data: { post: { metadata }}}) => {
 
 const BlogPost = ({
     children,
-    data: { post }
+    data: { post, allLink }
 }) => {
-    const { previous, next, content, metadata } = post;
+    const { content, metadata } = post;
+
+    const group = allLink.group.map(({label,
+                                      nodes: [{ previous, next}]}) =>
+        ({
+            label,
+            previous: previous?.post?.metadata,
+            next: next?.post?.metadata
+        }));
+    // FIXME... do only one previous/next for now
+    const { previous, next } = group[0];
 
     const {
         category, dateXml, title,
@@ -60,8 +70,8 @@ const BlogPost = ({
 
     return <>
                <Content content={content}
-                        previous={previous?.metadata}
-                        next={next?.metadata}
+                        previous={previous}
+                        next={next}
                         metadata={metadata}>
                    {children}
                </Content>
@@ -81,19 +91,30 @@ export default BlogPost;
 
 export const pageQuery = graphql`
 query BlogPostById($id: String!) {
+  allLink(sort: {date: DESC}, filter: {post: {id: {eq: $id}}}) {
+    group(field: {index: {label: SELECT}}) {
+      label: fieldValue
+      nodes {
+        previous {
+          post {
+            metadata {
+              slug
+              title
+            }
+          }
+        }
+        next {
+          post {
+            metadata {
+              slug
+              title
+            }
+          }
+        }
+      }
+    }
+  }
   post(id: {eq: $id}) {
-    previous {
-      metadata {
-        title
-        slug
-      }
-    }
-    next {
-      metadata {
-        title
-        slug
-      }
-    }
     metadata {
       dateDisplay: date(formatString: "YYYY-MM-DD")
       dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")

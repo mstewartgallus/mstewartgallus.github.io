@@ -7,6 +7,46 @@ const resolve = mkResolve(import.meta);
 
 const typeDefs = resolve('./type-defs.gql');
 
+const next = async (source, args, context, info) => {
+    const { id, date } = source;
+    const { entries } = await context.nodeModel.findAll({
+        type: 'Link',
+        query: {
+            limit: 1,
+            sort: { fields: ['date'], order: ['ASC'] },
+            filter: {
+                id: { ne: id },
+                date: { gte: date }
+            }
+        }
+    });
+    const x = Array.from(entries);
+    if (x.length > 0) {
+        return x[0];
+    }
+    return null;
+};
+
+const previous = async (source, args, context, info) => {
+    const { id, date } = source;
+    const { entries } = await context.nodeModel.findAll({
+        type: 'Link',
+        query: {
+            limit: 1,
+            sort: { fields: ['date'], order: ['DESC'] },
+            filter: {
+                id: { ne: id },
+                date: { lte: date }
+            }
+        }
+    });
+    const x = Array.from(entries);
+    if (x.length > 0) {
+        return x[0];
+    }
+    return null;
+};
+
 const indexNodeId = (label, props) => props.createNodeId(`${label} >>> INDEX`);
 
 const createIndexNode = async (label, props) => {
@@ -42,11 +82,7 @@ const onCreatePostNode = async props => {
     const index = await getIndexNode(ALL, props);
 
     const link = { index, post: node, date: node.metadata.date };
-    // posts.sort((x, y) => {
-    //     const xdate = x.metadata.date;
-    //     const ydate = y.metadata.date;
-    //     return xdate.localeCompare(ydate);
-    // });
+
     const linkNode = {
         ...link,
         id: createNodeId(`${node.id} >>> LINK`),
@@ -59,6 +95,15 @@ const onCreatePostNode = async props => {
     };
     await actions.createNode(linkNode);
     await actions.createParentChildLink({ parent: node, child: linkNode });
+};
+
+export const createResolvers = async ({ createResolvers }) => {
+    await createResolvers({
+        Link: {
+            next: { type: 'Link', resolve: next },
+            previous: { type: 'Link', resolve: previous }
+        }
+    });
 };
 
 export const createSchemaCustomization = async ({ actions, schema }) => {
