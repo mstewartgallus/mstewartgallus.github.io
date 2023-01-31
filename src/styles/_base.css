@@ -224,7 +224,7 @@ dl, header {
     -webkit-text-size-adjust: none ;
     text-size-adjust: none ;
 
-    color-scheme: light dark ;
+    color-scheme: dark light ;
 
     color: var(--canvas-text) ;
 
