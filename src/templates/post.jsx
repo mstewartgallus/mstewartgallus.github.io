@@ -18,11 +18,9 @@ const author = {
 export const Head = ({
     location: {pathname},
     data: {
-        postMdx,
-        postPoem
+        post
     }
 }) => {
-    const post = (postMdx ?? postPoem).post;
     const { metadata } = post;
     const {
         description, title, dateXml, category, tags, places, people
@@ -47,14 +45,11 @@ const BlogPost = ({
     children,
     data: {
         allLink,
-        postMdx,
-        postPoem
+        post
     }
 }) => {
-    const { post } = postMdx ?? postPoem;
-    const poem = postPoem?.poem;
-
-    const { metadata } = post;
+    const { metadata, poem } = post;
+    const type = post.__typename;
 
     const group = allLink.group.map(({label,
                                       nodes: [{ previous, next}]}) =>
@@ -71,18 +66,23 @@ const BlogPost = ({
         tags, places, people
     } = metadata;
 
+    let Content;
+    switch (type) {
+    case "PostPoem":
+        Content = () => <Poem poem={poem.content} />;
+        break;
+
+    case "PostMdx":
+        Content = () => <PostMDX category={category}>{children}</PostMDX>;
+        break;
+
+    default:
+        throw new Error(`unknown type ${type}`);
+    }
+
     return <>
                <Post previous={previous} next={next} metadata={metadata}>
-                   {
-                       poem &&
-                           <Poem poem={poem.content} />
-                   }
-                   {
-                       postMdx &&
-                           <PostMDX category={category}>
-                               {children}
-                           </PostMDX>
-                   }
+                   <Content />
                </Post>
                <SeoPostFoot
                    title={title}
@@ -100,7 +100,7 @@ export default BlogPost;
 
 export const pageQuery = graphql`
 query BlogById($id: String!) {
-  allLink(sort: {date: DESC}, filter: {post: {children: {eq: $id}}}) {
+  allLink(sort: {date: DESC}, filter: {post: {id: {eq: $id}}}) {
     group(field: {index: {label: SELECT}}) {
       label: fieldValue
       nodes {
@@ -123,39 +123,24 @@ query BlogById($id: String!) {
       }
     }
   }
-  postMdx(id: {eq: $id}) {
-    post {
-      metadata {
-        dateDisplay: date(formatString: "YYYY-MM-DD")
-        dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")
-        description
-        title
-        subtitle
-        category
-        notice
-        tags
-        places
-        people
+  post(id: {eq: $id}) {
+    __typename
+    ... on PostPoem {
+      poem {
+        content
       }
     }
-  }
-  postPoem(id: {eq: $id}) {
-    poem {
-      content
-    }
-    post {
-      metadata {
-        dateDisplay: date(formatString: "YYYY-MM-DD")
-        dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")
-        description
-        title
-        subtitle
-        category
-        notice
-        tags
-        places
-        people
-     }
+    metadata {
+      dateDisplay: date(formatString: "YYYY-MM-DD")
+      dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")
+      description
+      title
+      subtitle
+      category
+      notice
+      tags
+      places
+      people
     }
   }
 }

@@ -1,104 +1,38 @@
 import { promises as fs } from "fs";
+import slugify from "slugify";
 import { mkResolve } from "../../src/utils/resolve.js";
 
 const resolve = mkResolve(import.meta);
 
-const mdxTemplate = resolve('../../src/templates/post.jsx');
-const poemTemplate = resolve('../../src/templates/post.jsx');
+const typeDefs = resolve('./type-defs.gql');
 
-const usePostMdxList = async ({graphql, reporter}) => {
-    const { errors, data } = await graphql(`
-query MdxPosts {
-  allPostMdx {
-    nodes {
-      id
-      post {
-        id
-        metadata {
-          slug
+const slug = async (source, args, context, info) => {
+    let { category, name } = source;
+    // FIXME
+    // YYYY-MM-DD-foo.bar
+    const parts = name.slice(0, 11).split('-');
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+    name = name.slice(11);
+
+    const opts = { lower: true };
+    const catSlug = slugify(category, opts);
+    const nameSlug = slugify(name, opts);
+
+    return `/${catSlug}/${year}/${month}/${day}/${nameSlug}/`;
+};
+
+export const createSchemaCustomization = async ({ actions, schema }) => {
+    const { createTypes } = actions;
+    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
+    await createTypes(types);
+};
+
+export const createResolvers = async ({ createResolvers }) => {
+    await createResolvers({
+        Metadata: {
+            slug: { type: 'String!', resolve: slug },
         }
-      }
-      mdx {
-        internal {
-          contentFilePath
-        }
-      }
-    }
-  }
-}
-`);
-    if (errors) {
-        reporter.panicOnBuild('Error loading Mdx posts', errors);
-        return;
-    }
-    return data.allPostMdx.nodes;
-};
-
-const usePostPoemList = async ({graphql, reporter}) => {
-    const { errors, data } = await graphql(`
-query PoemPosts {
-   allPostPoem {
-      nodes {
-          id
-          post {
-            id
-            metadata {
-              slug
-            }
-          }
-        }
-      }
-    }
-`);
-    if (errors) {
-        reporter.panicOnBuild('Error loading Poem posts', errors);
-        return;
-    }
-    return data.allPostPoem.nodes;
-};
-
-const createMdxPages = async ({actions, graphql, reporter}) => {
-    const { createPage } = actions;
-
-    const posts = await usePostMdxList({ graphql, reporter });
-    if (!posts) {
-        return;
-    }
-    await Promise.all(posts.map(async post => {
-        const {
-            id,
-            post: { id: postId, metadata: { slug } },
-            mdx: { internal: { contentFilePath } }
-        } = post;
-        await createPage({
-            path: slug,
-            component: `${mdxTemplate}?__contentFilePath=${contentFilePath}`,
-            context: { id  }
-        });
-    }));
-};
-
-const createPoemPages = async ({actions, graphql, reporter}) => {
-    const { createPage } = actions;
-
-    const posts = await usePostPoemList({ graphql, reporter });
-    if (!posts) {
-        return;
-    }
-    await Promise.all(posts.map(async post => {
-        const {
-            id,
-            post: { id: postId, metadata: { slug } }
-        } = post;
-        return await createPage({
-            path: slug,
-            component: `${poemTemplate}`,
-            context: { id }
-        });
-    }));
-};
-
-export const createPages = async props => {
-    await Promise.all([createMdxPages(props),
-                       createPoemPages(props)]);
+    });
 };

@@ -6,7 +6,7 @@ type Index implements Node {
 type Link implements Node {
   id: ID!
   index: Index!
-  node: Post!
+  post: Post!
   next: Link
   previous: Link
   date: Date! @dateformat

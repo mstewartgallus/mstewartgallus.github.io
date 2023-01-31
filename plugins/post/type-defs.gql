@@ -1,0 +1,18 @@
+type Metadata {
+  name: String!
+  date: Date! @dateformat
+  category: String!
+  slug: String!
+  title: String!
+  subtitle: String
+  notice: [String!]!
+  tags: [String!]!
+  places: [String!]!
+  people: [String!]!
+  description: String
+}
+
+interface Post implements Node {
+  id: ID!
+  metadata: Metadata!
+}

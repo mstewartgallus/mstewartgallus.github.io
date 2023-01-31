@@ -114,7 +114,9 @@ export const createSchemaCustomization = async ({ actions, schema }) => {
 
 export const onCreateNode = async props => {
     switch (props.node.internal.type) {
-        case 'Post':
+        // FIXME
+        case 'PostPoem':
+        case 'PostMdx':
             return await onCreatePostNode(props);
     }
 };

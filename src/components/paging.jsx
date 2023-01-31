@@ -18,6 +18,9 @@ const Next = ({ children, href }) =>
 
 export const Paging = ({ previous, next, phref, nhref }) => {
     const id = React.useId();
+    if (!phref && !nhref) {
+        return null;
+    }
     return <nav className={paging} aria-labelledby={id}>
                <header className="sr-only">
                    <hgroup>

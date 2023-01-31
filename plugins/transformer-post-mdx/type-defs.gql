@@ -1,0 +1,16 @@
+type Frontmatter {
+  title: String
+  subtitle: String
+  description: String
+  date: Date @dateformat
+  notice: [String!]
+  tags: [String!]
+  places: [String!]
+  people: [String!]
+}
+
+type PostMdx implements Post & Node {
+  id: ID!
+  metadata: Metadata!
+  mdx: Mdx!
+}

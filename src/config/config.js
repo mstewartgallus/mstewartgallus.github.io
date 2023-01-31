@@ -100,11 +100,14 @@ const config = {
             options: feed
         },
         "pagefind",
-        "transformer-poem",
-        "transformer-post",
-        "transformer-index",
         "post",
         "site",
+        "transformer-poem",
+        "transformer-post-mdx",
+        "transformer-post-poem",
+        "transformer-index",
+        "publish-post-mdx",
+        "publish-post-poem"
     ]
 };
 
