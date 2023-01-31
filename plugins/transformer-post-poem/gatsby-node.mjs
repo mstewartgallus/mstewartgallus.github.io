@@ -54,7 +54,15 @@ const postNodeOfPoem = async ({ node, getNode }) => {
     };
 };
 
-const onCreatePoemNode = async props => {
+export const createSchemaCustomization = async ({ actions, schema }) => {
+    const { createTypes } = actions;
+    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
+    await createTypes(types);
+};
+
+export const shouldOnCreateNode = ({node}) => 'Poem' === node.internal.type;
+
+export const onCreateNode = async props => {
     const {
         node,
         actions,
@@ -78,17 +86,4 @@ const onCreatePoemNode = async props => {
     };
     await actions.createNode(postNode);
     await actions.createParentChildLink({ parent: node, child: postNode });
-};
-
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
-    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
-    await createTypes(types);
-};
-
-export const onCreateNode = async props => {
-    switch (props.node.internal.type) {
-        case 'Poem':
-            return await onCreatePoemNode(props);
-    }
 };

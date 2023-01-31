@@ -50,7 +50,16 @@ const poemNodeOfFile = async ({ node, loadNodeContent }) => {
     };
 };
 
-const onCreatePoemFileNode = async props => {
+export const createSchemaCustomization = async ({ actions, schema }) => {
+    const { createTypes } = actions;
+    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
+    await createTypes(types);
+};
+
+export const shouldOnCreateNode = ({node}) =>
+'File' === node.internal.type && 'poem' === node.extension;
+
+export const onCreateNode = async props => {
     const {
         node,
         actions,
@@ -71,25 +80,4 @@ const onCreatePoemFileNode = async props => {
     };
     await actions.createNode(poemNode);
     await actions.createParentChildLink({ parent: node, child: poemNode });
-};
-
-const onCreateFileNode = async props => {
-    const { node } = props;
-    switch (node.extension) {
-    case "poem":
-        return await onCreatePoemFileNode(props);
-    }
-};
-
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
-    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
-    await createTypes(types);
-};
-
-export const onCreateNode = async props => {
-    switch (props.node.internal.type) {
-        case 'File':
-            return await onCreateFileNode(props);
-    }
 };

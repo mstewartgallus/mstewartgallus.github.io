@@ -47,7 +47,15 @@ const postNodeOfMdx = async ({ node, getNode }) => {
     };
 };
 
-const onCreateMdxNode = async ({
+export const createSchemaCustomization = async ({ actions, schema }) => {
+    const { createTypes } = actions;
+    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
+    await createTypes(types);
+};
+
+export const shouldOnCreateNode = ({node}) => 'Mdx' === node.internal.type;
+
+export const onCreateNode = async ({
     node,
     actions,
     createContentDigest,
@@ -68,17 +76,4 @@ const onCreateMdxNode = async ({
     };
     await actions.createNode(postNode);
     await actions.createParentChildLink({ parent: node, child: postNode });
-};
-
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
-    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
-    await createTypes(types);
-};
-
-export const onCreateNode = async props => {
-    switch (props.node.internal.type) {
-        case 'Mdx':
-            return await onCreateMdxNode(props);
-    }
 };

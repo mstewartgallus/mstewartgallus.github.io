@@ -76,7 +76,25 @@ const getIndexNode = async (label, props) => {
     return await createIndexNode(label, props);
 };
 
-const onCreatePostNode = async props => {
+export const createResolvers = async ({ createResolvers }) => {
+    await createResolvers({
+        Link: {
+            next: { type: 'Link', resolve: next },
+            previous: { type: 'Link', resolve: previous }
+        }
+    });
+};
+
+export const createSchemaCustomization = async ({ actions, schema }) => {
+    const { createTypes } = actions;
+    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
+    await createTypes(types);
+};
+
+export const shouldOnCreateNode = ({node}) =>
+['PostPoem', 'PostMdx'].includes(node.internal.type);
+
+export const onCreateNode = async props => {
     const {node, actions, createNodeId, createContentDigest} = props;
 
     const index = await getIndexNode(ALL, props);
@@ -95,28 +113,4 @@ const onCreatePostNode = async props => {
     };
     await actions.createNode(linkNode);
     await actions.createParentChildLink({ parent: node, child: linkNode });
-};
-
-export const createResolvers = async ({ createResolvers }) => {
-    await createResolvers({
-        Link: {
-            next: { type: 'Link', resolve: next },
-            previous: { type: 'Link', resolve: previous }
-        }
-    });
-};
-
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
-    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
-    await createTypes(types);
-};
-
-export const onCreateNode = async props => {
-    switch (props.node.internal.type) {
-        // FIXME
-        case 'PostPoem':
-        case 'PostMdx':
-            return await onCreatePostNode(props);
-    }
 };
