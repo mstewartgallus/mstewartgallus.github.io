@@ -17,9 +17,7 @@ query {
     }
   }
 }`).allLink.group;
-    // FIXME
-    // Gross hack for now
-    // Only one index of ALL for now
-    const indices = group.map(col => col.nodes.map(l => l.post.metadata));
-    return indices[0];
+    const entries = group.map(({ label, nodes }) =>
+        [label, nodes.map(l => l.post.metadata)]);
+    return Object.fromEntries(entries);
 }

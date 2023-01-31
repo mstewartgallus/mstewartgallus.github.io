@@ -3,7 +3,7 @@ type Index implements Node {
   label: String!
 }
 
-type Link implements Node {
+type Link implements Node @childOf(types: ["Post"]) {
   id: ID!
   index: Index!
   post: Post!

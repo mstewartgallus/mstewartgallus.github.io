@@ -14,7 +14,7 @@ const author = {
 };
 
 export const Post = ({
-    children, previous, next,
+    children, paging,
     metadata: {
         category, dateXml, dateDisplay, title, subtitle,
         notice, tags, places, people
@@ -26,11 +26,7 @@ export const Post = ({
         {children}
     </Main>
     <Sidebar>
-        <Paging
-            previous={previous?.title}
-            next={next?.title}
-            phref={previous?.slug}
-            nhref={next?.slug} />
+        <Paging paging={paging} />
         <Metadata
             author={author}
             dateDisplay={dateDisplay} dateXml={dateXml}

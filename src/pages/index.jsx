@@ -49,7 +49,8 @@ export const Head = ({location: {pathname}}) => {
 
 const IndexPage = props => {
     const json = useJSON();
-    const posts = usePostList();
+    const indices = usePostList();
+    const posts = indices.ALL;
     return <>
         <Page>
             <Main title="Posts">

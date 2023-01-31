@@ -24,7 +24,7 @@ query MdxPosts {
 }
 `);
     if (errors) {
-        reporter.panicOnBuild('Error loading Mdx posts', errors);
+        reporter.panicOnBuild('Error loading MDX posts', errors);
         return;
     }
     return data.allPostMdx.nodes;

@@ -1,36 +1,39 @@
 import * as React from "react";
 import { Link } from "gatsby";
-import { paging } from "./paging.module.css";
+import { paging as pagingClass } from "./paging.module.css";
 
 const Prev = ({ children, href }) =>
       href &&
     <div>
-        <dt><Link to={href}>Previous</Link></dt>
-        <dd>{children}</dd>
+        <dt><Link rel="previous" to={href}>Previous</Link></dt>
+        <dd><cite>{children}</cite></dd>
     </div>;
 
 const Next = ({ children, href }) =>
       href &&
     <div>
-        <dt><Link to={href}>Next</Link></dt>
-        <dd>{children}</dd>
+        <dt><Link rel="next" to={href}>Next</Link></dt>
+        <dd><cite>{children}</cite></dd>
     </div>;
 
-export const Paging = ({ previous, next, phref, nhref }) => {
+const Pages = ({ previous, next }) =>
+<dl>
+    { previous && <Prev href={previous.slug}>{previous.title}</Prev> }
+    { next && <Next href={next.slug}>{next.title}</Next> }
+</dl>;
+
+
+export const Paging = ({ paging }) => {
     const id = React.useId();
-    if (!phref && !nhref) {
-        return null;
-    }
-    return <nav className={paging} aria-labelledby={id}>
+
+    const {previous, next} = paging.ALL;
+    return <nav className={pagingClass} aria-labelledby={id}>
                <header className="sr-only">
                    <hgroup>
                        <h2 id={id}>Paging</h2>
                    </hgroup>
                </header>
-               <dl>
-                   <Prev href={phref}><cite>{previous}</cite></Prev>
-                   <Next href={nhref}><cite>{next}</cite></Next>
-               </dl>
+               <Pages previous={previous} next={next} />
            </nav>;
 };
 

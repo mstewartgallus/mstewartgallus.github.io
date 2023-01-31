@@ -43,23 +43,18 @@ export const Head = ({
 
 const BlogPost = ({
     children,
-    data: {
-        allLink,
-        post
-    }
+    data: { post }
 }) => {
-    const { metadata, poem } = post;
+    const { childrenLink, metadata, poem } = post;
     const type = post.__typename;
 
-    const group = allLink.group.map(({label,
-                                      nodes: [{ previous, next}]}) =>
-        ({
-            label,
-            previous: previous?.post?.metadata,
-            next: next?.post?.metadata
-        }));
-    // FIXME... do only one previous/next for now
-    const { previous, next } = group[0];
+    const paging = Object.fromEntries(childrenLink.map(({
+        index: { label },
+        previous, next
+    }) => [label, {
+        previous: previous?.post?.metadata,
+        next: next?.post?.metadata
+    }]));
 
     const {
         category, dateXml, title,
@@ -81,7 +76,7 @@ const BlogPost = ({
     }
 
     return <>
-               <Post previous={previous} next={next} metadata={metadata}>
+               <Post paging={paging} metadata={metadata}>
                    <Content />
                </Post>
                <SeoPostFoot
@@ -100,31 +95,29 @@ export default BlogPost;
 
 export const pageQuery = graphql`
 query BlogById($id: String!) {
-  allLink(sort: {date: DESC}, filter: {post: {id: {eq: $id}}}) {
-    group(field: {index: {label: SELECT}}) {
-      label: fieldValue
-      nodes {
-        previous {
-          post {
-            metadata {
-              slug
-              title
-            }
+  post(id: {eq: $id}) {
+    __typename
+    childrenLink {
+      index {
+        label
+      }
+      previous {
+        post {
+          metadata {
+            slug
+            title
           }
         }
-        next {
-          post {
-            metadata {
-              slug
-              title
-            }
+      }
+      next {
+        post {
+          metadata {
+            slug
+            title
           }
         }
       }
     }
-  }
-  post(id: {eq: $id}) {
-    __typename
     ... on PostPoem {
       poem {
         content
@@ -143,5 +136,4 @@ query BlogById($id: String!) {
       people
     }
   }
-}
-`;
+}`;

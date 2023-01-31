@@ -9,7 +9,7 @@ type Frontmatter {
   people: [String!]
 }
 
-type PostMdx implements Post & Node {
+type PostMdx implements Node & Post @childOf(types: ["Mdx"]) {
   id: ID!
   metadata: Metadata!
   mdx: Mdx!
