@@ -8,26 +8,15 @@ import SeoPostHead from "../components/seo-post-head.jsx";
 import Title from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
 
-const Content = ({content, children, previous, next, metadata}) => {
-    const type = content.__typename;
-    switch (type) {
-    case 'MdxContent':
-        return children;
-    case 'PoemContent':
-        return <PostPoem previous={previous} next={next}
-                         metadata={metadata}
-                         poem={content.body} />;
-    default:
-        throw new Error(`unknown type: ${type}`);
-    }
-};
-
 const author = {
     name: "Molossus Spondee",
     url: "/about/"
 };
 
-export const Head = ({ location: {pathname}, data: { post: { metadata }}}) => {
+export const Head = ({
+    location: {pathname},
+    data: { postPoem: { post: { metadata }} }
+}) => {
     const {
         description, title, dateXml, category, tags, places, people
     } = metadata;
@@ -49,9 +38,14 @@ export const Head = ({ location: {pathname}, data: { post: { metadata }}}) => {
 
 const BlogPost = ({
     children,
-    data: { post, allLink }
+    data: {
+        allLink,
+        postPoem: {
+            post: { metadata },
+            poem
+        }
+    }
 }) => {
-    const { content, metadata } = post;
 
     const group = allLink.group.map(({label,
                                       nodes: [{ previous, next}]}) =>
@@ -69,12 +63,9 @@ const BlogPost = ({
     } = metadata;
 
     return <>
-               <Content content={content}
-                        previous={previous}
-                        next={next}
-                        metadata={metadata}>
-                   {children}
-               </Content>
+               <PostPoem previous={previous} next={next}
+                         metadata={metadata}
+                         poem={poem.content} />
                <SeoPostFoot
                    title={title}
                    date={dateXml}
@@ -90,8 +81,8 @@ const BlogPost = ({
 export default BlogPost;
 
 export const pageQuery = graphql`
-query BlogPostById($id: String!) {
-  allLink(sort: {date: DESC}, filter: {post: {id: {eq: $id}}}) {
+query BlogPostById($id: String!, $post: String!) {
+  allLink(sort: {date: DESC}, filter: {post: {id: {eq: $post}}}) {
     group(field: {index: {label: SELECT}}) {
       label: fieldValue
       nodes {
@@ -114,24 +105,23 @@ query BlogPostById($id: String!) {
       }
     }
   }
-  post(id: {eq: $id}) {
-    metadata {
-      dateDisplay: date(formatString: "YYYY-MM-DD")
-      dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")
-      description
-      title
-      subtitle
-      category
-      notice
-      tags
-      places
-      people
+  postPoem(id: {eq: $id}) {
+    poem {
+      content
     }
-    content {
-      __typename
-      ... on PoemContent {
-         body
-      }
+    post {
+      metadata {
+        dateDisplay: date(formatString: "YYYY-MM-DD")
+        dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")
+        description
+        title
+        subtitle
+        category
+        notice
+        tags
+        places
+        people
+     }
     }
   }
 }

@@ -9,16 +9,6 @@ type Frontmatter {
   people: [String!]
 }
 
-type MdxContent {
-  contentFilePath: String!
-}
-
-type PoemContent {
-  body: [[[String!]!]!]!
-}
-
-union Content = MdxContent | PoemContent
-
 type Metadata {
   date: Date! @dateformat
   category: String!
@@ -35,5 +25,16 @@ type Metadata {
 type Post implements Node {
   id: ID!
   metadata: Metadata!
-  content: Content!
+}
+
+type PostMdx implements Node {
+  id: ID!
+  post: Post!
+  mdx: Mdx!
+}
+
+type PostPoem implements Node {
+  id: ID!
+  post: Post!
+  poem: Poem!
 }

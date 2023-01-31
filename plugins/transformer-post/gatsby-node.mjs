@@ -67,14 +67,8 @@ const postNodeOfPoem = async ({ node, getNode }) => {
           .map(x => x.join('\u2009\u2014\u2009'))
           .join('\n');
 
-    const content = {
-            __typename: 'PoemContent',
-            body: ast
-    };
-
     return {
-        metadata: metadata({ name, category, description, ...node.frontmatter }),
-        content
+        metadata: metadata({ name, category, description, ...node.frontmatter })
     };
 };
 
@@ -83,16 +77,8 @@ const postNodeOfMdx = async ({ node, getNode }) => {
     const category = parent.sourceInstanceName;
     const name = parent.name;
 
-    const contentFilePath = node.internal.contentFilePath;
-
-    const content = {
-            __typename: 'MdxContent',
-            contentFilePath
-    };
-
     return {
-        metadata: metadata({ name, category, ...node.frontmatter }),
-        content
+        metadata: metadata({ name, category, ...node.frontmatter })
     };
 };
 
@@ -109,7 +95,7 @@ const onCreatePoemNode = async props => {
         ...post,
         children: [],
         parent: node.id,
-        id: createNodeId(`${node.id} >>> POST`),
+        id: createNodeId(`${node.id} >>> Post`),
         internal: {
             type: 'Post',
             contentDigest: createContentDigest(post)
@@ -117,6 +103,20 @@ const onCreatePoemNode = async props => {
     };
     await actions.createNode(postNode);
     await actions.createParentChildLink({ parent: node, child: postNode });
+
+    const postPoem = { post: postNode, poem: node };
+    const postPoemNode = {
+        ...postPoem,
+        children: [],
+        parent: node.id,
+        id: createNodeId(`${node.id} >>> PostPoem`),
+        internal: {
+            type: 'PostPoem',
+            contentDigest: createContentDigest(postPoem)
+        }
+    };
+    await actions.createNode(postPoemNode);
+    await actions.createParentChildLink({ parent: node, child: postPoemNode });
 };
 
 const onCreateMdxNode = async ({
@@ -131,7 +131,7 @@ const onCreateMdxNode = async ({
         ...post,
         children: [],
         parent: node.id,
-        id: createNodeId(`${node.id} >>> POST`),
+        id: createNodeId(`${node.id} >>> Post`),
         internal: {
             type: 'Post',
             contentDigest: createContentDigest(post)
@@ -139,23 +139,26 @@ const onCreateMdxNode = async ({
     };
     await actions.createNode(postNode);
     await actions.createParentChildLink({ parent: node, child: postNode });
+
+    const postMdx = { post: postNode, mdx: node };
+    const postMdxNode = {
+        ...postMdx,
+        children: [],
+        parent: node.id,
+        id: createNodeId(`${node.id} >>> PostMdx`),
+        internal: {
+            type: 'PostMdx',
+            contentDigest: createContentDigest(postMdx)
+        }
+    };
+    await actions.createNode(postMdxNode);
+    await actions.createParentChildLink({ parent: node, child: postMdxNode });
 };
 
 export const createSchemaCustomization = async ({ actions, schema }) => {
     const { createTypes } = actions;
     const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
     await createTypes(types);
-    await createTypes([schema.buildUnionType({
-        name: 'Content',
-        resolveType(value) {
-            // FIXME ugly hack
-            const typename = value.__typename;
-            if (!typename) {
-                throw new Error("no typename");
-            }
-            return typename;
-        }
-    })]);
 };
 
 export const onCreateNode = async props => {
