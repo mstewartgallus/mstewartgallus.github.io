@@ -5,7 +5,6 @@ import Green from "./green.jsx";
 import { H1, H2, H3, H4, H5, H6 } from "./heading.jsx";
 import L from "./l.jsx";
 import Lg from "./lg.jsx";
-import Post from "./post.jsx";
 
 const shortcodes = {
     Green,
@@ -25,14 +24,10 @@ const categoryComponents = {
 
 export const PostMDX = ({
     children,
-    previous,
-    next,
-    metadata
+    category
 }) =>
-<Post previous={previous} next={next} metadata={metadata}>
-    <MDXProvider components={categoryComponents[metadata.category]}>
-        {children}
-    </MDXProvider>
-</Post>;
+<MDXProvider components={categoryComponents[category]}>
+    {children}
+</MDXProvider>;
 
 export default PostMDX;

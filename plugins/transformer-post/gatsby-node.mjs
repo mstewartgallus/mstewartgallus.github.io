@@ -90,31 +90,34 @@ const onCreatePoemNode = async props => {
         createNodeId,
         getNode
     } = props;
+    const postId = createNodeId(`${node.id} >>> Post`);
+    const postPoemId = createNodeId(`${node.id} >>> PostPoem`);
+
     const post = await postNodeOfPoem(props);
+
     const postNode = {
         ...post,
-        children: [],
+        children: [postPoemId],
         parent: node.id,
-        id: createNodeId(`${node.id} >>> Post`),
+        id: postId,
         internal: {
             type: 'Post',
             contentDigest: createContentDigest(post)
         }
     };
-    await actions.createNode(postNode);
-    await actions.createParentChildLink({ parent: node, child: postNode });
 
     const postPoem = { post: postNode, poem: node };
     const postPoemNode = {
         ...postPoem,
         children: [],
-        parent: node.id,
-        id: createNodeId(`${node.id} >>> PostPoem`),
+        parent: postId,
+        id: postPoemId,
         internal: {
             type: 'PostPoem',
             contentDigest: createContentDigest(postPoem)
         }
     };
+    await actions.createNode(postNode);
     await actions.createNode(postPoemNode);
     await actions.createParentChildLink({ parent: node, child: postPoemNode });
 };
@@ -126,31 +129,33 @@ const onCreateMdxNode = async ({
     createNodeId,
     getNode
 }) => {
+    const postId = createNodeId(`${node.id} >>> Post`);
+    const postMdxId = createNodeId(`${node.id} >>> PostMdx`);
+
     const post = await postNodeOfMdx({ node, getNode });
     const postNode = {
         ...post,
-        children: [],
+        children: [postMdxId],
         parent: node.id,
-        id: createNodeId(`${node.id} >>> Post`),
+        id: postId,
         internal: {
             type: 'Post',
             contentDigest: createContentDigest(post)
         }
     };
-    await actions.createNode(postNode);
-    await actions.createParentChildLink({ parent: node, child: postNode });
 
     const postMdx = { post: postNode, mdx: node };
     const postMdxNode = {
         ...postMdx,
         children: [],
-        parent: node.id,
-        id: createNodeId(`${node.id} >>> PostMdx`),
+        parent: postId,
+        id: postMdxId,
         internal: {
             type: 'PostMdx',
             contentDigest: createContentDigest(postMdx)
         }
     };
+    await actions.createNode(postNode);
     await actions.createNode(postMdxNode);
     await actions.createParentChildLink({ parent: node, child: postMdxNode });
 };

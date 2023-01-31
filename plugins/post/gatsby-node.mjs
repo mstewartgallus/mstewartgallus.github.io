@@ -3,8 +3,8 @@ import { mkResolve } from "../../src/utils/resolve.js";
 
 const resolve = mkResolve(import.meta);
 
-const mdxTemplate = resolve('../../src/templates/mdx.jsx');
-const poemTemplate = resolve('../../src/templates/poem.jsx');
+const mdxTemplate = resolve('../../src/templates/post.jsx');
+const poemTemplate = resolve('../../src/templates/post.jsx');
 
 const usePostMdxList = async ({graphql, reporter}) => {
     const { errors, data } = await graphql(`
@@ -73,7 +73,7 @@ const createMdxPages = async ({actions, graphql, reporter}) => {
         await createPage({
             path: slug,
             component: `${mdxTemplate}?__contentFilePath=${contentFilePath}`,
-            context: { id, post: postId  }
+            context: { id  }
         });
     }));
 };
@@ -93,7 +93,7 @@ const createPoemPages = async ({actions, graphql, reporter}) => {
         return await createPage({
             path: slug,
             component: `${poemTemplate}`,
-            context: { id, post: postId }
+            context: { id }
         });
     }));
 };

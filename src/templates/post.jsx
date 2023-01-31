@@ -1,7 +1,9 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import HeadBasic from "../components/head-basic.jsx";
-import PostPoem from "../components/post-poem.jsx";
+import Post from "../components/post.jsx";
+import Poem from "../components/poem.jsx";
+import PostMDX from "../components/post-mdx.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import SeoPostFoot from "../components/seo-post-foot.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
@@ -15,8 +17,13 @@ const author = {
 
 export const Head = ({
     location: {pathname},
-    data: { postPoem: { post: { metadata }} }
+    data: {
+        postMdx,
+        postPoem
+    }
 }) => {
+    const post = (postMdx ?? postPoem).post;
+    const { metadata } = post;
     const {
         description, title, dateXml, category, tags, places, people
     } = metadata;
@@ -40,12 +47,14 @@ const BlogPost = ({
     children,
     data: {
         allLink,
-        postPoem: {
-            post: { metadata },
-            poem
-        }
+        postMdx,
+        postPoem
     }
 }) => {
+    const { post } = postMdx ?? postPoem;
+    const poem = postPoem?.poem;
+
+    const { metadata } = post;
 
     const group = allLink.group.map(({label,
                                       nodes: [{ previous, next}]}) =>
@@ -63,9 +72,18 @@ const BlogPost = ({
     } = metadata;
 
     return <>
-               <PostPoem previous={previous} next={next}
-                         metadata={metadata}
-                         poem={poem.content} />
+               <Post previous={previous} next={next} metadata={metadata}>
+                   {
+                       poem &&
+                           <Poem poem={poem.content} />
+                   }
+                   {
+                       postMdx &&
+                           <PostMDX category={category}>
+                               {children}
+                           </PostMDX>
+                   }
+               </Post>
                <SeoPostFoot
                    title={title}
                    date={dateXml}
@@ -81,8 +99,8 @@ const BlogPost = ({
 export default BlogPost;
 
 export const pageQuery = graphql`
-query BlogPostById($id: String!, $post: String!) {
-  allLink(sort: {date: DESC}, filter: {post: {id: {eq: $post}}}) {
+query BlogById($id: String!) {
+  allLink(sort: {date: DESC}, filter: {post: {children: {eq: $id}}}) {
     group(field: {index: {label: SELECT}}) {
       label: fieldValue
       nodes {
@@ -102,6 +120,22 @@ query BlogPostById($id: String!, $post: String!) {
             }
           }
         }
+      }
+    }
+  }
+  postMdx(id: {eq: $id}) {
+    post {
+      metadata {
+        dateDisplay: date(formatString: "YYYY-MM-DD")
+        dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")
+        description
+        title
+        subtitle
+        category
+        notice
+        tags
+        places
+        people
       }
     }
   }
