@@ -6,7 +6,7 @@ const resolve = mkResolve(import.meta);
 
 const typeDefs = resolve('./type-defs.gql');
 
-const slug = async (source, args, context, info) => {
+const slug = (source, args, context, info) => {
     let { category, name } = source;
     // FIXME
     // YYYY-MM-DD-foo.bar
@@ -23,6 +23,8 @@ const slug = async (source, args, context, info) => {
     return `/${catSlug}/${year}/${month}/${day}/${nameSlug}/`;
 };
 
+const nil = (source, args, context, info) => source[info.fieldName] ?? [];
+
 export const createSchemaCustomization = async ({ actions, schema }) => {
     const { createTypes } = actions;
     const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
@@ -33,6 +35,10 @@ export const createResolvers = async ({ createResolvers }) => {
     await createResolvers({
         Metadata: {
             slug: { type: 'String!', resolve: slug },
+            notice: { type: '[String!]!', resolve: nil },
+            tags: { type: '[String!]!', resolve: nil },
+            places: { type: '[String!]!', resolve: nil },
+            people: { type: '[String!]!', resolve: nil },
         }
     });
 };

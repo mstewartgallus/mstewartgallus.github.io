@@ -5,12 +5,16 @@ const resolve = mkResolve(import.meta);
 
 const typeDefs = resolve('./type-defs.gql');
 
+const fields = [
+    'description', 'name', 'category', 'date',
+    'title', 'subtitle',
+    'notice', 'tags', 'places', 'people',
+    'author'
+];
+
 const metadata = frontmatter => {
-    let {
-        description, name, category, date,
-        title, subtitle,
-        notice, tags, people, places,
-        author
+    const {
+        name, category, date
     } = frontmatter;
 
     if (!category) {
@@ -23,18 +27,11 @@ const metadata = frontmatter => {
         throw new Error("no name");
     }
 
-    people = people ?? [];
-    notice = notice ?? [];
-    tags = tags ?? [];
-    places = places ?? [];
-
-    return {
-        description, date, category,
-        name,
-        title, subtitle,
-        notice, tags, places, people,
-        author
-    };
+    const meta = {};
+    for (const field of fields) {
+        meta[field] = frontmatter[field];
+    }
+    return meta;
 };
 
 const postNodeOfMdx = async ({ node, getNode }) => {
