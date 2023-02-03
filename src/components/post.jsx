@@ -8,16 +8,11 @@ import LinkCategory from "./link-category.jsx";
 import Paging from "./paging.jsx";
 import Sidebar from "./sidebar.jsx";
 
-const author = {
-    name: "Molossus Spondee",
-    url: "/about/"
-};
-
 export const Post = ({
     children, paging,
     metadata: {
         category, dateXml, dateDisplay, title, subtitle,
-        notice, tags, places, people
+        notice, tags, places, people, author
     }
 }) =>
 <Page>

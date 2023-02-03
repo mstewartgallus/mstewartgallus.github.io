@@ -76,7 +76,7 @@ const BlogPost = ({
     }
 
     return <>
-               <Post paging={paging} metadata={metadata}>
+               <Post paging={paging} metadata={{ ...metadata, author }}>
                    <Content />
                </Post>
                <SeoPostFoot
