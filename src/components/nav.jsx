@@ -1,11 +1,11 @@
 import * as React from "react";
 
-export const Nav = ({children, title}) => {
+export const Nav = ({children, heading}) => {
     const id = React.useId();
     return <nav aria-labelledby={id}>
                <header className="sr-only">
-                   <hgroup>
-                       <h2 id={id}>{title}</h2>
+                   <hgroup id={id}>
+                       {heading}
                    </hgroup>
                </header>
                {children}

@@ -9,3 +9,5 @@ query {
     }
   }
 }`).site.siteMetadata;
+
+export default useSiteMetadata;

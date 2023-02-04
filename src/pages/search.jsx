@@ -1,17 +1,16 @@
 import * as React from "react";
 import { Link } from "gatsby";
 
-import Breadcrumbs from "../components/breadcrumbs.jsx";
+import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
-import Main from  "../components/main.jsx";
-import Page from "../components/page.jsx";
+import Nav from  "../components/nav.jsx";
+import Post from "../components/post.jsx";
 import { Select, Option } from "../components/select.jsx";
-import Sidebar from "../components/sidebar.jsx";
-import Title from "../components/title.jsx";
 import { separator } from "../utils/separator.js";
-import { useSubmit } from "../hooks/use-submit.js";
-import { usePostTags } from "../hooks/use-post-tags.js";
-import { useSearch } from "../hooks/use-search.js";
+import Title from "../components/title.jsx";
+import useSubmit from "../hooks/use-submit.js";
+import usePostTags from "../hooks/use-post-tags.js";
+import useSearch from "../hooks/use-search.js";
 import { search, query } from "./search.module.css";
 
 const emptyQuery = {
@@ -138,14 +137,14 @@ export const Head = ({location}) => {
     }, [location]);
 
     return <>
-        <HeadBasic />
-        <Title>{title}</Title>
-        <link rel="modulepreload" href="/static/pagefind/pagefind.js" />
-        <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
-              as="fetch" crossOrigin="crossOrigin"
-              type="application/octet-stream"
-        />
-    </>;
+               <HeadBasic />
+               <Title>{title}</Title>
+               <link rel="modulepreload" href="/static/pagefind/pagefind.js" />
+               <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
+                     as="fetch" crossOrigin="crossOrigin"
+                     type="application/octet-stream"
+               />
+           </>;
 };
 
 const SearchPage = ({location}) => {
@@ -171,23 +170,26 @@ const SearchPage = ({location}) => {
     const title =
           <>{hasQuery && <>{query}{separator}</>}Search</>;
 
-    return <Page>
-               <Main title={title}>
-                   <PostList links={links} />
-               </Main>
-               <Sidebar>
-                   <SearchForm location={location}
-                               onSubmit={onSubmit}
-                               tags={tags}
-                               set={set}
-                               state={state}
-                   />
-                   <Breadcrumbs>
-                       <li><Link to="/">Home</Link></li>
-                       <li aria-current="page"><cite>Search</cite></li>
-                   </Breadcrumbs>
-               </Sidebar>
-           </Page>;
+    return <Post heading={<h1>{title}</h1>}
+                 sidebar={
+                     <>
+                         <SearchForm location={location}
+                                     onSubmit={onSubmit}
+                                     tags={tags}
+                                     set={set}
+                                     state={state}
+                         />
+                         <Nav heading={<h2>Breadcrumbs</h2>}>
+                             <BreadcrumbList>
+                                 <li><Link to="/">Home</Link></li>
+                                 <li aria-current="page"><cite>Search</cite></li>
+                             </BreadcrumbList>
+                         </Nav>
+                     </>
+                 }
+           >
+               <PostList links={links} />
+           </Post>;
 };
 
 export default SearchPage;

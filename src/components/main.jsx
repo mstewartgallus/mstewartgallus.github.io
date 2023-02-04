@@ -1,14 +1,11 @@
 import * as React from "react";
 
-export const Main = ({children, title, subtitle, notice}) => {
+export const Main = ({children, heading, notice}) => {
     const id = React.useId();
     return <main data-pagefind-body aria-describedby={id}>
                <header>
-                   <hgroup>
-                       <h1 id={id}>{title}</h1>
-                       {
-                           subtitle && <p>{subtitle}</p>
-                       }
+                   <hgroup id={id}>
+                       {heading}
                    </hgroup>
                    {notice}
                </header>

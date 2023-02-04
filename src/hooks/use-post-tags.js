@@ -12,3 +12,5 @@ query {
 }`).allPost;
     return posts;
 };
+
+export default usePostTags;

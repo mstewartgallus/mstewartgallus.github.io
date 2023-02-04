@@ -1,4 +1,4 @@
-const useBlogPosting = ({
+export const useBlogPosting = ({
     title, date, author, category, tags, people, places
 }) => ({
     "@context": "https://schema.org",

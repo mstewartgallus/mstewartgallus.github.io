@@ -1,10 +1,10 @@
 import * as React from "react";
 
-export const Footer = ({children, title}) => {
+export const Footer = ({children, heading, ...props}) => {
     const id = React.useId();
-    return <footer aria-labelledby={id}>
-               <hgroup className="sr-only">
-                   <h2 id={id}>{title}</h2>
+    return <footer {...props} aria-labelledby={id}>
+               <hgroup className="sr-only" id={id}>
+                   {heading}
                </hgroup>
                {children}
            </footer>;

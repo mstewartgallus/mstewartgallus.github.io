@@ -75,3 +75,5 @@ export const useSearch = () => {
 
     return [links, setQuery];
 };
+
+export default useSearch;

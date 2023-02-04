@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSiteMetadata } from "../hooks/use-site-metadata.js";
+import useSiteMetadata from "../hooks/use-site-metadata.js";
 import separator from "../utils/separator.js";
 
 export const Title = ({ children }) => {

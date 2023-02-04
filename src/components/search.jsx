@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSubmit } from "../hooks/use-submit.js";
 import { search, query } from "./search.module.css";
 
-const Search = () => {
+export const Search = () => {
     const id = React.useId();
     const onSubmit = useSubmit();
 

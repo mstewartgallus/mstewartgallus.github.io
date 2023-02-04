@@ -37,3 +37,5 @@ export const useSubmit = () => {
         await navigate(url);
     }, []);
 };
+
+export default useSubmit;

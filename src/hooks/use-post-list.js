@@ -21,3 +21,5 @@ query {
         [label, nodes.map(l => l.post.metadata)]);
     return Object.fromEntries(entries);
 }
+
+export default usePostList;

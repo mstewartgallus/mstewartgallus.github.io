@@ -66,7 +66,7 @@ export const Head = ({ data: { post: { metadata } } }) => {
 const BlogPost = ({ children, data: { post } }) =>  {
     let { childrenLink, metadata } = post;
 
-    metadata = { author,...metadata };
+    metadata = { author, ...metadata };
 
     const breadcrumbList = useBreadcrumbList(metadata);
     const blogPosting = useBlogPosting(metadata);
@@ -75,25 +75,29 @@ const BlogPost = ({ children, data: { post } }) =>  {
     const { category, title, subtitle, notice } = metadata;
 
     return <>
-               <Post title={title} subtitle={subtitle}
-                     notice={<ListNotice notice={notice} />}
-                     sidebar={
-                         <>
-                             <Nav title="Paging">
-                                 <Paging paging={paging} />
-                             </Nav>
-                             <Footer title="Metadata">
-                                 <Metadata {...metadata} />
-                             </Footer>
-                             <Nav title="Breadcrumbs">
-                                 <BreadcrumbList>
-                                     <li><Link to="/">Home</Link></li>
-                                     <li><LinkCategory rel="tag" category={category} /></li>
-                                     <li aria-current="page"><cite>{title}</cite></li>
-                                 </BreadcrumbList>
-                             </Nav>
-                         </>
-                     }>
+               <Post
+                   heading={<>
+                                <h1>{title}</h1>
+                                <p>{subtitle}</p>
+                            </>}
+                   notice={<ListNotice notice={notice} />}
+                   sidebar={
+                       <>
+                           <Nav heading={<h2>Paging</h2>}>
+                               <Paging {...paging.ALL} />
+                           </Nav>
+                           <Footer heading={<h2>Metadata</h2>}>
+                               <Metadata {...metadata} />
+                           </Footer>
+                           <Nav heading={<h2>Breadcrumbs</h2>}>
+                               <BreadcrumbList>
+                                   <li><Link to="/">Home</Link></li>
+                                   <li><LinkCategory rel="tag" category={category} /></li>
+                                   <li aria-current="page"><cite>{title}</cite></li>
+                               </BreadcrumbList>
+                           </Nav>
+                       </>
+                   }>
                    <Content {...post}>{children}</Content>
                </Post>
                <JsonLd srcdoc={breadcrumbList} />

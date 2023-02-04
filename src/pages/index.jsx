@@ -1,39 +1,19 @@
 import * as React from "react";
 import Banner from "../components/banner.jsx";
-import Breadcrumbs from "../components/breadcrumbs.jsx";
+import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
+import Header from "../components/header.jsx";
 import JsonLd from "../components/json-ld.jsx";
-import Main from "../components/main.jsx";
-import Page from "../components/page.jsx";
+import Nav from "../components/nav.jsx";
+import Post from "../components/post.jsx";
 import PostList from "../components/post-list.jsx";
 import Search from "../components/search.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
-import Sidebar from "../components/sidebar.jsx";
 import Title from "../components/title.jsx";
-import { useAbsolute } from "../hooks/use-absolute.js";
-import { usePostList } from "../hooks/use-post-list.js";
-import { useSiteMetadata } from "../hooks/use-site-metadata.js";
-
-const useJSON = () => {
-    const site = useSiteMetadata();
-    const search = useAbsolute('/search');
-    const index = useAbsolute('/');
-    return {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": site.title,
-        "description": site.description,
-        "url": index,
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": `${search}?s={s}`
-            },
-            "query-input": "required name=s"
-        }
-    };
-};
+import useAbsolute from "../hooks/use-absolute.js";
+import usePostList from "../hooks/use-post-list.js";
+import useSiteMetadata from "../hooks/use-site-metadata.js";
+import useWebsite from "../hooks/use-website.js";
 
 const title = "Table of Contents";
 
@@ -48,23 +28,34 @@ export const Head = ({location: {pathname}}) => {
 };
 
 const IndexPage = props => {
-    const json = useJSON();
+    const { title, description } = useSiteMetadata();
+
+    const json = useWebsite();
     const indices = usePostList();
     const posts = indices.ALL;
     return <>
-        <Page>
-            <Main title="Posts">
-                <PostList posts={posts} />
-            </Main>
-            <Sidebar>
-                <Banner />
-                <Search />
-                <Breadcrumbs>
-                    <li aria-current="page">Home</li>
-                </Breadcrumbs>
-            </Sidebar>
-        </Page>
-        <JsonLd srcdoc={json} />
+               <Post heading={<h1>Posts</h1>}
+                     sidebar={
+                         <>
+                             <Header
+                                 heading={
+                                     <>
+                                         <h2>{title}</h2>
+                                         <p>{description}</p>
+                                     </>}>
+                                 <Banner />
+                             </Header>
+                             <Search />
+                             <Nav heading={<h2>Breadcrumbs</h2>}>
+                                 <BreadcrumbList>
+                                     <li aria-current="page">Home</li>
+                                 </BreadcrumbList>
+                             </Nav>
+                         </>
+                     }>
+                   <PostList posts={posts} />
+               </Post>
+               <JsonLd srcdoc={json} />
     </>;
 };
 

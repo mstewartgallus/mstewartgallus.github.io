@@ -15,16 +15,11 @@ const Next = ({ children, href }) =>
         <dd><cite>{children}</cite></dd>
     </div>;
 
-const Pages = ({ previous, next }) =>
+export const Paging = ({ previous, next }) =>
 <dl>
     { previous && <Prev href={previous.slug}>{previous.title}</Prev> }
     { next && <Next href={next.slug}>{next.title}</Next> }
 </dl>;
 
-
-export const Paging = ({ paging }) => {
-    const {previous, next} = paging.ALL;
-    return <Pages previous={previous} next={next} />;
-};
 
 export default Paging;
