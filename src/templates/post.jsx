@@ -1,93 +1,67 @@
 import * as React from "react";
 import { graphql } from "gatsby";
+import { MDXProvider } from "@mdx-js/react";
 import HeadBasic from "../components/head-basic.jsx";
 import Post from "../components/post.jsx";
 import Poem from "../components/poem.jsx";
-import PostMDX from "../components/post-mdx.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import SeoPostFoot from "../components/seo-post-foot.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
 import Title from "../components/title.jsx";
-import { useAbsolute } from "../hooks/use-absolute.js";
+import useAbsolute from "../hooks/use-absolute.js";
+import useMdxComponents from "../hooks/use-mdx-components.js";
 
 const author = {
     name: "Molossus Spondee",
     url: "/about/"
 };
 
-export const Head = ({
-    location: {pathname},
-    data: {
-        post
-    }
-}) => {
-    const { metadata } = post;
-    const {
-        description, title, dateXml, category, tags, places, people
-    } = metadata;
-    const url = useAbsolute(pathname);
-    return [
-        <HeadBasic/>,
-        <Title>{title}</Title>,
-        <SeoBasic description={description} title={title} url={url} />,
-        <SeoPostHead
-            title={title}
-            date={dateXml}
-            author={author}
-            category={category}
-            tags={tags}
-            people={people}
-            places={places}
-        />];
+const pagingOfLinks = links =>
+      Object.fromEntries(links.map(({
+          index,
+          previous, next
+      }) => [index.label, {
+          previous: previous?.post?.metadata,
+          next: next?.post?.metadata
+      }]));
+
+const Provider = ({ children, category }) => {
+    const components = useMdxComponents(category);
+    return <MDXProvider components={components}>{children}</MDXProvider>;
 };
 
-const BlogPost = ({
-    children,
-    data: { post }
-}) => {
-    const { childrenLink, metadata, poem } = post;
-    const type = post.__typename;
-
-    const paging = Object.fromEntries(childrenLink.map(({
-        index: { label },
-        previous, next
-    }) => [label, {
-        previous: previous?.post?.metadata,
-        next: next?.post?.metadata
-    }]));
-
-    const {
-        category, dateXml, title,
-        tags, places, people
-    } = metadata;
-
-    let Content;
-    switch (type) {
+const Content = ({ children, __typename, metadata, poem }) => {
+    switch (__typename) {
     case "PostPoem":
-        Content = () => <Poem poem={poem.content} />;
-        break;
+        return <Poem poem={poem.content} />;
 
     case "PostMdx":
-        Content = () => <PostMDX category={category}>{children}</PostMDX>;
-        break;
+        return <Provider category={metadata.category}>{children}</Provider>;
 
     default:
-        throw new Error(`unknown type ${type}`);
+        throw new Error(`unknown type ${__typename}`);
     }
+};
 
+export const Head = ({ data: { post: { metadata } } }) => {
+    const { description, title, slug } = metadata;
+    const url = useAbsolute(slug);
     return <>
-               <Post paging={paging} metadata={{ ...metadata, author }}>
-                   <Content />
+               <HeadBasic/>
+               <Title>{title}</Title>
+               <SeoBasic description={description} title={title} url={url} />
+               <SeoPostHead author={author} {...metadata} />
+           </>;
+};
+
+const BlogPost = ({ children, data: { post } }) =>  {
+    const { childrenLink, metadata } = post;
+    return <>
+               <Post paging={pagingOfLinks(childrenLink)}
+                     metadata={{ author, ...metadata }}>
+                   <Content {...post}>{children}</Content>
                </Post>
-               <SeoPostFoot
-                   title={title}
-                   date={dateXml}
-                   author={author}
-                   category={category}
-                   tags={tags}
-                   people={people}
-                   places={places}
-               />
+               <SeoPostFoot author={author} {...metadata} />
            </>;
 };
 
@@ -124,8 +98,9 @@ query BlogById($id: String!) {
       }
     }
     metadata {
+      slug
       dateDisplay: date(formatString: "YYYY-MM-DD")
-      dateXml: date(formatString: "YYYY-MM-DDTHH:mmZ")
+      date: date(formatString: "YYYY-MM-DDTHH:mmZ")
       description
       title
       subtitle

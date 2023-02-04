@@ -42,7 +42,7 @@ const PeopleList = ({people}) =>
     </div>;
 
 export const Metadata = ({
-    dateDisplay, dateXml, author, places, tags, people
+    dateDisplay, date, author, places, tags, people
 }) => {
     const id = React.useId();
     return <footer className={metadata} aria-describedby={id}>
@@ -56,7 +56,7 @@ export const Metadata = ({
                        <dd>
                            <time data-pagefind-filter="date[datetime]"
                                  data-pagefind-sort="date[datetime]"
-                                 dateTime={dateXml}>
+                                 dateTime={date}>
                                {dateDisplay}
                            </time>
                        </dd>

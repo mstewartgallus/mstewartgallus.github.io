@@ -13,3 +13,5 @@ export const useAbsolute = (pathname) => {
     const site = useMetadata();
     return new URL(pathname, site.siteUrl).toString();
 };
+
+export default useAbsolute;
