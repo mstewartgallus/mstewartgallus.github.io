@@ -1,14 +1,23 @@
 import * as React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
+import BreadcrumbList from "../components/breadcrumb-list.jsx";
+import Footer from "../components/footer.jsx";
 import HeadBasic from "../components/head-basic.jsx";
-import Post from "../components/post.jsx";
+import JsonLd from "../components/json-ld.jsx";
+import LinkCategory from "../components/link-category.jsx";
+import ListNotice from "../components/list-notice.jsx";
+import Metadata from "../components/metadata.jsx";
+import Nav from "../components/nav.jsx";
+import Paging from "../components/paging.jsx";
 import Poem from "../components/poem.jsx";
+import Post from "../components/post.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
-import SeoPostFoot from "../components/seo-post-foot.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
+import useBlogPosting from "../hooks/use-blog-posting.js";
+import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 import useMdxComponents from "../hooks/use-mdx-components.js";
 
 const author = {
@@ -55,13 +64,40 @@ export const Head = ({ data: { post: { metadata } } }) => {
 };
 
 const BlogPost = ({ children, data: { post } }) =>  {
-    const { childrenLink, metadata } = post;
+    let { childrenLink, metadata } = post;
+
+    metadata = { author,...metadata };
+
+    const breadcrumbList = useBreadcrumbList(metadata);
+    const blogPosting = useBlogPosting(metadata);
+
+    const paging = pagingOfLinks(childrenLink);
+    const { category, title, subtitle, notice } = metadata;
+
     return <>
-               <Post paging={pagingOfLinks(childrenLink)}
-                     metadata={{ author, ...metadata }}>
+               <Post title={title} subtitle={subtitle}
+                     notice={<ListNotice notice={notice} />}
+                     sidebar={
+                         <>
+                             <Nav title="Paging">
+                                 <Paging paging={paging} />
+                             </Nav>
+                             <Footer title="Metadata">
+                                 <Metadata {...metadata} />
+                             </Footer>
+                             <Nav title="Breadcrumbs">
+                                 <BreadcrumbList>
+                                     <li><Link to="/">Home</Link></li>
+                                     <li><LinkCategory rel="tag" category={category} /></li>
+                                     <li aria-current="page"><cite>{title}</cite></li>
+                                 </BreadcrumbList>
+                             </Nav>
+                         </>
+                     }>
                    <Content {...post}>{children}</Content>
                </Post>
-               <SeoPostFoot author={author} {...metadata} />
+               <JsonLd srcdoc={breadcrumbList} />
+               <JsonLd srcdoc={blogPosting} />
            </>;
 };
 

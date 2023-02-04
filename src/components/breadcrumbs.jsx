@@ -1,16 +1,10 @@
 import * as React from "react";
-import { breadcrumbs, breadcrumb } from "./breadcrumbs.module.css";
+import BreadcrumbList from "./breadcrumb-list.jsx";
+import Nav from "./nav.jsx";
 
-export const Breadcrumbs = ({children}) => {
-    const id = React.useId();
-    return <nav className={breadcrumbs} aria-labelledby={id}>
-               <header className="sr-only">
-                   <hgroup>
-                       <h2 id={id}>Breadcrumbs</h2>
-                   </hgroup>
-               </header>
+export const Breadcrumbs = ({children}) =>
+<Nav title="Breadcrumbs">
+    <BreadcrumbList>{children}</BreadcrumbList>
+</Nav>;
 
-               <ol className={breadcrumb}>{children}</ol>
-           </nav>;
-};
 export default Breadcrumbs;
