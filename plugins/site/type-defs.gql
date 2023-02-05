@@ -3,3 +3,14 @@ type SiteSiteMetadata {
   description: String!
   siteUrl: String!
 }
+
+type Frontmatter {
+  title: String
+  subtitle: String
+  description: String
+  date: Date @dateformat
+  notice: [String!]
+  tags: [String!]
+  places: [String!]
+  people: [String!]
+}

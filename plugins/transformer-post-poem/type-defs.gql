@@ -1,14 +1,3 @@
-type Frontmatter {
-  title: String
-  subtitle: String
-  description: String
-  date: Date @dateformat
-  notice: [String!]
-  tags: [String!]
-  places: [String!]
-  people: [String!]
-}
-
 type PostPoem implements Node & Post @childOf(types: ["Poem"]) {
   id: ID!
   metadata: Metadata!

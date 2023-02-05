@@ -8,18 +8,7 @@ export const siteMetadata = {
     siteUrl: "https://mstewartgallus.github.io"
 };
 
-const serialize = ({ query: { allLink } }) => {
-    const siteUrl = siteMetadata.siteUrl;
-    return allLink.nodes.map(node => {
-        const { metadata } = node.post;
-        return {
-            ...metadata,
-            url: siteUrl + metadata.slug,
-            guid: siteUrl + metadata.slug,
-            custom_elements: []
-        };
-    });
-};
+const { title, siteUrl } = siteMetadata;
 
 const query =
 `{
@@ -39,12 +28,47 @@ const query =
 const feed = {
     feeds: [
         {
-            serialize,
             query,
+            title,
+            match: "^/(poem|prose|web)/",
             output: "/feed.xml",
-            title: siteMetadata.title
+            serialize: ({ query: { allLink } }) => {
+                return allLink.nodes.map(node => {
+                    const { metadata } = node.post;
+                    const { title, category, slug, date} = metadata;
+                    return {
+                        title,
+                        categories: [category],
+                        date,
+                        url: siteUrl + slug,
+                        guid: siteUrl + slug,
+                        custom_elements: []
+                    };
+                });
+            }
         }
     ]
+};
+
+const sitemap = {
+    query,
+    excludes: [],
+    resolveSiteUrl: () => siteUrl,
+    resolvePages: ({ allLink }) => {
+        return allLink.nodes.map(node => {
+            const { metadata } = node.post;
+            return { ...metadata, path: metadata.slug };
+        });
+    },
+    resolvePagePath: page => page.slug,
+    filterPages: page => false,
+    serialize: metadata => {
+        const { slug, date} = metadata;
+        return {
+            url: siteUrl + slug,
+            lastmod: date
+        };
+    }
 };
 
 export const graphqlTypegen = true;
@@ -55,18 +79,24 @@ export const flags = {
 };
 
 export const plugins = [
-    "gatsby-plugin-sitemap",
+    {
+        resolve: "gatsby-plugin-sitemap",
+        options: sitemap
+    },
+    {
+        resolve: "gatsby-plugin-feed",
+        options: feed
+    },
     {
         resolve: "gatsby-plugin-mdx",
         options: {
             extensions: ['.md', '.mdx', '.markdown'],
-             mdxOptions: {
-                 remarkPlugins: [RemarkGfm],
-                 rehypePlugins: [RehypeSlug],
+            mdxOptions: {
+                remarkPlugins: [RemarkGfm],
+                rehypePlugins: [RehypeSlug],
             }
         }
     },
-    "gatsby-transformer-yaml",
     {
         resolve: "gatsby-source-filesystem",
         options: {
@@ -87,10 +117,6 @@ export const plugins = [
             path: './blog/web',
             name: 'Web'
         }
-    },
-    {
-        resolve: "gatsby-plugin-feed",
-        options: feed
     },
     "pagefind",
     "post",
