@@ -4,7 +4,8 @@ import { mkResolve } from "../../src/utils/resolve.js";
 
 const resolve = mkResolve(import.meta);
 
-const typeDefs = resolve('./type-defs.gql');
+const typeDefs =  fs.readFile(resolve('./type-defs.gql'),
+                              { encoding: 'utf-8' });
 
 const frontmatter = source => {
     return grayMatter(source, {
@@ -52,8 +53,7 @@ const poemNodeOfFile = async ({ node, loadNodeContent }) => {
 
 export const createSchemaCustomization = async ({ actions, schema }) => {
     const { createTypes } = actions;
-    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
-    await createTypes(types);
+    await createTypes(await typeDefs);
 };
 
 export const shouldOnCreateNode = ({node}) =>

@@ -3,7 +3,8 @@ import { mkResolve } from "../../src/utils/resolve.js";
 
 const resolve = mkResolve(import.meta);
 
-const typeDefs = resolve('./type-defs.gql');
+const typeDefs = fs.readFile(resolve('./type-defs.gql'),
+                             { encoding: 'utf-8' });
 
 const fields = [
     'description', 'name', 'category', 'date',
@@ -53,8 +54,7 @@ const postNodeOfPoem = async ({ node, getNode }) => {
 
 export const createSchemaCustomization = async ({ actions, schema }) => {
     const { createTypes } = actions;
-    const types = await fs.readFile(typeDefs, { encoding: `utf-8` });
-    await createTypes(types);
+    await createTypes(await typeDefs);
 };
 
 export const shouldOnCreateNode = ({node}) => 'Poem' === node.internal.type;
