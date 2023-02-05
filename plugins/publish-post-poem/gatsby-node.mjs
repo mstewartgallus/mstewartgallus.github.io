@@ -39,7 +39,7 @@ export const createPages = async ({actions, graphql, reporter}) => {
         } = post;
         return await createPage({
             path: slug,
-            component: `${poemTemplate}`,
+            component: poemTemplate,
             context: { id }
         });
     }));

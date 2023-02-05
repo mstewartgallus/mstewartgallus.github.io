@@ -35,7 +35,7 @@ const metadata = frontmatter => {
     return meta;
 };
 
-const postNodeOfPoem = async ({ node, getNode }) => {
+const postNodeOfPoem = ({ node, getNode }) => {
     const parent = getNode(node.parent);
     const category = parent.sourceInstanceName;
     const name = parent.name;
@@ -67,7 +67,8 @@ export const onCreateNode = async props => {
         createNodeId,
         getNode
     } = props;
-    const post = await postNodeOfPoem(props);
+
+    const post = postNodeOfPoem(props);
 
     const postPoem = { ...post, poem: node };
 
@@ -81,6 +82,8 @@ export const onCreateNode = async props => {
             contentDigest: createContentDigest(postPoem)
         }
     };
-    await actions.createNode(postNode);
-    await actions.createParentChildLink({ parent: node, child: postNode });
+    await Promise.all([
+        actions.createNode(postNode),
+        actions.createParentChildLink({ parent: node, child: postNode })
+    ]);
 };

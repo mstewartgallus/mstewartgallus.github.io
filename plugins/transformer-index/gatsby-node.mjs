@@ -48,14 +48,16 @@ const previous = async (source, args, context, info) => {
     return null;
 };
 
-const indexNodeId = (label, props) => props.createNodeId(`${label} >>> INDEX`);
+const getIndexNode = async (label, {actions, createContentDigest,
+                                    createNodeId, getNode}) => {
+    const id = createNodeId(`${label} >>> INDEX`);
 
-const createIndexNode = async (label, props) => {
-    const {actions, createContentDigest} = props;
+    let node = getNode(id);
+    if (node) {
+        return node;
+    }
 
-    const id = indexNodeId(label, props);
-
-    const node = {
+    node = {
         label,
         id,
         parent: null,
@@ -67,14 +69,6 @@ const createIndexNode = async (label, props) => {
     };
     await actions.createNode(node);
     return node;
-};
-
-const getIndexNode = async (label, props) => {
-    const node = props.getNode(indexNodeId(label, props));
-    if (node) {
-        return node;
-    }
-    return await createIndexNode(label, props);
 };
 
 export const createResolvers = async ({ createResolvers }) => {
@@ -111,6 +105,9 @@ export const onCreateNode = async props => {
             contentDigest: createContentDigest(link)
         }
     };
-    await actions.createNode(linkNode);
-    await actions.createParentChildLink({ parent: node, child: linkNode });
+
+    await Promise.all([
+        actions.createNode(linkNode),
+        actions.createParentChildLink({ parent: node, child: linkNode })
+    ]);
 };

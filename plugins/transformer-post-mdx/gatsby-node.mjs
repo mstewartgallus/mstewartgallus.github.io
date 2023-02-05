@@ -35,7 +35,7 @@ const metadata = frontmatter => {
     return meta;
 };
 
-const postNodeOfMdx = async ({ node, getNode }) => {
+const postNodeOfMdx = ({ node, getNode }) => {
     const parent = getNode(node.parent);
     const category = parent.sourceInstanceName;
     const name = parent.name;
@@ -59,7 +59,7 @@ export const onCreateNode = async ({
     createNodeId,
     getNode
 }) => {
-    const post = await postNodeOfMdx({ node, getNode });
+    const post = postNodeOfMdx({ node, getNode });
     const postMdx = { ...post, mdx: node };
     const postNode = {
         ...postMdx,
@@ -71,6 +71,8 @@ export const onCreateNode = async ({
             contentDigest: createContentDigest(postMdx)
         }
     };
-    await actions.createNode(postNode);
-    await actions.createParentChildLink({ parent: node, child: postNode });
+    await Promise.all([
+        actions.createNode(postNode),
+        actions.createParentChildLink({ parent: node, child: postNode })
+    ]);
 };

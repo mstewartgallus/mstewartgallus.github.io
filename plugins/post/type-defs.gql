@@ -1,4 +1,4 @@
-type Metadata {
+type Metadata @dontInfer {
   name: String!
   date: Date! @dateformat
   category: String!

@@ -50,7 +50,8 @@ const feed = {
 export const graphqlTypegen = true;
 
 export const flags = {
-    DEV_SSR: true
+    DEV_SSR: true,
+    PARALLEL_SOURCING: true
 };
 
 export const plugins = [

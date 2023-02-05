@@ -1,9 +1,9 @@
-type Index implements Node {
+type Index implements Node @dontInfer {
   id: ID!
   label: String!
 }
 
-type Link implements Node @childOf(types: ["Post"]) {
+type Link implements Node @dontInfer @childOf(types: ["Post"]) {
   id: ID!
   index: Index!
   post: Post!
