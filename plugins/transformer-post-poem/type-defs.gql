@@ -1,5 +1,5 @@
 type PostPoem implements Node & Post @childOf(types: ["Poem"]) {
   id: ID!
   metadata: Metadata!
-  poem: Poem!
+  poem: Poem! @link
 }

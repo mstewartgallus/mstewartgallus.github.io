@@ -70,7 +70,7 @@ export const onCreateNode = async props => {
 
     const post = postNodeOfPoem(props);
 
-    const postPoem = { ...post, poem: node };
+    const postPoem = { ...post, poem: node.id };
 
     const postNode = {
         ...postPoem,

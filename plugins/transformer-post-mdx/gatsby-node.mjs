@@ -60,7 +60,7 @@ export const onCreateNode = async ({
     getNode
 }) => {
     const post = postNodeOfMdx({ node, getNode });
-    const postMdx = { ...post, mdx: node };
+    const postMdx = { ...post, mdx: node.id };
     const postNode = {
         ...postMdx,
         children: [],

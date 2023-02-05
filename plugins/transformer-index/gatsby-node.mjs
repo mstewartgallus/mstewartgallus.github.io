@@ -93,7 +93,11 @@ export const onCreateNode = async props => {
 
     const index = await getIndexNode(ALL, props);
 
-    const link = { index, post: node, date: node.metadata.date };
+    const link = {
+        index: index.id,
+        post: node.id,
+        date: node.metadata.date
+    };
 
     const linkNode = {
         ...link,

@@ -5,9 +5,9 @@ type Index implements Node @dontInfer {
 
 type Link implements Node @dontInfer @childOf(types: ["Post"]) {
   id: ID!
-  index: Index!
-  post: Post!
+  index: Index! @link
+  post: Post! @link
+  date: Date! @dateformat
   next: Link
   previous: Link
-  date: Date! @dateformat
 }
