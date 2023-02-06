@@ -1,6 +1,7 @@
 type Index implements Node @dontInfer {
   id: ID!
   label: String!
+  links: [Link!]! @link(by: "index.id", from: "id")
 }
 
 type Link implements Node @dontInfer @childOf(types: ["Post"]) {

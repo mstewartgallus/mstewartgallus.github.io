@@ -48,8 +48,10 @@ const previous = async (source, args, context, info) => {
     return null;
 };
 
-const getIndexNode = async (label, {actions, createContentDigest,
-                                    createNodeId, getNode}) => {
+const getIndexNode = async (
+    label,
+    {actions, createContentDigest, createNodeId, getNode}
+) => {
     const id = createNodeId(`${label} >>> INDEX`);
 
     let node = getNode(id);
