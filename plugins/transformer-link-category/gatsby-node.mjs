@@ -22,7 +22,7 @@ export const onCreateNode = async props => {
 
     const index = createNodeId(`${category} >>> Index`);
     if (!getNode(index)) {
-        await actions.createNode({
+        const indexNode = {
             category,
             id: index,
             parent: null,
@@ -31,7 +31,8 @@ export const onCreateNode = async props => {
                 type: 'IndexCategory',
                 contentDigest: createContentDigest(category)
             }
-        });
+        };
+        await actions.createNode(indexNode);
     }
 
     const content = { index, post, date };

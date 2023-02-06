@@ -12,6 +12,7 @@ import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 import useIndexAll from "../hooks/use-index-all.js";
+import useIndexCategory from "../hooks/use-index-category.js";
 import usePostList from "../hooks/use-post-list.js";
 import useSiteMetadata from "../hooks/use-site-metadata.js";
 import useWebsite from "../hooks/use-website.js";
@@ -34,7 +35,12 @@ const IndexPage = props => {
     const json = useWebsite();
     const indices = usePostList();
     const indexAll = useIndexAll();
-    const posts = indices[indexAll];
+    const indexCategory = useIndexCategory();
+    const allPosts = indices[indexAll];
+    const postsByCategory =
+          Object.entries(indexCategory)
+          .map(([category, id]) => [category, indices[id]]);
+
     return <>
                <Post heading={<h1>Posts</h1>}
                      sidebar={
@@ -55,7 +61,15 @@ const IndexPage = props => {
                              </Nav>
                          </>
                      }>
-                   <PostList posts={posts} />
+                   <PostList posts={allPosts} />
+
+                   {
+                       postsByCategory.map(([category, posts]) =>
+                           <React.Fragment key={category}>
+                               <h2>{category}</h2>
+                               <PostList posts={posts} />
+                           </React.Fragment>)
+                   }
                </Post>
                <JsonLd srcdoc={json} />
     </>;
