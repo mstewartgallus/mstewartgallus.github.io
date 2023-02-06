@@ -124,6 +124,7 @@ export const plugins = [
     "transformer-poem",
     "transformer-post-mdx",
     "transformer-post-poem",
+    "transformer-link",
     "transformer-index",
     "publish-post-mdx",
     "publish-post-poem",

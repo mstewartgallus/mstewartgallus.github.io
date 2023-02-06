@@ -4,7 +4,7 @@ export const usePostList = () => {
     const group = useStaticQuery(graphql`
 query {
   allLink(sort: {date: DESC}) {
-    group(field: {index: {label: SELECT}}) {
+    group(field: {label: SELECT}) {
       label: fieldValue
       nodes {
         post {

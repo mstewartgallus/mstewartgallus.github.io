@@ -27,9 +27,9 @@ const author = {
 
 const pagingOfLinks = links =>
       Object.fromEntries(links.map(({
-          index,
+          label,
           previous, next
-      }) => [index.label, {
+      }) => [label, {
           previous: previous?.post?.metadata,
           next: next?.post?.metadata
       }]));
@@ -72,6 +72,7 @@ const BlogPost = ({ children, data: { post } }) =>  {
     const blogPosting = useBlogPosting(metadata);
 
     const paging = pagingOfLinks(childrenLink);
+
     const { category, title, subtitle, notice } = metadata;
 
     return <>
@@ -112,9 +113,7 @@ query BlogById($id: String!) {
   post(id: {eq: $id}) {
     __typename
     childrenLink {
-      index {
-        label
-      }
+      label
       previous {
         post {
           metadata {
