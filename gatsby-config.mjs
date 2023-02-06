@@ -12,14 +12,12 @@ const { title, siteUrl } = siteMetadata;
 
 const query =
 `{
-  allLink(sort: { date: DESC }) {
+  allPost(sort: { metadata: { date: DESC }}) {
    nodes {
-     post {
-       metadata {
-         title
-         date
-         slug
-       }
+     metadata {
+       title
+       date
+       slug
      }
    }
   }
@@ -32,10 +30,9 @@ const feed = {
             title,
             match: "^/(poem|prose|web)/",
             output: "/feed.xml",
-            serialize: ({ query: { allLink } }) => {
-                return allLink.nodes.map(node => {
-                    const { metadata } = node.post;
-                    const { title, category, slug, date} = metadata;
+            serialize: ({ query: { allPost } }) => {
+                return allPost.nodes.map(node => {
+                    const { title, category, slug, date} = node.metadata;
                     return {
                         title,
                         categories: [category],
@@ -54,9 +51,9 @@ const sitemap = {
     query,
     excludes: [],
     resolveSiteUrl: () => siteUrl,
-    resolvePages: ({ allLink }) => {
-        return allLink.nodes.map(node => {
-            const { metadata } = node.post;
+    resolvePages: ({ allPost }) => {
+        return allPost.nodes.map(node => {
+            const { metadata } = node;
             return { ...metadata, path: metadata.slug };
         });
     },
@@ -124,8 +121,8 @@ export const plugins = [
     "transformer-poem",
     "transformer-post-mdx",
     "transformer-post-poem",
-    "transformer-link",
-    "transformer-index",
+    "transformer-link-all",
+    "transformer-link-category",
     "publish-post-mdx",
     "publish-post-poem",
     "layout"

@@ -24,6 +24,53 @@ const slug = (source, args, context, info) => {
     return `/${catSlug}/${year}/${month}/${day}/${nameSlug}/`;
 };
 
+
+const next = async (source, args, context, info) => {
+    const { post, index, date } = source;
+    const { entries } = await context.nodeModel.findAll({
+        type: 'Link',
+        query: {
+            limit: 1,
+            sort: { fields: ['content.date'], order: ['ASC'] },
+            filter: {
+                content: {
+                    index: { id: { eq: index } },
+                    post: { id: { ne: post } },
+                    date: { gte: date }
+                }
+            }
+        }
+    });
+    const x = Array.from(entries);
+    if (x.length > 0) {
+        return x[0];
+    }
+    return null;
+};
+
+const previous = async (source, args, context, info) => {
+    const { post, index, date } = source;
+    const { entries } = await context.nodeModel.findAll({
+        type: 'Link',
+        query: {
+            limit: 1,
+            sort: { fields: ['content.date'], order: ['DESC'] },
+            filter: {
+                content: {
+                    index: { id: { eq: index } },
+                    post: { id: { ne: post } },
+                    date: { lte: date }
+                }
+            }
+        }
+    });
+    const x = Array.from(entries);
+    if (x.length > 0) {
+        return x[0];
+    }
+    return null;
+};
+
 const nil = (source, args, context, info) => source[info.fieldName] ?? [];
 
 export const createSchemaCustomization = async ({ actions, schema }) => {
@@ -33,6 +80,10 @@ export const createSchemaCustomization = async ({ actions, schema }) => {
 
 export const createResolvers = async ({ createResolvers }) => {
     await createResolvers({
+        Content: {
+            next: { type: 'Link', resolve: next },
+            previous: { type: 'Link', resolve: previous }
+        },
         Metadata: {
             slug: { type: 'String!', resolve: slug },
             notice: { type: '[String!]!', resolve: nil },

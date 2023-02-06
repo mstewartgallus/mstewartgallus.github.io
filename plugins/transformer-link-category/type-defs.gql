@@ -1,0 +1,9 @@
+type LinkCategory implements Node & Link @dontInfer @childOf(types: ["Post"]) {
+  id: ID!
+  content: Content!
+}
+
+type IndexCategory implements Node & Index @dontInfer {
+  id: ID!
+  category: String!
+}

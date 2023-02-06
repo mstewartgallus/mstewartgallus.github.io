@@ -3,22 +3,24 @@ import { graphql, useStaticQuery } from "gatsby";
 export const usePostList = () => {
     const group = useStaticQuery(graphql`
 query {
-  allLink(sort: {date: DESC}) {
-    group(field: {label: SELECT}) {
-      label: fieldValue
+  allLink(sort: {content: {date: DESC}}) {
+    group(field: {content: {index: {id: SELECT}}}) {
+      index: fieldValue
       nodes {
-        post {
-          metadata {
-            title
-            slug
+        content {
+          post {
+            metadata {
+              title
+              slug
+            }
           }
         }
       }
     }
   }
 }`).allLink.group;
-    const entries = group.map(({ label, nodes }) =>
-        [label, nodes.map(l => l.post.metadata)]);
+    const entries = group.map(({ index, nodes }) =>
+        [index, nodes.map(l => l.content.post.metadata)]);
     return Object.fromEntries(entries);
 }
 

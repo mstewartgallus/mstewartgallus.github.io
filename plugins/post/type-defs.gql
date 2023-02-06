@@ -3,6 +3,7 @@ type Metadata @dontInfer {
   date: Date! @dateformat
   category: String!
   slug: String!
+
   title: String!
   subtitle: String
   notice: [String!]!
@@ -15,4 +16,21 @@ type Metadata @dontInfer {
 interface Post implements Node {
   id: ID!
   metadata: Metadata!
+}
+
+type Content @dontInfer {
+  index: Index! @link
+  post: Post! @link
+  date: Date! @dateformat
+  next: Link
+  previous: Link
+}
+
+interface Link implements Node {
+  id: ID!
+  content: Content!
+}
+
+interface Index implements Node {
+  id: ID!
 }

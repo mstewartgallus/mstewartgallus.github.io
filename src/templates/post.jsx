@@ -18,6 +18,7 @@ import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 import useBlogPosting from "../hooks/use-blog-posting.js";
 import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
+import useIndexAll from "../hooks/use-index-all.js";
 import useMdxComponents from "../hooks/use-mdx-components.js";
 
 const author = {
@@ -25,13 +26,13 @@ const author = {
     url: "/about/"
 };
 
-const pagingOfLinks = links =>
-      Object.fromEntries(links.map(({
-          label,
+const pagingOfLinks = allLink =>
+      Object.fromEntries(allLink.nodes.map(({content: {
+          index: { id: index },
           previous, next
-      }) => [label, {
-          previous: previous?.post?.metadata,
-          next: next?.post?.metadata
+      }}) => [index, {
+          previous: previous?.content?.post?.metadata,
+          next: next?.content?.post?.metadata
       }]));
 
 const Provider = ({ children, category }) => {
@@ -63,15 +64,17 @@ export const Head = ({ data: { post: { metadata } } }) => {
            </>;
 };
 
-const BlogPost = ({ children, data: { post } }) =>  {
-    let { childrenLink, metadata } = post;
+const BlogPost = ({ children, data: { allLink, post } }) =>  {
+    let { metadata } = post;
 
     metadata = { author, ...metadata };
 
     const breadcrumbList = useBreadcrumbList(metadata);
     const blogPosting = useBlogPosting(metadata);
 
-    const paging = pagingOfLinks(childrenLink);
+    const indexAll = useIndexAll();
+
+    const paging = pagingOfLinks(allLink);
 
     const { category, title, subtitle, notice } = metadata;
 
@@ -85,7 +88,7 @@ const BlogPost = ({ children, data: { post } }) =>  {
                    sidebar={
                        <>
                            <Nav heading={<h2>Paging</h2>}>
-                               <Paging {...paging.ALL} />
+                               <Paging {...paging[indexAll]} />
                            </Nav>
                            <Footer heading={<h2>Metadata</h2>}>
                                <Metadata {...metadata} />
@@ -110,27 +113,37 @@ export default BlogPost;
 
 export const pageQuery = graphql`
 query BlogById($id: String!) {
-  post(id: {eq: $id}) {
-    __typename
-    childrenLink {
-      label
-      previous {
-        post {
-          metadata {
-            slug
-            title
+  allLink(filter: {content: {post: {id: {eq: $id}}}}) {
+    nodes {
+      content {
+        index {
+          id
+        }
+        next {
+          content {
+            post {
+              metadata {
+                slug
+                title
+              }
+            }
           }
         }
-      }
-      next {
-        post {
-          metadata {
-            slug
-            title
+        previous {
+          content {
+            post {
+              metadata {
+                slug
+                title
+              }
+            }
           }
         }
       }
     }
+  }
+  post(id: {eq: $id}) {
+    __typename
     ... on PostPoem {
       poem {
         content
@@ -150,4 +163,5 @@ query BlogById($id: String!) {
       people
     }
   }
-}`;
+}
+`;

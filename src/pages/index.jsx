@@ -11,6 +11,7 @@ import Search from "../components/search.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
+import useIndexAll from "../hooks/use-index-all.js";
 import usePostList from "../hooks/use-post-list.js";
 import useSiteMetadata from "../hooks/use-site-metadata.js";
 import useWebsite from "../hooks/use-website.js";
@@ -32,7 +33,8 @@ const IndexPage = props => {
 
     const json = useWebsite();
     const indices = usePostList();
-    const posts = indices.ALL;
+    const indexAll = useIndexAll();
+    const posts = indices[indexAll];
     return <>
                <Post heading={<h1>Posts</h1>}
                      sidebar={

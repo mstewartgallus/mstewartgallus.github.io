@@ -1,8 +1,0 @@
-type Link implements Node @dontInfer @childOf(types: ["Post"]) {
-  id: ID!
-  label: String!
-  post: Post! @link
-  date: Date! @dateformat
-  next: Link
-  previous: Link
-}

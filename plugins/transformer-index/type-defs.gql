@@ -1,5 +1,0 @@
-type Index implements Node @dontInfer {
-  id: ID!
-  label: String!
-  links: [Link!]! @link(by: "index.label", from: "label")
-}
