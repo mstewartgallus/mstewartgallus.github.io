@@ -34,8 +34,8 @@ const paging = ({
     next: next?.post
 }];
 
-const pagingOfLinks = allLink =>
-      Object.fromEntries(allLink.nodes.map(paging));
+const pagingOfLinks = childrenLink =>
+      Object.fromEntries(childrenLink.map(paging));
 
 const Provider = ({ children, category }) => {
     const components = useMdxComponents(category);
@@ -53,7 +53,7 @@ export const Head = ({ data: { post } }) => {
            </>;
 };
 
-const BlogPost = ({ children, data: { allLink, post, postPoem, postMdx } }) =>  {
+const BlogPost = ({ children, data: { post } }) =>  {
     post = { author, ...post };
 
     const breadcrumbList = useBreadcrumbList(post);
@@ -61,9 +61,13 @@ const BlogPost = ({ children, data: { allLink, post, postPoem, postMdx } }) =>  
 
     const indexAll = useIndexAll();
 
-    const paging = pagingOfLinks(allLink);
+    const {
+        category, title, subtitle, notice,
+        childrenLink,
+        childPostPoem, childPostMdx
+    } = post;
 
-    const { category, title, subtitle, notice } = post;
+    const paging = pagingOfLinks(childrenLink);
 
     return <>
                <Post
@@ -89,11 +93,11 @@ const BlogPost = ({ children, data: { allLink, post, postPoem, postMdx } }) =>  
                            </Nav>
                        </>
                    }>
-                   {postPoem &&
-                    <Poem poem={postPoem.poem.content} />
+                   {childPostPoem &&
+                    <Poem poem={childPostPoem.poem.content} />
                    }
-                   {postMdx &&
-                    <Provider category={post.category}>{children}</Provider>
+                   {childPostMdx &&
+                    <Provider category={category}>{children}</Provider>
                    }
                </Post>
                <JsonLd srcdoc={breadcrumbList} />
@@ -105,8 +109,27 @@ export default BlogPost;
 
 export const pageQuery = graphql`
 query BlogById($id: String!) {
-  allLink(filter: {post: {id: {eq: $id}}}) {
-    nodes {
+  post(id: {eq: $id}) {
+    slug
+    dateDisplay: date(formatString: "YYYY-MM-DD")
+    date: date(formatString: "YYYY-MM-DDTHH:mmZ")
+    description
+    title
+    subtitle
+    category
+    notice
+    tags
+    places
+    people
+    childPostPoem {
+      poem {
+        content
+      }
+    }
+    childPostMdx {
+      id
+    }
+    childrenLink {
       index {
         id
       }
@@ -122,29 +145,6 @@ query BlogById($id: String!) {
           title
         }
       }
-    }
-  }
-  post(id: {eq: $id}) {
-    slug
-    dateDisplay: date(formatString: "YYYY-MM-DD")
-    date: date(formatString: "YYYY-MM-DDTHH:mmZ")
-    description
-    title
-    subtitle
-    category
-    notice
-    tags
-    places
-    people
-  }
-  postPoem(post: { id: {eq: $id} }) {
-    poem {
-      content
-    }
-  }
-  postMdx(post: { id: {eq: $id} }) {
-    mdx {
-      id
     }
   }
 }

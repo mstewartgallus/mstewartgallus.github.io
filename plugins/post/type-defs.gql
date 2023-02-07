@@ -13,7 +13,7 @@ type Post implements Node @dontInfer {
   description: String
 }
 
-type Link implements Node @dontInfer {
+type Link implements Node @dontInfer @childOf(types: ["Post"]) {
   id: ID!
   index: Index! @link
   post: Post! @link

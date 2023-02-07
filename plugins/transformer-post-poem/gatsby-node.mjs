@@ -7,35 +7,6 @@ const resolve = mkResolve(import.meta);
 const typeDefs = fs.readFile(resolve('./type-defs.gql'),
                              { encoding: 'utf-8' });
 
-const fields = [
-    'description', 'name', 'category', 'date',
-    'title', 'subtitle',
-    'notice', 'tags', 'places', 'people',
-    'author'
-];
-
-const metadata = frontmatter => {
-    const {
-        name, category, date
-    } = frontmatter;
-
-    if (!category) {
-        throw new Error("no category");
-    }
-    if (!date) {
-        throw new Error("no date");
-    }
-    if (!name) {
-        throw new Error("no name");
-    }
-
-    const meta = {};
-    for (const field of fields) {
-        meta[field] = frontmatter[field];
-    }
-    return meta;
-};
-
 const postNodeOfPoem = ({ node, getNode }) => {
     const parent = getNode(node.parent);
     const category = parent.sourceInstanceName;
@@ -48,7 +19,7 @@ const postNodeOfPoem = ({ node, getNode }) => {
           .map(x => x.join('\u2009\u2014\u2009'))
           .join('\n');
 
-    return metadata({ name, category, description, ...node.frontmatter });
+    return { name, category, description, ...node.frontmatter };
 };
 
 export const createSchemaCustomization = async ({ actions, schema }) => {

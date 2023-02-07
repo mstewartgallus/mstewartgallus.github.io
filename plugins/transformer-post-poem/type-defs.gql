@@ -1,4 +1,4 @@
-type PostPoem implements Node @dontInfer {
+type PostPoem implements Node @dontInfer @childOf(types: ["Post"]) {
   id: ID!
   post: Post! @link
   poem: Poem! @link

@@ -4,6 +4,36 @@ const truthy = x => {
     }
 };
 
+
+const fields = [
+    'description', 'name', 'category', 'date',
+    'title', 'subtitle',
+    'notice', 'tags', 'places', 'people',
+    'author'
+];
+
+const metadata = frontmatter => {
+    const {
+        name, category, date
+    } = frontmatter;
+
+    if (!category) {
+        throw new Error("no category");
+    }
+    if (!date) {
+        throw new Error("no date");
+    }
+    if (!name) {
+        throw new Error("no name");
+    }
+
+    const meta = {};
+    for (const field of fields) {
+        meta[field] = frontmatter[field];
+    }
+    return meta;
+};
+
 export const createLinkNode = async (index, post, {
     actions,
     createNodeId,
@@ -34,22 +64,24 @@ export const createLinkNode = async (index, post, {
     return linkNode;
 };
 
-export const createPostNode = async (node, metadata, {
+export const createPostNode = async (node, frontmatter, {
     actions,
     createNodeId,
     createContentDigest
 }) => {
     truthy(node);
-    truthy(metadata);
+    truthy(frontmatter);
+
+    const m = metadata(frontmatter);
 
     const postNode = {
-        ...metadata,
+        ...m,
         children: [],
         parent: node.id,
         id: createNodeId(`${node.id} >>> Post`),
         internal: {
             type: 'Post',
-            contentDigest: createContentDigest(metadata)
+            contentDigest: createContentDigest(m)
         }
     };
     await Promise.all([
