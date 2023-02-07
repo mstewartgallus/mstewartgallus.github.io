@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import { mkResolve } from "../../src/utils/resolve.js";
+import { createPostNode } from "../post/index.js";
 
 const resolve = mkResolve(import.meta);
 
@@ -47,9 +48,7 @@ const postNodeOfPoem = ({ node, getNode }) => {
           .map(x => x.join('\u2009\u2014\u2009'))
           .join('\n');
 
-    return {
-        metadata: metadata({ name, category, description, ...node.frontmatter })
-    };
+    return metadata({ name, category, description, ...node.frontmatter });
 };
 
 export const createSchemaCustomization = async ({ actions, schema }) => {
@@ -60,30 +59,25 @@ export const createSchemaCustomization = async ({ actions, schema }) => {
 export const shouldOnCreateNode = ({node}) => 'Poem' === node.internal.type;
 
 export const onCreateNode = async props => {
-    const {
-        node,
-        actions,
-        createContentDigest,
-        createNodeId,
-        getNode
-    } = props;
+    const { node, getNode, actions, createNodeId, createContentDigest } = props;
 
-    const post = postNodeOfPoem(props);
+    const post = postNodeOfPoem({ node, getNode });
+    const postNode = await createPostNode(node, post, props);
 
-    const postPoem = { ...post, poem: node.id };
+    const postPoem = { post: postNode.id, poem: node.id };
 
-    const postNode = {
+    const postPoemNode = {
         ...postPoem,
+        id: createNodeId(`${postNode.id} >>> PostPoem`),
+        parent: postNode.id,
         children: [],
-        parent: node.id,
-        id: createNodeId(`${node.id} >>> PostPoem`),
         internal: {
             type: 'PostPoem',
             contentDigest: createContentDigest(postPoem)
         }
     };
     await Promise.all([
-        actions.createNode(postNode),
-        actions.createParentChildLink({ parent: node, child: postNode })
+        actions.createNode(postPoemNode),
+        actions.createParentChildLink({ parent: postNode, child: postPoemNode })
     ]);
 };

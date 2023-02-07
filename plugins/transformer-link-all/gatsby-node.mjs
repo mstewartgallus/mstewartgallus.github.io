@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import { mkResolve } from "../../src/utils/resolve.js";
+import { createLinkNode } from "../post/index.js";
 
 const resolve = mkResolve(import.meta);
 
@@ -12,7 +13,7 @@ export const createSchemaCustomization = async ({ actions, schema }) => {
 };
 
 export const shouldOnCreateNode = ({node}) =>
-['PostPoem', 'PostMdx'].includes(node.internal.type);
+'Post' == node.internal.type;
 
 export const sourceNodes = async ({actions, createNodeId, createContentDigest}) => {
     await actions.createNode({
@@ -28,27 +29,5 @@ export const sourceNodes = async ({actions, createNodeId, createContentDigest}) 
 
 export const onCreateNode = async props => {
     const {node, actions, createNodeId, createContentDigest} = props;
-
-    const post = node.id;
-    const { date } = node.metadata;
-
-    const content = { index: createNodeId(`Index`),
-                      post, date };
-    const link = { content };
-
-    const linkNode = {
-        ...link,
-        id: createNodeId(`${node.id} >>> Link`),
-        parent: node.id,
-        children: [],
-        internal: {
-            type: 'LinkAll',
-            contentDigest: createContentDigest(link)
-        }
-    };
-
-    await Promise.all([
-        actions.createNode(linkNode),
-        actions.createParentChildLink({ parent: node, child: linkNode })
-    ]);
+    await createLinkNode(createNodeId(`Index`), node, props);
 };

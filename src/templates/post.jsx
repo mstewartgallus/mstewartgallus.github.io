@@ -26,57 +26,44 @@ const author = {
     url: "/about/"
 };
 
+const paging = ({
+    index: { id: index },
+    previous, next
+}) => [index, {
+    previous: previous?.post,
+    next: next?.post
+}];
+
 const pagingOfLinks = allLink =>
-      Object.fromEntries(allLink.nodes.map(({content: {
-          index: { id: index },
-          previous, next
-      }}) => [index, {
-          previous: previous?.content?.post?.metadata,
-          next: next?.content?.post?.metadata
-      }]));
+      Object.fromEntries(allLink.nodes.map(paging));
 
 const Provider = ({ children, category }) => {
     const components = useMdxComponents(category);
     return <MDXProvider components={components}>{children}</MDXProvider>;
 };
 
-const Content = ({ children, __typename, metadata, poem }) => {
-    switch (__typename) {
-    case "PostPoem":
-        return <Poem poem={poem.content} />;
-
-    case "PostMdx":
-        return <Provider category={metadata.category}>{children}</Provider>;
-
-    default:
-        throw new Error(`unknown type ${__typename}`);
-    }
-};
-
-export const Head = ({ data: { post: { metadata } } }) => {
-    const { description, title, slug } = metadata;
+export const Head = ({ data: { post } }) => {
+    const { description, title, slug } = post;
     const url = useAbsolute(slug);
     return <>
                <HeadBasic/>
                <Title>{title}</Title>
                <SeoBasic description={description} title={title} url={url} />
-               <SeoPostHead author={author} {...metadata} />
+               <SeoPostHead author={author} {...post} />
            </>;
 };
 
-const BlogPost = ({ children, data: { allLink, post } }) =>  {
-    let { metadata } = post;
+const BlogPost = ({ children, data: { allLink, post, postPoem, postMdx } }) =>  {
+    post = { author, ...post };
 
-    metadata = { author, ...metadata };
-
-    const breadcrumbList = useBreadcrumbList(metadata);
-    const blogPosting = useBlogPosting(metadata);
+    const breadcrumbList = useBreadcrumbList(post);
+    const blogPosting = useBlogPosting(post);
 
     const indexAll = useIndexAll();
 
     const paging = pagingOfLinks(allLink);
 
-    const { category, title, subtitle, notice } = metadata;
+    const { category, title, subtitle, notice } = post;
 
     return <>
                <Post
@@ -91,7 +78,7 @@ const BlogPost = ({ children, data: { allLink, post } }) =>  {
                                <Paging {...paging[indexAll]} />
                            </Nav>
                            <Footer heading={<h2>Metadata</h2>}>
-                               <Metadata {...metadata} />
+                               <Metadata {...post} />
                            </Footer>
                            <Nav heading={<h2>Breadcrumbs</h2>}>
                                <BreadcrumbList>
@@ -102,7 +89,12 @@ const BlogPost = ({ children, data: { allLink, post } }) =>  {
                            </Nav>
                        </>
                    }>
-                   <Content {...post}>{children}</Content>
+                   {postPoem &&
+                    <Poem poem={postPoem.poem.content} />
+                   }
+                   {postMdx &&
+                    <Provider category={post.category}>{children}</Provider>
+                   }
                </Post>
                <JsonLd srcdoc={breadcrumbList} />
                <JsonLd srcdoc={blogPosting} />
@@ -113,54 +105,46 @@ export default BlogPost;
 
 export const pageQuery = graphql`
 query BlogById($id: String!) {
-  allLink(filter: {content: {post: {id: {eq: $id}}}}) {
+  allLink(filter: {post: {id: {eq: $id}}}) {
     nodes {
-      content {
-        index {
-          id
+      index {
+        id
+      }
+      next {
+        post {
+          slug
+          title
         }
-        next {
-          content {
-            post {
-              metadata {
-                slug
-                title
-              }
-            }
-          }
-        }
-        previous {
-          content {
-            post {
-              metadata {
-                slug
-                title
-              }
-            }
-          }
+      }
+      previous {
+        post {
+          slug
+          title
         }
       }
     }
   }
   post(id: {eq: $id}) {
-    __typename
-    ... on PostPoem {
-      poem {
-        content
-      }
+    slug
+    dateDisplay: date(formatString: "YYYY-MM-DD")
+    date: date(formatString: "YYYY-MM-DDTHH:mmZ")
+    description
+    title
+    subtitle
+    category
+    notice
+    tags
+    places
+    people
+  }
+  postPoem(post: { id: {eq: $id} }) {
+    poem {
+      content
     }
-    metadata {
-      slug
-      dateDisplay: date(formatString: "YYYY-MM-DD")
-      date: date(formatString: "YYYY-MM-DDTHH:mmZ")
-      description
-      title
-      subtitle
-      category
-      notice
-      tags
-      places
-      people
+  }
+  postMdx(post: { id: {eq: $id} }) {
+    mdx {
+      id
     }
   }
 }

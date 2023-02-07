@@ -10,8 +10,8 @@ const usePostMdxList = async ({graphql, reporter}) => {
 query MdxPosts {
   allPostMdx {
     nodes {
-      id
-      metadata {
+      post {
+        id
         slug
       }
       mdx {
@@ -39,8 +39,7 @@ export const createPages = async ({actions, graphql, reporter}) => {
     }
     await Promise.all(posts.map(async post => {
         const {
-            id,
-            metadata: { slug },
+            post: { id, slug },
             mdx: { internal: { contentFilePath } }
         } = post;
         await createPage({

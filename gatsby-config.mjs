@@ -12,13 +12,11 @@ const { title, siteUrl } = siteMetadata;
 
 const query =
 `{
-  allPost(sort: { metadata: { date: DESC }}) {
+  allPost(sort: { date: DESC }) {
    nodes {
-     metadata {
-       title
-       date
-       slug
-     }
+     title
+     date
+     slug
    }
   }
 }`;
@@ -32,7 +30,7 @@ const feed = {
             output: "/feed.xml",
             serialize: ({ query: { allPost } }) => {
                 return allPost.nodes.map(node => {
-                    const { title, category, slug, date} = node.metadata;
+                    const { title, category, slug, date} = node;
                     return {
                         title,
                         categories: [category],
@@ -53,8 +51,7 @@ const sitemap = {
     resolveSiteUrl: () => siteUrl,
     resolvePages: ({ allPost }) => {
         return allPost.nodes.map(node => {
-            const { metadata } = node;
-            return { ...metadata, path: metadata.slug };
+            return { ...node, path: node.slug };
         });
     },
     resolvePagePath: page => page.slug,

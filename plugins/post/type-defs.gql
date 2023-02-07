@@ -1,4 +1,4 @@
-type Metadata @dontInfer {
+type Post implements Node @dontInfer {
   name: String!
   date: Date! @dateformat
   category: String!
@@ -13,22 +13,13 @@ type Metadata @dontInfer {
   description: String
 }
 
-interface Post implements Node {
+type Link implements Node @dontInfer {
   id: ID!
-  metadata: Metadata!
-}
-
-type Content @dontInfer {
   index: Index! @link
   post: Post! @link
   date: Date! @dateformat
   next: Link
   previous: Link
-}
-
-interface Link implements Node {
-  id: ID!
-  content: Content!
 }
 
 interface Index implements Node {

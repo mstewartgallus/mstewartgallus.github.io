@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import { mkResolve } from "../../src/utils/resolve.js";
+import { createPostNode } from "../post/index.js";
 
 const resolve = mkResolve(import.meta);
 
@@ -40,9 +41,7 @@ const postNodeOfMdx = ({ node, getNode }) => {
     const category = parent.sourceInstanceName;
     const name = parent.name;
 
-    return {
-        metadata: metadata({ name, category, ...node.frontmatter })
-    };
+    return metadata({ name, category, ...node.frontmatter });
 };
 
 export const createSchemaCustomization = async ({ actions, schema }) => {
@@ -52,27 +51,25 @@ export const createSchemaCustomization = async ({ actions, schema }) => {
 
 export const shouldOnCreateNode = ({node}) => 'Mdx' === node.internal.type;
 
-export const onCreateNode = async ({
-    node,
-    actions,
-    createContentDigest,
-    createNodeId,
-    getNode
-}) => {
+export const onCreateNode = async props => {
+    const { node, getNode, actions, createNodeId, createContentDigest } = props;
     const post = postNodeOfMdx({ node, getNode });
-    const postMdx = { ...post, mdx: node.id };
-    const postNode = {
+    const postNode = await createPostNode(node, post, props);
+
+    const postMdx = { post: postNode.id, mdx: node.id };
+
+    const postMdxNode = {
         ...postMdx,
+        id: createNodeId(`${postNode.id} >>> PostMdx`),
+        parent: postNode.id,
         children: [],
-        parent: node.id,
-        id: createNodeId(`${node.id} >>> PostMdx`),
         internal: {
             type: 'PostMdx',
             contentDigest: createContentDigest(postMdx)
         }
     };
     await Promise.all([
-        actions.createNode(postNode),
-        actions.createParentChildLink({ parent: node, child: postNode })
+        actions.createNode(postMdxNode),
+        actions.createParentChildLink({ parent: postNode, child: postMdxNode })
     ]);
 };

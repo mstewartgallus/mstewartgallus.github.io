@@ -4,10 +4,10 @@ export const usePostTags = () => {
     const posts = useStaticQuery(graphql`
 query {
   allPost {
-     place: distinct(field: {metadata: {places: SELECT}})
-     tags: distinct(field: {metadata: {tags: SELECT}})
-     people: distinct(field: {metadata: {people: SELECT}})
-     category: distinct(field: {metadata: {category: SELECT}})
+     place: distinct(field: {places: SELECT})
+     tags: distinct(field: {tags: SELECT})
+     people: distinct(field: {people: SELECT})
+     category: distinct(field: {category: SELECT})
   }
 }`).allPost;
     return posts;

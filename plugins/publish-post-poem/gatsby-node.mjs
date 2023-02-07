@@ -10,13 +10,13 @@ const usePostPoemList = async ({graphql, reporter}) => {
 query PoemPosts {
    allPostPoem {
       nodes {
+        post {
           id
-          metadata {
-            slug
-          }
+          slug
         }
       }
     }
+}
 `);
     if (errors) {
         reporter.panicOnBuild('Error loading Poem posts', errors);
@@ -32,11 +32,8 @@ export const createPages = async ({actions, graphql, reporter}) => {
     if (!posts) {
         return;
     }
-    await Promise.all(posts.map(async post => {
-        const {
-            id,
-            metadata: { slug }
-        } = post;
+    await Promise.all(posts.map(async postPoem => {
+        const { id, slug } = postPoem.post;
         return await createPage({
             path: slug,
             component: poemTemplate,

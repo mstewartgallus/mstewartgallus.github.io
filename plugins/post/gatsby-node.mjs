@@ -31,13 +31,11 @@ const next = async (source, args, context, info) => {
         type: 'Link',
         query: {
             limit: 1,
-            sort: { fields: ['content.date'], order: ['ASC'] },
+            sort: { fields: ['date'], order: ['ASC'] },
             filter: {
-                content: {
-                    index: { id: { eq: index } },
-                    post: { id: { ne: post } },
-                    date: { gte: date }
-                }
+                index: { id: { eq: index } },
+                post: { id: { ne: post } },
+                date: { gte: date }
             }
         }
     });
@@ -54,13 +52,11 @@ const previous = async (source, args, context, info) => {
         type: 'Link',
         query: {
             limit: 1,
-            sort: { fields: ['content.date'], order: ['DESC'] },
+            sort: { fields: ['date'], order: ['DESC'] },
             filter: {
-                content: {
-                    index: { id: { eq: index } },
-                    post: { id: { ne: post } },
-                    date: { lte: date }
-                }
+                index: { id: { eq: index } },
+                post: { id: { ne: post } },
+                date: { lte: date }
             }
         }
     });
@@ -80,11 +76,11 @@ export const createSchemaCustomization = async ({ actions, schema }) => {
 
 export const createResolvers = async ({ createResolvers }) => {
     await createResolvers({
-        Content: {
+        Link: {
             next: { type: 'Link', resolve: next },
             previous: { type: 'Link', resolve: previous }
         },
-        Metadata: {
+        Post: {
             slug: { type: 'String!', resolve: slug },
             notice: { type: '[String!]!', resolve: nil },
             tags: { type: '[String!]!', resolve: nil },

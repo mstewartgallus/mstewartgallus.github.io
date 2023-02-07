@@ -1,5 +1,5 @@
-type PostMdx implements Node & Post @childOf(types: ["Mdx"]) {
+type PostMdx implements Node @dontInfer {
   id: ID!
-  metadata: Metadata!
+  post: Post! @link
   mdx: Mdx! @link
 }
