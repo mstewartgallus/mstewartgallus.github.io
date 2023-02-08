@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import { mkResolve } from "../../src/utils/resolve.js";
-import { createLinkNode } from "../post/index.js";
+import { createLinkNode, createIndexNode } from "../post/index.js";
 
 const resolve = mkResolve(import.meta);
 
@@ -15,19 +15,33 @@ export const createSchemaCustomization = async ({ actions, schema }) => {
 export const shouldOnCreateNode = ({node}) =>
 'Post' == node.internal.type;
 
-export const sourceNodes = async ({actions, createNodeId, createContentDigest}) => {
-    await actions.createNode({
-        id: createNodeId(`Index`),
-        parent: null,
+export const sourceNodes = async props => {
+    const {actions, createNodeId, createContentDigest} = props;
+
+    const indexId = createNodeId(`Index`);
+    const indexAllId = createNodeId(`IndexAll`);
+
+    const indexAll = {
+        id: indexAllId,
+        parent: indexId,
         children: [],
         internal: {
             type: 'IndexAll',
             contentDigest: createContentDigest({})
         }
-    });
+    };
+
+    await Promise.all([
+        createIndexNode(indexId, indexAllId, props),
+        actions.createNode(indexAll)
+    ]);
 }
 
 export const onCreateNode = async props => {
     const {node, actions, createNodeId, createContentDigest} = props;
-    await createLinkNode(createNodeId(`Index`), node, props);
+
+    const linkId = createNodeId(`${node.id} >>> Link`);
+    const indexId = createNodeId(`Index`);
+
+    await createLinkNode(linkId, node.id, indexId, props);
 };

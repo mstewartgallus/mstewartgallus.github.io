@@ -1,16 +1,22 @@
 const truthy = x => {
     if (!x) {
-        throw new Error(`invalid ${x}`);
+        throw new Error(`falsy ${x}`);
+    }
+};
+
+const isString = x => {
+    if (typeof x !== 'string') {
+        throw new Error(`not a stringy ${x}`);
     }
 };
 
 
-const fields = [
+const fields = new Set([
     'description', 'name', 'category', 'date',
     'title', 'subtitle',
     'notice', 'tags', 'places', 'people',
     'author'
-];
+]);
 
 const metadata = frontmatter => {
     const {
@@ -29,28 +35,30 @@ const metadata = frontmatter => {
 
     const meta = {};
     for (const field of fields) {
+        if (!Object.hasOwn(frontmatter, field)) {
+            continue;
+        }
         meta[field] = frontmatter[field];
     }
     return meta;
 };
 
-export const createLinkNode = async (index, post, {
+export const createLinkNode = async (id, post, index, {
     actions,
     createNodeId,
-    createContentDigest
+    createContentDigest,
+    getNode
 }) => {
-    truthy(index);
-    truthy(post);
+    isString(id);
+    isString(index);
+    isString(post);
 
-    // FIXME
-    const nodeId = post.id;
-    const date = post.date;
-    const link = { index, post: post.id, date };
+    const link = { index };
 
     const linkNode = {
         ...link,
-        id: createNodeId(`${post.id} >>> Link`),
-        parent: post.id,
+        id,
+        parent: post,
         children: [],
         internal: {
             type: 'Link',
@@ -59,34 +67,54 @@ export const createLinkNode = async (index, post, {
     };
     await Promise.all([
         actions.createNode(linkNode, { name: 'post' }),
-        actions.createParentChildLink({ parent: post, child: linkNode })
+        actions.createParentChildLink({ parent: getNode(post), child: linkNode })
     ]);
     return linkNode;
 };
 
-export const createPostNode = async (node, frontmatter, {
+export const createPostNode = async (id, parent, child, frontmatter, {
     actions,
     createNodeId,
     createContentDigest
 }) => {
-    truthy(node);
+    isString(id);
+    isString(parent);
     truthy(frontmatter);
+    isString(child);
 
     const m = metadata(frontmatter);
 
     const postNode = {
         ...m,
-        children: [],
-        parent: node.id,
-        id: createNodeId(`${node.id} >>> Post`),
+        children: [child],
+        parent: parent,
+        id,
         internal: {
             type: 'Post',
             contentDigest: createContentDigest(m)
         }
     };
-    await Promise.all([
-        actions.createNode(postNode, { name: 'post' }),
-        actions.createParentChildLink({ parent: node, child: postNode })
-    ]);
+    await actions.createNode(postNode, { name: 'post' });
     return postNode;
+};
+
+export const createIndexNode = async (id, child, {
+    actions,
+    createNodeId,
+    createContentDigest
+}) => {
+    isString(id);
+    isString(child);
+
+    const node = {
+        children: [child],
+        parent: null,
+        id,
+        internal: {
+            type: 'Index',
+            contentDigest: createContentDigest({})
+        }
+    };
+    await actions.createNode(node, { name: 'post' });
+    return node;
 };

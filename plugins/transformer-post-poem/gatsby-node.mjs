@@ -32,23 +32,26 @@ export const shouldOnCreateNode = ({node}) => 'Poem' === node.internal.type;
 export const onCreateNode = async props => {
     const { node, getNode, actions, createNodeId, createContentDigest } = props;
 
-    const post = postNodeOfPoem({ node, getNode });
-    const postNode = await createPostNode(node, post, props);
+    const postId = createNodeId(`${node.id} >>> Post`);
+    const postPoemId = createNodeId(`${node.id} >>> PostPoem`);
 
-    const postPoem = { post: postNode.id, poem: node.id };
+    const postPoem = { poem: node.id };
+
+    const post = postNodeOfPoem({ node, getNode });
 
     const postPoemNode = {
         ...postPoem,
-        id: createNodeId(`${postNode.id} >>> PostPoem`),
-        parent: postNode.id,
+        id: postPoemId,
+        parent: postId,
         children: [],
         internal: {
             type: 'PostPoem',
             contentDigest: createContentDigest(postPoem)
         }
     };
+
     await Promise.all([
-        actions.createNode(postPoemNode),
-        actions.createParentChildLink({ parent: postNode, child: postPoemNode })
+        createPostNode(postId, node.id, postPoemId, post, props),
+        actions.createNode(postPoemNode)
     ]);
 };

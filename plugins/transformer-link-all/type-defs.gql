@@ -1,3 +1,4 @@
-type IndexAll implements Node & Index @dontInfer {
+type IndexAll implements Node @dontInfer @childOf(types: ["Index"]) {
   id: ID!
+  index: Index! @link(from: "parent")
 }

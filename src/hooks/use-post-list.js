@@ -2,8 +2,8 @@ import { graphql, useStaticQuery } from "gatsby";
 
 export const usePostList = () => {
     const group = useStaticQuery(graphql`
-query {
-  allLink(sort: {date: DESC}) {
+query UsePostList {
+  allLink(sort: {post: {date: DESC}}) {
     group(field: {index: {id: SELECT}}) {
       index: fieldValue
       nodes {

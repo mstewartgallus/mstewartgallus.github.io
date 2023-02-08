@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import { mkResolve } from "../../src/utils/resolve.js";
-import { createLinkNode } from "../post/index.js";
+import { createLinkNode, createIndexNode } from "../post/index.js";
 
 const resolve = mkResolve(import.meta);
 
@@ -20,20 +20,26 @@ export const onCreateNode = async props => {
 
     const { category } = node;
 
-    const index = createNodeId(`${category} >>> Index`);
-    if (!getNode(index)) {
+    const linkId = createNodeId(`${node.id} >>> ${category} >>> Link`);
+    const indexId = createNodeId(`${category} >>> Index`);
+    const indexCategoryId = createNodeId(`${category} >>> IndexCategory`);
+
+    if (!getNode(indexId)) {
         const indexNode = {
             category,
-            id: index,
-            parent: null,
+            id: indexCategoryId,
+            parent: indexId,
             children: [],
             internal: {
                 type: 'IndexCategory',
                 contentDigest: createContentDigest(category)
             }
         };
-        await actions.createNode(indexNode);
+        await Promise.all([
+            actions.createNode(indexNode),
+            createIndexNode(indexId, indexCategoryId, props)
+        ]);
     }
 
-    await createLinkNode(index, node, props);
+    await createLinkNode(linkId, node.id, indexId, props);
 };

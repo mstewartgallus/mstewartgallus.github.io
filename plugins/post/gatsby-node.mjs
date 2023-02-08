@@ -26,16 +26,19 @@ const slug = (source, args, context, info) => {
 
 
 const next = async (source, args, context, info) => {
-    const { post, index, date } = source;
+    const { parent, index } = source;
+    const post = await context.nodeModel.getNodeById({id: parent, type: 'Post'});
     const { entries } = await context.nodeModel.findAll({
         type: 'Link',
         query: {
             limit: 1,
-            sort: { fields: ['date'], order: ['ASC'] },
+            sort: { fields: ['post.date'], order: ['ASC'] },
             filter: {
                 index: { id: { eq: index } },
-                post: { id: { ne: post } },
-                date: { gte: date }
+                post: {
+                    id: { ne: parent },
+                    date: { gte: post.date }
+                }
             }
         }
     });
@@ -47,16 +50,19 @@ const next = async (source, args, context, info) => {
 };
 
 const previous = async (source, args, context, info) => {
-    const { post, index, date } = source;
+    const { parent, index } = source;
+    const post = await context.nodeModel.getNodeById({id: parent, type: 'Post'});
     const { entries } = await context.nodeModel.findAll({
         type: 'Link',
         query: {
             limit: 1,
-            sort: { fields: ['date'], order: ['DESC'] },
+            sort: { fields: ['post.date'], order: ['DESC'] },
             filter: {
                 index: { id: { eq: index } },
-                post: { id: { ne: post } },
-                date: { lte: date }
+                post: {
+                    id: { ne: parent },
+                    date: { lte: post.date }
+                }
             }
         }
     });

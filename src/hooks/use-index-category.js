@@ -2,15 +2,17 @@ import { graphql, useStaticQuery } from "gatsby";
 
 export const useIndexCategory = () => {
     const indices = useStaticQuery(graphql`
-query {
+query UseIndexCategory {
   allIndexCategory(sort: {category: DESC}) {
     nodes {
-      id
+      index {
+        id
+      }
       category
     }
   }
 }`).allIndexCategory.nodes;
-    return Object.fromEntries(indices.map(({id, category}) => [category, id]));
+    return Object.fromEntries(indices.map(({index: { id }, category}) => [category, id]));
 };
 
 export default useIndexCategory;

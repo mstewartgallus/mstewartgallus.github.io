@@ -16,12 +16,11 @@ type Post implements Node @dontInfer {
 type Link implements Node @dontInfer @childOf(types: ["Post"]) {
   id: ID!
   index: Index! @link
-  post: Post! @link
-  date: Date! @dateformat
+  post: Post! @link(from: "parent")
   next: Link
   previous: Link
 }
 
-interface Index implements Node {
+type Index implements Node @dontInfer {
   id: ID!
 }
