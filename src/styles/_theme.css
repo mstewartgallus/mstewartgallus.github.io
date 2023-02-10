@@ -10,7 +10,9 @@
     padding-inline: 1em ;
     padding-block: calc(0.5 * var(--line)) ;
 }
-.sr-only:not(:focus-within) {
+
+.sr-only:not(:focus-within):not(:focus):not(:active) {
+    white-space: nowrap !important ;
     position: absolute !important ;
     left: -10000px !important ;
     top: auto !important ;

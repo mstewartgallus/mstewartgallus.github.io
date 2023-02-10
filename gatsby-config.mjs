@@ -1,7 +1,6 @@
 import RemarkGfm from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
 
-
 export const siteMetadata = {
     title: "Words to Kick Your Teeth Out",
     description: "lol lmao",
