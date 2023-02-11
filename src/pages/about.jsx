@@ -20,6 +20,7 @@ export const Head = ({location: {pathname}}) => {
 };
 
 const AboutPage = () =>
+      <dialog open="open">
 <Post heading={<h1>About the Author</h1>}
       sidebar={
           <>
@@ -58,6 +59,7 @@ const AboutPage = () =>
             <dd>mstewartgallus</dd>
         </div>
     </dl>
-</Post>;
+</Post>
+      </dialog>;
 
 export default AboutPage;
