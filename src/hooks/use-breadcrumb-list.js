@@ -1,8 +1,9 @@
+import * as React from "react";
 import search from "../utils/search.js";
 
 export const useBreadcrumbList = ({
     title, category, slug
-}) => ({
+}) => React.useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [{
@@ -21,6 +22,6 @@ export const useBreadcrumbList = ({
         "name": title,
         "item": slug
     }]
-});
+}), [title, slug, category]);
 
 export default useBreadcrumbList;

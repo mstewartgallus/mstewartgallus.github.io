@@ -1,7 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 
-export const usePostTags = () => {
-    const posts = useStaticQuery(graphql`
+const usePostTagsRaw = () => useStaticQuery(graphql`
 query {
   allPost {
      place: distinct(field: {places: SELECT})
@@ -9,8 +8,8 @@ query {
      people: distinct(field: {people: SELECT})
      category: distinct(field: {category: SELECT})
   }
-}`).allPost;
-    return posts;
-};
+}`);
+
+export const usePostTags = () => usePostTagsRaw().allPost;
 
 export default usePostTags;

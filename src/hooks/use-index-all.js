@@ -1,12 +1,14 @@
 import { graphql, useStaticQuery } from "gatsby";
 
-export const useIndexAll = () => useStaticQuery(graphql`
+const useIndexAllRaw = () => useStaticQuery(graphql`
 query UseIndexAll {
   indexAll {
     index {
       id
     }
   }
-}`).indexAll.index.id;
+}`);
+
+export const useIndexAll = () => useIndexAllRaw().indexAll.index.id;
 
 export default useIndexAll;

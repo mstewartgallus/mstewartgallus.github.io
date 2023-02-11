@@ -36,8 +36,8 @@ export const onCreateNode = async props => {
             }
         };
         await Promise.all([
-            actions.createNode(indexNode),
-            createIndexNode(indexId, indexCategoryId, props)
+            createIndexNode(indexId, indexCategoryId, props),
+            actions.createNode(indexNode)
         ]);
     }
 

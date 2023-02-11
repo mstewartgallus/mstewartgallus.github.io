@@ -1,24 +1,12 @@
 import * as React from "react";
 import flatten from "../utils/flatten.js";
+import useOpenGraphBlog from '../hooks/use-opengraph-blog.js';
 
-const Open = ({author, date, category, tags, people, places}) =>
-    flatten({
-            og: {
-                type: "article",
-                article: {
-                    author: author.name,
-                    published_time: date,
-                    section: category,
-                    tag: [...people, ...tags, ...places]
-                },
-                profile: [
-                    author.name,
-                    {
-                        username: author.name
-                    }]
-            }
-    }).map(([k, v]) =>
+const Open = props => {
+    const json = useOpenGraphBlog(props);
+    return flatten(json).map(([k, v]) =>
         <meta key={k} property={k} content={v} />);
+};
 
 
 export const SeoPostHead = props => {
