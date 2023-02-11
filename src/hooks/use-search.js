@@ -15,6 +15,10 @@ const pagefindToPost = ({ url, meta: { title } }) => ({
 });
 
 const pagefindQuery = query => {
+    if (!query) {
+        return null;
+    }
+
     let {s, category, tag, place, person} = query;
 
     category = Array.from(category);
@@ -42,15 +46,18 @@ const pagefindQuery = query => {
     return [s, { filters }];
 };
 
-
 const mt = Object.freeze([]);
 
-export const useSearch = () => {
-    const [query, setQuery] = React.useState(null);
-    const [links, setLinks] = React.useState(mt);
+const useSearchEffect = query => {
+    const truthy = !!query;
+    const s = query?.[0];
+    const opts = query?.[1];
+    const sort = opts?.sort;
+    const filters = opts?.filters;
 
+    const [links, setLinks] = React.useState(mt);
     React.useEffect(() => {
-        if (query === null) {
+        if (!truthy) {
             return;
         }
 
@@ -58,22 +65,31 @@ export const useSearch = () => {
         const maybe = ps => Promise.any([ps, signaled]);
 
         (async () => {
-            const [s, opts] = pagefindQuery(query);
-
-            const { results } = await maybe(Pagefind.search(s, opts));
+            const data = await maybe(Pagefind.search(s, { sort, filters }));
+            if (!data) {
+                return;
+            }
 
             const posts = await maybe(Promise.all(
-                results.slice(0, 10)
+                data.results.slice(0, 10)
                     .map(r => r.data())));
 
-            const links = posts.map(pagefindToPost);
-            setLinks(links);
+            if (!posts) {
+                return;
+            }
+
+            setLinks(posts);
         })();
 
         return setSignal;
-    }, [query]);
+    }, [truthy, s, sort, filters]);
+    return links;
+};
 
-    return [links, setQuery];
+export const useSearch = query => {
+    const q = React.useMemo(() => pagefindQuery(query), [query]);
+    const links = useSearchEffect(q);
+    return React.useMemo(() => links.map(pagefindToPost), [links]);
 };
 
 export default useSearch;

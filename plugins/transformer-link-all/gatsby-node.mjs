@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import { mkResolve } from "../../src/utils/resolve.js";
-import { createLinkNode, createIndexNode } from "../post/index.js";
+import { createLinkNode, createIndexNode } from "../post/index.mjs";
 
 const resolve = mkResolve(import.meta);
 

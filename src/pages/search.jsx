@@ -148,23 +148,24 @@ export const Head = ({location}) => {
 };
 
 const SearchPage = ({location}) => {
-    const [links, setSearch] = useSearch();
-    const onSubmit = useSubmit();
+    const [search, setSearch] = React.useState(null);
+    React.useEffect(() => {
+        setSearch(location.search);
+    }, [location]);
 
-    const [state, dispatch] = React.useReducer(reducer, emptyQuery);
-    const [query, setQuery] = React.useState(null);
+    const onSubmit = useSubmit();
     const tags = usePostTags();
 
-    React.useEffect(() => {
-        setSearch(parseParams(location.search));
-    }, [location, setSearch]);
+    const [state, dispatch] = React.useReducer(reducer, emptyQuery);
 
-    React.useEffect(() => {
-        setQuery(parseParams(location.search).s);
-    }, [location]);
+    const params = React.useMemo(() => parseParams(search), [search]);
+
+    const links = useSearch(params);
 
     const set = React.useCallback((name, value) => dispatch({type: 'set', name, value}),
                                   [dispatch]);
+
+    const query = params.s;
 
     const hasQuery = query !== '' && query !== null;
     const title =
