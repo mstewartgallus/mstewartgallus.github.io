@@ -65,10 +65,9 @@ export const createLinkNode = async (id, post, index, {
             contentDigest: createContentDigest(link)
         }
     };
-    await Promise.all([
-        actions.createNode(linkNode, { name: 'post' }),
-        actions.createParentChildLink({ parent: getNode(post), child: linkNode })
-    ]);
+    await actions.createNode(linkNode, { name: 'post' });
+    await actions.createParentChildLink({ parent: getNode(post), child: linkNode });
+
     return linkNode;
 };
 

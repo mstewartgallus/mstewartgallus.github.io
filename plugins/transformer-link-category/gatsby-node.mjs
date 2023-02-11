@@ -35,10 +35,9 @@ export const onCreateNode = async props => {
                 contentDigest: createContentDigest(category)
             }
         };
-        await Promise.all([
-            createIndexNode(indexId, indexCategoryId, props),
-            actions.createNode(indexNode)
-        ]);
+
+        await createIndexNode(indexId, indexCategoryId, props);
+        await actions.createNode(indexNode);
     }
 
     await createLinkNode(linkId, node.id, indexId, props);
