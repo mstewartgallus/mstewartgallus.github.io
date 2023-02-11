@@ -1,28 +1,32 @@
 import * as React from "react";
+import flatten from "../utils/flatten.js";
 
-const Tags = ({tags}) =>
-      tags.map(tag =>
-          <meta key={tag} property="og:article:tag" content={tag} />);
+const Open = ({author, date, category, tags, people, places}) =>
+    flatten({
+            og: {
+                type: "article",
+                article: {
+                    author: author.name,
+                    published_time: date,
+                    section: category,
+                    tag: [...people, ...tags, ...places]
+                },
+                profile: [
+                    author.name,
+                    {
+                        username: author.name
+                    }]
+            }
+    }).map(([k, v]) =>
+        <meta key={k} property={k} content={v} />);
 
-const Opengraph = ({author, date, category, tags, people, places}) =>
-      <>
-          <meta property="og:type" content="article" />
-          <meta property="og:article:author" content={author.name} />
-          <meta property="og:article:published_time" content={date} />
-          <meta property="og:article:section" content={category} />
-          <meta property="og:profile" content={author.name} />
-          <meta property="og:profile:username" content={author.name} />
-          <Tags tags={people} />
-          <Tags tags={tags} />
-          <Tags tags={places} />
-      </>;
 
 export const SeoPostHead = props => {
     const {author} = props;
     return <>
                <link rel="author" href={author.url} />
                <meta name="author" content={author.name} />
-               <Opengraph {...props}/>
+               <Open {...props}/>
            </>;
 };
 
