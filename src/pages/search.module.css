@@ -8,3 +8,36 @@
     flex-wrap: wrap ;
     align-items: flex-start ;
 }
+
+.result::marker {
+    transition: color 0.01s ;
+}
+.result > a {
+    transition: color 0.01s ;
+}
+.result[aria-hidden="true"]::marker {
+    transition: color 0.1s ;
+}
+.result[aria-hidden="true"] > a {
+    transition: color 0.1s ;
+}
+
+.result > a {
+    text-decoration: underline ;
+}
+
+.result > a:not([href]) {
+    color: var(--gray-text);
+}
+
+.result[aria-hidden="true"] {
+    color: transparent;
+}
+
+.result[aria-hidden="true"]::marker {
+    color: transparent;
+}
+
+.result[aria-hidden="true"] > a {
+    color: transparent;
+}

@@ -1,95 +1,80 @@
 import * as React from 'react';
 import * as Pagefind from '../utils/pagefind.js';
 
-const signal = () => {
-    let sig;
-    const promise = new Promise((r, reject) => {
-        sig = reject;
-    });
-    return [promise, sig];
-};
+const reducer = (state, action) => {
+    switch (action.type) {
+    case "init":
+        return action.links;
 
-const pagefindToPost = ({ url, meta: { title } }) => ({
-    'href': url,
-    'value': title
-});
-
-const pagefindQuery = query => {
-    if (!query) {
-        return null;
+    case "load": {
+        const { index, url, title } = action;
+        const { id } = state[index];
+        const links = Array.from(state);
+        links[index] = { id, result: { url, title } };
+        return links;
     }
 
-    let {s, category, tag, place, person} = query;
+    default:
+        return state;
+    }
+};
 
-    category = Array.from(category);
-    tag = Array.from(tag);
-    place = Array.from(place);
-    person = Array.from(person);
-
+const parseParams = search => {
+    const params = new URLSearchParams(search);
+    let s = params.get('s');
     if (s === '') {
         s = null;
     }
-
-    let filters = {};
-    if (category.length > 0) {
-        filters.category = category;
-    }
-    if (tag.length > 0) {
-        filters.tag = tag;
-    }
-    if (place.length > 0) {
-        filters.place = place;
-    }
-    if (person.length > 0) {
-        filters.person = person;
-    }
-    return [s, { filters }];
+    const category = new Set(params.getAll('category'));
+    const tag = new Set(params.getAll('tag'));
+    const place = new Set(params.getAll('place'));
+    const person = new Set(params.getAll('person'));
+    return { s, category, tag, place, person };
 };
 
-const mt = Object.freeze([]);
+export const useSearch = (search, n) => {
+    const [links, dispatch] = React.useReducer(reducer, null);
 
-const useSearchEffect = query => {
-    const truthy = !!query;
-    const s = query?.[0];
-    const opts = query?.[1];
-    const sort = opts?.sort;
-    const filters = opts?.filters;
-
-    const [links, setLinks] = React.useState(mt);
     React.useEffect(() => {
-        if (!truthy) {
+        if (!search) {
             return;
         }
 
-        const [signaled, setSignal] = signal();
-        const maybe = ps => Promise.any([ps, signaled]);
+        let {s, category, tag, place, person} = parseParams(search);
+        const filters = {
+            ...(category.size > 0 ? { category: Array.from(category) } : null),
+            ...(tag.size > 0 ? { tag: Array.from(tag) } : null),
+            ...(place.size > 0 ? { place: Array.from(place) } : null),
+            ...(person.size > 0 ? { person: Array.from(person) } : null),
+        };
 
+        let ignore = false;
         (async () => {
-            const data = await maybe(Pagefind.search(s, { sort, filters }));
-            if (!data) {
+            const data = await Pagefind.search(s, { filters });
+            if (ignore) {
                 return;
             }
 
-            const posts = await maybe(Promise.all(
-                data.results.slice(0, 10)
-                    .map(r => r.data())));
+            const posts = data.results.slice(0, n);
 
-            if (!posts) {
-                return;
-            }
+            const links = posts.map(({ id }) => ({ id }));
+            dispatch({ type:"init", links });
 
-            setLinks(posts);
+            await Promise.all(posts.map(async (post, index) => {
+                const data = await post.data();
+                if (ignore) {
+                    return;
+                }
+
+                const { url, meta: { title } } = data;
+
+                dispatch({ type:"load", index, url, title });
+            }));
         })();
+        return () => ignore = true;
+    }, [search, n]);
 
-        return setSignal;
-    }, [truthy, s, sort, filters]);
     return links;
-};
-
-export const useSearch = query => {
-    const q = React.useMemo(() => pagefindQuery(query), [query]);
-    const links = useSearchEffect(q);
-    return React.useMemo(() => links.map(pagefindToPost), [links]);
 };
 
 export default useSearch;

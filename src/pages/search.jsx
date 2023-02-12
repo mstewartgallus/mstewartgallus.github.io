@@ -11,7 +11,7 @@ import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import usePostTags from "../hooks/use-post-tags.js";
 import useSearch from "../hooks/use-search.js";
-import { search, query } from "./search.module.css";
+import { search, query, result as resultClass } from "./search.module.css";
 
 const emptyQuery = {
     s: '',
@@ -31,6 +31,9 @@ const reducer = (state, action) => {
 };
 
 const parseParams = search => {
+    if (!search) {
+        return null;
+    }
     const params = new URLSearchParams(search);
     const s = params.get('s') ?? '';
     const category = new Set(params.getAll('category'));
@@ -40,13 +43,34 @@ const parseParams = search => {
     return { s, category, tag, place, person };
 };
 
-const Posts = ({links}) =>
-      links.map(({value, href}) =>
-          <li key={href}>
-              <Link to={href}>{value}</Link>
+const Result = ({url, title}) => <Link to={url}>{title}</Link>;
+const Loading = () => <Link>Loading</Link>;
+
+const Results = ({results}) =>
+      results.map(({id, result}) =>
+          <li key={id} className={resultClass}
+              aria-hidden={result ? null : "true"}>
+              {
+                  result ?
+                      <Result {...result} /> :
+                  <Loading />
+              }
           </li>);
 
-const PostList = ({links}) => <ul><Posts links={links}/></ul>;
+const ResultList = ({results}) =>
+    <ul>
+        <Results results={results} />
+    </ul>;
+
+const DynamicResultList = ({search}) => {
+    const results = useSearch(search, 10);
+
+    if (results) {
+        return <ResultList results={results} />;
+    } else {
+        return <ul aria-hidden="true" />;
+    }
+};
 
 const Query = ({value, onChange}) => {
     const id = React.useId();
@@ -126,15 +150,18 @@ const SearchForm = ({onSubmit, tags, state, set}) => {
 };
 
 export const Head = ({location}) => {
-    const [title, setTitle] = React.useState(['Search']);
-
+    const [search, setSearch] = React.useState(null);
     React.useEffect(() => {
-        const s = parseParams(location.search).s;
-        const title =
-              (s === '' || s === null) ? ['Search'] :
-              [s, 'Search'];
-        setTitle(title);
+        setSearch(location.search);
     }, [location]);
+
+    const title = React.useMemo(() => {
+        const s = parseParams(search)?.s;
+        if (s === '' || !s) {
+            return 'Search';
+        }
+        return [s, 'Search'];
+    }, [search]);
 
     return <>
                <HeadBasic />
@@ -147,10 +174,17 @@ export const Head = ({location}) => {
            </>;
 };
 
+const Heading = ({query}) => {
+    if (query === '' || !query) {
+        return <h1>Search</h1>;
+    }
+    return <h1>{query}{separator}Search</h1>;
+};
+
 const SearchPage = ({location}) => {
     const [search, setSearch] = React.useState(null);
     React.useEffect(() => {
-        setSearch(location.search);
+            setSearch(location.search);
     }, [location]);
 
     const onSubmit = useSubmit();
@@ -160,18 +194,12 @@ const SearchPage = ({location}) => {
 
     const params = React.useMemo(() => parseParams(search), [search]);
 
-    const links = useSearch(params);
-
     const set = React.useCallback((name, value) => dispatch({type: 'set', name, value}),
                                   [dispatch]);
 
-    const query = params.s;
+    const query = params?.s;
 
-    const hasQuery = query !== '' && query !== null;
-    const title =
-          <>{hasQuery && <>{query}{separator}</>}Search</>;
-
-    return <Post heading={<h1>{title}</h1>}
+    return <Post heading={<Heading query={query} />}
                  sidebar={
                      <>
                          <SearchForm location={location}
@@ -189,7 +217,7 @@ const SearchPage = ({location}) => {
                      </>
                  }
            >
-               <PostList links={links} />
+               <DynamicResultList search={search} />
            </Post>;
 };
 
