@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import A from "./a.jsx";
 import { search } from "../utils/search.js";
 
 export const LinkCategory = ({category}) => {
-    const to = search(['category', category]);
-    return <Link to={to}
+    const href = search(['category', category]);
+    return <A href={href}
                  rel="tag"
-                 data-pagefind-filter="category">{category}</Link>;
+                 data-pagefind-filter="category">{category}</A>;
 };
 
 export default LinkCategory;

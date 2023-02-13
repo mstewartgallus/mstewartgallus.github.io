@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import A from "./a.jsx";
 
 const Posts = ({posts}) =>
       posts.map(({ slug, title }) =>
           <li key={slug}>
-              <Link to={slug}>{title}</Link>
+              <A href={slug}>{title}</A>
           </li>);
 
 export const PostList = ({posts}) =>

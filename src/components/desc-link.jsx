@@ -1,13 +1,13 @@
 import * as React from "react";
-import Link from "./link.jsx";
+import A from "./a.jsx";
 
 const DescLink = ({ children, desc, ...props }) => {
     const id = React.useId();
-    return <Link {...props}>
+    return <A {...props}>
                <span aria-describedby={id}>{children}</span>
                &emsp;
                <span id={id} aria-hidden="true">{desc}</span>
-           </Link>;
+           </A>;
 };
 
 export default DescLink;

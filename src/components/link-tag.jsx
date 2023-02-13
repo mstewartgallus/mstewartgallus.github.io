@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import A from "./a.jsx";
 import { search } from "../utils/search.js";
 
 export const LinkTag = ({tag}) => {
-    const to = search(['tag', tag]);
-    return <Link to={to} rel="tag" data-pagefind-filter="tag">{tag}</Link>;
+    const href = search(['tag', tag]);
+    return <A href={href} rel="tag" data-pagefind-filter="tag">{tag}</A>;
 };
 
 export default LinkTag;
