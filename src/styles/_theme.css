@@ -35,3 +35,7 @@ main > :is(ul, ol) {
     /* default ratio on browsers is 1rem = 16px */
     --s: clamp(0rem, (600rem - 1600vw) / 100, 1rem) ;
 }
+
+nav, footer {
+    margin-block: var(--line);
+}

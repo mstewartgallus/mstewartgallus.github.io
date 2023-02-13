@@ -67,7 +67,7 @@ const sitemap = {
 export const graphqlTypegen = true;
 
 export const flags = {
-    DEV_SSR: true,
+    DEV_SSR: false,
     PARALLEL_SOURCING: true
 };
 

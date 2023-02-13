@@ -1,14 +1,11 @@
 import * as React from "react";
+import { DescList, DescItem } from "./desc-list.jsx";
 
-const Notices = ({notice}) => notice.map(n => <dd key={n}>{n}</dd>);
+const Notices = ({notice}) => notice.map(n => <DescItem key={n}>{n}</DescItem>);
 
 export const ListNotice = ({notice}) =>
-notice && notice.length > 0 &&
-    <dl>
-        <div>
-            <dt>Notice</dt>
-            <Notices notice={notice} />
-        </div>
-    </dl>;
+<DescList desc="Notice">
+    <Notices notice={notice} />
+</DescList>;
 
 export default ListNotice;

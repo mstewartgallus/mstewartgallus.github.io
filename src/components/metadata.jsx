@@ -1,66 +1,55 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import DescLink from "./desc-link.jsx";
+import { DescList, DescItem } from "./desc-list.jsx";
 import LinkPerson from "./link-person.jsx";
 import LinkPlace from "./link-place.jsx";
 import LinkTag from "./link-tag.jsx";
 
 const Places = ({places}) =>
       places.map(p =>
-          <dd key={p}><LinkPlace place={p}/></dd>
+          <DescItem key={p}><LinkPlace place={p}/></DescItem>
       );
 
 const Tags = ({tags}) =>
       tags.map(t =>
-          <dd key={t}><LinkTag tag={t}/></dd>
+          <DescItem key={t}><LinkTag tag={t}/></DescItem>
       );
 
 const People = ({people}) =>
       people.map(p =>
-          <dd key={p}><LinkPerson person={p}/></dd>
+          <DescItem key={p}><LinkPerson person={p}/></DescItem>
       );
 
 const PlaceList = ({places}) =>
-      places && places.length > 0 &&
-    <div>
-        <dt>Place</dt>
-        <Places places={places} />
-    </div>;
+<DescList desc="Place">
+    <Places places={places} />
+</DescList>;
 
 const TagList = ({tags}) =>
-      tags && tags.length > 0 &&
-    <div>
-        <dt>Tag</dt>
-        <Tags tags={tags} />
-    </div>;
+<DescList desc="Tag">
+    <Tags tags={tags} />
+</DescList>;
 
 const PeopleList = ({people}) =>
-      people && people.length > 0 &&
-    <div>
-        <dt>People</dt>
-        <People people={people} />
-    </div>;
+<DescList desc="People">
+    <People people={people} />
+</DescList>;
 
 export const Metadata = ({
     dateDisplay, date, author, places, tags, people
 }) =>
-<dl>
+<div>
     <div>
-        <dt>Post Date</dt>
-        <dd>
-            <time data-pagefind-filter="date[datetime]"
-                  data-pagefind-sort="date[datetime]"
-                  dateTime={date}>
-                {dateDisplay}
-            </time>
-        </dd>
+        Post Date&emsp;<time data-pagefind-filter="date[datetime]"
+                      data-pagefind-sort="date[datetime]"
+                      dateTime={date}>
+                    {dateDisplay}
+                </time>
     </div>
-    <div>
-        <dt><Link rel="author" to={author.url}>Author</Link></dt>
-        <dd>{author.name}</dd>
-    </div>
-    <PlaceList places={places} />
-    <TagList tags={tags} />
-    <PeopleList people={people} />
-</dl>;
+    <DescLink rel="author" href={author.url} desc={author.name}>Author</DescLink>
+    { places && places.length > 0 && <PlaceList places={places} /> }
+    { tags && tags.length > 0 && <TagList tags={tags} /> }
+    { people && people.length > 0 && <PeopleList people={people} /> }
+</div>;
 
 export default Metadata;

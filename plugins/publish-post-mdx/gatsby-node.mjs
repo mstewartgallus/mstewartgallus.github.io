@@ -1,4 +1,6 @@
 import { promises as fs } from "fs";
+import * as url from 'url';
+import * as path from 'path';
 import { mkResolve } from "../../src/utils/resolve.js";
 
 const resolve = mkResolve(import.meta);
@@ -30,7 +32,7 @@ query MdxPosts {
     return data.allPostMdx.nodes;
 };
 
-export const createPages = async ({actions, graphql, reporter}) => {
+export const createPages = async ({actions, graphql, reporter, getNode}) => {
     const { createPage } = actions;
 
     const posts = await usePostMdxList({ graphql, reporter });

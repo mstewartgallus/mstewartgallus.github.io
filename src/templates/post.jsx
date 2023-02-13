@@ -75,7 +75,7 @@ const BlogPost = ({ children, data: { post } }) =>  {
                                 <h1>{title}</h1>
                                 <p>{subtitle}</p>
                             </>}
-                   notice={<ListNotice notice={notice} />}
+                   notice={notice && notice.length > 0 && <ListNotice notice={notice} />}
                    sidebar={
                        <>
                            <Nav heading={<h2>Paging</h2>}>

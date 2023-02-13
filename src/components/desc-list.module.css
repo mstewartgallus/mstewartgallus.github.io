@@ -1,0 +1,8 @@
+.dl, .dd, .dt {
+    all: unset;
+}
+.dl {
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1em ;
+}
