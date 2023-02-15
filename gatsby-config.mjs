@@ -1,5 +1,8 @@
 import RemarkGfm from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
+import { mkResolve } from "./src/utils/resolve.js";
+
+const resolve = mkResolve(import.meta);
 
 export const siteMetadata = {
     title: "Words to Kick Your Teeth Out",
@@ -111,6 +114,12 @@ export const plugins = [
             name: 'Web'
         }
     },
+    {
+        resolve: "gatsby-plugin-layout",
+        options: {
+            component: resolve('./src/components/layout.jsx')
+        }
+    },
     "pagefind",
     "post",
     "site",
@@ -122,5 +131,10 @@ export const plugins = [
     "publish-post-mdx",
     "publish-post-poem",
     "layout",
-    "root"
+    {
+        resolve: "root",
+        options: {
+            component: resolve('./src/components/root.jsx')
+        }
+    }
 ];

@@ -19,6 +19,7 @@
         "@mdx-js/react": "^2.2.1",
         "gatsby": "^5.3.3",
         "gatsby-plugin-feed": "^5.4.0",
+        "gatsby-plugin-layout": "^4.6.0",
         "gatsby-plugin-mdx": "^5.4.0",
         "gatsby-plugin-sitemap": "^6.4.0",
         "gatsby-source-filesystem": "^5.4.0",

@@ -1,5 +1,4 @@
 import * as React from "react";
-import DescLink from "./desc-link.jsx";
 import { dl, dt, dd } from "./desc-list.module.css";
 
 const DescContext = React.createContext(null);

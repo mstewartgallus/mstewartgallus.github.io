@@ -1,1 +1,1 @@
-export { wrapRootElement } from "./root.jsx";
+exports.wrapRootElement = require("./root.js").wrapRootElement;

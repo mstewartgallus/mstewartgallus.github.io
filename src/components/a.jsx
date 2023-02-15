@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Gatsby from "gatsby";
 
-const internal = href => href.startsWith("/");
+const internal = href => href && href.startsWith("/");
 
 const linkish = ({href, download, target}) =>
       internal(href) && !download && !target;
