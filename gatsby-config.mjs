@@ -67,8 +67,8 @@ const sitemap = {
 export const graphqlTypegen = true;
 
 export const flags = {
-    DEV_SSR: false,
-    PARALLEL_SOURCING: true
+    DEV_SSR: true,
+    PARALLEL_SOURCING: false
 };
 
 export const plugins = [
@@ -121,5 +121,6 @@ export const plugins = [
     "transformer-link-category",
     "publish-post-mdx",
     "publish-post-poem",
-    "layout"
+    "layout",
+    "root"
 ];

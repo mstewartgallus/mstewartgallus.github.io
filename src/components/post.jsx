@@ -1,17 +1,13 @@
 import * as React from "react";
-import Main from "./main.jsx";
-import Page from "./page.jsx";
-import Sidebar from "./sidebar.jsx";
 
-export const Post = ({ children, sidebar, heading, notice, ...props }) =>
-<Page {...props}>
-    <Main heading={heading}
-          notice={notice}>
-        {children}
-    </Main>
-    <Sidebar>
-        {sidebar}
-    </Sidebar>
-</Page>;
+const PostContext = React.createContext(null);
+const Provider = PostContext.Provider;
+
+export const PostProvider = ({children, Post}) => <Provider value={Post}>{children}</Provider>;
+
+export const Post = ({ children, ...props }) => {
+    const Impl = React.useContext(PostContext);
+    return <Impl {...props}>{children}</Impl>;
+};
 
 export default Post;
