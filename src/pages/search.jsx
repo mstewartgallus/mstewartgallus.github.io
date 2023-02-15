@@ -149,6 +149,37 @@ const SearchForm = ({onSubmit, tags, state, set}) => {
            </form>;
 };
 
+const Heading = ({query}) => {
+    if (query === '' || !query) {
+        return <h1>Search</h1>;
+    }
+    return <h1>{query}{separator}Search</h1>;
+};
+
+const Sidebar = () => {
+    const [state, dispatch] = React.useReducer(reducer, emptyQuery);
+
+    const set = React.useCallback((name, value) => dispatch({type: 'set', name, value}),
+                                  [dispatch]);
+
+    const onSubmit = useSubmit();
+    const tags = usePostTags();
+
+    return <>
+               <SearchForm onSubmit={onSubmit}
+                           tags={tags}
+                           set={set}
+                           state={state}
+               />
+               <Nav heading={<h2>Breadcrumbs</h2>}>
+                   <BreadcrumbList>
+                       <li><Link to="/">Home</Link></li>
+                       <li aria-current="page"><cite>Search</cite></li>
+                   </BreadcrumbList>
+               </Nav>
+           </>;
+};
+
 export const Head = ({location}) => {
     const [search, setSearch] = React.useState(null);
     React.useEffect(() => {
@@ -174,49 +205,18 @@ export const Head = ({location}) => {
            </>;
 };
 
-const Heading = ({query}) => {
-    if (query === '' || !query) {
-        return <h1>Search</h1>;
-    }
-    return <h1>{query}{separator}Search</h1>;
-};
-
 const SearchPage = ({location}) => {
     const [search, setSearch] = React.useState(null);
     React.useEffect(() => {
             setSearch(location.search);
     }, [location]);
 
-    const onSubmit = useSubmit();
-    const tags = usePostTags();
-
-    const [state, dispatch] = React.useReducer(reducer, emptyQuery);
-
     const params = React.useMemo(() => parseParams(search), [search]);
-
-    const set = React.useCallback((name, value) => dispatch({type: 'set', name, value}),
-                                  [dispatch]);
 
     const query = params?.s;
 
     return <Post heading={<Heading query={query} />}
-                 sidebar={
-                     <>
-                         <SearchForm location={location}
-                                     onSubmit={onSubmit}
-                                     tags={tags}
-                                     set={set}
-                                     state={state}
-                         />
-                         <Nav heading={<h2>Breadcrumbs</h2>}>
-                             <BreadcrumbList>
-                                 <li><Link to="/">Home</Link></li>
-                                 <li aria-current="page"><cite>Search</cite></li>
-                             </BreadcrumbList>
-                         </Nav>
-                     </>
-                 }
-           >
+                 sidebar={<Sidebar />}>
                <DynamicResultList search={search} />
            </Post>;
 };

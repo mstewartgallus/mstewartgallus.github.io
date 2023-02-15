@@ -19,6 +19,54 @@ import useWebsite from "../hooks/use-website.js";
 
 const title = "Table of Contents";
 
+const Index = () => {
+    const indices = usePostList();
+    const indexAll = useIndexAll();
+    const indexCategory = useIndexCategory();
+    const allPosts = indices[indexAll];
+    const postsByCategory =
+          Object.entries(indexCategory)
+          .map(([category, id]) => [category, indices[id]]);
+
+    return <>
+               <PostList posts={allPosts} />
+
+               {
+                   postsByCategory.map(([category, posts]) =>
+                       <React.Fragment key={category}>
+                           <h2>{category}</h2>
+                           <PostList posts={posts} />
+                       </React.Fragment>)
+               }
+           </>;
+};
+
+const Sidebar = () => {
+    const { title, description } = useSiteMetadata();
+
+    return <>
+               <Header
+                   heading={
+                       <>
+                           <h2>{title}</h2>
+                           <p>{description}</p>
+                       </>}>
+                   <Banner />
+               </Header>
+               <Search />
+               <Nav heading={<h2>Breadcrumbs</h2>}>
+                   <BreadcrumbList>
+                       <li aria-current="page">Home</li>
+                   </BreadcrumbList>
+               </Nav>
+           </>;
+};
+
+const Foot = () => {
+    const json = useWebsite();
+    return <JsonLd srcdoc={json} />;
+};
+
 export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
     return <>
@@ -29,50 +77,11 @@ export const Head = ({location: {pathname}}) => {
            </>;
 };
 
-const IndexPage = props => {
-    const { title, description } = useSiteMetadata();
-
-    const json = useWebsite();
-    const indices = usePostList();
-    const indexAll = useIndexAll();
-    const indexCategory = useIndexCategory();
-    const allPosts = indices[indexAll];
-    const postsByCategory =
-          Object.entries(indexCategory)
-          .map(([category, id]) => [category, indices[id]]);
-
-    return <>
-               <Post heading={<h1>Posts</h1>}
-                     sidebar={
-                         <>
-                             <Header
-                                 heading={
-                                     <>
-                                         <h2>{title}</h2>
-                                         <p>{description}</p>
-                                     </>}>
-                                 <Banner />
-                             </Header>
-                             <Search />
-                             <Nav heading={<h2>Breadcrumbs</h2>}>
-                                 <BreadcrumbList>
-                                     <li aria-current="page">Home</li>
-                                 </BreadcrumbList>
-                             </Nav>
-                         </>
-                     }>
-                   <PostList posts={allPosts} />
-
-                   {
-                       postsByCategory.map(([category, posts]) =>
-                           <React.Fragment key={category}>
-                               <h2>{category}</h2>
-                               <PostList posts={posts} />
-                           </React.Fragment>)
-                   }
-               </Post>
-               <JsonLd srcdoc={json} />
-    </>;
-};
+const IndexPage = () =>
+<Post heading={<h1>Posts</h1>}
+      sidebar={<Sidebar />}
+      foot={<Foot />}>
+    <Index />
+</Post>;
 
 export default IndexPage;

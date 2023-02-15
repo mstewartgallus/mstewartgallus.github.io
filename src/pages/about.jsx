@@ -10,6 +10,46 @@ import { useAbsolute } from "../hooks/use-absolute.js";
 
 const title = "About the Author";
 
+const Sidebar = () =>
+      <>
+          <Nav heading={<h2>Breadcrumbs</h2>}>
+              <BreadcrumbList>
+                  <li><Link to="/">Home</Link></li>
+                  <li aria-current="page"><cite>About the Author</cite></li>
+              </BreadcrumbList>
+          </Nav>
+      </>;
+
+const About = () =>
+      <>
+          <p>My pen name is <span role="presentation" translate="no">Molossus Spondee</span>.
+          This is my personal blog mostly for posting silly poetry. </p>
+
+          <dl>
+              <div><dt>About the Author</dt><dd>Molossus Spondee</dd></div>
+              <div>
+                  <dt><a href="mailto:molossusspondee@gmail.com">Email</a></dt>
+                  <dd>molossusspondee@gmail.com</dd>
+              </div>
+              <div>
+                  <dt><a rel="me" href="https://mastodon.lol/@MSpondee">Mastodon</a></dt>
+                  <dd>@MSpondee@mastodon.lol</dd>
+              </div>
+              <div>
+                  <dt><a href="https://twitter.com/MSpondee">Twitter</a></dt>
+                  <dd>@MSpondee</dd>
+              </div>
+              <div>
+                  <dt><a href="https://github.com/mstewartgallus">GitHub</a></dt>
+                  <dd>mstewartgallus</dd>
+              </div>
+              <div>
+                  <dt><a href="https://www.linkedin.com/in/mstewartgallus">LinkedIn</a></dt>
+                  <dd>mstewartgallus</dd>
+              </div>
+          </dl>
+      </>;
+
 export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
     return <>
@@ -18,46 +58,10 @@ export const Head = ({location: {pathname}}) => {
                <Title>{title}</Title>
            </>;
 };
-
 const AboutPage = () =>
 <Post heading={<h1>About the Author</h1>}
-      sidebar={
-          <>
-              <Nav heading={<h2>Breadcrumbs</h2>}>
-                  <BreadcrumbList>
-                      <li><Link to="/">Home</Link></li>
-                      <li aria-current="page"><cite>About the Author</cite></li>
-                  </BreadcrumbList>
-              </Nav>
-          </>
-      }
->
-    <p>My pen name is <span role="presentation" translate="no">Molossus Spondee</span>.
-    This is my personal blog mostly for posting silly poetry. </p>
-
-    <dl>
-        <div><dt>About the Author</dt><dd>Molossus Spondee</dd></div>
-        <div>
-            <dt><a href="mailto:molossusspondee@gmail.com">Email</a></dt>
-            <dd>molossusspondee@gmail.com</dd>
-        </div>
-        <div>
-            <dt><a rel="me" href="https://mastodon.lol/@MSpondee">Mastodon</a></dt>
-            <dd>@MSpondee@mastodon.lol</dd>
-        </div>
-        <div>
-            <dt><a href="https://twitter.com/MSpondee">Twitter</a></dt>
-            <dd>@MSpondee</dd>
-        </div>
-        <div>
-            <dt><a href="https://github.com/mstewartgallus">GitHub</a></dt>
-            <dd>mstewartgallus</dd>
-        </div>
-        <div>
-            <dt><a href="https://www.linkedin.com/in/mstewartgallus">LinkedIn</a></dt>
-            <dd>mstewartgallus</dd>
-        </div>
-    </dl>
+      sidebar={<Sidebar />}>
+    <About />
 </Post>;
 
 export default AboutPage;
