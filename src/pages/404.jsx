@@ -1,6 +1,6 @@
 import * as React from "react";
+import A from "../components/a.jsx";
 import HeadBasic from "../components/head-basic.jsx";
-import { Link } from "gatsby";
 import Post from "../components/post.jsx";
 import Title from "../components/title.jsx";
 
@@ -14,7 +14,7 @@ const NotFoundPage = () =>
     <p>
         Sorry we couldn’t find what you were looking for.
         <br />
-        <Link to="/">Go home</Link>.
+        <A href="/">Go home</A>.
     </p>
 </Post>;
 

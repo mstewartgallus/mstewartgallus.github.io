@@ -1,23 +1,23 @@
 import * as React from "react";
-import DescLink from "./desc-link.jsx";
+import DescA from "./desc-a.jsx";
 import { DescList, DescItem } from "./desc-list.jsx";
-import LinkPerson from "./link-person.jsx";
-import LinkPlace from "./link-place.jsx";
-import LinkTag from "./link-tag.jsx";
+import PersonA from "./link-person.jsx";
+import PlaceA from "./link-place.jsx";
+import TagA from "./link-tag.jsx";
 
 const Places = ({places}) =>
       places.map(p =>
-          <DescItem key={p}><LinkPlace place={p}/></DescItem>
+          <DescItem key={p}><PlaceA place={p}/></DescItem>
       );
 
 const Tags = ({tags}) =>
       tags.map(t =>
-          <DescItem key={t}><LinkTag tag={t}/></DescItem>
+          <DescItem key={t}><TagA tag={t}/></DescItem>
       );
 
 const People = ({people}) =>
       people.map(p =>
-          <DescItem key={p}><LinkPerson person={p}/></DescItem>
+          <DescItem key={p}><PersonA person={p}/></DescItem>
       );
 
 const PlaceList = ({places}) =>
@@ -46,7 +46,7 @@ export const Metadata = ({
                     {dateDisplay}
                 </time>
     </div>
-    <DescLink rel="author" href={author.url} desc={author.name}>Author</DescLink>
+    <DescA rel="author" href={author.url} desc={author.name}>Author</DescA>
     { places && places.length > 0 && <PlaceList places={places} /> }
     { tags && tags.length > 0 && <TagList tags={tags} /> }
     { people && people.length > 0 && <PeopleList people={people} /> }

@@ -1,24 +1,24 @@
 import * as React from "react";
-import DescLink from "./desc-link.jsx";
+import DescA from "./desc-a.jsx";
 
 export const Paging = ({ previous, next }) =>
 <div>
-    { previous &&
       <div>
-          <DescLink rel="prev" href={previous.slug}
-                    desc={<cite>{previous.title}</cite>}>
-              Previous
-          </DescLink>
+          { previous &&
+            <DescA rel="prev" href={previous.slug}
+                   desc={<cite>{previous.title}</cite>}>
+                Previous
+            </DescA>
+          }
       </div>
-    }
-    { next &&
       <div>
-          <DescLink rel="next" href={next.slug}
-                    desc={<cite>{next.title}</cite>}>
-              Next
-          </DescLink>
+          { next &&
+            <DescA rel="next" href={next.slug}
+                   desc={<cite>{next.title}</cite>}>
+                Next
+            </DescA>
+          }
       </div>
-    }
 </div>;
 
 

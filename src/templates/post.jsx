@@ -1,6 +1,7 @@
 import * as React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
+import A from "../components/a.jsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import Footer from "../components/footer.jsx";
 import HeadBasic from "../components/head-basic.jsx";
@@ -74,7 +75,7 @@ const Sidebar = post => {
                </Footer>
                <Nav heading={<h2>Breadcrumbs</h2>}>
                    <BreadcrumbList>
-                       <li><Link to="/">Home</Link></li>
+                       <li><A href="/">Home</A></li>
                        <li><LinkCategory rel="tag" category={category} /></li>
                        <li aria-current="page"><cite>{title}</cite></li>
                    </BreadcrumbList>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import A from "../components/a.jsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from "../components/nav.jsx";
@@ -14,7 +14,7 @@ const Sidebar = () =>
       <>
           <Nav heading={<h2>Breadcrumbs</h2>}>
               <BreadcrumbList>
-                  <li><Link to="/">Home</Link></li>
+                  <li><A href="/">Home</A></li>
                   <li aria-current="page"><cite>About the Author</cite></li>
               </BreadcrumbList>
           </Nav>
@@ -28,23 +28,23 @@ const About = () =>
           <dl>
               <div><dt>About the Author</dt><dd>Molossus Spondee</dd></div>
               <div>
-                  <dt><a href="mailto:molossusspondee@gmail.com">Email</a></dt>
+                  <dt><A href="mailto:molossusspondee@gmail.com">Email</A></dt>
                   <dd>molossusspondee@gmail.com</dd>
               </div>
               <div>
-                  <dt><a rel="me" href="https://mastodon.lol/@MSpondee">Mastodon</a></dt>
+                  <dt><A rel="me" href="https://mastodon.lol/@MSpondee">Mastodon</A></dt>
                   <dd>@MSpondee@mastodon.lol</dd>
               </div>
               <div>
-                  <dt><a href="https://twitter.com/MSpondee">Twitter</a></dt>
+                  <dt><A href="https://twitter.com/MSpondee">Twitter</A></dt>
                   <dd>@MSpondee</dd>
               </div>
               <div>
-                  <dt><a href="https://github.com/mstewartgallus">GitHub</a></dt>
+                  <dt><A href="https://github.com/mstewartgallus">GitHub</A></dt>
                   <dd>mstewartgallus</dd>
               </div>
               <div>
-                  <dt><a href="https://www.linkedin.com/in/mstewartgallus">LinkedIn</a></dt>
+                  <dt><A href="https://www.linkedin.com/in/mstewartgallus">LinkedIn</A></dt>
                   <dd>mstewartgallus</dd>
               </div>
           </dl>

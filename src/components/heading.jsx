@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import A from "./a.jsx";
 
 const AutoLink = ({to, ...props}) => {
     const href = `#${to}`;
     return to &&
         <>
             &emsp;
-            <Link {...props} to={href}>#</Link>
+            <A {...props} href={href}>#</A>
         </>;
 };
 

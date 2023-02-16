@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Link } from "gatsby";
-
+import A from "../components/a.jsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from  "../components/nav.jsx";
@@ -43,8 +42,8 @@ const parseParams = search => {
     return { s, category, tag, place, person };
 };
 
-const Result = ({url, title}) => <Link to={url}>{title}</Link>;
-const Loading = () => <Link>Loading</Link>;
+const Result = ({url, title}) => <A href={url}>{title}</A>;
+const Loading = () => <A>Loading</A>;
 
 const Results = ({results}) =>
       results.map(({id, result}) =>
@@ -173,7 +172,7 @@ const Sidebar = () => {
                />
                <Nav heading={<h2>Breadcrumbs</h2>}>
                    <BreadcrumbList>
-                       <li><Link to="/">Home</Link></li>
+                       <li><A href="/">Home</A></li>
                        <li aria-current="page"><cite>Search</cite></li>
                    </BreadcrumbList>
                </Nav>
