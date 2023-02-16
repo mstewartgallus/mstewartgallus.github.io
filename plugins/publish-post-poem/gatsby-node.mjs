@@ -3,15 +3,15 @@ import { mkResolve } from "../../src/utils/resolve.js";
 
 const resolve = mkResolve(import.meta);
 
-const poemTemplate = resolve('../../src/templates/post.jsx');
+const poemTemplate = resolve('../../src/templates/post-poem.jsx');
 
 const usePostPoemList = async ({graphql, reporter}) => {
     const { errors, data } = await graphql(`
 query PoemPosts {
    allPostPoem {
       nodes {
+        id
         post {
-          id
           slug
         }
       }
@@ -33,7 +33,7 @@ export const createPages = async ({actions, graphql, reporter}) => {
         return;
     }
     await Promise.all(posts.map(async postPoem => {
-        const { id, slug } = postPoem.post;
+        const { id, post: { slug } } = postPoem;
         return await createPage({
             path: slug,
             component: poemTemplate,

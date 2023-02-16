@@ -5,15 +5,15 @@ import { mkResolve } from "../../src/utils/resolve.js";
 
 const resolve = mkResolve(import.meta);
 
-const mdxTemplate = resolve('../../src/templates/post.jsx');
+const mdxTemplate = resolve('../../src/templates/post-mdx.jsx');
 
 const usePostMdxList = async ({graphql, reporter}) => {
     const { errors, data } = await graphql(`
 query MdxPosts {
   allPostMdx {
     nodes {
+      id
       post {
-        id
         slug
       }
       mdx {
@@ -41,7 +41,8 @@ export const createPages = async ({actions, graphql, reporter, getNode}) => {
     }
     await Promise.all(posts.map(async post => {
         const {
-            post: { id, slug },
+            id,
+            post: { slug },
             mdx: { internal: { contentFilePath } }
         } = post;
         await createPage({
