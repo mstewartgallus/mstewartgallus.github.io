@@ -1,6 +1,6 @@
 import RemarkGfm from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
-import { mkResolve } from "./src/utils/resolve.js";
+import { mkResolve } from "./src/utils/resolve.mjs";
 
 const resolve = mkResolve(import.meta);
 
@@ -70,8 +70,8 @@ const sitemap = {
 export const graphqlTypegen = true;
 
 export const flags = {
-    DEV_SSR: false,
-    PARALLEL_SOURCING: false
+    DEV_SSR: true,
+    PARALLEL_SOURCING: true
 };
 
 export const plugins = [
@@ -86,7 +86,7 @@ export const plugins = [
     {
         resolve: "gatsby-plugin-mdx",
         options: {
-            extensions: ['.md', '.mdx', '.markdown'],
+            extensions: ['.mdx'],
             mdxOptions: {
                 remarkPlugins: [RemarkGfm],
                 rehypePlugins: [RehypeSlug],
@@ -121,6 +121,8 @@ export const plugins = [
         }
     },
     "pagefind",
+    "scan-mdx",
+    "webpack",
     "post",
     "site",
     "transformer-poem",

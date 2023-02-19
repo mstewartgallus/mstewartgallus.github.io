@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as url from 'url';
 import * as path from 'path';
-import { mkResolve } from "../../src/utils/resolve.js";
+import { mkResolve } from "../../src/utils/resolve.mjs";
 
 const resolve = mkResolve(import.meta);
 
@@ -15,11 +15,6 @@ query MdxPosts {
       id
       post {
         slug
-      }
-      mdx {
-        internal {
-          contentFilePath
-        }
       }
     }
   }
@@ -42,12 +37,11 @@ export const createPages = async ({actions, graphql, reporter, getNode}) => {
     await Promise.all(posts.map(async post => {
         const {
             id,
-            post: { slug },
-            mdx: { internal: { contentFilePath } }
+            post: { slug }
         } = post;
         await createPage({
             path: slug,
-            component: `${mdxTemplate}?__contentFilePath=${contentFilePath}`,
+            component: mdxTemplate,
             context: { id }
         });
     }));

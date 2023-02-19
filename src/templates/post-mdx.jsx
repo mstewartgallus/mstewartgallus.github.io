@@ -13,15 +13,11 @@ import useAbsolute from "../hooks/use-absolute.js";
 import useBlogPosting from "../hooks/use-blog-posting.js";
 import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 import useMdxComponents from "../hooks/use-mdx-components.js";
+import useMdx from "../hooks/use-mdx.js";
 
 const author = {
     name: "Molossus Spondee",
     url: "/about/"
-};
-
-const Provider = ({ children, category }) => {
-    const components = useMdxComponents(category);
-    return <MDXProvider components={components}>{children}</MDXProvider>;
 };
 
 const Heading = ({title, subtitle}) =>
@@ -53,15 +49,23 @@ export const Head = ({ data: { postMdx: { post } } }) => {
            </>;
 };
 
-const PostPage = ({ children, data: { postMdx: { post } } }) => {
+const PostPage = ({ data: { postMdx: { post, mdx } } }) => {
+    const { category, notice } = post;
+
+    const components = useMdxComponents(category);
+
+    const Component = useMdx(mdx.id);
+
     post = { author, ...post };
 
     return <Post
                heading={<Heading {...post} />}
-               notice={<Notice notice={post.notice} />}
+               notice={<Notice notice={notice} />}
                sidebar={<PostSidebar {...post} />}
                foot={<Foot {...post} />}>
-               <Provider category={post.category}>{children}</Provider>
+               <MDXProvider components={components}>
+                   <Component />
+               </MDXProvider>
            </Post>;
 };
 
@@ -70,6 +74,9 @@ export default PostPage;
 export const pageQuery = graphql`
 query MdxById($id: String!) {
   postMdx(id: {eq: $id}) {
+    mdx {
+      id
+    }
     post {
       slug
       dateDisplay: date(formatString: "YYYY-MM-DD")

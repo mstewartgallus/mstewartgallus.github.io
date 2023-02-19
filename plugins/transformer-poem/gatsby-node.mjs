@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import grayMatter from "gray-matter";
-import { mkResolve } from "../../src/utils/resolve.js";
+import { mkResolve } from "../../src/utils/resolve.mjs";
 
 const resolve = mkResolve(import.meta);
 
