@@ -1,28 +1,21 @@
 import * as React from "react";
+import blogMap from "./mdx-imports.js";
 
-// eslint-disable-next-line
-const blogs = GATSBY_MDX_PATHS;
+const importBlog = blog => import(`../../blog/${blog}.mdx`);
 
-const importBlog = blog =>
-      import(/* webpackMode: "eager" */ `../../blog/${blog}.mdx`);
+const createLazyBlog = blog => {
+    const Component = React.lazy(() => importBlog(blog));
 
-const blogMap = Object.fromEntries(
-    await Promise.all(blogs.map(async blog =>
-        [blog, (await importBlog(blog)).default]
-    ))
-);
+    const Lazy = ({children, ...props}) =>
+    <React.Suspense fallback="loading...">
+        <Component {...props}>{children}</Component>
+    </React.Suspense>;
+
+    return Lazy;
+};
 
 const useBlog = blog => {
-    const Lazy = React.useMemo(() => {
-        const Component = React.lazy(() => importBlog(blog), [blog]);
-
-        const Lazy = ({children, ...props}) =>
-        <React.Suspense fallback="loading...">
-            <Component {...props}>{children}</Component>
-        </React.Suspense>;
-
-        return Lazy;
-    }, [blog]);
+    const Lazy = React.useMemo(() => createLazyBlog(blog), [blog]);
     return blogMap[blog] ?? Lazy;
 };
 
