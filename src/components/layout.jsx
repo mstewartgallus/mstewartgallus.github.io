@@ -15,7 +15,6 @@ export const Layout = ({ children }) => {
         Sidebar = Default,
         Foot = Default
     } = type;
-    // FIXME detect improper post?
 
     return <>
                <div className={layout}>

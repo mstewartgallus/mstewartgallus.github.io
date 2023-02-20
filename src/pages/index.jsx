@@ -18,6 +18,8 @@ import useWebsite from "../hooks/use-website.js";
 
 const title = "Table of Contents";
 
+const Heading = () => <h1>Posts</h1>;
+
 const Sidebar = () => {
     const { title, description } = useSiteMetadata();
 
@@ -76,7 +78,7 @@ const IndexPage = () => {
            </>;
 };
 
-IndexPage.Heading = () => <h1>Posts</h1>;
+IndexPage.Heading = Heading;
 IndexPage.Sidebar = Sidebar;
 IndexPage.Foot = Foot;
 

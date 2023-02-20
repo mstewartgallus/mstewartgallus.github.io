@@ -8,11 +8,15 @@ export const Head = () => <>
                               <Title>Not found</Title>
                           </>;
 
+const Heading = () => <h1>Not Found</h1>;
+
 const NotFoundPage = () =>
 <p>
     Sorry we couldn’t find what you were looking for.
     <br />
     <A href="/">Go home</A>.
 </p>;
+
+NotFoundPage.Heading = Heading;
 
 export default NotFoundPage;

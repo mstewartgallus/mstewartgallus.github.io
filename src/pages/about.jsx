@@ -9,6 +9,8 @@ import { useAbsolute } from "../hooks/use-absolute.js";
 
 const title = "About the Author";
 
+const Heading = () => <h1>About the Author</h1>;
+
 const Sidebar = () =>
       <>
           <Nav heading={<h2>Breadcrumbs</h2>}>
@@ -58,7 +60,7 @@ const AboutPage = () =>
           </dl>
       </>;
 
-AboutPage.Heading = () => <h1>About the Author</h1>;
+AboutPage.Heading = Heading;
 AboutPage.Sidebar = Sidebar;
 
 export default AboutPage;

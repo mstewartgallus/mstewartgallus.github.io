@@ -218,10 +218,6 @@ const SearchPage = ({location}) => {
             setSearch(location.search);
     }, [location]);
 
-    const params = React.useMemo(() => parseParams(search), [search]);
-
-    const query = params?.s;
-
     return <DynamicResultList search={search} />;
 };
 
