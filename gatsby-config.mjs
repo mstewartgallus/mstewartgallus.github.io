@@ -116,7 +116,6 @@ export const plugins = [
         }
     },
     "pagefind",
-    "scan-mdx",
     "webpack",
     "post",
     "site",
@@ -127,6 +126,12 @@ export const plugins = [
     "transformer-link-category",
     "publish-post-mdx",
     "publish-post-poem",
+    {
+        resolve: "scan-mdx",
+        options: {
+            blog: resolve('./blog')
+        }
+    },
     {
         resolve: "layout",
         options: {

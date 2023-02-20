@@ -1,15 +1,20 @@
 import * as React from "react";
 import { layout, page, sidebar as sidebarClass } from "./layout.module.css";
-import { PostProvider } from "../../src/components/post.jsx";
 
-const Pick = ({children, ix}) =>
-<PostProvider value={ix}>
-    {children}
-</PostProvider>;
+const Default = () => false;
 
 export const Layout = ({ children }) => {
     const id = React.useId();
 
+    const child = React.Children.only(children);
+    const { type, props } = child;
+
+    const {
+        Heading = Default,
+        Notice = Default,
+        Sidebar = Default,
+        Foot = Default
+    } = type;
     // FIXME detect improper post?
 
     return <>
@@ -18,18 +23,18 @@ export const Layout = ({ children }) => {
                        <main data-pagefind-body="" aria-describedby={id}>
                            <header>
                                <hgroup id={id}>
-                                   <Pick ix="heading">{children}</Pick>
+                                   <Heading {...props} />
                                </hgroup>
-                               <Pick ix="notice">{children}</Pick>
+                               <Notice {...props} />
                            </header>
-                           <Pick ix="children">{children}</Pick>
+                           {children}
                        </main>
                        <div className={sidebarClass}>
-                           <Pick ix="sidebar">{children}</Pick>
+                           <Sidebar {...props} />
                        </div>
                    </div>
                </div>
-               <Pick ix="foot">{children}</Pick>
+               <Foot {...props} />
            </>;
 };
 

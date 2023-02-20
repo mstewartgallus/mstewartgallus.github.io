@@ -1,7 +1,7 @@
 import * as React from "react";
 import blogMap from "./mdx-imports.js";
 
-const importBlog = blog => import(`../../blog/${blog}.mdx`);
+const importBlog = blog => import(`blog/${blog}.mdx`);
 
 const createLazyBlog = blog => {
     const Component = React.lazy(() => importBlog(blog));

@@ -5,7 +5,6 @@ import HeadBasic from "../components/head-basic.jsx";
 import Header from "../components/header.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import Nav from "../components/nav.jsx";
-import Post from "../components/post.jsx";
 import PostList from "../components/post-list.jsx";
 import Search from "../components/search.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -18,28 +17,6 @@ import useSiteMetadata from "../hooks/use-site-metadata.js";
 import useWebsite from "../hooks/use-website.js";
 
 const title = "Table of Contents";
-
-const Index = () => {
-    const indices = usePostList();
-    const indexAll = useIndexAll();
-    const indexCategory = useIndexCategory();
-    const allPosts = indices[indexAll];
-    const postsByCategory =
-          Object.entries(indexCategory)
-          .map(([category, id]) => [category, indices[id]]);
-
-    return <>
-               <PostList posts={allPosts} />
-
-               {
-                   postsByCategory.map(([category, posts]) =>
-                       <React.Fragment key={category}>
-                           <h2>{category}</h2>
-                           <PostList posts={posts} />
-                       </React.Fragment>)
-               }
-           </>;
-};
 
 const Sidebar = () => {
     const { title, description } = useSiteMetadata();
@@ -77,11 +54,30 @@ export const Head = ({location: {pathname}}) => {
            </>;
 };
 
-const IndexPage = () =>
-<Post heading={<h1>Posts</h1>}
-      sidebar={<Sidebar />}
-      foot={<Foot />}>
-    <Index />
-</Post>;
+const IndexPage = () => {
+    const indices = usePostList();
+    const indexAll = useIndexAll();
+    const indexCategory = useIndexCategory();
+    const allPosts = indices[indexAll];
+    const postsByCategory =
+          Object.entries(indexCategory)
+          .map(([category, id]) => [category, indices[id]]);
+
+    return <>
+               <PostList posts={allPosts} />
+
+               {
+                   postsByCategory.map(([category, posts]) =>
+                       <React.Fragment key={category}>
+                           <h2>{category}</h2>
+                           <PostList posts={posts} />
+                       </React.Fragment>)
+               }
+           </>;
+};
+
+IndexPage.Heading = () => <h1>Posts</h1>;
+IndexPage.Sidebar = Sidebar;
+IndexPage.Foot = Foot;
 
 export default IndexPage;

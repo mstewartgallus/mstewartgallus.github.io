@@ -4,7 +4,6 @@ import { MDXProvider } from "@mdx-js/react";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
-import Post from "../components/post.jsx";
 import PostMdx from "../components/post-mdx.jsx";
 import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -50,21 +49,31 @@ export const Head = ({ data: { postMdx: { post } } }) => {
 };
 
 const PostPage = ({ data: { postMdx: { post, path } } }) => {
-    const { category, notice } = post;
-
-    const components = useMdxComponents(category);
-
     post = { author, ...post };
 
-    return <Post
-               heading={<Heading {...post} />}
-               notice={<Notice notice={notice} />}
-               sidebar={<PostSidebar {...post} />}
-               foot={<Foot {...post} />}>
-               <MDXProvider components={components}>
-                   <PostMdx blog={path} />
-               </MDXProvider>
-           </Post>;
+    const components = useMdxComponents(post.category);
+
+    return <MDXProvider components={components}>
+               <PostMdx blog={path} />
+           </MDXProvider>;
+};
+
+PostPage.Heading = ({ data: { postMdx: { post } } }) => {
+    post = { author, ...post };
+
+    return <Heading {...post} />;
+};
+
+PostPage.Notice = ({ data: { postMdx: { post } } }) => {
+    return <Notice notice={post.notice} />;
+};
+PostPage.Sidebar = ({ data: { postMdx: { post } } }) => {
+    post = { author, ...post };
+    return <PostSidebar {...post} />;
+};
+PostPage.Foot = ({ data: { postMdx: { post } } }) => {
+    post = { author, ...post };
+    return <Foot {...post} />;
 };
 
 export default PostPage;

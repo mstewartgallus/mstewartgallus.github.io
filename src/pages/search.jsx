@@ -3,7 +3,6 @@ import A from "../components/a.jsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from  "../components/nav.jsx";
-import Post from "../components/post.jsx";
 import { Select, Option } from "../components/select.jsx";
 import { separator } from "../utils/separator.js";
 import Title from "../components/title.jsx";
@@ -148,7 +147,16 @@ const SearchForm = ({onSubmit, tags, state, set}) => {
            </form>;
 };
 
-const Heading = ({query}) => {
+const Heading = ({location}) => {
+    const [search, setSearch] = React.useState(null);
+    React.useEffect(() => {
+            setSearch(location.search);
+    }, [location]);
+
+    const params = React.useMemo(() => parseParams(search), [search]);
+
+    const query = params?.s;
+
     if (query === '' || !query) {
         return <h1>Search</h1>;
     }
@@ -214,10 +222,10 @@ const SearchPage = ({location}) => {
 
     const query = params?.s;
 
-    return <Post heading={<Heading query={query} />}
-                 sidebar={<Sidebar />}>
-               <DynamicResultList search={search} />
-           </Post>;
+    return <DynamicResultList search={search} />;
 };
+
+SearchPage.Heading = Heading;
+SearchPage.Sidebar = Sidebar;
 
 export default SearchPage;

@@ -3,7 +3,6 @@ import A from "../components/a.jsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from "../components/nav.jsx";
-import Post from "../components/post.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
@@ -20,7 +19,16 @@ const Sidebar = () =>
           </Nav>
       </>;
 
-const About = () =>
+export const Head = ({location: {pathname}}) => {
+    const url = useAbsolute(pathname);
+    return <>
+               <HeadBasic />
+               <SeoBasic url={url} title={title} />
+               <Title>{title}</Title>
+           </>;
+};
+
+const AboutPage = () =>
       <>
           <p>My pen name is <span role="presentation" translate="no">Molossus Spondee</span>.
           This is my personal blog mostly for posting silly poetry. </p>
@@ -50,18 +58,7 @@ const About = () =>
           </dl>
       </>;
 
-export const Head = ({location: {pathname}}) => {
-    const url = useAbsolute(pathname);
-    return <>
-               <HeadBasic />
-               <SeoBasic url={url} title={title} />
-               <Title>{title}</Title>
-           </>;
-};
-const AboutPage = () =>
-<Post heading={<h1>About the Author</h1>}
-      sidebar={<Sidebar />}>
-    <About />
-</Post>;
+AboutPage.Heading = () => <h1>About the Author</h1>;
+AboutPage.Sidebar = Sidebar;
 
 export default AboutPage;
