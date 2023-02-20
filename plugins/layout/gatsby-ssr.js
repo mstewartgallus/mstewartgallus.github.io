@@ -1,1 +1,1 @@
-export * from "./layout.jsx";
+export { wrapPageElement } from "./layout.jsx";

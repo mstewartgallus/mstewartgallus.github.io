@@ -70,7 +70,7 @@ const sitemap = {
 export const graphqlTypegen = true;
 
 export const flags = {
-    DEV_SSR: false,
+    DEV_SSR: true,
     PARALLEL_SOURCING: true,
     FAST_DEV: true
 };
@@ -115,12 +115,6 @@ export const plugins = [
             name: 'Web'
         }
     },
-    {
-        resolve: "gatsby-plugin-layout",
-        options: {
-            component: resolve('./src/components/layout.jsx')
-        }
-    },
     "pagefind",
     "scan-mdx",
     "webpack",
@@ -133,7 +127,12 @@ export const plugins = [
     "transformer-link-category",
     "publish-post-mdx",
     "publish-post-poem",
-    "layout",
+    {
+        resolve: "layout",
+        options: {
+            component: resolve('./src/components/layout.jsx')
+        }
+    },
     {
         resolve: "root",
         options: {

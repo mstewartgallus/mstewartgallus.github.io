@@ -15,8 +15,11 @@ const createLazyBlog = blog => {
 };
 
 const useBlog = blog => {
-    const Lazy = React.useMemo(() => createLazyBlog(blog), [blog]);
-    return blogMap[blog] ?? Lazy;
+    const Component =  blogMap[blog];
+    if (Component) {
+        return Component;
+    }
+    throw new Error(`${blog} not cached`);
 };
 
 export const PostMdx = ({blog}) => {

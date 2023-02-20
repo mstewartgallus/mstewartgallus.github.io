@@ -2,7 +2,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }, { component }) =>
 actions.setWebpackConfig({
     resolve: {
         alias: {
-            'gatsby-plugin-root/root$': component
+            'gatsby-plugin-layout/layout$': component
         }
     }
 });
