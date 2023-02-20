@@ -24,7 +24,7 @@ export const onCreateNode = async props => {
     const indexId = createNodeId(`${category} >>> Index`);
     const indexCategoryId = createNodeId(`${category} >>> IndexCategory`);
 
-    if (!getNode(indexId)) {
+    {
         const indexNode = {
             category,
             id: indexCategoryId,
