@@ -1,10 +1,10 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
+import * as blogs from "blog/index";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
-import PostMdx from "../components/post-mdx.jsx";
 import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
@@ -48,13 +48,23 @@ export const Head = ({ data: { postMdx: { post } } }) => {
            </>;
 };
 
+const useBlog = blog => {
+    const Component = blogs[blog];
+    if (Component) {
+        return Component;
+    }
+    throw new Error(`${blog} not cached`);
+};
+
 const PostPage = ({ data: { postMdx: { post, path } } }) => {
     post = { author, ...post };
 
     const components = useMdxComponents(post.category);
 
+    const Blog = useBlog(path);
+
     return <MDXProvider components={components}>
-               <PostMdx blog={path} />
+               <Blog />
            </MDXProvider>;
 };
 

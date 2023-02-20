@@ -16,12 +16,7 @@ const postNodeOfMdx = ({ node, getNode }) => {
     return { name, category, ...node.frontmatter };
 };
 
-const relpath = p => {
-    const q = path.relative("./blog", p);
-    const dir = path.dirname(q);
-    const base = path.basename(q, ".mdx");
-    return `${dir}/${base}`;
-};
+const relpath = p => path.relative("./blog", p);
 
 export const createSchemaCustomization = async ({ actions, schema }) => {
     const { createTypes } = actions;
