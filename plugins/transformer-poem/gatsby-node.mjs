@@ -79,6 +79,7 @@ export const onCreateNode = async props => {
         }
     };
 
-    await actions.createNode(poemNode);
-    await actions.createParentChildLink({ parent: node, child: poemNode });
+    await Promise.all([
+        actions.createNode(poemNode),
+        actions.createParentChildLink({ parent: node, child: poemNode })]);
 };

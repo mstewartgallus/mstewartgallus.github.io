@@ -53,6 +53,7 @@ export const onCreateNode = async props => {
         }
     };
 
-    await createPostNode(postId, node.id, postMdxId, post, props);
-    await actions.createNode(postMdxNode);
+    await Promise.all([
+        createPostNode(postId, node.id, postMdxId, post, props),
+        actions.createNode(postMdxNode)]);
 };

@@ -24,21 +24,19 @@ export const onCreateNode = async props => {
     const indexId = createNodeId(`${category} >>> Index`);
     const indexCategoryId = createNodeId(`${category} >>> IndexCategory`);
 
-    {
-        const indexNode = {
-            category,
-            id: indexCategoryId,
-            parent: indexId,
-            children: [],
-            internal: {
-                type: 'IndexCategory',
-                contentDigest: createContentDigest(category)
-            }
-        };
+    const indexNode = {
+        category,
+        id: indexCategoryId,
+        parent: indexId,
+        children: [],
+        internal: {
+            type: 'IndexCategory',
+            contentDigest: createContentDigest(category)
+        }
+    };
 
-        await createIndexNode(indexId, indexCategoryId, props);
-        await actions.createNode(indexNode);
-    }
-
-    await createLinkNode(linkId, node.id, indexId, props);
+    await Promise.all([
+        createIndexNode(indexId, indexCategoryId, props),
+        actions.createNode(indexNode),
+        createLinkNode(linkId, node.id, indexId, props)]);
 };
