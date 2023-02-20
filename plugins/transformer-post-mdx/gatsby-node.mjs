@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import * as path from "path";
 import { mkResolve } from "../../src/utils/resolve.mjs";
 import { createPostNode } from "../post/index.mjs";
 
@@ -15,6 +16,13 @@ const postNodeOfMdx = ({ node, getNode }) => {
     return { name, category, ...node.frontmatter };
 };
 
+const relpath = p => {
+    const q = path.relative("./blog", p);
+    const dir = path.dirname(q);
+    const base = path.basename(q, ".mdx");
+    return `${dir}/${base}`;
+};
+
 export const createSchemaCustomization = async ({ actions, schema }) => {
     const { createTypes } = actions;
     await createTypes(await typeDefs);
@@ -28,7 +36,9 @@ export const onCreateNode = async props => {
     const postId = createNodeId(`${node.id} >>> Post`);
     const postMdxId = createNodeId(`${node.id} >>> PostMdx`);
 
-    const postMdx = { mdx: node.id };
+    const path = relpath(node.internal.contentFilePath);
+
+    const postMdx = { mdx: node.id, path };
 
     const post = postNodeOfMdx({ node, getNode });
 

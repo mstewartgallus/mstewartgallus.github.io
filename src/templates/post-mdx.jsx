@@ -5,6 +5,7 @@ import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
 import Post from "../components/post.jsx";
+import PostMdx from "../components/post-mdx.jsx";
 import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
@@ -13,7 +14,6 @@ import useAbsolute from "../hooks/use-absolute.js";
 import useBlogPosting from "../hooks/use-blog-posting.js";
 import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 import useMdxComponents from "../hooks/use-mdx-components.js";
-import useMdx from "../hooks/use-mdx.js";
 
 const author = {
     name: "Molossus Spondee",
@@ -49,12 +49,10 @@ export const Head = ({ data: { postMdx: { post } } }) => {
            </>;
 };
 
-const PostPage = ({ data: { postMdx: { post, mdx } } }) => {
+const PostPage = ({ data: { postMdx: { post, path } } }) => {
     const { category, notice } = post;
 
     const components = useMdxComponents(category);
-
-    const Component = useMdx(mdx.id);
 
     post = { author, ...post };
 
@@ -64,7 +62,7 @@ const PostPage = ({ data: { postMdx: { post, mdx } } }) => {
                sidebar={<PostSidebar {...post} />}
                foot={<Foot {...post} />}>
                <MDXProvider components={components}>
-                   <Component />
+                   <PostMdx blog={path} />
                </MDXProvider>
            </Post>;
 };
@@ -74,9 +72,7 @@ export default PostPage;
 export const pageQuery = graphql`
 query MdxById($id: String!) {
   postMdx(id: {eq: $id}) {
-    mdx {
-      id
-    }
+    path
     post {
       slug
       dateDisplay: date(formatString: "YYYY-MM-DD")

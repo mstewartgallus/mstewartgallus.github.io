@@ -70,8 +70,9 @@ const sitemap = {
 export const graphqlTypegen = true;
 
 export const flags = {
-    DEV_SSR: true,
-    PARALLEL_SOURCING: true
+    DEV_SSR: false,
+    PARALLEL_SOURCING: true,
+    FAST_DEV: true
 };
 
 export const plugins = [
