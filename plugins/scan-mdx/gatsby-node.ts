@@ -24,14 +24,30 @@ class PathSet {
 };
 
 const getIndexFile = async ({cache}) => {
+    // FIXME have different directories for different plugin instances?
     return resolve(cache.directory, 'index.js');
 };
 
-const sourceIndex = paths => paths.map(([key, val]) => {
-    const imp = JSON.stringify(val);
-    const exp = JSON.stringify(key);
-    return `export { default as ${exp} } from ${imp};`;
-}).join('\n');
+const sourceIndex = paths => {
+    const imports =
+        paths.map(([key, val], ix) => {
+            const imp = JSON.stringify(val);
+            const exp = JSON.stringify(key);
+            return `import { default as c${ix} } from ${imp};`;
+        }).join('\n');
+
+    const obj =
+        paths.map(([key, val], ix) => {
+            const exp = JSON.stringify(key);
+            return `${exp}: c${ix}`;
+        }).join(',\n');
+
+    return `${imports}
+
+export default Object.freeze({
+${obj}
+});`;
+};
 
 const createIndex = async (paths, helpers, { path }) => {
     const { cache } = helpers;
@@ -91,6 +107,7 @@ export const onCreateWebpackConfig = async (helpers, { path, "module": mod }) =>
 
 export const pluginOptionsSchema = ({ Joi }) => {
     return Joi.object({
-        path: Joi.string().required()
+        path: Joi.string().required(),
+        "module": Joi.string().required()
     });
 };
