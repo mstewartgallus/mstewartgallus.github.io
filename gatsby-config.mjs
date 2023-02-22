@@ -129,7 +129,8 @@ export const plugins = [
     {
         resolve: "scan-mdx",
         options: {
-            path: resolve('./blog')
+            path: resolve('./blog'),
+            "module": "blog"
         }
     },
     {

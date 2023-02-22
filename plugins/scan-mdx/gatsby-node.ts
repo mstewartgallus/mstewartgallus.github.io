@@ -1,66 +1,92 @@
-import { watchDirectory } from "gatsby-page-utils";
-import { createFileNodeFromBuffer } from "gatsby-source-filesystem";
+import { promises as fs } from "fs";
+import { resolve, relative } from "path";
 import glob from "globby";
+import { watchDirectory } from "gatsby-page-utils";
 
-const sourceIndex = paths => paths.map(path => {
-    const imp = JSON.stringify(`blog/${path}`);
-    const exp = JSON.stringify(path);
+class PathSet {
+    #cwd;
+    #x;
+    constructor(cwd) {
+        this.#cwd = cwd;
+        this.#x = new Set();
+    }
+    add(v) {
+        v = resolve(this.#cwd, v);
+        this.#x.add(v);
+    }
+    delete(v) {
+        this.#x.delete(resolve(this.#cwd, v));
+    }
+
+    [Symbol.iterator]() {
+        return this.#x[Symbol.iterator]();
+    }
+};
+
+const getIndexFile = async ({cache}) => {
+    return resolve(cache.directory, 'index.js');
+};
+
+const sourceIndex = paths => paths.map(([key, val]) => {
+    const imp = JSON.stringify(val);
+    const exp = JSON.stringify(key);
     return `export { default as ${exp} } from ${imp};`;
 }).join('\n');
 
-const createIndex = async (
-    paths,
-    {
-        actions: { setWebpackConfig, createNode },
-        getCache, createNodeId
-    }, { path }
-) => {
-    const source = sourceIndex(paths);
-    const buffer = Buffer.from(source);
-    const file = await createFileNodeFromBuffer({
-        name: 'index',
-        ext: '.js',
-        buffer,
-        getCache,
-        createNode,
-        createNodeId
-    });
+const createIndex = async (paths, helpers, { path }) => {
+    const { cache } = helpers;
 
-    const indexFile = file.absolutePath;
+    const mapped =
+        Array.from(paths)
+            .map(p =>
+                [relative(path, p), relative(cache.directory, p)]);
 
-    await setWebpackConfig({
-        resolve: {
-            alias: {
-                'blog/index$': indexFile,
-                'blog': path
-            }
-        }
-    });
+    const source = sourceIndex(mapped);
+
+    await fs.writeFile(await getIndexFile(helpers), source);
 };
 
-export const onCreateWebpackConfig = async (helpers, options, doneCb) => {
-    const globstr = `**.mdx`;
-
+export const onPostBootstrap = async (helpers, options, doneCb) => {
     const { path } = options;
 
-    const paths = await glob(globstr, { cwd: path });
-    await createIndex(paths, helpers, options);
+    const globstr = `**.mdx`;
+
+    const paths = new PathSet(path);
 
     (async () => {
-        const paths = new Set();
         await watchDirectory(
             path, globstr,
             async path => {
                 paths.add(path);
-                await createIndex(Array.from(paths), helpers, options);
+                await createIndex(paths, helpers, options);
             },
             async path => {
                 paths.delete(path);
-                await createIndex(Array.from(paths), helpers, options);
+                await createIndex(paths, helpers, options);
             }
         );
         await doneCb(null, null);
     })();
+
+    const initpaths = await glob(globstr, { cwd: path });
+    for (const file of initpaths) {
+        paths.add(file);
+    }
+
+    await createIndex(paths, helpers, options);
+};
+
+export const onCreateWebpackConfig = async (helpers, { path, "module": mod }) => {
+    const { actions } = helpers;
+    const { setWebpackConfig } = actions;
+
+    await setWebpackConfig({
+        resolve: {
+            alias: {
+                [mod + '$']: await getIndexFile(helpers)
+            }
+        }
+    });
 };
 
 export const pluginOptionsSchema = ({ Joi }) => {
