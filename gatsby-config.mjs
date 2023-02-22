@@ -127,10 +127,10 @@ export const plugins = [
     "publish-post-mdx",
     "publish-post-poem",
     {
-        resolve: "scan-mdx",
+        resolve: "index",
         options: {
             path: resolve('./blog'),
-            "module": "blog"
+            name: "blog"
         }
     },
     {

@@ -23,34 +23,18 @@ class PathSet {
     }
 };
 
-const getIndexFile = async ({cache}) => {
-    // FIXME have different directories for different plugin instances?
-    return resolve(cache.directory, 'index.js');
-};
-
 const sourceIndex = paths => {
-    const imports =
-        paths.map(([key, val], ix) => {
+    return paths.map(([key, val]) => {
             const imp = JSON.stringify(val);
             const exp = JSON.stringify(key);
-            return `import { default as c${ix} } from ${imp};`;
+            return `export { default as ${exp} } from ${imp};`;
         }).join('\n');
-
-    const obj =
-        paths.map(([key, val], ix) => {
-            const exp = JSON.stringify(key);
-            return `${exp}: c${ix}`;
-        }).join(',\n');
-
-    return `${imports}
-
-export default Object.freeze({
-${obj}
-});`;
 };
 
-const createIndex = async (paths, helpers, { path }) => {
+const createIndex = async (paths, helpers, options) => {
     const { cache } = helpers;
+    const { path, name } = options;
+    const indexFile = resolve(cache.directory, `${name}.js`);
 
     const mapped =
         Array.from(paths)
@@ -59,7 +43,7 @@ const createIndex = async (paths, helpers, { path }) => {
 
     const source = sourceIndex(mapped);
 
-    await fs.writeFile(await getIndexFile(helpers), source);
+    await fs.writeFile(indexFile, source);
 };
 
 export const onPostBootstrap = async (helpers, options, doneCb) => {
@@ -92,14 +76,14 @@ export const onPostBootstrap = async (helpers, options, doneCb) => {
     await createIndex(paths, helpers, options);
 };
 
-export const onCreateWebpackConfig = async (helpers, { path, "module": mod }) => {
-    const { actions } = helpers;
+export const onCreateWebpackConfig = async helpers => {
+    const { actions, cache } = helpers;
     const { setWebpackConfig } = actions;
 
     await setWebpackConfig({
         resolve: {
             alias: {
-                [mod + '$']: await getIndexFile(helpers)
+                ['gatsby-plugin-index/index']: cache.directory
             }
         }
     });
@@ -108,6 +92,6 @@ export const onCreateWebpackConfig = async (helpers, { path, "module": mod }) =>
 export const pluginOptionsSchema = ({ Joi }) => {
     return Joi.object({
         path: Joi.string().required(),
-        "module": Joi.string().required()
+        name: Joi.string().required()
     });
 };

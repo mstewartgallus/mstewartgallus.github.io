@@ -1,7 +1,6 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
-import blogs from "blog";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
@@ -9,10 +8,13 @@ import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
 import Title from "../components/title.jsx";
+import createUseIndex from "../hooks/use-index.js";
 import useAbsolute from "../hooks/use-absolute.js";
 import useBlogPosting from "../hooks/use-blog-posting.js";
 import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 import useMdxComponents from "../hooks/use-mdx-components.js";
+
+const useIndex = await createUseIndex("blog");
 
 const author = {
     name: "Molossus Spondee",
@@ -49,7 +51,7 @@ export const Head = ({ data: { postMdx: { post } } }) => {
 };
 
 const useBlog = blog => {
-    const Component = blogs[blog];
+    const Component = useIndex(blog);
     if (Component) {
         return Component;
     }
