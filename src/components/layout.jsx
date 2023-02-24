@@ -1,5 +1,7 @@
 import * as React from "react";
 import { layout, page, sidebar as sidebarClass } from "./layout.module.css";
+import ErrorBoundary from "./error-boundary.jsx";
+import Error from "./error.jsx";
 
 const Default = () => false;
 
@@ -20,6 +22,11 @@ const reducer = (state, action) => {
         return state;
     }
 };
+
+const Err = ({children}) =>
+<ErrorBoundary fallback={e => <Error error={e} />}>
+    {children}
+</ErrorBoundary>;
 
 const LayoutImpl = ({ children }, ref) => {
     const [state, dispatch] = React.useReducer(reducer, init);
@@ -57,18 +64,28 @@ const LayoutImpl = ({ children }, ref) => {
                        <main data-pagefind-body="" aria-describedby={id}>
                            <header>
                                <hgroup id={id}>
-                                   <Heading {...props} />
+                                   <Err>
+                                       <Heading {...props} />
+                                   </Err>
                                </hgroup>
-                               <Notice {...props} />
+                               <Err>
+                                   <Notice {...props} />
+                               </Err>
                            </header>
-                           {children}
+                           <Err>
+                               {children}
+                           </Err>
                        </main>
                        <div className={sidebarClass}>
-                           <Sidebar {...props} />
+                           <Err>
+                               <Sidebar {...props} />
+                           </Err>
                        </div>
                    </div>
                </div>
-               <Foot {...props} />
+               <Err>
+                   <Foot {...props} />
+               </Err>
            </>;
 };
 
