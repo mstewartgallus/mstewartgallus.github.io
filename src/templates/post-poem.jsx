@@ -19,7 +19,7 @@ const author = {
 
 const Heading = ({title, subtitle}) =>
       <>
-          <h1>{title}</h1>
+          <h1 tabIndex="-1">{title}</h1>
           <p>{subtitle}</p>
       </>;
 const Notice = ({notice}) =>

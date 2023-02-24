@@ -3,7 +3,42 @@ import { layout, page, sidebar as sidebarClass } from "./layout.module.css";
 
 const Default = () => false;
 
-export const Layout = ({ children }) => {
+const init = {
+    loading: true,
+    longLoad: false
+};
+
+const reducer = (state, action) => {
+    switch (action.type) {
+    case 'onPreRouteUpdate':
+        return { ...state, loading: true };
+    case 'onRouteUpdate':
+        return { ...state, loading: false, longLoad: false };
+    case 'onRouteUpdateDelayed':
+        return { ...state, longLoad: true };
+    default:
+        return state;
+    }
+};
+
+const LayoutImpl = ({ children }, ref) => {
+    const [state, dispatch] = React.useReducer(reducer, init);
+
+    React.useImperativeHandle(ref, () => ({
+        onPreRouteUpdate() {
+            dispatch({ type: 'onPreRouteUpdate' });
+        },
+        onRouteUpdate() {
+            dispatch({ type: 'onRouteUpdate' });
+        },
+        onRouteUpdateDelayed() {
+            dispatch({ type: 'onRouteUpdateDelayed' });
+        },
+        shouldUpdateScroll() {
+            return true;
+        }
+    }), []);
+
     const id = React.useId();
 
     const child = React.Children.only(children);
@@ -36,5 +71,7 @@ export const Layout = ({ children }) => {
                <Foot {...props} />
            </>;
 };
+
+export const Layout = React.forwardRef(LayoutImpl);
 
 export default Layout;

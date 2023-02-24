@@ -8,7 +8,7 @@ export const Head = () => <>
                               <Title>Not found</Title>
                           </>;
 
-const Heading = () => <h1>Not Found</h1>;
+const Heading = () => <h1 tabIndex="-1">Not Found</h1>;
 
 const NotFoundPage = () =>
 <p>

@@ -9,7 +9,7 @@ import { useAbsolute } from "../hooks/use-absolute.js";
 
 const title = "About the Author";
 
-const Heading = () => <h1>About the Author</h1>;
+const Heading = () => <h1 tabIndex="-1">About the Author</h1>;
 
 const Sidebar = () =>
       <>

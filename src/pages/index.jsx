@@ -18,7 +18,7 @@ import useWebsite from "../hooks/use-website.js";
 
 const title = "Table of Contents";
 
-const Heading = () => <h1>Posts</h1>;
+const Heading = () => <h1 tabIndex="-1">Posts</h1>;
 
 const Sidebar = () => {
     const { title, description } = useSiteMetadata();

@@ -158,9 +158,9 @@ const Heading = ({location}) => {
     const query = params?.s;
 
     if (query === '' || !query) {
-        return <h1>Search</h1>;
+        return <h1 tabIndex="-1">Search</h1>;
     }
-    return <h1>{query}{separator}Search</h1>;
+    return <h1 tabIndex="-1">{query}{separator}Search</h1>;
 };
 
 const Sidebar = () => {
