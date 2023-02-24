@@ -67,6 +67,8 @@ const sitemap = {
     }
 };
 
+export const jsxRuntime = "automatic";
+
 export const graphqlTypegen = true;
 
 export const flags = {
