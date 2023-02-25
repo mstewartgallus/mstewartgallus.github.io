@@ -28,28 +28,3 @@
     widows: 2 ;
     orphans: 2 ;
 }
-
-@media (max-width: 130ch) {
-    .sidebar {
-        display: contents ;
-    }
-}
-
-@media (min-width: 130ch) {
-    .page {
-        display: flex ;
-    }
-}
-
-.page {
-    box-sizing: border-box;
-    max-inline-size: 100% ;
-
-    flex-wrap: wrap ;
-    column-gap: 1em ;
-}
-
-/* .page { */
-/*      background: linear-gradient(grey, Canvas); */
-/*      background-size: 100% var(--line) ; */
-/* } */

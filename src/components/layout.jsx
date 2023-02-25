@@ -1,7 +1,8 @@
 import * as React from "react";
-import { layout, page, sidebar as sidebarClass } from "./layout.module.css";
+import { layout } from "./layout.module.css";
 import ErrorBoundary from "./error-boundary.jsx";
 import Error from "./error.jsx";
+import Page from "./page.jsx";
 
 const Default = () => false;
 
@@ -28,24 +29,11 @@ const Err = ({children}) =>
     {children}
 </ErrorBoundary>;
 
-const Loading = () => {
-    const id = React.useId();
-
-    return <>
-               <main aria-describedby={id}>
-                   <header>
-                       <hgroup id={id}>
-                           <h1>Loading...</h1>
-                       </hgroup>
-                   </header>
-
-                   <p>Loading...</p>
-               </main>
-               <div className={sidebarClass}>
-               </div>
-           </>;
-};
-
+const Loading = () =>
+<Page
+    heading={<h1>Loading...</h1>}>
+    <p>Loading...</p>
+</Page>;
 
 const LayoutImpl = ({ location, children }, ref) => {
     const { pathname } = location;
@@ -67,8 +55,6 @@ const LayoutImpl = ({ location, children }, ref) => {
         }
     }), []);
 
-    const id = React.useId();
-
     const child = React.Children.only(children);
     const { type, props } = child;
 
@@ -81,30 +67,26 @@ const LayoutImpl = ({ location, children }, ref) => {
 
     return <>
                <div className={layout}>
-                   <div className={page}>
-                       <React.Suspense fallback={<Loading />}>
-                           <main data-pagefind-body="" aria-describedby={id}>
-                               <header>
-                                   <hgroup id={id}>
-                                       <Err>
-                                           <Heading {...props} key={pathname} />
-                                       </Err>
-                                   </hgroup>
-                                   <Err>
-                                       <Notice {...props} key={pathname} />
-                                   </Err>
-                               </header>
+                   <React.Suspense fallback={<Loading />}>
+                       <Page
+                           heading={
                                <Err>
-                                   {children}
-                               </Err>
-                           </main>
-                           <div className={sidebarClass}>
+                                   <Heading {...props} key={pathname} />
+                               </Err>}
+                           notice={
+                               <Err>
+                                   <Notice {...props} key={pathname} />
+                               </Err>}
+                           sidebar={
                                <Err>
                                    <Sidebar {...props} key={pathname} />
                                </Err>
-                           </div>
-                       </React.Suspense>
-                   </div>
+                           }>
+                           <Err>
+                               {children}
+                           </Err>
+                       </Page>
+                   </React.Suspense>
                </div>
                <Err>
                    <Foot {...props} key={pathname} />
