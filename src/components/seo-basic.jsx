@@ -1,4 +1,3 @@
-import * as React from "react";
 import flatten from "../utils/flatten.js";
 import useSiteMetadata from '../hooks/use-site-metadata.js';
 import useOpenGraph from '../hooks/use-opengraph.js';

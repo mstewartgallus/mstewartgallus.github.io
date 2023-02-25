@@ -1,4 +1,3 @@
-import * as React from "react";
 import flatten from "../utils/flatten.js";
 import useOpenGraphBlog from '../hooks/use-opengraph-blog.js';
 

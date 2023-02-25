@@ -1,4 +1,3 @@
-import * as React from "react";
 import DescA from "./desc-a.jsx";
 import { DescList, DescItem } from "./desc-list.jsx";
 import PersonA from "./link-person.jsx";

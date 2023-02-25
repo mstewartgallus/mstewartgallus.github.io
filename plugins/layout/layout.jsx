@@ -1,4 +1,3 @@
-import * as React from "react";
 import Layout from "gatsby-plugin-layout/layout";
 
 const ref = { current: null };

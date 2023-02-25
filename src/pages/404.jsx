@@ -1,4 +1,3 @@
-import * as React from "react";
 import A from "../components/a.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";

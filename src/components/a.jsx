@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link } from "gatsby";
 
 const internal = href => href && href.startsWith("/");

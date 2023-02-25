@@ -1,4 +1,3 @@
-import * as React from "react";
 import { l } from "./l.module.css";
 
 // FIXME rm last break

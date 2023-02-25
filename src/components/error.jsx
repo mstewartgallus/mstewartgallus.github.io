@@ -1,4 +1,3 @@
-import * as React from "react";
 import { stack as stackClass, url as urlClass } from "./error.module.css";
 
 const flatten = error => {

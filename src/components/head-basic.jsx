@@ -1,4 +1,3 @@
-import * as React from "react";
 import favicon from '../images/favicon.svg';
 
 export const HeadBasic = () =>

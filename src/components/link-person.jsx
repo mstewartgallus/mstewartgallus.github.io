@@ -1,4 +1,3 @@
-import * as React from "react";
 import A from "./a.jsx";
 import { search } from "../utils/search.js";
 

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
 import HeadBasic from "../components/head-basic.jsx";

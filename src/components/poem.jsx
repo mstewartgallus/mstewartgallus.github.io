@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Children as C } from "react";
 import Caesura from "./caesura.jsx";
 import L from "./l.jsx";

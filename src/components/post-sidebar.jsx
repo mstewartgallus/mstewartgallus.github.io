@@ -1,4 +1,3 @@
-import * as React from "react";
 import A from "../components/a.jsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import Footer from "../components/footer.jsx";

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { graphql } from "gatsby";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";

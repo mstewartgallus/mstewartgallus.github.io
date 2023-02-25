@@ -1,4 +1,3 @@
-import * as React from "react";
 import DescA from "./desc-a.jsx";
 
 export const Paging = ({ previous, next }) =>

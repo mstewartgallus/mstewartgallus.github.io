@@ -1,4 +1,3 @@
-import * as React from "react";
 import { DescList, DescItem } from "./desc-list.jsx";
 
 const Notices = ({notice}) => notice.map(n => <DescItem key={n}>{n}</DescItem>);
