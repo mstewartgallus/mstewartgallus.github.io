@@ -28,7 +28,28 @@ const Err = ({children}) =>
     {children}
 </ErrorBoundary>;
 
-const LayoutImpl = ({ children }, ref) => {
+const Loading = () => {
+    const id = React.useId();
+
+    return <>
+               <main aria-describedby={id}>
+                   <header>
+                       <hgroup id={id}>
+                           <h1>Loading...</h1>
+                       </hgroup>
+                   </header>
+
+                   <p>Loading...</p>
+               </main>
+               <div className={sidebarClass}>
+               </div>
+           </>;
+};
+
+
+const LayoutImpl = ({ location, children }, ref) => {
+    const { pathname } = location;
+
     const [state, dispatch] = React.useReducer(reducer, init);
 
     React.useImperativeHandle(ref, () => ({
@@ -61,30 +82,32 @@ const LayoutImpl = ({ children }, ref) => {
     return <>
                <div className={layout}>
                    <div className={page}>
-                       <main data-pagefind-body="" aria-describedby={id}>
-                           <header>
-                               <hgroup id={id}>
+                       <React.Suspense fallback={<Loading />}>
+                           <main data-pagefind-body="" aria-describedby={id}>
+                               <header>
+                                   <hgroup id={id}>
+                                       <Err>
+                                           <Heading {...props} key={pathname} />
+                                       </Err>
+                                   </hgroup>
                                    <Err>
-                                       <Heading {...props} />
+                                       <Notice {...props} key={pathname} />
                                    </Err>
-                               </hgroup>
+                               </header>
                                <Err>
-                                   <Notice {...props} />
+                                   {children}
                                </Err>
-                           </header>
-                           <Err>
-                               {children}
-                           </Err>
-                       </main>
-                       <div className={sidebarClass}>
-                           <Err>
-                               <Sidebar {...props} />
-                           </Err>
-                       </div>
+                           </main>
+                           <div className={sidebarClass}>
+                               <Err>
+                                   <Sidebar {...props} key={pathname} />
+                               </Err>
+                           </div>
+                       </React.Suspense>
                    </div>
                </div>
                <Err>
-                   <Foot {...props} />
+                   <Foot {...props} key={pathname} />
                </Err>
            </>;
 };
