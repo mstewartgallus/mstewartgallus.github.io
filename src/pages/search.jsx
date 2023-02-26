@@ -4,11 +4,12 @@ import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from  "../components/nav.jsx";
 import { Select, Option } from "../components/select.jsx";
-import { separator } from "../utils/separator.js";
+import Search from "../components/search.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import usePostTags from "../hooks/use-post-tags.js";
 import useSearch from "../hooks/use-search.js";
+import { separator } from "../utils/separator.js";
 import { search, query, result as resultClass } from "./search.module.css";
 
 const emptyQuery = {
@@ -93,8 +94,6 @@ const Options = ({options, onChange, selected}) =>
           </Option>);
 
 const SearchForm = ({onSubmit, tags, state, set}) => {
-    const id = React.useId();
-
     const onChangeS = React.useCallback(event => set('s', event.target.value), [set]);
 
     const onChangeOption = React.useCallback(event => {
@@ -110,15 +109,9 @@ const SearchForm = ({onSubmit, tags, state, set}) => {
         set(name, next);
     }, [set, state]);
 
-    return <form className={search} aria-describedby={id} role="search" rel="search"
+    return <form className={search} rel="search"
                  action="/search"
                  onSubmit={onSubmit}>
-               <header className="sr-only">
-                   <hgroup>
-                       <h2 id={id}>Search</h2>
-                   </hgroup>
-               </header>
-
                <Query value={state.s} onChange={onChangeS} />
 
                <Select name="category">
@@ -173,11 +166,13 @@ const Sidebar = () => {
     const tags = usePostTags();
 
     return <>
-               <SearchForm onSubmit={onSubmit}
-                           tags={tags}
-                           set={set}
-                           state={state}
-               />
+               <Search heading={<h2>Search</h2>}>
+                   <SearchForm onSubmit={onSubmit}
+                               tags={tags}
+                               set={set}
+                               state={state}
+                   />
+               </Search>
                <Nav heading={<h2>Breadcrumbs</h2>}>
                    <BreadcrumbList>
                        <li><A href="/">Home</A></li>

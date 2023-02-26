@@ -7,24 +7,6 @@ import { parse } from "../utils/error.js";
 
 const Default = () => false;
 
-const init = {
-    loading: true,
-    longLoad: false
-};
-
-const reducer = (state, action) => {
-    switch (action.type) {
-    case 'onPreRouteUpdate':
-        return { ...state, loading: true };
-    case 'onRouteUpdate':
-        return { ...state, loading: false, longLoad: false };
-    case 'onRouteUpdateDelayed':
-        return { ...state, longLoad: true };
-    default:
-        return state;
-    }
-};
-
 const Err = ({children}) =>
 <ErrorBoundary
     fallback={e =>
@@ -42,17 +24,12 @@ const Loading = () =>
 const LayoutImpl = ({ location, children }, ref) => {
     const { pathname } = location;
 
-    const [state, dispatch] = React.useReducer(reducer, init);
-
     React.useImperativeHandle(ref, () => ({
         onPreRouteUpdate() {
-            dispatch({ type: 'onPreRouteUpdate' });
         },
         onRouteUpdate() {
-            dispatch({ type: 'onRouteUpdate' });
         },
         onRouteUpdateDelayed() {
-            dispatch({ type: 'onRouteUpdateDelayed' });
         },
         shouldUpdateScroll() {
             return true;

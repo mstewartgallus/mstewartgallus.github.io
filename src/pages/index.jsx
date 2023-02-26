@@ -6,6 +6,7 @@ import Header from "../components/header.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import Nav from "../components/nav.jsx";
 import PostList from "../components/post-list.jsx";
+import SearchForm from "../components/search-form.jsx";
 import Search from "../components/search.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
@@ -32,7 +33,9 @@ const Sidebar = () => {
                        </>}>
                    <Banner />
                </Header>
-               <Search />
+               <Search heading={<h2>Search</h2>}>
+                   <SearchForm />
+               </Search>
                <Nav heading={<h2>Breadcrumbs</h2>}>
                    <BreadcrumbList>
                        <li aria-current="page">Home</li>

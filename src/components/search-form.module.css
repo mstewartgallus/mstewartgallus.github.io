@@ -1,0 +1,6 @@
+.query {
+    display: flex ;
+    column-gap: 1em ;
+    flex-wrap: wrap ;
+    align-items: flex-start ;
+}

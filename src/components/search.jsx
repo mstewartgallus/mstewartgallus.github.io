@@ -1,29 +1,19 @@
 import * as React from "react";
-import { useSubmit } from "../hooks/use-submit.js";
-import { search, query } from "./search.module.css";
+import { search } from "./search.module.css";
 
-export const Search = () => {
+export const Search = ({heading, children}) => {
     const id = React.useId();
-    const onSubmit = useSubmit();
 
-    const titleId = `${id}-title`;
-    const inputId = `${id}-input`;
-
-    return <form className={search} aria-describedby={titleId}
-                 role="search" rel="search" action="/search"
-                 onSubmit={onSubmit}>
+    return <section className={search} aria-describedby={id}
+                 role="search">
                <header className="sr-only">
-                   <hgroup>
-                       <h2 id={titleId}>Search</h2>
+                   <hgroup id={id}>
+                       {heading}
                    </hgroup>
                </header>
 
-               <div className={query}>
-                   <label htmlFor={inputId}>Query</label>
-                   <input id={inputId} name="s" type="search" required />
-                   <button type="submit">Search</button>
-               </div>
-           </form>;
+               {children}
+           </section>;
 };
 
 export default Search;
