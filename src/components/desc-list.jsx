@@ -6,7 +6,7 @@ const DescContext = React.createContext(null);
 export const DescList = ({desc, children}) => {
     const id = React.useId();
     return <dl className={dl}>
-               <dt className={dt} id={id} aria-hidden="true">{desc}</dt>
+               <dt className={dt} id={id}>{desc}</dt>
                <DescContext.Provider value={id}>
                    {children}
                </DescContext.Provider>

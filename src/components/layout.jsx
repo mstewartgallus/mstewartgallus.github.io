@@ -3,6 +3,7 @@ import { layout } from "./layout.module.css";
 import ErrorBoundary from "./error-boundary.jsx";
 import Error from "./error.jsx";
 import Page from "./page.jsx";
+import { parse } from "../utils/error.js";
 
 const Default = () => false;
 
@@ -25,13 +26,16 @@ const reducer = (state, action) => {
 };
 
 const Err = ({children}) =>
-<ErrorBoundary fallback={e => <Error error={e} />}>
+<ErrorBoundary
+    fallback={e =>
+        parse(e).map(({message, name, stack}) =>
+            <Error message={message} name={name} stack={stack} />)
+    }>
     {children}
 </ErrorBoundary>;
 
 const Loading = () =>
-<Page
-    heading={<h1>Loading...</h1>}>
+<Page heading={<h1>Loading...</h1>}>
     <p>Loading...</p>
 </Page>;
 

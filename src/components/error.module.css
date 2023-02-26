@@ -1,16 +1,5 @@
-.url {
-    display: block ;
-    overflow: auto ;
-    box-sizing: border-box ;
-    inline-size: var(--main-width) ;
-    max-inline-size: 100% ;
-
-    font-size: 0.8rem;
-    white-space: nowrap ;
-}
-
 .stack {
-    display: block ;
-    overflow: auto ;
-    max-block-size: calc(13 * var(--line));
+    overflow: auto;
+    max-inline-size: var(--main-width) ;
+    font-size: 0.8rem;
 }
