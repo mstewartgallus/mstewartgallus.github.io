@@ -1,19 +1,33 @@
-function loop(key, value) {
+const loop = function *loop(ix, key, value) {
     if (typeof value === 'string') {
-        return [[key, value]];
+        yield [ix, key, value];
+        return;
     }
 
     if (Array.isArray(value)) {
-        return value.flatMap(x => loop(key, x));
+        let ii = 0;
+        for (const x of value) {
+            for (const l of loop(`${ix}${ii}`, key, x)) {
+                yield l;
+            }
+            ++ii;
+        }
+        return;
     }
 
-    return Object.entries(value)
-        .flatMap(([k, v]) => {
-            const prop = key ? `${key}:${k}` : k ;
-            return loop(prop, v);
-        });
-}
+    for (const [k, v] of Object.entries(value)) {
+        const prop = key ? `${key}:${k}` : k ;
+        const newix = key ? `${ix}:${k}` : k ;
+        for (const l of loop(newix, prop, v)) {
+            yield l;
+        }
+    }
+};
 
-export const flatten = value => loop(null, value);
+export const flatten = function*(value) {
+    for (const l of loop(null, null, value)) {
+        yield l;
+    }
+};
 
 export default flatten;

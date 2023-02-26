@@ -3,8 +3,12 @@ import useOpenGraphBlog from '../hooks/use-opengraph-blog.js';
 
 const Open = props => {
     const json = useOpenGraphBlog(props);
-    return flatten(json).map(([k, v]) =>
-        <meta key={k} property={k} content={v} />);
+    return Array.from((function* (){
+        for (const [ix, k, v] of flatten(json)) {
+            yield <meta key={ix} property={k} content={v} />;
+        }
+    })());
+
 };
 
 

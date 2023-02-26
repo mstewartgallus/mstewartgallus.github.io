@@ -4,8 +4,12 @@ import useOpenGraph from '../hooks/use-opengraph.js';
 
 const Open = props => {
     const json = useOpenGraph(props);
-    return flatten(json).map(([k, v]) =>
-        <meta key={k} property={k} content={v} />);
+
+    return Array.from((function* (){
+        for (const [ix, k, v] of flatten(json)) {
+            yield <meta key={ix} property={k} content={v} />;
+        }
+    })());
 };
 
 export const SeoBasic = props => {
