@@ -1,5 +1,7 @@
-exports.onCreateWebpackConfig = ({ actions, plugins }, { component }) =>
-actions.setWebpackConfig({
+exports.onCreateWebpackConfig = (
+    { actions: { setWebpackConfig }},
+    { component }
+) => setWebpackConfig({
     resolve: {
         alias: {
             'gatsby-plugin-layout/layout$': component
@@ -7,8 +9,6 @@ actions.setWebpackConfig({
     }
 });
 
-exports.pluginOptionsSchema = ({ Joi }) => {
-    return Joi.object({
-        component: Joi.string().required()
-    });
-};
+exports.pluginOptionsSchema = ({ Joi }) => Joi.object({
+    component: Joi.string().required()
+});

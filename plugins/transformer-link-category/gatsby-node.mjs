@@ -7,16 +7,20 @@ const resolve = mkResolve(import.meta);
 const typeDefs = fs.readFile(resolve('./type-defs.gql'),
                              { encoding: 'utf-8' });
 
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
-    await createTypes(await typeDefs);
-};
+export const createSchemaCustomization = async ({
+    actions: { createTypes }
+}) => await createTypes(await typeDefs);
 
-export const shouldOnCreateNode = ({node}) =>
-'Post' == node.internal.type;
+export const shouldOnCreateNode = ({
+    node: { internal: { type }}
+}) => 'Post' == type;
 
-export const onCreateNode = async props => {
-    const {node, actions, createNodeId, createContentDigest, getNode} = props;
+export const onCreateNode = async helpers => {
+    const {
+        node,
+        actions: { createNode },
+        createNodeId, createContentDigest, getNode
+    } = helpers;
 
     const { category } = node;
 
@@ -24,19 +28,17 @@ export const onCreateNode = async props => {
     const indexId = createNodeId(`${category} >>> Index`);
     const indexCategoryId = createNodeId(`${category} >>> IndexCategory`);
 
-    const indexNode = {
-        category,
-        id: indexCategoryId,
-        parent: indexId,
-        children: [],
-        internal: {
-            type: 'IndexCategory',
-            contentDigest: createContentDigest(category)
-        }
-    };
+    await createIndexNode(indexId, indexCategoryId, helpers);
+    await createNode({
+            category,
+            id: indexCategoryId,
+            parent: indexId,
+            children: [],
+            internal: {
+                type: 'IndexCategory',
+                contentDigest: createContentDigest(category)
+            }
+    });
 
-    await Promise.all([
-        createIndexNode(indexId, indexCategoryId, props),
-        actions.createNode(indexNode),
-        createLinkNode(linkId, node.id, indexId, props)]);
+    await createLinkNode(linkId, node.id, indexId, helpers);
 };

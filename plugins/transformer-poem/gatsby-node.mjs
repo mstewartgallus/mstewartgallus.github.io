@@ -51,35 +51,39 @@ const poemNodeOfFile = async ({ node, loadNodeContent }) => {
     };
 };
 
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
+export const createSchemaCustomization = async ({
+    actions: { createTypes }
+}) => {
     await createTypes(await typeDefs);
 };
 
-export const shouldOnCreateNode = ({node}) =>
-'File' === node.internal.type && 'poem' === node.extension;
+export const shouldOnCreateNode = ({node: { extension, internal: { type }}}) =>
+'File' === type && 'poem' === extension;
 
 export const onCreateNode = async props => {
     const {
         node,
-        actions,
+        actions: { createNode, createParentChildLink },
         createContentDigest,
         createNodeId,
         getNode
     } = props;
+
+    const id = createNodeId(`${node.id} >>> Poem`);
+
     const poem = await poemNodeOfFile(props);
-    const poemNode = {
+
+    await createNode({
         ...poem,
         children: [],
         parent: node.id,
-        id: createNodeId(`${node.id} >>> POEM`),
+        id,
         internal: {
             type: 'Poem',
             contentDigest: createContentDigest(poem)
         }
-    };
+    });
 
-    await Promise.all([
-        actions.createNode(poemNode),
-        actions.createParentChildLink({ parent: node, child: poemNode })]);
+    const child = getNode(id);
+    await createParentChildLink({ parent: node, child });
 };

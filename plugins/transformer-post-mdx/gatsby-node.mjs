@@ -18,15 +18,22 @@ const postNodeOfMdx = ({ node, getNode }) => {
 
 const relpath = p => path.relative("./blog", p);
 
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
+export const createSchemaCustomization = async ({
+    actions: { createTypes }
+}) => {
     await createTypes(await typeDefs);
 };
 
-export const shouldOnCreateNode = ({node}) => 'Mdx' === node.internal.type;
+export const shouldOnCreateNode = ({
+    node: { internal: { type }}
+}) => 'Mdx' === type;
 
-export const onCreateNode = async props => {
-    const { node, getNode, actions, createNodeId, createContentDigest } = props;
+export const onCreateNode = async helpers => {
+    const {
+        node,
+        actions: { createNode },
+        getNode, createNodeId, createContentDigest
+    } = helpers;
 
     const postId = createNodeId(`${node.id} >>> Post`);
     const postMdxId = createNodeId(`${node.id} >>> PostMdx`);
@@ -35,9 +42,7 @@ export const onCreateNode = async props => {
 
     const postMdx = { mdx: node.id, path };
 
-    const post = postNodeOfMdx({ node, getNode });
-
-    const postMdxNode = {
+    await createNode({
         ...postMdx,
         id: postMdxId,
         parent: postId,
@@ -46,9 +51,9 @@ export const onCreateNode = async props => {
             type: 'PostMdx',
             contentDigest: createContentDigest(postMdx)
         }
-    };
+    });
 
-    await Promise.all([
-        createPostNode(postId, node.id, postMdxId, post, props),
-        actions.createNode(postMdxNode)]);
+    await createPostNode(postId, node.id, postMdxId,
+                         postNodeOfMdx({ node, getNode }),
+                         helpers);
 };

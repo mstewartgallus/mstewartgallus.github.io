@@ -31,9 +31,7 @@ const sourceIndex = paths => {
         }).join('\n');
 };
 
-const createIndex = async (paths, helpers, options) => {
-    const { cache } = helpers;
-    const { path, name } = options;
+const createIndex = async (paths, { cache }, { path, name }) => {
     const indexFile = resolve(cache.directory, `${name}.js`);
 
     const mapped =
@@ -76,18 +74,16 @@ export const onPostBootstrap = async (helpers, options, doneCb) => {
     await createIndex(paths, helpers, options);
 };
 
-export const onCreateWebpackConfig = async helpers => {
-    const { actions, cache } = helpers;
-    const { setWebpackConfig } = actions;
-
-    await setWebpackConfig({
-        resolve: {
-            alias: {
-                ['gatsby-plugin-index/index']: cache.directory
-            }
+export const onCreateWebpackConfig = ({
+    actions: { setWebpackConfig },
+    cache
+}) => setWebpackConfig({
+    resolve: {
+        alias: {
+            ['gatsby-plugin-index/index']: cache.directory
         }
-    });
-};
+    }
+});
 
 export const pluginOptionsSchema = ({ Joi }) => {
     return Joi.object({

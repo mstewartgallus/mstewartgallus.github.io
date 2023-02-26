@@ -1,6 +1,0 @@
-type Leaf implements Node @dontInfer {
-  id: ID!
-  path: String!
-  component: String!
-  context: JSON
-}

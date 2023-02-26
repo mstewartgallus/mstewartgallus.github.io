@@ -6,7 +6,6 @@ const resolve = mkResolve(import.meta);
 const typeDefs = fs.readFile(resolve('./type-defs.gql'),
                              { encoding: 'utf-8' });
 
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
-    await createTypes(await typeDefs);
-};
+export const createSchemaCustomization = async ({
+    actions: { createTypes }
+}) => await createTypes(await typeDefs);

@@ -44,7 +44,7 @@ const metadata = frontmatter => {
 };
 
 export const createLinkNode = async (id, post, index, {
-    actions,
+    actions: { createNode, createParentChildLink },
     createNodeId,
     createContentDigest,
     getNode
@@ -55,7 +55,7 @@ export const createLinkNode = async (id, post, index, {
 
     const link = { index };
 
-    const linkNode = {
+    await createNode({
         ...link,
         id,
         parent: post,
@@ -64,17 +64,16 @@ export const createLinkNode = async (id, post, index, {
             type: 'Link',
             contentDigest: createContentDigest(link)
         }
-    };
+    }, { name: 'post' });
 
-    await Promise.all([
-        actions.createNode(linkNode, { name: 'post' }),
-        actions.createParentChildLink({ parent: getNode(post), child: linkNode })]);
+    const parent = getNode(post);
+    const child = getNode(id);
 
-    return linkNode;
+    await createParentChildLink({ parent, child });
 };
 
 export const createPostNode = async (id, parent, child, frontmatter, {
-    actions,
+    actions: { createNode },
     createNodeId,
     createContentDigest
 }) => {
@@ -85,7 +84,7 @@ export const createPostNode = async (id, parent, child, frontmatter, {
 
     const m = metadata(frontmatter);
 
-    const postNode = {
+    await createNode({
         ...m,
         children: [child],
         parent: parent,
@@ -94,20 +93,18 @@ export const createPostNode = async (id, parent, child, frontmatter, {
             type: 'Post',
             contentDigest: createContentDigest(m)
         }
-    };
-    await actions.createNode(postNode, { name: 'post' });
-    return postNode;
+    }, { name: 'post' });
 };
 
 export const createIndexNode = async (id, child, {
-    actions,
+    actions: { createNode },
     createNodeId,
     createContentDigest
 }) => {
     isString(id);
     isString(child);
 
-    const node = {
+    await createNode({
         children: [child],
         parent: null,
         id,
@@ -115,7 +112,5 @@ export const createIndexNode = async (id, child, {
             type: 'Index',
             contentDigest: createContentDigest({})
         }
-    };
-    await actions.createNode(node, { name: 'post' });
-    return node;
+    }, { name: 'post' });
 };

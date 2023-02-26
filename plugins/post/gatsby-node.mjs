@@ -24,7 +24,6 @@ const slug = (source, args, context, info) => {
     return `/${catSlug}/${year}/${month}/${day}/${nameSlug}/`;
 };
 
-
 const next = async (source, args, context, info) => {
     const { parent, index } = source;
     const post = await context.nodeModel.getNodeById({id: parent, type: 'Post'});
@@ -75,23 +74,21 @@ const previous = async (source, args, context, info) => {
 
 const nil = (source, args, context, info) => source[info.fieldName] ?? [];
 
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
-    await createTypes(await typeDefs);
-};
+export const createSchemaCustomization = async ({
+    actions: { createTypes }
+}) => await createTypes(await typeDefs);
 
-export const createResolvers = async ({ createResolvers }) => {
-    await createResolvers({
-        Link: {
-            next: { type: 'Link', resolve: next },
-            previous: { type: 'Link', resolve: previous }
-        },
-        Post: {
-            slug: { type: 'String!', resolve: slug },
-            notice: { type: '[String!]!', resolve: nil },
-            tags: { type: '[String!]!', resolve: nil },
-            places: { type: '[String!]!', resolve: nil },
-            people: { type: '[String!]!', resolve: nil },
-        }
-    });
-};
+export const createResolvers = ({ createResolvers }) =>
+createResolvers({
+    Link: {
+        next: { type: 'Link', resolve: next },
+        previous: { type: 'Link', resolve: previous }
+    },
+    Post: {
+        slug: { type: 'String!', resolve: slug },
+        notice: { type: '[String!]!', resolve: nil },
+        tags: { type: '[String!]!', resolve: nil },
+        places: { type: '[String!]!', resolve: nil },
+        people: { type: '[String!]!', resolve: nil },
+    }
+});

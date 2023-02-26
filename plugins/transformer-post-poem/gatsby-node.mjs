@@ -22,15 +22,19 @@ const postNodeOfPoem = ({ node, getNode }) => {
     return { name, category, description, ...node.frontmatter };
 };
 
-export const createSchemaCustomization = async ({ actions, schema }) => {
-    const { createTypes } = actions;
-    await createTypes(await typeDefs);
-};
+export const createSchemaCustomization = async ({
+    actions: { createTypes }
+}) => await createTypes(await typeDefs);
 
-export const shouldOnCreateNode = ({node}) => 'Poem' === node.internal.type;
+export const shouldOnCreateNode = ({node: { internal: { type }}}) => 'Poem' === type;
 
-export const onCreateNode = async props => {
-    const { node, getNode, actions, createNodeId, createContentDigest } = props;
+export const onCreateNode = async helpers => {
+    const {
+        node,
+        actions: { createNode },
+        getNode,
+        createNodeId, createContentDigest
+    } = helpers;
 
     const postId = createNodeId(`${node.id} >>> Post`);
     const postPoemId = createNodeId(`${node.id} >>> PostPoem`);
@@ -39,7 +43,7 @@ export const onCreateNode = async props => {
 
     const post = postNodeOfPoem({ node, getNode });
 
-    const postPoemNode = {
+    await createNode({
         ...postPoem,
         id: postPoemId,
         parent: postId,
@@ -48,9 +52,7 @@ export const onCreateNode = async props => {
             type: 'PostPoem',
             contentDigest: createContentDigest(postPoem)
         }
-    };
+    });
 
-    await Promise.all([
-        createPostNode(postId, node.id, postPoemId, post, props),
-        actions.createNode(postPoemNode)]);
+    await createPostNode(postId, node.id, postPoemId, post, helpers);
 };

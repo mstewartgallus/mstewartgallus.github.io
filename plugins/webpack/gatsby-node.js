@@ -4,4 +4,6 @@ const webpack = {
     }
 };
 
-exports.onCreateWebpackConfig = ({ actions }) => actions.setWebpackConfig(webpack);
+exports.onCreateWebpackConfig = ({
+    actions: { setWebpackConfig }
+}) => setWebpackConfig(webpack);
