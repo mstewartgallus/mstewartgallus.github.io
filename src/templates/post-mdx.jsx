@@ -3,6 +3,7 @@ import { MDXProvider } from "@mdx-js/react";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
+import Page from "../components/page.jsx";
 import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
@@ -64,27 +65,18 @@ const PostPage = ({ data: { postMdx: { post, path } } }) => {
 
     const Blog = useBlog(path);
 
-    return <MDXProvider components={components}>
-               <Blog />
-           </MDXProvider>;
-};
-
-PostPage.Heading = ({ data: { postMdx: { post } } }) => {
-    post = { author, ...post };
-
-    return <Heading {...post} />;
-};
-
-PostPage.Notice = ({ data: { postMdx: { post } } }) => {
-    return <Notice notice={post.notice} />;
-};
-PostPage.Sidebar = ({ data: { postMdx: { post } } }) => {
-    post = { author, ...post };
-    return <PostSidebar {...post} />;
-};
-PostPage.Foot = ({ data: { postMdx: { post } } }) => {
-    post = { author, ...post };
-    return <Foot {...post} />;
+    return <>
+               <Page
+                   heading={<Heading {...post} />}
+                   notice={<Notice notice={post.notice} />}
+                   sidebar={<PostSidebar {...post} />}
+               >
+                   <MDXProvider components={components}>
+                       <Blog />
+                   </MDXProvider>
+               </Page>
+               <Foot {...post} />
+           </>;
 };
 
 export default PostPage;

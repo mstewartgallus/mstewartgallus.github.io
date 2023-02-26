@@ -5,6 +5,7 @@ import HeadBasic from "../components/head-basic.jsx";
 import Header from "../components/header.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import Nav from "../components/nav.jsx";
+import Page from "../components/page.jsx";
 import PostList from "../components/post-list.jsx";
 import SearchForm from "../components/search-form.jsx";
 import Search from "../components/search.jsx";
@@ -18,8 +19,6 @@ import useSiteMetadata from "../hooks/use-site-metadata.js";
 import useWebsite from "../hooks/use-website.js";
 
 const title = "Table of Contents";
-
-const Heading = () => <h1 tabIndex="-1">Posts</h1>;
 
 const Sidebar = () => {
     const { title, description } = useSiteMetadata();
@@ -69,20 +68,21 @@ const IndexPage = () => {
           .map(([category, id]) => [category, indices[id]]);
 
     return <>
-               <PostList posts={allPosts} />
+               <Page heading={<h1 tabIndex="-1">Posts</h1>}
+                     sidebar={<Sidebar />}
+               >
+                   <PostList posts={allPosts} />
 
-               {
-                   postsByCategory.map(([category, posts]) =>
-                       <React.Fragment key={category}>
-                           <h2>{category}</h2>
-                           <PostList posts={posts} />
-                       </React.Fragment>)
-               }
-           </>;
+                   {
+                       postsByCategory.map(([category, posts]) =>
+                           <React.Fragment key={category}>
+                               <h2>{category}</h2>
+                               <PostList posts={posts} />
+                           </React.Fragment>)
+                   }
+               </Page>
+               <Foot />
+    </>;
 };
-
-IndexPage.Heading = Heading;
-IndexPage.Sidebar = Sidebar;
-IndexPage.Foot = Foot;
 
 export default IndexPage;

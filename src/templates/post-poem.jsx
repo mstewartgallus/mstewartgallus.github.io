@@ -2,6 +2,7 @@ import { graphql } from "gatsby";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
+import Page from "../components/page.jsx";
 import Poem from "../components/poem.jsx";
 import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -48,26 +49,16 @@ export const Head = ({ data: { postPoem: { post } } }) => {
 const PostPage = ({ data: { postPoem: { post, poem } } }) => {
     post = { author, ...post };
 
-    return <Poem poem={poem.content} />;
-};
-
-PostPage.Heading = ({ data: { postPoem: { post } } }) => {
-    post = { author, ...post };
-
-    return <Heading {...post} />;
-};
-
-PostPage.Notice = ({ data: { postPoem: { post } } }) => {
-    post = { author, ...post };
-    return <Notice notice={post.notice} />;
-};
-PostPage.Sidebar = ({ data: { postPoem: { post } } }) => {
-    post = { author, ...post };
-    return <PostSidebar {...post} />;
-};
-PostPage.Foot = ({ data: { postPoem: { post } } }) => {
-    post = { author, ...post };
-    return <Foot {...post} />;
+    return <>
+               <Page
+                   heading={<Heading {...post} />}
+                   notice={<Notice notice={post.notice} />}
+                   sidebar={<PostSidebar {...post} />}
+               >
+                   <Poem poem={poem.content} />
+               </Page>
+               <Foot {...post} />
+           </>;
 };
 
 export default PostPage;
