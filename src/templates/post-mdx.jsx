@@ -8,13 +8,20 @@ import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import SeoPostHead from "../components/seo-post-head.jsx";
 import Title from "../components/title.jsx";
-import createUseIndex from "../hooks/use-index.js";
 import useAbsolute from "../hooks/use-absolute.js";
 import useBlogPosting from "../hooks/use-blog-posting.js";
 import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 import useMdxComponents from "../hooks/use-mdx-components.js";
 
-const useIndex = await createUseIndex("blog");
+import * as Prose from "gatsby-plugin-index/index/Prose.js";
+import * as Poem from "gatsby-plugin-index/index/Poem.js";
+import * as Web from "gatsby-plugin-index/index/Web.js";
+
+const indices = {
+    "Prose": Prose,
+    "Poem": Poem,
+    "Web": Web
+};
 
 const Heading = ({title, subtitle}) =>
       <>
@@ -45,18 +52,30 @@ export const Head = ({ data: { postMdx: { post } } }) => {
            </>;
 };
 
-const useBlog = blog => {
-    const Component = useIndex(blog);
-    if (Component) {
-        return Component;
+const useBlog = (sourceInstanceName, relativePath) => {
+    const index = indices[sourceInstanceName];
+    if (!index) {
+        throw new Error(`Index ${sourceInstanceName} not found in ${indices}`);
     }
-    throw new Error(`${blog} not cached`);
+
+    const Component = index[relativePath];
+    if (!Component) {
+        throw new Error(`${relativePath} not found in index ${index}`);
+    }
+    return Component;
 };
 
-const PostPage = ({ data: { postMdx: { post, path } } }) => {
+const PostPage = ({
+    data: {
+        postMdx: { post,
+                   sourceInstanceName,
+                   relativePath
+                 }
+    }
+}) => {
     const components = useMdxComponents(post.category);
 
-    const Blog = useBlog(path);
+    const Blog = useBlog(sourceInstanceName, relativePath);
 
     return <>
                <Page
@@ -77,7 +96,8 @@ export default PostPage;
 export const pageQuery = graphql`
 query MdxById($id: String!) {
   postMdx(id: {eq: $id}) {
-    path
+    sourceInstanceName
+    relativePath
     post {
       slug
       dateDisplay: date(formatString: "YYYY-MM-DD")

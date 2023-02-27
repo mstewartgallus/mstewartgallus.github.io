@@ -136,13 +136,7 @@ export const plugins = [
     "transformer-link-category",
     "publish-post-mdx",
     "publish-post-poem",
-    {
-        resolve: "index",
-        options: {
-            path: resolve('./content/blog'),
-            name: "blog"
-        }
-    },
+    "index",
     {
         resolve: "layout",
         options: {

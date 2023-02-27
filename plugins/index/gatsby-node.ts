@@ -1,93 +1,61 @@
 import { promises as fs } from "fs";
 import { resolve, relative } from "path";
-import glob from "globby";
-import { watchDirectory } from "gatsby-page-utils";
 
-class PathSet {
-    #cwd;
-    #x;
-    constructor(cwd) {
-        this.#cwd = cwd;
-        this.#x = new Set();
-    }
-    add(v) {
-        v = resolve(this.#cwd, v);
-        this.#x.add(v);
-    }
-    delete(v) {
-        this.#x.delete(resolve(this.#cwd, v));
-    }
-
-    [Symbol.iterator]() {
-        return this.#x[Symbol.iterator]();
-    }
+const createDirectory = async ({ cache }) => {
+    const dir = cache.directory;
+    return dir;
 };
 
-const sourceIndex = paths => {
-    return paths.map(([key, val]) => {
-            const imp = JSON.stringify(val);
-            const exp = JSON.stringify(key);
-            return `export { default as ${exp} } from ${imp};`;
-        }).join('\n');
-};
 
-const createIndex = async (paths, { cache }, { path, name }) => {
-    const indexFile = resolve(cache.directory, `${name}.js`);
+const exts = ['mdx'];
 
-    const mapped =
-        Array.from(paths)
-            .map(p =>
-                [relative(path, p), relative(cache.directory, p)]);
+// FIXME configure extensions matched ???
+export const shouldOnCreateNode = ({node}) =>
+    node.internal.type === 'File'
+    && node.sourceInstanceName
+    && exts.includes(node.extension);
 
-    const source = sourceIndex(mapped);
+// Every new File regenerate a new index
+export const onCreateNode = async (helpers) => {
+    const { node, getNodesByType } = helpers;
+    const { sourceInstanceName } = node;
 
+    const indexdir = await createDirectory(helpers);
+
+    const files = (await getNodesByType(`File`))
+                      .filter(file =>
+                          file.sourceInstanceName === sourceInstanceName
+                          && exts.includes(file.extension));
+
+    const imports = files.map((file, ix) => {
+        const val = relative(indexdir, file.absolutePath);
+
+        const imp = JSON.stringify(val);
+        return `import C${ix} from ${imp};`;
+    });
+
+    const exports = files.map((file, ix) => {
+        const exp = JSON.stringify(file.relativePath);
+        return `export { C${ix} as ${exp} };`;
+    });
+
+    const source = [...imports, ...exports].join('\n');
+
+    const indexFile = resolve(indexdir, `${sourceInstanceName}.js`);
     await fs.writeFile(indexFile, source);
 };
 
-export const onPostBootstrap = async (helpers, options, doneCb) => {
-    const { path } = options;
+export const onCreateWebpackConfig = async helpers => {
+    const { actions } = helpers;
+    const { setWebpackConfig } = actions;
 
-    const globstr = `**.mdx`;
+    const indexdir = await createDirectory(helpers);
 
-    const paths = new PathSet(path);
-
-    (async () => {
-        await watchDirectory(
-            path, globstr,
-            async path => {
-                paths.add(path);
-                await createIndex(paths, helpers, options);
-            },
-            async path => {
-                paths.delete(path);
-                await createIndex(paths, helpers, options);
+    await setWebpackConfig({
+        resolve: {
+            alias: {
+                ['gatsby-plugin-index/index']: indexdir
             }
-        );
-        await doneCb(null, null);
-    })();
-
-    const initpaths = await glob(globstr, { cwd: path });
-    for (const file of initpaths) {
-        paths.add(file);
-    }
-
-    await createIndex(paths, helpers, options);
-};
-
-export const onCreateWebpackConfig = ({
-    actions: { setWebpackConfig },
-    cache
-}) => setWebpackConfig({
-    resolve: {
-        alias: {
-            ['gatsby-plugin-index/index']: cache.directory
         }
-    }
-});
-
-export const pluginOptionsSchema = ({ Joi }) => {
-    return Joi.object({
-        path: Joi.string().required(),
-        name: Joi.string().required()
     });
-};
+}

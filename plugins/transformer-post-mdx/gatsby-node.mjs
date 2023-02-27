@@ -35,9 +35,10 @@ export const onCreateNode = async helpers => {
     const postId = createNodeId(`${node.id} >>> Post`);
     const postMdxId = createNodeId(`${node.id} >>> PostMdx`);
 
-    const path = relative("./content/blog", node.internal.contentFilePath);
+    const file = getNode(node.parent);
+    const { sourceInstanceName, relativePath } = file;
 
-    const postMdx = { mdx: node.id, path };
+    const postMdx = { mdx: node.id, sourceInstanceName, relativePath };
 
     await createNode({
         ...postMdx,

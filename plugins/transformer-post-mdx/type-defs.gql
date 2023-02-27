@@ -2,5 +2,6 @@ type PostMdx implements Node @dontInfer @childOf(types: ["Post"]) {
   id: ID!
   post: Post! @link(from: "parent")
   mdx: Mdx! @link
-  path: String!
+  sourceInstanceName: String!
+  relativePath: String!
 }
