@@ -10,6 +10,8 @@ const isString = x => {
     }
 };
 
+// FIXME
+const defaultAuthor = "Molossus Spondee";
 
 const fields = new Set([
     'description', 'name', 'category', 'date',
@@ -33,7 +35,9 @@ const metadata = frontmatter => {
         throw new Error("no name");
     }
 
-    const meta = {};
+    const meta = {
+        author: defaultAuthor
+    };
     for (const field of fields) {
         if (!Object.hasOwn(frontmatter, field)) {
             continue;

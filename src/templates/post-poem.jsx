@@ -12,11 +12,6 @@ import useAbsolute from "../hooks/use-absolute.js";
 import useBlogPosting from "../hooks/use-blog-posting.js";
 import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 
-const author = {
-    name: "Molossus Spondee",
-    url: "/about/"
-};
-
 const Heading = ({title, subtitle}) =>
       <>
           <h1 tabIndex="-1">{title}</h1>
@@ -42,24 +37,21 @@ export const Head = ({ data: { postPoem: { post } } }) => {
                <HeadBasic/>
                <Title>{title}</Title>
                <SeoBasic description={description} title={title} url={url} />
-               <SeoPostHead author={author} {...post} />
+               <SeoPostHead {...post} />
            </>;
 };
 
-const PostPage = ({ data: { postPoem: { post, poem } } }) => {
-    post = { author, ...post };
-
-    return <>
-               <Page
-                   heading={<Heading {...post} />}
-                   notice={<Notice notice={post.notice} />}
-                   sidebar={<PostSidebar {...post} />}
-               >
-                   <Poem poem={poem.content} />
-               </Page>
-               <Foot {...post} />
-           </>;
-};
+const PostPage = ({ data: { postPoem: { post, poem } } }) =>
+      <>
+          <Page
+              heading={<Heading {...post} />}
+              notice={<Notice notice={post.notice} />}
+              sidebar={<PostSidebar {...post} />}
+          >
+              <Poem poem={poem.content} />
+          </Page>
+          <Foot {...post} />
+      </>;
 
 export default PostPage;
 
@@ -81,6 +73,10 @@ query PoemById($id: String!) {
       tags
       places
       people
+      author {
+        name
+        url
+      }
       childrenLink {
         index {
           id

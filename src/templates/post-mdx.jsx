@@ -16,11 +16,6 @@ import useMdxComponents from "../hooks/use-mdx-components.js";
 
 const useIndex = await createUseIndex("blog");
 
-const author = {
-    name: "Molossus Spondee",
-    url: "/about/"
-};
-
 const Heading = ({title, subtitle}) =>
       <>
           <h1 tabIndex="-1">{title}</h1>
@@ -46,7 +41,7 @@ export const Head = ({ data: { postMdx: { post } } }) => {
                <HeadBasic/>
                <Title>{title}</Title>
                <SeoBasic description={description} title={title} url={url} />
-               <SeoPostHead author={author} {...post} />
+               <SeoPostHead {...post} />
            </>;
 };
 
@@ -59,8 +54,6 @@ const useBlog = blog => {
 };
 
 const PostPage = ({ data: { postMdx: { post, path } } }) => {
-    post = { author, ...post };
-
     const components = useMdxComponents(post.category);
 
     const Blog = useBlog(path);
@@ -97,6 +90,10 @@ query MdxById($id: String!) {
       tags
       places
       people
+      author {
+        name
+        url
+      }
       childrenLink {
         index {
           id

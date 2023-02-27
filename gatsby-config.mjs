@@ -96,24 +96,32 @@ export const plugins = [
             }
         }
     },
+    "gatsby-transformer-yaml",
     {
         resolve: "gatsby-source-filesystem",
         options: {
-            path: './blog/prose',
+            path: './content/meta',
+            name: 'Content'
+        }
+    },
+    {
+        resolve: "gatsby-source-filesystem",
+        options: {
+            path: './content/blog/prose',
             name: 'Prose'
         }
     },
     {
         resolve: "gatsby-source-filesystem",
         options: {
-            path: './blog/poem',
+            path: './content/blog/poem',
             name: 'Poem'
         }
     },
     {
         resolve: "gatsby-source-filesystem",
         options: {
-            path: './blog/web',
+            path: './content/blog/web',
             name: 'Web'
         }
     },
@@ -131,7 +139,7 @@ export const plugins = [
     {
         resolve: "index",
         options: {
-            path: resolve('./blog'),
+            path: resolve('./content/blog'),
             name: "blog"
         }
     },

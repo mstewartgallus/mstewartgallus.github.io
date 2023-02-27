@@ -3,6 +3,7 @@ type Post implements Node @dontInfer {
   date: Date! @dateformat
   category: String!
   slug: String!
+  author: AuthorYaml @link(by: "name")
 
   title: String!
   subtitle: String

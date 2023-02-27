@@ -1,24 +1,6 @@
 import * as React from 'react';
 import * as Pagefind from '../utils/pagefind.js';
 
-const reducer = (state, action) => {
-    switch (action.type) {
-    case "init":
-        return action.links;
-
-    case "load": {
-        const { index, url, title } = action;
-        const { id } = state[index];
-        const links = Array.from(state);
-        links[index] = { id, result: { url, title } };
-        return links;
-    }
-
-    default:
-        return state;
-    }
-};
-
 const parseParams = search => {
     const params = new URLSearchParams(search);
     let s = params.get('s');
@@ -32,9 +14,7 @@ const parseParams = search => {
     return { s, category, tag, place, person };
 };
 
-export const useSearch = (search, n) => {
-    const [links, dispatch] = React.useReducer(reducer, null);
-
+export const useSearch = (search, n, onInit, onLoad) => {
     React.useEffect(() => {
         if (!search) {
             return;
@@ -57,8 +37,7 @@ export const useSearch = (search, n) => {
 
             const posts = data.results.slice(0, n);
 
-            const links = posts.map(({ id }) => ({ id }));
-            dispatch({ type:"init", links });
+            onInit(posts.map(post => post.id));
 
             await Promise.all(posts.map(async (post, index) => {
                 const data = await post.data();
@@ -68,13 +47,11 @@ export const useSearch = (search, n) => {
 
                 const { url, meta: { title } } = data;
 
-                dispatch({ type:"load", index, url, title });
+                onLoad(index, url, title);
             }));
         })();
         return () => ignore = true;
-    }, [search, n]);
-
-    return links;
+    }, [search, n, onInit, onLoad]);
 };
 
 export default useSearch;

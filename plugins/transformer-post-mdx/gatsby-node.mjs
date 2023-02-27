@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import * as path from "path";
+import { relative } from "path";
 import { mkResolve } from "../../src/utils/resolve.mjs";
 import { createPostNode } from "../post/index.mjs";
 
@@ -16,13 +16,10 @@ const postNodeOfMdx = ({ node, getNode }) => {
     return { name, category, ...node.frontmatter };
 };
 
-const relpath = p => path.relative("./blog", p);
 
 export const createSchemaCustomization = async ({
     actions: { createTypes }
-}) => {
-    await createTypes(await typeDefs);
-};
+}) => await createTypes(await typeDefs);
 
 export const shouldOnCreateNode = ({
     node: { internal: { type }}
@@ -38,7 +35,7 @@ export const onCreateNode = async helpers => {
     const postId = createNodeId(`${node.id} >>> Post`);
     const postMdxId = createNodeId(`${node.id} >>> PostMdx`);
 
-    const path = relpath(node.internal.contentFilePath);
+    const path = relative("./content/blog", node.internal.contentFilePath);
 
     const postMdx = { mdx: node.id, path };
 
