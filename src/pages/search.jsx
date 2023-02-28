@@ -217,17 +217,18 @@ export const Head = ({location}) => {
 
 const SearchPage = ({location}) => {
     const [state, dispatch] = React.useReducer(reducer, initState);
+    const [isPending, startTransition] = React.useTransition();
 
     React.useEffect(() => {
         dispatch(set('search', location.search));
     }, [location]);
 
     const onInit = React.useCallback(
-        links => dispatch(init(links)),
+        links => startTransition(() => dispatch(init(links))),
         []);
 
     const onLoad = React.useCallback(
-        (index, url, title) => dispatch(load(index, url, title)),
+        (index, url, title) => startTransition(() => dispatch(load(index, url, title))),
         []);
 
     const setter = React.useCallback(
