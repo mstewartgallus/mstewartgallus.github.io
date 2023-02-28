@@ -13,15 +13,15 @@ import useBlogPosting from "../hooks/use-blog-posting.js";
 import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 import useMdxComponents from "../hooks/use-mdx-components.js";
 
-import * as Prose from "gatsby-plugin-index/index/Prose.js";
-import * as Poem from "gatsby-plugin-index/index/Poem.js";
-import * as Web from "gatsby-plugin-index/index/Web.js";
+import Prose from "gatsby-plugin-index/index/Prose.js";
+import Poem from "gatsby-plugin-index/index/Poem.js";
+import Web from "gatsby-plugin-index/index/Web.js";
 
-const indices = {
-    "Prose": Prose,
-    "Poem": Poem,
-    "Web": Web
-};
+const indices = Object.freeze(new Map([
+    ["Prose", Prose],
+    ["Poem", Poem],
+    ["Web", Web]
+]));
 
 const Heading = ({title, subtitle}) =>
       <>
@@ -53,12 +53,12 @@ export const Head = ({ data: { postMdx: { post } } }) => {
 };
 
 const useBlog = (sourceInstanceName, relativePath) => {
-    const index = indices[sourceInstanceName];
+    const index = indices.get(sourceInstanceName);
     if (!index) {
         throw new Error(`Index ${sourceInstanceName} not found in ${indices}`);
     }
 
-    const Component = index[relativePath];
+    const Component = index.get(relativePath);
     if (!Component) {
         throw new Error(`${relativePath} not found in index ${index}`);
     }

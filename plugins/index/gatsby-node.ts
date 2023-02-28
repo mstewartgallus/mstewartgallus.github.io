@@ -36,10 +36,15 @@ export const onCreateNode = async (helpers) => {
 
     const exports = files.map((file, ix) => {
         const exp = JSON.stringify(file.relativePath);
-        return `export { C${ix} as ${exp} };`;
+        return `[${exp}, C${ix}],`;
     });
 
-    const source = [...imports, ...exports].join('\n');
+    const source = [...imports,
+                    "",
+                    "const Index = Object.freeze(new Map([",
+                    ...exports,
+                    "]));",
+                    "export default Index;"].join('\n');
 
     const indexFile = resolve(indexdir, `${sourceInstanceName}.js`);
     await fs.writeFile(indexFile, source);
