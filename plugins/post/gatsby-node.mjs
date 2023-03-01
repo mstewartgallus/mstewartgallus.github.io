@@ -7,19 +7,16 @@ const typeDefs = fs.readFile(resolve('./type-defs.gql'),
                              { encoding: 'utf-8' });
 
 const next = async (source, args, context, info) => {
-    const { parent, index } = source;
-    const post = await context.nodeModel.getNodeById({id: parent, type: 'Post'});
+    const { id, date, index } = source;
     const { entries } = await context.nodeModel.findAll({
         type: 'Link',
         query: {
             limit: 1,
-            sort: { fields: ['post.date'], order: ['ASC'] },
+            sort: { fields: ['date'], order: ['ASC'] },
             filter: {
+                id: { ne: id },
                 index: { id: { eq: index } },
-                post: {
-                    id: { ne: parent },
-                    date: { gte: post.date }
-                }
+                date: { gte: date }
             }
         }
     });
@@ -31,19 +28,16 @@ const next = async (source, args, context, info) => {
 };
 
 const previous = async (source, args, context, info) => {
-    const { parent, index } = source;
-    const post = await context.nodeModel.getNodeById({id: parent, type: 'Post'});
+    const { id, date, index } = source;
     const { entries } = await context.nodeModel.findAll({
         type: 'Link',
         query: {
             limit: 1,
-            sort: { fields: ['post.date'], order: ['DESC'] },
+            sort: { fields: ['date'], order: ['DESC'] },
             filter: {
+                id: { ne: id },
                 index: { id: { eq: index } },
-                post: {
-                    id: { ne: parent },
-                    date: { lte: post.date }
-                }
+                date: { lte: date }
             }
         }
     });

@@ -18,6 +18,7 @@ type Link implements Node @dontInfer @childOf(types: ["Post"]) {
   id: ID!
   index: Index! @link
   post: Post! @link(from: "parent")
+  date: Date! @dateformat
   next: Link
   previous: Link
 }

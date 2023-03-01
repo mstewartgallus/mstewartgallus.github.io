@@ -70,7 +70,11 @@ export const createLinkNode = async (id, post, index, {
     isString(index);
     isString(post);
 
-    const link = { index };
+    let link;
+    {
+        const { date } = getNode(post);
+        link = { index, date };
+    }
 
     await createNode({
         ...link,
