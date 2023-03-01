@@ -1,3 +1,21 @@
+import slugify from "slugify";
+
+const slug = (name, category) => {
+    // FIXME
+    // YYYY-MM-DD-foo.bar
+    const parts = name.slice(0, 11).split('-');
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+    name = name.slice(11);
+
+    const opts = { lower: true };
+    const catSlug = slugify(category, opts);
+    const nameSlug = slugify(name, opts);
+
+    return `/${catSlug}/${year}/${month}/${day}/${nameSlug}/`;
+};
+
 const truthy = x => {
     if (!x) {
         throw new Error(`falsy ${x}`);
@@ -13,16 +31,12 @@ const isString = x => {
 // FIXME
 const defaultAuthor = "Molossus Spondee";
 
-const fields = new Set([
-    'description', 'name', 'category', 'date',
-    'title', 'subtitle',
-    'notice', 'tags', 'places', 'people',
-    'author'
-]);
-
 const metadata = frontmatter => {
     const {
-        name, category, date
+        title, name, category, date,
+        author = defaultAuthor,
+        notice = [], tags = [], places = [], people = [],
+        description, subtitle
     } = frontmatter;
 
     if (!category) {
@@ -34,17 +48,16 @@ const metadata = frontmatter => {
     if (!name) {
         throw new Error("no name");
     }
-
-    const meta = {
-        author: defaultAuthor
-    };
-    for (const field of fields) {
-        if (!Object.hasOwn(frontmatter, field)) {
-            continue;
-        }
-        meta[field] = frontmatter[field];
+    if (!title) {
+        throw new Error("no title");
     }
-    return meta;
+
+    return {
+        slug: slug(name, category),
+        title, name, category, date, author,
+        notice, tags, places, people,
+        description, subtitle
+    };
 };
 
 export const createLinkNode = async (id, post, index, {
