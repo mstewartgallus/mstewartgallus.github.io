@@ -1,44 +1,33 @@
 import { promises as fs } from "fs";
-import { mkResolve } from "../../src/utils/resolve.mjs";
-import { createLinkNode, createIndexNode } from "../post/index.mjs";
-
-const resolve = mkResolve(import.meta);
-
-const typeDefs = fs.readFile(resolve('./type-defs.gql'),
-                             { encoding: 'utf-8' });
-
-export const createSchemaCustomization = async ({
-    actions: { createTypes }
-}) => await createTypes(await typeDefs);
+import { createLinkNode } from "../post/index.mjs";
 
 export const shouldOnCreateNode = ({
     node: { internal: { type }}
 }) => 'Post' == type;
 
+// FIXME awkward
+const getIndices = async ({getNodesByType}) => {
+    const indices = new Map(getNodesByType('IndexCategory')
+                            .map(index => [index.category, index]));
+    return indices;
+};
+
 export const onCreateNode = async helpers => {
     const {
         node,
         actions: { createNode },
-        createNodeId, createContentDigest, getNode
+        createNodeId
     } = helpers;
 
     const { category } = node;
 
     const linkId = createNodeId(`${node.id} >>> ${category} >>> Link`);
-    const indexId = createNodeId(`${category} >>> Index`);
-    const indexCategoryId = createNodeId(`${category} >>> IndexCategory`);
 
-    await createIndexNode(indexId, indexCategoryId, helpers);
-    await createNode({
-            category,
-            id: indexCategoryId,
-            parent: indexId,
-            children: [],
-            internal: {
-                type: 'IndexCategory',
-                contentDigest: createContentDigest(category)
-            }
-    });
+    const indices = await getIndices(helpers);
 
-    await createLinkNode(linkId, node.id, indexId, helpers);
+    const index = indices.get(category);
+    if (!index) {
+        throw new Error(`No index for category ${category}`);
+    }
+    await createLinkNode(linkId, node.id, index.parent, helpers);
 };
