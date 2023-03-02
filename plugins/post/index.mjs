@@ -60,37 +60,32 @@ const metadata = frontmatter => {
     };
 };
 
-export const createLinkNode = async (id, post, index, {
+export const createLinkNode = async (id, post, indexId, {
     actions: { createNode, createParentChildLink },
     createNodeId,
     createContentDigest,
     getNode
 }) => {
     isString(id);
-    isString(index);
-    isString(post);
+    isString(indexId);
 
-    let link;
-    {
-        const { date } = getNode(post);
-        link = { index, date };
-    }
+    const link = { index: indexId, date: post.date };
 
-    await createNode({
+    const linkNode = {
         ...link,
         id,
-        parent: post,
+        parent: post.id,
         children: [],
         internal: {
             type: 'Link',
             contentDigest: createContentDigest(link)
         }
-    }, { name: 'post' });
+    };
 
-    const parent = getNode(post);
-    const child = getNode(id);
-
-    await createParentChildLink({ parent, child });
+    await Promise.all([
+        createNode(linkNode, { name: 'post' }),
+        createParentChildLink({ parent: post, child: linkNode })
+    ]);
 };
 
 export const createPostNode = async (id, parent, child, frontmatter, {
@@ -108,7 +103,7 @@ export const createPostNode = async (id, parent, child, frontmatter, {
     await createNode({
         ...m,
         children: [child],
-        parent: parent,
+        parent,
         id,
         internal: {
             type: 'Post',

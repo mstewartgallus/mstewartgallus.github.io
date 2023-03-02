@@ -3,7 +3,7 @@ import { createLinkNode } from "../post/index.mjs";
 
 export const shouldOnCreateNode = ({
     node: { internal: { type }}
-}) => 'Post' == type;
+}) => 'Post' === type;
 
 // FIXME awkward
 const getIndices = async ({getNodesByType}) => {
@@ -29,5 +29,5 @@ export const onCreateNode = async helpers => {
     if (!index) {
         throw new Error(`No index for category ${category}`);
     }
-    await createLinkNode(linkId, node.id, index.parent, helpers);
+    await createLinkNode(linkId, node, index.parent, helpers);
 };

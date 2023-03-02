@@ -43,16 +43,17 @@ export const onCreateNode = async helpers => {
 
     const post = postNodeOfPoem({ node, getNode });
 
-    await createNode({
-        ...postPoem,
-        id: postPoemId,
-        parent: postId,
-        children: [],
-        internal: {
-            type: 'PostPoem',
-            contentDigest: createContentDigest(postPoem)
-        }
-    });
-
-    await createPostNode(postId, node.id, postPoemId, post, helpers);
+    await Promise.all([
+        createNode({
+            ...postPoem,
+            id: postPoemId,
+            parent: postId,
+            children: [],
+            internal: {
+                type: 'PostPoem',
+                contentDigest: createContentDigest(postPoem)
+            }
+        }),
+        createPostNode(postId, node.id, postPoemId, post, helpers)
+    ]);
 };

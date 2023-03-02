@@ -27,7 +27,8 @@ export const onCreateNode = async helpers => {
     const indexId = createNodeId(`${category} >>> Index`);
     const indexCategoryId = createNodeId(`${category} >>> IndexCategory`);
 
-    await createNode({
+    await Promise.all([
+        createNode({
             category,
             id: indexCategoryId,
             parent: indexId,
@@ -36,6 +37,7 @@ export const onCreateNode = async helpers => {
                 type: 'IndexCategory',
                 contentDigest: createContentDigest(category)
             }
-    });
-    await createIndexNode(indexId, indexCategoryId, helpers);
+        }),
+        createIndexNode(indexId, indexCategoryId, helpers)
+    ]);
 };

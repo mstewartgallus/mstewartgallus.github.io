@@ -21,15 +21,16 @@ export const sourceNodes = async helpers => {
     const indexId = createNodeId(`Index`);
     const indexAllId = createNodeId(`IndexAll`);
 
-    await createNode({
-        id: indexAllId,
-        parent: indexId,
-        children: [],
-        internal: {
-            type: 'IndexAll',
-            contentDigest: createContentDigest({})
-        }
-    });
-
-    await createIndexNode(indexId, indexAllId, helpers);
+    await Promise.all([
+        createNode({
+            id: indexAllId,
+            parent: indexId,
+            children: [],
+            internal: {
+                type: 'IndexAll',
+                contentDigest: createContentDigest({})
+            }
+        }),
+        createIndexNode(indexId, indexAllId, helpers)
+    ]);
 }

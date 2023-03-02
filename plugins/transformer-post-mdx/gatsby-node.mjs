@@ -16,7 +16,6 @@ const postNodeOfMdx = ({ node, getNode }) => {
     return { name, category, ...node.frontmatter };
 };
 
-
 export const createSchemaCustomization = async ({
     actions: { createTypes }
 }) => await createTypes(await typeDefs);
@@ -40,18 +39,19 @@ export const onCreateNode = async helpers => {
 
     const postMdx = { mdx: node.id, sourceInstanceName, relativePath };
 
-    await createNode({
-        ...postMdx,
-        id: postMdxId,
-        parent: postId,
-        children: [],
-        internal: {
-            type: 'PostMdx',
-            contentDigest: createContentDigest(postMdx)
-        }
-    });
-
-    await createPostNode(postId, node.id, postMdxId,
-                         postNodeOfMdx({ node, getNode }),
-                         helpers);
+    await Promise.all([
+        createNode({
+            ...postMdx,
+            id: postMdxId,
+            parent: postId,
+            children: [],
+            internal: {
+                type: 'PostMdx',
+                contentDigest: createContentDigest(postMdx)
+            }
+        }),
+        createPostNode(postId, node.id, postMdxId,
+                       postNodeOfMdx({ node, getNode }),
+                       helpers)
+    ]);
 };
