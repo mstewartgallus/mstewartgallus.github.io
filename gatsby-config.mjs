@@ -6,7 +6,7 @@ const resolve = mkResolve(import.meta);
 
 export const siteMetadata = {
     title: "Words to Kick Your Teeth Out",
-    description: "lol lmao",
+    description: "weird stories and poetry, some webdev",
     siteUrl: "https://mstewartgallus.github.io"
 };
 
