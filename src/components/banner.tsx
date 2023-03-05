@@ -1,6 +1,11 @@
-import A from "./a.jsx";
+import A from "./a";
+import * as React from "react";
+import type { FC } from "react";
 
-export const Banner = () =>
+export interface BannerProps {
+}
+
+export const Banner: FC<BannerProps> = () =>
 <ul>
     <li><a type="application/atom+xml" rel="alternate" href="/feed.xml">Subscribe</a></li>
     <li><A rel="author" href="/about">About the Author</A></li>

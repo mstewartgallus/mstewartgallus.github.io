@@ -1,4 +1,4 @@
-import A from "./a.jsx";
+import A from "./a.tsx";
 
 const Posts = ({posts}) =>
       posts.map(({ slug, title }) =>

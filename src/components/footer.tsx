@@ -1,12 +1,19 @@
 import * as React from "react";
+import type { FC, ReactNode } from "react";
 
-export const Footer = ({children, heading, ...props}) => {
+export interface FooterProps {
+    children?: ReactNode;
+    heading?: ReactNode;
+}
+
+export const Footer: FC<FooterProps> = ({children, heading}) => {
     const id = React.useId();
-    return <footer {...props} aria-labelledby={id}>
+    return <footer aria-labelledby={id}>
                <hgroup className="sr-only" id={id}>
                    {heading}
                </hgroup>
                {children}
            </footer>;
 };
+
 export default Footer;

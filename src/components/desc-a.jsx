@@ -1,5 +1,5 @@
 import * as React from "react";
-import A from "./a.jsx";
+import A from "./a.tsx";
 
 const DescAImpl = ({ children, desc, ...props }, ref) => {
     const id = React.useId();

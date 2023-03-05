@@ -1,4 +1,4 @@
-import A from "../components/a.jsx";
+import A from "../components/a.tsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Page from "../components/page.jsx";
 import Title from "../components/title.jsx";

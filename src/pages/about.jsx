@@ -1,4 +1,4 @@
-import A from "../components/a.jsx";
+import A from "../components/a.tsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from "../components/nav.jsx";

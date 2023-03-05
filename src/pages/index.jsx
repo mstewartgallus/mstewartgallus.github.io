@@ -1,5 +1,5 @@
 import * as React from "react";
-import Banner from "../components/banner.jsx";
+import Banner from "../components/banner.tsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
 import Header from "../components/header.jsx";

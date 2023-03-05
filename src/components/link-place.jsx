@@ -1,4 +1,4 @@
-import A from "./a.jsx";
+import A from "./a.tsx";
 import { search } from "../utils/search.js";
 
 export const LinkPlace = ({place}) => {
