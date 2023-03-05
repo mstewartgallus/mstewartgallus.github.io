@@ -1,5 +1,5 @@
-import { promises as fs } from "fs";
-import { resolve, relative } from "path";
+const { promises: fs } = require("fs");
+const { resolve, relative } = require("path");
 
 const createDirectory = async ({ cache }) => {
     const dir = cache.directory;
@@ -10,13 +10,13 @@ const createDirectory = async ({ cache }) => {
 const exts = ['mdx'];
 
 // FIXME configure extensions matched ???
-export const shouldOnCreateNode = ({node}) =>
+exports.shouldOnCreateNode = ({node}) =>
     node.internal.type === 'File'
     && node.sourceInstanceName
     && exts.includes(node.extension);
 
 // Every new File regenerate a new index
-export const onCreateNode = async (helpers) => {
+exports.onCreateNode = async (helpers) => {
     const { node, getNodesByType } = helpers;
     const { sourceInstanceName } = node;
 
@@ -50,7 +50,7 @@ export const onCreateNode = async (helpers) => {
     await fs.writeFile(indexFile, source);
 };
 
-export const onCreateWebpackConfig = async helpers => {
+exports.onCreateWebpackConfig = async helpers => {
     const { actions } = helpers;
     const { setWebpackConfig } = actions;
 
