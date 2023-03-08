@@ -1,5 +1,4 @@
 import A from "./a";
-import * as React from "react";
 import type { FC } from "react";
 
 export interface BannerProps {

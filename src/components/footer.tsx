@@ -1,5 +1,5 @@
-import * as React from "react";
 import type { FC, ReactNode } from "react";
+import { useId } from "react";
 
 export interface FooterProps {
     children?: ReactNode;
@@ -7,7 +7,7 @@ export interface FooterProps {
 }
 
 export const Footer: FC<FooterProps> = ({children, heading}) => {
-    const id = React.useId();
+    const id = useId();
     return <footer aria-labelledby={id}>
                <hgroup className="sr-only" id={id}>
                    {heading}

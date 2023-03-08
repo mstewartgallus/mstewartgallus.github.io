@@ -1,6 +1,7 @@
 import * as React from "react";
+import { forwardRef } from "react";
 import { Link } from "gatsby";
-import type { FC, AnchorHTMLAttributes } from "react";
+import type { Ref, FC, AnchorHTMLAttributes } from "react";
 import type { GatsbyLinkProps } from "gatsby";
 
 type AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement>;
@@ -28,7 +29,7 @@ const toLinkProps: (props: AnchorProps) => LinkProps | null = props => {
 
 const AImpl = (
     props: AnchorProps,
-    ref: React.Ref<HTMLAnchorElement>
+    ref: Ref<HTMLAnchorElement>
 ) => {
     const linkProps = toLinkProps(props);
     if (linkProps) {
@@ -37,6 +38,6 @@ const AImpl = (
     return <a ref={ref} {...props} />;
 };
 
-export const A: FC<AnchorProps> = React.forwardRef(AImpl);
+export const A: FC<AnchorProps> = forwardRef(AImpl);
 
 export default A;

@@ -4,7 +4,7 @@ import { mkResolve } from "./src/utils/resolve.mjs";
 
 const resolve = mkResolve(import.meta);
 
-export const siteMetadata = {
+const siteMetadata = {
     title: "Words to Kick Your Teeth Out",
     description: "weird stories and poetry, some webdev",
     siteUrl: "https://mstewartgallus.github.io"
@@ -67,17 +67,25 @@ const sitemap = {
     }
 };
 
-export const jsxRuntime = "automatic";
+const jsxRuntime = "automatic";
 
-export const graphqlTypegen = true;
+const graphqlTypegen = true;
 
-export const flags = {
+const flags = {
     DEV_SSR: true,
     PARALLEL_SOURCING: true,
     FAST_DEV: true
 };
 
-export const plugins = [
+const plugins = [
+    {
+        resolve: "gatsby-plugin-typescript",
+        options: {
+            jsxPragma: "jsx",
+            onlyRemoveTypeImports: true,
+            parserOpts: { strictMode: true }
+        },
+    },
     {
         resolve: "gatsby-plugin-sitemap",
         options: sitemap
@@ -152,3 +160,12 @@ export const plugins = [
         }
     }
 ];
+
+const config = {
+    siteMetadata,
+    jsxRuntime,
+    graphqlTypegen,
+    flags,
+    plugins
+};
+export default config;
