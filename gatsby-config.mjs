@@ -83,8 +83,7 @@ const plugins = [
         options: {
             jsxPragma: "jsx",
             onlyRemoveTypeImports: true,
-            parserOpts: { strictMode: true }
-        },
+        }
     },
     {
         resolve: "gatsby-plugin-sitemap",
@@ -138,7 +137,24 @@ const plugins = [
     "post",
     "site",
     "transformer-poem",
-    "transformer-post-mdx",
+    {
+        resolve: "transformer-post-mdx",
+        options: {
+            name: 'Prose'
+        }
+    },
+    {
+        resolve: "transformer-post-mdx",
+        options: {
+            name: 'Poem'
+        }
+    },
+    {
+        resolve: "transformer-post-mdx",
+        options: {
+            name: 'Web'
+        }
+    },
     "transformer-post-poem",
     "transformer-index-all",
     "transformer-link-all",

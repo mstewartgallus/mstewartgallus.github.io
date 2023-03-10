@@ -24,18 +24,22 @@ export const shouldOnCreateNode = ({
     node: { internal: { type }}
 }) => 'Mdx' === type;
 
-export const onCreateNode = async helpers => {
+export const onCreateNode = async (helpers, { name }) => {
     const {
         node,
         actions: { createNode },
         getNode, createNodeId, createContentDigest
     } = helpers;
 
+    const file = getNode(node.parent);
+    const { sourceInstanceName, relativePath } = file;
+    if (name !== sourceInstanceName) {
+        return;
+    }
+
     const postId = createNodeId(`${node.id} >>> Post`);
     const postMdxId = createNodeId(`${node.id} >>> PostMdx`);
 
-    const file = getNode(node.parent);
-    const { sourceInstanceName, relativePath } = file;
 
     const postMdx = { mdx: node.id, sourceInstanceName, relativePath };
 
@@ -55,3 +59,7 @@ export const onCreateNode = async helpers => {
                        helpers)
     ]);
 };
+
+export const pluginOptionsSchema = ({ Joi }) => Joi.object({
+    name: Joi.string().required()
+});

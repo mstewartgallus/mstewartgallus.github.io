@@ -1,3 +1,4 @@
+import About from "../../content/meta/about.mdx";
 import A from "../components/a.tsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
@@ -19,8 +20,8 @@ const Sidebar = () =>
           </Nav>
       </>;
 
-export const Head = ({location: {pathname}}) => {
-    const url = useAbsolute(pathname);
+export const Head = () => {
+    const url = useAbsolute("/about");
     return <>
                <HeadBasic />
                <SeoBasic url={url} title={title} />
@@ -32,32 +33,7 @@ const AboutPage = () =>
 <Page
     heading={<h1 tabIndex="-1">About the Author</h1>}
     sidebar={<Sidebar />}>
-    <p>My pen name is <span role="presentation" translate="no">Molossus Spondee</span>.
-    This is my personal blog mostly for posting silly poetry. </p>
-
-    <dl>
-        <div><dt>About the Author</dt><dd>Molossus Spondee</dd></div>
-        <div>
-            <dt><A href="mailto:molossusspondee@gmail.com">Email</A></dt>
-            <dd>molossusspondee@gmail.com</dd>
-        </div>
-        <div>
-            <dt><A rel="me" href="https://mastodon.lol/@MSpondee">Mastodon</A></dt>
-            <dd>@MSpondee@mastodon.lol</dd>
-        </div>
-        <div>
-            <dt><A href="https://twitter.com/MSpondee">Twitter</A></dt>
-            <dd>@MSpondee</dd>
-        </div>
-        <div>
-            <dt><A href="https://github.com/mstewartgallus">GitHub</A></dt>
-            <dd>mstewartgallus</dd>
-        </div>
-        <div>
-            <dt><A href="https://www.linkedin.com/in/mstewartgallus">LinkedIn</A></dt>
-            <dd>mstewartgallus</dd>
-        </div>
-    </dl>
+    <About />
 </Page>;
 
 export default AboutPage;
