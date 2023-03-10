@@ -1,12 +1,34 @@
-import * as React from "react";
+import { StrictMode, useImperativeHandle, forwardRef } from "react";
 import { Provider } from "react-redux";
+import { MDXProvider } from '@mdx-js/react';
 import * as Store from "../../src/state/store.js";
+import A from "./a.tsx";
+import Caesura from "./caesura.jsx";
+import Green from "./green.jsx";
+import { H1, H2, H3, H4, H5, H6 } from "./heading.jsx";
+import L from "./l.jsx";
+import Lg from "./lg.jsx";
+import MdxPage from "./mdx-page.jsx";
+
+const shortcodes = {
+    A,
+    Green,
+    Lg, L, Caesura,
+    H1, H2, H3, H4, H5, H6
+};
+const autolinkHeadings = { h1: H1, h2: H2, h3: H3, h4: H4, h5: H5, h6: H6 };
+
+const defaultComponents = {
+    ...shortcodes,
+    ...autolinkHeadings,
+    wrapper: MdxPage
+};
 
 const RootImpl = ({ children }, ref) => {
     // Create a different store per SSR page
     const store = Store.createStore();
 
-    React.useImperativeHandle(ref, () => ({
+    useImperativeHandle(ref, () => ({
         onPreRouteUpdate() {
         },
         onRouteUpdate() {
@@ -15,14 +37,15 @@ const RootImpl = ({ children }, ref) => {
         }
     }), []);
 
-
-    return <React.StrictMode>
+    return <StrictMode>
                <Provider store={store}>
-                   {children}
+                   <MDXProvider components={defaultComponents}>
+                       {children}
+                   </MDXProvider>
                </Provider>
-           </React.StrictMode>;
+           </StrictMode>;
 };
 
-export const Root = React.forwardRef(RootImpl);
+export const Root = forwardRef(RootImpl);
 
 export default Root;

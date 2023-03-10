@@ -107,6 +107,13 @@ const plugins = [
     {
         resolve: "gatsby-source-filesystem",
         options: {
+            path: './src/pages',
+            name: 'Pages'
+        }
+    },
+    {
+        resolve: "gatsby-source-filesystem",
+        options: {
             path: './content/meta',
             name: 'Content'
         }
