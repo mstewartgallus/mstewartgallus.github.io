@@ -67,6 +67,17 @@ const sitemap = {
     }
 };
 
+const sources = [
+    ['Pages', './src/pages'],
+    ['Content', './content/meta'],
+
+    ['Prose', './content/blog/prose'],
+    ['Poem', './content/blog/poem'],
+    ['Web', './content/blog/web']
+];
+
+const posts = ['Prose', 'Poem', 'Web'];
+
 const jsxRuntime = "automatic";
 
 const graphqlTypegen = true;
@@ -104,64 +115,19 @@ const plugins = [
         }
     },
     "gatsby-transformer-yaml",
-    {
+    ...sources.map(([name, path]) => ({
         resolve: "gatsby-source-filesystem",
-        options: {
-            path: './src/pages',
-            name: 'Pages'
-        }
-    },
-    {
-        resolve: "gatsby-source-filesystem",
-        options: {
-            path: './content/meta',
-            name: 'Content'
-        }
-    },
-    {
-        resolve: "gatsby-source-filesystem",
-        options: {
-            path: './content/blog/prose',
-            name: 'Prose'
-        }
-    },
-    {
-        resolve: "gatsby-source-filesystem",
-        options: {
-            path: './content/blog/poem',
-            name: 'Poem'
-        }
-    },
-    {
-        resolve: "gatsby-source-filesystem",
-        options: {
-            path: './content/blog/web',
-            name: 'Web'
-        }
-    },
+        options: { path, name }
+    })),
     "pagefind",
     "webpack",
     "post",
     "site",
     "transformer-poem",
-    {
+    ...posts.map(name => ({
         resolve: "transformer-post-mdx",
-        options: {
-            name: 'Prose'
-        }
-    },
-    {
-        resolve: "transformer-post-mdx",
-        options: {
-            name: 'Poem'
-        }
-    },
-    {
-        resolve: "transformer-post-mdx",
-        options: {
-            name: 'Web'
-        }
-    },
+        options: { name }
+    })),
     "transformer-post-poem",
     "transformer-index-all",
     "transformer-link-all",
