@@ -115,9 +115,7 @@ query MdxById($id: String!) {
         url
       }
       childrenLink {
-        index {
-          id
-        }
+        category
         next {
           post {
             slug

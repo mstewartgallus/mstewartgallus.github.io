@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Fragment } from "react";
 import Banner from "../components/banner.tsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
@@ -12,8 +12,6 @@ import Search from "../components/search.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
-import useIndexAll from "../hooks/use-index-all.js";
-import useIndexCategory from "../hooks/use-index-category.js";
 import usePostList from "../hooks/use-post-list.js";
 import useSiteMetadata from "../hooks/use-site-metadata.js";
 import useWebsite from "../hooks/use-website.js";
@@ -59,30 +57,21 @@ export const Head = ({location: {pathname}}) => {
 };
 
 const IndexPage = () => {
-    const indices = usePostList();
-    const indexAll = useIndexAll();
-    const indexCategory = useIndexCategory();
-    const allPosts = indices[indexAll];
-    const postsByCategory =
-          Object.entries(indexCategory)
-          .map(([category, id]) => [category, indices[id]]);
-
+    const posts = usePostList();
     return <>
                <Page heading={<h1 tabIndex="-1">Posts</h1>}
                      sidebar={<Sidebar />}
                >
-                   <PostList posts={allPosts} />
-
                    {
-                       postsByCategory.map(([category, posts]) =>
-                           <React.Fragment key={category}>
-                               <h2>{category}</h2>
+                       Array.from(posts.entries()).map(([category, posts]) =>
+                           <Fragment key={category}>
+                               {category && <h2>{category}</h2>}
                                <PostList posts={posts} />
-                           </React.Fragment>)
+                           </Fragment>)
                    }
                </Page>
                <Foot />
-    </>;
+           </>;
 };
 
 export default IndexPage;

@@ -4,8 +4,8 @@ import * as React from "react";
 const usePostListRaw = () => useStaticQuery(graphql`
 query UsePostList {
   allLink(sort: {post: {date: DESC}}) {
-    group(field: {index: {id: SELECT}}) {
-      index: fieldValue
+    group(field: {category: SELECT}) {
+      category: fieldValue
       nodes {
         post {
           title
@@ -19,10 +19,10 @@ query UsePostList {
 export const usePostList = () => {
     const raw = usePostListRaw();
     return React.useMemo(() =>
-        Object.fromEntries(
+        new Map(
             raw.allLink.group
-                .map(({ index, nodes }) =>
-                    [index, nodes.map(l => l.post)])),
+                .map(({ category, nodes }) =>
+                    [category, nodes.map(l => l.post)])),
         [raw]);
 }
 

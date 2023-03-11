@@ -1,5 +1,0 @@
-type IndexCategory implements Node @dontInfer @childOf(types: ["Index"]) {
-  id: ID!
-  category: String!
-  index: Index! @link(from: "parent")
-}

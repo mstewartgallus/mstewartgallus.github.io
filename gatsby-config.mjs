@@ -129,10 +129,7 @@ const plugins = [
         options: { name }
     })),
     "transformer-post-poem",
-    "transformer-index-all",
-    "transformer-link-all",
-    "transformer-index-category",
-    "transformer-link-category",
+    "transformer-link",
     "publish-post-mdx",
     "publish-post-poem",
     "index",
