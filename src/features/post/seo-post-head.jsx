@@ -1,5 +1,5 @@
-import flatten from "../utils/flatten.js";
-import useOpenGraphBlog from '../hooks/use-opengraph-blog.js';
+import flatten from "../../utils/flatten.js";
+import useOpenGraphBlog from '../../hooks/use-opengraph-blog.js';
 
 const Open = props => {
     const json = useOpenGraphBlog(props);

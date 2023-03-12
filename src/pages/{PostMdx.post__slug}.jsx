@@ -1,12 +1,11 @@
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
+import { Sidebar, SeoPostHead } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
 import Page from "../components/page";
-import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
-import SeoPostHead from "../components/seo-post-head.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 import useBlogPosting from "../hooks/use-blog-posting.js";
@@ -81,7 +80,7 @@ const PostPage = ({
                <Page
                    heading={<Heading {...post} />}
                    notice={<Notice notice={post.notice} />}
-                   sidebar={<PostSidebar {...post} />}
+                   sidebar={<Sidebar {...post} />}
                >
                    <MDXProvider components={components}>
                        <Blog />

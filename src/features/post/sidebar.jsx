@@ -1,10 +1,10 @@
-import Footer from "../components/footer.tsx";
-import Metadata from "../components/metadata.jsx";
-import Nav from "../components/nav.jsx";
-import PostBreadcrumbs from "../components/post-breadcrumbs.jsx";
-import PostPaging from "../components/post-paging.jsx";
+import PostBreadcrumbs from "./post-breadcrumbs.jsx";
+import PostPaging from "./post-paging.jsx";
+import Footer from "../../components/footer.tsx";
+import Metadata from "../../components/metadata.jsx";
+import Nav from "../../components/nav.jsx";
 
-export const PostSidebar = post => {
+export const Sidebar = post => {
     const {
         category, title, childrenLink
     } = post;
@@ -22,4 +22,4 @@ export const PostSidebar = post => {
            </>;
 };
 
-export default PostSidebar;
+export default Sidebar;
