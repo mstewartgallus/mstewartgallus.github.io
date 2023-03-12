@@ -1,5 +1,5 @@
-import * as React from "react";
-import { A } from "../features/ui";
+import { useId } from "react";
+import { A } from "./a.tsx";
 
 const AutoLink = ({to, ...props}) => {
     const href = `#${to}`;
@@ -12,7 +12,7 @@ const AutoLink = ({to, ...props}) => {
 
 const createAutoLink = Hn =>
       function HeadingAutoLink({id, children, ...props}) {
-          const textId = React.useId();
+          const textId = useId();
           return <Hn {...props} id={id}>
                      <span role="presentation" id={textId}>{children}</span>
                      <AutoLink to={id} aria-describedby={textId}>#</AutoLink>

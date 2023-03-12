@@ -1,12 +1,14 @@
 import { StrictMode, useImperativeHandle, forwardRef } from "react";
 import { Provider } from "react-redux";
 import { MDXProvider } from '@mdx-js/react';
+import { MdxPage } from "../features/mdx";
 import { Caesura, L, Lg } from "../features/poem";
-import { MdxPage } from "./../features/post";
-import { A } from "../features/ui";
+import {
+    A,
+    H1, H2, H3, H4, H5, H6
+} from "../features/ui";
 import * as Store from "../state/store.js";
 import Green from "./green";
-import { H1, H2, H3, H4, H5, H6 } from "./heading.jsx";
 
 const shortcodes = {
     A,
