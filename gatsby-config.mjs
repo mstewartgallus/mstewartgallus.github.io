@@ -130,8 +130,6 @@ const plugins = [
     })),
     "transformer-post-poem",
     "transformer-link",
-    "publish-post-mdx",
-    "publish-post-poem",
     "index",
     {
         resolve: "layout",
