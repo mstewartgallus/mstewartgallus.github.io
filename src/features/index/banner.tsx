@@ -1,4 +1,4 @@
-import A from "../../components/a";
+import { A } from "../../features/ui";
 import type { FC } from "react";
 
 export interface BannerProps {

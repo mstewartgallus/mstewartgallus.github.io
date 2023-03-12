@@ -1,5 +1,5 @@
 import * as React from "react";
-import A from "./a.tsx";
+import { A } from "../features/ui";
 
 const DescAImpl = ({ children, desc, ...props }, ref) => {
     const id = React.useId();

@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import { MDXProvider } from '@mdx-js/react';
 import { Caesura, L, Lg } from "../features/poem";
 import { MdxPage } from "./../features/post";
+import { A } from "../features/ui";
 import * as Store from "../state/store.js";
-import A from "./a.tsx";
 import Green from "./green";
 import { H1, H2, H3, H4, H5, H6 } from "./heading.jsx";
 

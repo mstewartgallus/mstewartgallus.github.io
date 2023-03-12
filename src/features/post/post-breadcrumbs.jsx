@@ -1,4 +1,4 @@
-import A from "../../components/a.tsx";
+import { A } from "../../features/ui";
 import BreadcrumbList from "../../components/breadcrumb-list";
 import LinkCategory from "../../components/link-category.jsx";
 

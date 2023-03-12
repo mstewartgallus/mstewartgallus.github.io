@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Search, useSearch } from "../features/search";
-import A from "../components/a.tsx";
+import { A } from "../features/ui";
 import BreadcrumbList from "../components/breadcrumb-list";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from  "../components/nav.jsx";

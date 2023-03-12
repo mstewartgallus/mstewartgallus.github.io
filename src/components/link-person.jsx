@@ -1,4 +1,4 @@
-import A from "./a.tsx";
+import { A } from "../features/ui";
 import { search } from "../utils/search.js";
 
 export const LinkPerson = ({person}) => {
