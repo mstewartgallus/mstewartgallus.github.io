@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Search } from "../features/search";
 import Banner from "../components/banner.tsx";
 import BreadcrumbList from "../components/breadcrumb-list.jsx";
 import HeadBasic from "../components/head-basic.jsx";
@@ -8,7 +9,6 @@ import Nav from "../components/nav.jsx";
 import Page from "../components/page.jsx";
 import PostList from "../components/post-list.jsx";
 import SearchForm from "../components/search-form.jsx";
-import Search from "../components/search.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
