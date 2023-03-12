@@ -1,5 +1,5 @@
 import DescA from "./desc-a.jsx";
-import { DescList, DescItem } from "./desc-list.jsx";
+import { DescList, DescItem } from "./desc-list";
 import PersonA from "./link-person.jsx";
 import PlaceA from "./link-place.jsx";
 import TagA from "./link-tag.jsx";

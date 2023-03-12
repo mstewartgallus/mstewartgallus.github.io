@@ -1,5 +1,5 @@
 import A from "./a.tsx";
-import BreadcrumbList from "./breadcrumb-list.jsx";
+import BreadcrumbList from "./breadcrumb-list";
 import LinkCategory from "./link-category.jsx";
 
 export const PostBreadcrumbs = ({category, title}) =>

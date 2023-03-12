@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Search, useSearch } from "../features/search";
 import A from "../components/a.tsx";
-import BreadcrumbList from "../components/breadcrumb-list.jsx";
+import BreadcrumbList from "../components/breadcrumb-list";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from  "../components/nav.jsx";
-import Page from "../components/page.jsx";
-import { Select, Option } from "../components/select.jsx";
+import Page from "../components/page";
+import { Select, Option } from "../components/select";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import usePostTags from "../hooks/use-post-tags.js";

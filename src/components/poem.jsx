@@ -1,8 +1,8 @@
 import { Children as C } from "react";
 import Caesura from "./caesura.jsx";
-import L from "./l.jsx";
-import Lg from "./lg.jsx";
-import Seg from "./seg.jsx";
+import L from "./l";
+import Lg from "./lg";
+import Seg from "./seg";
 
 const key = x => C.map(x, y => y);
 

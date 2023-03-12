@@ -1,4 +1,4 @@
-import { DescList, DescItem } from "./desc-list.jsx";
+import { DescList, DescItem } from "./desc-list";
 
 const Notices = ({notice}) => notice.map(n => <DescItem key={n}>{n}</DescItem>);
 

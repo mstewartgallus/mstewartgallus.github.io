@@ -4,10 +4,10 @@ import { MDXProvider } from '@mdx-js/react';
 import * as Store from "../../src/state/store.js";
 import A from "./a.tsx";
 import Caesura from "./caesura.jsx";
-import Green from "./green.jsx";
+import Green from "./green";
 import { H1, H2, H3, H4, H5, H6 } from "./heading.jsx";
-import L from "./l.jsx";
-import Lg from "./lg.jsx";
+import L from "./l";
+import Lg from "./lg";
 import MdxPage from "./mdx-page.jsx";
 
 const shortcodes = {

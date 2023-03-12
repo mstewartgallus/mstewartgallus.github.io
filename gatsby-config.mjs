@@ -134,7 +134,7 @@ const plugins = [
     {
         resolve: "layout",
         options: {
-            component: resolve('./src/components/layout.jsx')
+            component: resolve('./src/components/layout')
         }
     },
     {

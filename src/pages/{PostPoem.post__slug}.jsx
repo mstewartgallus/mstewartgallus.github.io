@@ -2,7 +2,7 @@ import { graphql } from "gatsby";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
-import Page from "../components/page.jsx";
+import Page from "../components/page";
 import Poem from "../components/poem.jsx";
 import PostSidebar from "../components/post-sidebar.jsx";
 import SeoBasic from "../components/seo-basic.jsx";

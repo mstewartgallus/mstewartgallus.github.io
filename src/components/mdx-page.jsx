@@ -1,7 +1,7 @@
 import A from "./a.tsx";
-import BreadcrumbList from "./breadcrumb-list.jsx";
+import BreadcrumbList from "./breadcrumb-list";
 import Nav from "./nav.jsx";
-import Page from "./page.jsx";
+import Page from "./page";
 
 const Sidebar = ({ title }) =>
       <>

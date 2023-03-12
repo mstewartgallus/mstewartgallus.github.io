@@ -1,5 +1,5 @@
-import L from "../components/l.jsx";
-import Lg from "../components/lg.jsx";
+import L from "../components/l";
+import Lg from "../components/lg";
 
 const poem = { ul: Lg, li: L };
 

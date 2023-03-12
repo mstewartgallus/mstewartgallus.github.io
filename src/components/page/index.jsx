@@ -1,8 +1,8 @@
 import { useId } from "react";
 import { page, sidebar as sidebarClass } from "./page.module.css";
-import ErrorBoundary from "./error-boundary.jsx";
-import Error from "./error.jsx";
-import { parse } from "../utils/error.js";
+import ErrorBoundary from "../error-boundary.jsx";
+import Error from "../error";
+import { parse } from "../../utils/error.js";
 
 const Err = ({children}) =>
 <ErrorBoundary

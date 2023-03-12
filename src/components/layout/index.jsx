@@ -1,6 +1,6 @@
 import { Suspense, forwardRef, useImperativeHandle } from "react";
 import { layout } from "./layout.module.css";
-import Page from "./page.jsx";
+import Page from "../page";
 
 const Loading = () =>
 <Page heading={<h1 tabIndex="-1">Loading...</h1>}>
