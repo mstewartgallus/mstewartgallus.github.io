@@ -1,4 +1,3 @@
-import * as React from "react";
 import { forwardRef } from "react";
 import { Link } from "gatsby";
 import type { Ref, FC, AnchorHTMLAttributes } from "react";

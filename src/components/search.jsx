@@ -1,8 +1,8 @@
-import * as React from "react";
+import { useId } from "react";
 import { search } from "./search.module.css";
 
 export const Search = ({heading, children}) => {
-    const id = React.useId();
+    const id = useId();
 
     return <section className={search} aria-describedby={id}
                  role="search">

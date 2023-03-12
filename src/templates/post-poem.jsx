@@ -41,17 +41,19 @@ export const Head = ({ data: { postPoem: { post } } }) => {
            </>;
 };
 
-const PostPage = ({ data: { postPoem: { post, poem } } }) =>
-      <>
-          <Page
-              heading={<Heading {...post} />}
-              notice={<Notice notice={post.notice} />}
-              sidebar={<PostSidebar {...post} />}
-          >
-              <Poem poem={poem.content} />
-          </Page>
-          <Foot {...post} />
-      </>;
+const PostPage = ({ data: { postPoem: { post, poem } } }) => {
+    const content = poem.content;
+    return <>
+               <Page
+                   heading={<Heading {...post} />}
+                   notice={<Notice notice={post.notice} />}
+                   sidebar={<PostSidebar {...post} />}
+               >
+                   <Poem poem={content} />
+               </Page>
+               <Foot {...post} />
+           </>;
+};
 
 export default PostPage;
 
