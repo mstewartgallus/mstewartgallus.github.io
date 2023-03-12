@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { useSubmit } from "../../hooks/use-submit.js";
+import { useSubmit } from "../../../../hooks/use-submit.js";
 import { query } from "./search-form.module.css";
 
 export const SearchForm = () => {
