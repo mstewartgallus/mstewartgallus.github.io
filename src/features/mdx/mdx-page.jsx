@@ -1,5 +1,6 @@
 import { A } from "../../features/ui";
 import BreadcrumbList from "../../components/breadcrumb-list";
+import Main from "../../components/main";
 import Nav from "../../components/nav.jsx";
 import Page from "../../components/page";
 
@@ -20,9 +21,10 @@ export const MdxPage = ({
 }) => {
     const { frontmatter: { title = pathname }} = pageContext;
     return <Page
-               heading={<h1 tabIndex="-1">{title}</h1>}
                sidebar={<Sidebar title={title} />}>
-               {children}
+               <Main heading={<h1 tabIndex="-1">{title}</h1>}>
+                   {children}
+               </Main>
            </Page>;
 };
 

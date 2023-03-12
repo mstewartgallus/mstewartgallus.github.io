@@ -4,6 +4,7 @@ import { Sidebar, SeoPostHead } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
+import Main from "../components/main";
 import Page from "../components/page";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
@@ -77,14 +78,13 @@ const PostPage = ({
     const Blog = useBlog(sourceInstanceName, relativePath);
 
     return <>
-               <Page
-                   heading={<Heading {...post} />}
-                   notice={<Notice notice={post.notice} />}
-                   sidebar={<Sidebar {...post} />}
-               >
-                   <MDXProvider components={components}>
-                       <Blog />
-                   </MDXProvider>
+               <Page sidebar={<Sidebar {...post} />}>
+                   <Main heading={<Heading {...post} />}
+                         notice={<Notice notice={post.notice} />}>
+                       <MDXProvider components={components}>
+                           <Blog />
+                       </MDXProvider>
+                   </Main>
                </Page>
                <Foot {...post} />
            </>;

@@ -18,6 +18,13 @@
     column-gap: 1em ;
 }
 
+.mainbar {
+    box-sizing: border-box;
+
+    inline-size: var(--main-width) ;
+    max-inline-size: 100% ;
+}
+
 /* .page { */
 /*      background: linear-gradient(grey, Canvas); */
 /*      background-size: 100% var(--line) ; */

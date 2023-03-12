@@ -5,6 +5,7 @@ import BreadcrumbList from "../components/breadcrumb-list";
 import HeadBasic from "../components/head-basic.jsx";
 import Header from "../components/header.jsx";
 import JsonLd from "../components/json-ld.jsx";
+import Main from "../components/main";
 import Nav from "../components/nav.jsx";
 import Page from "../components/page";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -56,16 +57,16 @@ export const Head = ({location: {pathname}}) => {
 const IndexPage = () => {
     const posts = usePostList();
     return <>
-               <Page heading={<h1 tabIndex="-1">Posts</h1>}
-                     sidebar={<Sidebar />}
-               >
-                   {
-                       Array.from(posts.entries()).map(([category, posts]) =>
-                           <Fragment key={category}>
-                               {category && <h2>{category}</h2>}
-                               <PostList posts={posts} />
-                           </Fragment>)
-                   }
+               <Page sidebar={<Sidebar />}>
+                   <Main heading={<h1 tabIndex="-1">Posts</h1>}>
+                       {
+                           Array.from(posts.entries()).map(([category, posts]) =>
+                               <Fragment key={category}>
+                                   {category && <h2>{category}</h2>}
+                                   <PostList posts={posts} />
+                               </Fragment>)
+                       }
+                   </Main>
                </Page>
                <Foot />
            </>;

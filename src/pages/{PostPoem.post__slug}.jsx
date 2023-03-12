@@ -4,6 +4,7 @@ import { Sidebar, SeoPostHead } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
+import Main from "../components/main";
 import Page from "../components/page";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
@@ -43,12 +44,12 @@ export const Head = ({ data: { postPoem: { post } } }) => {
 const PostPage = ({ data: { postPoem: { post, poem } } }) => {
     const content = poem.content;
     return <>
-               <Page
-                   heading={<Heading {...post} />}
-                   notice={<Notice notice={post.notice} />}
-                   sidebar={<Sidebar {...post} />}
-               >
-                   <Poem poem={content} />
+               <Page sidebar={<Sidebar {...post} />}>
+                   <Main
+                       heading={<Heading {...post} />}
+                       notice={<Notice notice={post.notice} />}>
+                       <Poem poem={content} />
+                   </Main>
                </Page>
                <Foot {...post} />
            </>;

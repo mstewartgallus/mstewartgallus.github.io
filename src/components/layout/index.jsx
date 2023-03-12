@@ -1,10 +1,13 @@
 import { Suspense, forwardRef, useImperativeHandle } from "react";
 import { layout } from "./layout.module.css";
+import Main from "../main";
 import Page from "../page";
 
 const Loading = () =>
-<Page heading={<h1 tabIndex="-1">Loading...</h1>}>
-    <p>Loading...</p>
+<Page>
+    <Main heading={<h1 tabIndex="-1">Loading...</h1>}>
+        <p>Loading...</p>
+    </Main>
 </Page>;
 
 const LayoutImpl = ({ children }, ref) => {

@@ -4,6 +4,7 @@ import { A } from "../features/ui";
 import BreadcrumbList from "../components/breadcrumb-list";
 import HeadBasic from "../components/head-basic.jsx";
 import Nav from  "../components/nav.jsx";
+import Main from "../components/main";
 import Page from "../components/page";
 import { Select, Option } from "../components/select";
 import Title from "../components/title.jsx";
@@ -240,12 +241,13 @@ const SearchPage = ({location}) => {
 
     const query = params?.s;
 
-    return <Page heading={<Heading query={query} />}
-                 sidebar={<Sidebar
+    return <Page sidebar={<Sidebar
                               state={state}
                               set={setter}
                           />}>
-               <DynamicResultList links={state.links} />
+               <Main heading={<Heading query={query} />}>
+                   <DynamicResultList links={state.links} />
+               </Main>
            </Page>;
 };
 

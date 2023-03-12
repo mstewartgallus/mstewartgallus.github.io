@@ -1,5 +1,4 @@
-import { useId } from "react";
-import { page, sidebar as sidebarClass } from "./page.module.css";
+import { page, mainbar as mainbarClass, sidebar as sidebarClass } from "./page.module.css";
 import ErrorBoundary from "../error-boundary.jsx";
 import Error from "../error";
 import { parse } from "../../utils/error.js";
@@ -13,24 +12,13 @@ const Err = ({children}) =>
     {children}
 </ErrorBoundary>;
 
-export const Page = ({children, sidebar, heading, notice}) => {
-    const id = useId();
+export const Page = ({children, sidebar}) => {
     return <div className={page}>
-               <main data-pagefind-body="" aria-describedby={id}>
-                   <header>
-                       <Err>
-                           <hgroup id={id}>
-                               {heading}
-                           </hgroup>
-                       </Err>
-                       <Err>
-                           {notice}
-                       </Err>
-                   </header>
+               <div className={mainbarClass}>
                    <Err>
                        {children}
                    </Err>
-               </main>
+               </div>
                <div className={sidebarClass}>
                    <Err>
                        {sidebar}
