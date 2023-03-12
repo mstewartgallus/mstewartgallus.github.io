@@ -1,7 +1,6 @@
 import { Fragment } from "react";
-import { PostList, usePostList } from "../features/index";
+import { Banner, PostList, usePostList } from "../features/index";
 import { Search, SearchForm } from "../features/search";
-import Banner from "../components/banner.tsx";
 import BreadcrumbList from "../components/breadcrumb-list";
 import HeadBasic from "../components/head-basic.jsx";
 import Header from "../components/header.jsx";

@@ -1,7 +1,7 @@
+import Metadata from "./metadata.jsx";
 import PostBreadcrumbs from "./post-breadcrumbs.jsx";
 import PostPaging from "./post-paging.jsx";
 import Footer from "../../components/footer.tsx";
-import Metadata from "../../components/metadata.jsx";
 import Nav from "../../components/nav.jsx";
 
 export const Sidebar = post => {
