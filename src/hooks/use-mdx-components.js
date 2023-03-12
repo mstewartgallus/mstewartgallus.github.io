@@ -1,5 +1,4 @@
-import L from "../components/l";
-import Lg from "../components/lg";
+import { L, Lg } from "../features/poem";
 
 const poem = { ul: Lg, li: L };
 

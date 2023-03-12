@@ -1,10 +1,10 @@
 import { graphql } from "gatsby";
+import { Poem } from "../features/poem";
 import { Sidebar, SeoPostHead } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import ListNotice from "../components/list-notice.jsx";
 import Page from "../components/page";
-import Poem from "../components/poem.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
