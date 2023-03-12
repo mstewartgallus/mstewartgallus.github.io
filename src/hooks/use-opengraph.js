@@ -1,6 +1,6 @@
 import * as React from 'react';
 import useSiteMetadata from './use-site-metadata.js';
-import favicon from '../images/favicon.svg';
+import favicon from '../assets/favicon.svg';
 
 export const useOpenGraph = ({description, url, title}) => {
     const site = useSiteMetadata();

@@ -1,4 +1,4 @@
-import favicon from '../images/favicon.svg';
+import favicon from '../assets/favicon.svg';
 
 export const HeadBasic = () =>
 <>
