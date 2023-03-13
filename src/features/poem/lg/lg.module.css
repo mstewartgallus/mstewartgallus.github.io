@@ -1,5 +1,4 @@
 .lg {
-    all: unset ;
     display: block ;
     margin-block: var(--line);
     hyphens: manual;

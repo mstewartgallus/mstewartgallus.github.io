@@ -1,5 +1,5 @@
 .dl, .dd, .dt {
-    all: unset;
+    margin-block: 0;
 }
 .dl {
     display: flex ;

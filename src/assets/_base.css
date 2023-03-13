@@ -245,4 +245,15 @@ dl, header {
 
 :root {
     background-color: var(--canvas) ;
+
+}
+
+main :where(p, h1, h2, h3, h4, h5, h6, dl, form) {
+    margin-inline-start: 2rem ;
+    margin-inline-start: calc(2 * var(--s));
+}
+
+:root {
+    /* default ratio on browsers is 1rem = 16px */
+    --s: clamp(0rem, (1600vw - 600rem) / 100, 1rem) ;
 }

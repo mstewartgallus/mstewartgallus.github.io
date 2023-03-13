@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useId } from "react";
 import { Banner, PostList, usePostList } from "../features/index";
 import { Search, SearchForm } from "../features/search";
 import BreadcrumbList from "../components/breadcrumb-list";
@@ -54,18 +54,34 @@ export const Head = ({location: {pathname}}) => {
            </>;
 };
 
+const Section = ({ children, heading, ...props}) => {
+    const id = useId();
+    return <section {...props} aria-labelledby={id}>
+               <header>
+                   <hgroup id={id}>
+                       {heading}
+                   </hgroup>
+               </header>
+               {children}
+           </section>;
+};
+
 const IndexPage = () => {
     const posts = usePostList();
     return <>
                <Page sidebar={<Sidebar />}>
                    <Main heading={<h1 tabIndex="-1">Posts</h1>}>
-                       {
-                           Array.from(posts.entries()).map(([category, posts]) =>
-                               <Fragment key={category}>
-                                   {category && <h2>{category}</h2>}
-                                   <PostList posts={posts} />
-                               </Fragment>)
-                       }
+                   {
+                       Array.from(posts.entries()).map(([category, posts]) =>
+                           category ?
+                           <Section key={category}
+                                heading={<h2>{category}</h2>}>
+                               <PostList posts={posts} />
+                           </Section>
+                           :
+                           <PostList key="main" posts={posts} />
+                       )
+                   }
                    </Main>
                </Page>
                <Foot />
