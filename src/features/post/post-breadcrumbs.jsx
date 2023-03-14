@@ -1,11 +1,15 @@
-import { A, BreadcrumbList } from "../../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem } from "../../features/ui";
 import LinkCategory from "./link-category.jsx";
 
 export const PostBreadcrumbs = ({category, title}) =>
 <BreadcrumbList>
-    <li><A href="/">Home</A></li>
-    <li><LinkCategory rel="tag" category={category} /></li>
-    <li aria-current="page"><cite>{title}</cite></li>
+    <BreadcrumbItem><A href="/">Home</A></BreadcrumbItem>
+    <BreadcrumbItem><LinkCategory rel="tag" category={category} /></BreadcrumbItem>
+    <BreadcrumbItem>
+        <A role="link" aria-disabled="true" aria-current="page">
+            <cite>{title}</cite>
+        </A>
+    </BreadcrumbItem>
 </BreadcrumbList>;
 
 export default PostBreadcrumbs;

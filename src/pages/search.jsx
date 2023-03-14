@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Search, Select, Option, useSearch, usePostTags } from "../features/search";
-import { A, BreadcrumbList, Main, Nav, Page } from "../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem, Main, Nav, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
@@ -177,8 +177,12 @@ const Sidebar = ({state, set}) => {
                </Search>
                <Nav heading={<h2>Breadcrumbs</h2>}>
                    <BreadcrumbList>
-                       <li><A href="/">Home</A></li>
-                       <li aria-current="page"><cite>Search</cite></li>
+                       <BreadcrumbItem><A href="/">Home</A></BreadcrumbItem>
+                       <BreadcrumbItem>
+                           <A role="link" aria-disabled="true" aria-current="page">
+                               Search
+                           </A>
+                       </BreadcrumbItem>
                    </BreadcrumbList>
                </Nav>
            </>;

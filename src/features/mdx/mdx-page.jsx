@@ -1,11 +1,13 @@
-import { A, BreadcrumbList, Main, Nav, Page } from "../../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem, Main, Nav, Page } from "../../features/ui";
 
 const Sidebar = ({ title }) =>
       <>
           <Nav heading={<h2>Breadcrumbs</h2>}>
               <BreadcrumbList>
-                  <li><A href="/">Home</A></li>
-                  <li aria-current="page"><cite>{title}</cite></li>
+                  <BreadcrumbItem><A href="/">Home</A></BreadcrumbItem>
+                  <BreadcrumbItem>
+                      <A role="link" aria-disabled="true" aria-current="page">{title}</A>
+                  </BreadcrumbItem>
               </BreadcrumbList>
           </Nav>
       </>;

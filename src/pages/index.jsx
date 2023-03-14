@@ -1,7 +1,7 @@
 import { Fragment, useId } from "react";
 import { Banner, PostList, usePostList, useWebsite } from "../features/index";
 import { Search, SearchForm } from "../features/search";
-import { BreadcrumbList, Header, Main, Nav, Page } from "../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem, Header, Main, Nav, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -28,7 +28,9 @@ const Sidebar = () => {
                </Search>
                <Nav heading={<h2>Breadcrumbs</h2>}>
                    <BreadcrumbList>
-                       <li aria-current="page">Home</li>
+                       <BreadcrumbItem>
+                           <A role="link" aria-disabled="true" aria-current="page">Home</A>
+                       </BreadcrumbItem>
                    </BreadcrumbList>
                </Nav>
            </>;

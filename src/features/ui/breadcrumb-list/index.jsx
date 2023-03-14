@@ -1,6 +1,7 @@
-import { breadcrumb } from "./breadcrumb-list.module.css";
+import { breadcrumblist, breadcrumb } from "./breadcrumb-list.module.css";
 
 export const BreadcrumbList = ({children, ...props}) =>
-<ol {...props} className={breadcrumb}>{children}</ol>;
+<ol {...props} className={breadcrumblist}>{children}</ol>;
 
-export default BreadcrumbList;
+export const BreadcrumbItem = ({children, ...props}) =>
+<li {...props} className={breadcrumb}>{children}</li>;

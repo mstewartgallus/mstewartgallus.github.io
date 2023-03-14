@@ -1,8 +1,4 @@
-.breadcrumbs {
-    margin-block: var(--line);
-}
-
-.breadcrumb {
+.breadcrumblist {
     all: unset ;
     padding: 0 ;
     margin: 0;
@@ -12,15 +8,16 @@
     inline-size: fit-content ;
     max-inline-size: 100% ;
 }
-.breadcrumb li {
+
+.breadcrumb {
     all: unset ;
 }
 
-.breadcrumb li::before {
+.breadcrumb::before {
     color: var(--emphasis-text);
 }
 
-.breadcrumb li::before {
+.breadcrumb::before {
   display: inline-block;
   margin-inline-end: 0.5em;
   transform: rotate(15deg);
