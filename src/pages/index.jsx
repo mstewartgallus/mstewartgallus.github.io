@@ -1,7 +1,12 @@
-import { Fragment, useId } from "react";
 import { Banner, PostList, usePostList, useWebsite } from "../features/index";
 import { Search, SearchForm } from "../features/search";
-import { A, BreadcrumbList, BreadcrumbItem, Header, Main, Nav, Page } from "../features/ui";
+import {
+    A,
+    BreadcrumbList, BreadcrumbItem,
+    Header, Main, Nav,
+    Section,
+    Page
+} from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -49,18 +54,6 @@ export const Head = ({location: {pathname}}) => {
                <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
                <SeoBasic title={title} url={url} />
            </>;
-};
-
-const Section = ({ children, heading, ...props}) => {
-    const id = useId();
-    return <section {...props} aria-labelledby={id}>
-               <header>
-                   <hgroup id={id}>
-                       {heading}
-                   </hgroup>
-               </header>
-               {children}
-           </section>;
 };
 
 const IndexPage = () => {

@@ -54,10 +54,6 @@ p {
     margin-block: var(--line);
     inline-size: var(--measure) ;
     max-inline-size: 100% ;
-
-    -moz-hyphens: auto ;
-    -ms-hyphens: auto ;
-    -webkit-hyphens: auto ;
     hyphens: auto ;
 }
 
@@ -135,10 +131,6 @@ ol {
     list-style-type: bullet ;
 }
 
-dl, dt, dd {
-    margin: unset ;
-}
-
 @media screen {
     figcaption {
         position: sticky ;
@@ -183,7 +175,7 @@ main {
     display: block ;
 }
 
-dl, header {
+header {
     margin-block: var(--line) ;
 }
 

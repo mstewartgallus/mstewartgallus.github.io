@@ -1,3 +1,11 @@
+.dl, .dt, .dd {
+    margin: unset ;
+}
+
+.dl {
+    inline-size: fit-content ;
+}
+
 .dl, .dd, .dt {
     margin-block: 0;
 }
