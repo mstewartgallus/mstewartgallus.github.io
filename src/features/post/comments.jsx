@@ -1,12 +1,8 @@
-import * as React from "react";
-import { createPortal } from "react-dom";
-import { comments as commentsClass } from "./comments.module.css";
-import CommentList from "./comment-list.jsx";
-import useComments from '../../hooks/use-comments.js';
-import useClient from '../../hooks/use-client.js';
+import { useState, useEffect } from "react";
+import Comment from "./comment.jsx";
+import { CommentList, CommentItem } from "./comment-list.jsx";
 
-
-const parseComment = ({id, url, content, account }) => [id, { url, content, account }];
+const parseComment = ({id, url, content, account }) => [id, { url, account, content }];
 
 const parseComments = comments => {
     if (!comments) {
@@ -27,66 +23,80 @@ const parseChildren = comments => {
     return map;
 };
 
-const LazyCommentList = ({ host, id }) => {
-    const comments = useComments({host, id});
-    const data = React.useMemo(() => parseComments(comments), [comments]);
-    const replies = React.useMemo(() => parseChildren(comments), [comments]);
-    if (data) {
-        return <CommentList comments={data} replies={replies} id={id} />;
+const zipComments = ({id, comments, replies}) => {
+    function loop(id) {
+        const comment = comments.get(id);
+        const allReplies = replies.get(id) ?? [];
+
+        return { id, ...comment, replies: allReplies.map(loop) };
     }
-    return "Loading...";
-};
 
-const CommentPreload = ({ host, id }) => {
-    const url = new URL(`/api/v1/statuses/${id}/context`, host);
-    return <link rel="preload" as="fetch" type="application/json" crossOrigin="" href={url} />;
-};
-
-const Preload = ({ host, id }) => {
-    const client = useClient();
-
-    return client && createPortal(
-        <CommentPreload host={host} id={id} />,
-        document.head);
+    return (replies.get(id) ?? []).map(loop);
 };
 
 
-const initial = {
-    open: false,
-    openedOnce: false
-};
+function CommentTree({id, account, url, content, replies}) {
+    return <Comment account={account} url={url} content={content}>
+               <CommentList>
+                   {
 
-const reducer = (state, action) => {
-    switch (action) {
-    case 'toggle':
-        return { open: !state.open, openedOnce: true };
-    default:
-        return state;
-    }
-};
+                       replies.map(comment =>
+                           <CommentItem key={comment.id}>
+                               <CommentTree {...comment} />
+                           </CommentItem>
+                       )
+                   }
+               </CommentList>
+           </Comment>;
+}
+
 
 export const Comments = ({ host, id }) => {
-    const [state, dispatch] = React.useReducer(reducer, initial);
-    const ident = React.useId();
+    const [comments, setComments] = useState(null);
 
-    const onToggle = React.useCallback(event => {
-        dispatch('toggle');
-    }, []);
+    useEffect(() => {
+        let ignore = false;
 
-    return <>
-               <section className={commentsClass} aria-labelledby={ident} open={state.open ? "" : null}>
-                   <header className="sr-only">
-                       <hgroup>
-                           <h2 id={ident}>Comments</h2>
-                       </hgroup>
-                   </header>
-                   <details onToggle={onToggle}>
-                       <summary>Comments</summary>
-                       {state.openedOnce && <LazyCommentList host={host} id={id} />}
-                   </details>
-               </section>
-               <Preload host={host} id={id} />
-           </>;
+        (async () => {
+            const request = new Request(new URL(`/api/v1/statuses/${id}/context`, `https://${host}`));
+            const response = await fetch(request);
+            if (!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+            if (ignore) {
+                return;
+            }
+
+            const json = await response.json();
+            if (ignore) {
+                return;
+            }
+
+            const comments = json?.descendants ?? null;
+
+            const data = parseComments(comments);
+            const replies = parseChildren(comments);
+
+            const zipped = zipComments({ id, comments: data, replies });
+
+            setComments(zipped);
+        })();
+
+        return () => ignore = true;
+    }, [host, id]);
+
+    if (!comments) {
+        return "Loading...";
+    }
+
+    return <CommentList>
+               {
+                   comments.map(comment =>
+                       <CommentItem key={comment.id}>
+                           <CommentTree {...comment} />
+                       </CommentItem>)
+               }
+           </CommentList>;
 };
 
 export default Comments;

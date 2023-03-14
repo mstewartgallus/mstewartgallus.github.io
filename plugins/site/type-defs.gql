@@ -13,4 +13,6 @@ type Frontmatter {
   tags: [String!]
   places: [String!]
   people: [String!]
+
+  comments: JSON
 }

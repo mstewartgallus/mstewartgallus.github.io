@@ -1,0 +1,9 @@
+.list .item {
+    border-inline-start-style: dashed ;
+    border-width: 2px ;
+    padding-inline-start: 1em ;
+}
+.list .item .item {
+    border: none ;
+    padding: 0 ;
+}

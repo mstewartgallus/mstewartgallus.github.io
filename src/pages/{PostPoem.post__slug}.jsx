@@ -78,6 +78,10 @@ query PoemById($id: String!) {
         name
         url
       }
+      comments {
+        host
+        id
+      }
       childrenLink {
         category
         next {

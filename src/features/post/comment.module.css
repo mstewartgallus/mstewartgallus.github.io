@@ -9,17 +9,6 @@
     margin-block: var(--line);
 }
 
-.children .comment {
-    border-inline-start-style: dashed ;
-    border-width: 2px ;
-    padding-inline-start: 1em ;
-}
-
-.children .comment .comment {
-    border: none ;
-    padding: 0 ;
-}
-
 .iframe {
     inline-size: 100% ;
     border: none;

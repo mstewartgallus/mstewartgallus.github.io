@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useMemo, useState, useCallback } from "react";
 import {
     children as childrenClass,
     iframe as iframeClass,
@@ -25,13 +25,13 @@ const render = content =>
 </html>`;
 
 const useRender = content =>
-      React.useMemo(() => render(content), [content]);
+      useMemo(() => render(content), [content]);
 
 const Comment = ({url, account, content, children}) => {
     const srcdoc = useRender(content);
 
-    const [loaded, setLoaded] = React.useState(false);
-    const onLoad = React.useCallback(event => {
+    const [loaded, setLoaded] = useState(false);
+    const onLoad = useCallback(event => {
         setLoaded(true);
     }, []);
 
@@ -42,14 +42,12 @@ const Comment = ({url, account, content, children}) => {
                    <Account {...account} />
                    <a rel="nofollow" href={url}>#</a>
                </header>
-               {srcdoc &&
                 <iframe className={iframeClass + ' ' + loadClass}
                         allow=""
                         sandbox="allow-top-navigation-by-user-activation"
                         srcDoc={srcdoc}
                         onLoad={onLoad}
                 />
-               }
                <div className={childrenClass}>
                    {children}
                </div>

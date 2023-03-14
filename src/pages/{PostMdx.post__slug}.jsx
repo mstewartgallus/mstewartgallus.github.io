@@ -1,7 +1,7 @@
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
-import { Card, Main, Page } from "../features/ui";
-import { ListNotice, Sidebar, SeoPostHead, useBlogPosting } from "../features/post";
+import { Card, Main, Page, Section } from "../features/ui";
+import { Comments, ListNotice, Sidebar, SeoPostHead, useBlogPosting } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -75,7 +75,6 @@ const PostPage = ({
     const Blog = useBlog(sourceInstanceName, relativePath);
 
     const { comments } = post;
-    console.log(comments);
     return <>
                <Page sidebar={<Sidebar {...post} />}>
                    <Card>
@@ -86,6 +85,13 @@ const PostPage = ({
                            </MDXProvider>
                        </Main>
                    </Card>
+                   { comments &&
+                     <Card>
+                         <Section heading={<h2>Comments</h2>}>
+                             <Comments host={comments.host} id={comments.id} />
+                         </Section>
+                     </Card>
+                   }
                </Page>
                <Foot {...post} />
            </>;
@@ -113,6 +119,10 @@ query MdxById($id: String!) {
       author {
         name
         url
+      }
+      comments {
+        host
+        id
       }
       childrenLink {
         category
