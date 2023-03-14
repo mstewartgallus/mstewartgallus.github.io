@@ -50,17 +50,6 @@ address {
 }
 
 
-p {
-    margin-block: var(--line);
-    inline-size: var(--measure) ;
-    max-inline-size: 100% ;
-    hyphens: auto ;
-}
-
-pre {
-    margin: 0;
-}
-
 table { border-collapse: collapse ; }
 
 hr {
@@ -100,10 +89,6 @@ hgroup {
     max-inline-size: 100% ;
 
     font-style: italic;
-}
-
-blockquote {
-    margin-block: var(--line) ;
 }
 
 @counter-style nodot {
@@ -173,10 +158,6 @@ header,h1,h2,h3,h4,h5,h6 {
 
 main {
     display: block ;
-}
-
-header {
-    margin-block: var(--line) ;
 }
 
 @media print {

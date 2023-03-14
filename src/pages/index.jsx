@@ -3,6 +3,7 @@ import { Search, SearchForm } from "../features/search";
 import {
     A,
     BreadcrumbList, BreadcrumbItem,
+    Card,
     Header, Main, Nav,
     Section,
     Page
@@ -20,24 +21,30 @@ const Sidebar = () => {
     const { title, description } = useSiteMetadata();
 
     return <>
-               <Header
-                   heading={
-                       <>
-                           <h2>{title}</h2>
-                           <p>{description}</p>
-                       </>}>
-                   <Banner />
-               </Header>
-               <Search heading={<h2>Search</h2>}>
-                   <SearchForm />
-               </Search>
-               <Nav heading={<h2>Breadcrumbs</h2>}>
-                   <BreadcrumbList>
-                       <BreadcrumbItem>
-                           <A role="link" aria-disabled="true" aria-current="page">Home</A>
-                       </BreadcrumbItem>
-                   </BreadcrumbList>
-               </Nav>
+               <Card>
+                   <Header
+                       heading={
+                           <>
+                               <h2>{title}</h2>
+                               <p style={{marginBlock:0}}>{description}</p>
+                           </>}>
+                       <Banner />
+                   </Header>
+               </Card>
+               <Card>
+                   <Search heading={<h2>Search</h2>}>
+                       <SearchForm />
+                   </Search>
+               </Card>
+               <Card>
+                   <Nav heading={<h2>Breadcrumbs</h2>}>
+                       <BreadcrumbList>
+                           <BreadcrumbItem>
+                               <A role="link" aria-disabled="true" aria-current="page">Home</A>
+                           </BreadcrumbItem>
+                       </BreadcrumbList>
+                   </Nav>
+               </Card>
            </>;
 };
 
@@ -62,15 +69,19 @@ const IndexPage = () => {
                <Page sidebar={<Sidebar />}>
                    {
                        Array.from(posts.entries()).map(([category, posts]) =>
-                           category ?
-                               <Section key={category}
-                                        heading={<h2>{category}</h2>}>
-                                   <PostList posts={posts} />
-                               </Section>
-                           :
-                           <Main key="main" heading={<h1>Posts</h1>}>
-                               <PostList posts={posts} />
-                           </Main>
+                           <Card key={category ?? "main"}>
+                               {
+                                   category ?
+                                       <Section
+                                           heading={<h2>{category}</h2>}>
+                                           <PostList posts={posts} />
+                                       </Section>
+                                   :
+                                   <Main heading={<h1>Posts</h1>}>
+                                       <PostList posts={posts} />
+                                   </Main>
+                               }
+                           </Card>
                        )
                    }
                </Page>

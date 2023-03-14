@@ -21,11 +21,3 @@
     clip-path: polygon(0px 0px, 0px 0px, 0px 0px) !important ;
     overflow: hidden !important ;
 }
-
-hgroup p {
-    margin-block: 0 ;
-}
-
-nav, footer {
-    margin-block: var(--line);
-}

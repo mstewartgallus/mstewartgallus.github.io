@@ -1,7 +1,3 @@
-.search {
-    margin-block: var(--line);
-}
-
 .query {
     display: flex ;
     column-gap: 1em ;

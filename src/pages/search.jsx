@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Search, Select, Option, useSearch, usePostTags } from "../features/search";
-import { A, BreadcrumbList, BreadcrumbItem, Main, Nav, Page } from "../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem, Card, Main, Nav, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import { separator } from "../utils/separator.js";
-import { search, query, result as resultClass } from "./search.module.css";
+import { query, result as resultClass } from "./search.module.css";
 
 const initState = {
     links: null,
@@ -125,7 +125,7 @@ const SearchForm = ({onSubmit, tags, state, set}) => {
         set(name, next);
     }, [set, state]);
 
-    return <form className={search} rel="search"
+    return <form rel="search"
                  action="/search"
                  onSubmit={onSubmit}>
                <Query value={state.s} onChange={onChangeS} />
@@ -168,23 +168,27 @@ const Sidebar = ({state, set}) => {
     const tags = usePostTags();
 
     return <>
-               <Search heading={<h2>Search</h2>}>
-                   <SearchForm onSubmit={onSubmit}
-                               tags={tags}
-                               set={set}
-                               state={state}
-                   />
-               </Search>
-               <Nav heading={<h2>Breadcrumbs</h2>}>
-                   <BreadcrumbList>
-                       <BreadcrumbItem><A href="/">Home</A></BreadcrumbItem>
-                       <BreadcrumbItem>
-                           <A role="link" aria-disabled="true" aria-current="page">
-                               Search
-                           </A>
-                       </BreadcrumbItem>
-                   </BreadcrumbList>
-               </Nav>
+               <Card>
+                   <Search heading={<h2>Search</h2>}>
+                       <SearchForm onSubmit={onSubmit}
+                                   tags={tags}
+                                   set={set}
+                                   state={state}
+                       />
+                   </Search>
+               </Card>
+               <Card>
+                   <Nav heading={<h2>Breadcrumbs</h2>}>
+                       <BreadcrumbList>
+                           <BreadcrumbItem><A href="/">Home</A></BreadcrumbItem>
+                           <BreadcrumbItem>
+                               <A role="link" aria-disabled="true" aria-current="page">
+                                   Search
+                               </A>
+                           </BreadcrumbItem>
+                       </BreadcrumbList>
+                   </Nav>
+               </Card>
            </>;
 };
 
@@ -243,9 +247,11 @@ const SearchPage = ({location}) => {
                               state={state}
                               set={setter}
                           />}>
-               <Main heading={<Heading query={query} />}>
-                   <DynamicResultList links={state.links} />
-               </Main>
+               <Card>
+                   <Main heading={<Heading query={query} />}>
+                       <DynamicResultList links={state.links} />
+                   </Main>
+               </Card>
            </Page>;
 };
 

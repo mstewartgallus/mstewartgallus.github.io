@@ -36,7 +36,7 @@ const metadata = frontmatter => {
         title, name, category, date,
         author = defaultAuthor,
         notice = [], tags = [], places = [], people = [],
-        description, subtitle
+        description, subtitle, comments
     } = frontmatter;
 
     if (!category) {
@@ -52,11 +52,20 @@ const metadata = frontmatter => {
         throw new Error("no title");
     }
 
+    if (comments) {
+        if (!comments.host) {
+            throw new Error("no host");
+        }
+        if (!comments.id) {
+            throw new Error("no id");
+        }
+    }
+
     return {
         slug: slug(name, category),
         title, name, category, date, author,
         notice, tags, places, people,
-        description, subtitle
+        description, subtitle, comments
     };
 };
 

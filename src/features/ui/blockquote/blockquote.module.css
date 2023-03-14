@@ -1,0 +1,4 @@
+.blockquote {
+    margin-inline-start: 3em ;
+    margin-block: var(--line) ;
+}

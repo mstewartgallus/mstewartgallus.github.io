@@ -1,5 +1,5 @@
 import { graphql } from "gatsby";
-import { Main, Page } from "../features/ui";
+import { Card, Main, Page } from "../features/ui";
 import { Poem } from "../features/poem";
 import { ListNotice, Sidebar, SeoPostHead, useBlogPosting } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
@@ -12,7 +12,7 @@ import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 const Heading = ({title, subtitle}) =>
       <>
           <h1>{title}</h1>
-          <p>{subtitle}</p>
+          <p style={{marginBlock: 0}}>{subtitle}</p>
       </>;
 const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
@@ -42,11 +42,13 @@ const PostPage = ({ data: { postPoem: { post, poem } } }) => {
     const content = poem.content;
     return <>
                <Page sidebar={<Sidebar {...post} />}>
-                   <Main
-                       heading={<Heading {...post} />}
-                       notice={<Notice notice={post.notice} />}>
-                       <Poem poem={content} />
-                   </Main>
+                   <Card>
+                       <Main
+                           heading={<Heading {...post} />}
+                           notice={<Notice notice={post.notice} />}>
+                           <Poem poem={content} />
+                       </Main>
+                   </Card>
                </Page>
                <Foot {...post} />
            </>;

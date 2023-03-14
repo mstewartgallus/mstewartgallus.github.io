@@ -1,3 +1,8 @@
+type Comments {
+  host: String!
+  id: String!
+}
+
 type Post implements Node @dontInfer {
   name: String!
   date: Date! @dateformat
@@ -12,4 +17,6 @@ type Post implements Node @dontInfer {
   places: [String!]!
   people: [String!]!
   description: String
+
+  comments: Comments
 }

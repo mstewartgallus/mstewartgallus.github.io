@@ -1,17 +1,14 @@
 import { useId } from "react";
-import { search } from "./search.module.css";
 
-export const Search = ({heading, children}) => {
+export const Search = ({heading, children, ...props}) => {
     const id = useId();
 
-    return <section className={search} aria-describedby={id}
-                 role="search">
+    return <section aria-describedby={id} role="search" {...props}>
                <header className="sr-only">
                    <hgroup id={id}>
                        {heading}
                    </hgroup>
                </header>
-
                {children}
            </section>;
 };

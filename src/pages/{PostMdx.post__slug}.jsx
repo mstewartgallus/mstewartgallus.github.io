@@ -1,6 +1,6 @@
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
-import { Main, Page } from "../features/ui";
+import { Card, Main, Page } from "../features/ui";
 import { ListNotice, Sidebar, SeoPostHead, useBlogPosting } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
@@ -23,7 +23,7 @@ const indices = Object.freeze(new Map([
 const Heading = ({title, subtitle}) =>
       <>
           <h1>{title}</h1>
-          <p>{subtitle}</p>
+          <p style={{marginBlock: 0}}>{subtitle}</p>
       </>;
 const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
@@ -74,14 +74,18 @@ const PostPage = ({
 
     const Blog = useBlog(sourceInstanceName, relativePath);
 
+    const { comments } = post;
+    console.log(comments);
     return <>
                <Page sidebar={<Sidebar {...post} />}>
-                   <Main heading={<Heading {...post} />}
-                         notice={<Notice notice={post.notice} />}>
-                       <MDXProvider components={components}>
-                           <Blog />
-                       </MDXProvider>
-                   </Main>
+                   <Card>
+                       <Main heading={<Heading {...post} />}
+                             notice={<Notice notice={post.notice} />}>
+                           <MDXProvider components={components}>
+                               <Blog />
+                           </MDXProvider>
+                       </Main>
+                   </Card>
                </Page>
                <Foot {...post} />
            </>;
