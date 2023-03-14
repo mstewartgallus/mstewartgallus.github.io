@@ -1,5 +1,5 @@
-import { A } from "../features/ui";
-import { search } from "../utils/search.js";
+import { A } from "../../features/ui";
+import { search } from "../../utils/search.js";
 
 export const LinkPlace = ({place}) => {
     const href = search(['place', place]);

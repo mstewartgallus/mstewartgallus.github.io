@@ -1,8 +1,4 @@
-import { A } from "../../features/ui";
-import BreadcrumbList from "../../components/breadcrumb-list";
-import Main from "../../components/main";
-import Nav from "../../components/nav.jsx";
-import Page from "../../components/page";
+import { A, BreadcrumbList, Main, Nav, Page } from "../../features/ui";
 
 const Sidebar = ({ title }) =>
       <>

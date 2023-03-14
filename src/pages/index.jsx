@@ -1,18 +1,13 @@
 import { Fragment, useId } from "react";
-import { Banner, PostList, usePostList } from "../features/index";
+import { Banner, PostList, usePostList, useWebsite } from "../features/index";
 import { Search, SearchForm } from "../features/search";
-import BreadcrumbList from "../components/breadcrumb-list";
+import { BreadcrumbList, Header, Main, Nav, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
-import Header from "../components/header.jsx";
 import JsonLd from "../components/json-ld.jsx";
-import Main from "../components/main";
-import Nav from "../components/nav.jsx";
-import Page from "../components/page";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 import useSiteMetadata from "../hooks/use-site-metadata.js";
-import useWebsite from "../hooks/use-website.js";
 
 const title = "Table of Contents";
 
@@ -70,19 +65,19 @@ const IndexPage = () => {
     const posts = usePostList();
     return <>
                <Page sidebar={<Sidebar />}>
-                   <Main heading={<h1 tabIndex="-1">Posts</h1>}>
                    {
                        Array.from(posts.entries()).map(([category, posts]) =>
                            category ?
-                           <Section key={category}
-                                heading={<h2>{category}</h2>}>
-                               <PostList posts={posts} />
-                           </Section>
+                               <Section key={category}
+                                        heading={<h2>{category}</h2>}>
+                                   <PostList posts={posts} />
+                               </Section>
                            :
-                           <PostList key="main" posts={posts} />
+                           <Main key="main" heading={<h1>Posts</h1>}>
+                               <PostList posts={posts} />
+                           </Main>
                        )
                    }
-                   </Main>
                </Page>
                <Foot />
            </>;

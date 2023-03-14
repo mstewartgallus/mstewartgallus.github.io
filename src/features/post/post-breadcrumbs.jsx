@@ -1,6 +1,5 @@
-import { A } from "../../features/ui";
-import BreadcrumbList from "../../components/breadcrumb-list";
-import LinkCategory from "../../components/link-category.jsx";
+import { A, BreadcrumbList } from "../../features/ui";
+import LinkCategory from "./link-category.jsx";
 
 export const PostBreadcrumbs = ({category, title}) =>
 <BreadcrumbList>

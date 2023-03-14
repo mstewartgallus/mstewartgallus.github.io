@@ -94,7 +94,7 @@ select, option, button, input {
 sub, sup { vertical-align: inherit ; }
 
 h1,h2,h3,h4,h5,h6 {
-    margin: unset ;
+    margin-block: 0 ;
     font-size: inherit ;
     font-style: normal ;
 }
@@ -102,7 +102,6 @@ h1,h2,h3,h4,h5,h6 {
 hgroup {
     inline-size: fit-content ;
     max-inline-size: 100% ;
-    margin: unset ;
 
     font-style: italic;
 }
@@ -248,10 +247,17 @@ dl, header {
 
 }
 
-main :where(p, h1, h2, h3, h4, h5, h6, dl, form) {
-    margin-inline-start: 2rem ;
+/* FIXME way too clunky */
+:where(main, section, nav, footer, header) >
+:where(p, header, hgroup, h1, h2, h3, h4, h5, h6) {
     margin-inline-start: calc(2 * var(--s));
 }
+
+:where(main, section, nav, footer, header) > header
+      > :where(p, header, hgroup, h1, h2, h3, h4, h5, h6) {
+    margin-inline-start: 0 ;
+}
+
 
 :root {
     /* default ratio on browsers is 1rem = 16px */

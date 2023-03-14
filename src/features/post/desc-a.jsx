@@ -1,8 +1,8 @@
-import * as React from "react";
-import { A } from "../features/ui";
+import { useId, forwardRef } from "react";
+import { A } from "../../features/ui";
 
 const DescAImpl = ({ children, desc, ...props }, ref) => {
-    const id = React.useId();
+    const id = useId();
     return <A {...props} aria-describedby={id} ref={ref}>
                {children}
                &emsp;
@@ -10,6 +10,6 @@ const DescAImpl = ({ children, desc, ...props }, ref) => {
            </A>;
 };
 
-export const DescA = React.forwardRef(DescAImpl);
+export const DescA = forwardRef(DescAImpl);
 
 export default DescA;

@@ -1,4 +1,4 @@
-import Paging from "../../components/paging.jsx";
+import Paging from "./paging.jsx";
 
 const paging = ({ category, previous, next }) => [category, {
     previous: previous?.post,

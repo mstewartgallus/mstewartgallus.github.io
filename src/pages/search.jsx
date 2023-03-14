@@ -1,15 +1,9 @@
 import * as React from "react";
-import { Search, useSearch } from "../features/search";
-import { A } from "../features/ui";
-import BreadcrumbList from "../components/breadcrumb-list";
+import { Search, Select, Option, useSearch, usePostTags } from "../features/search";
+import { A, BreadcrumbList, Main, Nav, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
-import Nav from  "../components/nav.jsx";
-import Main from "../components/main";
-import Page from "../components/page";
-import { Select, Option } from "../components/select";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
-import usePostTags from "../hooks/use-post-tags.js";
 import { separator } from "../utils/separator.js";
 import { search, query, result as resultClass } from "./search.module.css";
 
@@ -164,9 +158,9 @@ const SearchForm = ({onSubmit, tags, state, set}) => {
 
 const Heading = ({query}) => {
     if (query === '' || !query) {
-        return <h1 tabIndex="-1">Search</h1>;
+        return <h1>Search</h1>;
     }
-    return <h1 tabIndex="-1">{query}{separator}Search</h1>;
+    return <h1>{query}{separator}Search</h1>;
 };
 
 const Sidebar = ({state, set}) => {

@@ -1,20 +1,17 @@
 import { graphql } from "gatsby";
+import { Main, Page } from "../features/ui";
 import { Poem } from "../features/poem";
-import { Sidebar, SeoPostHead } from "../features/post";
+import { ListNotice, Sidebar, SeoPostHead, useBlogPosting } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
-import ListNotice from "../components/list-notice.jsx";
-import Main from "../components/main";
-import Page from "../components/page";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
-import useBlogPosting from "../hooks/use-blog-posting.js";
 import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 
 const Heading = ({title, subtitle}) =>
       <>
-          <h1 tabIndex="-1">{title}</h1>
+          <h1>{title}</h1>
           <p>{subtitle}</p>
       </>;
 const Notice = ({notice}) =>

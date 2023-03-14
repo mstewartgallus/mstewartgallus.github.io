@@ -1,8 +1,7 @@
+import { Footer, Nav } from "../../features/ui";
 import Metadata from "./metadata.jsx";
 import PostBreadcrumbs from "./post-breadcrumbs.jsx";
 import PostPaging from "./post-paging.jsx";
-import Footer from "../../components/footer.tsx";
-import Nav from "../../components/nav.jsx";
 
 export const Sidebar = post => {
     const {

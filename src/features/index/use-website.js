@@ -1,12 +1,12 @@
-import * as React from "react";
-import useAbsolute from "../hooks/use-absolute.js";
-import useSiteMetadata from "../hooks/use-site-metadata.js";
+import { useMemo } from "react";
+import useAbsolute from "../../hooks/use-absolute.js";
+import useSiteMetadata from "../../hooks/use-site-metadata.js";
 
 export const useWebsite = () => {
     const site = useSiteMetadata();
     const search = useAbsolute('/search');
     const index = useAbsolute('/');
-    return React.useMemo(() => ({
+    return useMemo(() => ({
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": site.title,

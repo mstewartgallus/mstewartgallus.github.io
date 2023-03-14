@@ -1,8 +1,8 @@
-import DescA from "../../components/desc-a.jsx";
-import { DescList, DescItem } from "../../components/desc-list";
-import PersonA from "../../components/link-person.jsx";
-import PlaceA from "../../components/link-place.jsx";
-import TagA from "../../components/link-tag.jsx";
+import DescA from "./desc-a.jsx";
+import { DescList, DescItem } from "./desc-list";
+import PersonA from "./link-person.jsx";
+import PlaceA from "./link-place.jsx";
+import TagA from "./link-tag.jsx";
 
 const Places = ({places}) =>
       places.map(p =>

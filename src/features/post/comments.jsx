@@ -2,8 +2,8 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { comments as commentsClass } from "./comments.module.css";
 import CommentList from "./comment-list.jsx";
-import useComments from '../hooks/use-comments.js';
-import useClient from '../hooks/use-client.js';
+import useComments from '../../hooks/use-comments.js';
+import useClient from '../../hooks/use-client.js';
 
 
 const parseComment = ({id, url, content, account }) => [id, { url, content, account }];
