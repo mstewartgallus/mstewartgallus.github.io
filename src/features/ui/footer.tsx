@@ -1,14 +1,13 @@
-import type { FC, ReactNode } from "react";
+import type { FC, ReactNode, HTMLAttributes } from "react";
 import { useId } from "react";
 
-export interface FooterProps {
-    children?: ReactNode;
+export interface FooterProps extends HTMLAttributes<HTMLElement> {
     heading?: ReactNode;
 }
 
-export const Footer: FC<FooterProps> = ({children, heading}) => {
+export const Footer: FC<FooterProps> = ({children, heading, ...props}) => {
     const id = useId();
-    return <footer aria-labelledby={id}>
+    return <footer aria-labelledby={id} {...props}>
                <hgroup className="sr-only" id={id}>
                    {heading}
                </hgroup>

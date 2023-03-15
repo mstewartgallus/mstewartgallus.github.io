@@ -1,6 +1,5 @@
 import { useMemo, useState, useCallback } from "react";
 import {
-    children as childrenClass,
     iframe as iframeClass,
     loaded as loadedClass,
     unloaded as unloadedClass,
@@ -48,7 +47,7 @@ const Comment = ({url, account, content, children}) => {
                         srcDoc={srcdoc}
                         onLoad={onLoad}
                 />
-               <div className={childrenClass}>
+               <div>
                    {children}
                </div>
            </article>;
