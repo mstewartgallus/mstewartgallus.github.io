@@ -1,6 +1,6 @@
 export { Comments } from "./comments.jsx";
 export { ListNotice } from "./list-notice.jsx";
-export { Poem } from "./poem.jsx";
+export { Post } from "./post.jsx";
 export { SeoPostHead } from "./seo-post-head.jsx";
 export { Sidebar } from "./sidebar.jsx";
 export { useBlog } from "./use-blog.js";

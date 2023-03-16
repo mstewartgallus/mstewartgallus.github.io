@@ -1,8 +1,8 @@
 import { graphql } from "gatsby";
 import { Card, Main, Page, Section } from "../features/ui";
-import { Comments, ListNotice, Poem, Sidebar, SeoPostHead,
-         useBlog,
-         useBlogPosting, useBreadcrumbList, useMdxComponents } from "../features/post";
+import { Comments, ListNotice, Sidebar, SeoPostHead,
+         Post,
+         useBlogPosting, useBreadcrumbList } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -37,22 +37,6 @@ export const Head = ({ data: { post } }) => {
                <SeoPostHead {...post} />
            </>;
 };
-
-const PostMdx = ({category, sourceInstanceName, relativePath}) => {
-    const components = useMdxComponents(category);
-    const Blog = useBlog(sourceInstanceName, relativePath);
-    return <Blog components={components} />;
-};
-
-const PostPoem = ({poem: { content }}) => <Poem poem={content} />;
-
-const Post = ({
-    post: { category },
-    postPoem,
-    postMdx
-}) => postMdx ?
-    <PostMdx {...postMdx} category={category} /> :
-<PostPoem {...postPoem} />;
 
 const PostPage = ({ data }) => {
     const { post } = data;
