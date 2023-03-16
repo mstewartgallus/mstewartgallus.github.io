@@ -1,24 +1,13 @@
 import { graphql } from "gatsby";
-import { MDXProvider } from "@mdx-js/react";
 import { Card, Main, Page, Section } from "../features/ui";
-import { Comments, ListNotice, Sidebar, SeoPostHead, useBlogPosting } from "../features/post";
+import { Comments, ListNotice, Sidebar, SeoPostHead,
+         useBlog,
+         useBlogPosting, useBreadcrumbList, useMdxComponents } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
-import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
-import useMdxComponents from "../hooks/use-mdx-components.js";
-
-import Prose from "gatsby-plugin-index/index/Prose.js";
-import Poem from "gatsby-plugin-index/index/Poem.js";
-import Web from "gatsby-plugin-index/index/Web.js";
-
-const indices = Object.freeze(new Map([
-    ["Prose", Prose],
-    ["Poem", Poem],
-    ["Web", Web]
-]));
 
 const Heading = ({title, subtitle}) =>
       <>
@@ -49,19 +38,6 @@ export const Head = ({ data: { postMdx: { post } } }) => {
            </>;
 };
 
-const useBlog = (sourceInstanceName, relativePath) => {
-    const index = indices.get(sourceInstanceName);
-    if (!index) {
-        throw new Error(`Index ${sourceInstanceName} not found in ${indices}`);
-    }
-
-    const Component = index.get(relativePath);
-    if (!Component) {
-        throw new Error(`${relativePath} not found in index ${index}`);
-    }
-    return Component;
-};
-
 const PostPage = ({
     data: {
         postMdx: { post,
@@ -74,15 +50,13 @@ const PostPage = ({
 
     const Blog = useBlog(sourceInstanceName, relativePath);
 
-    const { comments } = post;
+    const { comments, notice } = post;
     return <>
                <Page sidebar={<Sidebar {...post} />}>
                    <Card>
                        <Main heading={<Heading {...post} />}
-                             notice={<Notice notice={post.notice} />}>
-                           <MDXProvider components={components}>
-                               <Blog />
-                           </MDXProvider>
+                             notice={<Notice notice={notice} />}>
+                           <Blog components={components} />
                        </Main>
                    </Card>
                    { comments &&

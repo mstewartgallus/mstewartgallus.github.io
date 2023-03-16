@@ -1,13 +1,12 @@
 import { graphql } from "gatsby";
-import { Card, Main, Page } from "../features/ui";
-import { Poem } from "../features/poem";
-import { ListNotice, Sidebar, SeoPostHead, useBlogPosting } from "../features/post";
+import { Card, Main, Page, Section } from "../features/ui";
+import { Comments, ListNotice, Poem, Sidebar, SeoPostHead,
+         useBlogPosting, useBreadcrumbList } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
-import useBreadcrumbList from "../hooks/use-breadcrumb-list.js";
 
 const Heading = ({title, subtitle}) =>
       <>
@@ -40,6 +39,7 @@ export const Head = ({ data: { postPoem: { post } } }) => {
 
 const PostPage = ({ data: { postPoem: { post, poem } } }) => {
     const content = poem.content;
+    const { comments } = post;
     return <>
                <Page sidebar={<Sidebar {...post} />}>
                    <Card>
@@ -49,6 +49,13 @@ const PostPage = ({ data: { postPoem: { post, poem } } }) => {
                            <Poem poem={content} />
                        </Main>
                    </Card>
+                   { comments &&
+                     <Card>
+                         <Section heading={<h2>Comments</h2>}>
+                             <Comments host={comments.host} id={comments.id} />
+                         </Section>
+                     </Card>
+                   }
                </Page>
                <Foot {...post} />
            </>;

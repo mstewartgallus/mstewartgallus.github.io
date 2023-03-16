@@ -17,41 +17,33 @@ import useSiteMetadata from "../hooks/use-site-metadata.js";
 
 const title = "Table of Contents";
 
-const Sidebar = () => {
-    const { title, description } = useSiteMetadata();
-
-    return <>
-               <Card>
-                   <Header
-                       heading={
-                           <>
-                               <h2>{title}</h2>
-                               <p style={{marginBlock:0}}>{description}</p>
-                           </>}>
-                       <Banner />
-                   </Header>
-               </Card>
-               <Card>
-                   <Search heading={<h2>Search</h2>}>
-                       <SearchForm />
-                   </Search>
-               </Card>
-               <Card>
-                   <Nav heading={<h2>Breadcrumbs</h2>}>
-                       <BreadcrumbList>
-                           <BreadcrumbItem>
-                               <A role="link" aria-disabled="true" aria-current="page">Home</A>
-                           </BreadcrumbItem>
-                       </BreadcrumbList>
-                   </Nav>
-               </Card>
-           </>;
-};
-
-const Foot = () => {
-    const json = useWebsite();
-    return <JsonLd srcdoc={json} />;
-};
+const Sidebar = ({ title, description }) =>
+      <>
+          <Card>
+              <Header
+                  heading={
+                      <>
+                          <h2>{title}</h2>
+                          <p style={{marginBlock:0}}>{description}</p>
+                      </>}>
+                  <Banner />
+              </Header>
+          </Card>
+          <Card>
+              <Search heading={<h2>Search</h2>}>
+                  <SearchForm />
+              </Search>
+          </Card>
+          <Card>
+              <Nav heading={<h2>Breadcrumbs</h2>}>
+                  <BreadcrumbList>
+                      <BreadcrumbItem>
+                          <A role="link" aria-disabled="true" aria-current="page">Home</A>
+                      </BreadcrumbItem>
+                  </BreadcrumbList>
+              </Nav>
+          </Card>
+      </>;
 
 export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
@@ -65,8 +57,10 @@ export const Head = ({location: {pathname}}) => {
 
 const IndexPage = () => {
     const posts = usePostList();
+    const { title, description } = useSiteMetadata();
+    const json = useWebsite();
     return <>
-               <Page sidebar={<Sidebar />}>
+               <Page sidebar={<Sidebar title={title} description={description} />}>
                    {
                        Array.from(posts.entries()).map(([category, posts]) =>
                            <Card key={category ?? "main"}>
@@ -85,7 +79,7 @@ const IndexPage = () => {
                        )
                    }
                </Page>
-               <Foot />
+               <JsonLd srcdoc={json} />
            </>;
 };
 

@@ -33,18 +33,20 @@ const defaultComponents = {
     wrapper: MdxPage
 };
 
+class RootHandle {
+    onPreRouteUpdate() {
+    }
+    onRouteUpdate() {
+    }
+    onRouteUpdateDelayed() {
+    }
+}
+
 const RootImpl = ({ children }, ref) => {
     // Create a different store per SSR page
     const store = Store.createStore();
 
-    useImperativeHandle(ref, () => ({
-        onPreRouteUpdate() {
-        },
-        onRouteUpdate() {
-        },
-        onRouteUpdateDelayed() {
-        }
-    }), []);
+    useImperativeHandle(ref, () => new RootHandle(), []);
 
     return <StrictMode>
                <Provider store={store}>

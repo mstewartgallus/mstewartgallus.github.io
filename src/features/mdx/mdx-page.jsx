@@ -1,10 +1,13 @@
+import { MDXProvider } from '@mdx-js/react';
 import { A, BreadcrumbList, BreadcrumbItem, Card, Main, Nav, Page } from "../../features/ui";
 
 const Sidebar = ({ title }) =>
 <Card>
     <Nav heading={<h2>Breadcrumbs</h2>}>
         <BreadcrumbList>
-            <BreadcrumbItem><A href="/">Home</A></BreadcrumbItem>
+            <BreadcrumbItem>
+                <A href="/">Home</A>
+            </BreadcrumbItem>
             <BreadcrumbItem>
                 <A role="link" aria-disabled="true" aria-current="page">{title}</A>
             </BreadcrumbItem>
@@ -19,14 +22,17 @@ export const MdxPage = props => {
         pageContext
     } = props;
     const title = pageContext?.frontmatter?.title ?? pathname;
-    return <Page
-               sidebar={<Sidebar title={title} />}>
-               <Card>
-                   <Main heading={<h1>{title}</h1>}>
-                       {children}
-                   </Main>
-               </Card>
-           </Page>;
+    // Prevent doublying up
+    return <MDXProvider components={{ wrapper: null}}>
+               <Page
+                   sidebar={<Sidebar title={title} />}>
+                   <Card>
+                       <Main heading={<h1>{title}</h1>}>
+                           {children}
+                       </Main>
+                   </Card>
+               </Page>
+           </MDXProvider>;
 };
 
 export default MdxPage;

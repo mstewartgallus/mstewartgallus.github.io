@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import * as Pagefind from '../utils/pagefind.js';
 
 const parseParams = search => {
@@ -15,7 +15,7 @@ const parseParams = search => {
 };
 
 export const useSearch = (search, n, onInit, onLoad) => {
-    React.useEffect(() => {
+    useEffect(() => {
         if (!search) {
             return;
         }
@@ -32,6 +32,10 @@ export const useSearch = (search, n, onInit, onLoad) => {
         (async () => {
             const data = await Pagefind.search(s, { filters });
             if (ignore) {
+                return;
+            }
+
+            if (!data) {
                 return;
             }
 

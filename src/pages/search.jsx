@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useTransition, useReducer, useId, useState, useEffect, useMemo, useCallback } from "react";
 import { Search, Select, Option, useSearch, usePostTags } from "../features/search";
 import { A, BreadcrumbList, BreadcrumbItem, Card, Main, Nav, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
@@ -88,7 +88,7 @@ const DynamicResultList = ({links}) => {
 };
 
 const Query = ({value, onChange}) => {
-    const id = React.useId();
+    const id = useId();
 
     return <div className={query}>
                <label htmlFor={id}>Query</label>
@@ -110,9 +110,9 @@ const Options = ({options, onChange, selected}) =>
           </Option>);
 
 const SearchForm = ({onSubmit, tags, state, set}) => {
-    const onChangeS = React.useCallback(event => set('s', event.target.value), [set]);
+    const onChangeS = useCallback(event => set('s', event.target.value), [set]);
 
-    const onChangeOption = React.useCallback(event => {
+    const onChangeOption = useCallback(event => {
         const { target: { checked, name, value } } = event;
 
         const next = new Set(state[name]);
@@ -193,12 +193,12 @@ const Sidebar = ({state, set}) => {
 };
 
 export const Head = ({location}) => {
-    const [search, setSearch] = React.useState(null);
-    React.useEffect(() => {
+    const [search, setSearch] = useState(null);
+    useEffect(() => {
         setSearch(location.search);
     }, [location]);
 
-    const title = React.useMemo(() => {
+    const title = useMemo(() => {
         const s = parseParams(search)?.s;
         if (s === '' || !s) {
             return 'Search';
@@ -218,26 +218,26 @@ export const Head = ({location}) => {
 };
 
 const SearchPage = ({location}) => {
-    const [state, dispatch] = React.useReducer(reducer, initState);
-    const [isPending, startTransition] = React.useTransition();
+    const [state, dispatch] = useReducer(reducer, initState);
+    const [isPending, startTransition] = useTransition();
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(set('search', location.search));
     }, [location]);
 
-    const onInit = React.useCallback(
+    const onInit = useCallback(
         links => startTransition(() => dispatch(init(links))),
         []);
 
-    const onLoad = React.useCallback(
+    const onLoad = useCallback(
         (index, url, title) => startTransition(() => dispatch(load(index, url, title))),
         []);
 
-    const setter = React.useCallback(
+    const setter = useCallback(
         (name, value) => dispatch(set(name, value)),
         []);
 
-    const params = React.useMemo(() => parseParams(state.search), [state.search]);
+    const params = useMemo(() => parseParams(state.search), [state.search]);
 
     useSearch(state.search, 10, onInit, onLoad);
 
