@@ -1,7 +1,8 @@
 import { graphql } from "gatsby";
 import { Card, Main, Page, Section } from "../features/ui";
 import { Comments, ListNotice, Poem, Sidebar, SeoPostHead,
-         useBlogPosting, useBreadcrumbList } from "../features/post";
+         useBlog,
+         useBlogPosting, useBreadcrumbList, useMdxComponents } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -26,7 +27,7 @@ const Foot = post => {
            </>;
 };
 
-export const Head = ({ data: { postPoem: { post } } }) => {
+export const Head = ({ data: { post } }) => {
     const { description, title, slug } = post;
     const url = useAbsolute(slug);
     return <>
@@ -37,16 +38,31 @@ export const Head = ({ data: { postPoem: { post } } }) => {
            </>;
 };
 
-const PostPage = ({ data: { postPoem: { post, poem } } }) => {
-    const content = poem.content;
-    const { comments } = post;
+const PostMdx = ({category, sourceInstanceName, relativePath}) => {
+    const components = useMdxComponents(category);
+    const Blog = useBlog(sourceInstanceName, relativePath);
+    return <Blog components={components} />;
+};
+
+const PostPoem = ({poem: { content }}) => <Poem poem={content} />;
+
+const Post = ({
+    post: { category },
+    postPoem,
+    postMdx
+}) => postMdx ?
+    <PostMdx {...postMdx} category={category} /> :
+<PostPoem {...postPoem} />;
+
+const PostPage = ({ data }) => {
+    const { post } = data;
+    const { comments, notice } = post;
     return <>
                <Page sidebar={<Sidebar {...post} />}>
                    <Card>
-                       <Main
-                           heading={<Heading {...post} />}
-                           notice={<Notice notice={post.notice} />}>
-                           <Poem poem={content} />
+                       <Main heading={<Heading {...post} />}
+                             notice={<Notice notice={notice} />}>
+                           <Post {...data} />
                        </Main>
                    </Card>
                    { comments &&
@@ -64,44 +80,48 @@ const PostPage = ({ data: { postPoem: { post, poem } } }) => {
 export default PostPage;
 
 export const pageQuery = graphql`
-query PoemById($id: String!) {
-  postPoem(id: {eq: $id}) {
+query PostById($id: String!) {
+  postMdx(post:{id: {eq:$id}}) {
+    sourceInstanceName
+    relativePath
+  }
+  postPoem(post:{id: {eq:$id}}) {
     poem {
       content
     }
-    post {
-      slug
-      dateDisplay: date(formatString: "YYYY-MM-DD")
-      date: date(formatString: "YYYY-MM-DDTHH:mmZ")
-      description
-      title
-      subtitle
+  }
+  post(id: {eq: $id}) {
+    slug
+    dateDisplay: date(formatString: "YYYY-MM-DD")
+    date: date(formatString: "YYYY-MM-DDTHH:mmZ")
+    description
+    title
+    subtitle
+    category
+    notice
+    tags
+    places
+    people
+    author {
+      name
+      url
+    }
+    comments {
+      host
+      id
+    }
+    childrenLink {
       category
-      notice
-      tags
-      places
-      people
-      author {
-        name
-        url
-      }
-      comments {
-        host
-        id
-      }
-      childrenLink {
-        category
-        next {
-          post {
-            slug
-            title
-          }
+      next {
+        post {
+          slug
+          title
         }
-        previous {
-          post {
-            slug
-            title
-          }
+      }
+      previous {
+        post {
+          slug
+          title
         }
       }
     }
