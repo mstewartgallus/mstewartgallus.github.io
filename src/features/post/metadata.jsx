@@ -1,4 +1,4 @@
-import DescA from "./desc-a.jsx";
+import { DescA } from "./desc-a";
 import { DescList, DescItem } from "./desc-list";
 import PersonA from "./link-person.jsx";
 import PlaceA from "./link-place.jsx";

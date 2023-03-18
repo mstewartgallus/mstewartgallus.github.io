@@ -1,0 +1,35 @@
+.grid {
+    margin: 0 ;
+    inline-size: fit-content ;
+}
+.grid > div {
+    display: inline-grid ;
+    position: relative ;
+    justify-items: start ;
+    column-gap: 1em ;
+    grid-template-columns: auto 1fr ;
+}
+.real {
+    display: contents ;
+}
+.real > a {
+    position: absolute ;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.fake {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+    visibility: hidden ;
+}
+.desc {
+    grid-row: 1 / 1;
+    grid-column: 2 / 2;
+}
+
+.fake, .desc {
+    margin: 0;
+}

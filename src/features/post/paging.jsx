@@ -1,4 +1,4 @@
-import DescA from "./desc-a.jsx";
+import { DescA } from "./desc-a";
 
 export const Paging = ({ previous, next }) =>
 <div>
