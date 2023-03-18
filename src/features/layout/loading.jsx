@@ -1,4 +1,4 @@
-import { Card, Main, Page } from "../features/ui";
+import { Card, Main, Page } from "../../features/ui";
 
 export const Loading = () =>
 <Page>

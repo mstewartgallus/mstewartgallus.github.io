@@ -1,4 +1,4 @@
-import ErrorBoundary from "./error-boundary.jsx";
+import { ErrorBoundary } from "../features/util";
 import Error from "./error";
 import { parse } from "../utils/error.js";
 

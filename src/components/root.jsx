@@ -9,10 +9,10 @@ import {
     Code,
     H1, H2, H3, H4, H5, H6,
     P,
-    Pre
+    Pre,
+    Green
 } from "../features/ui";
 import * as Store from "../state/store.js";
-import Green from "./green";
 
 const shortcodes = {
     A,

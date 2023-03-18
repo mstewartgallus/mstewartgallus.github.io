@@ -1,6 +1,7 @@
 export { A } from "./a.tsx";
 export { Blockquote } from "./blockquote";
 export { BreadcrumbList, BreadcrumbItem } from "./breadcrumb-list";
+export { Green } from "./green";
 export { Card } from "./card";
 export { Code } from "./code.jsx";
 export { Footer } from "./footer.tsx";

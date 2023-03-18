@@ -1,14 +1,13 @@
-import { useTransition, useReducer, useId, useState, useEffect, useMemo, useCallback } from "react";
-import { Search, Select, Option, useSearch, usePostTags } from "../features/search";
+import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
+import { ResultList, Search, SearchForm, useSearch, usePostTags } from "../features/search";
 import { A, BreadcrumbList, BreadcrumbItem, Card, Main, Nav, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import { separator } from "../utils/separator.js";
-import { query, result as resultClass } from "./search.module.css";
 
 const initState = {
-    links: null,
+    links: [],
     s: '',
     category: new Set(),
     tag: new Set(),
@@ -60,137 +59,38 @@ const parseParams = search => {
     return { s, category, tag, place, person };
 };
 
-const Result = ({url, title}) => <A href={url}>{title}</A>;
-const Loading = () => <A>Loading</A>;
+const Heading = ({query}) =>
+      (query === '' || !query) ?
+      "Search" :
+      <>{query}{separator}Search</>;
 
-const Results = ({results}) =>
-      results.map(({id, result}) =>
-          <li key={id} className={resultClass}
-              aria-hidden={result ? null : "true"}>
-              {
-                  result ?
-                      <Result {...result} /> :
-                  <Loading />
-              }
-          </li>);
-
-const ResultList = ({results}) =>
-    <ul>
-        <Results results={results} />
-    </ul>;
-
-const DynamicResultList = ({links}) => {
-    if (links) {
-        return <ResultList results={links} />;
-    } else {
-        return <ul aria-hidden="true" />;
-    }
-};
-
-const Query = ({value, onChange}) => {
-    const id = useId();
-
-    return <div className={query}>
-               <label htmlFor={id}>Query</label>
-               <input id={id} name="s" type="search"
-                      value={value}
-                      onChange={onChange}
-               />
-               <button type="submit">Search</button>
-           </div>;
-};
-
-const Options = ({options, onChange, selected}) =>
-      options.map(opt =>
-          <Option key={opt}
-                  onChange={onChange}
-                  selected={selected?.has(opt)}
-                  value={opt}>
-              {opt}
-          </Option>);
-
-const SearchForm = ({onSubmit, tags, state, set}) => {
-    const onChangeS = useCallback(event => set('s', event.target.value), [set]);
-
-    const onChangeOption = useCallback(event => {
-        const { target: { checked, name, value } } = event;
-
-        const next = new Set(state[name]);
-        if (checked) {
-            next.add(value);
-        } else {
-            next.delete(value);
-        }
-
-        set(name, next);
-    }, [set, state]);
-
-    return <form rel="search"
-                 action="/search"
-                 onSubmit={onSubmit}>
-               <Query value={state.s} onChange={onChangeS} />
-
-               <Select name="category">
-                   <legend>Category</legend>
-                   <Options options={tags.category} selected={state.category}
-                            onChange={onChangeOption} />
-               </Select>
-
-               <Select name="place">
-                   <legend>Place</legend>
-                   <Options options={tags.place} selected={state.place}
-                            onChange={onChangeOption} />
-               </Select>
-
-               <Select name="person">
-                   <legend>People</legend>
-                   <Options options={tags.people} selected={state.person}
-                            onChange={onChangeOption} />
-               </Select>
-
-               <Select name="tag">
-                   <legend>Tags</legend>
-                   <Options options={tags.tags} selected={state.tag}
-                            onChange={onChangeOption} />
-               </Select>
-           </form>;
-};
-
-const Heading = ({query}) => {
-    if (query === '' || !query) {
-        return <h1>Search</h1>;
-    }
-    return <h1>{query}{separator}Search</h1>;
-};
-
-const Sidebar = ({state, set}) => {
-    const onSubmit = useSubmit();
-    const tags = usePostTags();
-
-    return <>
-               <Card>
-                   <Search heading={<h2>Search</h2>}>
-                       <SearchForm onSubmit={onSubmit}
-                                   tags={tags}
-                                   set={set}
-                                   state={state}
-                       />
-                   </Search>
-               </Card>
-               <Card>
-                   <Nav heading={<h2>Breadcrumbs</h2>}>
-                       <BreadcrumbList>
-                           <BreadcrumbItem><A href="/">Home</A></BreadcrumbItem>
-                           <BreadcrumbItem>
-                               <A role="link" aria-disabled="true" aria-current="page">
-                                   Search
-                               </A>
-                           </BreadcrumbItem>
-                       </BreadcrumbList>
-                   </Nav>
-               </Card>
-           </>;
-};
+const Sidebar = ({state, set, tags, action, onSubmit}) =>
+      <>
+          <Card>
+              <Search heading={<h2>Search</h2>}>
+                  <SearchForm action={action}
+                              onSubmit={onSubmit}
+                              tags={tags}
+                              set={set}
+                              state={state}
+                  />
+              </Search>
+          </Card>
+          <Card>
+              <Nav heading={<h2>Breadcrumbs</h2>}>
+                  <BreadcrumbList>
+                      <BreadcrumbItem>
+                          <A href="/">Home</A>
+                      </BreadcrumbItem>
+                      <BreadcrumbItem>
+                          <A role="link" aria-disabled="true" aria-current="page">
+                              Search
+                          </A>
+                      </BreadcrumbItem>
+                  </BreadcrumbList>
+              </Nav>
+          </Card>
+      </>;
 
 export const Head = ({location}) => {
     const [search, setSearch] = useState(null);
@@ -221,8 +121,11 @@ const SearchPage = ({location}) => {
     const [state, dispatch] = useReducer(reducer, initState);
     const [isPending, startTransition] = useTransition();
 
+    const onSubmit = useSubmit();
+    const tags = usePostTags();
+
     useEffect(() => {
-        dispatch(set('search', location.search));
+        startTransition(() => dispatch(set('search', location.search)));
     }, [location]);
 
     const onInit = useCallback(
@@ -246,10 +149,13 @@ const SearchPage = ({location}) => {
     return <Page sidebar={<Sidebar
                               state={state}
                               set={setter}
+                              tags={tags}
+                              action="/search"
+                              onSubmit={onSubmit}
                           />}>
                <Card>
-                   <Main heading={<Heading query={query} />}>
-                       <DynamicResultList links={state.links} />
+                   <Main heading={<h1><Heading query={query} /></h1>}>
+                       <ResultList links={state.links} />
                    </Main>
                </Card>
            </Page>;

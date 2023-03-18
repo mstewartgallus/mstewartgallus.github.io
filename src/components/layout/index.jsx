@@ -1,6 +1,6 @@
 import { Suspense, forwardRef, useImperativeHandle } from "react";
+import { Loading } from "../../features/layout";
 import { layout } from "./layout.module.css";
-import Loading from "../loading";
 
 class LayoutHandle {
     onPreRouteUpdate() {

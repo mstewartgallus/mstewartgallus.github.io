@@ -1,5 +1,6 @@
 import { Banner, PostList, usePostList, useWebsite } from "../features/index";
-import { Search, SearchForm } from "../features/search";
+import { useSearchURL } from "../features/route";
+import { Search, SearchFormMini } from "../features/search";
 import {
     A,
     BreadcrumbList, BreadcrumbItem,
@@ -14,10 +15,9 @@ import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 import useSiteMetadata from "../hooks/use-site-metadata.js";
+import { useSubmit } from "../hooks/use-submit.js";
 
-const title = "Table of Contents";
-
-const Sidebar = ({ title, description }) =>
+const Sidebar = ({ title, description, action, onSubmit }) =>
       <>
           <Card>
               <Header
@@ -31,7 +31,7 @@ const Sidebar = ({ title, description }) =>
           </Card>
           <Card>
               <Search heading={<h2>Search</h2>}>
-                  <SearchForm />
+                  <SearchFormMini action={action} onSubmit={onSubmit} />
               </Search>
           </Card>
           <Card>
@@ -44,6 +44,8 @@ const Sidebar = ({ title, description }) =>
               </Nav>
           </Card>
       </>;
+
+const title = "Table of Contents";
 
 export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
@@ -59,8 +61,15 @@ const IndexPage = () => {
     const posts = usePostList();
     const { title, description } = useSiteMetadata();
     const json = useWebsite();
+    const onSubmit = useSubmit();
+    const search = useSearchURL();
     return <>
-               <Page sidebar={<Sidebar title={title} description={description} />}>
+               <Page sidebar={
+                         <Sidebar
+                             title={title} description={description}
+                             action={search}
+                             onSubmit={onSubmit} />
+                     }>
                    {
                        Array.from(posts.entries()).map(([category, posts]) =>
                            <Card key={category ?? "main"}>
