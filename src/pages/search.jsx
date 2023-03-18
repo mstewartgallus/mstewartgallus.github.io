@@ -20,7 +20,7 @@ const reducer = (state, action) => {
     switch (type) {
     case "init": {
         const { linkIds } = action;
-        return { ...state, links: linkIds.map(id => ({ id })) };
+        return { ...state, links: linkIds.map(id => ({ id, loaded: false })) };
     }
 
     case "load": {
@@ -28,7 +28,7 @@ const reducer = (state, action) => {
         const { index, url, title } = action;
         const { id } = links[index];
         links = Array.from(links);
-        links[index] = { id, result: { url, title } };
+        links[index] = { id, loaded: true, url, title };
         return { ...state, links };
     }
 

@@ -1,31 +1,25 @@
-import { Suspense } from "react";
 import { Suspend } from "../../../../features/util";
 import { A } from "../../../../features/ui";
+import { SuspenseList, SuspenseItem } from "../../components/suspense-list";
 
-const Result = ({url, title}) => <A href={url}>{title}</A>;
-const MaybeResult = ({result}) => {
-    if (!result) {
+const Result = ({loaded, url, title}) => {
+    if (!loaded) {
         return <Suspend />;
     }
-    return <li>
-               <Result {...result}/>
-           </li>;
+    return <A href={url}>{title}</A>;
 };
 
 const Loading = () =>
-<li>
-    <A role="link" aria-disabled="true">Loading...</A>
-</li>;
-
-const Results = ({links}) =>
-      links.map(({id, result}) =>
-          <Suspense key={id} fallback={<Loading />}>
-              <MaybeResult result={result} />
-          </Suspense>);
+<A role="link" aria-disabled="true">Loading...</A>;
 
 export const ResultList = ({links}) =>
-<ul>
-    <Results links={links} />
-</ul>;
+<SuspenseList fallback={<Loading />}>
+    {
+        links.map(link =>
+            <SuspenseItem key={link.id}>
+                <Result {...link} />
+            </SuspenseItem>)
+    }
+</SuspenseList>;
 
 export default ResultList;
