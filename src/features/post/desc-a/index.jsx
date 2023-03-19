@@ -6,13 +6,14 @@ import {
 
 const DescAImpl = ({ children, desc, ...props }, ref) => {
     const id = useId();
-    return <div aria-owns={id} role="group">
+    return <div role="group">
                <A className={gridClass} aria-describedby={id} ref={ref} {...props}>
                    <span role="presentation">{children}</span>
                    <span id={id} role="presentation">
                        {desc}
                    </span>
                </A>
+               <span aria-owns={id} role="presentation" />
            </div>;
 };
 
