@@ -1,0 +1,18 @@
+.heading {
+    break-inside: avoid ;
+    break-after: avoid ;
+    color: var(--emphasis-text);
+    margin-block: 0 ;
+    font-size: inherit ;
+    font-style: normal ;
+    border-radius: 0.01ch ;
+    font-variant-numeric: proportional-nums lining-nums ;
+}
+
+h1.heading {
+    font-size: calc(var(--ratio-2) * 1rem);
+}
+
+h2.heading {
+    font-size: calc(var(--ratio-1) * 1rem);
+}

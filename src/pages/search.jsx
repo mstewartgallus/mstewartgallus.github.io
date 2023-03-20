@@ -1,6 +1,6 @@
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, Search, SearchForm, useSearch, usePostTags } from "../features/search";
-import { A, BreadcrumbList, BreadcrumbItem, Card, Main, Nav, Page } from "../features/ui";
+import { A, H1, H2, BreadcrumbList, BreadcrumbItem, Card, Main, Nav, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
@@ -67,7 +67,7 @@ const Heading = ({query}) =>
 const Sidebar = ({state, set, tags, action, onSubmit}) =>
       <>
           <Card>
-              <Search heading={<h2>Search</h2>}>
+              <Search heading={<H2>Search</H2>}>
                   <SearchForm action={action}
                               onSubmit={onSubmit}
                               tags={tags}
@@ -77,7 +77,7 @@ const Sidebar = ({state, set, tags, action, onSubmit}) =>
               </Search>
           </Card>
           <Card>
-              <Nav heading={<h2>Breadcrumbs</h2>}>
+              <Nav heading={<H2>Breadcrumbs</H2>}>
                   <BreadcrumbList>
                       <BreadcrumbItem>
                           <A href="/">Home</A>
@@ -154,7 +154,7 @@ const SearchPage = ({location}) => {
                               onSubmit={onSubmit}
                           />}>
                <Card>
-                   <Main heading={<h1><Heading query={query} /></h1>}>
+                   <Main heading={<H1><Heading query={query} /></H1>}>
                        <ResultList links={state.links} />
                    </Main>
                </Card>

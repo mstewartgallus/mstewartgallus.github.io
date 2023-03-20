@@ -1,0 +1,28 @@
+@counter-style nodot {
+  system: numeric;
+  symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
+  suffix: "\2003";
+}
+@counter-style bullet {
+  system: cyclic;
+  symbols: "\2043";
+  suffix: "\2003";
+}
+
+.orderedList {
+    list-style-type: nodot ;
+}
+.menuList, .unorderedList {
+    list-style-type: bullet ;
+}
+
+.menuList, .unorderedList, .orderedList {
+    margin-block: var(--line) ;
+    padding-inline-start: 2em ;
+}
+
+.item::marker {
+    font-weight: bold ;
+    font-variant-numeric: lining-nums tabular-nums;
+    color: var(--emphasis-text);
+}

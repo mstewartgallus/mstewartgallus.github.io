@@ -1,5 +1,6 @@
 import { MDXProvider } from '@mdx-js/react';
-import { A, BreadcrumbList, BreadcrumbItem, Card, Main, Nav, Page } from "../../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem, Card, H1,
+         Main, Nav, Page } from "../../features/ui";
 
 const Sidebar = ({ title }) =>
 <Card>
@@ -27,7 +28,7 @@ export const MdxPage = props => {
                <Page
                    sidebar={<Sidebar title={title} />}>
                    <Card>
-                       <Main heading={<h1>{title}</h1>}>
+                       <Main heading={<H1>{title}</H1>}>
                            {children}
                        </Main>
                    </Card>

@@ -1,15 +1,15 @@
-import { A } from "../../features/ui";
+import { A, Ol, Li } from "../../features/ui";
 
 const Posts = ({posts}) =>
       posts.map(({ slug, title }) =>
-          <li key={slug}>
+          <Li key={slug}>
               <A href={slug}>{title}</A>
-          </li>);
+          </Li>);
 
 export const PostList = ({posts}) =>
 posts && posts.length > 0 &&
-    <ol reversed>
+    <Ol reversed="reversed">
         <Posts posts={posts} />
-    </ol>;
+    </Ol>;
 
 export default PostList;

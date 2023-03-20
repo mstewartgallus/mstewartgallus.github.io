@@ -1,5 +1,5 @@
 import { graphql } from "gatsby";
-import { Card, Main, Page, Section } from "../features/ui";
+import { Card, H1, H2, Main, Page, Section } from "../features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
          Post,
          useBlogPosting, useBreadcrumbList } from "../features/post";
@@ -11,7 +11,7 @@ import useAbsolute from "../hooks/use-absolute.js";
 
 const Heading = ({title, subtitle}) =>
       <>
-          <h1>{title}</h1>
+          <H1>{title}</H1>
           <p style={{marginBlock: 0}}>{subtitle}</p>
       </>;
 const Notice = ({notice}) =>
@@ -51,7 +51,7 @@ const PostPage = ({ data }) => {
                    </Card>
                    { comments &&
                      <Card>
-                         <Section heading={<h2>Comments</h2>}>
+                         <Section heading={<H2>Comments</H2>}>
                              <Comments host={comments.host} id={comments.id} />
                          </Section>
                      </Card>

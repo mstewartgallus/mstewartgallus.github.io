@@ -5,6 +5,7 @@ import {
     A,
     BreadcrumbList, BreadcrumbItem,
     Card,
+    H1, H2,
     Header, Main, Nav,
     Section,
     Page
@@ -23,19 +24,19 @@ const Sidebar = ({ title, description, action, onSubmit }) =>
               <Header
                   heading={
                       <>
-                          <h2>{title}</h2>
+                          <H2>{title}</H2>
                           <p style={{marginBlock:0}}>{description}</p>
                       </>}>
                   <Banner />
               </Header>
           </Card>
           <Card>
-              <Search heading={<h2>Search</h2>}>
+              <Search heading={<H2>Search</H2>}>
                   <SearchFormMini action={action} onSubmit={onSubmit} />
               </Search>
           </Card>
           <Card>
-              <Nav heading={<h2>Breadcrumbs</h2>}>
+              <Nav heading={<H2>Breadcrumbs</H2>}>
                   <BreadcrumbList>
                       <BreadcrumbItem>
                           <A role="link" aria-disabled="true" aria-current="page">Home</A>
@@ -76,11 +77,11 @@ const IndexPage = () => {
                                {
                                    category ?
                                        <Section
-                                           heading={<h2>{category}</h2>}>
+                                           heading={<H2>{category}</H2>}>
                                            <PostList posts={posts} />
                                        </Section>
                                    :
-                                   <Main heading={<h1>Posts</h1>}>
+                                   <Main heading={<H1>Posts</H1>}>
                                        <PostList posts={posts} />
                                    </Main>
                                }

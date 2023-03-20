@@ -52,68 +52,24 @@ address {
 
 table { border-collapse: collapse ; }
 
-hr {
-    block-size: 0 ;
-    border: unset ;
-    margin-block: var(--line) ;
-
-    break-before: avoid ;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    break-inside: avoid ;
-    break-after: avoid ;
-}
-
-h1,h2,h3,h4,h5,h6, figcaption, ::marker {
+figcaption {
     color: var(--emphasis-text);
 }
 
 /* FIXME should form controls be tabular or just lining? */
 time, code, pre,
-table, ::marker,
+table,
 select, option, button, input {
     font-variant-numeric: lining-nums tabular-nums;
 }
 
 sub, sup { vertical-align: inherit ; }
 
-h1,h2,h3,h4,h5,h6 {
-    margin-block: 0 ;
-    font-size: inherit ;
-    font-style: normal ;
-}
-
 hgroup {
     inline-size: fit-content ;
     max-inline-size: 100% ;
 
     font-style: italic;
-}
-
-@counter-style nodot {
-  system: numeric;
-  symbols: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
-  suffix: "\2003";
-}
-@counter-style bullet {
-  system: cyclic;
-  symbols: "\2043";
-  suffix: "\2003";
-}
-
-ol {
-    list-style-type: nodot ;
-}
-
-::marker {
-    font-weight: bold ;
-}
-
-:where(menu, ul, ol) {
-    margin-block: var(--line) ;
-    padding-inline-start: 2em ;
-    list-style-type: bullet ;
 }
 
 @media screen {
@@ -139,23 +95,9 @@ figure {
     break-inside: avoid ;
 }
 
-
-h1 {
-    font-size: calc(var(--ratio-2) * 1rem);
-}
-
-h2 {
-    font-size: calc(var(--ratio-1) * 1rem);
-}
-
-h1,h2,h3,h4,h5,h6 {
-    border-radius: 0.01ch ;
-}
-
-header,h1,h2,h3,h4,h5,h6 {
+header {
     font-variant-numeric: proportional-nums lining-nums ;
 }
-
 main {
     display: block ;
 }

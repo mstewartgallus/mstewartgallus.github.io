@@ -6,6 +6,7 @@ import {
     A,
     BreadcrumbList, BreadcrumbItem,
     Card,
+    H1,
     Header, Main, Nav,
     Section,
     Page
@@ -122,7 +123,7 @@ const IndexPage = () => {
                                            <PostList posts={posts} />
                                        </Panel>
                                    :
-                                   <Main heading={<h1>Posts</h1>}>
+                                   <Main heading={<H1>Posts</H1>}>
                                        <PostList posts={posts} />
                                    </Main>
                                }

@@ -1,9 +1,9 @@
-import { Card, Main, Page } from "../../features/ui";
+import { Card, H1, Main, Page } from "../../features/ui";
 
 export const Loading = () =>
 <Page>
     <Card>
-        <Main heading={<h1>Loading...</h1>}>
+        <Main heading={<H1>Loading...</H1>}>
             <p>Loading...</p>
         </Main>
     </Card>

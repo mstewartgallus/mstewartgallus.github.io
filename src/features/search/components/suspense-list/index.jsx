@@ -1,20 +1,22 @@
 import { Suspense, createContext, useContext } from "react";
+import { Ul, Li } from "../../../../features/ui";
+
 
 const FallbackContext = createContext();
 
 export const Fallback = () => {
     const fallback = useContext(FallbackContext);
-    return <li>{fallback}</li>;
+    return <Li>{fallback}</Li>;
 };
 
 export const SuspenseItem = ({children}) =>
 <Suspense fallback={<Fallback />}>
-    <li>{children}</li>
+    <Li>{children}</Li>
 </Suspense>;
 
 export const SuspenseList = ({children, fallback}) =>
-<ul>
+<Ul>
     <FallbackContext.Provider value={fallback}>
         {children}
     </FallbackContext.Provider>
-</ul>;
+</Ul>;
