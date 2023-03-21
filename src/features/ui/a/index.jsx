@@ -33,7 +33,7 @@ const useLinkProps = ({ href, target, download, ...props }) => {
     return { to, target, download, ...props };
 };
 
-const AImpl = ({children, ...props}, ref) => {
+const A = ({children, ...props}, ref) => {
     const linkProps = useLinkProps(props);
     if (linkProps) {
         return <Link className={aClass} innerRef={ref} {...linkProps}>{children}</Link>;
@@ -41,6 +41,6 @@ const AImpl = ({children, ...props}, ref) => {
     return <a className={aClass} ref={ref} {...props}>{children}</a>;
 };
 
-export const A = forwardRef(AImpl);
+const ARef = forwardRef(A);
 
-export default A;
+export { ARef as A, ARef as default };

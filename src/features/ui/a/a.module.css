@@ -1,25 +1,31 @@
-.a:any-link:active {
+.a {
+    /* more legible hyperlinks */
+    text-underline-position: under ;
+    border-radius: 0.01ch ;
+}
+
+.a:link {
+    color: var(--link-text);
+}
+.a:visited {
+    color: var(--visited-text) ;
+}
+.a:active {
     color: var(--active-text) ;
     transition: color 0.05s ;
 }
 
 @media print {
-    .a:any-link {
-        text-decoration: none ;
+    .a {
+        text-decoration: inherit ;
     }
-}
 
-.a:link { color: var(--link-text) ; }
-.a:visited { color: var(--visited-text) ; }
-
-.a:any-link { border-radius: 0.01ch ; }
-
-@media print {
     /* Hide bookmark links? */
-    .a:any-link:is([rel~="bookmark"]) {
+    .a[rel~="bookmark"] {
         display: none ;
     }
-    .a:any-link:not(:is([href^="/"], [href^="#"]))::after {
+
+    .a:not([href^="/"]):not([href^="#"])::after {
         content: "\2003" attr(href) ;
         white-space: nowrap ;
     }

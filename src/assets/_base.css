@@ -105,15 +105,9 @@ main {
     line-height: var(--line) ;
     font-size-adjust: var(--ex-height) ;
 
-    /* more legible hyperlinks */
-    -webkit-text-underline-position: under ;
-    text-underline-position: under ;
-
     font-family: sans-serif ;
     font-variant-numeric: proportional-nums oldstyle-nums ;
 
-    -moz-text-size-adjust: none ;
-    -webkit-text-size-adjust: none ;
     text-size-adjust: none ;
 
     color-scheme: dark light ;

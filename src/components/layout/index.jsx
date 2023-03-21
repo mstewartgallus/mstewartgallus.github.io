@@ -14,16 +14,15 @@ class LayoutHandle {
     }
 };
 
-const LayoutImpl = ({ children }) =>
-<div className={layout}>
-    <Suspense fallback={<Loading />}>
-        {children}
-    </Suspense>
-</div>;
-
-export const Layout = forwardRef((props, ref) => {
+const Layout = ({ children }, ref) => {
     useImperativeHandle(ref, () => new LayoutHandle(), []);
-    return <LayoutImpl {...props} />;
-});
+    return <div className={layout}>
+               <Suspense fallback={<Loading />}>
+                   {children}
+               </Suspense>
+           </div>;
+}
 
-export default Layout;
+const LayoutRef = forwardRef(Layout);
+
+export { LayoutRef as Layout, LayoutRef as default };
