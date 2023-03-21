@@ -7,6 +7,7 @@ export { Card } from "./card";
 export { Code } from "./code.jsx";
 export { Footer } from "./footer.tsx";
 export { Header } from "./header.tsx";
+export { Input } from "./input";
 export { H1, H2, H3, H4, H5, H6 } from "./heading";
 export { Hr } from "./hr";
 export { Ol, Ul, Menu, Li } from "./list";

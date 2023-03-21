@@ -7,79 +7,18 @@
     align-items: flex-start ;
 }
 
-fieldset, label, input {
+fieldset, label {
     border: unset ;
 }
 
-input[type="checkbox"]:checked {
-    background-color: var(--accent-color) ;
-    color: var(--accent-color-text) ;
-}
-
-input[type="checkbox"] {
-    border-color: var(--button-border) ;
-    background-color: var(--button-face) ;
-    color: var(--button-text) ;
-}
-
-input[type="search"] {
-    border-style: solid ;
-    padding-inline: 0.5em ;
-
-    inline-size: 20ch;
-    max-inline-size: 100%;
-}
-
-/* FIXME i18n */
-/* FIXME use display list-item ? */
-input[type="checkbox"]:checked::after {
-    content: "✓" ;
-}
-input[type="checkbox"]::after {
-    display: table-cell ;
-    vertical-align: middle ;
-    content: "" ;
-}
-
-
-input[type="checkbox"]:checked {
-    border: unset ;
-
-    transition: background-color 0.1s, color 0.1s ;
-}
-
-input[type="checkbox"] {
-    block-size: 1.4em ;
-    inline-size: 2em ;
-
-    border-style: solid ;
-
-    font-weight: bold ;
-
-    display: flex ;
-    justify-content: center ;
-    align-items: center ;
-    text-align: center ;
-
-    transition: background-color 0.2s, color 0.2s ;
-}
-
-input {
-    background-color: var(--field);
-    color: var(--field-text);
-}
-
-input {
-    appearance: none ;
-}
-fieldset, label, input {
+fieldset, label {
     margin: unset ;
     display: block ;
     font: inherit ;
 }
 
 
-label, input {
+label {
     box-sizing: border-box ;
     block-size: var(--line) ;
 
@@ -103,4 +42,61 @@ fieldset {
 
 legend {
     font-weight: bold ;
+}
+
+input[type="checkbox"] {
+    appearance: none ;
+    margin: unset ;
+    border: unset ;
+
+    block-size: 1.4em ;
+    inline-size: 2em ;
+
+    border-style: solid ;
+
+    font: inherit ;
+    font-weight: bold ;
+
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+    text-align: center ;
+
+    transition: background-color 0.2s, color 0.2s ;
+
+    background-color: var(--field);
+    color: var(--field-text);
+
+
+    box-sizing: border-box ;
+
+    border-radius: 0.1ch ;
+    border-width: calc(max(1px, 0.07em));
+}
+
+input[type="checkbox"] {
+    border-color: var(--button-border) ;
+    background-color: var(--button-face) ;
+    color: var(--button-text) ;
+}
+input[type="checkbox"]:checked {
+    background-color: var(--accent-color) ;
+    color: var(--accent-color-text) ;
+}
+
+input[type="checkbox"]::after {
+    display: table-cell ;
+    vertical-align: middle ;
+    content: "" ;
+}
+input[type="checkbox"]:checked {
+    border: unset ;
+
+    transition: background-color 0.1s, color 0.1s ;
+}
+
+/* FIXME i18n */
+/* FIXME use display list-item ? */
+input[type="checkbox"]:checked::after {
+    content: "✓" ;
 }

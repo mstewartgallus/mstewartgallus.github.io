@@ -1,0 +1,25 @@
+.input {
+    appearance: none ;
+    border: unset ;
+    margin: unset ;
+    display: block ;
+
+    border-style: solid ;
+    padding-inline: 0.5em ;
+
+    inline-size: 20ch;
+    max-inline-size: 100%;
+
+    background-color: var(--field);
+    border-color: var(--button);
+    color: var(--field-text);
+
+    font: inherit ;
+    font-variant-numeric: lining-nums tabular-nums;
+
+    box-sizing: border-box ;
+    block-size: var(--line) ;
+
+    border-radius: 0.1ch ;
+    border-width: calc(max(1px, 0.07em));
+}

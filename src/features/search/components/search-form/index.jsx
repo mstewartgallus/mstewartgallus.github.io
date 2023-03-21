@@ -1,5 +1,5 @@
 import { useId, useCallback } from "react";
-import { Button } from "../../../../features/ui";
+import { Input, Button } from "../../../../features/ui";
 import { Select, Option } from "../../components/select";
 import { query } from "./search-form.module.css";
 
@@ -8,7 +8,7 @@ const Query = ({value, onChange}) => {
 
     return <div className={query}>
                <label htmlFor={id}>Query</label>
-               <input id={id} name="s" type="search"
+               <Input id={id} name="s" type="search"
                       value={value}
                       onChange={onChange}
                />
