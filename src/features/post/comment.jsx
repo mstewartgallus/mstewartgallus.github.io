@@ -1,4 +1,5 @@
 import { useMemo, useState, useCallback } from "react";
+import { A } from "../../features/ui";
 import {
     iframe as iframeClass,
     loaded as loadedClass,
@@ -9,7 +10,7 @@ import {
 
 const Account = ({url, display_name, acct}) => {
     const name = display_name !== '' ? display_name : acct;
-    return <address><a rel="nofollow" href={url}>{name}</a></address>;
+    return <address><A rel="nofollow" href={url}>{name}</A></address>;
 };
 
 const render = content =>
@@ -39,7 +40,7 @@ const Comment = ({url, account, content, children}) => {
     return <article className={commentClass}>
                <header className={headerClass}>
                    <Account {...account} />
-                   <a rel="nofollow" href={url}>#</a>
+                   <A rel="nofollow" href={url}>#</A>
                </header>
                 <iframe className={iframeClass + ' ' + loadClass}
                         allow=""

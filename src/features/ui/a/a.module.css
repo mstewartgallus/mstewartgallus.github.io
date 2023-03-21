@@ -1,0 +1,26 @@
+.a:any-link:active {
+    color: var(--active-text) ;
+    transition: color 0.05s ;
+}
+
+@media print {
+    .a:any-link {
+        text-decoration: none ;
+    }
+}
+
+.a:link { color: var(--link-text) ; }
+.a:visited { color: var(--visited-text) ; }
+
+.a:any-link { border-radius: 0.01ch ; }
+
+@media print {
+    /* Hide bookmark links? */
+    .a:any-link:is([rel~="bookmark"]) {
+        display: none ;
+    }
+    .a:any-link:not(:is([href^="/"], [href^="#"]))::after {
+        content: "\2003" attr(href) ;
+        white-space: nowrap ;
+    }
+}

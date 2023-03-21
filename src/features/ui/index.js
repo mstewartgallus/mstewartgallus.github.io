@@ -1,4 +1,4 @@
-export { A } from "./a.tsx";
+export { A } from "./a";
 export { Blockquote } from "./blockquote";
 export { BreadcrumbList, BreadcrumbItem } from "./breadcrumb-list";
 export { Green } from "./green";

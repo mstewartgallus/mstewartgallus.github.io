@@ -5,13 +5,3 @@
     margin: 0 0 ;
 }
 
-@media print {
-    /* Hide bookmark links? */
-    :any-link:is([rel~="bookmark"]) {
-        display: none ;
-    }
-    :any-link:not(:is([href^="/"], [href^="#"]))::after {
-        content: "\2003" attr(href) ;
-        white-space: nowrap ;
-    }
-}

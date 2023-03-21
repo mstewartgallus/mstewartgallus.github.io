@@ -12,22 +12,6 @@
     outline-style: solid ;
 }
 
-:any-link:active {
-    color: var(--active-text) ;
-    transition: color 0.05s ;
-}
-
-@media print {
-    :any-link {
-        text-decoration: none ;
-    }
-}
-
-:link { color: var(--link-text) ; }
-:visited { color: var(--visited-text) ; }
-
-:any-link { border-radius: 0.01ch ; }
-
 mark {
     background-color: var(--mark);
     color: var(--mark-text);
@@ -163,13 +147,11 @@ main {
 }
 
 /* FIXME way too clunky */
-:where(main, section, nav, footer, header) >
-:where(p, header, hgroup, h1, h2, h3, h4, h5, h6) {
+:where(main, section, nav, footer, header) > p {
     margin-inline-start: calc(2 * var(--s));
 }
 
-:where(main, section, nav, footer, header) > header
-      > :where(p, header, hgroup, h1, h2, h3, h4, h5, h6) {
+:where(main, section, nav, footer, header) > header > p {
     margin-inline-start: 0 ;
 }
 
