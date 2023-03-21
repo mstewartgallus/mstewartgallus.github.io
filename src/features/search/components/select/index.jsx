@@ -1,5 +1,5 @@
 import * as React from "react";
-import { select, option } from "./select.module.css";
+import { select, option, optionLabel } from "./select.module.css";
 
 const SelectContext = React.createContext(null);
 
@@ -20,6 +20,6 @@ export const Option = ({ children, onChange, selected, value }) => {
                       onChange={onChange}
                       checked={selected}
                />
-               <label htmlFor={id}>{children}</label>
+               <label className={optionLabel} htmlFor={id}>{children}</label>
            </div>;
 };

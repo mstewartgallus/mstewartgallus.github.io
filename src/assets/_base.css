@@ -41,9 +41,7 @@ figcaption {
 }
 
 /* FIXME should form controls be tabular or just lining? */
-time, code, pre,
-table,
-select, option {
+time, code, pre, table {
     font-variant-numeric: lining-nums tabular-nums;
 }
 
