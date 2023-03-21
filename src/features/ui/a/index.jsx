@@ -1,27 +1,36 @@
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 import { Link } from "gatsby";
 import { a as aClass } from "./a.module.css";
+import { useLocation } from "./use-location.js";
 
-const useLinkProps = ({ href, target, download, ...props }) => {
-    if (target || download) {
-        return null;
-    }
-
+const useTo = (href, location) => useMemo(() => {
     if (!href) {
         return null;
     }
 
-    if (href.startsWith("#")) {
-        return null;
-    }
-    if (href.startsWith("http://")) {
-        return null;
-    }
-    if (href.startsWith("https://")) {
+    const url = new URL(href, location);
+    const { origin, hash, pathname, search } = url;
+
+    if (hash) {
         return null;
     }
 
-    return ({ to: href, target, download, ...props });
+    if (origin !== new URL(location).origin) {
+        return null;
+    }
+
+    return `${pathname}${search}`;
+}, [href, location]);
+
+const useLinkProps = ({ href, target, download, ...props }) => {
+    const location = useLocation();
+    const to = useTo(href, location);
+
+    if (!to || target || download) {
+        return null;
+    }
+
+    return { to, target, download, ...props };
 };
 
 const AImpl = ({children, ...props}, ref) => {
