@@ -1,6 +1,7 @@
 import { useId, useCallback } from "react";
-import { query } from "./search-form.module.css";
+import { Button } from "../../../../features/ui";
 import { Select, Option } from "../../components/select";
+import { query } from "./search-form.module.css";
 
 const Query = ({value, onChange}) => {
     const id = useId();
@@ -11,7 +12,7 @@ const Query = ({value, onChange}) => {
                       value={value}
                       onChange={onChange}
                />
-               <button type="submit">Search</button>
+               <Button type="submit">Search</Button>
            </div>;
 };
 

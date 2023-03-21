@@ -1,6 +1,7 @@
 export { A } from "./a";
 export { Blockquote } from "./blockquote";
 export { BreadcrumbList, BreadcrumbItem } from "./breadcrumb-list";
+export { Button } from "./button";
 export { Green } from "./green";
 export { Card } from "./card";
 export { Code } from "./code.jsx";

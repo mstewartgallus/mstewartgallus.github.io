@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { Button } from "../../../../features/ui";
 import { query } from "./search-form.module.css";
 
 export const SearchFormMini = ({action, onSubmit}) => {
@@ -8,7 +9,7 @@ export const SearchFormMini = ({action, onSubmit}) => {
                <div className={query}>
                    <label htmlFor={id}>Query</label>
                    <input id={id} name="s" type="search" required />
-                   <button type="submit">Search</button>
+                   <Button type="submit">Search</Button>
                </div>
            </form>;
 };
