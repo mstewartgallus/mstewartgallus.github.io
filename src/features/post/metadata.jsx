@@ -1,23 +1,40 @@
+import { useSearchURL } from "../../features/route";
+import { A } from "../../features/ui";
 import { DescA } from "./desc-a";
 import { DescList, DescItem } from "./desc-list";
-import PersonA from "./link-person.jsx";
-import PlaceA from "./link-place.jsx";
-import TagA from "./link-tag.jsx";
 
-const Places = ({places}) =>
-      places.map(p =>
-          <DescItem key={p}><PlaceA place={p}/></DescItem>
-      );
+const TagA = ({tag}) => {
+    const href = useSearchURL({tag: [tag]});
+    return <A href={href} rel="tag" data-pagefind-filter="tag">{tag}</A>;
+};
 
-const Tags = ({tags}) =>
-      tags.map(t =>
-          <DescItem key={t}><TagA tag={t}/></DescItem>
-      );
+const PersonA = ({person}) => {
+    const href = useSearchURL({ person: [person] });
+    return <A href={href} rel="tag" data-pagefind-filter="person">{person}</A>;
+};
 
-const People = ({people}) =>
-      people.map(p =>
-          <DescItem key={p}><PersonA person={p}/></DescItem>
-      );
+const PlaceA = ({place}) => {
+    const href = useSearchURL({ place: [place] });
+    return <A href={href} rel="tag" data-pagefind-filter="place">{place}</A>;
+};
+
+const Places = ({places}) => places.map(p =>
+    <DescItem key={p}>
+        <PlaceA place={p}/>
+    </DescItem>
+);
+
+const Tags = ({tags}) => tags.map(t =>
+    <DescItem key={t}>
+        <TagA tag={t}/>
+    </DescItem>
+);
+
+const People = ({people}) => people.map(p =>
+    <DescItem key={p}>
+        <PersonA person={p}/>
+    </DescItem>
+);
 
 const PlaceList = ({places}) =>
 <DescList desc="Place">
