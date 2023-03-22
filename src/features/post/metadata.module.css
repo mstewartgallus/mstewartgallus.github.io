@@ -1,0 +1,16 @@
+.dl, .dt, .dd {
+    margin: unset ;
+}
+
+.dl {
+    inline-size: fit-content ;
+}
+
+.dl, .dd, .dt {
+    margin-block: 0;
+}
+.dl {
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1em ;
+}
