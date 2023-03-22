@@ -18,6 +18,7 @@
 
 .list {
     display: inline-flex ;
+    flex-wrap: wrap ;
     column-gap: 1em ;
 }
 .item {
