@@ -1,16 +1,25 @@
-.dl, .dt, .dd {
+.list, .dl, .dt, .item {
     margin: unset ;
+    padding: unset ;
 }
 
 .dl {
     inline-size: fit-content ;
 }
 
-.dl, .dd, .dt {
+.dl, .item, .dt {
     margin-block: 0;
 }
 .dl {
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 1em ;
+}
+
+.list {
+    display: inline-flex ;
+    column-gap: 1em ;
+}
+.item {
+    display: inline ;
 }
