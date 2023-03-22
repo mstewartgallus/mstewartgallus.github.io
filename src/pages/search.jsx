@@ -83,7 +83,7 @@ const Sidebar = ({state, set, tags, action, onSubmit}) =>
                           <A href="/">Home</A>
                       </BreadcrumbItem>
                       <BreadcrumbItem>
-                          <A role="link" aria-disabled="true" aria-current="page">
+                          <A aria-current="page">
                               Search
                           </A>
                       </BreadcrumbItem>

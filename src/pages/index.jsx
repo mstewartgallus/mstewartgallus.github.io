@@ -39,7 +39,7 @@ const Sidebar = ({ title, description, action, onSubmit }) =>
               <Nav heading={<H2>Breadcrumbs</H2>}>
                   <BreadcrumbList>
                       <BreadcrumbItem>
-                          <A role="link" aria-disabled="true" aria-current="page">Home</A>
+                          <A aria-current="page">Home</A>
                       </BreadcrumbItem>
                   </BreadcrumbList>
               </Nav>

@@ -9,7 +9,7 @@ const Sidebar = ({ title }) =>
                 <A href="/">Home</A>
             </BreadcrumbItem>
             <BreadcrumbItem>
-                <A role="link" aria-disabled="true" aria-current="page">{title}</A>
+                <A aria-current="page">{title}</A>
             </BreadcrumbItem>
         </BreadcrumbList>
     </Nav>
