@@ -9,7 +9,7 @@ const DescContext = createContext(null);
 const Desc = ({desc,children}) => {
     const id = useId();
     return <div role="presentation" className={dl}>
-               <div role="presentation" className={dt} id={id}>{desc}</div>
+               <div className={dt} id={id}>{desc}</div>
                <ul role="list" aria-labelledby={id} className={list}>
                    <DescContext.Provider value={id}>
                        {children}
@@ -38,66 +38,75 @@ const AnItem = ({children, filter, item, ...props}) => {
 
 export const Metadata = ({
     dateDisplay, date, author, places, tags, people
-}) => <div>
-          <div>
-              Post Date&emsp;<time data-pagefind-filter="date[datetime]"
-                                   data-pagefind-sort="date[datetime]"
-                                   dateTime={date}>
-                                 {dateDisplay}
-                             </time>
-          </div>
-          <DescA rel="author" href={author.url} desc={author.name}>Author</DescA>
-          {
-              places && places.length > 0 &&
-                  <Desc desc="Place">
-                      {
-                          places.map(item =>
-                              <AnItem
-                                  key={item}
-                                  filter="place"
-                                  rel="tag"
-                                  item={item}
-                              >
-                                  {item}
-                              </AnItem>
-                          )
-                      }
-                  </Desc>
-          }
-          {
-              tags && tags.length > 0 &&
-                  <Desc desc="Tag">
-                      {
-                          tags.map(item =>
-                              <AnItem
-                                  key={item}
-                                  filter="tag"
-                                  rel="tag"
-                                  item={item}
-                              >
-                                  {item}
-                              </AnItem>
-                          )
-                      }
-                  </Desc>
-          }
-          {
-              people && people.length > 0 &&
-                  <Desc desc="Person">
-                      {
-                          people.map(item =>
-                              <AnItem
-                                  key={item}
-                                  filter="person"
-                                  rel="tag"
-                                  item={item}
-                              >
-                                  {item}
-                              </AnItem>
-                          )
-                      }
-                  </Desc>
-          }
-      </div>;
+}) => {
+    const id = useId();
+    return <>
+               <div role="presentation">
+                   <span id={id}>Post Date</span>
+                   &emsp;
+                   <time
+                       aria-describedby={id}
+                       data-pagefind-filter="date[datetime]"
+                       data-pagefind-sort="date[datetime]"
+                       dateTime={date}>
+                       {dateDisplay}
+                   </time>
+               </div>
+               <address>
+                   <DescA rel="author" href={author.url} desc={author.name}>Author</DescA>
+               </address>
+               {
+                   places && places.length > 0 &&
+                       <Desc desc="Place">
+                           {
+                               places.map(item =>
+                                   <AnItem
+                                       key={item}
+                                       filter="place"
+                                       rel="tag"
+                                       item={item}
+                                   >
+                                       {item}
+                                   </AnItem>
+                               )
+                           }
+                       </Desc>
+               }
+               {
+                   tags && tags.length > 0 &&
+                       <Desc desc="Tag">
+                           {
+                               tags.map(item =>
+                                   <AnItem
+                                       key={item}
+                                       filter="tag"
+                                       rel="tag"
+                                       item={item}
+                                   >
+                                       {item}
+                                   </AnItem>
+                               )
+                           }
+                       </Desc>
+               }
+               {
+                   people && people.length > 0 &&
+                       <Desc desc="Person">
+                           {
+                               people.map(item =>
+                                   <AnItem
+                                       key={item}
+                                       filter="person"
+                                       rel="tag"
+                                       item={item}
+                                   >
+                                       {item}
+                                   </AnItem>
+                               )
+                           }
+                       </Desc>
+               }
+           </>;
+};
 
 export default Metadata;

@@ -3,15 +3,15 @@ import { A } from "../../../features/ui";
 
 const DescA = ({ children, desc, ...props }, ref) => {
     const id = useId();
-    return <div role="group">
+    return <div role="presentation">
                <A aria-describedby={id} ref={ref} {...props}>
                    <span role="presentation">{children}</span>
                    &emsp;
-                   <span id={id} role="presentation">
+                   <span id={id}>
                        {desc}
                    </span>
                </A>
-               <span className="sr-only" aria-owns={id} role="presentation" />
+               <span className="sr-only" aria-owns={id} />
            </div>;
 };
 
