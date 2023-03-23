@@ -2,9 +2,11 @@
     all: unset ;
     padding: 0 ;
     margin: 0;
+
     display: flex ;
     flex-wrap: wrap ;
-    column-gap: 1ch ;
+    column-gap: 0.5em ;
+
     inline-size: fit-content ;
     max-inline-size: 100% ;
 }
@@ -13,15 +15,21 @@
     all: unset ;
 }
 
-.breadcrumb::before {
-    color: var(--emphasis-text);
+.breadcrumb {
+    display: list-item ;
 }
 
-.breadcrumb::before {
-  display: inline-block;
-  margin-inline-end: 0.5em;
-  transform: rotate(15deg);
-  border-inline-end: 0.1em solid currentcolor;
-  block-size: 0.8em;
-  content: "";
+@counter-style breadcrumb {
+  system: cyclic;
+  symbols: "/";
+  suffix: "  ";
+}
+
+.breadcrumb {
+    list-style: breadcrumb ;
+    list-style-position: inside ;
+}
+.breadcrumb::marker {
+    color: var(--emphasis-text);
+    font-weight: bold ;
 }
