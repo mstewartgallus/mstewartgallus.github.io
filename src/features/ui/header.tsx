@@ -7,7 +7,7 @@ export interface HeaderProps extends HTMLAttributes<HTMLElement> {
 
 export const Header: FC<HeaderProps> = ({children, heading, ...props}) => {
     const id = useId();
-    return <header aria-labelledby={id} {...props}>
+    return <header aria-describedby={id} {...props}>
                <hgroup id={id}>
                    {heading}
                </hgroup>

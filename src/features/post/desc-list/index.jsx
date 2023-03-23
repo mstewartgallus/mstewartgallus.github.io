@@ -15,5 +15,5 @@ export const DescList = ({desc, children}) => {
 
 export const DescItem = ({children}) => {
     const id = useContext(DescContext);
-    return <dd className={dd} aria-describedby={id}>{children}</dd>;
+    return <dd className={dd}>{children}</dd>;
 };
