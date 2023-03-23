@@ -1,9 +1,9 @@
+import { useMemo } from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import * as React from "react";
 
 const usePostListRaw = () => useStaticQuery(graphql`
 query UsePostList {
-  allLink(sort: {post: {date: DESC}}) {
+  allLink(sort: {post: {date: DESC}}, filter: {category: {ne: ""}}) {
     group(field: {category: SELECT}) {
       category: fieldValue
       nodes {
@@ -18,8 +18,8 @@ query UsePostList {
 
 export const usePostList = () => {
     const raw = usePostListRaw();
-    return React.useMemo(() =>
-        new Map(
+    return useMemo(() =>
+        Object.fromEntries(
             raw.allLink.group
                 .map(({ category, nodes }) =>
                     [category, nodes.map(l => l.post)])),

@@ -1,0 +1,10 @@
+.summary::marker {
+    font-weight: bold ;
+    color: var(--emphasis-text);
+}
+.summary {
+    list-style-position: inside ;
+}
+.summary > * {
+    display: inline ;
+}

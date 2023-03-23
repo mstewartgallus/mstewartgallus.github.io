@@ -1,4 +1,5 @@
-import { Banner, PostList, usePostList, useWebsite } from "../features/index";
+import { memo, useMemo, useReducer } from "react";
+import { Banner, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
 import { useSearchURL } from "../features/route";
 import { Search, SearchFormMini } from "../features/search";
 import {
@@ -17,6 +18,50 @@ import Title from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 import useSiteMetadata from "../hooks/use-site-metadata.js";
 import { useSubmit } from "../hooks/use-submit.js";
+
+const initState = null;
+
+const reducer = (state, action) => {
+    const { type } = action;
+    switch (type) {
+    case 'toggle': {
+        const { category } = action;
+        return state === category ? null : category;
+    }
+
+    default:
+        return state;
+    }
+};
+
+const Accordion = () => {
+    const postByCategory = usePostList();
+
+    const [state, dispatch] = useReducer(reducer, initState);
+
+    const sections = useMemo(() => Object.fromEntries(Object.entries(postByCategory).map(([category, posts]) => [
+        category,
+        {
+            posts,
+            onClick(e) {
+                e.preventDefault();
+                dispatch({ type: 'toggle', category });
+            }
+        }])), [postByCategory]);
+
+    return Object.entries(sections).map(([category, { posts, onClick }]) =>
+        <Card key={category}>
+            <Panel
+                heading={category}
+                open={(state === category) ? "open" : null}
+                onClick={onClick}>
+                <PostList posts={posts} />
+            </Panel>
+        </Card>
+    );
+};
+
+const AccordionMemo = memo(Accordion);
 
 const Sidebar = ({ title, description, action, onSubmit }) =>
       <>
@@ -59,7 +104,7 @@ export const Head = ({location: {pathname}}) => {
 };
 
 const IndexPage = () => {
-    const posts = usePostList();
+    const posts = usePosts();
     const { title, description } = useSiteMetadata();
     const json = useWebsite();
     const onSubmit = useSubmit();
@@ -71,26 +116,16 @@ const IndexPage = () => {
                              action={search}
                              onSubmit={onSubmit} />
                      }>
-                   {
-                       Array.from(posts.entries()).map(([category, posts]) =>
-                           <Card key={category ?? "main"}>
-                               {
-                                   category ?
-                                       <Section
-                                           heading={<H2>{category}</H2>}>
-                                           <PostList posts={posts} />
-                                       </Section>
-                                   :
-                                   <Main heading={<H1>Posts</H1>}>
-                                       <PostList posts={posts} />
-                                   </Main>
-                               }
-                           </Card>
-                       )
-                   }
+                   <Card>
+                       <Main heading={<H1>Posts</H1>}>
+                           <PostList posts={posts} />
+                       </Main>
+                   </Card>
+                   <AccordionMemo />
                </Page>
                <JsonLd srcdoc={json} />
            </>;
 };
+
 
 export default IndexPage;
