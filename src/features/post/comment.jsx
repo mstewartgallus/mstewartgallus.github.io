@@ -37,7 +37,7 @@ const Comment = ({url, account, content, children}) => {
 
     const loadClass = loaded ? loadedClass : unloadedClass;
 
-    return <article className={commentClass} role="comment">
+    return <article className={commentClass}>
                <header className={headerClass}>
                    <Account {...account} />
                    <A rel="nofollow" href={url}>#</A>

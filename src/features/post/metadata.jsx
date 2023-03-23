@@ -2,7 +2,8 @@ import { createContext, useId, useContext } from "react";
 import { useSearchURL } from "../../features/route";
 import { A } from "../../features/ui";
 import { DescA } from "./desc-a";
-import { dl, dt, list, item } from "./metadata.module.css";
+import { Set, SetItem } from "./set";
+import { dl, dt } from "./metadata.module.css";
 
 const DescContext = createContext(null);
 
@@ -10,33 +11,24 @@ const Desc = ({desc,children}) => {
     const id = useId();
     return <div role="presentation" className={dl}>
                <div className={dt} id={id}>{desc}</div>
-               <ul role="list" aria-labelledby={id} className={list}>
+               <Set aria-labelledby={id}>
                    <DescContext.Provider value={id}>
                        {children}
                    </DescContext.Provider>
-               </ul>
+               </Set>
            </div>;
 };
 
-const Item = ({ children, ...props }) => {
+const DescItem = ({ children, filter, item, ...props }) => {
     const id = useContext(DescContext);
-    // work around Safari silliness
-    return <li role="listitem" className={item}>
-               <A aria-describedby={id} {...props}>{children}</A>
-           </li>;
-};
-
-const AnItem = ({children, filter, item, ...props}) => {
     const href = useSearchURL({ [filter]: [item] });
-    return <Item
-               href={href}
-               data-pagefind-filter={filter}
-               {...props}>{children}</Item>;
+    return <SetItem>
+               <A href={href} data-pagefind-filter={filter}
+                  aria-describedby={id} {...props}>{children}</A>
+           </SetItem>;
 };
 
- // items && items.length > 0 &&
-
-export const Metadata = ({
+ export const Metadata = ({
     dateDisplay, date, author, places, tags, people
 }) => {
     const id = useId();
@@ -60,14 +52,14 @@ export const Metadata = ({
                        <Desc desc="Place">
                            {
                                places.map(item =>
-                                   <AnItem
+                                   <DescItem
                                        key={item}
                                        filter="place"
                                        rel="tag"
                                        item={item}
                                    >
                                        {item}
-                                   </AnItem>
+                                   </DescItem>
                                )
                            }
                        </Desc>
@@ -77,14 +69,14 @@ export const Metadata = ({
                        <Desc desc="Tag">
                            {
                                tags.map(item =>
-                                   <AnItem
+                                   <DescItem
                                        key={item}
                                        filter="tag"
                                        rel="tag"
                                        item={item}
                                    >
                                        {item}
-                                   </AnItem>
+                                   </DescItem>
                                )
                            }
                        </Desc>
@@ -94,14 +86,14 @@ export const Metadata = ({
                        <Desc desc="Person">
                            {
                                people.map(item =>
-                                   <AnItem
+                                   <DescItem
                                        key={item}
                                        filter="person"
                                        rel="tag"
                                        item={item}
                                    >
                                        {item}
-                                   </AnItem>
+                                   </DescItem>
                                )
                            }
                        </Desc>

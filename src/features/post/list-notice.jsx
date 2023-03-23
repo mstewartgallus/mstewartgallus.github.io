@@ -1,10 +1,21 @@
-import { DescList, DescItem } from "./desc-list";
+import { useId } from "react";
+import { Set, SetItem } from "./set";
 
-const Notices = ({notice}) => notice.map(n => <DescItem key={n}>{n}</DescItem>);
-
-export const ListNotice = ({notice}) =>
-<DescList desc="Notice">
-    <Notices notice={notice} />
-</DescList>;
+export const ListNotice = ({notice}) => {
+    const id = useId();
+    return <div role="presentation">
+        <span id={id}>Notice</span>
+        &emsp;
+        <Set aria-labelledby={id}>
+            {
+                notice.map(n =>
+                    <SetItem key={n} aria-describedby={id}>
+                        {n}
+                    </SetItem>
+                )
+            }
+        </Set>
+    </div>;
+};
 
 export default ListNotice;
