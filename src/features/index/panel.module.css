@@ -1,7 +1,3 @@
-.button::marker {
-    font-weight: bold ;
-    color: var(--emphasis-text);
-}
 .button {
     padding: 0;
     margin: 0;
@@ -10,22 +6,15 @@
     background: none ;
     color: inherit ;
     appearance: none ;
-    display: list-item ;
-    list-style-position: inside ;
     border-radius: 0.3ch ;
 }
 
-.button[aria-expanded="true"] {
-    list-style-type: disclosure-open ;
-}
-.button[aria-expanded="false"] {
-    list-style-type: disclosure-closed ;
-}
-
-.section[data-open="true"] {
-    display: block ;
+.state::before {
+    font-weight: bold ;
+    color: var(--emphasis-text);
+    content: counter(state, disclosure-closed) ;
 }
 
-.section[data-open="false"] {
-    display: none ;
+.state[data-open="true"]::before {
+    content: counter(state, disclosure-open) ;
 }
