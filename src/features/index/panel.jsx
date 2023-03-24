@@ -1,6 +1,6 @@
 import { useId, useTransition, useCallback, createContext, useContext } from "react";
 import { Card, H2 } from "../../features/ui";
-import { summary } from "./panel.module.css";
+import { section, button } from "./panel.module.css";
 
 const Context = createContext(null);
 
@@ -22,39 +22,25 @@ export const Panel = ({children, heading, value, onClick}) => {
     const id = useId();
     const selected = useContext(Context);
 
-    const detailsId = `${id}-details`;
-    const headingTextId = `${id}-heading-text`;
-    const headingId = `${id}-heading`;
     const contentId = `${id}-content`;
+    const titleId = `${id}-title`;
 
     const open = selected === value;
 
     return <Card>
-               <span aria-owns={headingId} />
-               <span aria-owns={contentId} />
-               <details
-                   id={detailsId}
-                   open={open ? "open" : null}
-                   aria-labelledby={headingTextId}
-               >
-                   <summary
-                       onClick={onClickWrapper}
-                       className={summary}
-                       aria-labelledby={headingTextId}
-                       aria-controls={contentId}
-                       aria-expanded={String(open)}
-                   >
-                       <span aria-owns={headingTextId} />
-                       <H2 id={headingId} aria-labelledby={headingTextId}>
-                           <span aria-owns={detailsId} />
-                           <span id={headingTextId}>
-                               {heading}
-                           </span>
-                       </H2>
-                   </summary>
-                   <section aria-labelledby={headingTextId} id={contentId}>
-                       {children}
-                   </section>
-               </details>
+               <H2>
+                   <button onClick={onClickWrapper}
+                           className={button}
+                           aria-controls={contentId}
+                           aria-expanded={String(open)}>
+                       <span id={titleId}>{heading}</span>
+                   </button>
+               </H2>
+               <section id={contentId}
+                        aria-labelledby={titleId}
+                        className={section}
+                        data-open={String(open)}>
+                   {children}
+               </section>
            </Card>;
 };
