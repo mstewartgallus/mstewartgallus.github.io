@@ -1,47 +1,59 @@
-import { useId, useTransition, useCallback } from "react";
-import { H2 } from "../../features/ui";
+import { useId, useTransition, useCallback, createContext, useContext } from "react";
+import { Card, H2 } from "../../features/ui";
 import { summary } from "./panel.module.css";
 
-export const Panel = ({children, heading, open, onClick}) => {
-    const id = useId();
-    const [isPending, startTransition] = useTransition();
+const Context = createContext(null);
 
-    const onClickWrapper = useCallback(e => startTransition(() => onClick(e)), [onClick]);
+export const Accordion = ({children, value}) => {
+    return <div>
+               <Context.Provider value={value}>
+                   {children}
+               </Context.Provider>
+           </div>;
+};
+
+export const Panel = ({children, heading, value, onClick}) => {
+    const [isPending, startTransition] = useTransition();
+    const onClickWrapper = useCallback(e => {
+        e.preventDefault();
+        startTransition(() => onClick(e));
+    }, [onClick]);
+
+    const id = useId();
+    const selected = useContext(Context);
 
     const detailsId = `${id}-details`;
     const headingTextId = `${id}-heading-text`;
     const headingId = `${id}-heading`;
     const contentId = `${id}-content`;
 
-    return <article aria-labelledby={headingTextId}>
+    const open = selected === value;
+
+    return <Card>
                <span aria-owns={headingId} />
                <span aria-owns={contentId} />
                <details
                    id={detailsId}
-                   open={open}
-                   aria-labelledby={headingTextId}
+                   open={open ? "open" : null}
                >
                    <summary
-                       className={summary}
                        onClick={onClickWrapper}
+                       className={summary}
                        aria-labelledby={headingTextId}
                        aria-controls={contentId}
-                       aria-expanded={String(!!open)}
+                       aria-expanded={String(open)}
                    >
                        <span aria-owns={headingTextId} />
-                       <H2 id={headingId}
-                           aria-labelledby={headingTextId}>
+                       <H2 id={headingId} aria-labelledby={headingTextId}>
                            <span aria-owns={detailsId} />
                            <span id={headingTextId}>
                                {heading}
                            </span>
                        </H2>
                    </summary>
-                   <div id={contentId}>
+                   <section aria-labelledby={headingTextId} id={contentId}>
                        {children}
-                   </div>
+                   </section>
                </details>
-           </article>;
+           </Card>;
 };
-
-export default Panel;

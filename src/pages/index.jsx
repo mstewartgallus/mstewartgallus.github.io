@@ -1,5 +1,5 @@
 import { memo, useMemo, useReducer } from "react";
-import { Banner, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
+import { Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
 import { useSearchURL } from "../features/route";
 import { Search, SearchFormMini } from "../features/search";
 import {
@@ -34,34 +34,35 @@ const reducer = (state, action) => {
     }
 };
 
-const Accordion = () => {
-    const postByCategory = usePostList();
+const AccordionImpl = () => {
+    const postsByCategory = usePostList();
 
     const [state, dispatch] = useReducer(reducer, initState);
 
-    const sections = useMemo(() => Object.fromEntries(Object.entries(postByCategory).map(([category, posts]) => [
-        category,
-        {
+    const sections = useMemo(() => Object.fromEntries(Object.entries(postsByCategory).map(([category, posts]) =>
+        [category, {
             posts,
             onClick(e) {
-                e.preventDefault();
                 dispatch({ type: 'toggle', category });
             }
-        }])), [postByCategory]);
+        }])), [postsByCategory]);
 
-    return Object.entries(sections).map(([category, { posts, onClick }]) =>
-        <Card key={category}>
-            <Panel
-                heading={category}
-                open={(state === category) ? "open" : null}
-                onClick={onClick}>
-                <PostList posts={posts} />
-            </Panel>
-        </Card>
-    );
+    return <Accordion value={state}>
+               {
+                   Object.entries(sections).map(([category, { posts, onClick }]) =>
+                       <Panel
+                           key={category}
+                           value={category}
+                           heading={category}
+                           onClick={onClick}>
+                           <PostList posts={posts} />
+                       </Panel>
+                   )
+               }
+           </Accordion>;
 };
 
-const AccordionMemo = memo(Accordion);
+const AccordionMemo = memo(AccordionImpl);
 
 const Sidebar = ({ title, description, action, onSubmit }) =>
       <>
