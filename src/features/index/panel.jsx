@@ -1,16 +1,16 @@
 import { useId, useTransition, useCallback, createContext, useContext } from "react";
+import { useClient } from "../../features/util";
 import { Card, H2 } from "../../features/ui";
-import { state, button } from "./panel.module.css";
+import { state, button, wrapper, content } from "./panel.module.css";
 
 const Context = createContext(null);
 
-export const Accordion = ({children, value}) => {
-    return <div>
-               <Context.Provider value={value}>
-                   {children}
-               </Context.Provider>
-           </div>;
-};
+export const Accordion = ({children, value}) =>
+<div>
+    <Context.Provider value={value}>
+        {children}
+    </Context.Provider>
+</div>;
 
 export const Panel = ({children, heading, value, onClick}) => {
     const [isPending, startTransition] = useTransition();
@@ -21,11 +21,13 @@ export const Panel = ({children, heading, value, onClick}) => {
 
     const id = useId();
     const selected = useContext(Context);
+    const client = useClient();
 
     const contentId = `${id}-content`;
     const titleId = `${id}-title`;
 
-    const open = selected === value;
+    // Force open panels on server for better degradation
+    const open = client ? selected === value : true;
 
     return <Card>
                <H2 id={titleId} onClick={onClickWrapper}>
@@ -38,10 +40,15 @@ export const Panel = ({children, heading, value, onClick}) => {
                        {heading}
                    </button>
                </H2>
-               <nav id={contentId}
-                    aria-labelledby={titleId}
-                    hidden={open ? null : "hidden"}>
-                   {children}
-               </nav>
+               <div className={wrapper}
+                    aria-hidden={String(!open)}
+                    inert={open ? null : "inert"}>
+                   <nav id={contentId}
+                        aria-labelledby={titleId}
+                        hidden={open ? null : "hidden"}
+                        className={content}>
+                       {children}
+                   </nav>
+               </div>
            </Card>;
 };

@@ -18,3 +18,44 @@
 .state[data-open="true"]::before {
     content: counter(state, disclosure-open) ;
 }
+
+.wrapper {
+    display: block ;
+    position: relative ;
+}
+
+.wrapper[inert], .wrapper[inert] * {
+    cursor: default;
+    pointer-events: none ;
+    user-select: none ;
+}
+
+.wrapper[inert] {
+    block-size: 0 ;
+}
+
+.content[hidden] {
+    position: absolute ;
+    display: block ;
+    translate: 0 -1.5em ;
+    opacity: 0 ;
+    visibility: hidden ;
+    max-block-size: 10em ;
+}
+
+.content {
+    top:0 ;
+    transition-property: opacity, visibility ;
+
+    transition-duration: 0.5s ;
+}
+
+.content[hidden] {
+    transition-duration: 0.3s ;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .content {
+        transition-property: opacity, translate, visibility ;
+    }
+}

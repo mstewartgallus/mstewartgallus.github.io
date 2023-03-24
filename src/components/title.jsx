@@ -1,14 +1,26 @@
-import * as React from "react";
-import useSiteMetadata from "../hooks/use-site-metadata.js";
-import separator from "../utils/separator.js";
+import { Children, useMemo } from "react";
+import { useStaticQuery, graphql } from "gatsby";
+import { separator } from "../utils/separator.js";
+
+const useSiteTitle = () => useStaticQuery(graphql`
+query {
+  site {
+    siteMetadata {
+      title
+    }
+  }
+}`);
+
+const useTitle = title => {
+    const results = useSiteTitle();
+    return useMemo(() => {
+        const { title: siteTitle } = results.site.siteMetadata;
+        return [...title, siteTitle].join(separator);
+    }, [results, title]);
+};
 
 export const Title = ({ children }) => {
-    const site = useSiteMetadata();
-
-    const array = React.Children.toArray(children);
-    array.push(site.title);
-    const fullTitle = array.join(separator);
-
+    const fullTitle = useTitle(Children.toArray(children));
     return <title>{fullTitle}</title>;
 };
 
