@@ -1,0 +1,8 @@
+[inert] {
+    cursor: default;
+    pointer-events: none ;
+}
+
+[inert], [inert] * {
+    user-select: none ;
+}
