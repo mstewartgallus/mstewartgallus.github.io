@@ -35,6 +35,7 @@ export const Panel = ({children, heading, value, onClick}) => {
                <details
                    id={detailsId}
                    open={open ? "open" : null}
+                   aria-labelledby={headingTextId}
                >
                    <summary
                        onClick={onClickWrapper}
