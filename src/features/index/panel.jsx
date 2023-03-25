@@ -1,7 +1,24 @@
 import { useId, useTransition, useCallback, createContext, useContext } from "react";
 import { useClient } from "../../features/util";
-import { Card, H2 } from "../../features/ui";
-import { state, button, wrapper, content } from "./panel.module.css";
+import { Button, Card, H2 } from "../../features/ui";
+import {
+    open, closed,
+    insideHeading, details,
+    heading as headingClass, wrapper, content
+} from "./panel.module.css";
+
+const OpenIcon = () => <span aria-hidden="true" className={open} />;
+const ClosedIcon = () => <span aria-hidden="false" className={closed} />;
+
+const DetailsTriangle = ({ open }) =>
+<span aria-hidden="true" class={details}>
+    {
+        open ? <OpenIcon /> : <ClosedIcon />
+    }
+    {
+        open ? "Collapse" : "Expand"
+    }
+</span>;
 
 const Context = createContext(null);
 
@@ -25,23 +42,27 @@ export const Panel = ({children, heading, value, onClick}) => {
 
     const contentId = `${id}-content`;
     const titleId = `${id}-title`;
+    const buttonId = `${id}-button`;
 
     // Force open panels on server for better degradation
     const open = client ? selected === value : true;
 
     return <Card>
-               <H2 id={titleId} onClick={onClickWrapper}>
-                   <button className={button}
-                           aria-controls={contentId}
-                           aria-expanded={String(open)}>
-                       <span aria-hidden="true" className={state} data-open={String(open)}>
-                           &ensp;
-                       </span>
-                       {heading}
-                   </button>
-               </H2>
+               <div className={headingClass}>
+                   <H2 id={titleId} onClick={onClickWrapper}>
+                       <div className={insideHeading}>
+                           <Button id={buttonId}
+                                   aria-controls={contentId}
+                                   aria-expanded={String(open)}
+                                   onClick={onClickWrapper}>
+                               <DetailsTriangle open={open} />
+                           </Button>
+                           <label htmlFor={buttonId}>{heading}</label>
+                       </div>
+                   </H2>
+               </div>
                <div className={wrapper}
-                    aria-hidden={String(!open)}
+                    aria-hidden={open ? null : "true"}
                     inert={open ? null : "inert"}>
                    <nav id={contentId}
                         aria-labelledby={titleId}

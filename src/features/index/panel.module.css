@@ -1,22 +1,7 @@
-.button {
-    padding: 0;
-    margin: 0;
-    font: inherit ;
-    border: none ;
-    background: none ;
-    color: inherit ;
-    appearance: none ;
-    border-radius: 0.3ch ;
-}
-
-.state::before {
-    font-weight: bold ;
-    color: var(--emphasis-text);
-    content: counter(state, disclosure-closed) ;
-}
-
-.state[data-open="true"]::before {
-    content: counter(state, disclosure-open) ;
+.insideHeading {
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1em ;
 }
 
 .wrapper {
@@ -51,4 +36,23 @@
     .content {
         transition-property: opacity, translate ;
     }
+}
+
+.details {
+    display: flex ;
+    font-size: 1rem ;
+    column-gap: 0.5em ;
+    justify-items: center ;
+    align-items: center ;
+}
+
+.closed, .open {
+    display: list-item ;
+    list-style-position: inside ;
+}
+.closed {
+    list-style-type: disclosure-closed;
+}
+.open {
+    list-style-type: disclosure-open;
 }

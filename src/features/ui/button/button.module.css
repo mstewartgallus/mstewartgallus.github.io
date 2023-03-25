@@ -15,7 +15,6 @@
     margin: 0 ;
 
     box-sizing: border-box ;
-    block-size: var(--line) ;
 
     border-radius: 0.1ch ;
     border-width: calc(max(1px, 0.07em));
