@@ -1,14 +1,12 @@
 import { useId, useTransition, useCallback, createContext, useContext } from "react";
 import { useClient } from "../../features/util";
 import { Button, Card, H2 } from "../../features/ui";
+import { ClosedIcon } from "./closed-icon";
+import { OpenIcon } from "./open-icon";
 import {
-    open, closed,
     insideHeading, details,
     wrapper, content
 } from "./panel.module.css";
-
-const OpenIcon = () => <span className={open} />;
-const ClosedIcon = () => <span className={closed} />;
 
 const IconItem = ({ icon, children }) =>
 <span class={details}>
@@ -17,7 +15,10 @@ const IconItem = ({ icon, children }) =>
 </span>;
 
 const DetailsTriangle = ({ open }) =>
-<IconItem icon={open ? <OpenIcon /> : <ClosedIcon />}>
+<IconItem
+    icon={
+        open ? <OpenIcon /> : <ClosedIcon />
+    }>
     {
         open ? "Close" : "Open"
     }

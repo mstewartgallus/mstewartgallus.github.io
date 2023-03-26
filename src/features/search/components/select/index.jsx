@@ -1,7 +1,7 @@
-import * as React from "react";
+import { createContext, useId, useContext } from "react";
 import { select, option, optionLabel } from "./select.module.css";
 
-const SelectContext = React.createContext(null);
+const SelectContext = createContext(null);
 
 export const Select = ({ name, children, onChange }) =>
 <fieldset className={select} onChange={onChange}>
@@ -11,8 +11,8 @@ export const Select = ({ name, children, onChange }) =>
 </fieldset>;
 
 export const Option = ({ children, onChange, selected, value }) => {
-    const id = React.useId();
-    const name = React.useContext(SelectContext);
+    const id = useId();
+    const name = useContext(SelectContext);
 
     return <div className={option}>
                <input id={id}

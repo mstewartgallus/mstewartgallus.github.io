@@ -52,14 +52,3 @@
     justify-items: center ;
     align-items: center ;
 }
-
-.closed, .open {
-    display: list-item ;
-    list-style-position: inside ;
-}
-.closed {
-    list-style-type: disclosure-closed;
-}
-.open {
-    list-style-type: disclosure-open;
-}

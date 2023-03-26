@@ -70,8 +70,10 @@ const Sidebar = ({state, set, tags, action, onSubmit}) =>
               <Search heading={<H2>Search</H2>}>
                   <SearchForm action={action}
                               onSubmit={onSubmit}
+
                               tags={tags}
                               set={set}
+
                               state={state}
                   />
               </Search>

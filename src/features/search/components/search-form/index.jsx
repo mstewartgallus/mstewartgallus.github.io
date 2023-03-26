@@ -1,4 +1,4 @@
-import { useId, useCallback } from "react";
+import { useId, useCallback, useMemo } from "react";
 import { Input, Button } from "../../../../features/ui";
 import { Select, Option } from "../../components/select";
 import { query } from "./search-form.module.css";
@@ -16,57 +16,94 @@ const Query = ({value, onChange}) => {
            </div>;
 };
 
-const Options = ({options, onChange, selected}) =>
-      options.map(opt =>
-          <Option key={opt}
-                  onChange={onChange}
-                  selected={selected?.has(opt)}
-                  value={opt}>
-              {opt}
-          </Option>);
+const Options = ({options, onChange, selected}) => useMemo(() => options.map(option => {
+    const checked = selected?.has(option);
 
-export const SearchForm = ({action, onSubmit, tags, state, set}) => {
+    return {
+        option,
+        selected: checked,
+        onChange(e) {
+            onChange(e, option, checked);
+        }
+    };
+}), [options, selected, onChange]).map(({
+    option,
+    selected,
+    onChange
+}) => <Option key={option}
+              onChange={onChange}
+              selected={selected}
+              value={option}>
+          {option}
+      </Option>);
+
+const Selects = ({
+    state,
+    onChange
+}) => useMemo(() => state.map(({selected, options, legend, name}) => {
+    return {
+        options,
+        name,
+        legend,
+        selected,
+        onChange(e, option, checked) {
+            onChange(e, option, checked, name);
+        }
+    };
+}), [state, onChange]).map(({
+    name,
+    options,
+    legend,
+    selected,
+    onChange
+}) => <Select key={name} name={name}>
+          <legend>{legend}</legend>
+          <Options options={options} selected={selected} onChange={onChange} />
+      </Select>);
+
+const legends = {
+    category: 'Category',
+    place: 'Place',
+    person: 'Person',
+    tag: 'Tag'
+};
+
+export const SearchForm = ({
+    action,
+    onSubmit,
+    tags,
+    state,
+    set
+}) => {
     const onChangeS = useCallback(event => set('s', event.target.value), [set]);
 
-    const onChangeOption = useCallback(event => {
-        const { target: { checked, name, value } } = event;
+    const onChangeSelect = useCallback((event, option, checked, name) => {
+        const old = state[name];
 
-        const next = new Set(state[name]);
+        const next = new Set();
         if (checked) {
-            next.add(value);
+            next.delete(option);
         } else {
-            next.delete(value);
+            next.add(option);
         }
 
         set(name, next);
     }, [set, state]);
 
+    const selects = (({ category, place, tag, person }) => ({ category, place, person, tag }))(state);
+
+    const theState = Object.entries(selects).map(([name, selected]) => {
+        const legend = legends[name];
+        const options = tags[name];
+        return { name, selected, legend, options };
+    });
+
     return <form rel="search" action={action} onSubmit={onSubmit}>
                <Query value={state.s} onChange={onChangeS} />
 
-               <Select name="category">
-                   <legend>Category</legend>
-                   <Options options={tags.category} selected={state.category}
-                            onChange={onChangeOption} />
-               </Select>
-
-               <Select name="place">
-                   <legend>Place</legend>
-                   <Options options={tags.place} selected={state.place}
-                            onChange={onChangeOption} />
-               </Select>
-
-               <Select name="person">
-                   <legend>People</legend>
-                   <Options options={tags.people} selected={state.person}
-                            onChange={onChangeOption} />
-               </Select>
-
-               <Select name="tag">
-                   <legend>Tags</legend>
-                   <Options options={tags.tags} selected={state.tag}
-                            onChange={onChangeOption} />
-               </Select>
+               <Selects state={theState}
+                        onChange={onChangeSelect}
+               />
            </form>;
 };
 

@@ -1,4 +1,4 @@
-import { memo, useMemo, useReducer } from "react";
+import { memo, useCallback, useMemo, useReducer } from "react";
 import { Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
 import { useSearchURL } from "../features/route";
 import { Search, SearchFormMini } from "../features/search";
@@ -34,31 +34,33 @@ const reducer = (state, action) => {
     }
 };
 
+const Panels = ({posts, onClick}) => useMemo(() => Object.entries(posts).map(([category, posts]) =>
+    [category, {
+        posts,
+        onClick(e) {
+            onClick(category, e);
+        }
+    }]), [posts, onClick]).map(([category, { posts, onClick }]) =>
+        <Panel
+            key={category}
+            value={category}
+            heading={category}
+            onClick={onClick}>
+            <PostList posts={posts} />
+        </Panel>
+    );
+
 const AccordionImpl = () => {
     const postsByCategory = usePostList();
 
     const [state, dispatch] = useReducer(reducer, initState);
 
-    const sections = useMemo(() => Object.fromEntries(Object.entries(postsByCategory).map(([category, posts]) =>
-        [category, {
-            posts,
-            onClick(e) {
-                dispatch({ type: 'toggle', category });
-            }
-        }])), [postsByCategory]);
+    const onClick = useCallback((category, e) => {
+        dispatch({ type: 'toggle', category });
+    }, []);
 
     return <Accordion value={state}>
-               {
-                   Object.entries(sections).map(([category, { posts, onClick }]) =>
-                       <Panel
-                           key={category}
-                           value={category}
-                           heading={category}
-                           onClick={onClick}>
-                           <PostList posts={posts} />
-                       </Panel>
-                   )
-               }
+               <Panels posts={postsByCategory} onClick={onClick} />
            </Accordion>;
 };
 

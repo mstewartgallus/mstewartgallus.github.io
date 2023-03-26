@@ -4,8 +4,8 @@ const usePostTagsRaw = () => useStaticQuery(graphql`
 query {
   allPost {
      place: distinct(field: {places: SELECT})
-     tags: distinct(field: {tags: SELECT})
-     people: distinct(field: {people: SELECT})
+     tag: distinct(field: {tags: SELECT})
+     person: distinct(field: {people: SELECT})
      category: distinct(field: {category: SELECT})
   }
 }`);

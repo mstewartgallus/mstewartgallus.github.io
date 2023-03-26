@@ -15,12 +15,11 @@ const Sidebar = ({ title }) =>
     </Nav>
 </Card>;
 
-export const MdxPage = props => {
-    const {
-        children,
-        location: { pathname },
-        pageContext
-    } = props;
+export const MdxPage = ({
+    children,
+    location: { pathname },
+    pageContext
+}) => {
     const title = pageContext?.frontmatter?.title ?? pathname;
     return <Page
                sidebar={<Sidebar title={title} />}>
