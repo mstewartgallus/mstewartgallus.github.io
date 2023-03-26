@@ -4,21 +4,24 @@ import { Button, Card, H2 } from "../../features/ui";
 import {
     open, closed,
     insideHeading, details,
-    heading as headingClass, wrapper, content
+    wrapper, content
 } from "./panel.module.css";
 
-const OpenIcon = () => <span aria-hidden="true" className={open} />;
-const ClosedIcon = () => <span aria-hidden="false" className={closed} />;
+const OpenIcon = () => <span className={open} />;
+const ClosedIcon = () => <span className={closed} />;
+
+const IconItem = ({ icon, children }) =>
+<span class={details}>
+    <span aria-hidden="true">{icon}</span>
+    <span>{children}</span>
+</span>;
 
 const DetailsTriangle = ({ open }) =>
-<span aria-hidden="true" class={details}>
+<IconItem icon={open ? <OpenIcon /> : <ClosedIcon />}>
     {
-        open ? <OpenIcon /> : <ClosedIcon />
+        open ? "Close" : "Open"
     }
-    {
-        open ? "Collapse" : "Expand"
-    }
-</span>;
+</IconItem>;
 
 const Context = createContext(null);
 
@@ -38,35 +41,36 @@ export const Panel = ({children, heading, value, onClick}) => {
 
     const id = useId();
     const selected = useContext(Context);
-    const client = useClient();
+    const server = !useClient();
 
     const contentId = `${id}-content`;
     const titleId = `${id}-title`;
     const buttonId = `${id}-button`;
 
     // Force open panels on server for better degradation
-    const open = client ? selected === value : true;
+    const open = selected === value;
+    const serverOpen = server || open ;
 
     return <Card>
-               <div className={headingClass}>
-                   <H2 id={titleId} onClick={onClickWrapper}>
-                       <div className={insideHeading}>
-                           <Button id={buttonId}
-                                   aria-controls={contentId}
-                                   aria-expanded={String(open)}
-                                   onClick={onClickWrapper}>
-                               <DetailsTriangle open={open} />
-                           </Button>
-                           <label htmlFor={buttonId}>{heading}</label>
-                       </div>
-                   </H2>
-               </div>
+               <H2>
+                   <div className={insideHeading}>
+                       <Button id={buttonId}
+                               aria-controls={contentId}
+                               aria-expanded={String(open)}
+                               onClick={onClickWrapper}>
+                           <DetailsTriangle open={open} />
+                       </Button>
+                       <label id={titleId}
+                              htmlFor={buttonId}>{heading}</label>
+                   </div>
+               </H2>
                <div className={wrapper}
-                    aria-hidden={open ? null : "true"}
-                    inert={open ? null : "inert"}>
+                    aria-hidden={serverOpen ? null : "true"}
+                    inert={serverOpen ? null : "inert"}>
                    <nav id={contentId}
                         aria-labelledby={titleId}
-                        hidden={open ? null : "hidden"}
+                        hidden={serverOpen ? null : "hidden"}
+                        data-server={server ? "server" : null}
                         className={content}>
                        {children}
                    </nav>

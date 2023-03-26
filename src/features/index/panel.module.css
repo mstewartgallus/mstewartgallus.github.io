@@ -1,7 +1,7 @@
 .insideHeading {
     display: flex ;
     flex-wrap: wrap ;
-    column-gap: 1em ;
+    column-gap: 0.5em ;
 }
 
 .wrapper {
@@ -14,22 +14,29 @@
 }
 
 .content[hidden] {
-    position: absolute ;
     display: block ;
+
+    position: absolute ;
     translate: 0 -1.5em ;
     opacity: 0 ;
-    block-size: 10em ;
-    overflow: hidden ;
 }
 
 .content {
     top: 0 ;
     transition-property: opacity ;
+}
+
+.content {
     transition-duration: 0.5s ;
 }
 
 .content[hidden] {
     transition-duration: 0.3s ;
+}
+
+
+.content[data-server] {
+    transition-duration: 0s !important ;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -41,7 +48,7 @@
 .details {
     display: flex ;
     font-size: 1rem ;
-    column-gap: 0.5em ;
+    column-gap: 0.1em ;
     justify-items: center ;
     align-items: center ;
 }

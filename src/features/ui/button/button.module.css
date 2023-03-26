@@ -20,13 +20,26 @@
     border-width: calc(max(1px, 0.07em));
 }
 
-.button:focus-visible {
-    outline-offset: 0.2em ;
-    outline-width: 0.2em ;
+.button[aria-expanded="true"] {
+    background-color: var(--button-text) ;
+    color: var(--button-face) ;
 }
+
+.button:hover,
+.button:focus-visible {
+    border-color: var(--accent-color-text) ;
+    background-color: var(--accent-color) ;
+    color: var(--accent-color-text) ;
+}
+
 .button:active {
     background-color: var(--button-text) ;
     color: var(--button-face) ;
+}
+
+.button:focus-visible {
+    outline-offset: 0.2em ;
+    outline-width: 0.2em ;
 }
 
 .button {
