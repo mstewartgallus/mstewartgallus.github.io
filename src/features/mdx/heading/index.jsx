@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { A } from "../../../features/ui";
 import {
     H1 as UiH1, H2 as UiH2, H3 as UiH3,
@@ -7,16 +8,17 @@ import { heading } from "./heading.module.css";
 
 const createAutoLink = Hn => {
     const HeadingAutoLink = ({id, children, ...props}) => {
+        const text = useId();
         const href = id && `#${id}`;
-        return <div role="group" className={heading}>
-                   <hgroup>
-                       <Hn id={id} {...props}>{children}</Hn>
-                   </hgroup>
-                   {
-                       href &&
-                           <A href={href} aria-describedby={id}>#</A>
-                   }
-               </div>;
+        return <Hn id={id} aria-labelledby={text} {...props}>
+                   <span className={heading}>
+                       <span id={text}>{children}</span>
+                       {
+                           href &&
+                               <A href={href} aria-describedby={text}>#</A>
+                       }
+                   </span>
+               </Hn>;
     };
     return HeadingAutoLink;
 };
