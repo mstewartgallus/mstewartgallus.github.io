@@ -9,16 +9,30 @@
     position: relative ;
 }
 
-.wrapper[inert] {
-    block-size: 0 ;
+@media screen {
+    .wrapper[inert] {
+        block-size: 0 ;
+    }
+
+    .content[hidden] {
+        display: block ;
+
+        position: absolute ;
+        translate: 0 -1.5em ;
+        opacity: 0 ;
+    }
 }
 
-.content[hidden] {
-    display: block ;
-
-    position: absolute ;
-    translate: 0 -1.5em ;
-    opacity: 0 ;
+.button {
+    display: contents ;
+}
+@media print {
+    .button {
+        display: none ;
+    }
+    .content[hidden] {
+        display: block ;
+    }
 }
 
 .content {

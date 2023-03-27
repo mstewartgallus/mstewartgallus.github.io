@@ -28,3 +28,36 @@
     widows: 2 ;
     orphans: 2 ;
 }
+
+
+.layout {
+    line-height: var(--line) ;
+    font-size-adjust: var(--ex-height) ;
+
+    font-family: sans-serif ;
+    font-variant-numeric: proportional-nums oldstyle-nums ;
+
+    text-size-adjust: none ;
+
+    color-scheme: dark light ;
+
+    background-color: var(--canvas) ;
+    color: var(--canvas-text) ;
+
+    accent-color: var(--accent-color) ;
+
+    /* Make the caret seeable with caret browsing?  Need to figure out */
+    /* a better UX here/experiment on different platforms */
+    caret-color: var(--highlight-text) ;
+}
+
+@media screen {
+    .layout {
+        position: fixed ;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        overflow: auto ;
+    }
+}

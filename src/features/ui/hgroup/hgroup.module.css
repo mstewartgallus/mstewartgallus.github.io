@@ -1,0 +1,6 @@
+.hgroup {
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+
+    font-style: italic;
+}

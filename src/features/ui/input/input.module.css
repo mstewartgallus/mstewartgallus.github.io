@@ -23,3 +23,13 @@
     border-radius: 0.1ch ;
     border-width: calc(max(1px, 0.07em));
 }
+
+.input {
+    outline-color: var(--highlight-text) ;
+    outline-width: 0.18rem ;
+    outline-offset: 0.23em ;
+}
+
+.input:focus-visible {
+    outline-style: solid ;
+}

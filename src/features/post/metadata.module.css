@@ -1,3 +1,10 @@
+.time {
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+.address {
+    font-style: unset ;
+}
 .dl, .dt {
     margin: unset ;
     padding: unset ;

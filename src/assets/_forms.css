@@ -60,3 +60,12 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:checked::after {
     content: "✓" ;
 }
+
+input[type="checkbox"] {
+    outline-color: var(--highlight-text) ;
+    outline-width: 0.18rem ;
+    outline-offset: 0.23em ;
+}
+input[type="checkbox"]:focus-visible {
+    outline-style: solid ;
+}

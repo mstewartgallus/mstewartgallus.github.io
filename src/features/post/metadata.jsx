@@ -3,7 +3,7 @@ import { useSearchURL } from "../../features/route";
 import { A } from "../../features/ui";
 import { DescA } from "./desc-a";
 import { Set, SetItem } from "./set";
-import { dl, dt } from "./metadata.module.css";
+import { time, address, dl, dt } from "./metadata.module.css";
 
 const DescContext = createContext(null);
 
@@ -36,7 +36,7 @@ const DescItem = ({ children, filter, item, ...props }) => {
                <div role="presentation">
                    <span id={id}>Post Date</span>
                    &emsp;
-                   <time
+                   <time className={time}
                        aria-describedby={id}
                        data-pagefind-filter="date[datetime]"
                        data-pagefind-sort="date[datetime]"
@@ -44,7 +44,7 @@ const DescItem = ({ children, filter, item, ...props }) => {
                        {dateDisplay}
                    </time>
                </div>
-               <address>
+               <address className={address}>
                    <DescA rel="author" href={author.url} desc={author.name}>Author</DescA>
                </address>
                {

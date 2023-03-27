@@ -4,12 +4,12 @@ import { Button, Card, H2 } from "../../features/ui";
 import { ClosedIcon } from "./closed-icon";
 import { OpenIcon } from "./open-icon";
 import {
-    insideHeading, details,
+    button, insideHeading, details,
     wrapper, content
 } from "./panel.module.css";
 
 const IconItem = ({ icon, children }) =>
-<span class={details}>
+<span className={details}>
     <span aria-hidden="true">{icon}</span>
     <span>{children}</span>
 </span>;
@@ -55,12 +55,14 @@ export const Panel = ({children, heading, value, onClick}) => {
     return <Card>
                <H2>
                    <div className={insideHeading}>
-                       <Button id={buttonId}
-                               aria-controls={contentId}
-                               aria-expanded={String(open)}
-                               onClick={onClickWrapper}>
-                           <DetailsTriangle open={open} />
-                       </Button>
+                       <div className={button}>
+                           <Button id={buttonId}
+                                   aria-controls={contentId}
+                                   aria-expanded={String(open)}
+                                   onClick={onClickWrapper}>
+                               <DetailsTriangle open={open} />
+                           </Button>
+                       </div>
                        <label id={titleId}
                               htmlFor={buttonId}>{heading}</label>
                    </div>

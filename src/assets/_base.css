@@ -5,15 +5,6 @@
     color: var(--selected-item-text);
 }
 
-* {
-    outline-color: var(--highlight-text) ;
-    outline-width: 0.18rem ;
-    outline-offset: 0.23em ;
-}
-:focus-visible {
-    outline-style: solid ;
-}
-
 mark {
     background-color: var(--mark);
     color: var(--mark-text);
@@ -31,29 +22,15 @@ cite {
     font-variant-caps: small-caps ;
 }
 
-address {
-    font-style: unset ;
-}
-
-
-table { border-collapse: collapse ; }
-
-figcaption {
-    color: var(--emphasis-text);
-}
-
 /* FIXME should form controls be tabular or just lining? */
-time, code, pre, table {
+code, pre {
     font-variant-numeric: lining-nums tabular-nums;
 }
 
 sub, sup { vertical-align: inherit ; }
 
-hgroup {
-    inline-size: fit-content ;
-    max-inline-size: 100% ;
-
-    font-style: italic;
+figcaption {
+    color: var(--emphasis-text);
 }
 
 @media screen {
@@ -79,12 +56,37 @@ figure {
     break-inside: avoid ;
 }
 
-header {
-    font-variant-numeric: proportional-nums lining-nums ;
-}
 main {
     display: block ;
 }
+
+/* FIXME not valid CSS */
+:root {
+    --t: clamp(0rem,
+               (1600vw - var(--min-width) * 1rem) / var(--width-delta),
+               1rem) ;
+    --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
+}
+
+:root, body {
+    margin: 0;
+}
+
+/* FIXME way too clunky */
+:where(main, section, nav, footer, header) > p {
+    margin-inline-start: calc(2 * var(--s));
+}
+
+:where(main, section, nav, footer, header) > header > p {
+    margin-inline-start: 0 ;
+}
+
+
+:root {
+    /* default ratio on browsers is 1rem = 16px */
+    --s: clamp(0rem, (1600vw - 600rem) / 100, 1rem) ;
+}
+
 
 @media print {
     :root {
@@ -101,56 +103,4 @@ main {
                  + var(--t) * (var(--max-font-size) - var(--min-font-size))) / 16
             ) ;
     }
-}
-
-:root {
-    line-height: var(--line) ;
-    font-size-adjust: var(--ex-height) ;
-
-    font-family: sans-serif ;
-    font-variant-numeric: proportional-nums oldstyle-nums ;
-
-    text-size-adjust: none ;
-
-    color-scheme: dark light ;
-
-    color: var(--canvas-text) ;
-
-    accent-color: var(--accent-color) ;
-
-    /* Make the caret seeable with caret browsing?  Need to figure out */
-    /* a better UX here/experiment on different platforms */
-    caret-color: var(--highlight-text) ;
-}
-
-/* FIXME not valid CSS */
-:root {
-    --t: clamp(0rem,
-               (1600vw - var(--min-width) * 1rem) / var(--width-delta),
-               1rem) ;
-    --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
-}
-
-:root, body {
-    margin: 0;
-}
-
-:root {
-    background-color: var(--canvas) ;
-
-}
-
-/* FIXME way too clunky */
-:where(main, section, nav, footer, header) > p {
-    margin-inline-start: calc(2 * var(--s));
-}
-
-:where(main, section, nav, footer, header) > header > p {
-    margin-inline-start: 0 ;
-}
-
-
-:root {
-    /* default ratio on browsers is 1rem = 16px */
-    --s: clamp(0rem, (1600vw - 600rem) / 100, 1rem) ;
 }
