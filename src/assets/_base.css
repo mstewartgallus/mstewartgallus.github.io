@@ -68,10 +68,6 @@ main {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
-:root, body {
-    margin: 0;
-}
-
 /* FIXME way too clunky */
 :where(main, section, nav, footer, header) > p {
     margin-inline-start: calc(2 * var(--s));
