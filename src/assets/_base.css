@@ -22,11 +22,6 @@ cite {
     font-variant-caps: small-caps ;
 }
 
-/* FIXME should form controls be tabular or just lining? */
-code, pre {
-    font-variant-numeric: lining-nums tabular-nums;
-}
-
 sub, sup { vertical-align: inherit ; }
 
 figcaption {

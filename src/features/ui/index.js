@@ -4,7 +4,7 @@ export { BreadcrumbList, BreadcrumbItem } from "./breadcrumb-list";
 export { Button } from "./button";
 export { Green } from "./green";
 export { Card } from "./card";
-export { Code } from "./code.jsx";
+export { Code } from "./code";
 export { Footer } from "./footer.tsx";
 export { Header } from "./header.jsx";
 export { Input } from "./input";
