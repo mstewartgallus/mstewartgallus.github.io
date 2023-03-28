@@ -1,12 +1,26 @@
+import { useId } from "react"
+import { useScrollRestoration } from "gatsby"
 import { Pre as BarePre } from "../../../features/ui";
-import { figure, figcaption } from "./pre.module.css";
+import { panel, figure, figcaption } from "./pre.module.css";
+
+const Panel = ({children, ...props}) => {
+    const scroll = useScrollRestoration(`Panel`);
+    return <article tabIndex="0" className={panel} {...scroll} {...props}>
+               {children}
+           </article>;
+};
 
 export const Pre = ({children, id, title}) => {
-    return <figure tabIndex="0" id={id} className={figure}>
-               {title && <figcaption className={figcaption}>{title}</figcaption>}
-               <BarePre>
-                   {children}
-               </BarePre>
+    const caption = useId();
+    return <figure id={id} className={figure}>
+               {title &&
+                <figcaption id={caption} className={figcaption}>{title}</figcaption>
+               }
+               <Panel aria-labelledby={title && caption}>
+                   <BarePre>
+                       {children}
+                   </BarePre>
+               </Panel>
            </figure>;
 };
 
