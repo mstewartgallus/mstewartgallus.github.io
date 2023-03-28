@@ -31,7 +31,10 @@
     overflow: hidden !important ;
 }
 
-@import "./_forms.css";
+legend {
+    font-weight: bold ;
+}
+
 @import "./_base.css";
 
 @page {

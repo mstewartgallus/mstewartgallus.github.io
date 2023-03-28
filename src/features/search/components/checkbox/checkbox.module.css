@@ -1,10 +1,4 @@
-@charset "utf-8";
-
-legend {
-    font-weight: bold ;
-}
-
-input[type="checkbox"] {
+.checkbox {
     appearance: none ;
     margin: unset ;
     border: unset ;
@@ -34,22 +28,22 @@ input[type="checkbox"] {
     border-width: calc(max(1px, 0.07em));
 }
 
-input[type="checkbox"] {
+.checkbox {
     border-color: var(--button-border) ;
     background-color: var(--button-face) ;
     color: var(--button-text) ;
 }
-input[type="checkbox"]:checked {
+.checkbox:checked {
     background-color: var(--accent-color) ;
     color: var(--accent-color-text) ;
 }
 
-input[type="checkbox"]::after {
+.checkbox::after {
     display: table-cell ;
     vertical-align: middle ;
     content: "" ;
 }
-input[type="checkbox"]:checked {
+.checkbox:checked {
     border: unset ;
 
     transition: background-color 0.1s, color 0.1s ;
@@ -57,15 +51,15 @@ input[type="checkbox"]:checked {
 
 /* FIXME i18n */
 /* FIXME use display list-item ? */
-input[type="checkbox"]:checked::after {
+.checkbox:checked::after {
     content: "✓" ;
 }
 
-input[type="checkbox"] {
+.checkbox {
     outline-color: var(--highlight-text) ;
     outline-width: 0.18rem ;
     outline-offset: 0.23em ;
 }
-input[type="checkbox"]:focus-visible {
+.checkbox:focus-visible {
     outline-style: solid ;
 }
