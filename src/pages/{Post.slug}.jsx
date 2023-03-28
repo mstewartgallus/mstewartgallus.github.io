@@ -1,7 +1,7 @@
 import { graphql } from "gatsby";
 import { Card, H1, H2, Main, Page, Section } from "../features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
-         Post,
+         Post, PostPaging, Metadata, PostBreadcrumbs,
          useBlogPosting, useBreadcrumbList } from "../features/post";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
@@ -40,9 +40,15 @@ export const Head = ({ data: { post } }) => {
 
 const PostPage = ({ data }) => {
     const { post } = data;
-    const { comments, notice } = post;
+    const { comments, notice,
+            category, title, childrenLink
+          } = post;
     return <>
-               <Page sidebar={<Sidebar {...post} />}>
+               <Page sidebar={<Sidebar
+                                  paging={<PostPaging childrenLink={childrenLink} />}
+                                  metadata={<Metadata {...post} />}
+                                  breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
+                              />}>
                    <Card>
                        <Main heading={<Heading {...post} />}
                              notice={<Notice notice={notice} />}>

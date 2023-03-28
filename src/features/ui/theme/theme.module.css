@@ -1,0 +1,21 @@
+.theme {
+    display: contents ;
+
+    line-height: var(--line) ;
+    font-size-adjust: var(--ex-height) ;
+
+    font-family: sans-serif ;
+    font-variant-numeric: proportional-nums oldstyle-nums ;
+
+    text-size-adjust: none ;
+
+    color-scheme: dark light ;
+
+    color: var(--canvas-text, CanvasText) ;
+
+    accent-color: var(--accent-color, AccentColor) ;
+
+    /* Make the caret seeable with caret browsing?  Need to figure out */
+    /* a better UX here/experiment on different platforms */
+    caret-color: var(--highlight-text, HighlightText) ;
+}

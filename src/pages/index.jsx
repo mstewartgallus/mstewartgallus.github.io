@@ -1,14 +1,13 @@
 import { memo, useCallback, useMemo, useReducer } from "react";
-import { Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
+import { Sidebar, Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
 import { useSearchURL } from "../features/route";
-import { Search, SearchFormMini } from "../features/search";
+import { SearchFormMini } from "../features/search";
 import {
     A,
     BreadcrumbList, BreadcrumbItem,
     Card,
     H1, H2,
-    Header, Main, Nav,
-    Section,
+    Header, Main,
     Page
 } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
@@ -66,34 +65,6 @@ const AccordionImpl = () => {
 
 const AccordionMemo = memo(AccordionImpl);
 
-const Sidebar = ({ title, description, action, onSubmit }) =>
-      <>
-          <Card>
-              <Header
-                  heading={
-                      <>
-                          <H2>{title}</H2>
-                          <p style={{marginBlock:0}}>{description}</p>
-                      </>}>
-                  <Banner />
-              </Header>
-          </Card>
-          <Card>
-              <Search heading={<H2>Search</H2>}>
-                  <SearchFormMini action={action} onSubmit={onSubmit} />
-              </Search>
-          </Card>
-          <Card>
-              <Nav heading={<H2>Breadcrumbs</H2>}>
-                  <BreadcrumbList>
-                      <BreadcrumbItem>
-                          <A aria-current="page">Home</A>
-                      </BreadcrumbItem>
-                  </BreadcrumbList>
-              </Nav>
-          </Card>
-      </>;
-
 const title = "Table of Contents";
 
 export const Head = ({location: {pathname}}) => {
@@ -115,9 +86,28 @@ const IndexPage = () => {
     return <>
                <Page sidebar={
                          <Sidebar
-                             title={title} description={description}
-                             action={search}
-                             onSubmit={onSubmit} />
+                             search={
+                                 <SearchFormMini action={search} onSubmit={onSubmit} />
+                             }
+                             breadcrumbs={
+                                 <BreadcrumbList>
+                                     <BreadcrumbItem>
+                                         <A aria-current="page">Home</A>
+                                     </BreadcrumbItem>
+                                 </BreadcrumbList>
+                             }
+                         >
+                             <Card>
+                                 <Header
+                                     heading={
+                                         <>
+                                             <H2>{title}</H2>
+                                             <p style={{marginBlock:0}}>{description}</p>
+                                         </>}>
+                                     <Banner />
+                                 </Header>
+                             </Card>
+                         </Sidebar>
                      }>
                    <Card>
                        <Main heading={<H1>Posts</H1>}>

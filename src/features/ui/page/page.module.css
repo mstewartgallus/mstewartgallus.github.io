@@ -1,36 +1,3 @@
-@media (max-width: 130ch) {
-    .sidebar {
-        display: contents ;
-    }
-}
-
-@media (min-width: 130ch) {
-    .page {
-        display: flex ;
-    }
-}
-
-.page {
-    box-sizing: border-box;
-    max-inline-size: 100% ;
-
-    flex-wrap: wrap ;
-    column-gap: 1em ;
-}
-
-.mainbar {
-    box-sizing: border-box;
-
-    inline-size: var(--main-width) ;
-    max-inline-size: 100% ;
-}
-
-/* .page { */
-/*      background: linear-gradient(grey, Canvas); */
-/*      background-size: 100% var(--line) ; */
-/* } */
-
-
 @media screen {
     .layout {
         padding-inline:
@@ -55,51 +22,8 @@
 }
 
 .layout {
-    -webkit-box-decoration-break: clone;
     box-decoration-break: clone ;
 
     widows: 2 ;
     orphans: 2 ;
-}
-
-
-.layout {
-    line-height: var(--line) ;
-    font-size-adjust: var(--ex-height) ;
-
-    font-family: sans-serif ;
-    font-variant-numeric: proportional-nums oldstyle-nums ;
-
-    text-size-adjust: none ;
-
-    color-scheme: dark light ;
-
-    background-color: var(--canvas, Canvas) ;
-    color: var(--canvas-text, CanvasText) ;
-
-    accent-color: var(--accent-color, AccentColor) ;
-
-    /* Make the caret seeable with caret browsing?  Need to figure out */
-    /* a better UX here/experiment on different platforms */
-    caret-color: var(--highlight-text, HighlightText) ;
-}
-
-.layout {
-    display: flow-root;
-    box-sizing: border-box ;
-    isolation: isolate ;
-}
-
-@media screen {
-    .layout {
-        position: fixed ;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-
-        overflow: auto ;
-
-        contain: strict ;
-    }
 }
