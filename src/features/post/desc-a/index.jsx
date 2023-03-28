@@ -11,7 +11,7 @@ const DescA = ({ children, desc, ...props }, ref) => {
                        {desc}
                    </span>
                </A>
-               <span className="sr-only" aria-owns={id} />
+               <span aria-owns={id} />
            </div>;
 };
 

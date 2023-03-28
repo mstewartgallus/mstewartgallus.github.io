@@ -4,3 +4,7 @@
     flex-wrap: wrap ;
     align-items: flex-start ;
 }
+
+.legend {
+    font-weight: bold ;
+}

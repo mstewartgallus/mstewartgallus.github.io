@@ -1,14 +1,17 @@
 import { useId } from "react";
+import { Assistive } from "../../../../features/util";
 
 export const Search = ({heading, children, ...props}) => {
     const id = useId();
 
     return <section aria-describedby={id} role="search" {...props}>
-               <header className="sr-only">
-                   <hgroup id={id}>
-                       {heading}
-                   </hgroup>
-               </header>
+               <Assistive>
+                   <header>
+                       <hgroup id={id}>
+                           {heading}
+                       </hgroup>
+                   </header>
+               </Assistive>
                {children}
            </section>;
 };

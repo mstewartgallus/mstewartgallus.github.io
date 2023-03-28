@@ -1,4 +1,4 @@
-import { A, BreadcrumbList, BreadcrumbItem } from "../../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem, Cite } from "../../features/ui";
 import { useSearchURL } from "../../features/route";
 
 export const PostBreadcrumbs = ({category, title}) => {
@@ -12,7 +12,7 @@ export const PostBreadcrumbs = ({category, title}) => {
                </BreadcrumbItem>
                <BreadcrumbItem>
                    <A aria-current="page">
-                       <cite>{title}</cite>
+                       <Cite>{title}</Cite>
                    </A>
                </BreadcrumbItem>
            </BreadcrumbList>;

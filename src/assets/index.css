@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+@page {
+    size: A4 portrait ;
+    margin: 0 0 ;
+}
+
 [inert] {
     cursor: default;
     pointer-events: none ;
@@ -9,37 +14,51 @@
     user-select: none ;
 }
 
-.sr-only {
-    position: absolute ;
-    display: block ;
-    z-index: 1000 ;
-    background-color: var(--highlight) ;
-    color: var(--highlight-text) ;
-    border-radius: 0.6ch ;
-    padding-inline: 1em ;
-    padding-block: calc(0.5 * var(--line)) ;
+
+::selection {
+    background-color: var(--selected-item, SelectedItem);
+    color: var(--selected-item-text, SelectedItemText);
 }
 
-.sr-only:not(:focus-within):not(:focus):not(:active) {
-    white-space: nowrap !important ;
-    position: absolute !important ;
-    left: -10000px !important ;
-    top: auto !important ;
-    width: 1px !important ;
-    height: 1px !important ;
-    clip-path: polygon(0px 0px, 0px 0px, 0px 0px) !important ;
-    overflow: hidden !important ;
+mark {
+    background-color: var(--mark, Mark);
+    color: var(--mark-text, MarkText);
 }
 
-legend {
-    font-weight: bold ;
+sub { font-variant-position: sub ; }
+sup { font-variant-position: super ; }
+
+sub, sup { vertical-align: inherit ; }
+
+abbr {
+    text-decoration: unset ;
+    font-variant-caps: all-small-caps ;
 }
 
-@import "./_base.css";
 
-@page {
-    size: A4 portrait ;
-    margin: 0 0 ;
+:root {
+    --t: clamp(0rem,
+               (1600vw - var(--min-width) * 1rem) / var(--width-delta),
+               1rem) ;
+    --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
+}
+
+
+@media print {
+    :root {
+        font-size: 14pt ;
+    }
+}
+
+@media screen {
+    :root {
+        /* default ratio on browsers is 1rem = 16px */
+        font-size:
+            calc(
+                (var(--min-font-size) * 1rem
+                 + var(--t) * (var(--max-font-size) - var(--min-font-size))) / 16
+            ) ;
+    }
 }
 
 @import "./_vars.css";

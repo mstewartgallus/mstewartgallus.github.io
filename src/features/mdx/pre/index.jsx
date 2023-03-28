@@ -1,5 +1,4 @@
 import { useId } from "react"
-import { useScrollRestoration } from "gatsby"
 import { Pre as BarePre } from "../../../features/ui";
 import { ScrollArticle } from "../scroll-article";
 import { figure, figcaption } from "./pre.module.css";

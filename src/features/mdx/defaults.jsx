@@ -3,6 +3,7 @@ import { Caesura, L, Lg } from "../../features/poem";
 import {
     A,
     Blockquote,
+    Cite,
     Code,
     Ul, Ol, Menu, Li,
     Hr,
@@ -23,6 +24,7 @@ const Wrapper = ({children, ...props}) =>
 
 const shortcodes = {
     A,
+    Cite,
     Green,
     Lg, L, Caesura
 };

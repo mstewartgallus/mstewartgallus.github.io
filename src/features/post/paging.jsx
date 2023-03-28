@@ -1,11 +1,12 @@
 import { DescA } from "./desc-a";
+import { Cite } from "../../features/ui";
 
 export const Paging = ({ previous, next }) =>
 <div>
       <div>
           { previous &&
             <DescA rel="prev" href={previous.slug}
-                   desc={<cite>{previous.title}</cite>}>
+                   desc={<Cite>{previous.title}</Cite>}>
                 Previous
             </DescA>
           }
@@ -13,7 +14,7 @@ export const Paging = ({ previous, next }) =>
       <div>
           { next &&
             <DescA rel="next" href={next.slug}
-                   desc={<cite>{next.title}</cite>}>
+                   desc={<Cite>{next.title}</Cite>}>
                 Next
             </DescA>
           }

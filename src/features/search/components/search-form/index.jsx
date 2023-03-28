@@ -1,7 +1,7 @@
 import { useId, useCallback, useMemo } from "react";
 import { Input, Button } from "../../../../features/ui";
 import { Select, Option } from "../../components/select";
-import { query } from "./search-form.module.css";
+import { legend as legendClass, query } from "./search-form.module.css";
 
 const Query = ({value, onChange}) => {
     const id = useId();
@@ -57,7 +57,7 @@ const Selects = ({
     selected,
     onChange
 }) => <Select key={name} name={name}>
-          <legend>{legend}</legend>
+          <legend className={legendClass}>{legend}</legend>
           <Options options={options} selected={selected} onChange={onChange} />
       </Select>);
 
@@ -80,7 +80,7 @@ export const SearchForm = ({
     const onChangeSelect = useCallback((event, option, checked, name) => {
         const old = state[name];
 
-        const next = new Set();
+        const next = new Set(old);
         if (checked) {
             next.delete(option);
         } else {

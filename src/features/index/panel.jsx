@@ -34,7 +34,7 @@ export const Accordion = ({children, value}) =>
 </div>;
 
 export const Panel = ({children, heading, value, onClick}) => {
-    const [isPending, startTransition] = useTransition();
+    const [_, startTransition] = useTransition();
     const onClickWrapper = useCallback(e => {
         e.preventDefault();
         startTransition(() => onClick(e));

@@ -1,0 +1,15 @@
+.sr {
+    position: absolute ;
+    display: block ;
+}
+
+.sr:not(:focus-within):not(:focus):not(:active) {
+    white-space: nowrap ;
+    position: absolute ;
+    left: -10000px ;
+    top: auto ;
+    width: 1px ;
+    height: 1px ;
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px) ;
+    overflow: hidden ;
+}

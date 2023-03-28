@@ -10,7 +10,7 @@ tags:
 
 Common poetry markup is inaccessible, unsemantic and doesn't display
 well. I am not skilled in accessibility and I don't have good
-solutions.  See [<cite>Try It</cite>](#try-it) if you want to try out a screen
+solutions.  See [<Cite>Try It</Cite>](#try-it) if you want to try out a screen
 reader yourself.
 
 **Special thanks to the kind people who helped edit this post.**
@@ -20,10 +20,10 @@ reader yourself.
 The art of the spoken word is not accessible to the visually impaired.
 Most markup navigates awkwardly, does not insert appropriate pauses
 for breath, and mispronounces stress and sounds.  Consider
-[<cite>Markup A</cite>](#markupa) and [<cite>Markup
-B</cite>](#markupb).  In [<cite>Markup A</cite>](#markupa) a poem is
+[<Cite>Markup A</Cite>](#markupa) and [<Cite>Markup
+B</Cite>](#markupb).  In [<Cite>Markup A</Cite>](#markupa) a poem is
 an ordered list of stanzas and stanzas are ordered lists of verses.
-In [<cite>Markup B</cite>](#markupb) poems are sequences of stanzas,
+In [<Cite>Markup B</Cite>](#markupb) poems are sequences of stanzas,
 stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.
 
@@ -48,12 +48,12 @@ Sugar is sweet<br>
 And so are you.</p>
 ~~~
 
-[<cite>Markup A</cite>](#markupa) is hard to navigate as each line in
+[<Cite>Markup A</Cite>](#markupa) is hard to navigate as each line in
 an ordered list must be manually tracked through.  As well <q>line
 <var>m</var> of <var>n</var></q> is repeated for every line of
-[<cite>Markup A</cite>](#markupa).  You can use the `presentation`
-ARIA role as in [<cite>Markup A</cite>](#markupa2) and [<cite>Markup
-A3</cite>](#markupa3) to ameliorate the problem.  By the spec using
+[<Cite>Markup A</Cite>](#markupa).  You can use the `presentation`
+ARIA role as in [<Cite>Markup A</Cite>](#markupa2) and [<Cite>Markup
+A3</Cite>](#markupa3) to ameliorate the problem.  By the spec using
 the `presentation` role in a list item for a list already marked with
 a `presentation` role doesn't do much, but such markup can reduce
 cruft in Firefox's accessibility inspector.
@@ -85,8 +85,8 @@ cruft in Firefox's accessibility inspector.
 ```
 
 As a <i>nuclear</i> solution you can markup the text for graphical
-display using the `graphic` role as in [<cite>Markup
-N</cite>](#markupn).  I advise use of the ~~`aria-labelledby`~~
+display using the `graphic` role as in [<Cite>Markup
+N</Cite>](#markupn).  I advise use of the ~~`aria-labelledby`~~
 `aria-details` (2022-11-28) attribute instead of the `aria-label`
 attribute here. `aria-label` has a tendency to work poorly with
 newlines in text, is not usually translated by automated tools and
@@ -116,11 +116,11 @@ doesn't let you embed more markup as appropriate.
 </figure>
 ```
 
-In some setups [<cite>Markup B</cite>](#markupb) sounds yucky.  Ending
+In some setups [<Cite>Markup B</Cite>](#markupb) sounds yucky.  Ending
 and starting words in separate lines like <i>red</i> and
 <i>Violets</i> run together.  You might include extra punctuation
-annotated with a screen-reader-only class as with [<cite>Markup
-B HTML</cite>](#markupb2) and [<cite>Markup B CSS</cite>](#markupb3) to work around this issue.
+annotated with a screen-reader-only class as with [<Cite>Markup
+B HTML</Cite>](#markupb2) and [<Cite>Markup B CSS</Cite>](#markupb3) to work around this issue.
 However, on Firefox this hack breaks up lines into separate areas to
 track through.
 
@@ -141,7 +141,7 @@ And so are you.</p>
 }
 ```
 
-No revisions of [<cite>Markup A</cite>](#markupa) or [<cite>Markup B</cite>](#markupb) ensure
+No revisions of [<Cite>Markup A</Cite>](#markupa) or [<Cite>Markup B</Cite>](#markupb) ensure
 proper pronunciation of stress and sounds.  Only American English is
 likely to be pronounced correctly. To help, you can set the language
 attribute for documents and poems as appropriate.  However, this is
@@ -172,7 +172,7 @@ layout for overlong lines is to align the first line ragged right and
 all other lines ragged left.
 
 You can approximate a poetry layout with a hanging indent layout
-something like [<cite>Indent CSS</cite>](#indentcss).  However, a
+something like [<Cite>Indent CSS</Cite>](#indentcss).  However, a
 hanging indent layout is not really correct.
 
 ```css id="indentcss" title="Indent CSS"
@@ -184,8 +184,8 @@ hanging indent layout is not really correct.
 
 You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text *within* the
-line block to the right.  Something like [<cite>Align Last
-CSS</cite>](#alignlastcss) almost works for a poetry layout.  However,
+line block to the right.  Something like [<Cite>Align Last
+CSS</Cite>](#alignlastcss) almost works for a poetry layout.  However,
 even this layout fails when you overflow multiple lines.
 
 ```css id="alignlastcss" title="Align Last CSS"
@@ -201,7 +201,7 @@ even this layout fails when you overflow multiple lines.
 ```
 
 
-[<cite>Example Code</cite>](#examplecode) is similar to the current
+[<Cite>Example Code</Cite>](#examplecode) is similar to the current
 compromise I use on this site.
 
 ```html id="examplecode" title="Example Code"
@@ -233,19 +233,19 @@ You should use the `audio` element to markup poetry.
 ## Try It
 
 Personally I found Android TalkBack to be the easiest screen reader to
-get started with. [The helpful <cite>A11y Project</cite>
+get started with. [The helpful <Cite>A11y Project</Cite>
 blog](https://www.a11yproject.com) has a number of guides on getting
 started with screen readers but they might be a little old.
 
-- [<cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</cite>](https://www.a11yproject.com/posts/getting-started-with-orca)
-- [<cite>Getting Started with VoiceOver on iOS</cite>](https://www.a11yproject.com/posts/getting-started-with-voiceover-ios)
-- [<cite>Getting Started with NVDA</cite>](https://www.a11yproject.com/posts/getting-started-with-nvda)
-- [<cite>Getting Started with MacOS VoiceOver</cite>](https://www.a11yproject.com/posts/getting-started-with-voiceover)
+- [<Cite>Getting Started with Orca screen reader on Gnome desktop environment on Ubuntu 20.04 LTS</Cite>](https://www.a11yproject.com/posts/getting-started-with-orca)
+- [<Cite>Getting Started with VoiceOver on iOS</Cite>](https://www.a11yproject.com/posts/getting-started-with-voiceover-ios)
+- [<Cite>Getting Started with NVDA</Cite>](https://www.a11yproject.com/posts/getting-started-with-nvda)
+- [<Cite>Getting Started with MacOS VoiceOver</Cite>](https://www.a11yproject.com/posts/getting-started-with-voiceover)
 
 ## And One More Thing
 
-As of this blog post, the [<cite>CSS Speech
-Module</cite>](https://www.w3.org/TR/css-speech-1/) has never really
+As of this blog post, the [<Cite>CSS Speech
+Module</Cite>](https://www.w3.org/TR/css-speech-1/) has never really
 gone anywhere.  Perhaps in the future the `voice-stress`,
 `voice-duration` (for long syllables), `voice-pitch` (for pitch
 accent) and `pause` properties would solve these sort of accessibility
