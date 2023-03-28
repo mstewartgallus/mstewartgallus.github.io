@@ -1,0 +1,15 @@
+@media screen {
+    .scroller {
+        overflow: auto ;
+    }
+}
+
+.scroller {
+    outline-color: var(--highlight-text, HighlightText) ;
+    outline-offset: 0.1em ;
+    outline-width: 0.1em ;
+}
+
+.scroller:focus {
+    outline-style: solid ;
+}
