@@ -60,27 +60,11 @@ main {
     display: block ;
 }
 
-/* FIXME not valid CSS */
 :root {
     --t: clamp(0rem,
                (1600vw - var(--min-width) * 1rem) / var(--width-delta),
                1rem) ;
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
-}
-
-/* FIXME way too clunky */
-:where(main, section, nav, footer, header) > p {
-    margin-inline-start: calc(2 * var(--s));
-}
-
-:where(main, section, nav, footer, header) > header > p {
-    margin-inline-start: 0 ;
-}
-
-
-:root {
-    /* default ratio on browsers is 1rem = 16px */
-    --s: clamp(0rem, (1600vw - 600rem) / 100, 1rem) ;
 }
 
 

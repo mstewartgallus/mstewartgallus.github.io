@@ -4,3 +4,13 @@
     max-inline-size: 100% ;
     hyphens: auto ;
 }
+
+.p {
+    margin-inline-start: calc(2 * var(--s));
+}
+
+
+.p {
+    /* default ratio on browsers is 1rem = 16px */
+    --s: clamp(0rem, (1600vw - 600rem) / 100, 1rem) ;
+}

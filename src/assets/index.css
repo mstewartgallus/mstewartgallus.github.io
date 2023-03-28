@@ -1,12 +1,42 @@
 @charset "utf-8";
 
-@import "./_inert.css";
+[inert] {
+    cursor: default;
+    pointer-events: none ;
+}
 
-@import "./_theme.css";
-@import "./_syntax.css";
+[inert], [inert] * {
+    user-select: none ;
+}
+
+.sr-only {
+    position: absolute ;
+    display: block ;
+    z-index: 1000 ;
+    background-color: var(--highlight) ;
+    color: var(--highlight-text) ;
+    border-radius: 0.6ch ;
+    padding-inline: 1em ;
+    padding-block: calc(0.5 * var(--line)) ;
+}
+
+.sr-only:not(:focus-within):not(:focus):not(:active) {
+    white-space: nowrap !important ;
+    position: absolute !important ;
+    left: -10000px !important ;
+    top: auto !important ;
+    width: 1px !important ;
+    height: 1px !important ;
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px) !important ;
+    overflow: hidden !important ;
+}
+
 @import "./_forms.css";
 @import "./_base.css";
 
-@import "./_print.css";
+@page {
+    size: A4 portrait ;
+    margin: 0 0 ;
+}
 
 @import "./_vars.css";
