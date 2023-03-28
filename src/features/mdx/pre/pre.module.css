@@ -1,0 +1,26 @@
+.figcaption {
+    color: var(--emphasis-text);
+}
+
+@media screen {
+    .figcaption {
+        position: sticky ;
+        left: 0 ;
+    }
+
+    .figure {
+        position: relative ;
+        overflow: auto ;
+    }
+}
+
+.figcaption {
+    font-weight: bold ;
+}
+
+.figure {
+    margin-inline: 0 ;
+    margin-block: var(--line) ;
+
+    break-inside: avoid ;
+}

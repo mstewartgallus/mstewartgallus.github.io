@@ -7,11 +7,11 @@ import {
     Ul, Ol, Menu, Li,
     Hr,
     P,
-    Pre,
     Green
 } from "../../features/ui";
 import { MdxPage } from "./mdx-page.jsx";
 import { H1, H2, H3, H4, H5, H6, } from "./heading";
+import { Pre } from "./pre";
 
 // Prevent doublying up
 const Wrapper = ({children, ...props}) =>

@@ -28,9 +28,7 @@ stanzas are paragraphs and lines in a paragraph are separated by line
 break elements.
 
 
-<figure id="markupa">
-<figcaption>Markup A</figcaption>
-```html
+```html id="markupa" title="Markup A"
 <ol class="poem">
 <li>
     <ol>
@@ -42,18 +40,13 @@ break elements.
 </li>
 </ol>
 ```
-</figure>
 
-
-<figure id="markupb">
-<figcaption>Markup B</figcaption>
-~~~ html
+~~~ html id="markupb" title="Markup B"
 <p class="stanza">Roses are red<br>
 Violets are blue,<br>
 Sugar is sweet<br>
 And so are you.</p>
 ~~~
-</figure>
 
 [<cite>Markup A</cite>](#markupa) is hard to navigate as each line in
 an ordered list must be manually tracked through.  As well <q>line
@@ -65,9 +58,7 @@ the `presentation` role in a list item for a list already marked with
 a `presentation` role doesn't do much, but such markup can reduce
 cruft in Firefox's accessibility inspector.
 
-<figure id="markupa2">
-<figcaption>Markup A2</figcaption>
-```html
+```html id="markupa2" title="Markup A2"
 <ol class="poem">
 <li>
     <ol role="presentation">
@@ -79,12 +70,8 @@ cruft in Firefox's accessibility inspector.
 </li>
 </ol>
 ```
-</figure>
 
-
-<figure id="markupa3">
-<figcaption>Markup A3</figcaption>
-```html
+```html id="markupa3" title="Markup A3"
 <ol class="poem" role="presentation">
 <li>
     <ol role="presentation">
@@ -96,7 +83,6 @@ cruft in Firefox's accessibility inspector.
 </li>
 </ol>
 ```
-</figure>
 
 As a <i>nuclear</i> solution you can markup the text for graphical
 display using the `graphic` role as in [<cite>Markup
@@ -106,9 +92,7 @@ attribute here. `aria-label` has a tendency to work poorly with
 newlines in text, is not usually translated by automated tools and
 doesn't let you embed more markup as appropriate.
 
-<figure id="markupn">
-<figcaption>Markup N</figcaption>
-```html
+```html id="markupn" title="Markup N"
 <figure>
 <div role="img" aria-details="transcript">
 <ol class="poem">
@@ -131,7 +115,6 @@ doesn't let you embed more markup as appropriate.
 </figcaption>
 </figure>
 ```
-</figure>
 
 In some setups [<cite>Markup B</cite>](#markupb) sounds yucky.  Ending
 and starting words in separate lines like <i>red</i> and
@@ -141,19 +124,14 @@ B HTML</cite>](#markupb2) and [<cite>Markup B CSS</cite>](#markupb3) to work aro
 However, on Firefox this hack breaks up lines into separate areas to
 track through.
 
-<figure id="markupb2">
-<figcaption>Markup B HTML</figcaption>
-```html
+```html id="markupb2" title="Markup B HTML"
 <p>Roses are red<span class="sr-only">; </span><br>
 Violets are blue,<br>
 Sugar is sweet<span class="sr-only">; </span><br>
 And so are you.</p>
 ```
-</figure>
 
-<figure id="markupb3">
-<figcaption>Markup B CSS</figcaption>
-```css
+```css id="markupb3" title="Markup B CSS"
 .sr-only {
    display: inline-block ;
    user-select: none ;
@@ -162,7 +140,6 @@ And so are you.</p>
    color: transparent ;
 }
 ```
-</figure>
 
 No revisions of [<cite>Markup A</cite>](#markupa) or [<cite>Markup B</cite>](#markupb) ensure
 proper pronunciation of stress and sounds.  Only American English is
@@ -198,16 +175,12 @@ You can approximate a poetry layout with a hanging indent layout
 something like [<cite>Indent CSS</cite>](#indentcss).  However, a
 hanging indent layout is not really correct.
 
-<figure id="indentcss">
-<figcaption>Indent CSS</figcaption>
-```css
+```css id="indentcss" title="Indent CSS"
 .line {
    text-indent: -4ch ;
    margin-left: 4ch ;
 }
 ```
-</figure>
-
 
 You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text *within* the
@@ -215,9 +188,7 @@ line block to the right.  Something like [<cite>Align Last
 CSS</cite>](#alignlastcss) almost works for a poetry layout.  However,
 even this layout fails when you overflow multiple lines.
 
-<figure id="alignlastcss">
-<figcaption>Align Last CSS</figcaption>
-```css
+```css id="alignlastcss" title="Align Last CSS"
 .stanza {
    display: flex ;
    flex-direction: column ;
@@ -228,15 +199,12 @@ even this layout fails when you overflow multiple lines.
    text-align-last: end ;
 }
 ```
-</figure>
 
 
 [<cite>Example Code</cite>](#examplecode) is similar to the current
 compromise I use on this site.
 
-<figure id="examplecode">
-<figcaption>Example Code</figcaption>
-```html
+```html id="examplecode" title="Example Code"
 <style>
 #scope p {
    text-indent: 0 ;
@@ -256,7 +224,6 @@ compromise I use on this site.
 </p>
 </div>
 ```
-</figure>
 
 
 ## Conclusion
