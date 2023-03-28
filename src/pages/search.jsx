@@ -1,6 +1,6 @@
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, Search, SearchForm, useSearch, usePostTags } from "../features/search";
-import { A, H1, H2, BreadcrumbList, BreadcrumbItem, Card, Main, Nav, Page } from "../features/ui";
+import { A, H1, H2, BreadcrumbList, BreadcrumbItem, Card, Page } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
@@ -64,36 +64,6 @@ const Heading = ({query}) =>
       "Search" :
       <>{query}{separator}Search</>;
 
-const Sidebar = ({state, set, tags, action, onSubmit}) =>
-      <>
-          <Card>
-              <Search heading={<H2>Search</H2>}>
-                  <SearchForm action={action}
-                              onSubmit={onSubmit}
-
-                              tags={tags}
-                              set={set}
-
-                              state={state}
-                  />
-              </Search>
-          </Card>
-          <Card>
-              <Nav heading={<H2>Breadcrumbs</H2>}>
-                  <BreadcrumbList>
-                      <BreadcrumbItem>
-                          <A href="/">Home</A>
-                      </BreadcrumbItem>
-                      <BreadcrumbItem>
-                          <A aria-current="page">
-                              Search
-                          </A>
-                      </BreadcrumbItem>
-                  </BreadcrumbList>
-              </Nav>
-          </Card>
-      </>;
-
 export const Head = ({location}) => {
     const [search, setSearch] = useState(null);
     useEffect(() => {
@@ -148,18 +118,36 @@ const SearchPage = ({location}) => {
 
     const query = params?.s;
 
-    return <Page sidebar={<Sidebar
-                              state={state}
-                              set={setter}
-                              tags={tags}
-                              action="/search"
-                              onSubmit={onSubmit}
-                          />}>
-               <Card>
-                   <Main heading={<H1><Heading query={query} /></H1>}>
-                       <ResultList links={state.links} />
-                   </Main>
-               </Card>
+    return <Page
+               sidebar={
+                   <Card>
+                       <Search heading={<H2>Search</H2>}>
+                           <SearchForm action="/search"
+                                       onSubmit={onSubmit}
+
+                                       tags={tags}
+                                       set={setter}
+
+                                       state={state}
+                           />
+                       </Search>
+                   </Card>
+               }
+               breadcrumbs={
+                   <BreadcrumbList>
+                       <BreadcrumbItem>
+                           <A href="/">Home</A>
+                       </BreadcrumbItem>
+                       <BreadcrumbItem>
+                           <A aria-current="page">
+                               Search
+                           </A>
+                       </BreadcrumbItem>
+                   </BreadcrumbList>
+               }
+               heading={<H1><Heading query={query} /></H1>}
+           >
+               <ResultList links={state.links} />
            </Page>;
 };
 

@@ -1,6 +1,6 @@
 import { Card, Footer, Nav, H2 } from "../../features/ui";
 
-export const Sidebar = ({children, paging, metadata, breadcrumbs}) =>
+export const Sidebar = ({children, paging, metadata}) =>
 <>
     {children}
     <Card>
@@ -12,11 +12,6 @@ export const Sidebar = ({children, paging, metadata, breadcrumbs}) =>
         <Footer heading={<H2>Metadata</H2>}>
             {metadata}
         </Footer>
-    </Card>
-    <Card>
-        <Nav heading={<H2>Breadcrumbs</H2>}>
-            {breadcrumbs}
-        </Nav>
     </Card>
 </>;
 
