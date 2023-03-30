@@ -1,8 +1,4 @@
-import { Card } from "../card";
-import { H2 } from "../heading";
-import { Main } from "../main";
-import { Nav } from "../nav.jsx";
-import { SidebarLayout } from "../sidebar-layout";
+import { Card, H2, Main, Nav, SidebarLayout } from "../../../features/ui";
 import { layout } from "./page.module.css";
 
 export const Page = ({

@@ -15,7 +15,7 @@ export { Ol, Ul, Menu, Li } from "./list";
 export { Main } from "./main";
 export { Nav } from "./nav.jsx";
 export { Section } from "./section.tsx";
-export { Page } from "./page";
+export { SidebarLayout } from "./sidebar-layout";
 export { P } from "./p";
 export { Pre } from "./pre";
 export { Theme } from "./theme";

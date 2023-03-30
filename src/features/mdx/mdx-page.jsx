@@ -1,5 +1,5 @@
-import { A, BreadcrumbList, BreadcrumbItem, Card, H1,
-         Main, Page } from "../../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem, H1 } from "../../features/ui";
+import { Page } from "../../features/layout";
 
 export const MdxPage = ({
     children,
@@ -17,12 +17,9 @@ export const MdxPage = ({
                            <A aria-current="page">{title}</A>
                        </BreadcrumbItem>
                    </BreadcrumbList>
-               }>
-               <Card>
-                   <Main heading={<H1>{title}</H1>}>
-                       {children}
-                   </Main>
-               </Card>
+               }
+               heading={<H1>{title}</H1>}>
+               {children}
            </Page>;
 };
 

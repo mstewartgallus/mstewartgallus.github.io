@@ -1,6 +1,7 @@
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, Search, SearchForm, useSearch, usePostTags } from "../features/search";
-import { A, H1, H2, BreadcrumbList, BreadcrumbItem, Card, Page, Viewport } from "../features/ui";
+import { A, H1, H2, BreadcrumbList, BreadcrumbItem, Card, Viewport } from "../features/ui";
+import { Page } from "../features/layout";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";

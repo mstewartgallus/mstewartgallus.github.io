@@ -1,8 +1,9 @@
 import { graphql } from "gatsby";
-import { Card, H1, H2, Page, Section, Viewport } from "../features/ui";
+import { Card, H1, H2, Section, Viewport } from "../features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
          Post, PostPaging, Metadata, PostBreadcrumbs,
          useBlogPosting, useBreadcrumbList } from "../features/post";
+import { Page } from "../features/layout";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";

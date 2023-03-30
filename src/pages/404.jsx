@@ -1,12 +1,10 @@
 import { useCallback, useRef, useId, useEffect } from "react";
 import { navigate } from "gatsby";
+import { Page } from "../features/layout";
 import {
-    A,
-    BreadcrumbList, BreadcrumbItem,
     Button,
     H1,
     P,
-    Page,
     Viewport
 } from "../features/ui";
 import HeadBasic from "../components/head-basic.jsx";

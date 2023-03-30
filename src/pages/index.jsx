@@ -8,9 +8,9 @@ import {
     Card,
     H1, H2,
     Header,
-    Page,
     Viewport
 } from "../features/ui";
+import { Page } from "../features/layout";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";

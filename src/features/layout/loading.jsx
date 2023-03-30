@@ -1,9 +1,10 @@
-import { Card, H1, Main, Page, Viewport } from "../../features/ui";
+import { H1, P, Viewport } from "../../features/ui";
+import { Page } from "./page";
 
 export const Loading = () =>
 <Viewport>
     <Page heading={<H1>Loading...</H1>}>
-        <p>Loading...</p>
+        <P>Loading...</P>
     </Page>
 </Viewport>;
 
