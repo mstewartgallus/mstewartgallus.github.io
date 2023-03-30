@@ -1,23 +1,22 @@
 import { useId, useRef } from "react"
 import { A, Pre as BarePre, Card } from "../../../features/ui";
-import { scroller, figure, figcaption } from "./pre.module.css";
+import { title as titleClass, figure, figcaption } from "./pre.module.css";
 
 export const Pre = ({children, id, title}) => {
     const ref = useRef();
     const caption = useId();
+    const focusId = useId();
     return <Card>
-               <figure ref={ref} className={figure}>
-                   <figcaption id={caption} className={figcaption}>
-                       {title}
+               <figure id={id} ref={ref} className={figure}>
+                   <figcaption className={figcaption}>
+                       <span className={titleClass} id={caption}>{title}</span>
+                       &emsp;
+                       <A href={`#${id}`} aria-describedby={caption}>Focus</A>
                    </figcaption>
-                   &emsp;
-                   <A href={`#${id}`} aria-describedby={caption}>Focus</A>
-                   <article id={id} aria-labelledby={caption}
-                            className={scroller}>
-                       <BarePre>
-                           {children}
-                       </BarePre>
-                   </article>
+                   <span aria-owns={focusId} />
+                   <BarePre>
+                       {children}
+                   </BarePre>
                </figure>
            </Card>;
 };

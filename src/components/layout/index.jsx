@@ -11,6 +11,7 @@ class LayoutHandle {
 
     onRouteUpdateDelayed() {
     }
+
     shouldUpdateScroll() {
         return true;
     }

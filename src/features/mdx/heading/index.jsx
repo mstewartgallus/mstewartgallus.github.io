@@ -1,5 +1,4 @@
-import { useId } from "react";
-import { A } from "../../../features/ui";
+import { A, Hgroup } from "../../../features/ui";
 import {
     H1 as UiH1, H2 as UiH2, H3 as UiH3,
     H4 as UiH4, H5 as UiH5, H6 as UiH6
@@ -7,19 +6,22 @@ import {
 import { heading } from "./heading.module.css";
 
 const createAutoLink = Hn => {
+    const name = Hn.displayName || Hn.name || 'Component';
     const HeadingAutoLink = ({id, children, ...props}) => {
-        const text = useId();
         const href = id && `#${id}`;
-        return <Hn id={id} aria-labelledby={text} {...props}>
-                   <span className={heading}>
-                       <span id={text}>{children}</span>
-                       {
-                           href &&
-                               <A href={href} aria-describedby={text}>#</A>
-                       }
-                   </span>
-               </Hn>;
+        return <header className={heading}>
+                   <Hgroup>
+                       <Hn id={id} {...props}>
+                           {children}
+                       </Hn>
+                   </Hgroup>
+                   {
+                       href &&
+                           <A href={href} aria-describedby={id}>#</A>
+                   }
+               </header>;
     };
+    HeadingAutoLink.displayName = `createAutoLink(${name})`;
     return HeadingAutoLink;
 };
 
