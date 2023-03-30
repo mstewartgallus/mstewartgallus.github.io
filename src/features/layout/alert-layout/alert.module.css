@@ -1,0 +1,14 @@
+.dialog {
+    border-width: 0.1em;
+    border-style: solid;
+    border-radius: 1ch ;
+    background-color: var(--canvas);
+    color: var(--canvas-text);
+}
+
+.header {
+    display: flex ;
+    flex-wrap: wrap ;
+    justify-content: space-between ;
+    column-gap: 1em ;
+}

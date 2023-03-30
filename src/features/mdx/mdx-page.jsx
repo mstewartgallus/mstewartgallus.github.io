@@ -1,5 +1,5 @@
 import { A, BreadcrumbList, BreadcrumbItem, H1 } from "../../features/ui";
-import { Page } from "../../features/layout";
+import { PageLayout } from "../../features/layout";
 
 export const MdxPage = ({
     children,
@@ -7,7 +7,7 @@ export const MdxPage = ({
     pageContext
 }) => {
     const title = pageContext?.frontmatter?.title ?? pathname;
-    return <Page
+    return <PageLayout
                breadcrumbs={
                    <BreadcrumbList>
                        <BreadcrumbItem>
@@ -20,7 +20,7 @@ export const MdxPage = ({
                }
                heading={<H1>{title}</H1>}>
                {children}
-           </Page>;
+           </PageLayout>;
 };
 
 export default MdxPage;

@@ -1,7 +1,0 @@
-.dialog {
-    border-width: 0.2em;
-    border-style: solid;
-    border-radius: 1ch ;
-    background-color: var(--canvas);
-    color: var(--canvas-text);
-}

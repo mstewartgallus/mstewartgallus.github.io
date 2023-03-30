@@ -7,10 +7,9 @@ import {
     BreadcrumbList, BreadcrumbItem,
     Card,
     H1, H2,
-    Header,
-    Viewport
+    Header
 } from "../features/ui";
-import { Page } from "../features/layout";
+import { PageLayout } from "../features/layout";
 import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
@@ -85,40 +84,38 @@ const IndexPage = () => {
     const { title, description } = useSiteMetadata();
     const onSubmit = useSubmit();
     const search = useSearchURL();
-    return <Viewport>
-               <Page
-                   sidebar={
-                       <Sidebar
-                           search={
-                               <SearchFormMini action={search} onSubmit={onSubmit} />
-                           }
-                       >
-                           <Card>
-                               <Header
-                                   heading={
-                                       <>
-                                           <H2>{title}</H2>
-                                           <p style={{marginBlock:0}}>{description}</p>
-                                       </>}>
-                                   <Banner />
-                               </Header>
-                           </Card>
-                       </Sidebar>
-                   }
-                   breadcrumbs={
-                       <BreadcrumbList>
-                           <BreadcrumbItem>
-                               <A aria-current="page">Home</A>
-                           </BreadcrumbItem>
-                       </BreadcrumbList>
-                   }
-                   mainbar={<AccordionMemo />}
+    return <PageLayout
+               sidebar={
+                   <Sidebar
+                       search={
+                           <SearchFormMini action={search} onSubmit={onSubmit} />
+                       }
+                   >
+                       <Card>
+                           <Header
+                               heading={
+                                   <>
+                                       <H2>{title}</H2>
+                                       <p style={{marginBlock:0}}>{description}</p>
+                                   </>}>
+                               <Banner />
+                           </Header>
+                       </Card>
+                   </Sidebar>
+               }
+               breadcrumbs={
+                   <BreadcrumbList>
+                       <BreadcrumbItem>
+                           <A aria-current="page">Home</A>
+                       </BreadcrumbItem>
+                   </BreadcrumbList>
+               }
+               mainbar={<AccordionMemo />}
 
-                   heading={<H1>Posts</H1>}
-               >
-                   <PostList posts={posts} />
-               </Page>
-           </Viewport>;
+               heading={<H1>Posts</H1>}
+           >
+               <PostList posts={posts} />
+           </PageLayout>;
 };
 
 

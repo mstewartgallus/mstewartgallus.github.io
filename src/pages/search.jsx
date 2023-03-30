@@ -1,7 +1,7 @@
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "../features/search";
-import { A, H1, H2, BreadcrumbList, BreadcrumbItem, Search, Card, Viewport } from "../features/ui";
-import { Page } from "../features/layout";
+import { A, H1, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "../features/ui";
+import { PageLayout } from "../features/layout";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
@@ -119,39 +119,37 @@ const SearchPage = ({location}) => {
 
     const query = params?.s;
 
-    return <Viewport>
-               <Page
-                   sidebar={
-                       <Card>
-                           <Search heading={<H2>Search</H2>}>
-                               <SearchForm action="/search"
-                                           onSubmit={onSubmit}
+    return <PageLayout
+               sidebar={
+                   <Card>
+                       <Search heading={<H2>Search</H2>}>
+                           <SearchForm action="/search"
+                                       onSubmit={onSubmit}
 
-                                           tags={tags}
-                                           set={setter}
+                                       tags={tags}
+                                       set={setter}
 
-                                           state={state}
-                               />
-                           </Search>
-                       </Card>
-                   }
-                   breadcrumbs={
-                       <BreadcrumbList>
-                           <BreadcrumbItem>
-                               <A href="/">Home</A>
-                           </BreadcrumbItem>
-                           <BreadcrumbItem>
-                               <A aria-current="page">
-                                   Search
-                               </A>
-                           </BreadcrumbItem>
-                       </BreadcrumbList>
-                   }
-                   heading={<H1><Heading query={query} /></H1>}
-               >
-                   <ResultList links={state.links} />
-               </Page>
-           </Viewport>;
+                                       state={state}
+                           />
+                       </Search>
+                   </Card>
+               }
+               breadcrumbs={
+                   <BreadcrumbList>
+                       <BreadcrumbItem>
+                           <A href="/">Home</A>
+                       </BreadcrumbItem>
+                       <BreadcrumbItem>
+                           <A aria-current="page">
+                               Search
+                           </A>
+                       </BreadcrumbItem>
+                   </BreadcrumbList>
+               }
+               heading={<H1><Heading query={query} /></H1>}
+           >
+               <ResultList links={state.links} />
+           </PageLayout>;
 };
 
 export default SearchPage;

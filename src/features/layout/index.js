@@ -1,2 +1,3 @@
 export { Loading } from "./loading.jsx";
-export { Page } from "./page";
+export { PageLayout } from "./page-layout";
+export { AlertLayout } from "./alert-layout";
