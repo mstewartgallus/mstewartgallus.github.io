@@ -70,57 +70,55 @@ const title = "Table of Contents";
 
 export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
+    const json = useWebsite();
     return <>
                <HeadBasic />
                <Title>{title}</Title>
                <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
                <SeoBasic title={title} url={url} />
+               <JsonLd srcdoc={json} />
            </>;
 };
 
 const IndexPage = () => {
     const posts = usePosts();
     const { title, description } = useSiteMetadata();
-    const json = useWebsite();
     const onSubmit = useSubmit();
     const search = useSearchURL();
-    return <>
-               <Viewport>
-                   <Page
-                       sidebar={
-                           <Sidebar
-                               search={
-                                   <SearchFormMini action={search} onSubmit={onSubmit} />
-                               }
-                           >
-                               <Card>
-                                   <Header
-                                       heading={
-                                           <>
-                                               <H2>{title}</H2>
-                                               <p style={{marginBlock:0}}>{description}</p>
-                                           </>}>
-                                       <Banner />
-                                   </Header>
-                               </Card>
-                           </Sidebar>
-                       }
-                       breadcrumbs={
-                           <BreadcrumbList>
-                               <BreadcrumbItem>
-                                   <A aria-current="page">Home</A>
-                               </BreadcrumbItem>
-                           </BreadcrumbList>
-                       }
-                       mainbar={<AccordionMemo />}
+    return <Viewport>
+               <Page
+                   sidebar={
+                       <Sidebar
+                           search={
+                               <SearchFormMini action={search} onSubmit={onSubmit} />
+                           }
+                       >
+                           <Card>
+                               <Header
+                                   heading={
+                                       <>
+                                           <H2>{title}</H2>
+                                           <p style={{marginBlock:0}}>{description}</p>
+                                       </>}>
+                                   <Banner />
+                               </Header>
+                           </Card>
+                       </Sidebar>
+                   }
+                   breadcrumbs={
+                       <BreadcrumbList>
+                           <BreadcrumbItem>
+                               <A aria-current="page">Home</A>
+                           </BreadcrumbItem>
+                       </BreadcrumbList>
+                   }
+                   mainbar={<AccordionMemo />}
 
-                       heading={<H1>Posts</H1>}
-                   >
-                       <PostList posts={posts} />
-                   </Page>
-               </Viewport>
-               <JsonLd srcdoc={json} />
-           </>;
+                   heading={<H1>Posts</H1>}
+               >
+                   <PostList posts={posts} />
+               </Page>
+           </Viewport>;
 };
 
 

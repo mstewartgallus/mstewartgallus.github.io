@@ -31,6 +31,7 @@ export const Head = ({ data: { post } }) => {
                <Title>{title}</Title>
                <SeoBasic description={description} title={title} url={url} />
                <SeoPostHead {...post} />
+               <Foot {...post} />
            </>;
 };
 
@@ -39,35 +40,32 @@ const PostPage = ({ data }) => {
     const { comments, notice,
             category, subtitle, title, childrenLink
           } = post;
-    return <>
-               <Viewport>
-                   <Page
-                       sidebar={<Sidebar
-                                    paging={<PostPaging childrenLink={childrenLink} />}
-                                    metadata={<Metadata {...post} />}
-                                />}
-                       breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
-                       heading={
-                           <>
-                               <H1>{title}</H1>
-                               <p style={{marginBlock: 0}}>{subtitle}</p>
-                           </>
-                       }
-                       notice={<Notice notice={notice} />}
-                       mainbar={
-                           comments &&
-                               <Card>
-                                   <Section heading={<H2>Comments</H2>}>
-                                       <Comments host={comments.host} id={comments.id} />
-                                   </Section>
-                               </Card>
-                       }
-                   >
-                       <Post {...data} />
-                   </Page>
-               </Viewport>
-               <Foot {...post} />
-           </>;
+    return <Viewport>
+               <Page
+                   sidebar={<Sidebar
+                                paging={<PostPaging childrenLink={childrenLink} />}
+                                metadata={<Metadata {...post} />}
+                            />}
+                   breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
+                   heading={
+                       <>
+                           <H1>{title}</H1>
+                           <p style={{marginBlock: 0}}>{subtitle}</p>
+                       </>
+                   }
+                   notice={<Notice notice={notice} />}
+                   mainbar={
+                       comments &&
+                           <Card>
+                               <Section heading={<H2>Comments</H2>}>
+                                   <Comments host={comments.host} id={comments.id} />
+                               </Section>
+                           </Card>
+                   }
+               >
+                   <Post {...data} />
+               </Page>
+           </Viewport>;
 };
 
 export default PostPage;

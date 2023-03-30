@@ -1,8 +1,8 @@
-import { Script } from "gatsby";
+import { useMemo } from "react";
 
 export const JsonLd = ({srcdoc}) => {
-    const json = JSON.stringify(srcdoc);
-    return <Script type="application/ld+json">{json}</Script>;
+    const json = useMemo(() => JSON.stringify(srcdoc), [srcdoc]);
+    return <script type="application/ld+json">{json}</script>;
 };
 
 export default JsonLd;
