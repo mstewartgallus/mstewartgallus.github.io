@@ -61,4 +61,8 @@ abbr {
     }
 }
 
+:root {
+    background-color: var(--canvas, Canvas) ;
+}
+
 @import "./_vars.css";

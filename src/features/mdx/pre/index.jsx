@@ -12,7 +12,7 @@ export const Pre = ({children, id, title}) => {
                    </figcaption>
                    &emsp;
                    <A href={`#${id}`} aria-describedby={caption}>Focus</A>
-                   <article id={id} tabIndex="-1" aria-labelledby={caption}
+                   <article id={id} aria-labelledby={caption}
                             className={scroller}>
                        <BarePre>
                            {children}

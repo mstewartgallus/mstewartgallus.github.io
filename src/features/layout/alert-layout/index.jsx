@@ -1,6 +1,6 @@
 import { useCallback, useRef, useId, useEffect } from "react";
 import { navigate } from "gatsby";
-import { Button, Card, Hgroup, Main } from "../../../features/ui";
+import { Button, Card, Hgroup } from "../../../features/ui";
 import { dialog, header } from "./alert.module.css";
 
 export const AlertLayout = ({children, heading}) => {

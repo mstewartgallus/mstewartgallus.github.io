@@ -1,5 +1,5 @@
 import { Suspense, forwardRef, useImperativeHandle } from "react";
-import { Theme, Viewport } from "../../features/ui";
+import { Theme } from "../../features/ui";
 import { Loading } from "../../features/layout";
 
 class LayoutHandle {
@@ -19,11 +19,9 @@ class LayoutHandle {
 const Layout = ({ children }, ref) => {
     useImperativeHandle(ref, () => new LayoutHandle(), []);
     return <Theme>
-               <Viewport>
-                   <Suspense fallback={<Loading />}>
-                       {children}
-                   </Suspense>
-               </Viewport>
+               <Suspense fallback={<Loading />}>
+                   {children}
+               </Suspense>
            </Theme>;
 }
 
