@@ -1,7 +1,7 @@
 @media screen {
     .layout {
         padding-inline:
-            calc(1rem + 7 * var(--t))
+            calc(0.82rem + 7 * var(--t))
             1rem ;
         padding-block:
             calc(var(--t) * var(--line-height))
