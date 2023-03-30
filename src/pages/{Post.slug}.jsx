@@ -1,5 +1,5 @@
 import { graphql } from "gatsby";
-import { Card, H1, H2, Page, Section } from "../features/ui";
+import { Card, H1, H2, Page, Section, Viewport } from "../features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
          Post, PostPaging, Metadata, PostBreadcrumbs,
          useBlogPosting, useBreadcrumbList } from "../features/post";
@@ -39,30 +39,32 @@ const PostPage = ({ data }) => {
             category, subtitle, title, childrenLink
           } = post;
     return <>
-               <Page
-                   sidebar={<Sidebar
-                                paging={<PostPaging childrenLink={childrenLink} />}
-                                metadata={<Metadata {...post} />}
-                            />}
-                   breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
-                   heading={
-                       <>
-                           <H1>{title}</H1>
-                           <p style={{marginBlock: 0}}>{subtitle}</p>
-                       </>
-                   }
-                   notice={<Notice notice={notice} />}
-                   mainbar={
-                       comments &&
-                           <Card>
-                               <Section heading={<H2>Comments</H2>}>
-                                   <Comments host={comments.host} id={comments.id} />
-                               </Section>
-                           </Card>
-                   }
-               >
-                   <Post {...data} />
-               </Page>
+               <Viewport>
+                   <Page
+                       sidebar={<Sidebar
+                                    paging={<PostPaging childrenLink={childrenLink} />}
+                                    metadata={<Metadata {...post} />}
+                                />}
+                       breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
+                       heading={
+                           <>
+                               <H1>{title}</H1>
+                               <p style={{marginBlock: 0}}>{subtitle}</p>
+                           </>
+                       }
+                       notice={<Notice notice={notice} />}
+                       mainbar={
+                           comments &&
+                               <Card>
+                                   <Section heading={<H2>Comments</H2>}>
+                                       <Comments host={comments.host} id={comments.id} />
+                                   </Section>
+                               </Card>
+                       }
+                   >
+                       <Post {...data} />
+                   </Page>
+               </Viewport>
                <Foot {...post} />
            </>;
 };

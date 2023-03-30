@@ -18,3 +18,5 @@ export { Section } from "./section.tsx";
 export { Page } from "./page";
 export { P } from "./p";
 export { Pre } from "./pre";
+export { Theme } from "./theme";
+export { Viewport } from "./viewport";

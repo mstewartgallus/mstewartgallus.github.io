@@ -1,6 +1,8 @@
+import { Script } from "gatsby";
+
 export const JsonLd = ({srcdoc}) => {
     const json = JSON.stringify(srcdoc);
-    return <script type="application/ld+json">{json}</script>;
+    return <Script type="application/ld+json">{json}</Script>;
 };
 
 export default JsonLd;

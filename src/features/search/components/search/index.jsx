@@ -4,7 +4,7 @@ import { Assistive } from "../../../../features/util";
 export const Search = ({heading, children, ...props}) => {
     const id = useId();
 
-    return <section aria-describedby={id} role="search" {...props}>
+    return <section aria-labelledby={id} role="search" {...props}>
                <Assistive>
                    <header>
                        <hgroup id={id}>

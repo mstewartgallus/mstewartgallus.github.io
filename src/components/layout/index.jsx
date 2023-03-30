@@ -1,11 +1,14 @@
 import { Suspense, forwardRef, useImperativeHandle } from "react";
+import { Theme } from "../../features/ui";
 import { Loading } from "../../features/layout";
 
 class LayoutHandle {
     onPreRouteUpdate() {
     }
+
     onRouteUpdate() {
     }
+
     onRouteUpdateDelayed() {
     }
     shouldUpdateScroll() {
@@ -15,9 +18,11 @@ class LayoutHandle {
 
 const Layout = ({ children }, ref) => {
     useImperativeHandle(ref, () => new LayoutHandle(), []);
-    return <Suspense fallback={<Loading />}>
-               {children}
-           </Suspense>;
+    return <Theme>
+               <Suspense fallback={<Loading />}>
+                   {children}
+               </Suspense>
+           </Theme>;
 }
 
 const LayoutRef = forwardRef(Layout);
