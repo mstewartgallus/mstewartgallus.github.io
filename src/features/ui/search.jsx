@@ -1,10 +1,11 @@
 import { useId } from "react";
-import { Assistive } from "../../../../features/util";
+import { Search as SearchPf } from "../../features/polyfill";
+import { Assistive } from "../../features/util";
 
 export const Search = ({heading, children, ...props}) => {
     const id = useId();
 
-    return <search role="search" aria-describedby={id} {...props}>
+    return <SearchPf aria-describedby={id} {...props}>
                <Assistive>
                    <header>
                        <hgroup id={id}>
@@ -13,7 +14,7 @@ export const Search = ({heading, children, ...props}) => {
                    </header>
                </Assistive>
                {children}
-           </search>;
+           </SearchPf>;
 };
 
 export default Search;

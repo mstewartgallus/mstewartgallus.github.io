@@ -6,15 +6,11 @@
 .figcaption {
     color: var(--emphasis-text);
     font-weight: bold ;
-
-    position: sticky;
-    inset-inline-start: 0;
 }
 
-.scroller {
-    position: relative ;
+.figcaption {
+    display: inline ;
 }
-
 @media screen {
     .scroller {
         overflow: auto ;

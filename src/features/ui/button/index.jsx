@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import { button } from "./button.module.css";
 
-const Button = ({children, ...props}, ref) =>
-<button className={button} ref={ref} {...props}>
+const Button = ({children, className, ...props}, ref) =>
+<button className={`${button} ${className}`} ref={ref} {...props}>
     {children}
 </button>;
 

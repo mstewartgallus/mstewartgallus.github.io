@@ -33,12 +33,12 @@ const useLinkProps = ({ href, target, download, ...props }) => {
     return { to, target, download, ...props };
 };
 
-const A = ({children, ...props}, ref) => {
+const A = ({children, className, ...props}, ref) => {
     const linkProps = useLinkProps(props);
     if (linkProps) {
-        return <Link className={aClass} innerRef={ref} {...linkProps}>{children}</Link>;
+        return <Link className={`${aClass} ${className}`} innerRef={ref} {...linkProps}>{children}</Link>;
     }
-    return <a className={aClass} ref={ref} {...props}>{children}</a>;
+    return <a className={`${aClass} ${className}`} ref={ref} {...props}>{children}</a>;
 };
 
 const ARef = forwardRef(A);

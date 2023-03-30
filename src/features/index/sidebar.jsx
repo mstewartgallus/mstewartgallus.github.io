@@ -1,5 +1,4 @@
-import { Card, H2 } from "../../features/ui";
-import { Search } from "../../features/search";
+import { Search, Card, H2 } from "../../features/ui";
 
 export const Sidebar = ({children, search}) =>
 <>

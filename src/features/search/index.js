@@ -3,4 +3,3 @@ export { useSearch } from "./hooks/use-search.js";
 export { ResultList } from "./components/result-list";
 export { SearchForm } from "./components/search-form";
 export { SearchFormMini } from "./components/search-form-mini";
-export { Search } from "./components/search";
