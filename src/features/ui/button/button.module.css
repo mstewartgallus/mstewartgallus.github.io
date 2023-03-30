@@ -1,9 +1,6 @@
 .button {
-    appearance: none ;
+    all: unset ;
 
-    display: block ;
-
-    font: inherit ;
     font-variant-numeric: lining-nums tabular-nums;
 
     background-color: var(--button-face);
@@ -12,12 +9,12 @@
 
     border-style: solid ;
     padding-inline: 0.5em ;
-    margin: 0 ;
 
     box-sizing: border-box ;
 
     border-radius: 0.1ch ;
     border-width: calc(max(1px, 0.07em));
+    margin-block: calc(min(-1px, -0.07em));
 
     outline-color: var(--highlight-text) ;
     outline-offset: 0.2em ;
