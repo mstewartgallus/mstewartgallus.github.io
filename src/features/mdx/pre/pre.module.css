@@ -1,27 +1,32 @@
-.figcaption {
-    color: var(--emphasis-text);
-    font-weight: bold ;
-}
-
 .figure {
-    margin-inline: 0 ;
-    margin-block: var(--line) ;
-
+    margin: 0 ;
     break-inside: avoid ;
 }
 
+.figcaption {
+    color: var(--emphasis-text);
+    font-weight: bold ;
+
+    position: sticky;
+    inset-inline-start: 0;
+}
+
+.scroller {
+    position: relative ;
+}
+
 @media screen {
-    .panel {
+    .scroller {
         overflow: auto ;
     }
 }
 
-.panel {
+.scroller {
     outline-color: var(--highlight-text, HighlightText) ;
     outline-offset: 0.1em ;
     outline-width: 0.1em ;
 }
 
-.panel:focus {
+.scroller:focus {
     outline-style: solid ;
 }
