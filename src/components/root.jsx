@@ -1,7 +1,6 @@
-import { StrictMode, useSyncExternalStore } from "react";
+import { StrictMode } from "react";
 import { Provider } from "react-redux";
 import { MDXProvider } from '@mdx-js/react';
-import { setPrevLocation } from "../features/util";
 import { defaults } from "../features/mdx";
 import * as Store from "../state/store.js";
 
@@ -23,11 +22,7 @@ export const wrapRootElement = ({props, element}) => {
 export const onPreRouteUpdate = () => {
 };
 
-export const onRouteUpdate = ({ prevLocation }) => {
-    if (!prevLocation) {
-        return;
-    }
-    setPrevLocation(prevLocation);
+export const onRouteUpdate = () => {
 };
 
 export const onRouteUpdateDelayed = () => {

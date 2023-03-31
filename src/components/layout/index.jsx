@@ -1,28 +1,18 @@
-import { Suspense, forwardRef, useImperativeHandle } from "react";
+import { Suspense } from "react";
 import { Theme } from "../../features/ui";
 import { Loading } from "../../features/layout";
 
+export {
+    onPreRouteUpdate,
+    onRouteUpdate,
+    onRouteUpdateDelayed,
+    shouldUpdateScroll
+} from "../../features/layout";
 
-const Layout = ({ children }, ref) => {
-    useImperativeHandle(ref, () => ({
-        onPreRouteUpdate() {
-        },
-        onRouteUpdate() {
-        },
-        onRouteUpdateDelayed() {
-        },
-        shouldUpdateScroll() {
-            return true;
-        }
-    }), []);
-
+export const wrapPageElement = ({ element, props }) => {
     return <Theme>
                <Suspense fallback={<Loading />}>
-                   {children}
+                   {element}
                </Suspense>
            </Theme>;
-}
-
-const LayoutRef = forwardRef(Layout);
-
-export { LayoutRef as Layout, LayoutRef as default };
+};

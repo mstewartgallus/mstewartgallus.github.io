@@ -36,6 +36,10 @@ abbr {
 }
 
 
+:root, body {
+    margin: 0;
+    padding: 0;
+}
 :root {
     --t: clamp(0rem,
                (1600vw - var(--min-width) * 1rem) / var(--width-delta),
