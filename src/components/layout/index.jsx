@@ -2,23 +2,20 @@ import { Suspense, forwardRef, useImperativeHandle } from "react";
 import { Theme } from "../../features/ui";
 import { Loading } from "../../features/layout";
 
-class LayoutHandle {
-    onPreRouteUpdate() {
-    }
-
-    onRouteUpdate() {
-    }
-
-    onRouteUpdateDelayed() {
-    }
-
-    shouldUpdateScroll() {
-        return true;
-    }
-};
 
 const Layout = ({ children }, ref) => {
-    useImperativeHandle(ref, () => new LayoutHandle(), []);
+    useImperativeHandle(ref, () => ({
+        onPreRouteUpdate() {
+        },
+        onRouteUpdate() {
+        },
+        onRouteUpdateDelayed() {
+        },
+        shouldUpdateScroll() {
+            return true;
+        }
+    }), []);
+
     return <Theme>
                <Suspense fallback={<Loading />}>
                    {children}

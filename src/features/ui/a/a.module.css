@@ -4,12 +4,15 @@
     border-radius: 0.01ch ;
 
     outline-color: var(--highlight-text) ;
-    outline-width: 0.18rem ;
-    outline-offset: 0.23em ;
+    outline-width: 0.1rem ;
+    outline-offset: 0.2em ;
 }
 
-.a:focus-visible {
+.a:focus {
     outline-style: solid ;
+}
+.a:focus-visible {
+    outline-width: 0.18rem ;
 }
 
 .a:link {

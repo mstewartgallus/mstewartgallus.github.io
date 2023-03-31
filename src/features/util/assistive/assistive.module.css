@@ -1,9 +1,6 @@
-.sr {
-    position: absolute ;
-    display: block ;
-}
 
 .sr:not(:focus-within):not(:focus):not(:active) {
+    position: absolute ;
     white-space: nowrap ;
     position: absolute ;
     left: -10000px ;

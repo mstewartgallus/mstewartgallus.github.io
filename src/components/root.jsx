@@ -1,24 +1,12 @@
-import { StrictMode, useImperativeHandle, forwardRef } from "react";
+import { StrictMode, useSyncExternalStore } from "react";
 import { Provider } from "react-redux";
 import { MDXProvider } from '@mdx-js/react';
+import { setPrevLocation } from "../features/util";
 import { defaults } from "../features/mdx";
 import * as Store from "../state/store.js";
 
-class RootHandle {
-    onPreRouteUpdate() {
-    }
-    onRouteUpdate() {
-    }
-    onRouteUpdateDelayed() {
-    }
-}
-
-const Root = ({ children }, ref) => {
-    // Create a different store per SSR page
+const Root = ({ children }) => {
     const store = Store.createStore();
-
-    useImperativeHandle(ref, () => new RootHandle(), []);
-
     return <StrictMode>
                <Provider store={store}>
                    <MDXProvider components={defaults}>
@@ -28,6 +16,19 @@ const Root = ({ children }, ref) => {
            </StrictMode>;
 };
 
-const RootRef = forwardRef(Root);
+export const wrapRootElement = ({props, element}) => {
+    return <Root {...props}>{element}</Root>;
+};
 
-export { RootRef as Root, RootRef as default };
+export const onPreRouteUpdate = () => {
+};
+
+export const onRouteUpdate = ({ prevLocation }) => {
+    if (!prevLocation) {
+        return;
+    }
+    setPrevLocation(prevLocation);
+};
+
+export const onRouteUpdateDelayed = () => {
+};
