@@ -1,36 +1,32 @@
-import { useRef, useEffect, useMemo } from "react";
-import { A, Card, H2, Hgroup, Nav, SidebarLayout } from "../../../features/ui";
+import { useRef, useEffect } from "react";
+import { A, Card, H1, H2, Hgroup, Nav, SidebarLayout } from "../../../features/ui";
 import { Assistive } from "../../../features/util";
-import { usePrevLocation } from "../listeners.js";
+import { prevLocation } from "../listeners.js";
 import { layout, skipLink } from "./page.module.css";
-
-const useFresh = () => {
-    const prevLocation = usePrevLocation();
-    const fresh = useMemo(() => !prevLocation, [prevLocation]);
-    return fresh;
-};
 
 export const PageLayout = ({
     children,
-    heading, notice,
+    heading,
+    subheading,
+    notice,
     mainbar,
     sidebar,
     breadcrumbs
 }) => {
-    const skipLinkRef = useRef();
-    const fresh = useFresh();
+    const ref = useRef();
     useEffect(() => {
-        if (fresh) {
+        if (!prevLocation()) {
             return;
         }
-        skipLinkRef.current.focus({
+
+        ref.current.focus({
             preventScroll: true,
             focusVisible: true
         });
-    }, [fresh]);
+    }, []);
     return <div className={layout}>
                <Assistive>
-                   <A className={skipLink} ref={skipLinkRef} href="#content"
+                   <A className={skipLink} ref={ref} href="#content"
                       aria-describedby="content">Skip to content</A>
                </Assistive>
                <SidebarLayout
@@ -51,8 +47,9 @@ export const PageLayout = ({
                    <Card>
                        <main data-pagefind-body="" aria-describedby="content">
                            <header>
-                               <Hgroup id="content">
-                                   {heading}
+                               <Hgroup>
+                                   <H1 tabIndex="-1" id="content">{heading}</H1>
+                                   {subheading}
                                </Hgroup>
                                {notice}
                            </header>

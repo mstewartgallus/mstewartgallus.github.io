@@ -6,7 +6,7 @@ import {
     A,
     BreadcrumbList, BreadcrumbItem,
     Card,
-    H1, H2,
+    H2,
     Header
 } from "../features/ui";
 import { PageLayout } from "../features/layout";
@@ -112,7 +112,7 @@ const IndexPage = () => {
                }
                mainbar={<AccordionMemo />}
 
-               heading={<H1>Posts</H1>}
+               heading="Posts"
            >
                <PostList posts={posts} />
            </PageLayout>;

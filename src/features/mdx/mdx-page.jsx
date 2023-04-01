@@ -1,4 +1,4 @@
-import { A, BreadcrumbList, BreadcrumbItem, H1 } from "../../features/ui";
+import { A, BreadcrumbList, BreadcrumbItem } from "../../features/ui";
 import { PageLayout } from "../../features/layout";
 
 export const MdxPage = ({
@@ -18,7 +18,7 @@ export const MdxPage = ({
                        </BreadcrumbItem>
                    </BreadcrumbList>
                }
-               heading={<H1>{title}</H1>}>
+               heading={title}>
                {children}
            </PageLayout>;
 };

@@ -1,5 +1,5 @@
 import { graphql } from "gatsby";
-import { Card, H1, H2, Section } from "../features/ui";
+import { Card, H2, Section } from "../features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
          Post, PostPaging, Metadata, PostBreadcrumbs,
          useBlogPosting, useBreadcrumbList } from "../features/post";
@@ -46,11 +46,9 @@ const PostPage = ({ data }) => {
                             metadata={<Metadata {...post} />}
                         />}
                breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
-               heading={
-                   <>
-                       <H1>{title}</H1>
-                       <p style={{marginBlock: 0}}>{subtitle}</p>
-                   </>
+               heading={title}
+               subheading={
+                   <p style={{marginBlock: 0}}>{subtitle}</p>
                }
                notice={<Notice notice={notice} />}
                mainbar={

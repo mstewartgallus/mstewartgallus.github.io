@@ -16,3 +16,13 @@ h1.heading {
 h2.heading {
     font-size: calc(var(--ratio-1) * 1rem);
 }
+
+.heading {
+    outline-color: var(--highlight-text) ;
+    outline-offset: 0.26em ;
+    outline-width: 0.1ch ;
+}
+
+.heading:focus-visible {
+    outline-style: solid ;
+}

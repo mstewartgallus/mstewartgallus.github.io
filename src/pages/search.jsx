@@ -1,6 +1,6 @@
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "../features/search";
-import { A, H1, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "../features/ui";
+import { A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "../features/ui";
 import { PageLayout } from "../features/layout";
 import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
@@ -146,7 +146,7 @@ const SearchPage = ({location}) => {
                        </BreadcrumbItem>
                    </BreadcrumbList>
                }
-               heading={<H1><Heading query={query} /></H1>}
+               heading={<Heading query={query} />}
            >
                <ResultList links={state.links} />
            </PageLayout>;
