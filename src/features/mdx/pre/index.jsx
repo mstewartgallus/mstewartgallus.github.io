@@ -11,7 +11,7 @@ export const Pre = ({children, id, title}) => {
                    <figcaption className={figcaption}>
                        <span className={titleClass} id={caption}>{title}</span>
                        &emsp;
-                       <A className={autolink} href={`#${id}`} aria-describedby={caption}>Focus</A>
+                       <A id={focusId} className={autolink} href={`#${id}`} aria-describedby={caption}>Focus</A>
                    </figcaption>
                    <span aria-owns={focusId} />
                    <BarePre>

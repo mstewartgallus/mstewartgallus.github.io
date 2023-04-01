@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { useClient } from "../../features/util";
 import { Theme } from "../../features/ui";
 import { Loading, FocusProvider } from "../../features/layout";

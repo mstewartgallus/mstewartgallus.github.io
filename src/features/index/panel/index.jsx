@@ -1,8 +1,8 @@
 import { useId, useTransition, useCallback, createContext, useContext } from "react";
-import { useClient } from "../../features/util";
-import { Button, Card, H2 } from "../../features/ui";
-import { ClosedIcon } from "./closed-icon";
-import { OpenIcon } from "./open-icon";
+import { useClient } from "../../../features/util";
+import { Button, Card, H2 } from "../../../features/ui";
+import { ClosedIcon } from "../closed-icon";
+import { OpenIcon } from "../open-icon";
 import {
     button, insideHeading, details,
     wrapper, content
@@ -54,19 +54,16 @@ export const Panel = ({children, heading, value, onClick}) => {
     const serverOpen = server || open ;
 
     return <Card>
-               <H2>
-                   <div className={insideHeading}>
-                       <div className={button}>
-                           <Button id={buttonId}
-                                   aria-controls={contentId}
-                                   aria-expanded={String(open)}
-                                   onClick={onClickWrapper}>
-                               <DetailsTriangle open={open} />
-                           </Button>
-                       </div>
-                       <label id={titleId}
-                              htmlFor={buttonId}>{heading}</label>
-                   </div>
+               <H2 className={insideHeading}>
+                   <Button id={buttonId}
+                           className={button}
+                           aria-controls={contentId}
+                           aria-expanded={String(open)}
+                           onClick={onClickWrapper}>
+                       <DetailsTriangle open={open} />
+                   </Button>
+                   <label id={titleId}
+                          htmlFor={buttonId}>{heading}</label>
                </H2>
                <div className={wrapper}
                     aria-hidden={serverOpen ? null : "true"}

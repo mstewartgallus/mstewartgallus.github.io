@@ -18,15 +18,14 @@
         display: block ;
 
         position: absolute ;
-        translate: 0 -1.5em ;
+        transform: translateY(-1.5em) ;
         opacity: 0 ;
     }
 }
 
 .button {
     font-size: 1rem ;
-
-    display: contents ;
+    min-inline-size: 9ch ;
 }
 @media print {
     .button {
@@ -57,7 +56,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
     .content {
-        transition-property: opacity, translate ;
+        transition-property: opacity, transform ;
     }
 }
 

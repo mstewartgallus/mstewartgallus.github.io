@@ -22,13 +22,13 @@
 
 
 ::selection {
-    background-color: var(--selected-item, SelectedItem);
-    color: var(--selected-item-text, SelectedItemText);
+    background-color: var(--selected-item);
+    color: var(--selected-item-text);
 }
 
 mark {
-    background-color: var(--mark, Mark);
-    color: var(--mark-text, MarkText);
+    background-color: var(--mark);
+    color: var(--mark-text);
 }
 
 sub { font-variant-position: sub ; }
@@ -72,7 +72,7 @@ abbr {
 }
 
 :root {
-    background-color: var(--canvas, Canvas) ;
+    background-color: var(--canvas) ;
 }
 
 @import "./_vars.css";
