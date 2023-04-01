@@ -4,8 +4,12 @@
             calc(0.82rem + 7 * var(--t))
             1rem ;
         padding-block:
-            calc(var(--t) * var(--line-height))
+            calc(var(--t) * 2 * var(--line-height))
             calc(3 * var(--line)) ;
+    }
+
+    .layout {
+        margin-block-start: 1em ;
     }
 }
 
@@ -46,7 +50,7 @@
     padding-block: 0.4em ;
     padding-inline: 0.5em ;
     margin-block: 1em ;
-    margin-inline: 0.5em ;
+    margin-inline: 1em ;
 
     z-index: 9000 ;
 }

@@ -3,6 +3,7 @@ import { Ul, Li } from "../../../../features/ui";
 
 
 const FallbackContext = createContext();
+FallbackContext.displayName = 'Fallback';
 
 export const Fallback = () => {
     const fallback = useContext(FallbackContext);

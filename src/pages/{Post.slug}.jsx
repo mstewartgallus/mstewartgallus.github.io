@@ -4,10 +4,9 @@ import { Comments, ListNotice, Sidebar, SeoPostHead,
          Post, PostPaging, Metadata, PostBreadcrumbs,
          useBlogPosting, useBreadcrumbList } from "../features/post";
 import { PageLayout } from "../features/layout";
-import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
-import Title from "../components/title.jsx";
+import { useTitle } from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 
 const Notice = ({notice}) =>
@@ -26,9 +25,9 @@ const Foot = post => {
 export const Head = ({ data: { post } }) => {
     const { description, title, slug } = post;
     const url = useAbsolute(slug);
+    const fulltitle = useTitle(title);
     return <>
-               <HeadBasic/>
-               <Title>{title}</Title>
+               <title>{fulltitle}</title>
                <SeoBasic description={description} title={title} url={url} />
                <SeoPostHead {...post} />
                <Foot {...post} />

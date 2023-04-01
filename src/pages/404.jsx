@@ -1,17 +1,16 @@
 import { AlertLayout } from "../features/layout";
 import { H1, P } from "../features/ui";
-import HeadBasic from "../components/head-basic.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
-import Title from "../components/title.jsx";
+import { useTitle } from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 
 const title = "Page Not Found";
 
 export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
+    const fulltitle = useTitle(title);
     return <>
-               <HeadBasic />
-               <Title>{title}</Title>
+               <title>{fulltitle}</title>
                <SeoBasic title={title} url={url} />
            </>;
 };

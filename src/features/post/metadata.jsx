@@ -6,6 +6,7 @@ import { Set, SetItem } from "./set";
 import { time, address, dl, dt } from "./metadata.module.css";
 
 const DescContext = createContext(null);
+DescContext.displayName = 'Desc';
 
 const Desc = ({desc,children}) => {
     const id = useId();

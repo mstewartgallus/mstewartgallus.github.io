@@ -1,11 +1,12 @@
 import { useCallback, useRef, useId, useEffect } from "react";
 import { navigate } from "gatsby";
 import { Button, Card, Hgroup } from "../../../features/ui";
+import { useFocus } from "../listeners.jsx";
 import { dialog, header } from "./alert.module.css";
 
 export const AlertLayout = ({children, heading}) => {
+    const button = useFocus();
     const ref = useRef();
-    const button = useRef();
     const id = useId();
     useEffect(() => {
         const { current: dialog } = ref;

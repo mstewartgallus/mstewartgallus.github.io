@@ -1,12 +1,13 @@
+import { useLocation } from "@reach/router";
 import { A, BreadcrumbList, BreadcrumbItem } from "../../features/ui";
 import { PageLayout } from "../../features/layout";
 
 export const MdxPage = ({
     children,
-    location: { pathname },
     pageContext
 }) => {
-    const title = pageContext?.frontmatter?.title ?? pathname;
+    const location = useLocation();
+    const title = pageContext?.frontmatter?.title ?? location.pathname;
     return <PageLayout
                breadcrumbs={
                    <BreadcrumbList>

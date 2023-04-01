@@ -25,6 +25,7 @@ const DetailsTriangle = ({ open }) =>
 </IconItem>;
 
 const Context = createContext(null);
+Context.displayName = 'Accordion';
 
 export const Accordion = ({children, value}) =>
 <div>

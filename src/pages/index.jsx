@@ -1,3 +1,4 @@
+import { useLocation } from "@reach/router";
 import { memo, useCallback, useMemo, useReducer } from "react";
 import { Sidebar, Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
 import { useSearchURL } from "../features/route";
@@ -10,7 +11,6 @@ import {
     Header
 } from "../features/ui";
 import { PageLayout } from "../features/layout";
-import HeadBasic from "../components/head-basic.jsx";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import Title from "../components/title.jsx";
@@ -67,14 +67,18 @@ const AccordionMemo = memo(AccordionImpl);
 
 const title = "Table of Contents";
 
-export const Head = ({location: {pathname}}) => {
+const Seo = () => {
+    const { pathname } = useLocation();
     const url = useAbsolute(pathname);
+    return <SeoBasic title={title} url={url} />;
+};
+
+export const Head = () => {
     const json = useWebsite();
     return <>
-               <HeadBasic />
                <Title>{title}</Title>
                <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
-               <SeoBasic title={title} url={url} />
+               <Seo />
                <JsonLd srcdoc={json} />
            </>;
 };

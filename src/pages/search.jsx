@@ -1,8 +1,8 @@
+import { useLocation } from "@reach/router";
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "../features/search";
 import { A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "../features/ui";
 import { PageLayout } from "../features/layout";
-import HeadBasic from "../components/head-basic.jsx";
 import Title from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import { separator } from "../utils/separator.js";
@@ -65,8 +65,9 @@ const Heading = ({query}) =>
       "Search" :
       <>{query}{separator}Search</>;
 
-export const Head = ({location}) => {
+export const Head = () => {
     const [search, setSearch] = useState(null);
+    const location = useLocation();
     useEffect(() => {
         setSearch(location.search);
     }, [location]);
@@ -80,7 +81,6 @@ export const Head = ({location}) => {
     }, [search]);
 
     return <>
-               <HeadBasic />
                <Title>{title}</Title>
                <link rel="modulepreload" href="/static/pagefind/pagefind.js" />
                <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
@@ -90,7 +90,8 @@ export const Head = ({location}) => {
            </>;
 };
 
-const SearchPage = ({location}) => {
+const SearchPage = () => {
+    const location = useLocation();
     const [state, dispatch] = useReducer(reducer, initState);
     const [isPending, startTransition] = useTransition();
 

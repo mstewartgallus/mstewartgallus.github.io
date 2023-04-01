@@ -3,6 +3,7 @@ import { Checkbox } from "../checkbox";
 import { select, option, optionLabel } from "./select.module.css";
 
 const SelectContext = createContext(null);
+SelectContext.displayName = 'Select';
 
 export const Select = ({ name, children, onChange }) =>
 <fieldset className={select} onChange={onChange}>

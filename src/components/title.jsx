@@ -11,7 +11,7 @@ query {
   }
 }`);
 
-const useTitle = title => {
+export const useTitle = (...title) => {
     const results = useSiteTitle();
     return useMemo(() => {
         const { title: siteTitle } = results.site.siteMetadata;
@@ -20,7 +20,7 @@ const useTitle = title => {
 };
 
 export const Title = ({ children }) => {
-    const fullTitle = useTitle(Children.toArray(children));
+    const fullTitle = useTitle(...Children.toArray(children));
     return <title>{fullTitle}</title>;
 };
 
