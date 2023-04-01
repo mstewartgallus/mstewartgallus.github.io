@@ -15,7 +15,7 @@ export const MdxPage = ({
                            <A href="/">Home</A>
                        </BreadcrumbItem>
                        <BreadcrumbItem>
-                           <A aria-current="page">{title}</A>
+                           <span aria-current="page">{title}</span>
                        </BreadcrumbItem>
                    </BreadcrumbList>
                }

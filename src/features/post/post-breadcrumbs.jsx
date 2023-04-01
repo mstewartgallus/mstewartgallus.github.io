@@ -11,9 +11,7 @@ export const PostBreadcrumbs = ({category, title}) => {
                    <A rel="tag" href={cat}>{category}</A>
                </BreadcrumbItem>
                <BreadcrumbItem>
-                   <A aria-current="page">
-                       <Cite>{title}</Cite>
-                   </A>
+                   <Cite aria-current="page">{title}</Cite>
                </BreadcrumbItem>
            </BreadcrumbList>;
 };

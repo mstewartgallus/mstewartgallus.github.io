@@ -14,6 +14,7 @@ export const AlertLayout = ({children, heading}) => {
             return;
         }
 
+        dialog.close('closeformodal');
         dialog.showModal();
         return () => dialog.close('useEffect');
     }, []);
@@ -34,7 +35,8 @@ export const AlertLayout = ({children, heading}) => {
                    ref={ref}
                    aria-labelledby={id}
                    onClose={onClose}
-                   onCancel={onCancel}>
+                   onCancel={onCancel}
+                   open="open">
                <Card>
                    <main aria-labelledby={id}>
                        <header className={header}>

@@ -3,7 +3,7 @@ import { heading } from "./heading.module.css";
 
 const createHeading = Hn => {
     const name = Hn;
-    const Heading = ({children, className, ...props}, ref) =>
+    const Heading = ({children, className = '', ...props}, ref) =>
     <Hn ref={ref} className={`${heading} ${className}`} {...props}>
         {children}
     </Hn>;

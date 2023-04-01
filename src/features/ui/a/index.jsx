@@ -33,7 +33,7 @@ const useLinkProps = ({ href, target, download, ...props }) => {
     return { to, target, download, ...props };
 };
 
-const A = ({children, className, ...props}, ref) => {
+const A = ({children, className = '', ...props}, ref) => {
     const linkProps = useLinkProps(props);
     if (linkProps) {
         return <Link className={`${aClass} ${className}`} innerRef={ref} {...linkProps}>{children}</Link>;

@@ -4,7 +4,6 @@ import { Sidebar, Banner, Accordion, Panel, PostList, usePostList, usePosts, use
 import { useSearchURL } from "../features/route";
 import { SearchFormMini } from "../features/search";
 import {
-    A,
     BreadcrumbList, BreadcrumbItem,
     Card,
     H2,
@@ -110,7 +109,7 @@ const IndexPage = () => {
                breadcrumbs={
                    <BreadcrumbList>
                        <BreadcrumbItem>
-                           <A aria-current="page">Home</A>
+                           <span aria-current="page">Home</span>
                        </BreadcrumbItem>
                    </BreadcrumbList>
                }

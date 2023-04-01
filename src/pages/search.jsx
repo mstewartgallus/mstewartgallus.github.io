@@ -141,9 +141,9 @@ const SearchPage = () => {
                            <A href="/">Home</A>
                        </BreadcrumbItem>
                        <BreadcrumbItem>
-                           <A aria-current="page">
+                           <span aria-current="page">
                                Search
-                           </A>
+                           </span>
                        </BreadcrumbItem>
                    </BreadcrumbList>
                }
