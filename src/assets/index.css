@@ -5,6 +5,7 @@
     margin: 0 0 ;
 }
 
+/* polyfill inert */
 [inert] {
     cursor: default;
     pointer-events: none ;
@@ -12,6 +13,11 @@
 
 [inert], [inert] * {
     user-select: none ;
+}
+
+/* hack around gatsby focus */
+#gatsby-focus-wrapper, #___gatsby {
+    display: contents ;
 }
 
 
