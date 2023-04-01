@@ -16,18 +16,18 @@ export const AlertLayout = ({children, heading}) => {
 
         dialog.showModal();
         return () => dialog.close('useEffect');
-    }, [ref]);
+    }, []);
 
     const onClose = useCallback(async e => {
         e.preventDefault();
         if (e.target.returnValue !== 'back') {
             return;
         }
-        await navigate(-1);
+        await navigate('/');
     }, []);
     const onCancel = useCallback(async e => {
         e.preventDefault();
-        await navigate(-1);
+        await navigate('/');
     }, []);
     return <dialog className={dialog}
                    role="alertdialog"

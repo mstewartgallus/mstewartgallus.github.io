@@ -1,0 +1,16 @@
+.overlap {
+    display: grid ;
+}
+
+.wrapper {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+
+.wrapper {
+    z-index: 1000 ;
+}
+
+.wrapper[inert] {
+    z-index: -1000 ;
+}

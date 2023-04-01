@@ -1,6 +1,8 @@
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useClient } from "../../features/util";
 import { Theme } from "../../features/ui";
 import { Loading, FocusProvider } from "../../features/layout";
+import { overlap, wrapper } from "./layout.module.css";
 
 const options = {
     preventScroll: true,
@@ -37,15 +39,34 @@ const useFocus = () => {
     return ref;
 };
 
+const Wrapper = ({children, ...props}) =>
+<div className={wrapper} {...props}>
+    {children}
+</div>;
+
 const Layout = ({children}) => {
     const ref = useFocus();
-    return <FocusProvider value={ref}>
-               <Theme>
-                   <Suspense fallback={<Loading />}>
-                       {children}
-                   </Suspense>
-               </Theme>
-           </FocusProvider>;
+    const fake = useRef();
+    const client = useClient();
+    return <Theme>
+               <div className={overlap}>
+                   <FocusProvider value={ref}>
+                       <Wrapper>
+                           <Suspense fallback={<Loading />}>
+                               {children}
+                           </Suspense>
+                       </Wrapper>
+                   </FocusProvider>
+                   {
+                       client &&
+                           <FocusProvider ref={fake}>
+                               <Wrapper inert="inert">
+                                   <Loading />
+                               </Wrapper>
+                           </FocusProvider>
+                   }
+               </div>
+           </Theme>;
 };
 
 export const wrapPageElement = ({ element }) => <Layout>{element}</Layout>;

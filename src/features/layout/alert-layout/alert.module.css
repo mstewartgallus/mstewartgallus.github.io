@@ -12,3 +12,8 @@
     justify-content: space-between ;
     column-gap: 1em ;
 }
+
+.dialog::backdrop {
+    background-color: black ;
+    opacity: 80%;
+}
