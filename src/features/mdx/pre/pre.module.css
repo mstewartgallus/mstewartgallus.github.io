@@ -27,3 +27,9 @@
 .figure:focus {
     outline-style: solid ;
 }
+
+@media print {
+    .autolink {
+        display: none ;
+    }
+}

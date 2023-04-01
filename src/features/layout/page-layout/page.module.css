@@ -4,12 +4,8 @@
             calc(0.82rem + 7 * var(--t))
             1rem ;
         padding-block:
-            calc(var(--t) * 2 * var(--line-height))
+            calc(var(--t) * var(--line-height))
             calc(3 * var(--line)) ;
-    }
-
-    .layout {
-        margin-block-start: 1em ;
     }
 }
 
@@ -36,3 +32,30 @@
     position: relative ;
 }
 
+.skipLink {
+    display: block ;
+    white-space: nowrap ;
+
+    inset-block-start: 1em;
+    margin-block-start: 1em ;
+
+    background-color: var(--canvas);
+    box-sizing: border-box ;
+
+    padding-block: 0.4em ;
+    padding-inline: 0.5em ;
+
+    inline-size: fit-content ;
+
+    z-index: 9000 ;
+}
+
+.skipLink:focus {
+    position: sticky ;
+}
+
+@media print {
+    .skipLink {
+        display: none ;
+    }
+}

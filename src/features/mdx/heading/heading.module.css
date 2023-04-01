@@ -3,3 +3,9 @@
     column-gap: 1em ;
     font-style: inherit ;
 }
+
+@media print {
+    .autolink {
+        display: none ;
+    }
+}

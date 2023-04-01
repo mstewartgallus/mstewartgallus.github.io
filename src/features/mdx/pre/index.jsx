@@ -1,6 +1,6 @@
 import { useId, useRef } from "react"
 import { A, Pre as BarePre, Card } from "../../../features/ui";
-import { title as titleClass, figure, figcaption } from "./pre.module.css";
+import { autolink, title as titleClass, figure, figcaption } from "./pre.module.css";
 
 export const Pre = ({children, id, title}) => {
     const ref = useRef();
@@ -11,7 +11,7 @@ export const Pre = ({children, id, title}) => {
                    <figcaption className={figcaption}>
                        <span className={titleClass} id={caption}>{title}</span>
                        &emsp;
-                       <A href={`#${id}`} aria-describedby={caption}>Focus</A>
+                       <A className={autolink} href={`#${id}`} aria-describedby={caption}>Focus</A>
                    </figcaption>
                    <span aria-owns={focusId} />
                    <BarePre>
