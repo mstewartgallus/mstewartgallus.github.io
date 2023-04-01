@@ -17,7 +17,7 @@ export const Head = ({location: {pathname}}) => {
 
 const NotFoundPage = () =>
 <AlertLayout
-    heading={<H1>Page Not Found</H1>}>
+    heading={<H1 id="content">Page Not Found</H1>}>
     <P>Sorry the page you requested could not be found.</P>
 </AlertLayout>;
 

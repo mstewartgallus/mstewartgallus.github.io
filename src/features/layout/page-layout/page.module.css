@@ -36,21 +36,3 @@
     position: relative ;
 }
 
-.skipLink {
-    white-space: nowrap ;
-
-    position: fixed ;
-    display: block ;
-    inset-inline-start: 0;
-    inset-block-start: 0;
-
-    background-color: var(--canvas);
-    box-sizing: border-box ;
-
-    padding-block: 0.4em ;
-    padding-inline: 0.5em ;
-    margin-block: 1em ;
-    margin-inline: 1em ;
-
-    z-index: 9000 ;
-}

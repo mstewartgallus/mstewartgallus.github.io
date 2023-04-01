@@ -1,34 +1,52 @@
-import { Suspense } from "react";
-import { Theme } from "../../features/ui";
-import { Loading, FocusProvider } from "../../features/layout";
+import { Suspense, useMemo, useEffect, useRef } from "react";
+import { useLocation } from "@reach/router";
+import { Theme, A } from "../../features/ui";
+import { Assistive } from "../../features/util";
+import { Loading } from "../../features/layout";
+import { skipLink } from "./layout.module.css";
 
-const ref = { current: null };
+let isFresh = true;
 
-export const onRouteUpdate = ({location, prevLocation}) => {
-    if (!prevLocation) {
-        return;
-    }
+const SkipLink = () => {
+    const ref = useRef();
+    const location = useLocation();
+    const pathname = useMemo(() => location.pathname, [location]);
 
-    if (location.hash) {
-        return;
-    }
-
-    window.queueMicrotask(() => {
-        ref.current.focus({
-            preventScroll: true,
-            focusVisible: true
+    useEffect(() => {
+        if (isFresh) {
+            return;
+        }
+        let cancel = false;
+        window.queueMicrotask(() => {
+            if (cancel) {
+                return;
+            }
+            ref.current.focus({
+                preventScroll: true,
+                focusVisible: true
+            });
         });
-    });
+        return () => cancel = true;
+    }, [pathname]);
+    return <A ref={ref} className={skipLink} href="#content"
+              aria-describedby="content">Skip to content</A>;
 };
 
-export const wrapPageElement = ({ element, props }) =>
-<FocusProvider value={ref}>
-    <Theme>
-        <Suspense fallback={<Loading />}>
-            {element}
-        </Suspense>
-    </Theme>
-</FocusProvider>;
+const Layout = ({children}) =>
+<Theme>
+    <Assistive>
+        <SkipLink />
+    </Assistive>
+    <Suspense fallback={<Loading />}>
+        {children}
+    </Suspense>
+</Theme>;
+
+export const wrapPageElement = ({ element }) => <Layout>{element}</Layout>;
+
+export const onRouteUpdate = () => {
+    isFresh = false;
+};
 
 export const onPreRouteUpdate = () => {
 };

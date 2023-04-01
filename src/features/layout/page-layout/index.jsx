@@ -1,8 +1,6 @@
 import { useRef } from "react";
-import { A, Card, H1, H2, Hgroup, Nav, SidebarLayout } from "../../../features/ui";
-import { Assistive } from "../../../features/util";
-import { useFocus } from "../listeners.jsx";
-import { layout, skipLink } from "./page.module.css";
+import { Card, H1, H2, Hgroup, Nav, SidebarLayout } from "../../../features/ui";
+import { layout } from "./page.module.css";
 
 export const PageLayout = ({
     children,
@@ -13,13 +11,8 @@ export const PageLayout = ({
     sidebar,
     breadcrumbs
 }) => {
-    const skipLinkRef = useFocus();
     const content = useRef();
     return <div className={layout}>
-               <Assistive>
-                   <A className={skipLink} ref={skipLinkRef} href="#content"
-                      aria-describedby="content">Skip to content</A>
-               </Assistive>
                <SidebarLayout
                    sidebar={
                        <>
