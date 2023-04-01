@@ -30,15 +30,15 @@ export const AlertLayout = ({children, heading}) => {
         e.preventDefault();
         await navigate('/');
     }, []);
-    return <dialog className={dialog}
-                   role="alertdialog"
-                   ref={ref}
-                   aria-labelledby={id}
-                   onClose={onClose}
-                   onCancel={onCancel}
-                   open="open">
-               <Card>
-                   <main aria-labelledby={id}>
+    return <main aria-labelledby={id}>
+               <dialog className={dialog}
+                       role="alertdialog"
+                       ref={ref}
+                       aria-labelledby={id}
+                       onClose={onClose}
+                       onCancel={onCancel}
+                       open="open">
+                   <Card>
                        <header className={header}>
                            <Hgroup id={id}>
                                {heading}
@@ -48,9 +48,9 @@ export const AlertLayout = ({children, heading}) => {
                            </form>
                        </header>
                        {children}
-                   </main>
-               </Card>
-           </dialog>;
+                   </Card>
+               </dialog>
+           </main>;
 };
 
 export default AlertLayout;
