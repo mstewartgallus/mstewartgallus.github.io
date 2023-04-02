@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useRef } from "react";
-import { useClient } from "../../features/util";
+import { useClient, UnderProvider } from "../../features/util";
 import { Theme } from "../../features/ui";
 import { Loading, FocusProvider } from "../../features/layout";
 import { overlap, wrapper } from "./layout.module.css";
@@ -51,18 +51,22 @@ const Layout = ({children}) => {
     return <Theme>
                <div className={overlap}>
                    <FocusProvider value={ref}>
-                       <Wrapper>
-                           <Suspense fallback={<Loading />}>
-                               {children}
-                           </Suspense>
-                       </Wrapper>
+                       <UnderProvider value={false}>
+                           <Wrapper>
+                               <Suspense fallback={<Loading />}>
+                                   {children}
+                               </Suspense>
+                           </Wrapper>
+                       </UnderProvider>
                    </FocusProvider>
                    {
                        client &&
                            <FocusProvider ref={fake}>
-                               <Wrapper inert="inert">
-                                   <Loading />
-                               </Wrapper>
+                               <UnderProvider value={true}>
+                                   <Wrapper inert="inert">
+                                       <Loading />
+                                   </Wrapper>
+                               </UnderProvider>
                            </FocusProvider>
                    }
                </div>
