@@ -1,13 +1,25 @@
 import { useCallback, useRef, useEffect } from "react";
 import { navigate } from "gatsby";
+import { useFocus } from "../../../features/util";
 import { Button, Card, Hgroup } from "../../../features/ui";
-import { useFocus } from "../listeners.jsx";
 import { H1 } from "../h1.jsx";
 import { dialog, header } from "./alert.module.css";
 
+const options = {
+    preventScroll: true,
+    focusVisible: true
+};
+
 const CloseButton = ({children, ...props}) => {
-    const button = useFocus();
-    return <Button ref={button} {...props}>{children}</Button>;
+    const ref = useRef();
+    const focus = useFocus();
+    useEffect(() => {
+        if (!focus) {
+            return;
+        }
+        ref.current.focus(options);
+    }, [focus]);
+    return <Button ref={ref} {...props}>{children}</Button>;
 };
 
 const Dialog = ({children, ...props}) => {

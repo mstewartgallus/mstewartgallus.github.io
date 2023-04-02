@@ -1,8 +1,25 @@
+import { useEffect, useRef } from "react";
+import { useFocus } from "../../../features/util";
 import { A } from "../../../features/ui";
-import { useFocus } from "../listeners.jsx";
 import { skipLink } from "./skip-a.module.css";
 
-export const SkipA = ({children, className = '', ...props}) => {
+const options = {
+    preventScroll: true,
+    focusVisible: true
+};
+
+const useFocusRef = ref => {
     const focus = useFocus();
-    return <A className={`${skipLink} ${className}`} ref={focus} {...props}>{children}</A>;
+    useEffect(() => {
+        if (!focus) {
+            return;
+        }
+        ref.current.focus(options);
+    }, [focus, ref]);
+};
+
+export const SkipA = ({children, className = '', ...props}) => {
+    const ref = useRef();
+    useFocusRef(ref);
+    return <A className={`${skipLink} ${className}`} ref={ref} {...props}>{children}</A>;
 };

@@ -1,34 +1,21 @@
-import { Suspense, useEffect, useRef } from "react";
-import { useClient, UnderProvider } from "../../features/util";
+import { Suspense, useEffect, useState } from "react";
+import { useClient, UnderProvider, PrevLocationProvider } from "../../features/util";
 import { Theme } from "../../features/ui";
-import { Loading, FocusProvider } from "../../features/layout";
+import { Loading } from "../../features/layout";
 import { overlap, wrapper } from "./layout.module.css";
-
-const options = {
-    preventScroll: true,
-    focusVisible: true
-};
 
 const callbacks = new Set();
 
-const useFocus = () => {
-    const ref = useRef();
+const usePrevLocation = () => {
+    const [prevLocation, setState] = useState(null);
     useEffect(() => {
         let ignore = false;
-        const callback = ({prevLocation, location}) => {
+        const callback = ({prevLocation}) => {
             if (ignore) {
                 return;
             }
 
-            if (!prevLocation) {
-                return;
-            }
-
-            if (prevLocation.pathname === location.pathname && location.hash) {
-                return;
-            }
-
-            ref.current.focus(options);
+            setState(prevLocation);
         };
         callbacks.add(callback);
         return () => {
@@ -36,7 +23,7 @@ const useFocus = () => {
             callbacks.delete(callback);
         };
     }, []);
-    return ref;
+    return prevLocation;
 };
 
 const Wrapper = ({children, ...props}) =>
@@ -45,12 +32,11 @@ const Wrapper = ({children, ...props}) =>
 </div>;
 
 const Layout = ({children}) => {
-    const ref = useFocus();
-    const fake = useRef();
+    const prevLocation = usePrevLocation();
     const client = useClient();
-    return <Theme>
-               <div className={overlap}>
-                   <FocusProvider value={ref}>
+    return <PrevLocationProvider value={prevLocation}>
+               <Theme>
+                   <div className={overlap}>
                        <UnderProvider value={false}>
                            <Wrapper>
                                <Suspense fallback={<Loading />}>
@@ -58,19 +44,17 @@ const Layout = ({children}) => {
                                </Suspense>
                            </Wrapper>
                        </UnderProvider>
-                   </FocusProvider>
-                   {
-                       client &&
-                           <FocusProvider ref={fake}>
+                       {
+                           client &&
                                <UnderProvider value={true}>
                                    <Wrapper inert="inert">
                                        <Loading />
                                    </Wrapper>
                                </UnderProvider>
-                           </FocusProvider>
-                   }
-               </div>
-           </Theme>;
+                       }
+                   </div>
+               </Theme>
+           </PrevLocationProvider>;
 };
 
 export const wrapPageElement = ({ element }) => <Layout>{element}</Layout>;
