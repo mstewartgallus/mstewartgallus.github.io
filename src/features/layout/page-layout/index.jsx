@@ -1,18 +1,7 @@
-import { useUnder } from "../../../features/util";
-import { A, Card, H1 as UiH1, H2, Hgroup, Nav, SidebarLayout } from "../../../features/ui";
-import { useFocus } from "../listeners.jsx";
-import { layout, skipLink } from "./page.module.css";
-
-const SkipLink = ({children, ...props}) => {
-    const ref = useFocus();
-    return <A className={skipLink} ref={ref} {...props}>{children}</A>;
-};
-
-const H1 = ({children, id, tabIndex = "-1", ...props}) => {
-    const under = useUnder();
-    id = id ?? (under ? null : "content");
-    return <UiH1 tabIndex={tabIndex} id={id} {...props}>{children}</UiH1>;
-};
+import { Card, H2, Hgroup, Nav, SidebarLayout } from "../../../features/ui";
+import { H1 } from "../h1.jsx";
+import { SkipA } from "../skip-a";
+import { layout } from "./page.module.css";
 
 export const PageLayout = ({
     children,
@@ -24,9 +13,7 @@ export const PageLayout = ({
     breadcrumbs
 }) =>
 <div className={layout}>
-    <SkipLink
-        aria-describedby="content"
-        href="#content">Skip to Content</SkipLink>
+    <SkipA aria-describedby="content" href="#content">Skip to Content</SkipA>
     <SidebarLayout
         sidebar={
             <>

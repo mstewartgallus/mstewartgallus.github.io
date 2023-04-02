@@ -1,5 +1,5 @@
 import { AlertLayout } from "../features/layout";
-import { H1, P } from "../features/ui";
+import { P } from "../features/ui";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
@@ -16,8 +16,7 @@ export const Head = ({location: {pathname}}) => {
 };
 
 const NotFoundPage = () =>
-<AlertLayout
-    heading={<H1 id="content">Page Not Found</H1>}>
+<AlertLayout heading="Page Not Found">
     <P>Sorry the page you requested could not be found.</P>
 </AlertLayout>;
 

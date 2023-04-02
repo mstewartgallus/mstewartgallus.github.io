@@ -1,13 +1,17 @@
-import { useCallback, useRef, useId, useEffect } from "react";
+import { useCallback, useRef, useEffect } from "react";
 import { navigate } from "gatsby";
 import { Button, Card, Hgroup } from "../../../features/ui";
 import { useFocus } from "../listeners.jsx";
+import { H1 } from "../h1.jsx";
 import { dialog, header } from "./alert.module.css";
 
-export const AlertLayout = ({children, heading}) => {
+const CloseButton = ({children, ...props}) => {
     const button = useFocus();
+    return <Button ref={button} {...props}>{children}</Button>;
+};
+
+const Dialog = ({children, ...props}) => {
     const ref = useRef();
-    const id = useId();
     useEffect(() => {
         const { current: dialog } = ref;
         if (!dialog) {
@@ -30,27 +34,32 @@ export const AlertLayout = ({children, heading}) => {
         e.preventDefault();
         await navigate('/');
     }, []);
-    return <main aria-labelledby={id}>
-               <dialog className={dialog}
-                       role="alertdialog"
-                       ref={ref}
-                       aria-labelledby={id}
-                       onClose={onClose}
-                       onCancel={onCancel}
-                       open="open">
-                   <Card>
-                       <header className={header}>
-                           <Hgroup id={id}>
-                               {heading}
-                           </Hgroup>
-                           <form method="dialog">
-                               <Button ref={button} value="back">Back</Button>
-                           </form>
-                       </header>
-                       {children}
-                   </Card>
-               </dialog>
-           </main>;
+    return <dialog className={dialog}
+                   ref={ref}
+                   onClose={onClose}
+                   onCancel={onCancel}
+                   open="open"
+                   {...props}>
+               {children}
+           </dialog>;
 };
+
+export const AlertLayout = ({children, heading}) =>
+<main aria-labelledby="content">
+    <Dialog role="alertdialog"
+            aria-labelledby="content">
+        <Card>
+            <header className={header}>
+                <Hgroup>
+                    <H1>{heading}</H1>
+                </Hgroup>
+                <form method="dialog">
+                    <CloseButton value="back">Back</CloseButton>
+                </form>
+            </header>
+            {children}
+        </Card>
+    </Dialog>
+</main>;
 
 export default AlertLayout;
