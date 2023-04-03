@@ -1,4 +1,7 @@
 .query {
+    border: 0;
+    padding: 0;
+    margin: 0;
     display: flex ;
     column-gap: 1em ;
     flex-wrap: wrap ;

@@ -1,9 +1,9 @@
 import { useLocation } from "@reach/router";
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "../features/search";
-import { A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "../features/ui";
-import { PageLayout } from "../features/layout";
-import Title from "../components/title.jsx";
+import { Ul, Li, A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "../features/ui";
+import { PageLayout, SkipA } from "../features/layout";
+import { useTitle } from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import { separator } from "../utils/separator.js";
 
@@ -62,8 +62,17 @@ const parseParams = search => {
 
 const Heading = ({query}) =>
       (query === '' || !query) ?
-      "Search" :
-      <>{query}{separator}Search</>;
+      "Results" :
+      <>{query}{separator}Results</>;
+
+const TableOfContents = () =>
+<Ul>
+    <Li>
+        <SkipA aria-describedby="content" href="#content">Skip to Content</SkipA>
+    </Li>
+    <Li><A href="#search">Search</A></Li>
+    <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+</Ul>;
 
 export const Head = () => {
     const [search, setSearch] = useState(null);
@@ -75,13 +84,14 @@ export const Head = () => {
     const title = useMemo(() => {
         const s = parseParams(search)?.s;
         if (s === '' || !s) {
-            return 'Search';
+            return [];
         }
-        return [s, 'Search'];
+        return [];
     }, [search]);
 
+    const fulltitle = useTitle(...title, 'Search');
     return <>
-               <Title>{title}</Title>
+               <title>{fulltitle}</title>
                <link rel="modulepreload" href="/static/pagefind/pagefind.js" />
                <link rel="preload" href="/static/pagefind/wasm.en.pagefind"
                      as="fetch" crossOrigin="crossOrigin"
@@ -121,9 +131,10 @@ const SearchPage = () => {
     const query = params?.s;
 
     return <PageLayout
+               tableOfContents={<TableOfContents />}
                sidebar={
                    <Card>
-                       <Search heading={<H2>Search</H2>}>
+                       <Search heading={<H2 id="search" tabIndex="-1">Search</H2>}>
                            <SearchForm action="/search"
                                        onSubmit={onSubmit}
 

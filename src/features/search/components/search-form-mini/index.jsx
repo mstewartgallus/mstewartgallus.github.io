@@ -6,11 +6,11 @@ export const SearchFormMini = ({action, onSubmit}) => {
     const id = useId();
 
     return <form rel="search" action={action} onSubmit={onSubmit}>
-               <div className={query}>
+               <fieldset className={query}>
                    <label htmlFor={id}>Query</label>
                    <Input id={id} name="s" type="search" required />
                    <Button type="submit">Search</Button>
-               </div>
+               </fieldset>
            </form>;
 };
 

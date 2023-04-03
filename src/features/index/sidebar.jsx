@@ -1,10 +1,19 @@
-import { Search, Card, H2 } from "../../features/ui";
+import { Assistive } from "../../features/util";
+import { Search } from "../../features/polyfill";
+import { Hgroup, Card, H2 } from "../../features/ui";
 
 export const Sidebar = ({children, search}) =>
 <>
     {children}
     <Card>
-        <Search heading={<H2>Search</H2>}>
+        <Search aria-describedby="search">
+            <Assistive>
+                <header>
+                    <Hgroup>
+                        <H2 id="search" tabIndex="-1">Search</H2>
+                    </Hgroup>
+                </header>
+            </Assistive>
             {search}
         </Search>
     </Card>

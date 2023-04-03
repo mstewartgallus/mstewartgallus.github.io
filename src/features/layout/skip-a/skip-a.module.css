@@ -1,27 +1,24 @@
 .skipLink {
-    display: block ;
-    white-space: nowrap ;
+    display: flow-root ;
 
-    inset-block-start: 1em;
-    margin-block-start: 1em ;
+    inset-block-start: calc(4 * var(--line));
+    inset-inline-start: 4em ;
 
     background-color: var(--canvas);
     box-sizing: border-box ;
 
-    padding-block: 0.4em ;
-    padding-inline: 0.5em ;
-
+    border-radius: 1ch ;
     inline-size: fit-content ;
 
     z-index: 9000 ;
 }
 
-.skipLink:focus {
-    position: sticky ;
+.skipLink:focus-within {
+    position: fixed ;
 }
 
-@media print {
-    .skipLink {
-        display: none ;
-    }
+.wrapper {
+    display: flex ;
+    min-block-size: var(--line);
+    min-inline-size: 10ch ;
 }

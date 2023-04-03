@@ -54,7 +54,7 @@ export const Panel = ({children, heading, value, onClick}) => {
     const serverOpen = server || open ;
 
     return <Card>
-               <H2 className={insideHeading}>
+               <H2 id={heading} tabIndex="-1" className={insideHeading}>
                    <Button id={buttonId}
                            className={button}
                            aria-controls={contentId}

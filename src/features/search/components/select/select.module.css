@@ -9,6 +9,7 @@
     border-inline-start-style: dashed ;
     border-width: 0.1em ;
 
+    padding-block:0;
     padding-inline-start: 1em;
     margin-block: var(--line) ;
 

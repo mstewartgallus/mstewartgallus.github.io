@@ -1,9 +1,9 @@
 import { graphql } from "gatsby";
-import { Card, H2, Section } from "../features/ui";
+import { Ul, Li, A, Card, H2, Section } from "../features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
          Post, PostPaging, Metadata, PostBreadcrumbs,
          useBlogPosting, useBreadcrumbList } from "../features/post";
-import { PageLayout } from "../features/layout";
+import { PageLayout, SkipA } from "../features/layout";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -22,6 +22,25 @@ const Foot = post => {
            </>;
 };
 
+const TableOfContents = ({ headings }) =>
+<Ul>
+    <Li>
+        <SkipA aria-describedby="content" href="#content">Skip to Content</SkipA>
+        {
+            headings &&
+                <Ul>
+                    {
+                        headings.map(({url, title}) =>
+                            <Li key={url}><A href={url}>{title}</A></Li>)
+                    }
+                </Ul>
+        }
+    </Li>
+    <Li><A href="#paging">Paging</A></Li>
+    <Li><A href="#metadata">Metadata</A></Li>
+    <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+</Ul>;
+
 export const Head = ({ data: { post } }) => {
     const { description, title, slug } = post;
     const url = useAbsolute(slug);
@@ -35,11 +54,13 @@ export const Head = ({ data: { post } }) => {
 };
 
 const PostPage = ({ data }) => {
-    const { post } = data;
+    const { post, postMdx } = data;
     const { comments, notice,
             category, subtitle, title, childrenLink
           } = post;
+    const headings = postMdx?.mdx?.tableOfContents?.items;
     return <PageLayout
+               tableOfContents={<TableOfContents headings={headings} />}
                sidebar={<Sidebar
                             paging={<PostPaging childrenLink={childrenLink} />}
                             metadata={<Metadata {...post} />}
@@ -53,7 +74,7 @@ const PostPage = ({ data }) => {
                mainbar={
                    comments &&
                        <Card>
-                           <Section heading={<H2>Comments</H2>}>
+                           <Section heading={<H2 tabIndex="-1">Comments</H2>}>
                                <Comments host={comments.host} id={comments.id} />
                            </Section>
                        </Card>
@@ -70,6 +91,9 @@ query PostById($id: String!) {
   postMdx(post:{id: {eq:$id}}) {
     sourceInstanceName
     relativePath
+    mdx {
+      tableOfContents(maxDepth: 2)
+    }
   }
   postPoem(post:{id: {eq:$id}}) {
     poem {

@@ -20,9 +20,12 @@ h2.heading {
 .heading {
     outline-color: var(--highlight-text) ;
     outline-offset: 0.26em ;
-    outline-width: 0.1ch ;
+    outline-width: 0.05ch ;
 }
 
-.heading:focus-visible {
+.heading:focus {
     outline-style: solid ;
+}
+.heading:focus-visible {
+    outline-width: 0.1ch ;
 }

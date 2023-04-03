@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useFocus } from "../../../features/util";
 import { A } from "../../../features/ui";
-import { skipLink } from "./skip-a.module.css";
+import { wrapper, skipLink } from "./skip-a.module.css";
 
 const options = {
     preventScroll: true,
@@ -18,8 +18,14 @@ const useFocusRef = ref => {
     }, [focus, ref]);
 };
 
-export const SkipA = ({children, className = '', ...props}) => {
+export const SkipA = ({children, ...props}) => {
     const ref = useRef();
     useFocusRef(ref);
-    return <A className={`${skipLink} ${className}`} ref={ref} {...props}>{children}</A>;
+    // Fix space hack
+    return <div className={wrapper}>
+               <div className={skipLink}>
+                   <A ref={ref} {...props}>{children}</A>
+               </div>
+               &emsp;
+           </div>;
 };

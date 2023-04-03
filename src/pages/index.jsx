@@ -1,18 +1,20 @@
 import { useLocation } from "@reach/router";
-import { memo, useCallback, useMemo, useReducer } from "react";
+import { useCallback, useMemo, useReducer } from "react";
 import { Sidebar, Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
 import { useSearchURL } from "../features/route";
 import { SearchFormMini } from "../features/search";
 import {
     BreadcrumbList, BreadcrumbItem,
     Card,
+    A,
     H2,
+    Ul, Li,
     Header
 } from "../features/ui";
-import { PageLayout } from "../features/layout";
+import { PageLayout, SkipA } from "../features/layout";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
-import Title from "../components/title.jsx";
+import { useTitle } from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 import useSiteMetadata from "../hooks/use-site-metadata.js";
 import { useSubmit } from "../hooks/use-submit.js";
@@ -48,9 +50,7 @@ const Panels = ({posts, onClick}) => useMemo(() => Object.entries(posts).map(([c
         </Panel>
     );
 
-const AccordionImpl = () => {
-    const postsByCategory = usePostList();
-
+const AccordionImpl = ({posts}) => {
     const [state, dispatch] = useReducer(reducer, initState);
 
     const onClick = useCallback((category, e) => {
@@ -58,11 +58,9 @@ const AccordionImpl = () => {
     }, []);
 
     return <Accordion value={state}>
-               <Panels posts={postsByCategory} onClick={onClick} />
+               <Panels posts={posts} onClick={onClick} />
            </Accordion>;
 };
-
-const AccordionMemo = memo(AccordionImpl);
 
 const title = "Table of Contents";
 
@@ -72,10 +70,27 @@ const Seo = () => {
     return <SeoBasic title={title} url={url} />;
 };
 
+const TableOfContents = ({posts}) =>
+<Ul>
+    <Li>
+        <SkipA aria-describedby="content" href="#content">Skip to Content</SkipA>
+        <Ul>
+            {
+                posts.map(category =>
+                    <Li key={category}><A href={`#${category}`}>{category}</A></Li>)
+            }
+        </Ul>
+    </Li>
+    <Li><A href="#banner">Banner</A></Li>
+    <Li><A href="#search">Search</A></Li>
+    <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+</Ul>;
+
 export const Head = () => {
     const json = useWebsite();
+    const fulltitle = useTitle(title);
     return <>
-               <Title>{title}</Title>
+               <title>{fulltitle}</title>
                <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
                <Seo />
                <JsonLd srcdoc={json} />
@@ -87,7 +102,10 @@ const IndexPage = () => {
     const { title, description } = useSiteMetadata();
     const onSubmit = useSubmit();
     const search = useSearchURL();
+    const postsByCategory = usePostList();
+
     return <PageLayout
+               tableOfContents={<TableOfContents posts={Object.keys(postsByCategory)} />}
                sidebar={
                    <Sidebar
                        search={
@@ -98,7 +116,7 @@ const IndexPage = () => {
                            <Header
                                heading={
                                    <>
-                                       <H2>{title}</H2>
+                                       <H2 tabIndex="-1" id="banner">{title}</H2>
                                        <p style={{marginBlock:0}}>{description}</p>
                                    </>}>
                                <Banner />
@@ -113,7 +131,7 @@ const IndexPage = () => {
                        </BreadcrumbItem>
                    </BreadcrumbList>
                }
-               mainbar={<AccordionMemo />}
+               mainbar={<AccordionImpl posts={postsByCategory} />}
 
                heading="Posts"
            >

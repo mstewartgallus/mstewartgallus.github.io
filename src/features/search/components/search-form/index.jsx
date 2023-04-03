@@ -1,19 +1,26 @@
 import { useId, useCallback, useMemo } from "react";
 import { Input, Button } from "../../../../features/ui";
+import { Legend } from "../../components/legend";
 import { Select, Option } from "../../components/select";
-import { legend as legendClass, query } from "./search-form.module.css";
+import { query, queryContent } from "./search-form.module.css";
 
 const Query = ({value, onChange}) => {
     const id = useId();
 
-    return <div className={query}>
-               <label htmlFor={id}>Query</label>
-               <Input id={id} name="s" type="search"
-                      value={value}
-                      onChange={onChange}
-               />
-               <Button type="submit">Search</Button>
-           </div>;
+    return <fieldset className={query}>
+               <Legend>Basic</Legend>
+               <div className={queryContent}>
+                   <label htmlFor={id}>
+                       Query
+                   </label>
+                   <Input id={id}
+                          name="s" type="search"
+                          value={value}
+                          onChange={onChange}
+                   />
+                   <Button type="submit">Search</Button>
+               </div>
+           </fieldset>;
 };
 
 const Options = ({options, onChange, selected}) => useMemo(() => options.map(option => {
@@ -57,7 +64,7 @@ const Selects = ({
     selected,
     onChange
 }) => <Select key={name} name={name}>
-          <legend className={legendClass}>{legend}</legend>
+          <Legend>{legend}</Legend>
           <Options options={options} selected={selected} onChange={onChange} />
       </Select>);
 

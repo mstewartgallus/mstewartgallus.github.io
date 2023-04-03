@@ -1,3 +1,4 @@
 .card {
     margin-block: var(--line) ;
+    clear: both ;
 }
