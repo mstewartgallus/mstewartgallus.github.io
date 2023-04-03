@@ -1,5 +1,5 @@
-import { A, Hgroup } from "../../../features/ui";
 import {
+    A, Hgroup,
     H1 as UiH1, H2 as UiH2, H3 as UiH3,
     H4 as UiH4, H5 as UiH5, H6 as UiH6
 } from "../../../features/ui";
@@ -17,7 +17,7 @@ const createAutoLink = Hn => {
                    </Hgroup>
                    {
                        href &&
-                           <A  className={autolink} href={href} aria-describedby={id}>#</A>
+                           <A className={autolink} href={href} aria-describedby={id}>#</A>
                    }
                </header>;
     };

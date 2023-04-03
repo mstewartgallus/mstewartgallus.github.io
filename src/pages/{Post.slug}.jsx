@@ -62,7 +62,7 @@ const PostPage = ({ data }) => {
                mainbar={
                    comments &&
                        <Card>
-                           <Section heading={<H2 tabIndex="-1">Comments</H2>}>
+                           <Section heading={<H2 id="comments" tabIndex="-1">Comments</H2>}>
                                <Comments host={comments.host} id={comments.id} />
                            </Section>
                        </Card>

@@ -101,7 +101,6 @@ const IndexPage = () => {
     const onSubmit = useSubmit();
     const search = useSearchURL();
     const postsByCategory = usePostList();
-
     return <PageLayout
                tableOfContents={<TableOfContents posts={Object.keys(postsByCategory)} />}
                sidebar={

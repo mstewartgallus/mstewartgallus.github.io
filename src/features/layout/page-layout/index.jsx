@@ -68,7 +68,6 @@ export const PageLayout = ({
         </Card>
         {mainbar}
     </SidebarLayout>
-
 </div>;
 
 export default PageLayout;

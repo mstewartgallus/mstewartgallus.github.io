@@ -1,12 +1,18 @@
 import { forwardRef } from "react";
+import { useUnder } from "../../../features/util";
 import { heading } from "./heading.module.css";
 
 const createHeading = Hn => {
     const name = Hn;
-    const Heading = ({children, className = '', ...props}, ref) =>
-    <Hn className={`${heading} ${className}`} {...props} ref={ref}>
-        {children}
-    </Hn>;
+    const Heading = ({children, id, className = '', ...props}, ref) => {
+        const under = useUnder();
+        if (under) {
+            id = null;
+        }
+        return <Hn className={`${heading} ${className}`} id={id} {...props} ref={ref}>
+            {children}
+        </Hn>;
+    };
     Heading.displayName = `createHeading(${name})`;
     return forwardRef(Heading);
 };

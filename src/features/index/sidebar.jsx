@@ -17,6 +17,6 @@ export const Sidebar = ({children, search}) =>
             {search}
         </Search>
     </Card>
-</>;
+    </>;
 
 export default Sidebar;
