@@ -1,9 +1,9 @@
-import { H1, P } from "../../features/ui";
+import { P } from "../../features/ui";
 import { PageLayout } from "./page-layout";
 
 export const Loading = () =>
-<PageLayout heading={<H1>Loading...</H1>}>
-    <P>Loading...</P>
+<PageLayout heading={<>Loading&hellip;</>}>
+    <P>Loading&hellip;</P>
 </PageLayout>;
 
 export default Loading;

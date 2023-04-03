@@ -7,13 +7,14 @@
     background-color: var(--canvas);
     box-sizing: border-box ;
 
-    border-radius: 1ch ;
+    border-radius: 0.7ch ;
     inline-size: fit-content ;
 
     z-index: 9000 ;
 }
 
-.skipLink:focus-within {
+.skipLink:focus-visible {
+    outline-offset: 0.7em ;
     position: fixed ;
 }
 

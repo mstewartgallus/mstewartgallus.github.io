@@ -45,17 +45,16 @@ export const Panel = ({children, heading, value, onClick}) => {
     const selected = useContext(Context);
     const server = !useClient();
 
-    const contentId = `${id}-content`;
     const titleId = `${id}-title`;
-    const buttonId = `${id}-button`;
+    const contentId = `${id}-content`;
 
     // Force open panels on server for better degradation
     const open = selected === value;
     const serverOpen = server || open ;
 
     return <Card>
-               <H2 id={heading} tabIndex="-1" className={insideHeading}>
-                   <Button id={buttonId}
+               <H2 className={insideHeading}>
+                   <Button id={heading}
                            className={button}
                            aria-controls={contentId}
                            aria-expanded={String(open)}
@@ -63,7 +62,7 @@ export const Panel = ({children, heading, value, onClick}) => {
                        <DetailsTriangle open={open} />
                    </Button>
                    <label id={titleId}
-                          htmlFor={buttonId}>{heading}</label>
+                          htmlFor={heading}>{heading}</label>
                </H2>
                <div className={wrapper}
                     aria-hidden={serverOpen ? null : "true"}

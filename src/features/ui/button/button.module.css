@@ -18,11 +18,14 @@
 
     outline-color: var(--highlight-text) ;
     outline-offset: 0.2em ;
-    outline-width: 0.2em ;
+    outline-width: 0.2ch ;
 }
 
-.button:focus-visible {
+.button:focus {
     outline-style: solid ;
+}
+.button:focus-visible {
+    outline-width: 0.2em ;
 }
 
 .button[aria-expanded="true"] {

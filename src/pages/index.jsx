@@ -71,20 +71,18 @@ const Seo = () => {
 };
 
 const TableOfContents = ({posts}) =>
-<Ul>
-    <Li>
-        <SkipA aria-describedby="content" href="#content">Skip to Content</SkipA>
-        <Ul>
-            {
-                posts.map(category =>
-                    <Li key={category}><A href={`#${category}`}>{category}</A></Li>)
-            }
-        </Ul>
-    </Li>
-    <Li><A href="#banner">Banner</A></Li>
-    <Li><A href="#search">Search</A></Li>
-    <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-</Ul>;
+      <>
+          <SkipA aria-describedby="content" href="#content">Posts</SkipA>
+          <Ul>
+              {
+                  posts.map(category =>
+                      <Li key={category}><A href={`#${category}`}>{category}</A></Li>)
+              }
+              <Li><A href="#banner" aria-describedby="banner">Common</A></Li>
+              <Li><A href="#search">Search</A></Li>
+              <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+          </Ul>
+      </>;
 
 export const Head = () => {
     const json = useWebsite();

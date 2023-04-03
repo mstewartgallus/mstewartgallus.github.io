@@ -2,13 +2,13 @@ import { useLocation } from "@reach/router";
 import { A, Ul, Li, BreadcrumbList, BreadcrumbItem } from "../../features/ui";
 import { SkipA, PageLayout } from "../../features/layout";
 
-const TableOfContents = () =>
-<Ul>
-    <Li>
-        <SkipA aria-describedby="content" href="#content">Skip to Content</SkipA>
-    </Li>
-    <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-</Ul>;
+const TableOfContents = ({heading}) =>
+      <>
+          <SkipA href="#content">{heading}</SkipA>
+          <Ul>
+              <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+          </Ul>
+      </>;
 
 export const MdxPage = ({
     children,
@@ -18,7 +18,7 @@ export const MdxPage = ({
     const location = useLocation();
     const title = pageContext?.frontmatter?.title ?? location.pathname;
     return <PageLayout
-               tableofContents={<TableOfContents />}
+               tableofContents={<TableOfContents heading={title} />}
                breadcrumbs={
                    <BreadcrumbList>
                        <BreadcrumbItem>

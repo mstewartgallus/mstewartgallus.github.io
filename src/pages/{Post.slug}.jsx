@@ -12,44 +12,32 @@ import useAbsolute from "../hooks/use-absolute.js";
 const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
 
-const Foot = post => {
-    const breadcrumbList = useBreadcrumbList(post);
-    const blogPosting = useBlogPosting(post);
-
-    return <>
-               <JsonLd srcdoc={breadcrumbList} />
-               <JsonLd srcdoc={blogPosting} />
-           </>;
-};
-
-const TableOfContents = ({ headings }) =>
-<Ul>
-    <Li>
-        <SkipA aria-describedby="content" href="#content">Skip to Content</SkipA>
-        {
-            headings &&
-                <Ul>
-                    {
-                        headings.map(({url, title}) =>
-                            <Li key={url}><A href={url}>{title}</A></Li>)
-                    }
-                </Ul>
-        }
-    </Li>
-    <Li><A href="#paging">Paging</A></Li>
-    <Li><A href="#metadata">Metadata</A></Li>
-    <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-</Ul>;
+const TableOfContents = ({ title,  headings = [] }) =>
+      <>
+          <SkipA aria-describedby="content" href="#content">{title}</SkipA>
+          <Ul>
+              {
+                  headings.map(({url, title}) =>
+                      <Li key={url}><A href={url}>{title}</A></Li>)
+              }
+              <Li><A href="#paging">Paging</A></Li>
+              <Li><A href="#metadata">Metadata</A></Li>
+              <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+          </Ul>
+      </>;
 
 export const Head = ({ data: { post } }) => {
     const { description, title, slug } = post;
     const url = useAbsolute(slug);
     const fulltitle = useTitle(title);
+    const breadcrumbList = useBreadcrumbList(post);
+    const blogPosting = useBlogPosting(post);
     return <>
                <title>{fulltitle}</title>
                <SeoBasic description={description} title={title} url={url} />
                <SeoPostHead {...post} />
-               <Foot {...post} />
+               <JsonLd srcdoc={breadcrumbList} />
+               <JsonLd srcdoc={blogPosting} />
            </>;
 };
 
@@ -60,7 +48,7 @@ const PostPage = ({ data }) => {
           } = post;
     const headings = postMdx?.mdx?.tableOfContents?.items;
     return <PageLayout
-               tableOfContents={<TableOfContents headings={headings} />}
+               tableOfContents={<TableOfContents title={title} headings={headings} />}
                sidebar={<Sidebar
                             paging={<PostPaging childrenLink={childrenLink} />}
                             metadata={<Metadata {...post} />}

@@ -4,7 +4,7 @@ import { heading } from "./heading.module.css";
 const createHeading = Hn => {
     const name = Hn;
     const Heading = ({children, className = '', ...props}, ref) =>
-    <Hn ref={ref} className={`${heading} ${className}`} {...props}>
+    <Hn className={`${heading} ${className}`} {...props} ref={ref}>
         {children}
     </Hn>;
     Heading.displayName = `createHeading(${name})`;

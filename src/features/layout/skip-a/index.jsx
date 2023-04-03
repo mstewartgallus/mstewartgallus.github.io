@@ -23,9 +23,7 @@ export const SkipA = ({children, ...props}) => {
     useFocusRef(ref);
     // Fix space hack
     return <div className={wrapper}>
-               <div className={skipLink}>
-                   <A ref={ref} {...props}>{children}</A>
-               </div>
-               &emsp;
+               <A ref={ref} className={skipLink} {...props}>{children}</A>
+               <span aria-hidden="true">&emsp;</span>
            </div>;
 };

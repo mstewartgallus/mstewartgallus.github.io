@@ -66,13 +66,13 @@ const Heading = ({query}) =>
       <>{query}{separator}Results</>;
 
 const TableOfContents = () =>
-<Ul>
-    <Li>
-        <SkipA aria-describedby="content" href="#content">Skip to Content</SkipA>
-    </Li>
-    <Li><A href="#search">Search</A></Li>
-    <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-</Ul>;
+      <>
+          <SkipA aria-describedby="content" href="#content">Results</SkipA>
+          <Ul>
+              <Li><A href="#search">Search</A></Li>
+              <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+          </Ul>
+      </>;
 
 export const Head = () => {
     const [search, setSearch] = useState(null);
