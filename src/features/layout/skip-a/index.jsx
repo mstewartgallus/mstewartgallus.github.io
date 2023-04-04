@@ -8,22 +8,28 @@ const options = {
     focusVisible: true
 };
 
-const useFocusRef = ref => {
-    const focus = useFocus();
-    useEffect(() => {
-        if (!focus) {
-            return;
-        }
-        ref.current.focus(options);
-    }, [focus, ref]);
-};
-
 export const SkipA = ({children, ...props}) => {
     const ref = useRef();
-    useFocusRef(ref);
+    const focus = useFocus();
+    useEffect(() => {
+        const { hash } = window.location;
+        if (hash) {
+            const elem = window.document.getElementById(hash.slice(1));
+            if (!elem) {
+                return;
+            }
+            elem.focus({ focusVisible: true });
+        } else {
+            const elem = ref.current;
+            if (!elem) {
+                return;
+            }
+            elem.focus(options);
+        }
+    }, []);
     // Fix space hack
     return <div className={wrapper}>
-               <A ref={ref} className={skipLink} {...props}>{children}</A>
+               <A ref={focus ? ref : null} className={skipLink} {...props}>{children}</A>
                <span aria-hidden="true">&emsp;</span>
            </div>;
 };
