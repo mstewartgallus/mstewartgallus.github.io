@@ -1,11 +1,11 @@
-import { useId, useTransition, useCallback, createContext, useContext } from "react";
+import { useId, useDeferredValue, useTransition, useCallback, createContext, useContext } from "react";
 import { useClient } from "../../../features/util";
 import { Button, Card, H2 } from "../../../features/ui";
 import { ClosedIcon } from "../closed-icon";
 import { OpenIcon } from "../open-icon";
 import {
     button, insideHeading, details,
-    wrapper, content
+    wrapper, wrapperInert, content, contentHidden, contentServer
 } from "./panel.module.css";
 
 const IconItem = ({ icon, children }) =>
@@ -34,6 +34,36 @@ export const Accordion = ({children, value}) =>
     </Context.Provider>
 </div>;
 
+const Heading = ({children, id, buttonId, open, ...props}) =>
+<H2 id={id}
+    className={insideHeading}>
+    <Button
+        id={buttonId}
+        className={button}
+        aria-expanded={String(open)}
+        {...props}>
+        <DetailsTriangle open={open} />
+    </Button>
+    <label htmlFor={buttonId}>{children}</label>
+</H2>;
+
+const Pane = ({children, id, open, ...props}) => {
+    open = useDeferredValue(open);
+    // Force open panels on server for better degradation
+    const server = !useClient();
+    if (server) {
+        open = true;
+    }
+    return <div className={`${wrapper} ${open ? '' : wrapperInert}`}
+                inert={open ? null : "inert"}>
+               <nav id={id}
+                    className={`${content} ${open ? '' : contentHidden} ${server ? contentServer : ''}`}
+                    {...props}>
+                   {children}
+               </nav>
+           </div>;
+};
+
 export const Panel = ({children, heading, value, onClick}) => {
     const [_, startTransition] = useTransition();
     const onClickWrapper = useCallback(e => {
@@ -41,39 +71,25 @@ export const Panel = ({children, heading, value, onClick}) => {
         startTransition(() => onClick(e));
     }, [onClick]);
 
-    const id = useId();
     const selected = useContext(Context);
-    const server = !useClient();
 
-    const titleId = `${id}-title`;
-    const contentId = `${id}-content`;
+    const contentId = useId();
+    const headingId = useId();
 
-    // Force open panels on server for better degradation
     const open = selected === value;
-    const serverOpen = server || open ;
 
     return <Card>
-               <H2 className={insideHeading}>
-                   <Button id={heading}
-                           className={button}
-                           aria-controls={contentId}
-                           aria-expanded={String(open)}
-                           onClick={onClickWrapper}>
-                       <DetailsTriangle open={open} />
-                   </Button>
-                   <label id={titleId}
-                          htmlFor={heading}>{heading}</label>
-               </H2>
-               <div className={wrapper}
-                    aria-hidden={serverOpen ? null : "true"}
-                    inert={serverOpen ? null : "inert"}>
-                   <nav id={contentId}
-                        aria-labelledby={titleId}
-                        hidden={serverOpen ? null : "hidden"}
-                        data-server={server ? "server" : null}
-                        className={content}>
-                       {children}
-                   </nav>
-               </div>
+               <Heading id={headingId}
+                        buttonId={heading}
+                        aria-controls={contentId}
+                        open={open}
+                        onClick={onClickWrapper}>
+                   {heading}
+               </Heading>
+               <Pane id={contentId}
+                     aria-labelledby={headingId}
+                     open={open}>
+                   {children}
+               </Pane>
            </Card>;
 };

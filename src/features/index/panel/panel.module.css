@@ -12,11 +12,11 @@
 }
 
 @media screen {
-    .wrapper[inert] {
+    .wrapperInert {
         block-size: 0 ;
     }
 
-    .content[hidden] {
+    .contentHidden {
         display: block ;
 
         position: absolute ;
@@ -33,7 +33,7 @@
     .button {
         display: none ;
     }
-    .content[hidden] {
+    .contentHidden {
         display: block ;
     }
 }
@@ -47,14 +47,10 @@
     transition-duration: 0.5s ;
 }
 
-.content[hidden] {
+.contentHidden {
     transition-duration: 0.3s ;
 }
 
-
-.content[data-server] {
-    transition-duration: 0s !important ;
-}
 
 @media (prefers-reduced-motion: no-preference) {
     .content {
@@ -68,4 +64,8 @@
     column-gap: 0.1em ;
     justify-items: center ;
     align-items: center ;
+}
+
+.contentServer {
+    transition: unset ;
 }
