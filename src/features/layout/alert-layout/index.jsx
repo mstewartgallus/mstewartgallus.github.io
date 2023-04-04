@@ -3,7 +3,7 @@ import { navigate } from "gatsby";
 import { useFocus } from "../../../features/util";
 import { Theme, Button, Card, Hgroup } from "../../../features/ui";
 import { H1 } from "../h1.jsx";
-import { dialog, header } from "./alert.module.css";
+import { inner, dialog, header } from "./alert.module.css";
 
 const options = {
     preventScroll: true,
@@ -52,7 +52,9 @@ const Dialog = ({children, ...props}) => {
                    onCancel={onCancel}
                    open="open"
                    {...props}>
-               {children}
+               <div className={inner}>
+                   {children}
+               </div>
            </dialog>;
 };
 

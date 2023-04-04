@@ -20,7 +20,7 @@ export const Layout = ({
     const location = useLocation();
     const title = pageContext?.frontmatter?.title ?? location.pathname;
     return <PageLayout
-               tableofContents={<TableOfContents heading={title} />}
+               tableOfContents={<TableOfContents heading={title} />}
                breadcrumbs={
                    <BreadcrumbList>
                        <BreadcrumbItem>
