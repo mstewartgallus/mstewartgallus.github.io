@@ -1,60 +1,45 @@
-import { Suspense, useEffect, useState } from "react";
-import { useClient, UnderProvider, PrevLocationProvider } from "../../features/util";
-import { Theme } from "../../features/ui";
+import { useLocation } from "@reach/router";
+import { Suspense } from "react";
 import { Loading } from "../../features/layout";
+import { useClient, UnderProvider, usePrevLocation, setPrevLocation } from "../../features/util";
 import { overlap, wrapper } from "./layout.module.css";
-
-const callbacks = new Set();
-
-const usePrevLocation = () => {
-    const [prevLocation, setState] = useState(null);
-    useEffect(() => {
-        let ignore = false;
-        const callback = ({prevLocation}) => {
-            if (ignore) {
-                return;
-            }
-
-            setState(prevLocation);
-        };
-        callbacks.add(callback);
-        return () => {
-            ignore = true;
-            callbacks.delete(callback);
-        };
-    }, []);
-    return prevLocation;
-};
 
 const Wrapper = ({children, ...props}) =>
 <div className={wrapper} {...props}>
     {children}
 </div>;
 
-const Layout = ({children}) => {
-    const prevLocation = usePrevLocation();
+const Overlap = ({children}) =>
+<div className={overlap}>
+    {children}
+</div>;
+
+const Previous = () => {
     const client = useClient();
-    return <PrevLocationProvider value={prevLocation}>
-               <Theme>
-                   <div className={overlap}>
-                       <UnderProvider value={false}>
-                           <Wrapper>
-                               <Suspense fallback={<Loading />}>
-                                   {children}
-                               </Suspense>
-                           </Wrapper>
-                       </UnderProvider>
-                       {
-                           client &&
-                               <UnderProvider value={true}>
-                                   <Wrapper inert="inert">
-                                       <Loading />
-                                   </Wrapper>
-                               </UnderProvider>
-                       }
-                   </div>
-               </Theme>
-           </PrevLocationProvider>;
+    return client && <Loading />;
+};
+
+const Layout = ({children}) => {
+    const { pathname } = useLocation();
+    const prevLocation = usePrevLocation();
+    let prevPathname = prevLocation?.pathname ?? 'previous';
+    if (prevPathname === pathname) {
+        prevPathname = 'previous';
+    }
+    return <Overlap>
+               <Wrapper key={pathname}>
+                   <UnderProvider value={false}>
+                       <Suspense fallback={<Loading />}>
+                           {children}
+                       </Suspense>
+                   </UnderProvider>
+               </Wrapper>
+               <Wrapper key={prevPathname} inert="inert">
+                   <UnderProvider value={true}>
+                       <Previous />
+                   </UnderProvider>
+               </Wrapper>
+           </Overlap>;
 };
 
 export const wrapPageElement = ({ element }) => <Layout>{element}</Layout>;
@@ -65,12 +50,10 @@ export const onPreRouteUpdate = () => {
 export const onRouteUpdateDelayed = () => {
 };
 
-export const shouldUpdateScroll = () => {
-    return true;
+export const onRouteUpdate = ({prevLocation}) => {
+    setPrevLocation(prevLocation);
 };
 
-export const onRouteUpdate = ({ prevLocation, location }) => {
-    for (const cb of Array.from(callbacks)) {
-        cb({ prevLocation, location });
-    }
+export const shouldUpdateScroll = () => {
+    return true;
 };

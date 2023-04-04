@@ -1,6 +1,8 @@
 import { useLocation } from "@reach/router";
+import { MDXProvider } from '@mdx-js/react';
 import { A, Ul, Li, BreadcrumbList, BreadcrumbItem } from "../../features/ui";
 import { SkipA, PageLayout } from "../../features/layout";
+import { defaults } from "./defaults.jsx";
 
 const TableOfContents = ({heading}) =>
       <>
@@ -10,7 +12,7 @@ const TableOfContents = ({heading}) =>
           </Ul>
       </>;
 
-export const MdxPage = ({
+export const Layout = ({
     children,
     pageContext,
     ...props
@@ -30,8 +32,10 @@ export const MdxPage = ({
                    </BreadcrumbList>
                }
                heading={title}>
-               {children}
+               <MDXProvider components={defaults}>
+                   {children}
+               </MDXProvider>
            </PageLayout>;
 };
 
-export default MdxPage;
+export default Layout;

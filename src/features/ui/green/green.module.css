@@ -1,4 +1,4 @@
-.green > li::before {
+.green > p::before {
     display: inline-block ;
     margin-inline-end: 1ch;
     transform: rotate(-45deg) skew(14deg, 14deg);
@@ -9,7 +9,7 @@
     content: "";
 }
 
-.green > li {
+.green > p {
     all: unset ;
     display: block ;
 }

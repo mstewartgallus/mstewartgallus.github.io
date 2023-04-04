@@ -1,4 +1,3 @@
-import { MDXProvider } from '@mdx-js/react';
 import { Caesura, L, Lg } from "../../features/poem";
 import {
     A,
@@ -10,17 +9,8 @@ import {
     P,
     Green
 } from "../../features/ui";
-import { MdxPage } from "./mdx-page.jsx";
 import { H1, H2, H3, H4, H5, H6, } from "./heading";
 import { Pre } from "./pre";
-
-// Prevent doublying up
-const Wrapper = ({children, ...props}) =>
-<MdxPage {...props}>
-    <MDXProvider components={{ wrapper: null}}>
-        {children}
-    </MDXProvider>
-</MdxPage>;
 
 const shortcodes = {
     A,
@@ -50,8 +40,7 @@ const components = {
 export const defaults = {
     ...shortcodes,
     ...headings,
-    ...components,
-    wrapper: Wrapper
+    ...components
 };
 
 export default defaults;

@@ -1,4 +1,3 @@
-
 .sr:not(:focus-within):not(:focus):not(:active) {
     position: absolute ;
     white-space: nowrap ;

@@ -1,8 +1,12 @@
 import { legend, inner } from "./legend.module.css";
 
-export const Legend = ({ children, ...props }) =>
-<legend className={legend} {...props}>
-    <div className={inner}>
+export const Legend = ({ children }) =>
+<>
+    <legend className={legend}>
+        {children}
+    </legend>
+    <div className={inner} aria-hidden="true">
         {children}
     </div>
-</legend>;
+</>
+;

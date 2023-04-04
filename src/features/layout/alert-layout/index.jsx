@@ -1,7 +1,7 @@
 import { useCallback, useRef, useEffect } from "react";
 import { navigate } from "gatsby";
 import { useFocus } from "../../../features/util";
-import { Button, Card, Hgroup } from "../../../features/ui";
+import { Theme, Button, Card, Hgroup } from "../../../features/ui";
 import { H1 } from "../h1.jsx";
 import { dialog, header } from "./alert.module.css";
 
@@ -57,21 +57,23 @@ const Dialog = ({children, ...props}) => {
 };
 
 export const AlertLayout = ({children, heading}) =>
-<main aria-labelledby="content">
-    <Dialog role="alertdialog"
-            aria-labelledby="content">
-        <Card>
-            <header className={header}>
-                <Hgroup>
-                    <H1>{heading}</H1>
-                </Hgroup>
-                <form method="dialog">
-                    <CloseButton value="back">Back</CloseButton>
-                </form>
-            </header>
-            {children}
-        </Card>
-    </Dialog>
-</main>;
+<Theme>
+    <main aria-labelledby="content">
+        <Dialog role="alertdialog"
+                aria-labelledby="content">
+            <Card>
+                <header className={header}>
+                    <Hgroup>
+                        <H1>{heading}</H1>
+                    </Hgroup>
+                    <form method="dialog">
+                        <CloseButton value="back">Back</CloseButton>
+                    </form>
+                </header>
+                {children}
+            </Card>
+        </Dialog>
+    </main>
+</Theme>;
 
 export default AlertLayout;

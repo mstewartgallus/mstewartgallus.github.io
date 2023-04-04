@@ -1,7 +1,7 @@
 .skipLink {
     display: flow-root ;
 
-    inset-block-start: calc(4 * var(--line));
+    inset-block-start: calc(2 * var(--line));
     inset-inline-start: 4em ;
 
     background-color: var(--canvas);

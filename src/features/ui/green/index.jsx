@@ -1,6 +1,6 @@
 import { green } from "./green.module.css";
 
 export const Green = ({ children }) =>
-<ul className={green}>{children}</ul>;
+<div className={green}>{children}</div>;
 
 export default Green;

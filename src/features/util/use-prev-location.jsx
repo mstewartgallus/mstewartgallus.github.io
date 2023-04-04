@@ -1,9 +1,29 @@
-import { createContext, useContext } from "react";
+import { useTransition, useEffect, useState } from "react";
 
-const Context = createContext();
-Context.displayName = 'PrevLocation';
+const callbacks = new Set();
 
-export const PrevLocationProvider = ({children, value}) =>
-<Context.Provider value={value}>{children}</Context.Provider>;
+export const usePrevLocation = () => {
+    const [prev, setPrev] = useState();
+    const [_, startTransition] = useTransition();
+    useEffect(() => {
+        let ignore = false;
+        const callback = prev => {
+            if (ignore) {
+                return;
+            }
+            startTransition(() => setPrev(prev));
+        };
+        callbacks.add(callback);
+        return () => {
+            ignore = true;
+            callbacks.delete(callback);
+        };
+    }, []);
+    return prev;
+};
 
-export const usePrevLocation = () => useContext(Context);
+export const setPrevLocation = prevLocation => {
+    for (const cb of Array.from(callbacks)) {
+        cb(prevLocation);
+    }
+};

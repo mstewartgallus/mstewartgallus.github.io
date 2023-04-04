@@ -1,16 +1,12 @@
 import { StrictMode } from "react";
 import { Provider } from "react-redux";
-import { MDXProvider } from '@mdx-js/react';
-import { defaults } from "../features/mdx";
 import * as Store from "../state/store.js";
 
 const Root = ({ children }) => {
     const store = Store.createStore();
     return <StrictMode>
                <Provider store={store}>
-                   <MDXProvider components={defaults}>
-                       {children}
-                   </MDXProvider>
+                   {children}
                </Provider>
            </StrictMode>;
 };
