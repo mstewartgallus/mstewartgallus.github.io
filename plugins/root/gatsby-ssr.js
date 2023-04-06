@@ -1,3 +1,3 @@
-import * as Root from "./root.jsx";
-
-export const wrapRootElement = Root.wrapRootElement;
+export {
+    wrapRootElement
+} from "gatsby-plugin-root/root";

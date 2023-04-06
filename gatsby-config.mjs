@@ -143,7 +143,9 @@ const plugins = [
         options: {
             component: resolve('./src/components/root.jsx')
         }
-    }
+    },
+    "focus",
+    "prev-location"
 ];
 
 const config = {

@@ -1,11 +1,9 @@
 import { createContext, useContext } from "react";
 import { PageRenderer } from "gatsby";
 import { LoadingPage } from "../../features/page";
-import { useClient, usePrevLocation } from "../../features/util";
+import { usePrevLocation } from "../../features/prev-location";
+import { useClient } from "../../features/util";
 import { OverlayLayout, Layout } from "../../features/layout";
-export {
-    onPreRouteUpdate, onRouteUpdateDelayed, onRouteUpdate
-} from "../../features/util";
 
 const PREVIOUS_PAGE = false;
 
@@ -54,5 +52,3 @@ const Shim = ({ children, ...props }) => {
 export const wrapPageElement = ({ element, props }) => {
     return <Shim {...props}>{element}</Shim>;
 }
-
-export const shouldUpdateScroll = () => true;

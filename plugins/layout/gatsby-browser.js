@@ -1,7 +1,3 @@
 export {
-    wrapPageElement,
-    onPreRouteUpdate,
-    onRouteUpdate,
-    onRouteUpdateDelayed,
-    shouldUpdateScroll
+    wrapPageElement
 } from "gatsby-plugin-layout/layout";
