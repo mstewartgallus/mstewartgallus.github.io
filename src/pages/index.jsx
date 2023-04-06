@@ -11,7 +11,7 @@ import {
     Ul, Li,
     Header
 } from "../features/ui";
-import { PageLayout, SkipA } from "../features/layout";
+import { ViewportPage, SkipA } from "../features/page";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -101,7 +101,7 @@ const IndexPage = () => {
     const onSubmit = useSubmit();
     const search = useSearchURL();
     const postsByCategory = usePostList();
-    return <PageLayout
+    return <ViewportPage
                tableOfContents={<TableOfContents posts={Object.keys(postsByCategory)} />}
                sidebar={
                    <Sidebar
@@ -113,7 +113,7 @@ const IndexPage = () => {
                            <Header
                                heading={
                                    <>
-                                       <H2 tabIndex="-1" id="banner">{title}</H2>
+                                       <H2 id="banner">{title}</H2>
                                        <p style={{marginBlock:0}}>{description}</p>
                                    </>}>
                                <Banner />
@@ -133,7 +133,7 @@ const IndexPage = () => {
                heading="Posts"
            >
                <PostList posts={posts} />
-           </PageLayout>;
+           </ViewportPage>;
 };
 
 

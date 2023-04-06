@@ -1,3 +1,3 @@
-import * as Layout from "./layout.jsx";
-
-export const wrapPageElement = Layout.wrapPageElement;
+export {
+    wrapPageElement
+} from "gatsby-plugin-layout/layout";

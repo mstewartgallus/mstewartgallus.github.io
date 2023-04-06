@@ -1,4 +1,4 @@
-import { AlertLayout } from "../features/layout";
+import { AlertPage } from "../features/page";
 import { P } from "../features/ui";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -16,8 +16,8 @@ export const Head = ({location: {pathname}}) => {
 };
 
 const NotFoundPage = () =>
-<AlertLayout heading="Page Not Found">
+<AlertPage heading="Page Not Found">
     <P>Sorry the page you requested could not be found.</P>
-</AlertLayout>;
+</AlertPage>;
 
 export default NotFoundPage;

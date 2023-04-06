@@ -3,7 +3,7 @@ import { Ul, Li, A, Card, H2, Section } from "../features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
          Post, PostPaging, Metadata, PostBreadcrumbs,
          useBlogPosting, useBreadcrumbList } from "../features/post";
-import { PageLayout, SkipA } from "../features/layout";
+import { ViewportPage, SkipA } from "../features/page";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -47,7 +47,7 @@ const PostPage = ({ data }) => {
             category, subtitle, title, childrenLink
           } = post;
     const headings = postMdx?.mdx?.tableOfContents?.items;
-    return <PageLayout
+    return <ViewportPage
                tableOfContents={<TableOfContents title={title} headings={headings} />}
                sidebar={<Sidebar
                             paging={<PostPaging childrenLink={childrenLink} />}
@@ -62,14 +62,14 @@ const PostPage = ({ data }) => {
                mainbar={
                    comments &&
                        <Card>
-                           <Section heading={<H2 id="comments" tabIndex="-1">Comments</H2>}>
+                           <Section heading={<H2 id="comments">Comments</H2>}>
                                <Comments host={comments.host} id={comments.id} />
                            </Section>
                        </Card>
                }
            >
                <Post {...data} />
-           </PageLayout>;
+           </ViewportPage>;
 };
 
 export default PostPage;

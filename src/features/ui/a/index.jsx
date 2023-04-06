@@ -1,5 +1,6 @@
 import { forwardRef, useMemo } from "react";
 import { Link } from "gatsby";
+import { useUnder } from "../../../features/util";
 import { a as aClass } from "./a.module.css";
 import { useLocation } from "./use-location.js";
 
@@ -34,7 +35,13 @@ const useLinkProps = ({ href, target, download, ...props }) => {
 };
 
 const A = ({children, className = '', ...props}, ref) => {
+    const under = useUnder();
     const linkProps = useLinkProps(props);
+
+    if (under) {
+        ref = null;
+    }
+
     if (linkProps) {
         return <Link className={`${aClass} ${className}`} innerRef={ref} {...linkProps}>{children}</Link>;
     }

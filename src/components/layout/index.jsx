@@ -1,59 +1,58 @@
-import { useLocation } from "@reach/router";
-import { Suspense } from "react";
-import { Loading } from "../../features/layout";
-import { useClient, UnderProvider, usePrevLocation, setPrevLocation } from "../../features/util";
-import { overlap, wrapper } from "./layout.module.css";
+import { createContext, useContext } from "react";
+import { PageRenderer } from "gatsby";
+import { LoadingPage } from "../../features/page";
+import { useClient, usePrevLocation } from "../../features/util";
+import { OverlayLayout, Layout } from "../../features/layout";
+export {
+    onPreRouteUpdate, onRouteUpdateDelayed, onRouteUpdate
+} from "../../features/util";
 
-const Wrapper = ({children, ...props}) =>
-<div className={wrapper} {...props}>
-    {children}
-</div>;
+const PREVIOUS_PAGE = false;
 
-const Overlap = ({children}) =>
-<div className={overlap}>
-    {children}
-</div>;
-
-const Previous = () => {
+const Pages = ({ children, ...props }) => {
     const client = useClient();
-    return client && <Loading />;
-};
-
-const Layout = ({children}) => {
-    const { pathname } = useLocation();
     const prevLocation = usePrevLocation();
-    let prevPathname = prevLocation?.pathname ?? 'previous';
-    if (prevPathname === pathname) {
-        prevPathname = 'previous';
+
+    let prevPage;
+    if (PREVIOUS_PAGE) {
+        prevPage = prevLocation ?
+            <PageRenderer location={prevLocation} /> : <LoadingPage />;
+    } else {
+        prevPage = <LoadingPage />;
     }
-    return <Overlap>
-               <Wrapper key={pathname}>
-                   <UnderProvider value={false}>
-                       <Suspense fallback={<Loading />}>
-                           {children}
-                       </Suspense>
-                   </UnderProvider>
-               </Wrapper>
-               <Wrapper key={prevPathname} inert="inert">
-                   <UnderProvider value={true}>
-                       <Previous />
-                   </UnderProvider>
-               </Wrapper>
-           </Overlap>;
+
+    return <OverlayLayout
+               {...props}
+               previous={
+                   client &&
+                       <Layout>
+                           {prevPage}
+                       </Layout>
+               }
+           >
+               <Layout>
+                   {children}
+               </Layout>
+           </OverlayLayout>;
 };
 
-export const wrapPageElement = ({ element }) => <Layout>{element}</Layout>;
+const Nest = createContext(false);
+Nest.displayName = 'Nest';
 
-export const onPreRouteUpdate = () => {
+const Shim = ({ children, ...props }) => {
+    const nested = useContext(Nest);
+    if (nested) {
+        return children;
+    }
+    return <Nest.Provider value="true">
+               <Pages {...props}>
+                   {children}
+               </Pages>
+           </Nest.Provider>;
 };
 
-export const onRouteUpdateDelayed = () => {
-};
+export const wrapPageElement = ({ element, props }) => {
+    return <Shim {...props}>{element}</Shim>;
+}
 
-export const onRouteUpdate = ({prevLocation}) => {
-    setPrevLocation(prevLocation);
-};
-
-export const shouldUpdateScroll = () => {
-    return true;
-};
+export const shouldUpdateScroll = () => true;

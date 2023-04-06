@@ -2,7 +2,7 @@ import { useLocation } from "@reach/router";
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "../features/search";
 import { Ul, Li, A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "../features/ui";
-import { PageLayout, SkipA } from "../features/layout";
+import { ViewportPage, SkipA } from "../features/page";
 import { useTitle } from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import { separator } from "../utils/separator.js";
@@ -130,11 +130,11 @@ const SearchPage = () => {
 
     const query = params?.s;
 
-    return <PageLayout
+    return <ViewportPage
                tableOfContents={<TableOfContents />}
                sidebar={
                    <Card>
-                       <Search heading={<H2 id="search" tabIndex="-1">Search</H2>}>
+                       <Search heading={<H2 id="search">Search</H2>}>
                            <SearchForm action="/search"
                                        onSubmit={onSubmit}
 
@@ -161,7 +161,7 @@ const SearchPage = () => {
                heading={<Heading query={query} />}
            >
                <ResultList links={state.links} />
-           </PageLayout>;
+           </ViewportPage>;
 };
 
 export default SearchPage;
