@@ -1,20 +1,24 @@
+.frame {
+    position: absolute ;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden ;
+    display: flow-root ;
+    contain: strict ;
+}
+.frame:last-of-type {
+    display: flow-root ;
+    position: static ;
+    contain: content ;
+}
+
 .overlap {
-    display: grid ;
-    grid-template-columns: 100% ;
-    grid-template-rows: 100% ;
-    justify-items: start;
-    align-items: start;
-    inline-size: fit-content ;
-    max-inline-size: 100% ;
-}
-
-.frame {
-    inline-size: fit-content ;
-    max-inline-size: 100% ;
-    grid-row-start: 1 ;
-    grid-column-start: 1 ;
-}
-
-.frame {
-    z-index: 1000 ;
+    position: absolute ;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flow-root ;
 }

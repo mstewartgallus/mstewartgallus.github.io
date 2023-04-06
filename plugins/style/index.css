@@ -5,22 +5,6 @@
     margin: 0 0 ;
 }
 
-/* polyfill inert */
-[inert] {
-    cursor: default;
-    pointer-events: none ;
-}
-
-[inert], [inert] * {
-    user-select: none ;
-}
-
-/* hack around gatsby focus */
-#gatsby-focus-wrapper, #___gatsby {
-    display: contents ;
-}
-
-
 ::selection {
     background-color: var(--selected-item);
     color: var(--selected-item-text);
@@ -53,6 +37,11 @@ abbr {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth;
+    }
+}
 
 @media print {
     :root {

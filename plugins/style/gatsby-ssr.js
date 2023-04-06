@@ -1,4 +1,4 @@
-import favicon from './src/assets/favicon.svg';
+import favicon from './favicon.svg';
 
 const HeadComponents = [
         <meta name="color-scheme" content="dark light" />,

@@ -132,20 +132,14 @@ const plugins = [
     "transformer-post-poem",
     "transformer-link",
     "index",
-    {
-        resolve: "layout",
-        options: {
-            component: resolve('./src/components/layout')
-        }
-    },
-    {
-        resolve: "root",
-        options: {
-            component: resolve('./src/components/root.jsx')
-        }
-    },
+    "inert",
+    "style",
     "focus",
-    "prev-location"
+    "prev-location",
+    "update-state",
+    "layout",
+    "overlay-layout",
+    "root"
 ];
 
 const config = {

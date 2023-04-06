@@ -1,3 +1,1 @@
-export {
-    wrapPageElement
-} from "gatsby-plugin-layout/layout";
+export { wrapPageElement } from "../../src/features/layout";

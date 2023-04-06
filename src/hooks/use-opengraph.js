@@ -1,15 +1,13 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 import useSiteMetadata from './use-site-metadata.js';
-import favicon from '../assets/favicon.svg';
 
 export const useOpenGraph = ({description, url, title}) => {
     const site = useSiteMetadata();
-    return React.useMemo(() => {
+    return useMemo(() => {
         return {
             og: {
                 site_name: site.title,
                 title,
-                image: favicon,
                 description: description ?? site.description,
                 url
             }

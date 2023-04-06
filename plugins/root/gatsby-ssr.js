@@ -1,3 +1,1 @@
-export {
-    wrapRootElement
-} from "gatsby-plugin-root/root";
+export { wrapRootElement } from "../../src/features/root";

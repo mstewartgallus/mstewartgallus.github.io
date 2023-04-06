@@ -3,7 +3,7 @@ import { PageRenderer } from "gatsby";
 import { LoadingPage } from "../../features/page";
 import { usePrevLocation } from "../../features/prev-location";
 import { useClient } from "../../features/util";
-import { OverlayLayout, Layout } from "../../features/layout";
+import { OverlayLayout } from "./overlay-layout";
 
 const PREVIOUS_PAGE = false;
 
@@ -19,18 +19,8 @@ const Pages = ({ children, ...props }) => {
         prevPage = <LoadingPage />;
     }
 
-    return <OverlayLayout
-               {...props}
-               previous={
-                   client &&
-                       <Layout>
-                           {prevPage}
-                       </Layout>
-               }
-           >
-               <Layout>
-                   {children}
-               </Layout>
+    return <OverlayLayout {...props} previous={client && prevPage}>
+               {children}
            </OverlayLayout>;
 };
 
