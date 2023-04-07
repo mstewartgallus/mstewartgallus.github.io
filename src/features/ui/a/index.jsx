@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from "react";
+import { memo, forwardRef, useMemo } from "react";
 import { Link } from "gatsby";
 import { useUnder } from "../../../features/util";
 import { a as aClass } from "./a.module.css";
@@ -48,6 +48,6 @@ const A = ({children, className = '', ...props}, ref) => {
     return <a className={`${aClass} ${className}`} ref={ref} {...props}>{children}</a>;
 };
 
-const ARef = forwardRef(A);
+const ARef = memo(forwardRef(A));
 
 export { ARef as A, ARef as default };
