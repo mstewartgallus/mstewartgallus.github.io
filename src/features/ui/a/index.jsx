@@ -1,51 +1,39 @@
-import { memo, forwardRef, useMemo } from "react";
+import { memo, forwardRef } from "react";
 import { Link } from "gatsby";
-import { useUnder } from "../../../features/util";
 import { a as aClass } from "./a.module.css";
-import { useLocation } from "./use-location.js";
+import { graphql, useStaticQuery } from "gatsby";
 
-const useTo = (href, location) => useMemo(() => {
-    if (!href) {
-        return null;
+const useSiteMetadataRaw = () => useStaticQuery(graphql`
+query {
+  site {
+    siteMetadata {
+      siteUrl
     }
+  }
+}`);
 
-    const url = new URL(href, location);
-    const { origin, hash, pathname, search } = url;
-
-    if (hash) {
-        return null;
-    }
-
-    if (origin !== new URL(location).origin) {
-        return null;
-    }
-
-    return `${pathname}${search}`;
-}, [href, location]);
-
-const useLinkProps = ({ href, target, download, ...props }) => {
-    const location = useLocation();
-    const to = useTo(href, location);
-
-    if (!to || target || download) {
-        return null;
-    }
-
-    return { to, target, download, ...props };
+const fallback = (siteUrl, href, props) => {
+    const { origin, hash } = new URL(href, siteUrl);
+    return hash || origin !== siteUrl || !href || props.target || props.download;
 };
 
-const A = ({children, className = '', ...props}, ref) => {
-    const under = useUnder();
-    const linkProps = useLinkProps(props);
+const A = ({children, className = '', href, ...props}, ref) => {
+    const metadata = useSiteMetadataRaw();
 
-    if (under) {
-        ref = null;
-    }
+    const siteUrl = metadata.site.siteMetadata.siteUrl;
 
-    if (linkProps) {
-        return <Link className={`${aClass} ${className}`} innerRef={ref} {...linkProps}>{children}</Link>;
-    }
-    return <a className={`${aClass} ${className}`} ref={ref} {...props}>{children}</a>;
+    className = `${aClass} ${className}`;
+    return fallback(siteUrl, href, props) ?
+        <Link
+            className={className}
+            innerRef={ref}
+            to={href}
+            {...props}>{children}</Link> :
+    <a
+        className={className}
+        ref={ref}
+        href={href}
+        {...props}>{children}</a>;
 };
 
 const ARef = memo(forwardRef(A));
