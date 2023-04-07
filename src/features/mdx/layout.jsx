@@ -12,13 +12,13 @@ const TableOfContents = ({heading}) =>
           </Ul>
       </>;
 
+const Pathname = () => useLocation().pathname;
+
 export const Layout = ({
     children,
-    pageContext,
-    ...props
+    pageContext
 }) => {
-    const location = useLocation();
-    const title = pageContext?.frontmatter?.title ?? location.pathname;
+    const title = pageContext?.frontmatter?.title ?? <Pathname />;
     return <ViewportPage
                tableOfContents={<TableOfContents heading={title} />}
                breadcrumbs={

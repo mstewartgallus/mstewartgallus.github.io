@@ -21,6 +21,19 @@ const View = ({children}) => {
                data-state={updateState}>{children}</div>;
 };
 
+const Sidebar = ({children, breadcrumbs}) =>
+      <>
+          {children}
+          <Card>
+              <Nav heading={<H2 id="breadcrumbs">Breadcrumbs</H2>}>
+                  {breadcrumbs}
+              </Nav>
+          </Card>
+          <Card>
+              <A href="#table-of-contents">Table of Contents</A>
+          </Card>
+      </>;
+
 export const ViewportPage = ({
     children,
     heading,
@@ -34,23 +47,9 @@ export const ViewportPage = ({
 <Theme>
     <View>
         <SidebarLayout
-            sidebar={
-                <>
-                    {sidebar}
-                    {
-                        breadcrumbs &&
-                            <Card>
-                                <Nav heading={<H2 id="breadcrumbs">Breadcrumbs</H2>}>
-                                    {breadcrumbs}
-                                </Nav>
-                            </Card>
-                    }
-                    <Card>
-                        <A href="#table-of-contents">Table of Contents</A>
-                    </Card>
-                </>
-            }
-        >
+            sidebar={<Sidebar breadcrumbs={breadcrumbs}>
+                         {sidebar}
+                     </Sidebar>}>
             <Card className={tableOfContentsClass}>
                 <nav aria-labelledby="table-of-contents">
                     <header>

@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { memo, createContext, useContext } from "react";
 import { PageRenderer } from "gatsby";
 import { LoadingPage } from "../../features/page";
 import { usePrevLocation } from "../../features/prev-location";
@@ -7,38 +7,52 @@ import { OverlayLayout } from "./overlay-layout";
 
 const PREVIOUS_PAGE = false;
 
-const Pages = ({ children, ...props }) => {
-    const client = useClient();
-    const prevLocation = usePrevLocation();
+const PageRendererDefault = ({location}) =>
+      location ? <PageRenderer location={location} /> : <LoadingPage />;
 
-    let prevPage;
-    if (PREVIOUS_PAGE) {
-        prevPage = prevLocation ?
-            <PageRenderer location={prevLocation} /> : <LoadingPage />;
-    } else {
-        prevPage = <LoadingPage />;
+const PageRendererPrevious = () => {
+    const prevLocation = usePrevLocation();
+    return <PageRendererDefault location={prevLocation} />;
+};
+
+const PageRendererPreviousChoice = PREVIOUS_PAGE ? PageRendererPrevious : LoadingPage;
+
+const PreviousPage = () => {
+    const client = useClient();
+
+    if (!client) {
+        return null;
     }
 
-    return <OverlayLayout {...props} previous={client && prevPage}>
-               {children}
-           </OverlayLayout>;
+    return <PageRendererPreviousChoice />;
 };
+
+const PreviousPageMemo = memo(PreviousPage);
+
+const Pages = ({ children }) =>
+<OverlayLayout previous={<PreviousPageMemo />}>
+    {children}
+</OverlayLayout>;
+
+const PagesMemo = memo(Pages);
 
 const Nest = createContext(false);
 Nest.displayName = 'Nest';
 
-const Shim = ({ children, ...props }) => {
+const Shim = ({ children }) => {
     const nested = useContext(Nest);
     if (nested) {
         return children;
     }
     return <Nest.Provider value="true">
-               <Pages {...props}>
+               <PagesMemo>
                    {children}
-               </Pages>
+               </PagesMemo>
            </Nest.Provider>;
 };
 
+const ShimMemo = memo(Shim);
+
 export const wrapPageElement = ({ element, props }) => {
-    return <Shim {...props}>{element}</Shim>;
+    return <ShimMemo {...props}>{element}</ShimMemo>;
 }

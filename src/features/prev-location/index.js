@@ -1,22 +1,25 @@
-import { useSyncExternalStore } from "react";
+import { useDeferredValue, useSyncExternalStore } from "react";
 
 let prevLocation = null;
 
 const callbacks = new Set();
 
-export const usePrevLocation = () => useSyncExternalStore(callback => {
-    let ignore = false;
-    const cb = () => {
-        if (ignore) {
-            return;
-        }
-        callbacks.add(callbacks);
-    };
-    return () => {
-        ignore = true;
-        callbacks.delete(cb);
-    };
-}, () => prevLocation, () => prevLocation);
+export const usePrevLocation = () => {
+    const prev = useSyncExternalStore(callback => {
+        let ignore = false;
+        const cb = () => {
+            if (ignore) {
+                return;
+            }
+            callbacks.add(callbacks);
+        };
+        return () => {
+            ignore = true;
+            callbacks.delete(cb);
+        };
+    }, () => prevLocation, () => prevLocation);
+    return useDeferredValue(prev);
+};
 
 export const onRouteUpdate = ({prevLocation: prevLocationNew}) => {
     prevLocation = prevLocationNew;
