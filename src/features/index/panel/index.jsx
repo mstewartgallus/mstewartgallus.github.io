@@ -1,4 +1,4 @@
-import { useId, useDeferredValue, useTransition, useCallback, createContext, useContext } from "react";
+import { memo, useId, useDeferredValue, useTransition, useCallback, createContext, useContext } from "react";
 import { useClient } from "../../../features/util";
 import { Button, Card, H2 } from "../../../features/ui";
 import { ClosedIcon } from "../closed-icon";
@@ -27,11 +27,12 @@ const DetailsTriangle = ({ open }) =>
 const Context = createContext(null);
 Context.displayName = 'Accordion';
 
+const ContextProvider= memo(Context.Provider);
 export const Accordion = ({children, value}) =>
 <div>
-    <Context.Provider value={value}>
+    <ContextProvider value={value}>
         {children}
-    </Context.Provider>
+    </ContextProvider>
 </div>;
 
 const Heading = ({children, id, buttonId, open, ...props}) =>

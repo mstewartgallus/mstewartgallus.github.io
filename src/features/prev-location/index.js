@@ -22,6 +22,10 @@ export const usePrevLocation = () => {
 };
 
 export const onRouteUpdate = ({prevLocation: prevLocationNew}) => {
+    if (prevLocation === prevLocationNew) {
+        return;
+    }
+
     prevLocation = prevLocationNew;
     for (const cb of callbacks) {
         cb();

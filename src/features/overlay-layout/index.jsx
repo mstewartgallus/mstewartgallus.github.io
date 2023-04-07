@@ -39,16 +39,18 @@ const PagesMemo = memo(Pages);
 const Nest = createContext(false);
 Nest.displayName = 'Nest';
 
+const NestProvider = memo(Nest.Provider);
+
 const Shim = ({ children }) => {
     const nested = useContext(Nest);
     if (nested) {
         return children;
     }
-    return <Nest.Provider value="true">
+    return <NestProvider value={true}>
                <PagesMemo>
                    {children}
                </PagesMemo>
-           </Nest.Provider>;
+           </NestProvider>;
 };
 
 const ShimMemo = memo(Shim);

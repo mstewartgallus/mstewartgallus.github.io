@@ -12,8 +12,6 @@ export const OverlayLayout = ({children, previous}) =>
             </OverlayItem>
     }
     <OverlayItem>
-        <UnderProvider value={false}>
-            {children}
-        </UnderProvider>
+        {children}
     </OverlayItem>
 </Overlay>;

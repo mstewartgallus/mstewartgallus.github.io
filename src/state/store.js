@@ -1,4 +1,4 @@
-import * as Redux from "redux";
+import { createStore as createStoreRedux } from "redux";
 
 const NAVIGATE = 'NAVIGATE';
 
@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export const createStore = () => Redux.createStore(reducer);
+export const createStore = () => createStoreRedux(reducer);
 
 export const navigate = ({location, data}) =>
 ({ type: NAVIGATE, location, data });

@@ -1,4 +1,4 @@
-import { createContext, useId, useContext } from "react";
+import { memo, createContext, useId, useContext } from "react";
 import { useSearchURL } from "../../features/route";
 import { A } from "../../features/ui";
 import { DescA } from "./desc-a";
@@ -8,14 +8,16 @@ import { time, address, dl, dt } from "./metadata.module.css";
 const DescContext = createContext(null);
 DescContext.displayName = 'Desc';
 
+const DescContextProvider = memo(DescContext.Provider);
+
 const Desc = ({desc,children}) => {
     const id = useId();
     return <div role="presentation" className={dl}>
                <div className={dt} id={id}>{desc}</div>
                <Set aria-labelledby={id}>
-                   <DescContext.Provider value={id}>
+                   <DescContextProvider value={id}>
                        {children}
-                   </DescContext.Provider>
+                   </DescContextProvider>
                </Set>
            </div>;
 };

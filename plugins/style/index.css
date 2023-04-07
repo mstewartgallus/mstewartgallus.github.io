@@ -37,12 +37,6 @@ abbr {
     --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    :root {
-        scroll-behavior: smooth;
-    }
-}
-
 @media print {
     :root {
         font-size: 14pt ;

@@ -1,10 +1,9 @@
-import { createContext, useContext } from "react";
+import { memo, useDeferredValue, createContext, useContext } from "react";
 
-const Context = createContext(false);
-Context.displayName = 'Under';
+const Under = createContext(false);
+Under.displayName = 'Under';
 
-export const useUnder = () => useContext(Context);
-export const UnderProvider = ({value, children}) =>
-<Context.Provider value={!!value}>{children}</Context.Provider>;
+export const useUnder = () => useDeferredValue(useContext(Under));
+export const UnderProvider = memo(Under.Provider);
 
 export default useUnder;

@@ -11,7 +11,8 @@
 .frame:last-of-type {
     display: flow-root ;
     position: static ;
-    contain: content ;
+    /* FIXME figure out containment here? */
+    contain: unset ;
 }
 
 .overlap {

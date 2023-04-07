@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
-import * as React from "react";
+import { useMemo } from "react";
 
 const useMetadata = () => useStaticQuery(graphql`
 query {
@@ -12,9 +12,9 @@ query {
 
 export const useAbsolute = pathname => {
     const raw = useMetadata();
-    return React.useMemo(() => {
+    return useMemo(() => {
         const site = raw.site.siteMetadata;
-        return new URL(pathname, site.siteUrl).toString();
+        return String(new URL(pathname, site.siteUrl));
     }, [raw, pathname]);
 };
 

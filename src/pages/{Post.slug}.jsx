@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { graphql } from "gatsby";
 import { Ul, Li, A, Card, H2, Section } from "../features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
@@ -26,20 +27,29 @@ const TableOfContents = ({ title,  headings = [] }) =>
           </Ul>
       </>;
 
-export const Head = ({ data: { post } }) => {
+const HeadStuff = memo(({ data: { post }}) => {
     const { description, title, slug } = post;
     const url = useAbsolute(slug);
-    const fulltitle = useTitle(title);
     const breadcrumbList = useBreadcrumbList(post);
     const blogPosting = useBlogPosting(post);
     return <>
-               <title>{fulltitle}</title>
                <SeoBasic description={description} title={title} url={url} />
                <SeoPostHead {...post} />
                <JsonLd srcdoc={breadcrumbList} />
                <JsonLd srcdoc={blogPosting} />
            </>;
-};
+});
+
+const TitleStuff = memo(({ data: { post } }) => {
+    const fulltitle = useTitle(post.title);
+    return <title>{fulltitle}</title>;
+});
+
+export const Head = props =>
+<>
+    <TitleStuff {...props} />
+    <HeadStuff  {...props} />
+</>;
 
 const PostPage = ({ data }) => {
     const { post, postMdx } = data;

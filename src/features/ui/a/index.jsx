@@ -24,16 +24,16 @@ const A = ({children, className = '', href, ...props}, ref) => {
 
     className = `${aClass} ${className}`;
     return fallback(siteUrl, href, props) ?
-        <Link
+        <a
             className={className}
-            innerRef={ref}
-            to={href}
-            {...props}>{children}</Link> :
-    <a
+            ref={ref}
+            href={href}
+            {...props}>{children}</a> :
+    <Link
         className={className}
-        ref={ref}
-        href={href}
-        {...props}>{children}</a>;
+        innerRef={ref}
+        to={href}
+        {...props}>{children}</Link> ;
 };
 
 const ARef = memo(forwardRef(A));
