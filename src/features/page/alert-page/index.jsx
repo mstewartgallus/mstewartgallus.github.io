@@ -38,7 +38,7 @@ const Dialog = ({children, ...props}) => {
                    ref={under ? null : ref}
                    onClose={onClose}
                    onCancel={onCancel}
-                   open="open"
+                   open={under ? null : "open"}
                    {...props}>
                <div className={inner}>
                    {children}

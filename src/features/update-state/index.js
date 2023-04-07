@@ -11,8 +11,9 @@ export const useUpdateState = () => {
             if (ignore) {
                 return;
             }
-            callbacks.add(callbacks);
+            callback();
         };
+        callbacks.add(cb);
         return () => {
             ignore = true;
             callbacks.delete(cb);

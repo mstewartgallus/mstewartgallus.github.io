@@ -34,5 +34,5 @@
 
 .dialog::backdrop {
     background-color: black ;
-    opacity: 80%;
+    opacity: 40%;
 }

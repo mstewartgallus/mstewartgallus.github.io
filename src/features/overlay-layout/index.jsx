@@ -7,8 +7,18 @@ import { OverlayLayout } from "./overlay-layout";
 
 const PREVIOUS_PAGE = false;
 
+const Nest = createContext(false);
+Nest.displayName = 'Nest';
+
+const NestProvider = memo(Nest.Provider);
+
+const NestedPageRenderer = ({location}) =>
+<NestProvider value={true}>
+    <PageRenderer location={location} />
+</NestProvider>;
+
 const PageRendererDefault = ({location}) =>
-      location ? <PageRenderer location={location} /> : <LoadingPage />;
+      location ? <NestedPageRenderer location={location} /> : <LoadingPage />;
 
 const PageRendererPrevious = () => {
     const prevLocation = usePrevLocation();
@@ -19,12 +29,7 @@ const PageRendererPreviousChoice = PREVIOUS_PAGE ? PageRendererPrevious : Loadin
 
 const PreviousPage = () => {
     const client = useClient();
-
-    if (!client) {
-        return null;
-    }
-
-    return <PageRendererPreviousChoice />;
+    return client && <PageRendererPreviousChoice />;
 };
 
 const PreviousPageMemo = memo(PreviousPage);
@@ -32,29 +37,15 @@ const PreviousPageMemo = memo(PreviousPage);
 const Pages = ({ children }) =>
 <OverlayLayout previous={<PreviousPageMemo />}>
     {children}
-</OverlayLayout>;
+</OverlayLayout>
 
 const PagesMemo = memo(Pages);
 
-const Nest = createContext(false);
-Nest.displayName = 'Nest';
-
-const NestProvider = memo(Nest.Provider);
-
 const Shim = ({ children }) => {
     const nested = useContext(Nest);
-    if (nested) {
-        return children;
-    }
-    return <NestProvider value={true}>
-               <PagesMemo>
-                   {children}
-               </PagesMemo>
-           </NestProvider>;
+    return nested ? children : <PagesMemo>{children}</PagesMemo>;
 };
 
 const ShimMemo = memo(Shim);
 
-export const wrapPageElement = ({ element, props }) => {
-    return <ShimMemo {...props}>{element}</ShimMemo>;
-}
+export const wrapPageElement = ({ element, props }) => <ShimMemo>{element}</ShimMemo>;

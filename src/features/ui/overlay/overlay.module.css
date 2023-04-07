@@ -1,25 +1,18 @@
 .frame {
+    display: flow-root ;
+    z-index: 1000 ;
+}
+
+.frame[inert] {
+    z-index: -1000 ;
     position: absolute ;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     overflow: hidden ;
-    display: flow-root ;
-    contain: strict ;
-}
-.frame:last-of-type {
-    display: flow-root ;
-    position: static ;
-    /* FIXME figure out containment here? */
-    contain: unset ;
 }
 
 .overlap {
-    position: absolute ;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     display: flow-root ;
 }

@@ -1,4 +1,4 @@
-import { useDeferredValue, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 
 let prevLocation = null;
 
@@ -11,14 +11,15 @@ export const usePrevLocation = () => {
             if (ignore) {
                 return;
             }
-            callbacks.add(callbacks);
+            callback();
         };
+        callbacks.add(cb);
         return () => {
             ignore = true;
             callbacks.delete(cb);
         };
     }, () => prevLocation, () => prevLocation);
-    return useDeferredValue(prev);
+    return prev;
 };
 
 export const onRouteUpdate = ({prevLocation: prevLocationNew}) => {

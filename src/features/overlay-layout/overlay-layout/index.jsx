@@ -3,6 +3,9 @@ import { Overlay, OverlayItem } from "../../../features/ui";
 
 export const OverlayLayout = ({children, previous}) =>
 <Overlay>
+    <OverlayItem>
+        {children}
+    </OverlayItem>
     {
         previous &&
             <OverlayItem inert="inert">
@@ -11,7 +14,4 @@ export const OverlayLayout = ({children, previous}) =>
                 </UnderProvider>
             </OverlayItem>
     }
-    <OverlayItem>
-        {children}
-    </OverlayItem>
 </Overlay>;
