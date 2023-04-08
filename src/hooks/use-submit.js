@@ -1,8 +1,8 @@
-import * as React from "react";
+import { useCallback } from "react";
 import { navigate } from "gatsby";
 
 export const useSubmit = () => {
-    return React.useCallback(async event => {
+    return useCallback(async event => {
         const nativeEvent = event.nativeEvent;
         const form = event.target;
         const submitter = nativeEvent.submitter;

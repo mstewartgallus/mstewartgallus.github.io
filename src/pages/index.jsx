@@ -1,4 +1,4 @@
-import { useLocation } from "@reach/router";
+import { useLocation } from "@gatsbyjs/reach-router";
 import { useCallback, useMemo, useReducer } from "react";
 import { Sidebar, Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
 import { useSearchURL } from "../features/route";
