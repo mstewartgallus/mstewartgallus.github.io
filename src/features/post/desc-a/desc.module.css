@@ -1,3 +1,16 @@
 .label {
+    /* position: relative ; */
     cursor: default ;
+}
+.wrapper {
+    position: relative ;
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+}
+.clickTrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }

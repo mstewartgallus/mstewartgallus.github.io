@@ -1,38 +1,20 @@
-import { useRef, useId, forwardRef, useCallback } from "react";
+import { useId, forwardRef, useCallback } from "react";
 import { A } from "../../../features/ui";
-import { label } from "./desc.module.css";
+import { wrapper, label, clickTrap } from "./desc.module.css";
 
-const DescA = ({ children, desc, ...props }, ref) => {
-    const theRef = useRef();
+const DescA = ({ children, desc, href, ...props }, ref) => {
     const id = useId();
-    if (!ref) {
-        ref = theRef;
-    }
 
-    const onFocus = useCallback(e => {
-        ref.current.focus({preventScroll:true, focusVisible: true});
-    }, [ref]);
-    const onClick = useCallback(e => {
-        // Just punt on onClick events that we don't know how to handle
-        if (e.button !== 0 || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
-            return;
-        }
-
-        e.preventDefault();
-
-        ref.current.click();
-    }, [ref]);
-
-    return <div role="presentation">
-               <A aria-describedby={id} ref={ref} {...props}>
+    return <div role="presentation" className={wrapper}>
+               <A aria-describedby={id} ref={ref} href={href} {...props}>
                    {children}
+                   <span
+                       className={clickTrap}
+                       aria-hidden="true" />
                </A>
                &emsp;
-               <span tabIndex="-1"
-                     className={label}
-                     id={id}
-                     onFocus={onFocus}
-                     onClick={onClick}>
+               <span className={label}
+                     id={id}>
                    {desc}
                </span>
            </div>;
