@@ -138,7 +138,6 @@ const plugins = [
     "prev-location",
     "update-state",
     "layout",
-    "overlay-layout",
     "root"
 ];
 

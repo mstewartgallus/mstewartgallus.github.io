@@ -11,10 +11,15 @@ export const onRouteUpdate = ({prevLocation, location}) => {
     if (!prevLocation) {
         return;
     }
+
     const { hash } = location;
     if (hash) {
         const elem = document.getElementById(hash.slice(1));
         elem.focus({ focusVisible: true});
+        return;
+    }
+
+    if (prevLocation.pathname === location.pathname) {
         return;
     }
 

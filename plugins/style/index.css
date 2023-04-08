@@ -58,4 +58,9 @@ abbr {
     background-color: var(--canvas) ;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.3s;
+}
+
 @import "./_vars.css";

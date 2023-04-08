@@ -1,5 +1,6 @@
-import { memo, forwardRef } from "react";
+import { memo, forwardRef, useCallback } from "react";
 import { Link } from "gatsby";
+import { navigate } from "../../../features/util";
 import { a as aClass } from "./a.module.css";
 import { graphql, useStaticQuery } from "gatsby";
 
@@ -17,6 +18,20 @@ const fallback = (siteUrl, href, props) => {
     return hash || origin !== siteUrl || !href || props.target || props.download;
 };
 
+const MyLink = ({children, href, ...props}, ref) => {
+    const onClick = useCallback(e => {
+        e.preventDefault();
+
+        navigate(href);
+    }, [href]);
+    return <Link innerRef={ref}
+                 to={href}
+                 onClick={onClick}
+                 {...props}>{children}</Link> ;
+};
+
+const MyLinkRef = forwardRef(MyLink);
+
 const A = ({children, className = '', href, ...props}, ref) => {
     const metadata = useSiteMetadataRaw();
 
@@ -29,11 +44,11 @@ const A = ({children, className = '', href, ...props}, ref) => {
             ref={ref}
             href={href}
             {...props}>{children}</a> :
-    <Link
+    <MyLinkRef
         className={className}
-        innerRef={ref}
-        to={href}
-        {...props}>{children}</Link> ;
+        ref={ref}
+        href={href}
+        {...props}>{children}</MyLinkRef> ;
 };
 
 const ARef = memo(forwardRef(A));
