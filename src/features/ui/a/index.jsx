@@ -20,6 +20,10 @@ const fallback = (siteUrl, href, props) => {
 
 const MyLink = ({children, href, ...props}, ref) => {
     const onClick = useCallback(e => {
+        if (e.button !== 0 || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
+            return;
+        }
+
         e.preventDefault();
 
         navigate(href);

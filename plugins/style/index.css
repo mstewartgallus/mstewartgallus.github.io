@@ -58,9 +58,56 @@ abbr {
     background-color: var(--canvas) ;
 }
 
+@keyframes slideout {
+    to {
+        transform: translateY(-1px) ;
+    }
+}
+
+@keyframes slideout {
+    from {
+        transform: translateX(-1px) ;
+    }
+}
+
+@keyframes fadeout {
+    to {
+        opacity: 0%;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0%;
+    }
+}
+
+::view-transition-group(root) {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  animation-timing-function: linear;
+  z-index: 1;
+  animation-fill-mode: both;
+}
+
+::view-transition-image-pair(root) {
+    isolation: isolate;
+}
 ::view-transition-old(root),
 ::view-transition-new(root) {
-    animation-duration: 0.3s;
+    mix-blend-box: plus-lighter ;
 }
+
+::view-transition-old(root) {
+    animation-duration: 0.2s ;
+    animation-name: fadeout ;
+}
+::view-transition-new(root) {
+    animation-duration: 0.2s ;
+    animation-name: fadein ;
+}
+
 
 @import "./_vars.css";
