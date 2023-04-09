@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { navigate } from "gasby";
+import { navigate } from "gatsby";
 
 export const useSubmit = () => {
     return useCallback(async event => {

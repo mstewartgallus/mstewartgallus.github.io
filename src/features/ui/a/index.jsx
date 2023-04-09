@@ -1,6 +1,5 @@
 import { useRef, memo, useEffect, forwardRef } from "react";
-import { prefetchPathname } from "gatsby";
-import { navigate } from "../../../features/util";
+import { prefetchPathname, navigate } from "gatsby";
 import { a as aClass } from "./a.module.css";
 import { graphql, useStaticQuery } from "gatsby";
 
