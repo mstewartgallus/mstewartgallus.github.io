@@ -1,7 +1,7 @@
 import { useRef, memo, useEffect, forwardRef } from "react";
-import { prefetchPathname, navigate } from "gatsby";
+import { graphql, useStaticQuery, prefetchPathname, navigate } from "gatsby";
+import { navigationEnabled } from "../../../features/navigation";
 import { a as aClass } from "./a.module.css";
-import { graphql, useStaticQuery } from "gatsby";
 
 const useSiteMetadataRaw = () => useStaticQuery(graphql`
 query {
@@ -71,8 +71,8 @@ const bubble = e => {
     return e;
 };
 
-const onClick = e => {
-    if (window.navigation) {
+const onClick = async e => {
+    if (navigationEnabled()) {
         return;
     }
 
@@ -92,7 +92,7 @@ const onClick = e => {
 
     const url = pathname + search;
 
-    navigate(url);
+    await navigate(url);
 };
 
 const onMouseEnter = e => {
@@ -127,8 +127,7 @@ const A = ({children, className = '', ...props}, ref) => {
         return () => pre.unobserve(current);
     }, [ref]);
 
-    // const fail = fallback(siteUrl, props);
-    const fail = true;
+    const fail = fallback(siteUrl, props);
     return <a
                className={className}
                ref={ref}

@@ -1,28 +1,48 @@
 import { useEffect } from "react";
 
+const ENABLE_NAVIGATION = false;
+
 let resolveRouteUpdate = () => {};
-let resolveRouteUpdateDelayed = () => {};
 
 const onNavigate = e => {
-    const { hashChange, canIntercept, downloadRequest } = e;
+    const { hashChange, userInitiated, canIntercept, downloadRequest, formData } = e;
 
-    if (!canIntercept || downloadRequest || hashChange) {
+    if (!canIntercept) {
+        return;
+    }
+
+    if (!userInitiated) {
+        return;
+    }
+
+    if (downloadRequest) {
+        return;
+    }
+
+    if (formData) {
+        return;
+    }
+
+    if (hashChange) {
         return;
     }
 
     const routeUpdate = new Promise(r => resolveRouteUpdate = r);
-    const routeUpdateDelayed = new Promise(r => resolveRouteUpdateDelayed = r);
+    e.intercept({
+        focusReset: 'manual',
+        scroll: 'manual',
 
-    // FIXME update focus AFTER transition
-    document.startViewTransition(async () => {
-        await Promise.race([routeUpdateDelayed, routeUpdate]);
+        async handler() {
+            await routeUpdate;
+        }
     });
 };
 
+export const navigationEnabled = () => window.navigation && ENABLE_NAVIGATION;
 
 const Nav = ({children}) => {
     useEffect(() => {
-        if (!window.navigation || !document.startViewTransition) {
+        if (!navigationEnabled()) {
             return;
         }
         let ignore = false;
@@ -42,6 +62,4 @@ const Nav = ({children}) => {
 };
 
 export const wrapPageElement = ({element}) => <Nav>{element}</Nav>;
-
 export const onRouteUpdate = (...x) => resolveRouteUpdate(...x);
-export const onRouteUpdateDelayed = (...x) => resolveRouteUpdateDelayed(...x);

@@ -103,7 +103,7 @@ export const Head = () => {
 const SearchPage = () => {
     const location = useLocation();
     const [state, dispatch] = useReducer(reducer, initState);
-    const [isPending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
 
     const onSubmit = useSubmit();
     const tags = usePostTags();

@@ -90,6 +90,7 @@ const flags = {
 };
 
 const plugins = [
+    "navigation",
     "view-transition",
     {
         resolve: "gatsby-plugin-typescript",

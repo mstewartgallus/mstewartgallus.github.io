@@ -1,9 +1,10 @@
 import { useCallback } from "react";
 import { navigate } from "gatsby";
+import { navigationEnabled } from "../features/navigation";
 
 export const useSubmit = () => {
     return useCallback(async event => {
-        if (window.navigation) {
+        if (navigationEnabled()) {
             return;
         }
 

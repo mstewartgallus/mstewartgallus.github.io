@@ -1,1 +1,4 @@
-export { wrapPageElement } from "../../src/features/view-transition";
+export {
+    wrapPageElement,
+    onRouteUpdate, onRouteUpdateDelayed
+} from "../../src/features/view-transition";

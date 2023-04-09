@@ -66,7 +66,7 @@ const Pane = ({children, id, open, ...props}) => {
 };
 
 export const Panel = ({children, heading, value, onClick}) => {
-    const [_, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
     const onClickWrapper = useCallback(e => {
         e.preventDefault();
         startTransition(() => onClick(e));
