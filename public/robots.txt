@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-
-User-agent: *
-Disallow: /search/
-
-Sitemap: https://mstewartgallus.github.io/sitemap-index.xml

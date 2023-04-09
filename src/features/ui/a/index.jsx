@@ -1,5 +1,5 @@
-import { memo, forwardRef, useCallback } from "react";
-import { Link } from "gatsby";
+import { useRef, memo, useEffect, forwardRef } from "react";
+import { prefetchPathname } from "gatsby";
 import { navigate } from "../../../features/util";
 import { a as aClass } from "./a.module.css";
 import { graphql, useStaticQuery } from "gatsby";
@@ -13,46 +13,124 @@ query {
   }
 }`);
 
-const fallback = (siteUrl, href, props) => {
-    const { origin, hash } = new URL(href, siteUrl);
-    return hash || origin !== siteUrl || !href || props.target || props.download;
+const fallback = (siteUrl, props) => {
+    if (!props.href) {
+        return true;
+    }
+
+    const { origin, hash } = new URL(props.href, siteUrl);
+    return hash || origin !== siteUrl || props.target || props.download;
 };
 
-const MyLink = ({children, href, ...props}, ref) => {
-    const onClick = useCallback(e => {
-        if (e.button !== 0 || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
-            return;
+const aborts = new WeakMap();
+
+const prefetch = elem => {
+    const { pathname, search } = new URL(elem.href, window.location);
+
+    const url = pathname + search;
+    aborts.set(elem, prefetchPathname(url));
+};
+
+const abort = elem => {
+    aborts.get(elem)?.abort();
+    aborts.delete(elem);
+};
+
+let prefetcher = null;
+const getPrefetcher = () => {
+    if (prefetcher) {
+        return prefetcher;
+    }
+    if (!window) {
+        return null;
+    }
+
+    const { IntersectionObserver} = window;
+    if (!IntersectionObserver) {
+        return null;
+    }
+
+    prefetcher = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+            const { target, isIntersecting, intersectionRatio } = entry;
+
+            const near = isIntersecting || intersectionRatio > 0;
+            if (near) {
+                prefetch(target);
+            } else {
+                abort(target);
+            }
         }
-
-        e.preventDefault();
-
-        navigate(href);
-    }, [href]);
-    return <Link innerRef={ref}
-                 to={href}
-                 onClick={onClick}
-                 {...props}>{children}</Link> ;
+    });
+    return prefetcher;
 };
 
-const MyLinkRef = forwardRef(MyLink);
+const bubble = e => {
+    while (e && (e.tagName !== 'A' || !e.href)) {
+        e = e.parentElement;
+    }
+    return e;
+};
 
-const A = ({children, className = '', href, ...props}, ref) => {
+const onClick = e => {
+    const { target, altKey, metaKey, shiftKey, ctrlKey, button } = e;
+    if (button !== 0) {
+        return;
+    }
+
+    if (altKey || metaKey || shiftKey || ctrlKey) {
+        return;
+    }
+
+    e.preventDefault();
+
+    const { href } = bubble(target);
+    const { pathname, search } = new URL(href, window.location);
+
+    const url = pathname + search;
+
+    navigate(url);
+};
+
+const onMouseEnter = e => {
+    const { target } = e;
+    const { href } = bubble(target);
+    const { pathname, search } = new URL(href, window.location);
+    // FIXME
+    window.___loader.hovering(pathname + search);
+};
+
+const A = ({children, className = '', ...props}, ref) => {
+    const theRef = useRef();
+    ref ??= theRef;
+
     const metadata = useSiteMetadataRaw();
 
     const siteUrl = metadata.site.siteMetadata.siteUrl;
 
     className = `${aClass} ${className}`;
-    return fallback(siteUrl, href, props) ?
-        <a
-            className={className}
-            ref={ref}
-            href={href}
-            {...props}>{children}</a> :
-    <MyLinkRef
-        className={className}
-        ref={ref}
-        href={href}
-        {...props}>{children}</MyLinkRef> ;
+
+    useEffect(() => {
+        const pre = getPrefetcher();
+        if (!pre) {
+            return;
+        }
+
+        const { current } = ref;
+        if (!current) {
+            return;
+        }
+        pre.observe(current);
+        return () => pre.unobserve(current);
+    }, [ref]);
+
+    const fail = fallback(siteUrl, props);
+    return <a
+               className={className}
+               ref={ref}
+               onClick={fail ? null : onClick}
+               onMouseEnter={fail ? null : onMouseEnter}
+               {...props}>{children}</a> ;
 };
 
 const ARef = memo(forwardRef(A));
