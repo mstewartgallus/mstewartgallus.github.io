@@ -72,6 +72,10 @@ const bubble = e => {
 };
 
 const onClick = e => {
+    if (window.navigation) {
+        return;
+    }
+
     const { target, altKey, metaKey, shiftKey, ctrlKey, button } = e;
     if (button !== 0) {
         return;
@@ -123,7 +127,8 @@ const A = ({children, className = '', ...props}, ref) => {
         return () => pre.unobserve(current);
     }, [ref]);
 
-    const fail = fallback(siteUrl, props);
+    // const fail = fallback(siteUrl, props);
+    const fail = true;
     return <a
                className={className}
                ref={ref}

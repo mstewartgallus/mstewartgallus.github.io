@@ -3,6 +3,10 @@ import { navigate } from "gatsby";
 
 export const useSubmit = () => {
     return useCallback(async event => {
+        if (window.navigation) {
+            return;
+        }
+
         const nativeEvent = event.nativeEvent;
         const form = event.target;
         const submitter = nativeEvent.submitter;

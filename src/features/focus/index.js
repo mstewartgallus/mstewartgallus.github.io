@@ -15,7 +15,7 @@ export const onRouteUpdate = ({prevLocation, location}) => {
     const { hash } = location;
     if (hash) {
         const elem = document.getElementById(hash.slice(1));
-        elem.focus({ focusVisible: true});
+        elem?.focus({ focusVisible: true});
         return;
     }
 
