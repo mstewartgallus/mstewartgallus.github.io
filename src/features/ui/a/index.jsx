@@ -1,6 +1,6 @@
 import { useRef, memo, useEffect, forwardRef } from "react";
 import { graphql, useStaticQuery, prefetchPathname, navigate } from "gatsby";
-import { navigationEnabled } from "../../../features/navigation";
+import { interceptEnabled } from "../../../features/intercept";
 import { a as aClass } from "./a.module.css";
 
 const useSiteMetadataRaw = () => useStaticQuery(graphql`
@@ -72,7 +72,7 @@ const bubble = e => {
 };
 
 const onClick = async e => {
-    if (navigationEnabled()) {
+    if (interceptEnabled()) {
         return;
     }
 

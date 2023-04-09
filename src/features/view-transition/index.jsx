@@ -19,29 +19,32 @@ const onNavigate = e => {
     });
 };
 
-
-const Nav = ({children}) => {
-    useEffect(() => {
-        if (!window.navigation || !document.startViewTransition) {
+const viewTransition = () => {
+    if (!window.navigation || !document.startViewTransition) {
+        return;
+    }
+    let ignore = false;
+    const cb = e => {
+        if (ignore) {
             return;
         }
-        let ignore = false;
-        const cb = e => {
-            if (ignore) {
-                return;
-            }
-            return onNavigate(e);
-        };
-        window.navigation.addEventListener('navigate', cb);
-        return () => {
-            ignore = true;
-            window.navigation.removeEventListener('navigate', cb);
-        };
-    }, []);
+        return onNavigate(e);
+    };
+    window.navigation.addEventListener('navigate', cb);
+    return () => {
+        ignore = true;
+        window.navigation.removeEventListener('navigate', cb);
+    };
+};
+
+const useViewTransition = () => useEffect(viewTransition, []);
+
+const ViewTransition = ({children}) => {
+    useViewTransition();
     return children;
 };
 
-export const wrapPageElement = ({element}) => <Nav>{element}</Nav>;
+export const wrapPageElement = ({element}) => <ViewTransition>{element}</ViewTransition>;
 
 export const onRouteUpdate = (...x) => resolveRouteUpdate(...x);
 export const onRouteUpdateDelayed = (...x) => resolveRouteUpdateDelayed(...x);

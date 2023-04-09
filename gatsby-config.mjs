@@ -90,8 +90,6 @@ const flags = {
 };
 
 const plugins = [
-    "navigation",
-    "view-transition",
     {
         resolve: "gatsby-plugin-typescript",
         options: {
@@ -140,7 +138,9 @@ const plugins = [
     "prev-location",
     "update-state",
     "layout",
-    "root"
+    "root",
+    "intercept",
+    "view-transition"
 ];
 
 const config = {
