@@ -1,4 +1,4 @@
 export {
     wrapPageElement,
     onRouteUpdate, onRouteUpdateDelayed
-} from "../../src/features/view-transition";
+} from "@features/view-transition";

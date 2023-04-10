@@ -1,1 +1,1 @@
-export { wrapRootElement } from "../../src/features/root";
+export { wrapRootElement } from "@features/root";

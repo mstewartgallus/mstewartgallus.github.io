@@ -1,1 +1,1 @@
-export { wrapPageElement } from "../../src/features/layout";
+export { wrapPageElement } from "@features/layout";

@@ -2,4 +2,4 @@ export {
     onPreRouteUpdate,
     onRouteUpdate,
     onRouteUpdateDelayed
-} from "../../src/features/update-state";
+} from "@features/update-state";

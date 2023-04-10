@@ -1,1 +1,1 @@
-export { wrapPageElement, onRouteUpdate } from "../../src/features/intercept";
+export { wrapPageElement, onRouteUpdate } from "@features/intercept";

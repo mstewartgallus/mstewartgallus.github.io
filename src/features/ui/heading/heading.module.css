@@ -10,11 +10,11 @@
 }
 
 h1.heading {
-    font-size: calc(var(--ratio-2) * 1rem);
+    font-size: 1.77777777777rem ;
 }
 
 h2.heading {
-    font-size: calc(var(--ratio-1) * 1rem);
+    font-size: 1.33333333333rem ;
 }
 
 .heading {

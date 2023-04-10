@@ -25,19 +25,6 @@ abbr {
     font-variant-caps: all-small-caps ;
 }
 
-
-@supports (background: paint(something)) {
-    @property --t {
-        syntax: '<length>';
-        initial-value: 0rem ;
-    }
-
-    @property --ratio-2 {
-        syntax: '<number>';
-        initial-value: 2.25 ;
-    }
-}
-
 :root, body {
     margin: 0;
     padding: 0;
@@ -46,7 +33,6 @@ abbr {
     --t: clamp(0rem,
                (1600vw - var(--min-width) * 1rem) / var(--width-delta),
                1rem) ;
-    --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
 }
 
 @media print {

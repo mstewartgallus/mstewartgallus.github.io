@@ -1,1 +1,1 @@
-export { onRouteUpdate } from "../../src/features/prev-location";
+export { onRouteUpdate } from "@features/prev-location";
