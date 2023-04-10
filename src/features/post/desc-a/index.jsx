@@ -1,5 +1,5 @@
 import { useId, forwardRef } from "react";
-import { A } from "../../../features/ui";
+import { A } from "@features/ui";
 import { wrapper, label, clickTrap } from "./desc.module.css";
 
 const DescA = ({ children, desc, href, ...props }, ref) => {

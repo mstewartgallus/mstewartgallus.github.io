@@ -1,5 +1,5 @@
 import { Children as C } from "react";
-import { Caesura, L, Lg, Seg } from "../../features/poem";
+import { Caesura, L, Lg, Seg } from "@features/poem";
 
 const key = x => C.map(x, y => y);
 

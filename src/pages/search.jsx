@@ -1,8 +1,8 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
-import { ResultList, SearchForm, useSearch, usePostTags } from "../features/search";
-import { Ul, Li, A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "../features/ui";
-import { ViewportPage, SkipA } from "../features/page";
+import { ResultList, SearchForm, useSearch, usePostTags } from "@features/search";
+import { Ul, Li, A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "@features/ui";
+import { ViewportPage, SkipA } from "@features/page";
 import { useTitle } from "../components/title.jsx";
 import useSubmit from "../hooks/use-submit.js";
 import { separator } from "../utils/separator.js";

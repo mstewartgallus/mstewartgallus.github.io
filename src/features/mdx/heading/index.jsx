@@ -2,7 +2,7 @@ import {
     A, Hgroup,
     H1 as UiH1, H2 as UiH2, H3 as UiH3,
     H4 as UiH4, H5 as UiH5, H6 as UiH6
-} from "../../../features/ui";
+} from "@features/ui";
 import { heading, autolink } from "./heading.module.css";
 
 const createAutoLink = Hn => {

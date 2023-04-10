@@ -1,5 +1,5 @@
-import { Suspend } from "../../../../features/util";
-import { A } from "../../../../features/ui";
+import { Suspend } from "@features/util";
+import { A } from "@features/ui";
 import { SuspenseList, SuspenseItem } from "../../components/suspense-list";
 
 const Result = ({loaded, url, title}) => {

@@ -1,4 +1,4 @@
-import { Card, Footer, Nav, H2 } from "../../features/ui";
+import { Card, Footer, Nav, H2 } from "@features/ui";
 
 export const Sidebar = ({children, paging, metadata}) =>
 <>

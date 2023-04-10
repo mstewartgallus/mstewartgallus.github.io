@@ -1,4 +1,4 @@
-import { Caesura, L, Lg } from "../../features/poem";
+import { Caesura, L, Lg } from "@features/poem";
 import {
     A,
     Blockquote,
@@ -8,7 +8,7 @@ import {
     Hr,
     P,
     Green
-} from "../../features/ui";
+} from "@features/ui";
 import { H1, H2, H3, H4, H5, H6, } from "./heading";
 import { Pre } from "./pre";
 

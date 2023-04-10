@@ -1,4 +1,4 @@
-import { A, Ol, Li } from "../../features/ui";
+import { A, Ol, Li } from "@features/ui";
 
 const Entry = ({href, children}) =>
 <Li><A href={href}>{children}</A></Li>;

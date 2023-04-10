@@ -1,5 +1,5 @@
 import { useId, useCallback, useMemo } from "react";
-import { Input, Button } from "../../../../features/ui";
+import { Input, Button } from "@features/ui";
 import { Legend } from "../../components/legend";
 import { Select, Option } from "../../components/select";
 import { query, queryContent } from "./search-form.module.css";

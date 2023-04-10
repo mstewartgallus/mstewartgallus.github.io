@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { H1 as UiH1 } from "../../features/ui";
+import { H1 as UiH1 } from "@features/ui";
 
 const H1 = ({children, id = "content", ...props}, ref) =>
 <UiH1 ref={ref} id={id} {...props}>{children}</UiH1>;

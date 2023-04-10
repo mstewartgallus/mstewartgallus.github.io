@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { Assistive } from "../../features/util";
+import { Assistive } from "@features/util";
 
 export const Footer = ({children, heading, ...props}) => {
     const id = useId();

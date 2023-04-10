@@ -1,6 +1,6 @@
-import { Assistive, useUnder } from "../../../features/util";
-import { useUpdateState } from "../../../features/update-state";
-import { Theme, A, Card, H2, Hgroup, Nav, SidebarLayout } from "../../../features/ui";
+import { Assistive, useUnder } from "@features/util";
+import { useUpdateState } from "@features/update-state";
+import { Theme, A, Card, H2, Hgroup, Nav, SidebarLayout } from "@features/ui";
 import { H1 } from "../h1.jsx";
 import { layout, tableOfContents as tableOfContentsClass } from "./page.module.css";
 

@@ -1,10 +1,10 @@
 import { memo } from "react";
 import { graphql } from "gatsby";
-import { Ul, Li, A, Card, H2, Section } from "../features/ui";
+import { Ul, Li, A, Card, H2, Section } from "@features/ui";
 import { Comments, ListNotice, Sidebar, SeoPostHead,
          Post, PostPaging, Metadata, PostBreadcrumbs,
-         useBlogPosting, useBreadcrumbList } from "../features/post";
-import { ViewportPage, SkipA } from "../features/page";
+         useBlogPosting, useBreadcrumbList } from "@features/post";
+import { ViewportPage, SkipA } from "@features/page";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";

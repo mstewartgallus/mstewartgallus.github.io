@@ -1,8 +1,8 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { useCallback, useMemo, useReducer } from "react";
-import { Sidebar, Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "../features/index";
-import { useSearchURL } from "../features/route";
-import { SearchFormMini } from "../features/search";
+import { Sidebar, Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "@features/index";
+import { useSearchURL } from "@features/route";
+import { SearchFormMini } from "@features/search";
 import {
     BreadcrumbList, BreadcrumbItem,
     Card,
@@ -10,8 +10,8 @@ import {
     H2,
     Ul, Li,
     Header
-} from "../features/ui";
-import { ViewportPage, SkipA } from "../features/page";
+} from "@features/ui";
+import { ViewportPage, SkipA } from "@features/page";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";

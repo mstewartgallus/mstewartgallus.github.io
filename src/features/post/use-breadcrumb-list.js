@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSearchURL } from "../../features/route";
+import { useSearchURL } from "@features/route";
 
 export const useBreadcrumbList = ({
     title, category, slug

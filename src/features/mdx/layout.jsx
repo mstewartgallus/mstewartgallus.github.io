@@ -1,7 +1,7 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { MDXProvider } from '@mdx-js/react';
-import { A, Ul, Li, BreadcrumbList, BreadcrumbItem } from "../../features/ui";
-import { ViewportPage, SkipA } from "../../features/page";
+import { A, Ul, Li, BreadcrumbList, BreadcrumbItem } from "@features/ui";
+import { ViewportPage, SkipA } from "@features/page";
 import { defaults } from "./defaults.jsx";
 
 const TableOfContents = ({heading}) =>

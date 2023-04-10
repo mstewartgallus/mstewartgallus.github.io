@@ -1,6 +1,6 @@
 import { useRef, memo, useEffect, forwardRef } from "react";
 import { graphql, useStaticQuery, prefetchPathname, navigate } from "gatsby";
-import { interceptEnabled } from "../../../features/intercept";
+import { interceptEnabled } from "@features/intercept";
 import { a as aClass } from "./a.module.css";
 
 const useSiteMetadataRaw = () => useStaticQuery(graphql`

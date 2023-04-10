@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { useUnder } from "../../../features/util";
+import { useUnder } from "@features/util";
 import { heading } from "./heading.module.css";
 
 const createHeading = Hn => {

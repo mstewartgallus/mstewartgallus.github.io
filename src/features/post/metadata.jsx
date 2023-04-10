@@ -1,6 +1,6 @@
 import { memo, createContext, useId, useContext } from "react";
-import { useSearchURL } from "../../features/route";
-import { A } from "../../features/ui";
+import { useSearchURL } from "@features/route";
+import { A } from "@features/ui";
 import { DescA } from "./desc-a";
 import { Set, SetItem } from "./set";
 import { time, address, dl, dt } from "./metadata.module.css";

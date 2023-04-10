@@ -1,6 +1,6 @@
 import { useId, useRef } from "react"
-import { useUnder } from "../../../features/util";
-import { A, Pre as BarePre, Card } from "../../../features/ui";
+import { useUnder } from "@features/util";
+import { A, Pre as BarePre, Card } from "@features/ui";
 import { autolink, title as titleClass, figure, figcaption } from "./pre.module.css";
 
 export const Pre = ({children, id, title}) => {

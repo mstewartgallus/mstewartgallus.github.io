@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { Search as SearchPf } from "../../features/polyfill";
+import { Search as SearchPf } from "@features/polyfill";
 
 export const Search = ({heading, children, ...props}) => {
     const id = useId();

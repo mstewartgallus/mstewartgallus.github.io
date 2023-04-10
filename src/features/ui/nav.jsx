@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { Assistive } from "../../features/util";
+import { Assistive } from "@features/util";
 import { Hgroup } from "./hgroup";
 
 export const Nav = ({children, heading, ...props}) => {

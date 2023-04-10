@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { navigate } from "gatsby";
-import { interceptEnabled } from "../features/intercept";
+import { interceptEnabled } from "@features/intercept";
 
 export const useSubmit = () => {
     return useCallback(async event => {

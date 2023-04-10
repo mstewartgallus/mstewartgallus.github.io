@@ -1,6 +1,6 @@
 import { memo, useId, useDeferredValue, useTransition, useCallback, createContext, useContext } from "react";
-import { useClient } from "../../../features/util";
-import { Button, Card, H2 } from "../../../features/ui";
+import { useClient } from "@features/util";
+import { Button, Card, H2 } from "@features/ui";
 import { ClosedIcon } from "../closed-icon";
 import { OpenIcon } from "../open-icon";
 import {

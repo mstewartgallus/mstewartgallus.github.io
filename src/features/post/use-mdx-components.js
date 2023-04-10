@@ -1,5 +1,5 @@
-import { defaults } from "../../features/mdx";
-import { L, Lg } from "../../features/poem";
+import { defaults } from "@features/mdx";
+import { L, Lg } from "@features/poem";
 
 const poem = { ul: Lg, li: L };
 

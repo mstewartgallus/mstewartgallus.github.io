@@ -1,6 +1,6 @@
-import { Assistive } from "../../features/util";
-import { Search } from "../../features/polyfill";
-import { Hgroup, Card, H2 } from "../../features/ui";
+import { Assistive } from "@features/util";
+import { Search } from "@features/polyfill";
+import { Hgroup, Card, H2 } from "@features/ui";
 
 export const Sidebar = ({children, search}) =>
 <>

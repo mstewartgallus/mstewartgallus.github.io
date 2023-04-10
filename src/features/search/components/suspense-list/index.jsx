@@ -1,5 +1,5 @@
 import { memo, Suspense, createContext, useContext } from "react";
-import { Ul, Li } from "../../../../features/ui";
+import { Ul, Li } from "@features/ui";
 
 const FallbackContext = createContext();
 FallbackContext.displayName = 'Fallback';

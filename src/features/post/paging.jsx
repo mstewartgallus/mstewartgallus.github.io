@@ -1,5 +1,5 @@
+import { Cite } from "@features/ui";
 import { DescA } from "./desc-a";
-import { Cite } from "../../features/ui";
 
 export const Paging = ({ previous, next }) =>
 <div>

@@ -1,4 +1,4 @@
-import { A, Ul, Li } from "../../features/ui";
+import { A, Ul, Li } from "@features/ui";
 
 export const Banner = () =>
 <Ul>

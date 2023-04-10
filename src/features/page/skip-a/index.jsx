@@ -1,6 +1,6 @@
-import { focusRef } from "../../../features/focus";
-import { useUnder } from "../../../features/util";
-import { A } from "../../../features/ui";
+import { focusRef } from "@features/focus";
+import { useUnder } from "@features/util";
+import { A } from "@features/ui";
 import { wrapper, skipLink } from "./skip-a.module.css";
 
 export const SkipA = ({children, ...props}) => {

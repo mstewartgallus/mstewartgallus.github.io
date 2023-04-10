@@ -1,5 +1,5 @@
-import { A, BreadcrumbList, BreadcrumbItem, Cite } from "../../features/ui";
-import { useSearchURL } from "../../features/route";
+import { useSearchURL } from "@features/route";
+import { A, BreadcrumbList, BreadcrumbItem, Cite } from "@features/ui";
 
 export const PostBreadcrumbs = ({category, title}) => {
     const cat = useSearchURL({ category: [category] });

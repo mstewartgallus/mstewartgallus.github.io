@@ -1,5 +1,5 @@
-import { AlertPage } from "../features/page";
-import { P } from "../features/ui";
+import { AlertPage } from "@features/page";
+import { P } from "@features/ui";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";

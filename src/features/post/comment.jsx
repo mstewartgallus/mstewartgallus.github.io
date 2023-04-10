@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback } from "react";
-import { A } from "../../features/ui";
+import { A } from "@features/ui";
 import {
     iframe as iframeClass,
     loaded as loadedClass,

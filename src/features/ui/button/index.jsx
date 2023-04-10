@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { useUnder } from "../../../features/util";
+import { useUnder } from "@features/util";
 import { button } from "./button.module.css";
 
 const Button = ({children, id, className = '', ...props}, ref) => {

@@ -1,4 +1,4 @@
-import { P, Ul, Li, A } from "../../features/ui";
+import { P, Ul, Li, A } from "@features/ui";
 import { ViewportPage } from "./viewport-page";
 import { SkipA } from "./skip-a";
 
