@@ -26,6 +26,18 @@ abbr {
 }
 
 
+@supports (background: paint(something)) {
+    @property --t {
+        syntax: '<length>';
+        initial-value: 0rem ;
+    }
+
+    @property --ratio-2 {
+        syntax: '<number>';
+        initial-value: 2.25 ;
+    }
+}
+
 :root, body {
     margin: 0;
     padding: 0;
