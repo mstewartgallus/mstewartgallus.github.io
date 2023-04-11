@@ -3,9 +3,9 @@ import { ViewportPage, SkipA } from "@features/page";
 import { Comments } from "./comments.jsx";
 import { ListNotice } from "./list-notice";
 import { Metadata } from "./metadata";
-import { Sidebar } from "./sidebar";
 import { PostBreadcrumbs } from "./post-breadcrumbs.jsx";
 import { PostPaging } from "./post-paging.jsx";
+import { Sidebar } from "./sidebar";
 
 const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;

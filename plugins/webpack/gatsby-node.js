@@ -6,7 +6,8 @@ const webpack = {
     },
     "resolve": {
         "alias": {
-            "@features": path.resolve(__dirname, "../../src/features")
+            "@features": path.resolve(__dirname, "../../src/features"),
+            "@content": path.resolve(__dirname, "../../content")
         }
     }
 };

@@ -131,7 +131,7 @@ const plugins = [
     })),
     "transformer-post-poem",
     "transformer-link",
-    "index",
+    "publish",
     "inert",
     "style",
     "focus",

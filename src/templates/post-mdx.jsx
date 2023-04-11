@@ -3,10 +3,12 @@ import { PostHead, PostPage, PostMdx } from "@features/post";
 
 export const Head = ({ data: { postMdx: { post }}}) => <PostHead post={post} />;
 
-const PostMdxPage = ({ data: { postMdx } }) => {
+const PostMdxPage = ({ children, data: { postMdx } }) => {
     const { post } = postMdx;
     return <PostPage post={post}>
-               <PostMdx {...postMdx} />
+               <PostMdx {...postMdx}>
+                   {children}
+               </PostMdx>
            </PostPage>;
 };
 

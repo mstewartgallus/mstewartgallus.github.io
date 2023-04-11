@@ -1,14 +1,14 @@
-import { useBlog } from "./use-blog.js";
+import { MDXProvider } from '@mdx-js/react';
 import { useMdxComponents } from "./use-mdx-components.js";
 
 export const PostMdx = ({
-    post: { category },
-    sourceInstanceName,
-    relativePath
+    children,
+    post: { category }
 }) => {
     const components = useMdxComponents(category);
-    const Blog = useBlog(sourceInstanceName, relativePath);
-    return <Blog components={components} />;
+    return <MDXProvider components={components}>
+               {children}
+           </MDXProvider>;
 };
 
 export default PostMdx;
