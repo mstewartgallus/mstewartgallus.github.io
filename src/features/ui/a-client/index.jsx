@@ -1,6 +1,5 @@
 import { useRef, useEffect, forwardRef } from "react";
 import { graphql, useStaticQuery, prefetchPathname, navigate } from "gatsby";
-import { interceptEnabled } from "@features/intercept";
 
 const useSiteMetadataRaw = () => useStaticQuery(graphql`
 query {
@@ -71,10 +70,6 @@ const bubble = e => {
 };
 
 const onClick = async e => {
-    if (interceptEnabled()) {
-        return;
-    }
-
     const { target, altKey, metaKey, shiftKey, ctrlKey, button } = e;
     if (button !== 0) {
         return;

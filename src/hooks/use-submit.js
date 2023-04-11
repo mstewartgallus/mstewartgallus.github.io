@@ -1,13 +1,8 @@
 import { useCallback } from "react";
 import { navigate } from "gatsby";
-import { interceptEnabled } from "@features/intercept";
 
 export const useSubmit = () => {
     return useCallback(async event => {
-        if (interceptEnabled()) {
-            return;
-        }
-
         const nativeEvent = event.nativeEvent;
         const form = event.target;
         const submitter = nativeEvent.submitter;

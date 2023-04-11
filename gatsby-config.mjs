@@ -137,7 +137,6 @@ const plugins = [
     "focus",
     "layout",
     "root",
-    "intercept",
     "view-transition"
 ];
 
