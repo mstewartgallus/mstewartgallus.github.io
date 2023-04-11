@@ -1,15 +1,9 @@
 import { StrictMode } from "react";
-import { Provider } from "react-redux";
-import { createStore } from "../../state/store.js";
 
-const Root = ({ children, store }) =>
+const Root = ({ children }) =>
 <StrictMode>
-    <Provider store={store}>
-        {children}
-    </Provider>
+    {children}
 </StrictMode>;
 
-export const wrapRootElement = ({element}) => {
-    const store = createStore();
-    return <Root store={store}>{element}</Root>;
-};
+export const wrapRootElement = ({element}) =>
+<Root>{element}</Root>;

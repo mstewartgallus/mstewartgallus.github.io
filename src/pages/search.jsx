@@ -3,8 +3,8 @@ import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } 
 import { ResultList, SearchForm, useSearch, usePostTags } from "@features/search";
 import { Ul, Li, A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "@features/ui";
 import { ViewportPage, SkipA } from "@features/page";
+import { useSubmit } from "@features/util";
 import { useTitle } from "../components/title.jsx";
-import useSubmit from "../hooks/use-submit.js";
 import { separator } from "../utils/separator.js";
 
 const initState = {

@@ -17,14 +17,12 @@ const Dialog = ({children, ...props}) => {
     }, []);
 
     const onClose = useCallback(async e => {
-        e.preventDefault();
         if (e.target.returnValue !== 'back') {
             return;
         }
         await navigate('/');
     }, []);
     const onCancel = useCallback(async e => {
-        e.preventDefault();
         await navigate('/');
     }, []);
     return <dialog className={dialog}

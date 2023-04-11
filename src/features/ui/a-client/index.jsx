@@ -1,5 +1,8 @@
-import { useRef, useEffect, forwardRef } from "react";
-import { graphql, useStaticQuery, prefetchPathname, navigate } from "gatsby";
+import { forwardRef } from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { useClick } from "@features/util";
+import { usePrefetch } from "./use-prefetch";
+import { useHover } from "./use-hover";
 
 const useSiteMetadataRaw = () => useStaticQuery(graphql`
 query {
@@ -9,121 +12,6 @@ query {
     }
   }
 }`);
-
-const aborts = new WeakMap();
-const urls = new WeakMap();
-
-const prefetch = elem => {
-    const url = urls.get(elem);
-    aborts.set(elem, prefetchPathname(url));
-};
-
-const abort = elem => {
-    aborts.get(elem)?.abort();
-    aborts.delete(elem);
-};
-
-const onObserve = entry => {
-    const { target, isIntersecting, intersectionRatio } = entry;
-
-    const near = isIntersecting || intersectionRatio > 0;
-    if (near) {
-        prefetch(target);
-    } else {
-        abort(target);
-    }
-};
-
-let prefetcher = null;
-const getPrefetcher = () => {
-    if (prefetcher) {
-        return prefetcher;
-    }
-    if (!window) {
-        return null;
-    }
-
-    const { IntersectionObserver} = window;
-    if (!IntersectionObserver) {
-        return null;
-    }
-
-    prefetcher = new IntersectionObserver(entries => {
-        for (const entry of entries) {
-            onObserve(entry);
-        }
-    });
-    return prefetcher;
-};
-
-const bubble = e => {
-    while (e && (e.tagName !== 'A' || !e.href)) {
-        e = e.parentElement;
-    }
-    return e;
-};
-
-const onClick = async e => {
-    const { target, altKey, metaKey, shiftKey, ctrlKey, button } = e;
-    if (button !== 0) {
-        return;
-    }
-
-    if (altKey || metaKey || shiftKey || ctrlKey) {
-        return;
-    }
-
-    e.preventDefault();
-
-    const { href } = bubble(target);
-    const { pathname, search } = new URL(href, window.location);
-
-    const url = pathname + search;
-
-    await navigate(url);
-};
-
-const usePrefetch = url => {
-    const ref = useRef();
-    useEffect(() => {
-        const pre = getPrefetcher();
-        if (!pre) {
-            return;
-        }
-
-        const { current } = ref;
-        if (!current) {
-            return;
-        }
-
-        urls.set(current, url);
-        pre.observe(current);
-        return () => {
-            pre.unobserve(current);
-            urls.delete(current);
-        };
-    }, [url]);
-    return ref;
-};
-
-const useHover = url => {
-    const ref = useRef();
-    useEffect(() => {
-        const { current } = ref;
-        if (!current) {
-            return;
-        }
-
-        // FIXME shouldn't bypass stuff
-        const abort = new AbortController();
-        const { signal } = abort;
-        current.addEventListener('mouseenter',
-                                 () => window.___loader.hovering(url),
-                                 { passive: true, signal });
-        return () => abort.abort();
-    }, [url]);
-    return ref;
-};
 
 const AClient = ({children, ...props}, ref) => {
     const metadata = useSiteMetadataRaw();
@@ -136,6 +24,8 @@ const AClient = ({children, ...props}, ref) => {
 
     const prefetchRef = usePrefetch(url);
     const hoverRef = useHover(url);
+
+    const onClick = useClick();
 
     return <a onClick={fail ? null : onClick}
               {...props}
