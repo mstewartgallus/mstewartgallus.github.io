@@ -1,6 +1,5 @@
 import { P, Ul, Li, A } from "@features/ui";
-import { ViewportPage } from "./viewport-page";
-import { SkipA } from "./skip-a";
+import { SkipA, ViewportPage } from "@features/page";
 
 const loading = <ViewportPage
                     heading={<>Loading&hellip;</>}

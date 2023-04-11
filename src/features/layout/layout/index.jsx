@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { LoadingPage } from "@features/page";
+import { LoadingPage } from "../loading-page.jsx";
 
 export const Layout = ({children}) =>
 <Suspense fallback={<LoadingPage />}>
