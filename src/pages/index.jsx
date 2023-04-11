@@ -1,8 +1,15 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { useCallback, useMemo, useReducer } from "react";
-import { Sidebar, Banner, Accordion, Panel, PostList, usePostList, usePosts, useWebsite } from "@features/index";
+import {
+    SearchForm,
+    Sidebar,
+    Banner,
+    Accordion,
+    Panel,
+    PostList,
+    usePostList, usePosts, useWebsite
+} from "@features/index";
 import { useSearchURL } from "@features/route";
-import { SearchFormMini } from "@features/search";
 import {
     BreadcrumbList, BreadcrumbItem,
     Card,
@@ -107,7 +114,7 @@ const IndexPage = () => {
                sidebar={
                    <Sidebar
                        search={
-                           <SearchFormMini action={search} onSubmit={onSubmit} />
+                           <SearchForm action={search} onSubmit={onSubmit} />
                        }
                    >
                        <Card>

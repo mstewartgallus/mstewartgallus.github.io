@@ -2,7 +2,7 @@ import { useId } from "react";
 import { Input, Button } from "@features/ui";
 import { query } from "./search-form.module.css";
 
-export const SearchFormMini = ({action, onSubmit}) => {
+export const SearchForm = ({action, onSubmit}) => {
     const id = useId();
 
     return <form rel="search" action={action} onSubmit={onSubmit}>
@@ -14,4 +14,4 @@ export const SearchFormMini = ({action, onSubmit}) => {
            </form>;
 };
 
-export default SearchFormMini;
+export default SearchForm;
