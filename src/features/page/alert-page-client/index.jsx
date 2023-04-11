@@ -28,10 +28,10 @@ const Dialog = ({children, ...props}) => {
         await navigate('/');
     }, []);
     return <dialog className={dialog}
-                   ref={ref}
                    onClose={onClose}
                    onCancel={onCancel}
-                   {...props}>
+                   {...props}
+                   ref={ref}>
                {children}
            </dialog>;
 };

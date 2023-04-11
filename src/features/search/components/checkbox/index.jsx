@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { checkbox } from "./checkbox.module.css";
 
 const Checkbox = (props, ref) =>
-<input className={checkbox} ref={ref} type="checkbox" {...props}/>;
+<input className={checkbox} type="checkbox" {...props} ref={ref}/>;
 
 const CheckboxRef = forwardRef(Checkbox);
 

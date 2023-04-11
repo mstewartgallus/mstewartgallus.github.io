@@ -6,7 +6,7 @@ const DescA = ({ children, desc, href, ...props }, ref) => {
     const id = useId();
 
     return <div role="presentation" className={wrapper}>
-               <A aria-describedby={id} ref={ref} href={href} {...props}>
+               <A aria-describedby={id} href={href} {...props} ref={ref}>
                    {children}
                    <span
                        className={clickTrap}

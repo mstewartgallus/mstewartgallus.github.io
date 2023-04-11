@@ -33,6 +33,17 @@ const abort = elem => {
     aborts.delete(elem);
 };
 
+const onObserve = entry => {
+    const { target, isIntersecting, intersectionRatio } = entry;
+
+    const near = isIntersecting || intersectionRatio > 0;
+    if (near) {
+        prefetch(target);
+    } else {
+        abort(target);
+    }
+};
+
 let prefetcher = null;
 const getPrefetcher = () => {
     if (prefetcher) {
@@ -49,14 +60,7 @@ const getPrefetcher = () => {
 
     prefetcher = new IntersectionObserver(entries => {
         for (const entry of entries) {
-            const { target, isIntersecting, intersectionRatio } = entry;
-
-            const near = isIntersecting || intersectionRatio > 0;
-            if (near) {
-                prefetch(target);
-            } else {
-                abort(target);
-            }
+            onObserve(entry);
         }
     });
     return prefetcher;
@@ -105,7 +109,13 @@ const AClient = ({children, ...props}, ref) => {
 
     const siteUrl = metadata.site.siteMetadata.siteUrl;
 
+    const fail = fallback(siteUrl, props);
+
     useEffect(() => {
+        if (fail) {
+            return;
+        }
+
         const pre = getPrefetcher();
         if (!pre) {
             return;
@@ -117,14 +127,29 @@ const AClient = ({children, ...props}, ref) => {
         }
         pre.observe(current);
         return () => pre.unobserve(current);
-    }, [ref]);
+    }, [ref, fail]);
 
-    const fail = fallback(siteUrl, props);
-    return <a
-               onClick={fail ? null : onClick}
-               onMouseEnter={fail ? null : onMouseEnter}
-               {...props}
-               ref={ref}>{children}</a> ;
+    useEffect(() => {
+        if (fail) {
+            return;
+        }
+
+        const { current } = ref;
+        if (!current) {
+            return;
+        }
+
+        const abort = new AbortController();
+        const { signal } = abort;
+        current.addEventListener('mouseenter',
+                                 onMouseEnter,
+                                 { passive: true, signal } );
+        return () => abort.abort();
+    }, [ref, fail]);
+
+    return <a onClick={fail ? null : onClick}
+              {...props}
+              ref={ref}>{children}</a>;
 };
 
 const ARef = forwardRef(AClient);

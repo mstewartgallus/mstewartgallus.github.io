@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { button } from "./button.module.css";
 
 const Button = ({children, className = '', ...props}, ref) =>
-<button className={`${button} ${className}`} ref={ref} {...props}>
+<button className={`${button} ${className}`} {...props} ref={ref}>
     {children}
 </button>;
 
