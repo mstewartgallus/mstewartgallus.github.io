@@ -10,21 +10,11 @@ query {
   }
 }`);
 
-const fallback = (siteUrl, props) => {
-    if (!props.href) {
-        return true;
-    }
-
-    const { origin, hash } = new URL(props.href, siteUrl);
-    return hash || origin !== siteUrl || props.target || props.download;
-};
-
 const aborts = new WeakMap();
+const urls = new WeakMap();
 
 const prefetch = elem => {
-    const { pathname, search } = new URL(elem.href, window.location);
-
-    const url = pathname + search;
+    const url = urls.get(elem);
     aborts.set(elem, prefetchPathname(url));
 };
 
@@ -93,29 +83,9 @@ const onClick = async e => {
     await navigate(url);
 };
 
-const onMouseEnter = e => {
-    const { target } = e;
-    const { href } = bubble(target);
-    const { pathname, search } = new URL(href, window.location);
-    // FIXME
-    window.___loader.hovering(pathname + search);
-};
-
-const AClient = ({children, ...props}, ref) => {
-    const theRef = useRef();
-    ref ??= theRef;
-
-    const metadata = useSiteMetadataRaw();
-
-    const siteUrl = metadata.site.siteMetadata.siteUrl;
-
-    const fail = fallback(siteUrl, props);
-
+const usePrefetch = url => {
+    const ref = useRef();
     useEffect(() => {
-        if (fail) {
-            return;
-        }
-
         const pre = getPrefetcher();
         if (!pre) {
             return;
@@ -125,31 +95,58 @@ const AClient = ({children, ...props}, ref) => {
         if (!current) {
             return;
         }
+
+        urls.set(current, url);
         pre.observe(current);
-        return () => pre.unobserve(current);
-    }, [ref, fail]);
+        return () => {
+            pre.unobserve(current);
+            urls.delete(current);
+        };
+    }, [url]);
+    return ref;
+};
 
+const useHover = url => {
+    const ref = useRef();
     useEffect(() => {
-        if (fail) {
-            return;
-        }
-
         const { current } = ref;
         if (!current) {
             return;
         }
 
+        // FIXME shouldn't bypass stuff
         const abort = new AbortController();
         const { signal } = abort;
         current.addEventListener('mouseenter',
-                                 onMouseEnter,
-                                 { passive: true, signal } );
+                                 () => window.___loader.hovering(url),
+                                 { passive: true, signal });
         return () => abort.abort();
-    }, [ref, fail]);
+    }, [url]);
+    return ref;
+};
+
+const AClient = ({children, ...props}, ref) => {
+    const metadata = useSiteMetadataRaw();
+
+    const siteUrl = metadata.site.siteMetadata.siteUrl;
+
+    const { origin, pathname, search, hash } = new URL(props.href ?? '', siteUrl);
+    const fail = !props.href || hash || origin !== siteUrl || props.target || props.download;
+    const url = pathname + search;
+
+    const prefetchRef = usePrefetch(url);
+    const hoverRef = useHover(url);
 
     return <a onClick={fail ? null : onClick}
               {...props}
-              ref={ref}>{children}</a>;
+              ref={elem => {
+                  hoverRef.current = fail ? null : elem;
+                  prefetchRef.current = fail ? null : elem;
+
+                  if (ref) {
+                      ref.current = elem;
+                  }
+              }}>{children}</a>;
 };
 
 const ARef = forwardRef(AClient);

@@ -8,13 +8,12 @@ const A = ({children, className = '', ...props}, ref) => {
     className = `${aClass} ${className}`;
     return <Suspense
                fallback={
-                   <a className={className} {...props} ref={ref}>
+                   <a {...props} className={className} ref={ref}>
                        {children}
                    </a>
                }
            >
-               <AClient className={className}
-                        {...props} ref={ref}>{children}</AClient>
+               <AClient {...props} className={className} ref={ref}>{children}</AClient>
            </Suspense>;
 };
 

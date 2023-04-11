@@ -15,7 +15,6 @@ export { Hr } from "./hr";
 export { Li, Ol, Ul, Menu } from "./list";
 export { Main } from "./main";
 export { Nav } from "./nav.jsx";
-export { Overlay, OverlayItem } from "./overlay";
 export { Search } from "./search.jsx";
 export { Section } from "./section.tsx";
 export { SidebarLayout } from "./sidebar-layout";
