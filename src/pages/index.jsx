@@ -44,6 +44,7 @@ const Panels = ({posts, onClick}) => useMemo(() => Object.entries(posts).map(([c
         <Panel
             key={category}
             value={category}
+            id={category}
             heading={category}
             onClick={onClick}>
             <PostList posts={posts} />
