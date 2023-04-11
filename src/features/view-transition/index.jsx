@@ -42,42 +42,31 @@ const onNavigateError = e => {
     resolveNavigationError(e);
 };
 
-const useNavigate = () => useEffect(() => {
-    if (!window.navigation || !document.startViewTransition) {
-        return;
-    }
-    window.navigation.addEventListener('navigate', onNavigate);
-    return () => window.navigation.removeEventListener('navigate', onNavigate);
-}, []);
-
-const useNavigateSuccess = () => useEffect(() => {
-    if (!window.navigation || !document.startViewTransition) {
-        return;
-    }
-    window.navigation.addEventListener('navigatesuccess', onNavigateSuccess);
-    return () => window.navigation.removeEventListener('navigatesuccess', onNavigateSuccess);
-}, []);
-
-const useNavigateError = () => useEffect(() => {
-    if (!window.navigation || !document.startViewTransition) {
-        return;
-    }
-    window.navigation.addEventListener('navigateerror', onNavigateError);
-    return () => window.navigation.removeEventListener('navigateerror', onNavigateError);
-}, []);
-
 const useViewTransition = () => {
-    useNavigate();
-    useNavigateSuccess();
-    useNavigateError();
+    useEffect(() => {
+        if (!window.navigation || !document.startViewTransition) {
+            return;
+        }
+        const abort = new AbortController();
+        const { signal } = abort;
+        const options = { passive: true, signal };
+        window.navigation.addEventListener('navigate', onNavigate, options);
+        window.navigation.addEventListener('navigateerror', onNavigateError, options);
+        window.navigation.addEventListener('navigatesuccess', onNavigateSuccess, options);
+        return () => abort.abort();
+    });
 };
 
-const ViewTransition = ({children}) => {
+const ViewTransition = () => {
     useViewTransition();
-    return children;
+    return null;
 };
 
-export const wrapPageElement = ({element}) => <ViewTransition>{element}</ViewTransition>;
+export const wrapPageElement = ({element}) =>
+<>
+    <ViewTransition />
+    {element}
+</>;
 
 export const onRouteUpdate = (...x) => resolveRouteUpdate(...x);
 export const onRouteUpdateDelayed = (...x) => resolveRouteUpdateDelayed(...x);
