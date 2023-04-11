@@ -1,4 +1,3 @@
-import { useId } from "react";
 import { H2 } from "@features/ui";
 
 export const PanelServer = ({id, children, heading}) =>

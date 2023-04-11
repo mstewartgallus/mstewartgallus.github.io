@@ -1,16 +1,13 @@
 import { useId, useRef } from "react"
-import { useUnder } from "@features/util";
 import { A, Pre as BarePre, Card } from "@features/ui";
 import { autolink, title as titleClass, figure, figcaption } from "./pre.module.css";
 
 export const Pre = ({children, id, title}) => {
     const ref = useRef();
-    const under = useUnder();
-    const caption = useId();
-    const focusId = useId();
-    if (under) {
-        id = null;
-    }
+    const gid = useId();
+    const caption = `${gid}-caption`;
+    const focusId = `${gid}-focus`;
+    // FIXME aria-owns isn't supported on Safari
     return <Card>
                <figure id={id} ref={ref} className={figure}>
                    <figcaption className={figcaption}>

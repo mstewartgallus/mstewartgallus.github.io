@@ -41,23 +41,3 @@
         display: none ;
     }
 }
-
-/* .layout { */
-/*     transition-property: opacity; */
-/*     transition-duration: 1s; */
-/* } */
-
-/* .layout[data-under="false"][data-state="pre"] { */
-/*     opacity:0; */
-/* } */
-
-/* .layout[data-under="false"][data-state="update"] { */
-/*     opacity:100%; */
-/* } */
-
-/* .layout[data-under="true"][data-state="pre"] { */
-/*     opacity:100%; */
-/* } */
-/* .layout[data-under="true"][data-state="update"] { */
-/*     opacity:50%; */
-/* } */

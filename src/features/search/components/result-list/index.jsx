@@ -1,6 +1,8 @@
-import { Suspend } from "@features/util";
+import { lazy } from "react";
 import { A } from "@features/ui";
 import { SuspenseList, SuspenseItem } from "../../components/suspense-list";
+
+const Suspend = lazy(() => new Promise(r => {}));
 
 const Result = ({loaded, url, title}) => {
     if (!loaded) {

@@ -1,23 +1,15 @@
-import { Assistive, useUnder } from "@features/util";
+import { Assistive } from "@features/util";
 import { useUpdateState } from "@features/update-state";
 import { Theme, A, Card, H2, Hgroup, Nav, SidebarLayout } from "@features/ui";
 import { H1 } from "../h1.jsx";
 import { layout, tableOfContents as tableOfContentsClass } from "./page.module.css";
 
-const TableHeading = ({children, id, ...props}) => {
-    const under = useUnder();
-    if (under) {
-        id = null;
-    }
-    return <span id={id} {...props}>{children}</span>;
-};
+const TableHeading = ({children, id, ...props}) =><span id={id} {...props}>{children}</span>;
 
 const View = ({children}) => {
-    const under = useUnder();
     const updateState = useUpdateState();
     return <div
                className={layout}
-               data-under={under}
                data-state={updateState}>{children}</div>;
 };
 

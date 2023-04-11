@@ -1,7 +1,6 @@
 import { useCallback, useRef, useEffect } from "react";
 import { navigate } from "gatsby";
 import { Theme, Button, Card, Hgroup } from "@features/ui";
-import { useUnder } from "@features/util";
 import { H1 } from "../h1.jsx";
 import { inner, dialog, header } from "./alert.module.css";
 
@@ -10,7 +9,6 @@ const CloseButton = ({children, ...props}) => {
 };
 
 const Dialog = ({children, ...props}) => {
-    const under = useUnder();
     const ref = useRef();
     useEffect(() => {
         const { current: dialog } = ref;
@@ -35,10 +33,10 @@ const Dialog = ({children, ...props}) => {
         await navigate('/');
     }, []);
     return <dialog className={dialog}
-                   ref={under ? null : ref}
+                   ref={ref}
                    onClose={onClose}
                    onCancel={onCancel}
-                   open={under ? null : "open"}
+                   open="open"
                    {...props}>
                <div className={inner}>
                    {children}
@@ -46,6 +44,8 @@ const Dialog = ({children, ...props}) => {
            </dialog>;
 };
 
+// FIXME lazy load Alert dialog code and replace with different code
+// for server
 export const AlertPage = ({children, heading}) =>
 <Theme>
     <main aria-labelledby="content">
