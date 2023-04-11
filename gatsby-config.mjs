@@ -135,8 +135,6 @@ const plugins = [
     "inert",
     "style",
     "focus",
-    "prev-location",
-    "update-state",
     "layout",
     "root",
     "intercept",
