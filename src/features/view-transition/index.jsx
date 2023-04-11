@@ -54,7 +54,7 @@ const useViewTransition = () => {
         window.navigation.addEventListener('navigateerror', onNavigateError, options);
         window.navigation.addEventListener('navigatesuccess', onNavigateSuccess, options);
         return () => abort.abort();
-    });
+    }, []);
 };
 
 const ViewTransition = () => {
