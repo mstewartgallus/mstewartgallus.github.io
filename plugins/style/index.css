@@ -80,32 +80,186 @@ abbr {
     }
 }
 
-::view-transition-group(root) {
-  position: absolute;
-  top: 0;
-  left: 0;
+@supports selector(::view-transition-group(*)) {
+    ::view-transition-group(root) {
+        position: absolute;
+        top: 0;
+        left: 0;
 
-  animation-timing-function: linear;
-  z-index: 1;
-  animation-fill-mode: both;
+        animation-timing-function: linear;
+        z-index: 1;
+        animation-fill-mode: both;
+    }
+
+    ::view-transition-image-pair(root) {
+        isolation: isolate;
+    }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        mix-blend-box: plus-lighter ;
+    }
+
+    ::view-transition-old(root) {
+        animation-duration: 0.2s ;
+        animation-name: fadeout ;
+    }
+    ::view-transition-new(root) {
+        animation-duration: 0.2s ;
+        animation-name: fadein ;
+    }
 }
 
-::view-transition-image-pair(root) {
-    isolation: isolate;
+@supports (background: paint(something)) {
+    @property --ex-height {
+        syntax: "<number>";
+        initial-value:0.32;
+        inherits: true;
+    }
+    @property --line {
+        syntax: "<length-percentage>";
+        initial-value:20px;
+        inherits: true;
+    }
+    @property --max-width {
+        syntax: "<length-percentage>";
+        initial-value:100%;
+        inherits: true;
+    }
+    @property --measure {
+        syntax: "<length>";
+        initial-value:400px;
+        inherits: true;
+    }
+    @property --main-width {
+        syntax: "<length>";
+        initial-value:500px;
+        inherits: true;
+    }
+    @property --min-width {
+        syntax: "<number>";
+        initial-value:300;
+        inherits: true;
+    }
+    @property --width-delta {
+        syntax: "<number>";
+        initial-value:1500;
+        inherits: true;
+    }
+    @property --min-font-size {
+        syntax: "<number>";
+        initial-value:16;
+        inherits: true;
+    }
+    @property --max-font-size {
+        syntax: "<number>";
+        initial-value:30;
+        inherits: true;
+    }
+    @property --canvas {
+        syntax: "<color>";
+        initial-value:white;
+        inherits: true;
+    }
+    @property --canvas-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --gray-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --selected-item {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --selected-item-text {
+        syntax: "<color>";
+        initial-value:white;
+        inherits: true;
+    }
+    @property --highlight {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --highlight-text {
+        syntax: "<color>";
+        initial-value:white;
+        inherits: true;
+    }
+    @property --mark {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --mark-text {
+        syntax: "<color>";
+        initial-value:white;
+        inherits: true;
+    }
+    @property --link-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --visited-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --active-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --accent-color {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --accent-color-text {
+        syntax: "<color>";
+        initial-value:white;
+        inherits: true;
+    }
+    @property --button-border {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --button-face {
+        syntax: "<color>";
+        initial-value:white;
+        inherits: true;
+    }
+    @property --button-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --field {
+        syntax: "<color>";
+        initial-value:white;
+        inherits: true;
+    }
+    @property --field-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --emphasis-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
+    @property --green-text {
+        syntax: "<color>";
+        initial-value:black;
+        inherits: true;
+    }
 }
-::view-transition-old(root),
-::view-transition-new(root) {
-    mix-blend-box: plus-lighter ;
-}
-
-::view-transition-old(root) {
-    animation-duration: 0.2s ;
-    animation-name: fadeout ;
-}
-::view-transition-new(root) {
-    animation-duration: 0.2s ;
-    animation-name: fadein ;
-}
-
 
 @import "./_vars.css";
