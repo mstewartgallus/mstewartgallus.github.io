@@ -1,23 +1,13 @@
-import { Caesura, L, Lg } from "@features/poem";
 import {
     A,
     Blockquote,
-    Cite,
     Code,
     Ul, Ol, Menu, Li,
     Hr,
-    P,
-    Green
+    P
 } from "@features/ui";
 import { H1, H2, H3, H4, H5, H6, } from "./heading";
 import { Pre } from "./pre";
-
-const shortcodes = {
-    A,
-    Cite,
-    Green,
-    Lg, L, Caesura
-};
 
 const headings = {
     h1: H1,
@@ -37,10 +27,9 @@ const components = {
     hr: Hr
 };
 
-export const defaults = {
-    ...shortcodes,
+export const theme = {
     ...headings,
     ...components
 };
 
-export default defaults;
+export default theme;

@@ -2,7 +2,7 @@ import { useLocation } from "@gatsbyjs/reach-router";
 import { MDXProvider } from '@mdx-js/react';
 import { A, Ul, Li, BreadcrumbList, BreadcrumbItem } from "@features/ui";
 import { ViewportPage, SkipA } from "@features/page";
-import { defaults } from "./defaults.jsx";
+import { theme } from "./theme.jsx";
 
 const TableOfContents = ({heading}) =>
       <>
@@ -32,7 +32,7 @@ export const Layout = ({
                    </BreadcrumbList>
                }
                heading={title}>
-               <MDXProvider components={defaults}>
+               <MDXProvider components={theme}>
                    {children}
                </MDXProvider>
            </ViewportPage>;

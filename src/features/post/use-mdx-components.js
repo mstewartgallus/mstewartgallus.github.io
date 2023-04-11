@@ -1,16 +1,31 @@
-import { defaults } from "@features/mdx";
-import { L, Lg } from "@features/poem";
+import { theme } from "@features/mdx";
+import { Caesura, L, Lg } from "@features/poem";
+import {
+    Cite,
+    Green
+} from "@features/ui";
 
-const poem = { ul: Lg, li: L };
+// FIXME explicitly import shortcodes
+const shortcodes = {
+    Cite,
+    Green,
+    Lg, L, Caesura
+};
+
+const poemTheme = {
+    ...theme,
+    ul: Lg,
+    li: L
+};
 
 export const useMdxComponents = category => {
     switch (category) {
     case "Poem":
-        return { ...defaults, ...poem, wrapper: null };
+        return { ...poemTheme, ...shortcodes };
 
     case "Prose":
     case "Web":
-        return { ...defaults, wrapper: null };
+        return { ...theme, ...shortcodes };
 
     default:
         throw new Error(`Unrecognized category ${category}`);
