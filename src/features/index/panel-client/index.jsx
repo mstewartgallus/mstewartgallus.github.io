@@ -1,4 +1,3 @@
-import 'wicg-inert';
 import { useId, useTransition, useCallback } from "react";
 import { Button, H2 } from "@features/ui";
 import { ClosedIcon } from "../closed-icon";

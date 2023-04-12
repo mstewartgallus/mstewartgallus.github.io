@@ -2,7 +2,16 @@ import { Suspense, lazy, memo, createContext, useContext } from "react";
 import { Card } from "@features/ui";
 import { PanelServer } from "../panel-server";
 
-const PanelClient = lazy(() => import("../panel-client"));
+// FIXME this is kind of silly but a better structure would really
+// only be possible with top level await
+const PanelClient = lazy(async () => {
+    const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+    const hasInert = canUseDOM && window.document.createElement('div').inert === 'false';
+    if (!hasInert) {
+        await import('wicg-inert');
+    }
+    return import("../panel-client");
+});
 
 const Context = createContext(null);
 Context.displayName = 'Accordion';
