@@ -2,10 +2,13 @@ let focus = null;
 
 export const focusRef = elem => focus = elem;
 
-// hack around the gatsby focus wrapper for manual focus management
+// hack around the Gatsby focus wrapper for manual focus management
 export const onClientEntry = () => {
     document.getElementById('gatsby-focus-wrapper')?.removeAttribute('tabIndex');
 };
+
+// Gatsby already handles scroll, focus-visible for extra emphasis
+const opts = { focusVisible: true, preventScroll: true };
 
 export const onRouteUpdate = ({prevLocation, location}) => {
     if (!prevLocation) {
@@ -15,7 +18,7 @@ export const onRouteUpdate = ({prevLocation, location}) => {
     const { hash } = location;
     if (hash) {
         const elem = document.getElementById(hash.slice(1));
-        elem?.focus({ focusVisible: true});
+        elem?.focus(opts);
         return;
     }
 
@@ -28,5 +31,5 @@ export const onRouteUpdate = ({prevLocation, location}) => {
         return;
     }
 
-    current.focus({ preventScroll: true, focusVisible: true});
+    current.focus(opts);
 };

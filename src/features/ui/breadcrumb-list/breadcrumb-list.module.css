@@ -3,7 +3,7 @@
     padding: 0 ;
     margin: 0;
 
-    contain: content style ;
+    contain: layout style ;
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 0.5em ;

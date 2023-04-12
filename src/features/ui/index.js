@@ -21,4 +21,3 @@ export { SidebarLayout } from "./sidebar-layout";
 export { P } from "./p";
 export { Pre } from "./pre";
 export { Theme } from "./theme";
-export { Viewport } from "./viewport";

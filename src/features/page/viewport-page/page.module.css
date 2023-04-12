@@ -35,10 +35,14 @@
     position: relative ;
     display: flow-root ;
     max-inline-size: 100% ;
+
+    isolation: isolate ;
 }
 
 .tableOfContents {
     display: flow-root ;
+
+    contain: style ;
 }
 
 @media print {

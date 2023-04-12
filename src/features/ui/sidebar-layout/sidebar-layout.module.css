@@ -27,7 +27,13 @@
 }
 
 .page {
-    contain: content style ;
+    contain: style ;
+}
+.sidebar {
+    contain: layout style ;
+}
+.mainbar {
+    contain: style ;
 }
 /* .page { */
 /*      background: linear-gradient(grey, Canvas); */

@@ -1,6 +1,6 @@
 .l {
     all: unset ;
-    contain: content style ;
+    contain: paint style ;
     display: inline-block ;
     text-align-last: end ;
 }
