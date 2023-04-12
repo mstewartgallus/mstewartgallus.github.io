@@ -42,30 +42,30 @@ const onNavigateError = e => {
     resolveNavigationError(e);
 };
 
-const useViewTransition = () => {
+const registerListener = ({ signal }) => {
+    const options = { passive: true, signal };
+    window.navigation.addEventListener('navigate', onNavigate, options);
+    window.navigation.addEventListener('navigateerror', onNavigateError, options);
+    window.navigation.addEventListener('navigatesuccess', onNavigateSuccess, options);
+};
+
+const ViewTransition = () => {
     useEffect(() => {
         if (!window.navigation || !document.startViewTransition) {
             return;
         }
         const abort = new AbortController();
         const { signal } = abort;
-        const options = { passive: true, signal };
-        window.navigation.addEventListener('navigate', onNavigate, options);
-        window.navigation.addEventListener('navigateerror', onNavigateError, options);
-        window.navigation.addEventListener('navigatesuccess', onNavigateSuccess, options);
+        requestIdleCallback(() => registerListener({ signal }), { timeout: 500 });
         return () => abort.abort();
     }, []);
-};
-
-const ViewTransition = () => {
-    useViewTransition();
     return null;
 };
 
 export const wrapPageElement = ({element}) =>
 <>
-    <ViewTransition />
     {element}
+    <ViewTransition />
 </>;
 
 export const onRouteUpdate = (...x) => resolveRouteUpdate(...x);
