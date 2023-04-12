@@ -56,6 +56,15 @@ abbr {
     background-color: var(--canvas) ;
 }
 
+:root, body {
+    display: flow-root ;
+    isolate: isolation ;
+    contain: style ;
+}
+:root {
+    overflow: auto ;
+}
+
 @keyframes slideout {
     to {
         transform: translateY(-1px) ;
