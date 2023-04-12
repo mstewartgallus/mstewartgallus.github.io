@@ -132,7 +132,6 @@ const plugins = [
     "transformer-post-poem",
     "transformer-link",
     "publish",
-    "inert",
     "style",
     "focus",
     "layout",
