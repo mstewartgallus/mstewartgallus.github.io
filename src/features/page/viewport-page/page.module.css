@@ -8,7 +8,7 @@
             calc(0.82rem + 7 * var(--t))
             1rem ;
         padding-block:
-            var(--t)
+            calc(var(--line) + 2 * var(--t))
             calc(3 * var(--line)) ;
     }
 }
@@ -22,8 +22,7 @@
 
 .layout {
     box-sizing: border-box;
-    max-inline-size: 100% ;
-}
+ }
 
 .layout {
     box-decoration-break: clone ;
@@ -34,6 +33,12 @@
 
 .layout {
     position: relative ;
+    display: flow-root ;
+    max-inline-size: 100% ;
+}
+
+.tableOfContents {
+    display: flow-root ;
 }
 
 @media print {

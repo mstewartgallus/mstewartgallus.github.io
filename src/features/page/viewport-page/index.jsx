@@ -37,7 +37,7 @@ export const ViewportPage = ({
             sidebar={<Sidebar breadcrumbs={breadcrumbs}>
                          {sidebar}
                      </Sidebar>}>
-            <Card className={tableOfContentsClass}>
+            <div className={tableOfContentsClass}>
                 <nav aria-labelledby="table-of-contents">
                     <Assistive>
                         <header>
@@ -48,7 +48,7 @@ export const ViewportPage = ({
                     </Assistive>
                     {tableOfContents}
                 </nav>
-            </Card>
+            </div>
             <Card>
                 <main data-pagefind-body="" aria-describedby="content">
                     <header>

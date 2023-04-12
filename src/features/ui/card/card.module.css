@@ -1,3 +1,4 @@
 .card {
-    margin-block: var(--line) ;
+    display: flow-root ;
+    contain: layout style ;
 }

@@ -7,7 +7,8 @@
 }
 
 .wrapper {
-    display: block ;
+    display: flow-root ;
+    contain: layout style ;
     position: relative ;
 }
 
@@ -17,7 +18,7 @@
     }
 
     .contentHidden {
-        display: block ;
+        display: flow-root ;
 
         position: absolute ;
         transform: translateY(-1.5em) ;
@@ -34,7 +35,7 @@
         display: none ;
     }
     .contentHidden {
-        display: block ;
+        display: flow-root ;
     }
 }
 

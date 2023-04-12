@@ -29,3 +29,8 @@ h2.heading {
 .heading:focus-visible {
     outline-width: 0.1ch ;
 }
+
+.heading {
+    display: flow-root ;
+    contain: layout style ;
+}

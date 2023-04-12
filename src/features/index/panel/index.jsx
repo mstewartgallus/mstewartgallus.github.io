@@ -9,11 +9,9 @@ Context.displayName = 'Accordion';
 
 const ContextProvider = memo(Context.Provider);
 export const Accordion = ({children, value}) =>
-<div>
-    <ContextProvider value={value}>
-        {children}
-    </ContextProvider>
-</div>;
+<ContextProvider value={value}>
+    {children}
+</ContextProvider>;
 
 const PanelDynamic = ({id, children, heading, open, onClick}) =>
 <Suspense

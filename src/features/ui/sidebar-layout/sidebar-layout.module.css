@@ -1,13 +1,5 @@
-@media (max-width: 130ch) {
-    .sidebar {
-        display: contents ;
-    }
-}
-
-@media (min-width: 130ch) {
-    .page {
-        display: flex ;
-    }
+.page {
+    display: flex ;
 }
 
 .page {
@@ -26,6 +18,17 @@
     max-inline-size: 100% ;
 }
 
+.mainbar, .sidebar, .page {
+    row-gap: var(--line);
+}
+.mainbar, .sidebar {
+    display: flex ;
+    flex-direction: column ;
+}
+
+.page {
+    contain: content style ;
+}
 /* .page { */
 /*      background: linear-gradient(grey, Canvas); */
 /*      background-size: 100% var(--line) ; */

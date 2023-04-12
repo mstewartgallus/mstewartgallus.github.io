@@ -6,6 +6,8 @@
     isolation: isolate ;
 
     background-color: var(--canvas, Canvas) ;
+
+    contain: layout style paint ;
 }
 
 @media screen {

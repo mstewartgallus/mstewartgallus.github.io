@@ -1,5 +1,6 @@
 .lg {
-    display: block ;
+    contain: content style ;
+    display: flow-root ;
     margin-block: var(--line);
     hyphens: manual;
 }

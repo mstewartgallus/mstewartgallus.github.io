@@ -17,6 +17,8 @@
 }
 
 .menuList, .unorderedList, .orderedList {
+    display: flow-root ;
+    contain: layout ;
     margin-block: var(--line) ;
     padding-inline-start: 2em ;
 }

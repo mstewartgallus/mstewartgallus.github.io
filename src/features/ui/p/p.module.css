@@ -1,4 +1,6 @@
 .p {
+    contain: style ;
+
     margin-block: var(--line);
     inline-size: var(--measure) ;
     max-inline-size: 100% ;

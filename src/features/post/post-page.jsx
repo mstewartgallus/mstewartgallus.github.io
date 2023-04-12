@@ -24,7 +24,7 @@ const TableOfContents = ({ title,  headings = [] }) =>
           </Ul>
       </>;
 
-export const PostPage = ({post, children}) => {
+export const PostPage = ({post, headings, children}) => {
     const { comments, notice,
             category, subtitle, title, childrenLink
           } = post;
@@ -35,7 +35,7 @@ export const PostPage = ({post, children}) => {
                }
                notice={<Notice notice={notice} />}
                tableOfContents={
-                   <TableOfContents title={title} />
+                   <TableOfContents title={title} headings={headings} />
                }
                breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
                sidebar={<Sidebar

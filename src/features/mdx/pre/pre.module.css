@@ -1,6 +1,10 @@
 .figure {
-    margin: 0 ;
+    display: flow-root ;
+    margin: 0;
+    margin-block: var(--line) ;
     break-inside: avoid ;
+
+    contain: layout style ;
 }
 
 .figcaption {

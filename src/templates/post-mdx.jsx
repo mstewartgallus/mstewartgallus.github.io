@@ -4,8 +4,8 @@ import { PostHead, PostPage, PostMdx } from "@features/post";
 export const Head = ({ data: { postMdx: { post }}}) => <PostHead post={post} />;
 
 const PostMdxPage = ({ children, data: { postMdx } }) => {
-    const { post } = postMdx;
-    return <PostPage post={post}>
+    const { post, mdx } = postMdx;
+    return <PostPage post={post} headings={mdx.tableOfContents.items}>
                <PostMdx {...postMdx}>
                    {children}
                </PostMdx>

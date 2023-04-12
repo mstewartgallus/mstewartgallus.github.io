@@ -1,6 +1,10 @@
 .hr {
+    display: flow-root ;
+
     block-size: 0 ;
     border: unset ;
     break-before: avoid ;
     margin-block: var(--line) ;
+
+    contain: strict ;
 }
