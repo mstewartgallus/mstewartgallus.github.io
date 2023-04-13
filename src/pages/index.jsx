@@ -121,7 +121,7 @@ const IndexPage = () => {
                            <Header
                                heading={
                                    <>
-                                       <H2 id="banner">{title}</H2>
+                                       <H2 tabIndex="-1" id="banner">{title}</H2>
                                        <p style={{marginBlock:0}}>{description}</p>
                                    </>}>
                                <Banner />

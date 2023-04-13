@@ -4,7 +4,7 @@ export const PanelServer = ({id, children, heading}) =>
 <nav aria-labelledby={id}>
     <header>
         <hgroup>
-            <H2 id={id}>
+            <H2 tabIndex="-1" id={id}>
                 {heading}
             </H2>
         </hgroup>

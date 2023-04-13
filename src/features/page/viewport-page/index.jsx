@@ -12,7 +12,7 @@ const Sidebar = ({children, breadcrumbs}) =>
       <>
           {children}
           <Card>
-              <Nav heading={<H2 id="breadcrumbs">Breadcrumbs</H2>}>
+              <Nav heading={<H2 tabIndex="-1" id="breadcrumbs">Breadcrumbs</H2>}>
                   {breadcrumbs}
               </Nav>
           </Card>

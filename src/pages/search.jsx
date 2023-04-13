@@ -134,7 +134,7 @@ const SearchPage = () => {
                tableOfContents={<TableOfContents />}
                sidebar={
                    <Card>
-                       <Search heading={<H2 id="search">Search</H2>}>
+                       <Search heading={<H2 tabIndex="-1" id="search">Search</H2>}>
                            <SearchForm action="/search"
                                        onSubmit={onSubmit}
 

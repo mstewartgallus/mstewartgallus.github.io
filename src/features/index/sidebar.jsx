@@ -10,7 +10,7 @@ export const Sidebar = ({children, search}) =>
             <Assistive>
                 <header>
                     <Hgroup>
-                        <H2 id="search">Search</H2>
+                        <H2 tabIndex="-1" id="search">Search</H2>
                     </Hgroup>
                 </header>
             </Assistive>

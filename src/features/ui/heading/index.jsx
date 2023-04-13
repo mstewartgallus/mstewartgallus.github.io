@@ -5,11 +5,13 @@ const createHeading = Hn => {
     const name = Hn;
     const Heading = ({
         children,
-        tabIndex="-1",
         className = '',
         ...props
     }, ref) => {
-        return <Hn tabIndex={tabIndex} className={`${heading} ${className}`} {...props} ref={ref}>
+        return <Hn
+                   {...props}
+                   className={`${heading} ${className}`}
+                   ref={ref}>
             {children}
         </Hn>;
     };

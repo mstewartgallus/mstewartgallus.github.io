@@ -15,6 +15,7 @@ const idle = cb => {
         window.setTImeout(cb, 0);
     }
 };
+
 const prefetch = elem => {
     const url = urls.get(elem);
     if (!url) {
@@ -59,9 +60,9 @@ const getPrefetcher = () => {
         return null;
     }
 
-    prefetcher = new IntersectionObserver(entries => idle(() => {
+    prefetcher = new IntersectionObserver(entries => idle(async () => {
         for (const entry of entries) {
-            onObserve(entry);
+            queueMicrotask(() => onObserve(entry));
         }
     }));
     return prefetcher;
