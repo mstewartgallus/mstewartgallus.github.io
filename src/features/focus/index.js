@@ -1,6 +1,28 @@
+import { useSyncExternalStore, useEffect } from "react";
+import { useLocation } from "@gatsbyjs/reach-router";
+
+let prevLocation = null;
+const callbacks = new Set();
+const usePrevLocation = () => useSyncExternalStore(cb => {
+    let ignore = false;
+    const callback = () => {
+        if (ignore) {
+            return;
+        }
+        cb();
+    };
+    callbacks.add(callback);
+    return () => {
+        ignore = true;
+        callbacks.delete(callback);
+    };
+}, () => prevLocation, () => prevLocation);
+
 let focus = null;
 
-export const focusRef = elem => focus = elem;
+export const focusRef = elem => {
+    focus = elem;
+};
 
 // hack around the Gatsby focus wrapper for manual focus management
 export const onClientEntry = () => {
@@ -10,26 +32,39 @@ export const onClientEntry = () => {
 // Gatsby already handles scroll, focus-visible for extra emphasis
 const opts = { focusVisible: true, preventScroll: true };
 
-export const onRouteUpdate = ({prevLocation, location}) => {
-    if (!prevLocation) {
-        return;
-    }
+export const Focus = () => {
+    const { hash, pathname } = useLocation();
+    const prevLocation = usePrevLocation();
+    const prevPathname = prevLocation?.pathname;
 
-    const { hash } = location;
-    if (hash) {
-        const elem = document.getElementById(hash.slice(1));
-        elem?.focus(opts);
-        return;
-    }
+    useEffect(() => {
+        if (!prevPathname) {
+            return;
+        }
 
-    if (prevLocation.pathname === location.pathname) {
-        return;
-    }
+        if (hash) {
+            const elem = document.getElementById(hash.slice(1));
+            elem?.focus(opts);
+            return;
+        }
 
-    const current = focus;
-    if (!current) {
-        return;
-    }
+        if (prevPathname === pathname) {
+            return;
+        }
 
-    current.focus(opts);
+        const current = focus;
+        if (!current) {
+            return;
+        }
+
+        current.focus(opts);
+    }, [prevPathname, pathname, hash]);
+    return null;
+};
+
+export const onRouteUpdate = ({prevLocation: newPrev}) => {
+    prevLocation = newPrev;
+    for (const cb of callbacks) {
+        cb();
+    }
 };

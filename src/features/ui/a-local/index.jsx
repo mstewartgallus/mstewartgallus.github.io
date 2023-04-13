@@ -4,18 +4,8 @@ import {
     useCallback,
     useEffect, useReducer, useTransition
 } from "react";
-import { prefetchPathname, graphql, useStaticQuery } from "gatsby";
-import { useClick } from "@features/util";
+import { prefetchPathname, navigate } from "gatsby";
 import { observe } from "./use-intersect";
-
-const useSiteMetadataRaw = () => useStaticQuery(graphql`
-query {
-  site {
-    siteMetadata {
-      siteUrl
-    }
-  }
-}`);
 
 const initState = {
     mouseover: false,
@@ -66,21 +56,9 @@ const AClient = ({
     onMouseOver, onMouseOut,
     ...props
 }, ref) => {
-    const metadata = useSiteMetadataRaw();
+    const prefetchRef = useRef();
 
-    const siteUrl = metadata.site.siteMetadata.siteUrl;
-
-    const { origin, pathname, search, hash } = new URL(props.href ?? '', siteUrl);
-    const fail = !props.href || hash || origin !== siteUrl || props.target || props.download;
-    const url = fail ? null : pathname + search;
-
-    const onClickNavigate = useClick();
-
-    const onClickWrapper = useCallback(e => {
-        onClick?.(e);
-        onClickNavigate?.(e);
-    }, [onClick, onClickNavigate]);
-
+    const { href } = props;
 
     // Do this sort of silliness to integrate with React's native
     // scheduling as much as possible and appropriately idle and not
@@ -88,6 +66,16 @@ const AClient = ({
 
     const [, startTransition] = useTransition();
     const [{ mouseover, focus, near }, dispatch] = useReducer(reducer, initState);
+
+    const onClickWrapper = useCallback(async e => {
+        onClick?.(e);
+        if (e.defaultPrevented) {
+            return;
+        }
+
+        e.preventDefault();
+        await navigate(href);
+    }, [onClick, href]);
 
     const onMouseOverWrapper = useCallback(e => {
         startTransition(() => dispatch('mouseover'));
@@ -106,8 +94,6 @@ const AClient = ({
         startTransition(() => dispatch('blur'));
         onMouseOut?.(e);
     }, [onMouseOut]);
-
-    const prefetchRef = useRef();
 
     useEffect(() => {
         const { current } = prefetchRef;
@@ -128,8 +114,8 @@ const AClient = ({
     }, []);
 
     const hover = mouseover || focus;
-    useHover(hover ? url : null);
-    usePrefetchPathname((near || hover) ? url : null);
+    useHover(hover ? href : null);
+    usePrefetchPathname((near || hover) ? href : null);
 
     return <a
                {...props}
@@ -139,8 +125,7 @@ const AClient = ({
                onFocus={onFocusWrapper}
                onBlur={onBlurWrapper}
                ref={elem => {
-                   prefetchRef.current = fail ? null : elem;
-
+                   prefetchRef.current = elem;
                    if (ref) {
                        ref.current = elem;
                    }

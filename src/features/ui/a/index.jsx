@@ -1,22 +1,59 @@
 import { Suspense, lazy, forwardRef } from "react";
+import { graphql, useStaticQuery } from "gatsby";
 import { a as aClass } from "./a.module.css";
 
-const AClient = lazy(() => import("../a-client"));
+const ALocal = lazy(() => import("../a-local"));
 
-// FIXME only lazy load the prefetch logic, not the navigate logic
-const A = ({children, className = '', ...props}, ref) => {
-    className = `${aClass} ${className}`;
+const useSiteMetadataRaw = () => useStaticQuery(graphql`
+query {
+  site {
+    siteMetadata {
+      siteUrl
+    }
+  }
+}`);
+
+const ALocalLazy = forwardRef(function ALocalLazy({children, onClick, ...props}, ref) {
     return <Suspense
                fallback={
-                   <a {...props} className={className} ref={ref}>
+                   <a {...props} ref={ref}>
                        {children}
                    </a>
                }
            >
-               <AClient {...props} className={className} ref={ref}>{children}</AClient>
+               <ALocal {...props} ref={ref}>
+                   {children}
+               </ALocal>
            </Suspense>;
-};
+});
 
-const ARef = forwardRef(A);
+const AAll = forwardRef(function AAll({children, ...props}, ref) {
+    const metadata = useSiteMetadataRaw();
 
-export { ARef as A, ARef as default };
+    const siteUrl = metadata.site.siteMetadata.siteUrl;
+
+    const { href, target, download } = props;
+
+    const { origin, hash } = new URL(href ?? '', siteUrl);
+
+    const fail = !href || origin !== siteUrl || hash || target || download;
+
+    if (fail) {
+        return <a {...props} ref={ref}>
+                   {children}
+               </a>;
+    };
+
+    return <ALocalLazy {...props} ref={ref}>
+               {children}
+           </ALocalLazy>;
+});
+
+export const A = forwardRef(function A({children, className = '', ...props}, ref) {
+    className = [aClass, className].join(' ');
+    return <AAll {...props} className={className} ref={ref}>
+               {children}
+           </AAll>;
+});
+
+export default A;
