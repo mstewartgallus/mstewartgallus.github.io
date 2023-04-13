@@ -11,7 +11,10 @@ const bubble = e => {
 export const useClick = () => {
     return useCallback(async e => {
         // FIXME check if not my url
-        const { target, altKey, metaKey, shiftKey, ctrlKey, button } = e;
+        const { defaultPrevented, target, altKey, metaKey, shiftKey, ctrlKey, button } = e;
+        if (defaultPrevented) {
+            return;
+        }
         if (button !== 0) {
             return;
         }
