@@ -1,7 +1,6 @@
 import { useId, useTransition, useCallback } from "react";
 import { Button, H2 } from "@features/ui";
-import { ClosedIcon } from "../closed-icon";
-import { OpenIcon } from "../open-icon";
+import { Icon } from "../icon";
 import {
     disclosure, button, insideHeading, details,
     wrapper, wrapperInert, content, contentHidden
@@ -16,7 +15,7 @@ const IconItem = ({ icon, children }) =>
 const DetailsTriangle = ({ open }) =>
 <IconItem
     icon={
-        open ? <OpenIcon /> : <ClosedIcon />
+        <Icon open={open} />
     }>
     {
         open ? "Close" : "Open"
@@ -44,6 +43,8 @@ export const PanelClient = ({children, id, heading, open, onClick}) => {
 
     const contentId = useId();
 
+    const wrapperClass = [wrapper, open ? '' : wrapperInert].join(' ');
+    const contentClass = [content, open ? '' : contentHidden].join(' ');
     return <>
                <Heading id={id}
                         aria-controls={contentId}
@@ -52,11 +53,8 @@ export const PanelClient = ({children, id, heading, open, onClick}) => {
                    {heading}
                </Heading>
                <div className={disclosure}>
-                   <div className={`${wrapper} ${open ? '' : wrapperInert}`}
-                        inert={open ? null : "inert"}>
-                       <nav id={contentId}
-                            aria-labelledby={id}
-                            className={`${content} ${open ? '' : contentHidden}`}>
+                   <div className={wrapperClass} inert={open ? null : "inert"}>
+                       <nav id={contentId} aria-labelledby={id} className={contentClass}>
                            {children}
                        </nav>
                    </div>
