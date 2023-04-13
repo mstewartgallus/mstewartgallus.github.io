@@ -23,10 +23,14 @@ export const useClick = () => {
             return;
         }
 
-        e.preventDefault();
-
         const { href } = bubble(target);
-        const { pathname, search } = new URL(href, window.location);
+        const { hash, pathname, search } = new URL(href, window.location);
+
+        if (hash) {
+            return;
+        }
+
+        e.preventDefault();
 
         const url = pathname + search;
 
