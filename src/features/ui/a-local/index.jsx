@@ -49,13 +49,12 @@ const usePrefetchPathname = url => useEffect(() => {
     return () => abort.abort();
 }, [url]);
 
-const AClient = ({
-    children,
-    onClick,
-    onFocus, onBlur,
-    onMouseOver, onMouseOut,
-    ...props
-}, ref) => {
+const AClient = (props, ref) => {
+    const {
+        onClick,
+        onFocus, onBlur,
+        onMouseOver, onMouseOut
+    } = props;
     const prefetchRef = useRef();
 
     const { href } = props;
@@ -129,7 +128,8 @@ const AClient = ({
                    if (ref) {
                        ref.current = elem;
                    }
-               }}>{children}</a>;
+               }}
+           />;
 };
 
 const ARef = forwardRef(AClient);

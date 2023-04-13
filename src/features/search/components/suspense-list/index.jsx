@@ -4,7 +4,7 @@ import { Ul, Li } from "@features/ui";
 const FallbackContext = createContext();
 FallbackContext.displayName = 'Fallback';
 
-const FallbackProvider = memo(FallbackContext.Provider);
+const FallbackProvider = FallbackContext.Provider;
 
 const Fallback = () => useContext(FallbackContext);
 

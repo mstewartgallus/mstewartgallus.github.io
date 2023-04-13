@@ -13,21 +13,17 @@ query {
   }
 }`);
 
-const ALocalLazy = forwardRef(function ALocalLazy({children, onClick, ...props}, ref) {
+const ALocalLazy = forwardRef(function ALocalLazy(props, ref) {
     return <Suspense
                fallback={
-                   <a {...props} ref={ref}>
-                       {children}
-                   </a>
+                   <a {...props} ref={ref} />
                }
            >
-               <ALocal {...props} ref={ref}>
-                   {children}
-               </ALocal>
+               <ALocal {...props} ref={ref} />
            </Suspense>;
 });
 
-const AAll = forwardRef(function AAll({children, ...props}, ref) {
+const AAll = forwardRef(function AAll(props, ref) {
     const metadata = useSiteMetadataRaw();
 
     const siteUrl = metadata.site.siteMetadata.siteUrl;
@@ -39,21 +35,15 @@ const AAll = forwardRef(function AAll({children, ...props}, ref) {
     const fail = !href || origin !== siteUrl || hash || target || download;
 
     if (fail) {
-        return <a {...props} ref={ref}>
-                   {children}
-               </a>;
+        return <a {...props} ref={ref} />;
     };
 
-    return <ALocalLazy {...props} ref={ref}>
-               {children}
-           </ALocalLazy>;
+    return <ALocalLazy {...props} ref={ref} />;
 });
 
-export const A = forwardRef(function A({children, className = '', ...props}, ref) {
-    className = [aClass, className].join(' ');
-    return <AAll {...props} className={className} ref={ref}>
-               {children}
-           </AAll>;
+export const A = forwardRef(function A(props, ref) {
+    const className = [aClass, props.className ?? ''].join(' ');
+    return <AAll {...props} className={className} ref={ref} />;
 });
 
 export default A;

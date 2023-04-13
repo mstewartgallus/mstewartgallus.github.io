@@ -1,4 +1,4 @@
-import { memo, createContext, useId, useContext } from "react";
+import { createContext, useId, useContext } from "react";
 import { useSearchURL } from "@features/route";
 import { A } from "@features/ui";
 import { DescA } from "./desc-a";
@@ -8,7 +8,7 @@ import { time, address, dl, dt } from "./metadata.module.css";
 const DescContext = createContext(null);
 DescContext.displayName = 'Desc';
 
-const DescContextProvider = memo(DescContext.Provider);
+const DescContextProvider = DescContext.Provider;
 
 const Desc = ({desc,children}) => {
     const id = useId();

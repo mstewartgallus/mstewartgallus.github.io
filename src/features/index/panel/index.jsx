@@ -1,4 +1,4 @@
-import { Suspense, lazy, memo, createContext, useContext } from "react";
+import { Suspense, lazy, createContext, useContext } from "react";
 import { Card } from "@features/ui";
 import { PanelServer } from "../panel-server";
 
@@ -18,11 +18,10 @@ const PanelClient = lazy(() => supportsInert() ?
 const Context = createContext(null);
 Context.displayName = 'Accordion';
 
-const ContextProvider = memo(Context.Provider);
 export const Accordion = ({children, value}) =>
-<ContextProvider value={value}>
+<Context.Provider value={value}>
     {children}
-</ContextProvider>;
+</Context.Provider>;
 
 const PanelDynamic = ({id, children, heading, open, onClick}) =>
 <Suspense

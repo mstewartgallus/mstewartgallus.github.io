@@ -7,6 +7,12 @@ const onObserve = entry => {
     callbacks.get(target)(near);
 };
 
+const observer = entries => {
+    for (const entry of entries) {
+        onObserve(entry);
+    }
+};
+
 let prefetcher = null;
 const getPrefetcher = () => {
     if (prefetcher) {
@@ -21,11 +27,7 @@ const getPrefetcher = () => {
         return null;
     }
 
-    prefetcher = new IntersectionObserver(entries => {
-        for (const entry of entries) {
-            onObserve(entry);
-        }
-    });
+    prefetcher = new IntersectionObserver(observer);
     return prefetcher;
 };
 
