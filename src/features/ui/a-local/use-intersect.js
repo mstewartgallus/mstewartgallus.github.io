@@ -1,10 +1,11 @@
 const callbacks = new Map();
 
 const onObserve = entry => {
-    const { target, isIntersecting, intersectionRatio } = entry;
+    const { target } = entry;
+    const cb = callbacks.get(target);
 
-    const near = isIntersecting || intersectionRatio > 0;
-    callbacks.get(target)(near);
+    const { isIntersecting, intersectionRatio } = entry;
+    cb(isIntersecting || intersectionRatio > 0);
 };
 
 const observer = entries => {

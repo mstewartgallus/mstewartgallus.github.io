@@ -1,11 +1,9 @@
-import { forwardRef, useMemo } from "react";
+import { forwardRef } from "react";
 import { button } from "./button.module.css";
 
-const Button = ({children, className = '', ...props}, ref) => {
-    const clss = useMemo(() => [button, className].join(' '), [className]);
-    return <button {...props} ref={ref} className={clss}>
-               {children}
-           </button>;
+const Button = (props, ref) => {
+    const clss = [button, props.className ?? ''].join(' ');
+    return <button {...props} ref={ref} className={clss} />;
 };
 
 const ButtonRef = forwardRef(Button);

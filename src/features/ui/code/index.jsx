@@ -1,9 +1,5 @@
 import { code as codeClass } from "./code.module.css";
 
-export const Code = ({children, ...props}) => {
-    return <code className={codeClass} {...props}>
-               {children}
-           </code>;
-};
+export const Code = props => <code className={codeClass} {...props} />;
 
 export default Code;

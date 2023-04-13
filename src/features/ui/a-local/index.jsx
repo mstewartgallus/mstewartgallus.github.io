@@ -4,7 +4,9 @@ import {
     useCallback,
     useEffect, useReducer, useTransition
 } from "react";
-import { prefetchPathname, navigate } from "gatsby";
+import { navigate } from "gatsby";
+import { useHover } from "./use-hover";
+import { usePrefetchPathname } from "./use-prefetch-pathname";
 import { observe } from "./use-intersect";
 
 const initState = {
@@ -33,21 +35,6 @@ const reducer = (state, action) => {
     default: return state;
     }
 };
-
-const useHover = url => useEffect(() => {
-    if (!url) {
-        return;
-    }
-    window.___loader.hovering(url);
-}, [url]);
-
-const usePrefetchPathname = url => useEffect(() => {
-    if (!url) {
-        return;
-    }
-    const abort = prefetchPathname(url);
-    return () => abort.abort();
-}, [url]);
 
 const AClient = (props, ref) => {
     const {
@@ -87,12 +74,12 @@ const AClient = (props, ref) => {
 
     const onFocusWrapper = useCallback(e => {
         startTransition(() => dispatch('focus'));
-        onMouseOver?.(e);
-    }, [onMouseOver]);
+        onFocus?.(e);
+    }, [onFocus]);
     const onBlurWrapper = useCallback(e => {
         startTransition(() => dispatch('blur'));
-        onMouseOut?.(e);
-    }, [onMouseOut]);
+        onBlur?.(e);
+    }, [onBlur]);
 
     useEffect(() => {
         const { current } = prefetchRef;
@@ -103,11 +90,13 @@ const AClient = (props, ref) => {
         const abort = new AbortController();
         const { signal } = abort;
         observe(current, near => {
-            if (near) {
-                startTransition(() => dispatch('near'));
-            } else {
-                startTransition(() => dispatch('far'));
-            }
+            startTransition(() => {
+                if (near) {
+                    dispatch('near');
+                } else {
+                    dispatch('far');
+                }
+            });
         }, { signal });
         return () => abort.abort();
     }, []);

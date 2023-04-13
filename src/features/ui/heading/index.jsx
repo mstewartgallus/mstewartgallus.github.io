@@ -2,18 +2,14 @@ import { forwardRef } from "react";
 import { heading } from "./heading.module.css";
 
 const createHeading = Hn => {
-    const name = Hn;
-    const Heading = ({
-        children,
-        className = '',
-        ...props
-    }, ref) => {
+    const name = String(Hn);
+    const Heading = (props, ref) => {
+        const className = [heading, props.className ?? ''].join(' ');
         return <Hn
                    {...props}
-                   className={`${heading} ${className}`}
-                   ref={ref}>
-            {children}
-        </Hn>;
+                   className={className}
+                   ref={ref}
+               />;
     };
     Heading.displayName = `createHeading(${name})`;
     return forwardRef(Heading);

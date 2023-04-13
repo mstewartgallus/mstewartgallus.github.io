@@ -7,12 +7,13 @@ import {
 
 const Context = createContext(null);
 
-export const Ol = ({children, reversed, ...props}) =>
-<ol role="list" className={orderedList} reversed={reversed} {...props}>
-    <Context.Provider value={reversed ? 'rol' : 'ol'}>
-        {children}
-    </Context.Provider>
-</ol>;
+export const Ol = ({children, reversed, ...props}) => {
+    return <ol role="list" className={orderedList} reversed={reversed} {...props}>
+               <Context.Provider value={reversed ? 'rol' : 'ol'}>
+                   {children}
+               </Context.Provider>
+           </ol>;
+};
 
 export const Ul = ({children, ...props}) =>
 <ul role="list" className={unorderedList} {...props}>

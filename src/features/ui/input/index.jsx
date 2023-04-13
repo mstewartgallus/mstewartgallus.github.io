@@ -1,10 +1,7 @@
 import { forwardRef } from "react";
 import { input } from "./input.module.css";
 
-const Input = ({children, ...props}, ref) =>
-<input className={input} {...props} ref={ref}>
-    {children}
-</input>;
+const Input = (props, ref) => <input className={input} {...props} ref={ref} />;
 
 const InputRef = forwardRef(Input);
 

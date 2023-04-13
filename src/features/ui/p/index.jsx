@@ -1,8 +1,5 @@
 import { p as pClass } from "./p.module.css";
 
-export const P = ({children, ...props}) =>
-<p className={pClass} {...props}>
-    {children}
-</p>;
+export const P = props => <p className={pClass} {...props} />;
 
 export default P;
