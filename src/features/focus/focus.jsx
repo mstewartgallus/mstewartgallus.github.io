@@ -13,8 +13,10 @@ export const Focus = () => {
     // happening a little bit AFTER the the view transition
     // animations starts and we don't get forced reflow.
 
-    const { prevLocation, location: { hash, pathname } } = useDeferredValue(xs);
-    const prevPathname = prevLocation?.pathname;
+    const ys = useDeferredValue(xs);
+
+    const { hash = '', pathname = '' } = ys?.location;
+    const prevPathname = ys?.prevLocation?.pathname;
 
     useEffect(() => {
         if (!prevPathname) {
