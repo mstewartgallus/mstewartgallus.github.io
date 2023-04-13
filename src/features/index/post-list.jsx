@@ -3,8 +3,8 @@ import { A, Ol, Li } from "@features/ui";
 const Entry = ({href, children}) =>
 <Li><A href={href}>{children}</A></Li>;
 
-const EntryList = ({children}) =>
-<Ol reversed="reversed">
+const EntryList = ({children, start}) =>
+<Ol reversed="reversed" start={start}>
     {children}
 </Ol>;
 
@@ -14,7 +14,7 @@ const Posts = ({posts}) => posts.map(({ slug, title }) =>
 
 export const PostList = ({posts}) =>
 posts && posts.length > 0 &&
-    <EntryList>
+    <EntryList start={posts.length}>
         <Posts posts={posts} />
     </EntryList>;
 

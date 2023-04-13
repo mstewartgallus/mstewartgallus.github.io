@@ -25,7 +25,7 @@
 }
 
 .disclosure, .wrapper, .content {
-    inline-size: fit-content ;
+    /* inline-size: fit-content ; */
     display: flow-root ;
     contain: layout style ;
 }

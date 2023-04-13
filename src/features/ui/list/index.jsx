@@ -1,13 +1,41 @@
-import { orderedList, unorderedList, menuList, item } from "./list.module.css";
+import { createContext, useContext } from "react";
+import {
+    orderedList, unorderedList,
+    uitem, oitem, roitem,
+    content
+} from "./list.module.css";
 
-export const Ol = ({children, ...props}) =>
-<ol className={orderedList} {...props}>{children}</ol>;
+const Context = createContext(null);
+
+export const Ol = ({children, reversed, ...props}) =>
+<ol role="list" className={orderedList} reversed={reversed} {...props}>
+    <Context.Provider value={reversed ? 'rol' : 'ol'}>
+        {children}
+    </Context.Provider>
+</ol>;
 
 export const Ul = ({children, ...props}) =>
-<ul className={unorderedList} {...props}>{children}</ul>;
+<ul role="list" className={unorderedList} {...props}>
+    <Context.Provider value='ul'>
+        {children}
+    </Context.Provider>
+</ul>;
 
 export const Menu = ({children, ...props}) =>
-<menu className={menuList} {...props}>{children}</menu>;
+<menu role="list" className={unorderedList} {...props}>
+    <Context.Provider value='ul'>
+        {children}
+    </Context.Provider>
+</menu>;
 
-export const Li = ({children, ...props}) =>
-<li className={item} {...props} >{children}</li>;
+export const Li = ({children, ...props}) => {
+    const type = useContext(Context);
+    const item = {
+        'ul': uitem,
+        'ol': oitem,
+        'rol': roitem
+    }[type];
+    return <li role="listitem" className={item} {...props}>
+        <div className={content}>{children}</div>
+    </li>;
+};
