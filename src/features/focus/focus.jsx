@@ -15,7 +15,9 @@ export const Focus = () => {
 
     const ys = useDeferredValue(xs);
 
-    const { hash = '', pathname = '' } = ys?.location;
+    const location = ys?.location;
+    const hash = location?.hash;
+    const pathname = location?.pathname;
     const prevPathname = ys?.prevLocation?.pathname;
 
     useEffect(() => {
