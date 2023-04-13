@@ -1,29 +1,9 @@
-.insideHeading {
-    inline-size: fit-content ;
-    max-inline-size: 100% ;
+.details {
     display: flex ;
-    flex-wrap: wrap ;
-    column-gap: 0.5em ;
-}
-
-.wrapper {
-    display: flow-root ;
-    contain: layout style ;
-    position: relative ;
-}
-
-@media screen {
-    .wrapperInert {
-        block-size: 0 ;
-    }
-
-    .contentHidden {
-        display: flow-root ;
-
-        position: absolute ;
-        transform: translateY(-1.5em) ;
-        opacity: 0 ;
-    }
+    font-size: 1rem ;
+    column-gap: 0.1em ;
+    justify-items: center ;
+    align-items: center ;
 }
 
 .button {
@@ -34,14 +14,44 @@
     .button {
         display: none ;
     }
-    .contentHidden {
-        display: flow-root ;
-    }
+}
+
+.insideHeading {
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 0.5em ;
+}
+
+.disclosure, .wrapper, .content {
+    inline-size: fit-content ;
+    display: flow-root ;
+    contain: layout style ;
+}
+
+.disclosure {
+    position: relative ;
+}
+
+.wrapper {
+    contain: layout paint style ;
+    overflow: hidden ;
 }
 
 .content {
-    top: 0 ;
     transition-property: opacity ;
+}
+
+@media screen {
+    .wrapperInert {
+        position: absolute ;
+    }
+
+    .contentHidden {
+        transform: translateY(-1.5em) ;
+        opacity: 0 ;
+    }
 }
 
 .content {
@@ -57,12 +67,4 @@
     .content {
         transition-property: opacity, transform ;
     }
-}
-
-.details {
-    display: flex ;
-    font-size: 1rem ;
-    column-gap: 0.1em ;
-    justify-items: center ;
-    align-items: center ;
 }

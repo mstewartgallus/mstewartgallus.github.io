@@ -3,7 +3,7 @@ import { Button, H2 } from "@features/ui";
 import { ClosedIcon } from "../closed-icon";
 import { OpenIcon } from "../open-icon";
 import {
-    button, insideHeading, details,
+    disclosure, button, insideHeading, details,
     wrapper, wrapperInert, content, contentHidden
 } from "./panel.module.css";
 
@@ -51,13 +51,15 @@ export const PanelClient = ({children, id, heading, open, onClick}) => {
                         onClick={onClickWrapper}>
                    {heading}
                </Heading>
-               <div className={`${wrapper} ${open ? '' : wrapperInert}`}
-                    inert={open ? null : "inert"}>
-                   <nav id={contentId}
-                        aria-labelledby={id}
-                        className={`${content} ${open ? '' : contentHidden}`}>
-                       {children}
-                   </nav>
+               <div className={disclosure}>
+                   <div className={`${wrapper} ${open ? '' : wrapperInert}`}
+                        inert={open ? null : "inert"}>
+                       <nav id={contentId}
+                            aria-labelledby={id}
+                            className={`${content} ${open ? '' : contentHidden}`}>
+                           {children}
+                       </nav>
+                   </div>
                </div>
            </>;
 };

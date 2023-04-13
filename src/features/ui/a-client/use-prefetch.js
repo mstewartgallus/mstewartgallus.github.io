@@ -4,14 +4,34 @@ import { prefetchPathname } from "gatsby";
 const aborts = new WeakMap();
 const urls = new WeakMap();
 
+// We need to use idle callbacks somewhwere because rather a lot of
+// links can suddenly appear when opening and closing disclosures and
+// accordions.  Otherwise we can lag animations here.
+
+const idle = cb => {
+    if (window.requestIdleCallback) {
+        window.requestIdleCallback(cb, { timeout: 500 });
+    } else {
+        window.setTImeout(cb, 0);
+    }
+};
 const prefetch = elem => {
     const url = urls.get(elem);
-    aborts.set(elem, prefetchPathname(url));
+    if (!url) {
+        return;
+    }
+    const aborter = prefetchPathname(url);
+    aborts.set(elem, aborter);
 };
 
 const abort = elem => {
-    aborts.get(elem)?.abort();
+    const aborter = aborts.get(elem);
+    if (!aborter) {
+        return;
+    }
+
     aborts.delete(elem);
+    aborter.abort();
 };
 
 const onObserve = entry => {
@@ -39,11 +59,11 @@ const getPrefetcher = () => {
         return null;
     }
 
-    prefetcher = new IntersectionObserver(entries => {
+    prefetcher = new IntersectionObserver(entries => idle(() => {
         for (const entry of entries) {
             onObserve(entry);
         }
-    });
+    }));
     return prefetcher;
 };
 
