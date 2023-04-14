@@ -1,10 +1,9 @@
 .skipLink {
     display: flow-root ;
 
-    inset-block-start: var(--line);
-    inset-inline-start: 3em ;
+    inset-block-start: calc(2 * var(--t)) ;
+    inset-inline-start: calc(0.82rem + 7 * var(--t)) ;
 
-    padding-inline: 1em ;
     padding-block: calc(0.5 * var(--line)) ;
     margin-block: calc(0.5 * var(--line)) ;
 
