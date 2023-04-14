@@ -3,6 +3,9 @@ const callbacks = new Map();
 const onObserve = entry => {
     const { target } = entry;
     const cb = callbacks.get(target);
+    if (!cb) {
+        return;
+    }
 
     const { isIntersecting, intersectionRatio } = entry;
     cb(isIntersecting || intersectionRatio > 0);

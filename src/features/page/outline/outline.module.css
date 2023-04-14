@@ -1,0 +1,43 @@
+.summary {
+    /* FIXME, clamp to legible size? */
+    font-size: 0.75rem ;
+    float: right ;
+}
+
+.outline {
+    display: flow-root ;
+    contain: layout paint style ;
+    min-inline-size: 13ch ;
+    min-block-size: var(--line) ;
+
+    padding-inline: 0.77em 1em ;
+    /* padding-block-start: calc(0.2 * var(--line)) ; */
+    padding-block-end: calc(0.3 * var(--line)) ;
+    margin: 0;
+
+    background-color: var(--canvas) ;
+    border-block-end-style: solid ;
+    border-inline-end-style: solid ;
+    border-width: 1px ;
+
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    border-end-end-radius: 0.7ch ;
+    z-index: 9000 ;
+}
+
+@media print {
+    .outline {
+        display: none ;
+    }
+}
+
+.outline {
+    position: absolute ;
+    inset-block-start: 0 ;
+}
+
+/* FIXME awkward when clicking links */
+.outline:focus-within {
+    position: fixed ;
+}

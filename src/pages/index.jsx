@@ -19,7 +19,7 @@ import {
     Header
 } from "@features/ui";
 import { useSubmit } from "@features/util";
-import { ViewportPage, SkipA } from "@features/page";
+import { ViewportPage, SkipA, Outline } from "@features/page";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -79,18 +79,21 @@ const Seo = () => {
 };
 
 const TableOfContents = ({posts}) =>
-      <>
-          <SkipA aria-describedby="content" href="#content">Posts</SkipA>
-          <Ul>
-              {
-                  posts.map(category =>
-                      <Li key={category}><A href={`#${category}`}>{category}</A></Li>)
-              }
-              <Li><A href="#banner" aria-describedby="banner">Common</A></Li>
-              <Li><A href="#search">Search</A></Li>
-              <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-          </Ul>
-      </>;
+<Outline
+    content={
+        <SkipA href="#content">Posts</SkipA>
+    }
+>
+    <Ul>
+        {
+            posts.map(category =>
+                <Li key={category}><A href={`#${category}`}>{category}</A></Li>)
+        }
+        <Li><A href="#banner" aria-describedby="banner">Common</A></Li>
+        <Li><A href="#search">Search</A></Li>
+        <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+    </Ul>
+</Outline>;
 
 export const Head = () => {
     const json = useWebsite();

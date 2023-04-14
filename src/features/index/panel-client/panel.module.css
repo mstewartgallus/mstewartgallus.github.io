@@ -1,17 +1,14 @@
 .details {
-    display: flex ;
     font-size: 1rem ;
-    column-gap: 0.1em ;
-    justify-items: center ;
-    align-items: center ;
+    font-weight: normal ;
 }
 
 .button {
-    font-size: 1rem ;
-    min-inline-size: 9ch ;
+    display: inline-block ;
+    min-inline-size: 5ch ;
 }
 @media print {
-    .button {
+    .details {
         display: none ;
     }
 }

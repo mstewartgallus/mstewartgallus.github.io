@@ -36,7 +36,7 @@ const reducer = (state, action) => {
     }
 };
 
-const AClient = (props, ref) => {
+const ALocal = (props, ref) => {
     const {
         onClick,
         onFocus, onBlur,
@@ -121,6 +121,6 @@ const AClient = (props, ref) => {
            />;
 };
 
-const ARef = forwardRef(AClient);
+const ARef = forwardRef(ALocal);
 
-export { ARef as AClient, ARef as default };
+export { ARef as ALocal, ARef as default };

@@ -1,16 +1,17 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { MDXProvider } from '@mdx-js/react';
 import { A, Ul, Li, BreadcrumbList, BreadcrumbItem } from "@features/ui";
-import { ViewportPage, SkipA } from "@features/page";
+import { ViewportPage, SkipA, Outline } from "@features/page";
 import { theme } from "./theme.jsx";
 
 const TableOfContents = ({heading}) =>
-      <>
-          <SkipA href="#content">{heading}</SkipA>
-          <Ul>
-              <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-          </Ul>
-      </>;
+<Outline
+    content={<SkipA href="#content">{heading}</SkipA>}
+>
+    <Ul>
+        <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
+    </Ul>
+</Outline>;
 
 const Pathname = () => useLocation().pathname;
 

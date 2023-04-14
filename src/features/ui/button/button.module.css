@@ -12,7 +12,7 @@
 
     box-sizing: border-box ;
 
-    border-radius: 0.1ch ;
+    border-radius: 0.17ch ;
     border-width: calc(max(1px, 0.07em));
     margin-block: calc(min(-1px, -0.07em));
 
