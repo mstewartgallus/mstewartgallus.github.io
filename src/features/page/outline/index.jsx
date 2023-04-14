@@ -1,6 +1,6 @@
 import { useCallback, useId, useState, useTransition, } from "react";
-import { PushButton } from "@features/ui";
-import { header, summary, outline as outlineClass } from "./outline.module.css";
+import { Pane, PushButton } from "@features/ui";
+import { pane, header, summary, outline as outlineClass } from "./outline.module.css";
 
 export const Outline = ({children, content}) => {
     const [open, setOpen] = useState(false);
@@ -47,8 +47,10 @@ export const Outline = ({children, content}) => {
                         </PushButton>
                     </div>
                 </div>
-                <nav id={navId} hidden={open ? null : "hidden"} aria-labelledby={buttonId}>
-                    {children}
-                </nav>
+                <Pane open={open}>
+                    <nav id={navId} aria-labelledby={buttonId} className={pane}>
+                        {children}
+                    </nav>
+                </Pane>
             </div>;
 };

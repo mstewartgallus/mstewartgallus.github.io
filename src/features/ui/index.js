@@ -15,6 +15,7 @@ export { Hr } from "./hr";
 export { Li, Ol, Ul, Menu } from "./list";
 export { Main } from "./main";
 export { Nav } from "./nav.jsx";
+export { Pane } from "./pane";
 export { PushButton } from "./push-button";
 export { Search } from "./search.jsx";
 export { Section } from "./section.tsx";

@@ -1,12 +1,20 @@
+.header {
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 1em ;
+    justify-content: end ;
+}
+.pane {
+    padding-inline-end: 1em ;
+}
 .summary {
     /* FIXME, clamp to legible size? */
     font-size: 0.75rem ;
-    float: right ;
 }
 
 .outline {
     display: flow-root ;
-    contain: layout paint style ;
+    contain: layout style ;
     min-inline-size: 13ch ;
     min-block-size: var(--line) ;
 

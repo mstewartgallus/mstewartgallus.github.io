@@ -2,18 +2,7 @@ import { Suspense, lazy, createContext, useContext } from "react";
 import { Card } from "@features/ui";
 import { PanelServer } from "../panel-server";
 
-const supportsInert = () => {
-    if (typeof window === 'undefined') {
-        return false;
-    }
-    return document.createElement('p').inert === false;
-};
-
-// FIXME this is kind of silly but a better structure would really
-// only be possible with top level await
-const PanelClient = lazy(() => supportsInert() ?
-                         import("../panel-client") :
-                         import("./panel-client-inert.jsx"));
+const PanelClient = lazy(() => import("../panel-client"));
 
 const Context = createContext(null);
 Context.displayName = 'Accordion';

@@ -1,21 +1,6 @@
 import { useId, useTransition, useCallback } from "react";
-import { H2, PushButton } from "@features/ui";
-import {
-    details, disclosure, button, insideHeading,
-    wrapper, wrapperInert, content, contentHidden
-} from "./panel.module.css";
-
-const Pane = ({children, open}) => {
-    const wrapperClass = [wrapper, open ? '' : wrapperInert].join(' ');
-    const contentClass = [content, open ? '' : contentHidden].join(' ');
-    return <div className={disclosure}>
-               <div className={wrapperClass} inert={open ? null : "inert"}>
-                   <div className={contentClass}>
-                       {children}
-                   </div>
-               </div>
-           </div>;
-};
+import { H2, Pane, PushButton } from "@features/ui";
+import { details, button, insideHeading } from "./panel.module.css";
 
 const Heading = ({children, id, open, ...props}) =>
       <>
