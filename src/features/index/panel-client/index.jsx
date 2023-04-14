@@ -23,7 +23,7 @@ const DetailsTriangle = ({ open }) =>
 </IconItem>;
 
 const Heading = ({children, id, open, ...props}) =>
-<H2 className={insideHeading}>
+<>
     <Button
         id={id}
         className={button}
@@ -32,7 +32,7 @@ const Heading = ({children, id, open, ...props}) =>
         <DetailsTriangle open={open} />
     </Button>
     <label htmlFor={id}>{children}</label>
-</H2>;
+</>;
 
 export const PanelClient = ({children, id, heading, open, onClick}) => {
     const [, startTransition] = useTransition();
@@ -46,12 +46,14 @@ export const PanelClient = ({children, id, heading, open, onClick}) => {
     const wrapperClass = [wrapper, open ? '' : wrapperInert].join(' ');
     const contentClass = [content, open ? '' : contentHidden].join(' ');
     return <>
-               <Heading id={id}
-                        aria-controls={contentId}
-                        open={open}
-                        onClick={onClickWrapper}>
-                   {heading}
-               </Heading>
+               <H2 className={insideHeading}>
+                   <Heading id={id}
+                            aria-controls={contentId}
+                            open={open}
+                            onClick={onClickWrapper}>
+                       {heading}
+                   </Heading>
+               </H2>
                <div className={disclosure}>
                    <div className={wrapperClass} inert={open ? null : "inert"}>
                        <nav id={contentId} aria-labelledby={id} className={contentClass}>
