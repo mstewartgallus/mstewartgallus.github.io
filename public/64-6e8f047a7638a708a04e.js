@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwords_to_kick_your_teeth_out=self.webpackChunkwords_to_kick_your_teeth_out||[]).push([[64],{2064:function(e,t,r){r.r(t),r.d(t,{PopOverClient:function(){return i}});var n=r(7294),s=r(3935),u=r(4951),o=r(8088),c=r(5893);const i=e=>{let{children:t}=e;const r=(0,n.useContext)(u._),i=(0,n.useId)();return r?(0,c.jsxs)(c.Fragment,{children:[(0,s.createPortal)((0,c.jsx)(o.Q,{children:(0,c.jsx)("div",{id:i,children:t})}),r.current),(0,c.jsx)("div",{"aria-owns":i})]}):null};t.default=i}}]);
+//# sourceMappingURL=64-6e8f047a7638a708a04e.js.map

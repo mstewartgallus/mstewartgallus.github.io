@@ -27,14 +27,15 @@
 }
 
 .page {
-    contain: style ;
+    contain: layout style ;
 }
 .sidebar {
     contain: layout style ;
 }
 .mainbar {
-    contain: style ;
+    contain: layout style ;
 }
+
 /* .page { */
 /*      background: linear-gradient(grey, Canvas); */
 /*      background-size: 100% var(--line) ; */

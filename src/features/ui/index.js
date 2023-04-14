@@ -19,5 +19,6 @@ export { Search } from "./search.jsx";
 export { Section } from "./section.tsx";
 export { SidebarLayout } from "./sidebar-layout";
 export { P } from "./p";
+export { PopOver, PopOverProvider } from "./pop-over";
 export { Pre } from "./pre";
 export { Theme } from "./theme";

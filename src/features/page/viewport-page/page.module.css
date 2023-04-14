@@ -37,12 +37,11 @@
     max-inline-size: 100% ;
 
     isolation: isolate ;
+    contain: layout paint style ;
 }
 
 .tableOfContents {
     display: flow-root ;
-
-    contain: style ;
 }
 
 @media print {
