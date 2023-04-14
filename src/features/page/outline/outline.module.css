@@ -3,6 +3,12 @@
     flex-wrap: wrap ;
     column-gap: 1em ;
     justify-content: end ;
+    min-inline-size: 18ch ;
+    max-inline-size: 100% ;
+    box-sizing: border-box ;
+}
+.contentClass {
+    flex-grow: 1 ;
 }
 .pane {
     padding-inline-end: 1em ;
