@@ -20,7 +20,7 @@
     display: block ;
     text-align: center ;
     min-block-size: var(--line) ;
-    min-inline-size: 15em ;
+    min-inline-size: 12em ;
     font: inherit ;
     border-style: none ;
     border-radius: 0 ;
