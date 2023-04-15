@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwords_to_kick_your_teeth_out=self.webpackChunkwords_to_kick_your_teeth_out||[]).push([[894],{7894:function(e,t,n){n.r(t),n.d(t,{PaneClient:function(){return c}});var o=n(7294),r=n(5893);const u="undefined"!=typeof window&&!1===document.createElement("p").inert,i=(0,o.lazy)((()=>Promise.all([n.e(532),n.e(349)]).then(n.bind(n,9349)))),s=(0,o.lazy)((()=>Promise.all([n.e(532),n.e(638)]).then(n.bind(n,7638)))),c=e=>{const t=u?i:s;return(0,r.jsx)(t,{...e})};t.default=c}}]);
+//# sourceMappingURL=894-2c44db501a112eac9ce9.js.map

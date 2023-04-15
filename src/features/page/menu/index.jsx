@@ -1,7 +1,11 @@
 import {
+    Children,
     forwardRef,
-    useState,
-    useRef, useCallback, useId, useTransition
+    useReducer,
+    useEffect,
+    useDeferredValue,
+    createContext, useContext,
+    useRef, useCallback, useId
 } from "react";
 import { A, Pane } from "@features/ui";
 import {
@@ -12,6 +16,34 @@ import {
     outline as outlineClass
 } from "./outline.module.css";
 
+const reducer = (state, action) => {
+    switch (action) {
+    case 'escape':
+        return 'escaped';
+
+    case 'blur':
+        return 'closed';
+
+    case 'toggle':
+        switch (state) {
+        case 'escaped':
+        case 'closed':
+            return 'open';
+
+        default:
+            return 'escaped';
+        }
+
+    default:
+        return state;
+    }
+};
+
+const Item = createContext();
+Item.displayName = 'Item';
+
+const Selected = createContext();
+Selected.displayName = 'Selected';
 
 // We could use a menu or menubar role. However, we would need to
 // support a number of menu commands and "menu" is really more of a
@@ -22,45 +54,59 @@ export const Menu = forwardRef(function Menu({
     label
 }, ref) {
     const buttonRef = useRef();
-    ref ??= buttonRef;
 
-    const [, startTransition] = useTransition();
-    const [open, setOpen] = useState(false);
+    const [state, dispatch] = useReducer(reducer, 'closed');
+
+    const deferredState = useDeferredValue(state);
 
     const onKeyDown = useCallback(e => {
         switch (e.key) {
         case 'Escape':
             e.preventDefault();
-            startTransition(() => setOpen(false));
-            ref.current.focus({preventScroll: true, focusVisible: true});
+            dispatch('escape');
             break;
 
         default:
             return;
         }
-    }, [ref]);
+    }, []);
+
+    // Defer focuses so they work with inert polyfill
+    useEffect(() => {
+        if (deferredState !== 'escaped') {
+            return;
+        }
+        buttonRef.current.focus({preventScroll: true, focusVisible: true});
+    }, [deferredState]);
 
     const onBlur = useCallback(e => {
         const { relatedTarget, currentTarget } = e;
         if (currentTarget.contains(relatedTarget)) {
             return;
         }
-        startTransition(() => setOpen(false));
+        dispatch('blur');
     }, []);
 
     const listRef = useRef();
 
     const onClick = useCallback(e => {
-        startTransition(() => setOpen(o => !o));
+        dispatch('toggle');
     }, []);
 
     const menuId = useId();
+
+    const open = state === 'open';
     return <div className={outlineClass}
                 onBlur={open ? onBlur : null}
                 onKeyDown={open ? onKeyDown : null}
            >
                <button
-                   ref={ref}
+                   ref={elem => {
+                       buttonRef.current = elem;
+                       if (ref) {
+                           ref.current = elem;
+                       }
+                   }}
                    className={menubutton}
                    id={id}
                    onClick={onClick}
@@ -71,8 +117,16 @@ export const Menu = forwardRef(function Menu({
                </button>
                <Pane open={open}>
                    <nav id={menuId} aria-labelledby={id}>
-                       <menu className={menulist} ref={listRef}>
-                           {children}
+                       <menu role="list" className={menulist} ref={listRef}>
+                           <Selected.Provider value={open ? 0 : -1}>
+                               {
+                                   Children.map(children, (child, ix) =>
+                                       <Item.Provider value={ix}>
+                                           {child}
+                                       </Item.Provider>
+                                   )
+                               }
+                           </Selected.Provider>
                        </menu>
                    </nav>
                </Pane>
@@ -80,8 +134,21 @@ export const Menu = forwardRef(function Menu({
 });
 
 export const MenuA = props => {
-    return <li className={menuitem}>
+    const item = useContext(Item);
+    const selectedIndex = useContext(Selected);
+    const selected = item === selectedIndex;
+
+    const ref = useRef();
+    const deferredSelected = useDeferredValue(selected);
+    useEffect(() => {
+        if (!deferredSelected) {
+            return;
+        }
+        const { current } = ref;
+        current.focus({preventScroll: true, focusVisible: true });
+    }, [deferredSelected]);
+    return <li role="listitem" className={menuitem}>
                <A className={menulink}
-                  {...props} />
+                  {...props} ref={ref} />
            </li>;
 };
