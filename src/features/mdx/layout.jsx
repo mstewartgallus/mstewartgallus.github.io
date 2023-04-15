@@ -1,14 +1,8 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { MDXProvider } from '@mdx-js/react';
 import { A, BreadcrumbList, BreadcrumbItem } from "@features/ui";
-import { ViewportPage, Outline, OutlineItem } from "@features/page";
+import { ViewportPage, SkipA } from "@features/page";
 import { theme } from "./theme.jsx";
-
-const TableOfContents = ({heading}) =>
-<Outline>
-    <OutlineItem href="#content">{heading}</OutlineItem>
-    <OutlineItem href="#breadcrumbs">Breadcrumbs</OutlineItem>
-</Outline>;
 
 const Pathname = () => useLocation().pathname;
 
@@ -18,7 +12,7 @@ export const Layout = ({
 }) => {
     const title = pageContext?.frontmatter?.title ?? <Pathname />;
     return <ViewportPage
-               tableOfContents={<TableOfContents heading={title} />}
+               skipA={<SkipA>{title}</SkipA>}
                breadcrumbs={
                    <BreadcrumbList>
                        <BreadcrumbItem>

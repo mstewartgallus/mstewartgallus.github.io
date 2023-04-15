@@ -14,10 +14,10 @@ import {
     BreadcrumbList, BreadcrumbItem,
     Card,
     H2,
-    Header
+    Header,
 } from "@features/ui";
 import { useSubmit } from "@features/util";
-import { ViewportPage, Outline, OutlineItem } from "@features/page";
+import { ViewportPage, SkipA } from "@features/page";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -68,25 +68,13 @@ const AccordionImpl = ({posts}) => {
            </Accordion>;
 };
 
-const title = "Table of Contents";
+const title = "Posts";
 
 const Seo = () => {
     const { pathname } = useLocation();
     const url = useAbsolute(pathname);
     return <SeoBasic title={title} url={url} />;
 };
-
-const TableOfContents = ({posts}) =>
-<Outline>
-    <OutlineItem href="#content">Posts</OutlineItem>
-    {
-        posts.map(category =>
-            <OutlineItem key={category} href={`#${category}`}>{category}</OutlineItem>)
-    }
-    <OutlineItem href="#banner" aria-describedby="banner">Common</OutlineItem>
-    <OutlineItem href="#search">Search</OutlineItem>
-    <OutlineItem href="#breadcrumbs">Breadcrumbs</OutlineItem>
-</Outline>;
 
 export const Head = () => {
     const json = useWebsite();
@@ -106,7 +94,7 @@ const IndexPage = () => {
     const search = useSearchURL();
     const postsByCategory = usePostList();
     return <ViewportPage
-               tableOfContents={<TableOfContents posts={Object.keys(postsByCategory)} />}
+               skipA={<SkipA>Posts</SkipA>}
                sidebar={
                    <Sidebar
                        search={

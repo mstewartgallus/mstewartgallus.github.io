@@ -13,7 +13,7 @@ const Sidebar = ({children, breadcrumbs}) =>
               </Nav>
           </Card>
           <Card>
-              <A href="#outline">Outline</A>
+              <A href="#top">Back to Top</A>
           </Card>
       </>;
 
@@ -21,6 +21,7 @@ export const ViewportPage = ({
     children,
     heading,
     tableOfContents,
+    skipA = tableOfContents,
     subheading,
     notice,
     mainbar,
@@ -28,7 +29,7 @@ export const ViewportPage = ({
     breadcrumbs
 }) =>
 <Theme>
-    {tableOfContents}
+    {skipA}
     <View>
         <SidebarLayout
             sidebar={<Sidebar breadcrumbs={breadcrumbs}>

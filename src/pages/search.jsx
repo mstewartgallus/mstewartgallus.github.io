@@ -2,7 +2,7 @@ import { useLocation } from "@gatsbyjs/reach-router";
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "@features/search";
 import { A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "@features/ui";
-import { ViewportPage, Outline, OutlineItem } from "@features/page";
+import { ViewportPage, SkipA } from "@features/page";
 import { useSubmit } from "@features/util";
 import { useTitle } from "../components/title.jsx";
 import { separator } from "../utils/separator.js";
@@ -65,13 +65,6 @@ const Heading = ({query}) =>
       "Results" :
       <>{query}{separator}Results</>;
 
-const TableOfContents = () =>
-<Outline>
-    <OutlineItem aria-describedby="content" href="#content">Results</OutlineItem>
-    <OutlineItem href="#search">Search</OutlineItem>
-    <OutlineItem href="#breadcrumbs">Breadcrumbs</OutlineItem>
-</Outline>;
-
 export const Head = () => {
     const [search, setSearch] = useState(null);
     const location = useLocation();
@@ -129,7 +122,7 @@ const SearchPage = () => {
     const query = params?.s;
 
     return <ViewportPage
-               tableOfContents={<TableOfContents />}
+               skipA={<SkipA>Results</SkipA>}
                sidebar={
                    <Card>
                        <Search heading={<H2 tabIndex="-1" id="search">Search</H2>}>

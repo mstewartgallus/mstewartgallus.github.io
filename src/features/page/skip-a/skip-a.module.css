@@ -1,0 +1,28 @@
+.content {
+    display: flow-root ;
+    inline-size: fit-content;
+    max-inline-size: 100% ;
+    border-radius: 0.7ch ;
+
+    box-sizing: border-box ;
+    padding-inline: 1em  ;
+    padding-block: calc(0.25 * var(--line)) ;
+
+    background-color: var(--canvas) ;
+    border-radius: 0.7ch ;
+}
+
+.container {
+    display: flex ;
+    justify-content: end ;
+    box-sizing: border-box ;
+    z-index: 9000 ;
+    margin-inline: 1em ;
+
+    margin-block: calc(0.75 * var(--line)) ;
+
+    inset-block-start: calc(0.75 * var(--line)) ;
+}
+.container:focus-within {
+    position: sticky ;
+}

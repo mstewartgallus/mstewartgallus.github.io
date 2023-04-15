@@ -8,7 +8,7 @@
             calc(0.82rem + 7 * var(--t))
             1rem ;
         padding-block:
-            calc(2 * var(--line) + 2 * var(--t))
+            calc(2 * var(--t))
             calc(3 * var(--line)) ;
     }
 }
