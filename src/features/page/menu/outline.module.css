@@ -1,0 +1,73 @@
+.menulist {
+    display: block ;
+    padding: 0;
+    margin: 0;
+    padding-inline: 1em ;
+    margin-block-start: calc(0.5 * var(--line)) ;
+    margin-block-end: calc(0.5 * var(--line)) ;
+}
+
+.menuitem {
+    display: block ;
+}
+
+.menulink {
+    display: block ;
+}
+
+.menubutton {
+    appearance: none ;
+    display: block ;
+    text-align: center ;
+    min-block-size: var(--line) ;
+    min-inline-size: 15em ;
+    font: inherit ;
+    border-style: none ;
+    border-radius: 0 ;
+    box-sizing: border-box ;
+
+    outline-color: var(--highlight-text) ;
+    border-end-start-radius: 0.7ch ;
+}
+
+.menubutton {
+    background-color: var(--button-face);
+    color: var(--button-text);
+}
+.menubutton[aria-expanded="true"] {
+    color: inherit ;
+    background-color: transparent ;
+}
+
+.outline {
+    display: flow-root ;
+    contain: layout style ;
+    margin: 0;
+
+    background-color: var(--canvas) ;
+    border-block-end-style: solid ;
+    border-inline-start-style: solid ;
+    border-width: 1px ;
+
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    border-end-start-radius: 0.7ch ;
+    z-index: 9000 ;
+}
+
+@media print {
+    .outline {
+        display: none ;
+    }
+}
+
+.outline {
+    position: absolute ;
+    inset-block-start: 0 ;
+    inset-inline-end: 0 ;
+}
+
+/* FIXME awkward when clicking links */
+.outline:focus-within {
+    position: fixed ;
+}

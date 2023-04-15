@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { forwardRef, createContext, useContext } from "react";
 import {
     orderedList, unorderedList,
     uitem, oitem, roitem,
@@ -7,27 +7,29 @@ import {
 
 const Context = createContext(null);
 
-export const Ol = ({children, reversed, ...props}) => {
-    return <ol role="list" className={orderedList} reversed={reversed} {...props}>
-               <Context.Provider value={reversed ? 'rol' : 'ol'}>
+export const Ol = forwardRef(function Ol({children, ...props}, ref) {
+    return <ol role="list" className={orderedList} {...props} ref={ref}>
+               <Context.Provider value={props.reversed ? 'rol' : 'ol'}>
                    {children}
                </Context.Provider>
            </ol>;
-};
+});
 
-export const Ul = ({children, ...props}) =>
-<ul role="list" className={unorderedList} {...props}>
-    <Context.Provider value='ul'>
-        {children}
-    </Context.Provider>
-</ul>;
+export const Ul = forwardRef(function Ul({children, ...props}, ref) {
+    return <ul role="list" className={unorderedList} {...props} ref={ref}>
+               <Context.Provider value='ul'>
+                   {children}
+               </Context.Provider>
+           </ul>;
+});
 
-export const Menu = ({children, ...props}) =>
-<menu role="list" className={unorderedList} {...props}>
-    <Context.Provider value='ul'>
-        {children}
-    </Context.Provider>
-</menu>;
+export const Menu = forwardRef(function Ul({children, ...props}, ref) {
+    return <menu role="list" className={unorderedList} {...props} ref={ref}>
+               <Context.Provider value='ul'>
+                   {children}
+               </Context.Provider>
+           </menu>;
+});
 
 export const Li = ({children, ...props}) => {
     const type = useContext(Context);

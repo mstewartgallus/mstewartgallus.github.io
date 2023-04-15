@@ -1,4 +1,3 @@
 export { AlertPage } from "./alert-page";
 export { ViewportPage } from "./viewport-page";
-export { SkipA } from "./skip-a";
-export { Outline } from "./outline";
+export { Outline, OutlineItem } from "./outline";

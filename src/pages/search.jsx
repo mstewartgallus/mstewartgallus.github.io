@@ -1,8 +1,8 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "@features/search";
-import { Ul, Li, A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "@features/ui";
-import { ViewportPage, SkipA, Outline } from "@features/page";
+import { A, H2, BreadcrumbList, BreadcrumbItem, Search, Card } from "@features/ui";
+import { ViewportPage, Outline, OutlineItem } from "@features/page";
 import { useSubmit } from "@features/util";
 import { useTitle } from "../components/title.jsx";
 import { separator } from "../utils/separator.js";
@@ -66,15 +66,10 @@ const Heading = ({query}) =>
       <>{query}{separator}Results</>;
 
 const TableOfContents = () =>
-<Outline
-    content={
-        <SkipA aria-describedby="content" href="#content">Results</SkipA>
-    }
->
-    <Ul>
-        <Li><A href="#search">Search</A></Li>
-        <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-    </Ul>
+<Outline>
+    <OutlineItem aria-describedby="content" href="#content">Results</OutlineItem>
+    <OutlineItem href="#search">Search</OutlineItem>
+    <OutlineItem href="#breadcrumbs">Breadcrumbs</OutlineItem>
 </Outline>;
 
 export const Head = () => {

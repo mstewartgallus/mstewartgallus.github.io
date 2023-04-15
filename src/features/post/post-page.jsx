@@ -1,5 +1,5 @@
-import { A, Ul, Li, H2, Card, Section } from "@features/ui";
-import { ViewportPage, SkipA, Outline } from "@features/page";
+import { H2, Card, Section } from "@features/ui";
+import { ViewportPage, Outline, OutlineItem } from "@features/page";
 import { Comments } from "./comments.jsx";
 import { ListNotice } from "./list-notice";
 import { Metadata } from "./metadata";
@@ -11,18 +11,15 @@ const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
 
 const TableOfContents = ({ title,  headings = [] }) =>
-<Outline
-    content={<SkipA aria-describedby="content" href="#content">{title}</SkipA>}
->
-    <Ul>
-        {
-            headings.map(({url, title}) =>
-                <Li key={url}><A href={url}>{title}</A></Li>)
-        }
-        <Li><A href="#paging">Paging</A></Li>
-        <Li><A href="#metadata">Metadata</A></Li>
-        <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-    </Ul>
+<Outline>
+    <OutlineItem href="#content">{title}</OutlineItem>
+    {
+        headings.map(({url, title}) =>
+            <OutlineItem key={url} href={url}>{title}</OutlineItem>)
+    }
+    <OutlineItem href="#paging">Paging</OutlineItem>
+    <OutlineItem href="#metadata">Metadata</OutlineItem>
+    <OutlineItem href="#breadcrumbs">Breadcrumbs</OutlineItem>
 </Outline>;
 
 export const PostPage = ({post, headings, children}) => {

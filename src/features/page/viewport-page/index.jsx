@@ -13,7 +13,7 @@ const Sidebar = ({children, breadcrumbs}) =>
               </Nav>
           </Card>
           <Card>
-              <A href="#skip-link">Outline</A>
+              <A href="#outline">Outline</A>
           </Card>
       </>;
 

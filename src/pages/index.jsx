@@ -13,13 +13,11 @@ import { useSearchURL } from "@features/route";
 import {
     BreadcrumbList, BreadcrumbItem,
     Card,
-    A,
     H2,
-    Ul, Li,
     Header
 } from "@features/ui";
 import { useSubmit } from "@features/util";
-import { ViewportPage, SkipA, Outline } from "@features/page";
+import { ViewportPage, Outline, OutlineItem } from "@features/page";
 import JsonLd from "../components/json-ld.jsx";
 import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -79,20 +77,15 @@ const Seo = () => {
 };
 
 const TableOfContents = ({posts}) =>
-<Outline
-    content={
-        <SkipA href="#content">Posts</SkipA>
+<Outline>
+    <OutlineItem href="#content">Posts</OutlineItem>
+    {
+        posts.map(category =>
+            <OutlineItem key={category} href={`#${category}`}>{category}</OutlineItem>)
     }
->
-    <Ul>
-        {
-            posts.map(category =>
-                <Li key={category}><A href={`#${category}`}>{category}</A></Li>)
-        }
-        <Li><A href="#banner" aria-describedby="banner">Common</A></Li>
-        <Li><A href="#search">Search</A></Li>
-        <Li><A href="#breadcrumbs">Breadcrumbs</A></Li>
-    </Ul>
+    <OutlineItem href="#banner" aria-describedby="banner">Common</OutlineItem>
+    <OutlineItem href="#search">Search</OutlineItem>
+    <OutlineItem href="#breadcrumbs">Breadcrumbs</OutlineItem>
 </Outline>;
 
 export const Head = () => {
