@@ -1,11 +1,19 @@
 import { lazy } from "react";
 
-const supportsInert = (() => {
+const query = () => {
     if (typeof window === 'undefined') {
         return false;
     }
     return document.createElement('p').inert === false;
-})();
+};
+
+let support = undefined;
+const supportsInert = () => {
+    if (support === undefined) {
+        support = query();
+    }
+    return support;
+};
 
 const PaneClientNoninert = lazy(() => import("./pane-client.jsx"));
 const PaneClientInert = lazy(() => import("./pane-client-inert.jsx"));
@@ -14,7 +22,7 @@ const PaneClientInert = lazy(() => import("./pane-client-inert.jsx"));
 // only be possible with top level await
 
 export const PaneClient = props => {
-    const Pane = supportsInert ? PaneClientNoninert : PaneClientInert;
+    const Pane = supportsInert() ? PaneClientNoninert : PaneClientInert;
     return <Pane {...props} />;
 };
 

@@ -1,4 +1,4 @@
-import { useId, useTransition, useCallback } from "react";
+import { useId } from "react";
 import { H2, Pane, PushButton } from "@features/ui";
 import { details, button, insideHeading } from "./panel.module.css";
 
@@ -18,28 +18,22 @@ const Heading = ({children, id, open, ...props}) =>
       </>;
 
 export const PanelClient = ({children, id, heading, open, onClick}) => {
-    const [, startTransition] = useTransition();
-    const onClickWrapper = useCallback(e => {
-        e.preventDefault();
-        startTransition(() => onClick(e));
-    }, [onClick]);
-
     const contentId = useId();
-    return <>
+    return <nav aria-labelledby={id}>
                <H2 className={insideHeading}>
                    <Heading id={id}
                             aria-controls={contentId}
                             open={open}
-                            onClick={onClickWrapper}>
+                            onClick={onClick}>
                        {heading}
                    </Heading>
                </H2>
                <Pane open={open}>
-                   <nav id={contentId} aria-labelledby={id}>
+                   <div id={contentId}>
                        {children}
-                   </nav>
+                   </div>
                </Pane>
-           </>;
+           </nav>;
 };
 
 export default PanelClient;

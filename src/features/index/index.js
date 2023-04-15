@@ -1,5 +1,5 @@
 export { Banner } from "./banner.jsx";
-export { Accordion, Panel } from "./panel";
+export { Panel } from "./panel";
 export { PostList } from "./post-list.jsx";
 export { SearchForm } from "./search-form";
 export { Sidebar } from "./sidebar.jsx";

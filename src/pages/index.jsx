@@ -1,10 +1,9 @@
+import { useCallback, useReducer, createContext, useContext, useTransition } from "react";
 import { useLocation } from "@gatsbyjs/reach-router";
-import { useCallback, useMemo, useReducer } from "react";
 import {
     SearchForm,
     Sidebar,
     Banner,
-    Accordion,
     Panel,
     PostList,
     usePostList, usePosts, useWebsite
@@ -40,33 +39,65 @@ const reducer = (state, action) => {
     }
 };
 
-const Panels = ({posts, onClick}) => useMemo(() => Object.entries(posts).map(([category, posts]) =>
-    [category, {
-        posts,
-        onClick(e) {
-            onClick(category, e);
-        }
-    }]), [posts, onClick]).map(([category, { posts, onClick }]) =>
-        <Panel
-            key={category}
-            value={category}
-            id={category}
-            heading={category}
-            onClick={onClick}>
-            <PostList posts={posts} />
-        </Panel>
-    );
+const Selection = createContext(null);
+Selection.displayName = 'Selection';
 
-const AccordionImpl = ({posts}) => {
-    const [state, dispatch] = useReducer(reducer, initState);
+const Value = createContext(null);
+Value.displayName = 'Value';
 
-    const onClick = useCallback((category, e) => {
-        dispatch({ type: 'toggle', category });
-    }, []);
+const Toggle = createContext(null);
+Toggle.displayName = 'Toggle';
 
-    return <Accordion value={state}>
-               <Panels posts={posts} onClick={onClick} />
-           </Accordion>;
+const useSelection = () => useContext(Selection);
+const useValue = () => useContext(Value);
+const useToggle = () => useContext(Toggle);
+
+const ToggleProvider = ({children, value: toggle}) => {
+    const value = useValue();
+    const toggleValue = useCallback(() => toggle(value), [toggle, value]);
+    return <Toggle.Provider value={toggleValue}>
+               {children}
+           </Toggle.Provider>;
+};
+
+const SelectionProvider = Selection.Provider;
+const ValueProvider = Value.Provider;
+
+const useSelected = () => {
+    const value = useValue();
+    const selection = useSelection();
+    return value === selection;
+};
+
+const Accordion = ({posts}) => {
+    const [selection, dispatch] = useReducer(reducer, initState);
+    const [, startTransition] = useTransition();
+    const toggle = useCallback(value =>
+        startTransition(() => dispatch({ type: 'toggle', category: value }))
+    , []);
+
+    return <SelectionProvider value={selection}>
+               {
+                   Object.entries(posts).map(([category, p]) =>
+                       <ValueProvider key={category} value={category}>
+                           <ToggleProvider value={toggle}>
+                               {p}
+                           </ToggleProvider>
+                       </ValueProvider>
+                   )
+               }
+           </SelectionProvider>;
+};
+
+const PanelImpl = ({id, children, heading}) => {
+    const selected = useSelected();
+    const toggle = useToggle();
+
+    return <Panel id={id} heading={heading}
+                  open={selected}
+                  onClick={toggle}>
+               {children}
+           </Panel>;
 };
 
 const title = "Posts";
@@ -121,7 +152,21 @@ const IndexPage = () => {
                        </BreadcrumbItem>
                    </BreadcrumbList>
                }
-               mainbar={<AccordionImpl posts={postsByCategory} />}
+               mainbar={
+                   <Accordion
+                       posts={
+                           Object.fromEntries(
+                               Object.entries(postsByCategory)
+                                   .map(([category, p]) => [
+                                       category,
+                                       <PanelImpl id={category}
+                                                  heading={category}>
+                                           <PostList posts={p} />
+                                       </PanelImpl>
+                                   ]))
+                       }
+                   />
+               }
 
                heading="Posts"
            >
