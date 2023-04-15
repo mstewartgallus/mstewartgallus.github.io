@@ -1,3 +1,8 @@
+// Only prefetch mostly visible links
+const options = {
+    threshold: 1
+};
+
 const callbacks = new Map();
 
 const onObserve = entry => {
@@ -31,7 +36,7 @@ const getPrefetcher = () => {
         return null;
     }
 
-    prefetcher = new IntersectionObserver(observer);
+    prefetcher = new IntersectionObserver(observer, options);
     return prefetcher;
 };
 
