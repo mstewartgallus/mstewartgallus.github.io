@@ -1,5 +1,4 @@
 .layout {
-    background-color: var(--canvas);
 }
 
 @media screen {
@@ -8,7 +7,7 @@
             calc(0.82rem + 7 * var(--t))
             1rem ;
         padding-block:
-            calc(2 * var(--t))
+            calc(2 * var(--t) + var(--line))
             calc(3 * var(--line)) ;
     }
 }
@@ -33,9 +32,39 @@
 
 .layout {
     position: relative ;
-    display: flow-root ;
+    inline-size: calc(1em + 2 * var(--main-width)) ;
     max-inline-size: 100% ;
 
     isolation: isolate ;
-    contain: layout paint style ;
+    contain: paint style ;
+}
+
+.layout {
+    display: flex ;
+    flex-direction: column ;
+    row-gap: var(--line) ;
+}
+
+.header, .footer {
+    display: flex ;
+}
+.header {
+    justify-content: end ;
+}
+.footer {
+    justify-content: center ;
+}
+
+@media print {
+    .header, .footer {
+        display: none ;
+    }
+}
+
+.header {
+    z-index: 9000 ;
+    inset-block-start: var(--line) ;
+}
+.header:focus-within {
+    position: sticky ;
 }

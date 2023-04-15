@@ -15,6 +15,7 @@ import {
     Card,
     H2,
     Header,
+    Subheading,
 } from "@features/ui";
 import { useSubmit } from "@features/util";
 import { ViewportPage, SkipA } from "@features/page";
@@ -106,7 +107,7 @@ const IndexPage = () => {
                                heading={
                                    <>
                                        <H2 tabIndex="-1" id="banner">{title}</H2>
-                                       <p style={{marginBlock:0}}>{description}</p>
+                                       <Subheading>{description}</Subheading>
                                    </>}>
                                <Banner />
                            </Header>

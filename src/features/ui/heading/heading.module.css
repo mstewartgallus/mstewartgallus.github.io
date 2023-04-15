@@ -3,18 +3,20 @@
     break-after: avoid ;
     color: var(--emphasis-text);
     margin-block: 0 ;
+    font: inherit ;
+    font-weight: inherit ;
     font-size: inherit ;
-    font-style: normal ;
-    border-radius: 0.01ch ;
+    font-style: inherit ;
     font-variant-numeric: proportional-nums lining-nums ;
+    border-radius: 0.01ch ;
 }
 
 h1.heading {
-    font-size: 1.77777777777rem ;
+    font-size: 1.953125rem ;
 }
 
 h2.heading {
-    font-size: 1.33333333333rem ;
+    font-size: 1.25rem ;
 }
 
 .heading {

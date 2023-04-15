@@ -1,10 +1,22 @@
 import { focusRef } from "@features/focus";
 import { A } from "@features/ui";
-import { container, content } from "./skip-a.module.css";
+import { content } from "./skip-a.module.css";
 
-export const SkipA = ({children, ...props}) =>
-<span className={container}>
-    <A {...props} id="top" href="#content" ref={focusRef}>
-        <span className={content}>{children}</span>
-    </A>
-</span>;
+const onKeyDown = e => {
+    const { target, key, keyCode, isComposing } = e;
+
+    if (isComposing || keyCode === 229) {
+        return;
+    }
+
+    if (key === 'Escape' || key === 'Esc' || keyCode === 27) {
+        e.preventDefault();
+        target.blur();
+    }
+};
+
+export const SkipA = props => {
+    return <A className={content} id="top" href="#content"
+              onKeyDown={onKeyDown}
+              {...props} ref={focusRef} />;
+};

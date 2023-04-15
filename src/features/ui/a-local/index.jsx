@@ -55,7 +55,16 @@ const ALocal = (props, ref) => {
 
     const onClickWrapper = useCallback(async e => {
         onClick?.(e);
-        if (e.defaultPrevented) {
+
+        const { defaultPrevented, target, altKey, metaKey, shiftKey, ctrlKey, button } = e;
+        if (defaultPrevented) {
+            return;
+        }
+        if (button !== 0) {
+            return;
+        }
+
+        if (altKey || metaKey || shiftKey || ctrlKey) {
             return;
         }
 

@@ -1,4 +1,4 @@
-import { H2, Card, Section } from "@features/ui";
+import { H2, Subheading, Card, Section } from "@features/ui";
 import { ViewportPage, SkipA } from "@features/page";
 import { Comments } from "./comments.jsx";
 import { ListNotice } from "./list-notice";
@@ -18,7 +18,7 @@ export const PostPage = ({post, children}) => {
                skipA={<SkipA>{title}</SkipA>}
                heading={title}
                subheading={
-                   <p style={{marginBlock: 0}}>{subtitle}</p>
+                   <Subheading>{subtitle}</Subheading>
                }
                notice={<Notice notice={notice} />}
                breadcrumbs={<PostBreadcrumbs category={category} title={title} />}

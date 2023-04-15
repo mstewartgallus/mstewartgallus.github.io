@@ -11,11 +11,20 @@
     column-gap: 1em ;
 }
 
-.mainbar {
+.mainbar, .sidebar {
     box-sizing: border-box;
-
-    inline-size: var(--main-width) ;
     max-inline-size: 100% ;
+}
+
+.mainbar {
+    flex-basis: var(--main-width) ;
+    flex-grow: 3 ;
+    flex-shrink: 2 ;
+}
+.sidebar {
+    flex-basis: calc(0.66 * var(--measure)) ;
+    flex-grow: 2 ;
+    flex-shrink: 3 ;
 }
 
 .mainbar, .sidebar, .page {
@@ -33,7 +42,7 @@
     contain: layout style ;
 }
 .mainbar {
-    contain: layout style ;
+    contain: style ;
 }
 
 /* .page { */

@@ -7,10 +7,11 @@
     hyphens: auto ;
 }
 
-.p {
-    margin-inline-start: calc(2 * var(--s));
+@media screen {
+    .p {
+        margin-inline-start: calc(2 * var(--s));
+    }
 }
-
 
 .p {
     /* default ratio on browsers is 1rem = 16px */

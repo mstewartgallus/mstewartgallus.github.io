@@ -1,20 +1,20 @@
+import { ScreenOnly } from "@features/util";
 import { Theme, A, Card, H2, Hgroup, Nav, SidebarLayout } from "@features/ui";
 import { H1 } from "../h1.jsx";
-import { layout } from "./page.module.css";
+import { layout, header, footer } from "./page.module.css";
 
 const View = ({children}) => <div className={layout}>{children}</div>;
 
 const Sidebar = ({children, breadcrumbs}) =>
       <>
           {children}
-          <Card>
-              <Nav heading={<H2 tabIndex="-1" id="breadcrumbs">Breadcrumbs</H2>}>
-                  {breadcrumbs}
-              </Nav>
-          </Card>
-          <Card>
-              <A href="#top">Back to Top</A>
-          </Card>
+          <ScreenOnly>
+              <Card>
+                  <Nav heading={<H2 tabIndex="-1" id="breadcrumbs">Breadcrumbs</H2>}>
+                      {breadcrumbs}
+                  </Nav>
+              </Card>
+          </ScreenOnly>
       </>;
 
 export const ViewportPage = ({
@@ -29,8 +29,10 @@ export const ViewportPage = ({
     breadcrumbs
 }) =>
 <Theme>
-    {skipA}
     <View>
+        <div className={header}>
+            {skipA}
+        </div>
         <SidebarLayout
             sidebar={<Sidebar breadcrumbs={breadcrumbs}>
                          {sidebar}
@@ -49,6 +51,9 @@ export const ViewportPage = ({
             </Card>
             {mainbar}
         </SidebarLayout>
+        <div className={footer}>
+            <A href="#top">Back to Top</A>
+        </div>
     </View>
 </Theme>;
 

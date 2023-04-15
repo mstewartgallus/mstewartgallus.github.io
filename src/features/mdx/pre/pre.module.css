@@ -13,7 +13,6 @@
 }
 .title {
     color: var(--emphasis-text);
-    font-weight: bold ;
 }
 
 @media screen {

@@ -21,5 +21,6 @@ export { Search } from "./search.jsx";
 export { Section } from "./section.tsx";
 export { SidebarLayout } from "./sidebar-layout";
 export { P } from "./p";
+export { Subheading } from "./subheading";
 export { Pre } from "./pre";
 export { Theme } from "./theme";
