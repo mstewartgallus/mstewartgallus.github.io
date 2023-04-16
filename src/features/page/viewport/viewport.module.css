@@ -1,0 +1,18 @@
+.viewport {
+    display: contents ;
+}
+@media screen {
+    .viewport {
+        display: flow-root ;
+        position: absolute ;
+        top: 0 ;
+        left: 0 ;
+        right: 0 ;
+        bottom: 0 ;
+        contain: layout style paint size ;
+        isolation: isolate ;
+        overflow: auto ;
+
+        background: var(--canvas) ;
+    }
+}

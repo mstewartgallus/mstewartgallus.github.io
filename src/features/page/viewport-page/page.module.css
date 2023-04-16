@@ -31,7 +31,6 @@
 }
 
 .layout {
-    position: relative ;
     inline-size: calc(1em + 2 * var(--main-width)) ;
     max-inline-size: 100% ;
 

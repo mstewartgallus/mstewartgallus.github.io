@@ -52,17 +52,9 @@ abbr {
     }
 }
 
+/* avoid a flash of unstyled background :( */
 :root {
     background-color: var(--canvas) ;
-}
-
-:root, body {
-    display: flow-root ;
-    isolation: isolate ;
-    contain: style ;
-}
-:root {
-    overflow: auto ;
 }
 
 @keyframes slideout {
