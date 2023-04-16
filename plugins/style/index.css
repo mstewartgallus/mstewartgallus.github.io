@@ -58,7 +58,7 @@ abbr {
 
 :root, body {
     display: flow-root ;
-    isolate: isolation ;
+    isolation: isolate ;
     contain: style ;
 }
 :root {
