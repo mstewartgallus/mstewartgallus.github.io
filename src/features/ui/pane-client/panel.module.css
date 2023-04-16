@@ -28,6 +28,10 @@
     }
 }
 
+.contentWillChange {
+    will-change: transform, opacity ;
+}
+
 .content {
     transition-duration: 0.5s ;
 }

@@ -1,5 +1,12 @@
 .button {
-    all: unset ;
+    appearance: none ;
+    padding: 0;
+    margin: 0;
+
+    font: inherit ;
+    border: unset ;
+    background: unset ;
+    color: inherit ;
 
     font-variant-numeric: lining-nums tabular-nums;
 
@@ -10,12 +17,8 @@
     border-style: solid ;
     padding-inline: 0.5em ;
 
-    box-sizing: border-box ;
-
     border-radius: 0.17ch ;
-
     border-width: calc(max(1px, 0.07em));
-    max-block-size: var(--line);
 
     outline-color: var(--highlight-text) ;
     outline-offset: 0.2em ;
@@ -51,4 +54,8 @@
 }
 .button:active {
     transition: background-color 0.1s, color 0.1s ;
+}
+
+.button {
+    block-size: var(--line);
 }
