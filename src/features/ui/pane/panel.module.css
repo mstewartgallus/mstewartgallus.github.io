@@ -4,6 +4,14 @@
 }
 
 .disclosure {
+    /* Prevent buttons from moving around when popping the accordion in
+     * and out.
+     * Maybe there's a way to only apply this while hidden?
+     */
+    overflow-anchor: none ;
+}
+
+.disclosure {
     position: relative ;
 }
 
