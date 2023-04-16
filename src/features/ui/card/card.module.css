@@ -3,5 +3,5 @@
     contain: layout style ;
 
     scroll-snap-align: start ;
-    scroll-margin-block: calc(0.75 * var(--line)) ;
+    scroll-margin-block: calc(1.37 * var(--line)) ;
 }

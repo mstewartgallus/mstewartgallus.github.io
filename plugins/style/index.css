@@ -101,11 +101,11 @@ abbr {
     }
 
     ::view-transition-old(root) {
-        animation-duration: 0.2s ;
+        animation-duration: 0.15s ;
         animation-name: fadeout ;
     }
     ::view-transition-new(root) {
-        animation-duration: 0.2s ;
+        animation-duration: 0.15s ;
         animation-name: fadein ;
     }
 }

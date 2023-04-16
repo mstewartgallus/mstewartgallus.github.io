@@ -19,11 +19,5 @@
     background: var(--canvas) ;
 
     scroll-snap-type: both proximity ;
-    scroll-padding-block: calc(1.2 * var(--line)) ;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .viewport {
-        scroll-behaviour: smooth ;
-    }
+    scroll-padding-block: calc(1.5 * var(--t) + 2 * var(--line)) ;
 }
