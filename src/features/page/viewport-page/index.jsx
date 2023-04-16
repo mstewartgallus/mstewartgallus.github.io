@@ -54,7 +54,7 @@ export const ViewportPage = ({
                 {mainbar}
             </SidebarLayout>
             <div className={footer}>
-                <A href="#skip-link">Back to Top</A>
+                <A href="#top">Back to Top</A>
             </div>
         </View>
     </Theme>
