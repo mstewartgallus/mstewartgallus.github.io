@@ -5,6 +5,9 @@
     break-inside: avoid ;
 
     contain: layout style ;
+
+    scroll-snap-align: start ;
+    scroll-margin-block: calc(0.25 * var(--line)) ;
 }
 
 .figcaption {

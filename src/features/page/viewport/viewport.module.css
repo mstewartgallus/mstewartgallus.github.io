@@ -12,7 +12,13 @@
         contain: layout style paint size ;
         isolation: isolate ;
         overflow: auto ;
-
-        background: var(--canvas) ;
     }
+}
+
+.viewport {
+    background: var(--canvas) ;
+
+    scroll-behavior: smooth ;
+    scroll-snap-type: both proximity ;
+    scroll-padding-block: calc(1.25 * var(--line)) ;
 }

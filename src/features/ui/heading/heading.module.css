@@ -36,3 +36,13 @@ h2.heading {
     /* display: flow-root ; */
     contain: layout style ;
 }
+
+/* Placing this on a section wrapper might be more convenient :(  */
+.heading {
+    scroll-snap-align: start ;
+    scroll-margin-block: calc(0.25 * var(--line)) ;
+}
+
+h1.heading {
+    scroll-margin-block: calc(2.25 * var(--line)) var(--line) ;
+}
