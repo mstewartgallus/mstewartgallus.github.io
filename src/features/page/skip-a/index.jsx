@@ -16,7 +16,7 @@ const onKeyDown = e => {
 };
 
 export const SkipA = props => {
-    return <A className={content} id="top" href="#content"
+    return <A className={content} id="skip-link" href="#content"
               onKeyDown={onKeyDown}
               {...props} ref={focusRef} />;
 };
