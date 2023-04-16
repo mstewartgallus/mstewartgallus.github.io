@@ -1,23 +1,27 @@
 import { useDeferredValue } from "react";
 import {
     disclosure,
-    wrapper, wrapperInert,
+    wrapper, wrapperHidden, wrapperWillChange,
     content, contentHidden, contentWillChange
 } from "./panel.module.css";
 
-export const PaneClient = ({children, willChange, open, ...props}) => {
+export const PaneClient = ({children, willChange, open}) => {
     const deferredWillChange = useDeferredValue(willChange);
     const deferredOpen = useDeferredValue(open);
 
-    const wrapperClass = [wrapper, deferredOpen ? '' : wrapperInert].join(' ');
+    const wrapperClass = [
+        wrapper,
+        deferredWillChange ? wrapperWillChange : '',
+        deferredOpen ? '' : wrapperHidden
+    ].join(' ');
     const contentClass = [
         content,
         deferredWillChange ? contentWillChange : '',
         deferredOpen ? '' : contentHidden
     ].join(' ');
-    return <div className={disclosure} {...props}>
+    return <div className={disclosure}>
                <div className={wrapperClass}>
-                   <div className={contentClass} inert={open ? null : "inert"}>
+                   <div className={contentClass} aria-hidden={String(open)}>
                        {children}
                    </div>
                </div>

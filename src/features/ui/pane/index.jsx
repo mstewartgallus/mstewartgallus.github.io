@@ -1,15 +1,13 @@
 import { lazy, Suspense } from "react";
 
-const PaneClient = lazy(() => import("../pane-client"));
-
-const Fallback = ({open, ...props}) => {
-    return <div {...props} />;
-};
+const PaneClient = lazy(() => import("./pane-client.jsx"));
 
 // Force panes open when no JS
-export const Pane = ({willChange, ...props}) =>
-<Suspense fallback={<Fallback {...props} />}>
-    <PaneClient {...props} willChange={willChange} />
+export const Pane = ({children, willChange, open}) =>
+<Suspense fallback={children}>
+    <PaneClient willChange={willChange} open={open}>
+        {children}
+    </PaneClient>
 </Suspense>;
 
 export default Pane;

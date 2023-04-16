@@ -1,7 +1,19 @@
 import { Suspense, lazy } from "react";
-import { DisclosureServer } from "../disclosure-server";
+import { H2 } from "@features/ui";
 
-const DisclosureClient = lazy(() => import("../disclosure-client"));
+const DisclosureClient = lazy(() => import("./client.jsx"));
+
+const DisclosureServer = ({id, children, heading}) =>
+<nav aria-labelledby={id}>
+    <header>
+        <hgroup>
+            <H2 tabIndex="-1" id={id}>
+                {heading}
+            </H2>
+        </hgroup>
+    </header>
+    {children}
+</nav>;
 
 export const Disclosure = ({id, children, heading, open, onClick}) =>
 <Suspense

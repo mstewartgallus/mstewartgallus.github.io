@@ -1,0 +1,64 @@
+.disclosure, .wrapper, .content {
+    display: flow-root ;
+    contain: layout style ;
+}
+
+.disclosure {
+    position: relative ;
+}
+
+.wrapper {
+    inset-block-start: 0 ;
+    contain: layout paint style ;
+    overflow: hidden ;
+}
+
+@media screen {
+    .wrapperHidden {
+        position: absolute ;
+        opacity: 0 ;
+        visibility: hidden ;
+    }
+
+    .contentHidden {
+        transform: translateY(-100%) ;
+    }
+}
+
+.wrapperWillChange {
+    /* Not sure if this is a good idea  */
+    visibility: visible ;
+    will-change: opacity, visibility ;
+}
+
+.contentWillChange {
+    will-change: transform ;
+}
+
+.wrapper, .content {
+    transition-timing-function: ease-out;
+}
+.wrapperHidden, .contentHidden {
+    transition-timing-function: ease-in;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .content {
+        transition-property: transform ;
+    }
+}
+
+.wrapper {
+    transition-property: opacity ;
+
+}
+.wrapperHidden {
+    transition-property: opacity, visibility ;
+}
+
+.wrapper, .content {
+    transition-duration: 0.2s ;
+}
+.wrapperHidden, .contentHidden {
+    transition-duration: 0.19s ;
+}

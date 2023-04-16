@@ -80,7 +80,7 @@ const IndexPage = () => {
                    <Accordion>
                        {
                            Object.entries(postsByCategory).map(([category, p]) =>
-                               <Card>
+                               <Card key={category}>
                                    <AccordionPanel id={category}
                                                    value={category}
                                                    heading={category}>
