@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwords_to_kick_your_teeth_out=self.webpackChunkwords_to_kick_your_teeth_out||[]).push([[188],{6111:function(e,t,r){r.r(t),r.d(t,{ScrollClient:function(){return c}});var o=r(7294),u=r(1883);const c=e=>{let{scrolled:t}=e;const r=(0,u.F_)("viewport");return t((0,o.useDeferredValue)(r))};t.default=c}}]);
+//# sourceMappingURL=188-a16acfdd59c7af08130d.js.map
