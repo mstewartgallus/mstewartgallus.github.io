@@ -1,6 +1,6 @@
 import { useId, useReducer, useDeferredValue, useCallback, useTransition } from "react";
 import { H2, Pane, PushButton } from "@features/ui";
-import { details, button, insideHeading } from "./panel.module.css";
+import { details, button, insideHeading } from "./disclosure.module.css";
 
 const initialState = {
     hover: false,
@@ -22,7 +22,7 @@ const reducer = (state, action) => {
     }
 };
 
-export const PanelClient = ({children, id, heading, open, onClick}) => {
+export const DisclosureClient = ({children, id, heading, open, onClick}) => {
     const [{hover, focus}, dispatch] = useReducer(reducer, initialState);
     const [,startTransition] = useTransition();
     const onMouseOver = useCallback(() => startTransition(() => dispatch('mouseover')), []);
@@ -64,4 +64,4 @@ export const PanelClient = ({children, id, heading, open, onClick}) => {
            </nav>;
 };
 
-export default PanelClient;
+export default DisclosureClient;

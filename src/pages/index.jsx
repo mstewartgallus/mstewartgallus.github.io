@@ -1,10 +1,10 @@
-import { useCallback, useReducer, createContext, useContext, useTransition } from "react";
 import { useLocation } from "@gatsbyjs/reach-router";
 import {
     SearchForm,
     Sidebar,
     Banner,
-    Panel,
+    Accordion,
+    AccordionPanel,
     PostList,
     usePostList, usePosts, useWebsite
 } from "@features/index";
@@ -23,82 +23,6 @@ import SeoBasic from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
 import useAbsolute from "../hooks/use-absolute.js";
 import useSiteMetadata from "../hooks/use-site-metadata.js";
-
-const initState = null;
-
-const reducer = (state, action) => {
-    const { type } = action;
-    switch (type) {
-    case 'toggle': {
-        const { category } = action;
-        return state === category ? null : category;
-    }
-
-    default:
-        return state;
-    }
-};
-
-const Selection = createContext(null);
-Selection.displayName = 'Selection';
-
-const Value = createContext(null);
-Value.displayName = 'Value';
-
-const Toggle = createContext(null);
-Toggle.displayName = 'Toggle';
-
-const useSelection = () => useContext(Selection);
-const useValue = () => useContext(Value);
-const useToggle = () => useContext(Toggle);
-
-const ToggleProvider = ({children, value: toggle}) => {
-    const value = useValue();
-    const toggleValue = useCallback(() => toggle(value), [toggle, value]);
-    return <Toggle.Provider value={toggleValue}>
-               {children}
-           </Toggle.Provider>;
-};
-
-const SelectionProvider = Selection.Provider;
-const ValueProvider = Value.Provider;
-
-const useSelected = () => {
-    const value = useValue();
-    const selection = useSelection();
-    return value === selection;
-};
-
-const Accordion = ({posts}) => {
-    const [selection, dispatch] = useReducer(reducer, initState);
-    const [, startTransition] = useTransition();
-    const toggle = useCallback(value =>
-        startTransition(() => dispatch({ type: 'toggle', category: value }))
-    , []);
-
-    return <SelectionProvider value={selection}>
-               {
-                   Object.entries(posts).map(([category, p]) =>
-                       <ValueProvider key={category} value={category}>
-                           <ToggleProvider value={toggle}>
-                               {p}
-                           </ToggleProvider>
-                       </ValueProvider>
-                   )
-               }
-           </SelectionProvider>;
-};
-
-const PanelImpl = ({id, children, heading}) => {
-    const selected = useSelected();
-    const toggle = useToggle();
-
-    return <Panel id={id} heading={heading}
-                  open={selected}
-                  onClick={toggle}>
-               {children}
-           </Panel>;
-};
 
 const title = "Posts";
 
@@ -153,19 +77,19 @@ const IndexPage = () => {
                    </BreadcrumbList>
                }
                mainbar={
-                   <Accordion
-                       posts={
-                           Object.fromEntries(
-                               Object.entries(postsByCategory)
-                                   .map(([category, p]) => [
-                                       category,
-                                       <PanelImpl id={category}
-                                                  heading={category}>
-                                           <PostList posts={p} />
-                                       </PanelImpl>
-                                   ]))
+                   <Accordion>
+                       {
+                           Object.entries(postsByCategory).map(([category, p]) =>
+                               <Card>
+                                   <AccordionPanel id={category}
+                                                   value={category}
+                                                   heading={category}>
+                                       <PostList posts={p} />
+                                   </AccordionPanel>
+                               </Card>
+                           )
                        }
-                   />
+                   </Accordion>
                }
 
                heading="Posts"

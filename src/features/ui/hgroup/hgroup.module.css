@@ -1,4 +1,6 @@
 .hgroup {
     inline-size: fit-content ;
     max-inline-size: 100% ;
+    display: flow-root ;
+    contain: layout ;
 }

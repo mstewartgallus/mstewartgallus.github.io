@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 import { ScreenOnly } from "@features/util";
-import { Button, Theme, A, Card, H2, Hgroup, Nav, SidebarLayout } from "@features/ui";
+import { Button, Theme, Card, H2, Hgroup, Nav, SidebarLayout } from "@features/ui";
 import { H1 } from "../h1.jsx";
 import { Viewport } from "../viewport";
 import { layout, header, footer } from "./page.module.css";
