@@ -1,24 +1,25 @@
+import { useDeferredValue } from "react";
 import { useScrollRestoration } from "gatsby";
 import { Client } from "@features/util";
 import { viewport } from "./viewport.module.css";
 
-// Get rid of a warning of using useLayoutEffect on the server in a
-// silly convolutaed way
-
-const ScrollClient = ({children}) => {
-    const scroll = useScrollRestoration(`viewport`);
-    return children(scroll);
+const ScrollClient = ({scrollKey, children}) => {
+    const scroll = useScrollRestoration(scrollKey);
+    // avoid forced reflow
+    const deferred = useDeferredValue(scroll);
+    return children(deferred);
 };
 
-const Scroll = ({children}) =>
+// Avoid a useLayoutEffect warning with useScrollRestoration
+const Scroll = ({scrollKey, children}) =>
 <Client fallback={children({})}>
-    <ScrollClient>
+    <ScrollClient scrollKey={scrollKey}>
         {children}
     </ScrollClient>
 </Client>;
 
 export const Viewport = ({children}) =>
-<Scroll>
+<Scroll scrollKey="viewport">
     {
         scroll => <div className={viewport} {...scroll}>{children}</div>
     }
