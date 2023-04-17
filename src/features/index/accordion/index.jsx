@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useReducer, useTransition } from "react";
-import { Disclosure } from "../disclosure";
+import { Disclosure, Summary } from "../disclosure";
 
 const initState = null;
 
@@ -22,21 +22,18 @@ Selection.displayName = 'Selection';
 const Toggle = createContext(null);
 Toggle.displayName = 'Toggle';
 
-const useSelection = () => useContext(Selection);
-const useToggle = () => useContext(Toggle);
-
-const SelectionProvider = Selection.Provider;
-const ToggleProvider = Toggle.Provider;
-
 const useSelected = value => {
-    const selection = useSelection();
+    const selection = useContext(Selection);
     return value === selection;
 };
 
 const useToggleValue = value => {
-    const toggle = useToggle();
+    const toggle = useContext(Toggle);
     return useCallback(() => toggle(value), [toggle, value]);
 };
+
+const SelectionProvider = Selection.Provider;
+const ToggleProvider = Toggle.Provider;
 
 export const Accordion = ({children}) => {
     const [selection, dispatch] = useReducer(reducer, initState);
@@ -52,11 +49,23 @@ export const Accordion = ({children}) => {
            </SelectionProvider>;
 };
 
-export const AccordionPanel = ({id, children, value, heading}) => {
-    const selected = useSelected(value);
-    const onClick = useToggleValue(value);
+const Value = createContext();
+Value.displayName = 'Value';
 
-    return <Disclosure id={id} heading={heading} open={selected} onClick={onClick}>
+export const AccordionSummary = ({id, children}) => {
+    const value = useContext(Value);
+    const onClick = useToggleValue(value);
+    return <Summary id={id} onClick={onClick}>
                {children}
-           </Disclosure>;
+           </Summary>;
+};
+
+export const AccordionPanel = ({children, value, summary}) => {
+    const selected = useSelected(value);
+    return <Value.Provider value={value}>
+               <Disclosure open={selected}
+                           summary={summary}>
+                   {children}
+               </Disclosure>
+           </Value.Provider>;
 };

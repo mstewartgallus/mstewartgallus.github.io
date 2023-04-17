@@ -4,14 +4,6 @@
 }
 
 .disclosure {
-    /* Prevent buttons from moving around when popping the accordion in
-     * and out.
-     * Maybe there's a way to only apply this while hidden?
-     */
-    overflow-anchor: none ;
-}
-
-.disclosure {
     position: relative ;
 }
 
@@ -22,10 +14,14 @@
 }
 
 @media screen {
+    .disclosureHidden {
+        overflow-anchor: none ;
+        visibility: hidden ;
+    }
+
     .wrapperHidden {
         position: absolute ;
         opacity: 0 ;
-        visibility: hidden ;
     }
 
     .contentHidden {
@@ -33,20 +29,22 @@
     }
 }
 
-.wrapperWillChange {
+.disclosureWillChange {
     /* Not sure if this is a good idea  */
     visibility: visible ;
-    will-change: opacity, visibility ;
+    will-change: visibility ;
 }
-
+.wrapperWillChange {
+    will-change: opacity ;
+}
 .contentWillChange {
     will-change: transform ;
 }
 
-.wrapper, .content {
+.disclosure, .wrapper, .content {
     transition-timing-function: ease-out;
 }
-.wrapperHidden, .contentHidden {
+.disclosureHidden, .wrapperHidden, .contentHidden {
     transition-timing-function: ease-in;
 }
 
@@ -61,12 +59,15 @@
 
 }
 .wrapperHidden {
-    transition-property: opacity, visibility ;
+    transition-property: opacity ;
+}
+.disclosureHidden {
+    transition-property: visibility ;
 }
 
-.wrapper, .content {
+.disclosure, .wrapper, .content {
     transition-duration: 0.2s ;
 }
-.wrapperHidden, .contentHidden {
+.disclosureHidden, .wrapperHidden, .contentHidden {
     transition-duration: 0.19s ;
 }

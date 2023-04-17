@@ -5,6 +5,7 @@ import {
     Banner,
     Accordion,
     AccordionPanel,
+    AccordionSummary,
     PostList,
     usePostList, usePosts, useWebsite
 } from "@features/index";
@@ -14,6 +15,7 @@ import {
     Card,
     H2,
     Header,
+    Hgroup,
     Subheading,
 } from "@features/ui";
 import { useSubmit } from "@features/util";
@@ -63,7 +65,9 @@ const IndexPage = () => {
                                    <>
                                        <H2 tabIndex="-1" id="banner">{title}</H2>
                                        <Subheading>{description}</Subheading>
-                                   </>}>
+                                   </>
+                               }
+                           >
                                <Banner />
                            </Header>
                        </Card>
@@ -80,13 +84,25 @@ const IndexPage = () => {
                    <Accordion>
                        {
                            Object.entries(postsByCategory).map(([category, p]) =>
-                               <Card key={category}>
-                                   <AccordionPanel id={category}
-                                                   value={category}
-                                                   heading={category}>
-                                       <PostList posts={p} />
+                               <nav
+                                   key={category}
+                                   aria-labelledby={category}>
+                                   <AccordionPanel
+                                       value={category}
+                                       summary={
+                                           <header>
+                                               <Hgroup>
+                                                   <AccordionSummary id={category}>
+                                                       {category}
+                                                   </AccordionSummary>
+                                               </Hgroup>
+                                           </header>
+                                       }>
+                                       <Card>
+                                           <PostList posts={p} />
+                                       </Card>
                                    </AccordionPanel>
-                               </Card>
+                               </nav>
                            )
                        }
                    </Accordion>

@@ -33,6 +33,6 @@ h2.heading {
 }
 
 .heading {
-    /* display: flow-root ; */
+    display: flow-root ;
     contain: layout style ;
 }

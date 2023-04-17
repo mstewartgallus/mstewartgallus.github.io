@@ -1,5 +1,8 @@
-import { useId, useReducer, useDeferredValue, useCallback, useTransition } from "react";
-import { H2, Pane, PushButton } from "@features/ui";
+import {
+    createContext, useContext,
+    useMemo, useId, useReducer, useTransition
+} from "react";
+import { Pane, PushButton } from "@features/ui";
 import { details, button, insideHeading } from "./disclosure.module.css";
 
 const initialState = {
@@ -22,46 +25,76 @@ const reducer = (state, action) => {
     }
 };
 
-export const DisclosureClient = ({children, id, heading, open, onClick}) => {
-    const [{hover, focus}, dispatch] = useReducer(reducer, initialState);
-    const [,startTransition] = useTransition();
-    const onMouseOver = useCallback(() => startTransition(() => dispatch('mouseover')), []);
-    const onMouseOut = useCallback(() => startTransition(() => dispatch('mouseout')), []);
-    const onFocus = useCallback(() => startTransition(() => dispatch('focus')), []);
-    const onBlur = useCallback(() => startTransition(() => dispatch('blur')), []);
-    const willChange = hover || focus;
+// Have a rarely changing context and a separate context for changing
+// content
+const Context = createContext({
+    ariaControls: null,
+    onMouseOver: () => {},
+    onMouseOut: () => {},
+    onFocus: () => {},
+    onBlur: () => {}
+});
+Context.displayName = 'Disclosure';
 
-    const contentId = useId();
+const Open = createContext(false);
+Open.displayName = 'Open';
 
-    const deferredOpen = useDeferredValue(open);
+export const Summary = ({ id, children, onClick }) => {
+    const open = useContext(Open);
 
-    return <nav aria-labelledby={id}>
-               <H2 className={insideHeading}
-                   onMouseOver={onMouseOver}
-                   onMouseOut={onMouseOut}
-                   onFocus={onFocus}
-                   onBlur={onBlur}>
-                   <span className={details}
+    const {
+        ariaControls,
+        onMouseOver,
+        onMouseOut,
+        onFocus,
+        onBlur
+    } = useContext(Context);
+
+    return <span className={insideHeading}
+                 onMouseOver={onMouseOver}
+                 onMouseOut={onMouseOut}
+                 onFocus={onFocus}
+                 onBlur={onBlur}>
+               <span className={details}>
+                   <PushButton
+                       id={id}
+                       open={open}
+                       aria-controls={ariaControls}
+                       onClick={onClick}
                    >
-                       <PushButton
-                           id={id}
-                           open={open}
-                           aria-controls={contentId}
-                           onClick={onClick}
-                       >
-                           <span className={button}>
-                               {deferredOpen ? "Close" : "Open"}
-                           </span>
-                       </PushButton>
-                   </span>
-                   <label htmlFor={id}>{heading}</label>
-               </H2>
-               <Pane open={open} willChange={willChange}>
-                   <div id={contentId}>
-                       {children}
-                   </div>
-               </Pane>
-           </nav>;
+                       <span className={button}>
+                           {open ? "Close" : "Open"}
+                       </span>
+                   </PushButton>
+               </span>
+               <label htmlFor={id}>{children}</label>
+           </span>;
 };
 
-export default DisclosureClient;
+
+export const Disclosure = ({children, id, summary, open}) => {
+    const contentId = useId();
+    const [{hover, focus}, dispatch] = useReducer(reducer, initialState);
+
+    const [,startTransition] = useTransition();
+
+    const willChange = hover || focus;
+
+    const context = useMemo(() => ({
+        ariaControls: contentId,
+        onMouseOver: () => startTransition(() => dispatch('mouseover')),
+        onMouseOut: () => startTransition(() => dispatch('mouseout')),
+        onFocus: () => startTransition(() => dispatch('focus')),
+        onBlur: () => startTransition(() => dispatch('blur'))
+    }), [contentId]);
+    return <Context.Provider value={context}>
+               <Open.Provider value={open}>
+                   {summary}
+                   <div id={contentId}>
+                       <Pane open={open} willChange={willChange}>
+                           {children}
+                       </Pane>
+                   </div>
+               </Open.Provider>
+           </Context.Provider>;
+};
