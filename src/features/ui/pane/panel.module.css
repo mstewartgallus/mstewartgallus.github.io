@@ -30,8 +30,6 @@
 }
 
 .disclosureWillChange {
-    /* Not sure if this is a good idea  */
-    visibility: visible ;
     will-change: visibility ;
 }
 .wrapperWillChange {
