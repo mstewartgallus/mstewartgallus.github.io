@@ -1,7 +1,6 @@
-import { Suspense, lazy, forwardRef } from "react";
+import { forwardRef } from "react";
 import { graphql, useStaticQuery } from "gatsby";
-
-const ALocal = lazy(() => import("./a-local"));
+import { ALocal } from "./a-local";
 
 const useSiteMetadataRaw = () => useStaticQuery(graphql`
 query {
@@ -11,16 +10,6 @@ query {
     }
   }
 }`);
-
-const ALocalLazy = forwardRef(function ALocalLazy(props, ref) {
-    return <Suspense
-               fallback={
-                   <a {...props} ref={ref} />
-               }
-           >
-               <ALocal {...props} ref={ref} />
-           </Suspense>;
-});
 
 const useFail = props => {
     const metadata = useSiteMetadataRaw();
@@ -36,7 +25,7 @@ const useFail = props => {
 
 export const A = forwardRef(function A(props, ref) {
     const fail = useFail(props);
-    return fail ? <a {...props} ref={ref} /> : <ALocalLazy {...props} ref={ref} />;
+    return fail ? <a {...props} ref={ref} /> : <ALocal {...props} ref={ref} />;
 });
 
 export default A;
