@@ -3,17 +3,17 @@ const options = {
     threshold: 1
 };
 
-const callbacks = new Map();
+const onNears = new Map();
+const onFars = new Map();
 
-const onObserve = entry => {
-    const { target } = entry;
-    const cb = callbacks.get(target);
-    if (!cb) {
-        return;
+const onObserve = ({ target, isIntersecting, intersectionRatio }) => {
+    if (isIntersecting || intersectionRatio > 0) {
+        const cb = onNears.get(target);
+        cb?.();
+    } else {
+        const cb = onFars.get(target);
+        cb?.();
     }
-
-    const { isIntersecting, intersectionRatio } = entry;
-    cb(isIntersecting || intersectionRatio > 0);
 };
 
 const observer = entries => {
@@ -40,26 +40,39 @@ const getPrefetcher = () => {
     return prefetcher;
 };
 
-export const observe = (elem, cb, { signal }) => {
+export const onNearFar = (
+    elem,
+    onNear,
+    onFar,
+    { signal }
+) => {
     const pre = getPrefetcher();
     if (!pre) {
         return;
     }
 
     let ignore = false;
-    const callback = near => {
+    const onNearWrap = () => {
         if (ignore) {
             return;
         }
-        cb(near);
+        onNear();
+    };
+    const onFarWrap = () => {
+        if (ignore) {
+            return;
+        }
+        onFar();
     };
 
     signal.addEventListener('abort', () => {
         ignore = true;
         pre.unobserve(elem);
-        callbacks.delete(elem);
+        onNears.delete(elem);
+        onFars.delete(elem);
     }, { passive: true });
 
-    callbacks.set(elem, callback);
+    onNears.set(elem, onNearWrap);
+    onFars.set(elem, onFarWrap);
     pre.observe(elem);
 };

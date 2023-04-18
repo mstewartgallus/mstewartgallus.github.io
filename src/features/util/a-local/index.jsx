@@ -2,39 +2,13 @@ import {
     forwardRef,
     useRef,
     useCallback,
-    useEffect, useReducer, useTransition
+    useEffect
 } from "react";
 import { navigate } from "gatsby";
+import { useA } from "./use-a";
 import { useHover } from "./use-hover";
 import { usePrefetchPathname } from "./use-prefetch-pathname";
-import { observe } from "./use-intersect";
-
-const initState = {
-    mouseover: false,
-    focus: false,
-    near: false
-};
-
-const reducer = (state, action) => {
-    switch (action) {
-    case 'near':
-        return { ...state, near: true };
-    case 'far':
-        return { ...state, near: false };
-
-    case 'mouseover':
-        return { ...state, mouseover: true };
-    case 'mouseout':
-        return { ...state, mouseover: false };
-
-    case 'focus':
-        return { ...state, focus: true };
-    case 'blur':
-        return { ...state, focus: false };
-
-    default: return state;
-    }
-};
+import { onNearFar } from "./use-intersect";
 
 const ALocal = (props, ref) => {
     const {
@@ -46,12 +20,17 @@ const ALocal = (props, ref) => {
 
     const { href } = props;
 
-    // Do this sort of silliness to integrate with React's native
-    // scheduling as much as possible and appropriately idle and not
-    // block threads.
-
-    const [, startTransition] = useTransition();
-    const [{ mouseover, focus, near }, dispatch] = useReducer(reducer, initState);
+    const [
+        {
+            hover,
+            near: isNear
+        },
+        {
+            focus, blur,
+            mouseOver, mouseOut,
+            near, far
+        }
+    ] = useA();
 
     const onClickWrapper = useCallback(async e => {
         onClick?.(e);
@@ -73,22 +52,22 @@ const ALocal = (props, ref) => {
     }, [onClick, href]);
 
     const onMouseOverWrapper = useCallback(e => {
-        startTransition(() => dispatch('mouseover'));
+        mouseOver();
         onMouseOver?.(e);
-    }, [onMouseOver]);
+    }, [onMouseOver, mouseOver]);
     const onMouseOutWrapper = useCallback(e => {
-        startTransition(() => dispatch('mouseout'));
+        mouseOut();
         onMouseOut?.(e);
-    }, [onMouseOut]);
+    }, [onMouseOut, mouseOut]);
 
     const onFocusWrapper = useCallback(e => {
-        startTransition(() => dispatch('focus'));
+        focus();
         onFocus?.(e);
-    }, [onFocus]);
+    }, [onFocus, focus]);
     const onBlurWrapper = useCallback(e => {
-        startTransition(() => dispatch('blur'));
+        blur();
         onBlur?.(e);
-    }, [onBlur]);
+    }, [onBlur, blur]);
 
     useEffect(() => {
         const { current } = prefetchRef;
@@ -98,21 +77,12 @@ const ALocal = (props, ref) => {
 
         const abort = new AbortController();
         const { signal } = abort;
-        observe(current, near => {
-            startTransition(() => {
-                if (near) {
-                    dispatch('near');
-                } else {
-                    dispatch('far');
-                }
-            });
-        }, { signal });
+        onNearFar(current, near, far, { signal });
         return () => abort.abort();
-    }, []);
+    }, [near, far]);
 
-    const hover = mouseover || focus;
     useHover(hover ? href : null);
-    usePrefetchPathname((near || hover) ? href : null);
+    usePrefetchPathname((isNear || hover) ? href : null);
 
     return <a
                {...props}
