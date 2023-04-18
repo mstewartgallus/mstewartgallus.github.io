@@ -23,9 +23,12 @@ const useFail = props => {
     return !href || origin !== siteUrl || hash || target || download;
 };
 
-export const A = forwardRef(function A(props, ref) {
+const A = (props, ref) => {
     const fail = useFail(props);
-    return fail ? <a {...props} ref={ref} /> : <ALocal {...props} ref={ref} />;
-});
+    const A = fail ? 'a' : ALocal;
+    return <A {...props} ref={ref} />;
+};
 
-export default A;
+const ARef = forwardRef(A);
+
+export { ARef as A, ARef as default };
