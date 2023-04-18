@@ -1,5 +1,4 @@
-import { cite as citeClass } from "./cite.module.css";
+import { withClass } from "@features/util";
+import { cite } from "./cite.module.css";
 
-export const Cite = props => <cite className={citeClass} {...props} />;
-
-export default Cite;
+export const Cite = withClass('cite', cite);

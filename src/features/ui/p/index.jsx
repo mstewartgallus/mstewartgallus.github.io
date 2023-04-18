@@ -1,5 +1,4 @@
-import { p as pClass } from "./p.module.css";
+import { withClass } from "@features/util";
+import { p } from "./p.module.css";
 
-export const P = props => <p className={pClass} {...props} />;
-
-export default P;
+export const P = withClass('p', p);

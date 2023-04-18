@@ -13,5 +13,3 @@ export const SidebarLayout = ({children, sidebar}) =>
         {sidebar}
     </div>
 </div>;
-
-export default SidebarLayout;

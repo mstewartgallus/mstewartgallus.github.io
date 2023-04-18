@@ -36,5 +36,3 @@ export const Pane = ({children, willChange, open}) => {
                </div>
            </Client>;
 };
-
-export default Pane;

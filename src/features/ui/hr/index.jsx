@@ -1,6 +1,4 @@
-import { hr as hrClass } from "./hr.module.css";
+import { withClass } from "@features/util";
+import { hr } from "./hr.module.css";
 
-export const Hr = props => <hr className={hrClass} {...props} />;
-
-
-export default Hr;
+export const Hr = withClass('hr', hr);

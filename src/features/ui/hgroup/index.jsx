@@ -1,5 +1,4 @@
+import { withClass } from "@features/util";
 import { hgroup } from "./hgroup.module.css";
 
-export const Hgroup = props => <hgroup className={hgroup} {...props} />;
-
-export default Hgroup;
+export const Hgroup = withClass('hgroup', hgroup);

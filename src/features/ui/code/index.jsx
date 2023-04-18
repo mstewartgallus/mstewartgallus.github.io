@@ -1,5 +1,4 @@
-import { code as codeClass } from "./code.module.css";
+import { withClass } from "@features/util";
+import { code } from "./code.module.css";
 
-export const Code = props => <code className={codeClass} {...props} />;
-
-export default Code;
+export const Code = withClass('code', code);
