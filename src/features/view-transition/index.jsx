@@ -1,9 +1,10 @@
-import { Suspense, lazy } from "react";
+import { lazy } from "react";
+import { Client } from "@features/util";
 export { onRouteUpdate, onRouteUpdateDelayed } from "./listeners.js";
 
 const ViewTransitionLazy = lazy(() => import('./view-transition.jsx'));
 
 export const ViewTransition = () =>
-<Suspense>
+<Client>
     <ViewTransitionLazy />
-</Suspense>;
+</Client>;

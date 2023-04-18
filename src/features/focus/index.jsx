@@ -1,4 +1,5 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
+import { Client } from "@features/util";
 export { onRouteUpdate } from "./prev-location.js";
 export { focusRef } from "./focus-ref.js";
 
@@ -11,6 +12,6 @@ export const onInitialClientRender = () => {
 const FocusLazy = lazy(() => import('./focus.jsx'));
 
 export const Focus = () =>
-<Suspense>
+<Client>
     <FocusLazy />
-</Suspense>;
+</Client>;

@@ -1,5 +1,5 @@
 import { useDeferredValue } from "react";
-import { Client } from "@features/util";
+import { useClient } from "@features/util";
 import {
     disclosure, disclosureHidden, disclosureWillChange,
     wrapper, wrapperHidden, wrapperWillChange,
@@ -7,8 +7,9 @@ import {
 } from "./panel.module.css";
 
 export const Pane = ({children, willChange, open}) => {
+    const client = useClient();
     const deferredWillChange = useDeferredValue(willChange);
-    const deferredOpen = useDeferredValue(open);
+    const deferredOpen = useDeferredValue(open || !client);
 
     const disclosureClass = [
         disclosure,
@@ -26,13 +27,11 @@ export const Pane = ({children, willChange, open}) => {
         deferredOpen ? '' : contentHidden
     ].join(' ');
 
-    return <Client fallback={children}>
-               <div className={disclosureClass}>
-                   <div className={wrapperClass}>
-                       <div className={contentClass}>
-                           {children}
-                       </div>
+    return <div className={disclosureClass}>
+               <div className={wrapperClass}>
+                   <div className={contentClass}>
+                       {children}
                    </div>
                </div>
-           </Client>;
+           </div>;
 };

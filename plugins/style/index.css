@@ -28,6 +28,7 @@ abbr {
 :root, body {
     margin: 0;
     padding: 0;
+    display: flow-root ;
 }
 :root {
     --t: clamp(0rem,

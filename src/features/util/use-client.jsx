@@ -1,10 +1,11 @@
-import { createContext, useContext,
-         useEffect, useReducer, useTransition } from "react";
+import {
+    Suspense,
+    createContext, useContext,
+    useEffect, useReducer, useTransition
+} from "react";
 
 const Context = createContext(false);
 Context.displayName = 'Client';
-
-const useClient = () => useContext(Context);
 
 const reducer = () => true;
 
@@ -19,8 +20,16 @@ export const ClientProvider = ({children}) => {
            </Context.Provider>;
 };
 
-// FIXME use suspense?
-export const Client = ({children, fallback}) =>{
+const ClientCheck = ({children, fallback}) =>{
     const client = useClient();
     return client ? children : fallback ;
 };
+
+export const useClient = () => useContext(Context);
+
+export const Client = ({children, fallback}) =>
+<ClientCheck fallback={fallback}>
+    <Suspense fallback={fallback}>
+        {children}
+    </Suspense>
+</ClientCheck>;
