@@ -3,7 +3,7 @@
     contain: layout style ;
 }
 
-.disclosure {
+.disclosureClient {
     z-index: 9000 ;
     position: relative ;
 }
@@ -20,9 +20,12 @@
         visibility: hidden ;
     }
 
+    /* Clip to a maximum height and squish to use less memory */
     .wrapperHidden {
         position: absolute ;
         opacity: 0 ;
+
+        max-block-size: calc(10 * var(--line)) ;
     }
 
     .contentHidden {
@@ -40,7 +43,7 @@
     will-change: transform ;
 }
 
-.disclosure, .wrapper, .content {
+.disclosureClient, .wrapperClient, .contentClient {
     transition-timing-function: ease-out;
 }
 .disclosureHidden, .wrapperHidden, .contentHidden {
@@ -48,12 +51,12 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .content {
+    .contentClient {
         transition-property: transform ;
     }
 }
 
-.wrapper {
+.wrapperClient {
     transition-property: opacity ;
 
 }
@@ -64,9 +67,13 @@
     transition-property: visibility ;
 }
 
-.disclosure, .wrapper, .content {
+.disclosureClient, .wrapperClient, .contentClient {
     transition-duration: 0.2s ;
 }
 .disclosureHidden, .wrapperHidden, .contentHidden {
     transition-duration: 0.19s ;
+}
+
+.disclosureServer, .wrapperServer, .contentServer {
+    transition: unset ;
 }
