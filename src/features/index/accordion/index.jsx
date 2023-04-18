@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext } from "react";
 import { useNear } from "./use-near";
 import { useAccordion } from "./use-accordion";
 import { Disclosure, Summary } from "../disclosure";
+import { accordion } from "./accordion.module.css";
 
 const Click = createContext(() => {});
 Click.displayName = 'Click';
@@ -59,9 +60,11 @@ export const AccordionPanel = ({children, value, summary}) => {
 export const Accordion = ({children}) => {
     const [selection, click] = useAccordion();
 
-    return <Click.Provider value={click}>
-               <Selection.Provider value={selection}>
-                   {children}
-               </Selection.Provider>
-           </Click.Provider>;
+    return <div className={accordion}>
+               <Click.Provider value={click}>
+                   <Selection.Provider value={selection}>
+                       {children}
+                   </Selection.Provider>
+               </Click.Provider>
+           </div>;
 };

@@ -3,22 +3,6 @@ import { H2, Pane, Button, Icon } from "@features/ui";
 import { useClient, Client } from "@features/util";
 import { details, button, insideHeading } from "./disclosure.module.css";
 
-const PushButton = ({ children, ...props }) => {
-    const { 'aria-expanded': ariaExpanded, id } = props;
-
-    return <span className={insideHeading}>
-               <span className={details}>
-                   <Button {...props}>
-                       <Icon open={ariaExpanded === "true"}>
-                           <span className={button}>
-                               {ariaExpanded === "true" ? "Close" : "Open"}
-                           </span>
-                       </Icon>
-                   </Button>
-               </span>
-               <label htmlFor={id}>{children}</label>
-           </span>;
-};
 
 const Open = createContext(false);
 Open.displayName = 'Open';
@@ -30,13 +14,25 @@ export const Summary = props => {
     const open = useContext(Open);
     const ariaControls = useContext(Controls);
     const client = useClient();
+
     return <H2 tabIndex={client ? null : "-1"} id={client ? null : id}>
-               <Client fallback={children}>
-                   <PushButton
-                       aria-controls={ariaControls}
-                       aria-expanded={String(open)}
-                       {...props} />
-               </Client>
+               <span className={insideHeading}>
+                   <Client fallback={children}>
+                       <span className={details}>
+                           <Button
+                               aria-controls={ariaControls}
+                               aria-expanded={String(open)}
+                               {...props}>
+                               <Icon open={open}>
+                                   <span className={button}>
+                                       {open ? "Close" : "Open"}
+                                   </span>
+                               </Icon>
+                           </Button>
+                       </span>
+                       <label htmlFor={id}>{children}</label>
+                   </Client>
+               </span>
            </H2>;
 };
 

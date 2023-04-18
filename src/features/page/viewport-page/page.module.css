@@ -67,3 +67,7 @@
 .header:focus-within {
     position: sticky ;
 }
+
+.hide {
+    visibility: hidden ;
+}

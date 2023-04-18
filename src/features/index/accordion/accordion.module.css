@@ -1,0 +1,10 @@
+.accordion {
+    display: flex ;
+    contain: layout style ;
+
+    flex-direction: column ;
+    row-gap: var(--line) ;
+
+    /* Reduce jankiness with expanding/contracting the accordion */
+    min-block-size: calc(10 * var(--line)) ;
+}
