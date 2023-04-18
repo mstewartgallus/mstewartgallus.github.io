@@ -27,7 +27,7 @@ export const Pane = ({children, willChange, open}) => {
         deferredOpen ? '' : contentHidden
     ].join(' ');
 
-    return <div className={disclosureClass}>
+    return <div className={disclosureClass} aria-hidden={deferredOpen ? null : "true"}>
                <div className={wrapperClass}>
                    <div className={contentClass}>
                        {children}

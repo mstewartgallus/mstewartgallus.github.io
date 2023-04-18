@@ -45,6 +45,15 @@
     contain: layout style ;
 }
 
+/* Place main page above footer */
+.page {
+    z-index: 1000 ;
+}
+/* Place main compositing layers above the sidebar */
+.mainbar {
+    z-index: 1000 ;
+}
+
 /* .page { */
 /*      background: linear-gradient(grey, Canvas); */
 /*      background-size: 100% var(--line) ; */
