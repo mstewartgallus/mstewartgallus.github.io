@@ -29,5 +29,3 @@ export const Layout = ({
                </MDXProvider>
            </ViewportPage>;
 };
-
-export default Layout;

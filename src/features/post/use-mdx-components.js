@@ -24,5 +24,3 @@ export const useMdxComponents = category => {
         throw new Error(`Unrecognized category ${category}`);
     }
 };
-
-export default useMdxComponents;

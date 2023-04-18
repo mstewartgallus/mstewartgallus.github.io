@@ -102,4 +102,4 @@ const ALocal = (props, ref) => {
 
 const ARef = forwardRef(ALocal);
 
-export { ARef as ALocal, ARef as default };
+export { ARef as ALocal };

@@ -57,5 +57,3 @@ export const useSearch = (search, n, onInit, onLoad) => {
         return () => ignore = true;
     }, [search, n, onInit, onLoad]);
 };
-
-export default useSearch;

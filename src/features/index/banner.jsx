@@ -7,5 +7,3 @@ export const Banner = () =>
     <Li><A href="/README">About this Blog</A></Li>
     <Li><A rel="nofollow" href="/404">Test 404 Page</A></Li>
 </Ul>;
-
-export default Banner;

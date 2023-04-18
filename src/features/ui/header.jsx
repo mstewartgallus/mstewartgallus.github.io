@@ -10,5 +10,3 @@ export const Header = ({children, heading, ...props}) => {
                {children}
            </header>;
 };
-
-export default Header;

@@ -27,7 +27,7 @@ const render = content =>
 const useRender = content =>
       useMemo(() => render(content), [content]);
 
-const Comment = ({url, account, content, children}) => {
+export const Comment = ({url, account, content, children}) => {
     const srcdoc = useRender(content);
 
     const [loaded, setLoaded] = useState(false);
@@ -53,5 +53,3 @@ const Comment = ({url, account, content, children}) => {
                </div>
            </article>;
 };
-
-export default Comment;

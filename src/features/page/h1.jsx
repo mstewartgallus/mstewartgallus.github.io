@@ -12,4 +12,3 @@ const H1 = (props, ref) =>
 const H1Ref = forwardRef(H1);
 
 export { H1Ref as H1 };
-export default H1Ref;

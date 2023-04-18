@@ -1,5 +1,5 @@
-import flatten from "../../utils/flatten.js";
-import useOpenGraphBlog from './use-opengraph-blog.js';
+import { flatten } from "../../utils/flatten.js";
+import { useOpenGraphBlog } from './use-opengraph-blog.js';
 
 const Open = props => {
     const json = useOpenGraphBlog(props);
@@ -20,5 +20,3 @@ export const SeoPostHead = props => {
                <Open {...props}/>
            </>;
 };
-
-export default SeoPostHead;

@@ -6,6 +6,7 @@ import { viewport } from "./viewport.module.css";
 const ScrollClient = ({scrollKey, children}) => {
     const scroll = useScrollRestoration(scrollKey);
     // avoid forced reflow
+    // FIXME also use Suspense around here?
     const deferred = useDeferredValue(scroll);
     return children(deferred);
 };

@@ -17,5 +17,3 @@ export const ListNotice = ({notice}) => {
         </Set>
     </div>;
 };
-
-export default ListNotice;

@@ -13,5 +13,3 @@ export const Search = ({heading, children, ...props}) => {
                {children}
            </SearchPf>;
 };
-
-export default Search;

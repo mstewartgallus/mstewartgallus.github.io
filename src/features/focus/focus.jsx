@@ -5,7 +5,7 @@ import { getFocus } from "./focus-ref.js";
 // Gatsby already handles scroll, focus-visible for extra emphasis
 const opts = { focusVisible: true, preventScroll: true };
 
-export const Focus = () => {
+const Focus = () => {
     const xs = usePrevLocation();
     // Not sure if deferring focus here makes sense
 

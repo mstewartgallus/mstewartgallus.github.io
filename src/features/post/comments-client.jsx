@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Comment from "./comment.jsx";
+import { Comment } from "./comment.jsx";
 import { CommentList, CommentItem } from "./comment-list.jsx";
 
 const parseComment = ({id, url, content, account }) => [id, { url, account, content }];
@@ -51,7 +51,7 @@ function CommentTree({id, account, url, content, replies}) {
 }
 
 
-export const CommentsClient = ({ host, id }) => {
+const CommentsClient = ({ host, id }) => {
     const [comments, setComments] = useState(null);
 
     useEffect(() => {

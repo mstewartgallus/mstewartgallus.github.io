@@ -17,7 +17,7 @@ const onNavigate = e => {
     ]));
 };
 
-export const ViewTransition = () => {
+const ViewTransition = () => {
     useEffect(() => {
         if (!window.navigation || !document.startViewTransition) {
             return;

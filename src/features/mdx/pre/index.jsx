@@ -18,5 +18,3 @@ export const Pre = ({children, id, title}) => {
                </BarePre>
            </figure>;
 };
-
-export default Pre;

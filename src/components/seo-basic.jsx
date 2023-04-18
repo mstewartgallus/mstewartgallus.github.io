@@ -1,6 +1,6 @@
-import flatten from "../utils/flatten.js";
-import useSiteMetadata from '../hooks/use-site-metadata.js';
-import useOpenGraph from '../hooks/use-opengraph.js';
+import { flatten } from "../utils/flatten.js";
+import { useSiteMetadata } from '../hooks/use-site-metadata.js';
+import { useOpenGraph } from '../hooks/use-opengraph.js';
 
 const Open = props => {
     const json = useOpenGraph(props);
@@ -21,5 +21,3 @@ export const SeoBasic = props => {
                <Open {...props} />
            </>;
 };
-
-export default SeoBasic;

@@ -21,5 +21,3 @@ export const useSearchURL = xs => {
         return withPrefix(y);
     }, [s, category, tag, place, person]);
 };
-
-export default useSearchURL;

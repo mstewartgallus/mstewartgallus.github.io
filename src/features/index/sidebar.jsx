@@ -17,6 +17,4 @@ export const Sidebar = ({children, search}) =>
             </Search>
         </Card>
     </ScreenOnly>
-    </>;
-
-export default Sidebar;
+</>;

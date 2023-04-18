@@ -12,5 +12,3 @@ posts && posts.length > 0 &&
     <Ol reversed="reversed" start={posts.length}>
         <Posts posts={posts} />
     </Ol>;
-
-export default PostList;

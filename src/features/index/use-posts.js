@@ -17,5 +17,3 @@ export const usePosts = () => {
     const raw = usePostsRaw();
     return useMemo(() => raw.allLink.nodes.map(p => p.post), [raw]);
 }
-
-export default usePosts;

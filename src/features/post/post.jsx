@@ -11,5 +11,3 @@ export const Post = ({ post, postPoem, postMdx }) => {
         throw new Error("neither postMdx or postPoem");
     }
 }
-
-export default Post;

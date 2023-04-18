@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import useAbsolute from "../../hooks/use-absolute.js";
-import useSiteMetadata from "../../hooks/use-site-metadata.js";
+import { useAbsolute } from "../../hooks/use-absolute.js";
+import { useSiteMetadata } from "../../hooks/use-site-metadata.js";
 
 export const useWebsite = () => {
     const site = useSiteMetadata();
@@ -22,5 +22,3 @@ export const useWebsite = () => {
         }
     }), [site, search, index]);
 };
-
-export default useWebsite;

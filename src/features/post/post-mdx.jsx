@@ -10,5 +10,3 @@ export const PostMdx = ({
                {children}
            </MDXProvider>;
 };
-
-export default PostMdx;

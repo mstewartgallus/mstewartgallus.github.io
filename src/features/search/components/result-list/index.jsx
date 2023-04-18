@@ -23,5 +23,3 @@ export const ResultList = ({links}) =>
             </SuspenseItem>)
     }
 </SuspenseList>;
-
-export default ResultList;

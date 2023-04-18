@@ -15,5 +15,3 @@ export const useBlogPosting = ({
     "character": people,
     "contentLocation": places
 });
-
-export default useBlogPosting;

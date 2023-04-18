@@ -17,5 +17,3 @@ export const useAbsolute = pathname => {
         return String(new URL(pathname, site.siteUrl));
     }, [raw, pathname]);
 };
-
-export default useAbsolute;

@@ -23,5 +23,3 @@ key(poem.map(stanza =>
         <Stanza stanza={stanza} />
     </Lg>));
 
-
-export default Poem;

@@ -21,5 +21,3 @@ export const Paging = ({ previous, next }) =>
       </div>
 </div>;
 
-
-export default Paging;

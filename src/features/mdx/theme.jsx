@@ -31,5 +31,3 @@ export const theme = {
     ...headings,
     ...components
 };
-
-export default theme;

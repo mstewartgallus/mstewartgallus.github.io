@@ -38,5 +38,3 @@ export const PostPage = ({post, children}) => {
                {children}
            </ViewportPage>;
 };
-
-export default PostPage;

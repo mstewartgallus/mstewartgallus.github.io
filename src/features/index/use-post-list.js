@@ -25,5 +25,3 @@ export const usePostList = () => {
                     [category, nodes.map(l => l.post)])),
         [raw]);
 }
-
-export default usePostList;

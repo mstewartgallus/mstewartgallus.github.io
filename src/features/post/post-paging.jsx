@@ -1,4 +1,4 @@
-import Paging from "./paging.jsx";
+import { Paging } from "./paging.jsx";
 
 const paging = ({ category, previous, next }) => [category, {
     previous: previous?.post,
@@ -11,5 +11,3 @@ export const PostPaging = ({childrenLink}) => {
     const p = pagingOfLinks(childrenLink);
     return <Paging {...p.get('')} />;
 };
-
-export default PostPaging;

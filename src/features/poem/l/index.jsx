@@ -6,5 +6,3 @@ export const L = ({ children }) =>
     <span role="presentation" className={l}>{children}</span>
     <br />
 </>;
-
-export default L;

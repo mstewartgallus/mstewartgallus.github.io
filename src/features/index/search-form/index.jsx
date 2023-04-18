@@ -13,5 +13,3 @@ export const SearchForm = ({action, onSubmit}) => {
                </fieldset>
            </form>;
 };
-
-export default SearchForm;

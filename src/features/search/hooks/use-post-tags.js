@@ -11,5 +11,3 @@ query {
 }`);
 
 export const usePostTags = () => usePostTagsRaw().allPost;
-
-export default usePostTags;

@@ -6,5 +6,3 @@ export const Comments = ({ host, id }) =>
 <Suspense fallback="">
     <CommentsClient host={host} id={id} />
 </Suspense>;
-
-export default Comments;

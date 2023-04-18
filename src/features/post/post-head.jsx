@@ -29,5 +29,3 @@ export const PostHead = props =>
     <TitleStuff {...props} />
     <HeadStuff  {...props} />
 </>;
-
-export default PostHead;

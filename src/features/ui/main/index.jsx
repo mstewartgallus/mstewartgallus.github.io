@@ -13,5 +13,3 @@ export const Main = ({children, heading, notice, ...props}) => {
                {children}
            </main>;
 };
-
-export default Main;

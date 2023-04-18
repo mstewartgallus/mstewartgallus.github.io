@@ -20,11 +20,11 @@ import {
 } from "@features/ui";
 import { useSubmit } from "@features/util";
 import { ViewportPage, SkipA } from "@features/page";
-import JsonLd from "../components/json-ld.jsx";
-import SeoBasic from "../components/seo-basic.jsx";
+import { JsonLd } from "../components/json-ld.jsx";
+import { SeoBasic } from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
-import useAbsolute from "../hooks/use-absolute.js";
-import useSiteMetadata from "../hooks/use-site-metadata.js";
+import { useAbsolute } from "../hooks/use-absolute.js";
+import { useSiteMetadata } from "../hooks/use-site-metadata.js";
 
 const title = "Posts";
 

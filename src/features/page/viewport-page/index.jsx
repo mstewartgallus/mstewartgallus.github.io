@@ -65,5 +65,3 @@ export const ViewportPage = ({
         </Theme>
     </Viewport>;
 };
-
-export default ViewportPage;

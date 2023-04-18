@@ -16,5 +16,3 @@ export const Section: FC<SectionProps> = ({children, heading, ...props}) => {
                {children}
            </section>;
 };
-
-export default Section;

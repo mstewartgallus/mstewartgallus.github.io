@@ -29,5 +29,3 @@ export const flatten = function*(value) {
         yield l;
     }
 };
-
-export default flatten;

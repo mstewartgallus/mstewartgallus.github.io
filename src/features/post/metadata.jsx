@@ -103,5 +103,3 @@ const DescItem = ({ children, filter, item, ...props }) => {
                }
            </>;
 };
-
-export default Metadata;

@@ -17,5 +17,3 @@ export const Sidebar = ({children, paging, metadata}) =>
         </Footer>
     </Card>
 </>;
-
-export default Sidebar;

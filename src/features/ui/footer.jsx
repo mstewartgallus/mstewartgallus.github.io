@@ -9,5 +9,3 @@ export const Footer = ({children, heading, ...props}) => {
                {children}
            </footer>;
 };
-
-export default Footer;

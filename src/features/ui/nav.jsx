@@ -12,5 +12,3 @@ export const Nav = ({children, heading, ...props}) => {
                {children}
            </nav>;
 };
-
-export default Nav;

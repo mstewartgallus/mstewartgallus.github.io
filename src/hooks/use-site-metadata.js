@@ -11,5 +11,3 @@ query {
 }`);
 
 export const useSiteMetadata = () => useSiteMetadataRaw().site.siteMetadata;
-
-export default useSiteMetadata;

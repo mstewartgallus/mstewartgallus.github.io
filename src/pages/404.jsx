@@ -1,8 +1,8 @@
 import { AlertPage } from "@features/page";
 import { P } from "@features/ui";
-import SeoBasic from "../components/seo-basic.jsx";
+import { SeoBasic } from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
-import useAbsolute from "../hooks/use-absolute.js";
+import { useAbsolute } from "../hooks/use-absolute.js";
 
 const title = "Page Not Found";
 

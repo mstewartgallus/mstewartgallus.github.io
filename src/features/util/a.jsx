@@ -31,4 +31,4 @@ const A = (props, ref) => {
 
 const ARef = forwardRef(A);
 
-export { ARef as A, ARef as default };
+export { ARef as A };

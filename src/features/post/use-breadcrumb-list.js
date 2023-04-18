@@ -26,5 +26,3 @@ export const useBreadcrumbList = ({
         }]
     }), [item, title, slug, category]);
 };
-
-export default useBreadcrumbList;

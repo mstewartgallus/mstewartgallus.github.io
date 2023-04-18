@@ -15,5 +15,3 @@ export const PostBreadcrumbs = ({category, title}) => {
                </BreadcrumbItem>
            </BreadcrumbList>;
 };
-
-export default PostBreadcrumbs;

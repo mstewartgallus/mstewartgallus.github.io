@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import useSiteMetadata from './use-site-metadata.js';
+import { useSiteMetadata } from './use-site-metadata.js';
 
 export const useOpenGraph = ({description, url, title}) => {
     const site = useSiteMetadata();
@@ -14,5 +14,3 @@ export const useOpenGraph = ({description, url, title}) => {
         };
     }, [site, description, url, title]);
 };
-
-export default useOpenGraph;

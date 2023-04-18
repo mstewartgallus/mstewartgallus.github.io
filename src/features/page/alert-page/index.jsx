@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { ViewportPage } from "../viewport-page";
 
-const AlertPageClient = lazy(() => import("../alert-page-client"));
+const AlertPageClient = lazy(() => import("./client.jsx"));
 
 // FIXME consider breadcrumbs
 export const AlertPage = ({children, heading}) =>
@@ -15,5 +15,3 @@ export const AlertPage = ({children, heading}) =>
         {children}
     </AlertPageClient>
 </Suspense>
-
-export default AlertPage;

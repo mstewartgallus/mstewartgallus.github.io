@@ -18,5 +18,3 @@ export const useOpenGraphBlog = ({
         ]
     }
 });
-
-export default useOpenGraphBlog;
