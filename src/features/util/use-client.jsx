@@ -1,16 +1,18 @@
 import { createContext, useContext,
-         useEffect, useState, useTransition } from "react";
+         useEffect, useReducer, useTransition } from "react";
 
 const Context = createContext(false);
 Context.displayName = 'Client';
 
 const useClient = () => useContext(Context);
 
+const reducer = () => true;
+
 export const ClientProvider = ({children}) => {
     const [,startTransition] = useTransition();
-    const [client, setClient] = useState(false);
+    const [client, dispatch] = useReducer(reducer, false);
     useEffect(() => {
-        startTransition(() => setClient(true));
+        startTransition(() => dispatch());
     }, []);
     return <Context.Provider value={client}>
                {children}
