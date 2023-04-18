@@ -1,87 +1,55 @@
-import { createContext, useCallback, useContext,
-         useReducer, useTransition } from "react";
+import { createContext, useCallback, useContext } from "react";
+import { useNear } from "./use-near";
+import { useAccordion } from "./use-accordion";
 import { Disclosure, Summary } from "../disclosure";
 
-const initialState = {
-    selection: null,
-    hover: new Set(),
-    focus: new Set()
-};
+const Click = createContext(() => {});
+Click.displayName = 'Click';
 
-const reducer = (state, action) => {
-    const { type, value } = action;
-    let { selection, hover, focus } = state;
-
-    switch (type) {
-    case 'click':
-        selection = selection === value ? null : value;
-        return { ...state, selection };
-
-    case 'mouseover':
-        hover = new Set(hover);
-        hover.add(value);
-        return { ...state, hover };
-
-    case 'mouseout':
-        hover = new Set(hover);
-        hover.delete(value);
-        return { ...state, hover };
-
-    case 'focus':
-        focus = new Set(focus);
-        focus.add(value);
-        return { ...state, focus };
-
-    case 'blur':
-        focus = new Set(focus);
-        focus.delete(value);
-        return { ...state, focus };
-
-    default:
-        return state;
-    }
-};
-
-const Dispatch = createContext(() => {});
-Dispatch.displayName = 'Dispatch';
-
-const State = createContext();
-State.displayName = 'State';
+const Selection = createContext();
+Selection.displayName = 'Selection';
 
 const Value = createContext();
 Value.displayName = 'Value';
 
+const Event = createContext();
+Event.displayName = 'Event';
+
 export const AccordionSummary = props => {
     const value = useContext(Value);
-    const dispatch = useContext(Dispatch);
+    const click = useContext(Click);
+    const {
+        mouseOver,
+        mouseOut,
+        focus,
+        blur
+    } = useContext(Event);
 
-    const onClick = useCallback(() => dispatch({type: 'click', value}), [dispatch, value]);
-    const onMouseOver = useCallback(() => dispatch({type: 'mouseover', value}), [dispatch, value]);
-    const onMouseOut = useCallback(() => dispatch({type: 'mouseout', value}), [dispatch, value]);
-    const onFocus = useCallback(() => dispatch({type: 'focus', value}), [dispatch, value]);
-    const onBlur = useCallback(() => dispatch({type: 'blur', value}), [dispatch, value]);
+    const onClick = useCallback(() => click(value), [click, value]);
 
     return <Summary
                onClick={onClick}
-               onMouseOver={onMouseOver}
-               onMouseOut={onMouseOut}
-               onFocus={onFocus}
-               onBlur={onBlur}
+               onMouseOver={mouseOver}
+               onMouseOut={mouseOut}
+               onFocus={focus}
+               onBlur={blur}
                {...props} />;
 };
 
 export const AccordionPanel = ({children, value, summary}) => {
-    const { selection, hover, focus } = useContext(State);
+    const [willChange, event] = useNear();
+    const selection = useContext(Selection);
     const open = value === selection;
-    const willChange = hover.has(value) || focus.has(value);
 
     return <Disclosure
                open={open}
                willChange={willChange}
                summary={
-                   <Value.Provider value={value}>
-                       {summary}
-                   </Value.Provider>
+                   <Event.Provider value={event}>
+                       <Value.Provider value={value}>
+                           {summary}
+                       </Value.Provider>
+                   </Event.Provider>
                }
            >
                {children}
@@ -89,13 +57,11 @@ export const AccordionPanel = ({children, value, summary}) => {
 };
 
 export const Accordion = ({children}) => {
-    const [, startTransition] = useTransition();
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const dispatchTrans = useCallback(x => startTransition(() => dispatch(x)), []);
+    const [selection, click] = useAccordion();
 
-    return <Dispatch.Provider value={dispatchTrans}>
-               <State.Provider value={state}>
+    return <Click.Provider value={click}>
+               <Selection.Provider value={selection}>
                    {children}
-               </State.Provider>
-           </Dispatch.Provider>;
+               </Selection.Provider>
+           </Click.Provider>;
 };
