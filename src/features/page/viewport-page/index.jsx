@@ -22,8 +22,7 @@ const Sidebar = ({children, breadcrumbs}) =>
 export const ViewportPage = ({
     children,
     heading,
-    tableOfContents,
-    skipA = tableOfContents,
+    skipA,
     subheading,
     notice,
     mainbar,

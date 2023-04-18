@@ -1,100 +1,55 @@
-import {
-    createContext, useContext,
-    useMemo, useId, useReducer, useTransition
-} from "react";
-import { Pane, PushButton } from "@features/ui";
+import { createContext, useContext, useId } from "react";
+import { Pane, Button, Icon } from "@features/ui";
 import { details, button, insideHeading } from "./disclosure.module.css";
 
-const initialState = {
-    hover: false,
-    focus: false
-};
+const PushButton = ({ children, ...props }) => {
+    const { 'aria-expanded': ariaExpanded, id } = props;
 
-const reducer = (state, action) => {
-    switch (action) {
-    case 'mouseover':
-        return { ...state, hover: true };
-    case 'mouseout':
-        return { ...state, hover: false };
-    case 'focus':
-        return { ...state, focus: true };
-    case 'blur':
-        return { ...state, focus: false };
-    default:
-        return state;
-    }
-};
-
-// Have a rarely changing context and a separate context for changing
-// content
-const Context = createContext({
-    ariaControls: null,
-    onMouseOver: () => {},
-    onMouseOut: () => {},
-    onFocus: () => {},
-    onBlur: () => {}
-});
-Context.displayName = 'Disclosure';
-
-const Open = createContext(false);
-Open.displayName = 'Open';
-
-export const Summary = ({ id, children, onClick }) => {
-    const open = useContext(Open);
-
-    const {
-        ariaControls,
-        onMouseOver,
-        onMouseOut,
-        onFocus,
-        onBlur
-    } = useContext(Context);
-
-    return <span className={insideHeading}
-                 onMouseOver={onMouseOver}
-                 onMouseOut={onMouseOut}
-                 onFocus={onFocus}
-                 onBlur={onBlur}>
+    return <span className={insideHeading}>
                <span className={details}>
-                   <PushButton
-                       id={id}
-                       open={open}
-                       aria-controls={ariaControls}
-                       onClick={onClick}
-                   >
-                       <span className={button}>
-                           {open ? "Close" : "Open"}
-                       </span>
-                   </PushButton>
+                   <Button {...props}>
+                       <Icon open={ariaExpanded === "true"}>
+                           <span className={button}>
+                               {ariaExpanded === "true" ? "Close" : "Open"}
+                           </span>
+                       </Icon>
+                   </Button>
                </span>
                <label htmlFor={id}>{children}</label>
            </span>;
 };
 
+const Open = createContext(false);
+Open.displayName = 'Open';
+const Controls = createContext(null);
+Controls.displayName = 'AriaControls';
 
-export const Disclosure = ({children, id, summary, open}) => {
-    const contentId = useId();
-    const [{hover, focus}, dispatch] = useReducer(reducer, initialState);
+export const Summary = props => {
+    const open = useContext(Open);
+    const ariaControls = useContext(Controls);
+    return <PushButton
+               aria-controls={ariaControls}
+               aria-expanded={String(open)}
+               {...props} />;
+};
 
-    const [,startTransition] = useTransition();
 
-    const willChange = hover || focus;
-
-    const context = useMemo(() => ({
-        ariaControls: contentId,
-        onMouseOver: () => startTransition(() => dispatch('mouseover')),
-        onMouseOut: () => startTransition(() => dispatch('mouseout')),
-        onFocus: () => startTransition(() => dispatch('focus')),
-        onBlur: () => startTransition(() => dispatch('blur'))
-    }), [contentId]);
-    return <Context.Provider value={context}>
-               <Open.Provider value={open}>
-                   {summary}
-                   <div id={contentId}>
-                       <Pane open={open} willChange={willChange}>
-                           {children}
-                       </Pane>
-                   </div>
-               </Open.Provider>
-           </Context.Provider>;
+export const Disclosure = ({
+    children,
+    summary,
+    open, willChange = false
+}) => {
+    const id = useId();
+    return <>
+               <Controls.Provider value={id}>
+                   <Open.Provider value={open}>
+                       {summary}
+                   </Open.Provider>
+               </Controls.Provider>
+               <div id={id}>
+                   <Pane open={open} willChange={willChange}>
+                       {children}
+                   </Pane>
+               </div>
+           </>;
 };

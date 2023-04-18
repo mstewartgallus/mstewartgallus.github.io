@@ -1,71 +1,101 @@
-import { createContext, useCallback, useContext, useReducer, useTransition } from "react";
+import { createContext, useCallback, useContext,
+         useReducer, useTransition } from "react";
 import { Disclosure, Summary } from "../disclosure";
 
-const initState = null;
+const initialState = {
+    selection: null,
+    hover: new Set(),
+    focus: new Set()
+};
 
 const reducer = (state, action) => {
-    const { type } = action;
+    const { type, value } = action;
+    let { selection, hover, focus } = state;
+
     switch (type) {
-    case 'toggle': {
-        const { category } = action;
-        return state === category ? null : category;
-    }
+    case 'click':
+        selection = selection === value ? null : value;
+        return { ...state, selection };
+
+    case 'mouseover':
+        hover = new Set(hover);
+        hover.add(value);
+        return { ...state, hover };
+
+    case 'mouseout':
+        hover = new Set(hover);
+        hover.delete(value);
+        return { ...state, hover };
+
+    case 'focus':
+        focus = new Set(focus);
+        focus.add(value);
+        return { ...state, focus };
+
+    case 'blur':
+        focus = new Set(focus);
+        focus.delete(value);
+        return { ...state, focus };
 
     default:
         return state;
     }
 };
 
-const Selection = createContext(null);
-Selection.displayName = 'Selection';
+const Dispatch = createContext(() => {});
+Dispatch.displayName = 'Dispatch';
 
-const Toggle = createContext(null);
-Toggle.displayName = 'Toggle';
-
-const useSelected = value => {
-    const selection = useContext(Selection);
-    return value === selection;
-};
-
-const useToggleValue = value => {
-    const toggle = useContext(Toggle);
-    return useCallback(() => toggle(value), [toggle, value]);
-};
-
-const SelectionProvider = Selection.Provider;
-const ToggleProvider = Toggle.Provider;
-
-export const Accordion = ({children}) => {
-    const [selection, dispatch] = useReducer(reducer, initState);
-    const [, startTransition] = useTransition();
-    const toggle = useCallback(value =>
-        startTransition(() => dispatch({ type: 'toggle', category: value }))
-    , []);
-
-    return <SelectionProvider value={selection}>
-               <ToggleProvider value={toggle}>
-                   {children}
-               </ToggleProvider>
-           </SelectionProvider>;
-};
+const State = createContext();
+State.displayName = 'State';
 
 const Value = createContext();
 Value.displayName = 'Value';
 
-export const AccordionSummary = ({id, children}) => {
+export const AccordionSummary = props => {
     const value = useContext(Value);
-    const onClick = useToggleValue(value);
-    return <Summary id={id} onClick={onClick}>
-               {children}
-           </Summary>;
+    const dispatch = useContext(Dispatch);
+
+    const onClick = useCallback(() => dispatch({type: 'click', value}), [dispatch, value]);
+    const onMouseOver = useCallback(() => dispatch({type: 'mouseover', value}), [dispatch, value]);
+    const onMouseOut = useCallback(() => dispatch({type: 'mouseout', value}), [dispatch, value]);
+    const onFocus = useCallback(() => dispatch({type: 'focus', value}), [dispatch, value]);
+    const onBlur = useCallback(() => dispatch({type: 'blur', value}), [dispatch, value]);
+
+    return <Summary
+               onClick={onClick}
+               onMouseOver={onMouseOver}
+               onMouseOut={onMouseOut}
+               onFocus={onFocus}
+               onBlur={onBlur}
+               {...props} />;
 };
 
 export const AccordionPanel = ({children, value, summary}) => {
-    const selected = useSelected(value);
-    return <Value.Provider value={value}>
-               <Disclosure open={selected}
-                           summary={summary}>
+    const { selection, hover, focus } = useContext(State);
+    const open = value === selection;
+    const willChange = hover.has(value) || focus.has(value);
+
+    return <Disclosure
+               open={open}
+               willChange={willChange}
+               summary={
+                   <Value.Provider value={value}>
+                       {summary}
+                   </Value.Provider>
+               }
+           >
+               {children}
+           </Disclosure>;
+};
+
+export const Accordion = ({children}) => {
+    const [, startTransition] = useTransition();
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const dispatchTrans = useCallback(x => startTransition(() => dispatch(x)), []);
+
+    return <Dispatch.Provider value={dispatchTrans}>
+               <State.Provider value={state}>
                    {children}
-               </Disclosure>
-           </Value.Provider>;
+               </State.Provider>
+           </Dispatch.Provider>;
 };

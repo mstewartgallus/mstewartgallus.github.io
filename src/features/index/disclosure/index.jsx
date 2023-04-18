@@ -6,28 +6,28 @@ import {
     Summary as SummaryClient
 } from "./client.jsx";
 
-export const Disclosure = ({children, summary, open}) =>
-<Client fallback={
-              <>
-                  {summary}
-                  {children}
-              </>
-          }>
-    <DisclosureClient open={open} summary={summary}>
-        {children}
-    </DisclosureClient>
-</Client>;
+export const Disclosure = props => {
+    const {children, summary} = props;
+    return <Client fallback={
+                       <>
+                           {summary}
+                           {children}
+                       </>
+                   }>
+               <DisclosureClient {...props} />
+           </Client>;
+};
 
-export const Summary = ({id, children, onClick}) =>
-<Client
-    fallback={
-        <H2 tabIndex="-1" id={id}>
-            {children}
-        </H2>
-    }>
-    <H2>
-        <SummaryClient id={id} onClick={onClick}>
-            {children}
-        </SummaryClient>
-    </H2>
-</Client>;
+export const Summary = props => {
+    const {children, id} = props;
+    return <Client
+               fallback={
+                   <H2 tabIndex="-1" id={id}>
+                       {children}
+                   </H2>
+               }>
+               <H2>
+                   <SummaryClient {...props} />
+               </H2>
+           </Client>;
+};
