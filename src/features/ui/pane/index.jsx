@@ -25,8 +25,7 @@ export const Pane = ({children, willChange, open}) => {
                 disclosureClient,
                 steadyHidden ? disclosureHiddenSteady : '',
                 deferredWillChange ? disclosureWillChange : '',
-                !deferredOpen ? disclosureHidden  : '',
-                deferredOpen ? disclosureOpen : ''
+                !deferredOpen ? disclosureHidden  : ''
             ].join(' ') : ''
     ].join(' ');
     const wrapperClass = [
