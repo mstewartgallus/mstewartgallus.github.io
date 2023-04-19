@@ -33,7 +33,6 @@ export const Pane = ({children, willChange, open}) => {
         client ?
             [
                 wrapperClient,
-                isTransitioning ? wrapperTransitioning : '',
                 deferredWillChange ? wrapperWillChange : '',
                 !deferredOpen ? wrapperHidden : '',
                 deferredOpen ? wrapperOpen : ''
