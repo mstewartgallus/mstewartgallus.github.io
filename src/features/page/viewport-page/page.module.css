@@ -7,16 +7,17 @@
     .layout {
         margin-inline: calc(7 * var(--t)) ;
     }
-
-    .header, .footer, .mainbar, .sidebar {
-        margin-inline: 0.82rem ;
-    }
 }
 
 .layout, .page, .mainbar, .sidebar {
     row-gap: var(--line);
     display: flex ;
     flex-direction: column ;
+}
+
+.header, .footer, .mainbar, .sidebar {
+    box-sizing: border-box ;
+    max-inline-size: 100% ;
 }
 
 @media print {

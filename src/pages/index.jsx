@@ -59,18 +59,16 @@ const IndexPage = () => {
                            <SearchForm action={search} onSubmit={onSubmit} />
                        }
                    >
-                       <Card>
-                           <Header
-                               heading={
-                                   <>
-                                       <H2 tabIndex="-1" id="banner">{title}</H2>
-                                       <Subheading>{description}</Subheading>
-                                   </>
-                               }
-                           >
-                               <Banner />
-                           </Header>
-                       </Card>
+                       <Header
+                           heading={
+                               <>
+                                   <H2 tabIndex="-1" id="banner">{title}</H2>
+                                   <Subheading>{description}</Subheading>
+                               </>
+                           }
+                       >
+                           <Banner />
+                       </Header>
                    </Sidebar>
                }
                breadcrumbs={
@@ -87,21 +85,23 @@ const IndexPage = () => {
                                <nav
                                    key={category}
                                    aria-labelledby={category}>
-                                   <AccordionPanel
-                                       value={category}
-                                       summary={
-                                           <header>
-                                               <Hgroup>
-                                                   <AccordionSummary id={category}>
-                                                       {category}
-                                                   </AccordionSummary>
-                                               </Hgroup>
-                                           </header>
-                                       }>
-                                       <Card>
-                                           <PostList posts={p} />
-                                       </Card>
-                                   </AccordionPanel>
+                                       <AccordionPanel
+                                           value={category}
+                                           summary={
+                                               <Card>
+                                                   <header>
+                                                       <Hgroup>
+                                                           <AccordionSummary id={category}>
+                                                               {category}
+                                                           </AccordionSummary>
+                                                       </Hgroup>
+                                                   </header>
+                                               </Card>
+                                           }>
+                                           <Card>
+                                               <PostList posts={p} />
+                                           </Card>
+                                       </AccordionPanel>
                                </nav>
                            )
                        }

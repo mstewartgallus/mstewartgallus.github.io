@@ -6,15 +6,15 @@ export const Sidebar = ({children, search}) =>
 <>
     {children}
     <ScreenOnly>
-        <Card>
-            <Search aria-describedby="search">
+        <Search aria-describedby="search">
+            <Card>
                 <header>
                     <Hgroup>
                         <H2 tabIndex="-1" id="search">Search</H2>
                     </Hgroup>
                 </header>
                 {search}
-            </Search>
-        </Card>
+            </Card>
+        </Search>
     </ScreenOnly>
 </>;

@@ -28,12 +28,14 @@ export const ViewportPage = ({
                <Theme>
                    <div className={layout}>
                        <div className={header}>
-                           {skipA}
+                           <Card>
+                               {skipA}
+                           </Card>
                        </div>
                        <div className={page}>
                            <div className={mainbarClass}>
-                               <Card>
-                                   <main data-pagefind-body="" aria-describedby="content">
+                               <main data-pagefind-body="" aria-describedby="content">
+                                   <Card>
                                        <header>
                                            <Hgroup>
                                                <H1>{heading}</H1>
@@ -42,23 +44,23 @@ export const ViewportPage = ({
                                            {notice}
                                        </header>
                                        {children}
-                                   </main>
-                               </Card>
+                                   </Card>
+                               </main>
                                {mainbar}
                            </div>
                            <div className={sidebarClass}>
                                {sidebar}
                                <ScreenOnly>
-                                   <Card>
-                                       <Nav heading={<H2 tabIndex="-1" id="breadcrumbs">Breadcrumbs</H2>}>
-                                           {breadcrumbs}
-                                       </Nav>
-                                   </Card>
+                                   <Nav heading={<H2 tabIndex="-1" id="breadcrumbs">Breadcrumbs</H2>}>
+                                       {breadcrumbs}
+                                   </Nav>
                                </ScreenOnly>
                            </div>
                        </div>
                        <div className={client ? footer : hide} inert={client ? null : "inert"}>
-                           <Button type="button" onClick={scrollToTop}>Back to Top</Button>
+                           <Card>
+                               <Button type="button" onClick={scrollToTop}>Back to Top</Button>
+                           </Card>
                        </div>
                    </div>
                </Theme>
