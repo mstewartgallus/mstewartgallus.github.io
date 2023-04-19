@@ -1,4 +1,4 @@
-import { H2, Subheading, Card, Section } from "@features/ui";
+import { H2, Subheading, Section } from "@features/ui";
 import { ViewportPage, SkipA } from "@features/page";
 import { Comments } from "./comments.jsx";
 import { ListNotice } from "./list-notice";
@@ -28,11 +28,9 @@ export const PostPage = ({post, children}) => {
                         />}
                mainbar={
                    comments &&
-                       <Card>
-                           <Section heading={<H2 tabIndex="-1" id="comments">Comments</H2>}>
-                               <Comments host={comments.host} id={comments.id} />
-                           </Section>
-                       </Card>
+                       <Section heading={<H2 tabIndex="-1" id="comments">Comments</H2>}>
+                           <Comments host={comments.host} id={comments.id} />
+                       </Section>
                }
            >
                {children}

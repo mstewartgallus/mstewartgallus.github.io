@@ -69,6 +69,10 @@
     contain: layout style ;
 }
 
+.layout {
+    max-inline-size: calc(var(--main-width) + 2em + 0.70 * var(--measure));
+}
+
 .page {
     flex-direction: row ;
     flex-wrap: wrap ;
@@ -76,12 +80,12 @@
 }
 
 .mainbar {
-    flex-basis: var(--main-width) ;
+    flex-basis: 47% ;
     flex-grow: 3 ;
     flex-shrink: 2 ;
 }
 .sidebar {
-    flex-basis: calc(0.66 * var(--measure)) ;
+    flex-basis: 37% ;
     flex-grow: 2 ;
     flex-shrink: 3 ;
 }
