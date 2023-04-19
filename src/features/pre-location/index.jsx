@@ -19,6 +19,7 @@ const usePreLocationPrim = () => useSyncExternalStore(cb => {
         }
         cb();
     };
+    callbacks.add(callback);
     return () => {
         ignore = true;
         callbacks.delete(callback);

@@ -19,6 +19,7 @@ const useDelayedLocationPrim = () => useSyncExternalStore(cb => {
         }
         cb();
     };
+    callbacks.add(callback);
     return () => {
         ignore = true;
         callbacks.delete(callback);
