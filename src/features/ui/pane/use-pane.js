@@ -1,27 +1,12 @@
-import { useReducer, useCallback, useTransition } from "react";
-
-const initial = {
-    prevOpen: false,
-    isTransitioning: false
-};
-
-const reducer = (state, action) => {
-    const { type, open } = action;
-    switch (type) {
-    case "start": return { prevOpen: open, isTransitioning: true };
-    case "end": return { prevOpen: open, isTransitioning: false };
-    default: return state;
-    }
-};
+import { useState, useCallback, useTransition } from "react";
 
 export const usePane = open => {
+    // FIXME todo set initial state based off of open
     const [, startTransition] = useTransition();
-    const [{ prevOpen, isTransitioning }, dispatch] = useReducer(reducer, initial);
-    if (prevOpen !== open) {
-        dispatch({ type: "start", open });
-    }
+    const [prevOpen, setPrevOpen] = useState(open);
     const endTransition = useCallback(() => {
-        startTransition(() => dispatch({ type: "end", open }));
+        startTransition(() => setPrevOpen(open));
     }, [open]);
+    const isTransitioning = prevOpen !== open;
     return { isTransitioning, endTransition };
 };

@@ -6,5 +6,5 @@
     row-gap: var(--line) ;
 
     /* Reduce jankiness with expanding/contracting the accordion */
-    min-block-size: calc(10 * var(--line)) ;
+    min-block-size: calc(7 * var(--line)) ;
 }

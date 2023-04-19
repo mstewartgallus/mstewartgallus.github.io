@@ -1,20 +1,12 @@
 import { useCallback, useRef } from "react";
 import { useClient, ScreenOnly } from "@features/util";
-import { Button, Theme, Card, H2, Hgroup, Nav, SidebarLayout } from "@features/ui";
+import { Button, Theme, Card, H2, Hgroup, Nav } from "@features/ui";
 import { H1 } from "../h1.jsx";
-import { layout, header, footer, hide } from "./page.module.css";
-
-const Sidebar = ({children, breadcrumbs}) =>
-      <>
-          {children}
-          <ScreenOnly>
-              <Card>
-                  <Nav heading={<H2 tabIndex="-1" id="breadcrumbs">Breadcrumbs</H2>}>
-                      {breadcrumbs}
-                  </Nav>
-              </Card>
-          </ScreenOnly>
-      </>;
+import {
+    layout, header, footer,
+    page, mainbar as mainbarClass, sidebar as sidebarClass,
+    hide
+} from "./page.module.css";
 
 export const ViewportPage = ({
     children,
@@ -38,24 +30,33 @@ export const ViewportPage = ({
                        <div className={header}>
                            {skipA}
                        </div>
-                       <SidebarLayout
-                           sidebar={<Sidebar breadcrumbs={breadcrumbs}>
-                                        {sidebar}
-                                    </Sidebar>}>
-                           <Card>
-                               <main data-pagefind-body="" aria-describedby="content">
-                                   <header>
-                                       <Hgroup>
-                                           <H1>{heading}</H1>
-                                           {subheading}
-                                       </Hgroup>
-                                       {notice}
-                                   </header>
-                                   {children}
-                               </main>
-                           </Card>
-                           {mainbar}
-                       </SidebarLayout>
+                       <div className={page}>
+                           <div className={mainbarClass}>
+                               <Card>
+                                   <main data-pagefind-body="" aria-describedby="content">
+                                       <header>
+                                           <Hgroup>
+                                               <H1>{heading}</H1>
+                                               {subheading}
+                                           </Hgroup>
+                                           {notice}
+                                       </header>
+                                       {children}
+                                   </main>
+                               </Card>
+                               {mainbar}
+                           </div>
+                           <div className={sidebarClass}>
+                               {sidebar}
+                               <ScreenOnly>
+                                   <Card>
+                                       <Nav heading={<H2 tabIndex="-1" id="breadcrumbs">Breadcrumbs</H2>}>
+                                           {breadcrumbs}
+                                       </Nav>
+                                   </Card>
+                               </ScreenOnly>
+                           </div>
+                       </div>
                        <div className={client ? footer : hide} inert={client ? null : "inert"}>
                            <Button type="button" onClick={scrollToTop}>Back to Top</Button>
                        </div>

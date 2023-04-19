@@ -19,7 +19,6 @@ export { Nav } from "./nav.jsx";
 export { Pane } from "./pane";
 export { Search } from "./search.jsx";
 export { Section } from "./section.tsx";
-export { SidebarLayout } from "./sidebar-layout";
 export { P } from "./p";
 export { Subheading } from "./subheading";
 export { Pre } from "./pre";
