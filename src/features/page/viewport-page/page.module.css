@@ -1,6 +1,3 @@
-.layout {
-}
-
 @media screen {
     .layout {
         padding-inline:
@@ -20,10 +17,9 @@
 }
 
 .layout {
+    position: relative ;
     box-sizing: border-box;
- }
 
-.layout {
     box-decoration-break: clone ;
 
     widows: 2 ;
@@ -44,13 +40,8 @@
     row-gap: var(--line) ;
 }
 
-.header, .footer {
-    display: flex ;
-}
-.header {
-    justify-content: end ;
-}
 .footer {
+    display: flex ;
     justify-content: center ;
 }
 
@@ -61,6 +52,7 @@
 }
 
 .header {
+    place-self: end ;
     z-index: 9000 ;
     inset-block-start: var(--line) ;
 }
