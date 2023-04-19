@@ -6,6 +6,8 @@ export { Green } from "./green";
 export { Card } from "./card";
 export { Cite } from "./cite";
 export { Code } from "./code";
+export { Column } from "./column";
+export { Row } from "./row";
 export { Footer } from "./footer.jsx";
 export { Header } from "./header.jsx";
 export { Hgroup } from "./hgroup";

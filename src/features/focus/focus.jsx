@@ -1,48 +1,52 @@
-import { useDeferredValue, useEffect } from "react";
-import { usePrevLocation } from "./prev-location.js";
+import { useCallback, useEffect, useDeferredValue, useState, useTransition } from "react";
+import { useLocation } from "@gatsbyjs/reach-router";
+import { useOnRouteUpdate } from "./my-location.js";
 import { getFocus } from "./focus-ref.js";
 
 // Gatsby already handles scroll, focus-visible for extra emphasis
 const opts = { focusVisible: true, preventScroll: true };
 
+const useFocus = () => {
+    const location = useLocation();
+    const deferredLocation = useDeferredValue(location);
+
+    const [, startTransition] = useTransition();
+    const [prevLocation, setPrevLocation] = useState(deferredLocation);
+    const endNavigate = useCallback(() => {
+        startTransition(() => setPrevLocation(deferredLocation));
+    }, [deferredLocation]);
+
+    const { hash, pathname } = deferredLocation;
+    const { pathname: prevPathname } = prevLocation;
+
+    return { hash, pathname, prevPathname, endNavigate };
+};
+
 const Focus = () => {
-    const xs = usePrevLocation();
-    // Not sure if deferring focus here makes sense
-
-    // It's not great but at least sometimes we get the focusing
-    // happening a little bit AFTER the the view transition
-    // animations starts and we don't get forced reflow.
-
-    const ys = useDeferredValue(xs);
-
-    const location = ys?.location;
-    const hash = location?.hash;
-    const pathname = location?.pathname;
-    const prevPathname = ys?.prevLocation?.pathname;
+    // Do a silly little dance to update the focus lazily and avoid
+    // forced reflow
+    const { hash, pathname, prevPathname, endNavigate } = useFocus();
+    const isNavigating = prevPathname !== pathname;
 
     useEffect(() => {
-        if (!prevPathname) {
+        if (pathname === prevPathname) {
             return;
         }
 
         if (hash) {
-            const elem = document.getElementById(hash.slice(1));
-            elem?.focus(opts);
             return;
         }
 
-        if (prevPathname === pathname) {
-            return;
-        }
-
+        // FIXME useRef?
         const current = getFocus();
         if (!current) {
             return;
         }
 
         current.focus(opts);
-    }, [prevPathname, pathname, hash]);
-    return null;
+    },  [hash, pathname, prevPathname]);
+
+    useOnRouteUpdate(endNavigate);
 };
 
 export default Focus;

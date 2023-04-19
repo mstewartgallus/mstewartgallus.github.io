@@ -1,0 +1,7 @@
+.row {
+    display: flex ;
+    row-gap: var(--line) ;
+    column-gap: 1em ;
+    contain: layout style ;
+    flex-wrap: wrap ;
+}
