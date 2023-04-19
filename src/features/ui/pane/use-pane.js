@@ -1,7 +1,7 @@
 import { useReducer, useCallback, useTransition } from "react";
 
 const initial = {
-    prevOpen: null,
+    prevOpen: false,
     isTransitioning: false
 };
 
