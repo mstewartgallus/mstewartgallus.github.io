@@ -8,3 +8,8 @@ export const usePrevious = value => {
     }
     return prev;
 };
+
+export const useChanged = value => {
+    const prev = usePrevious(value);
+    return prev !== value;
+};

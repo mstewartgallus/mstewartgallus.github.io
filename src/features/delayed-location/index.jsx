@@ -4,7 +4,7 @@ import { useLocation } from "@gatsbyjs/reach-router";
 let info = null;
 const callbacks = new Set();
 
-export const onRouteUpdate = ({ location }) => {
+export const onRouteUpdateDelayed = ({ location }) => {
     info = location;
     for (const callback of callbacks) {
         callback();

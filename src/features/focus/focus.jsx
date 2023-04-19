@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { usePrevious } from "@features/util";
+import { useDeferredValue, useEffect } from "react";
+import { useChanged } from "@features/util";
 import { usePostLocation } from "@features/post-location";
 import { getFocus } from "./focus-ref.js";
 
@@ -7,15 +7,16 @@ import { getFocus } from "./focus-ref.js";
 const opts = { focusVisible: true, preventScroll: true };
 
 const Focus = () => {
-    // FIXME consider useDeferredValue ?
-    const { pathname, hash } = usePostLocation();
-    const prevPathname = usePrevious(pathname);
+    const location = usePostLocation();
+    const deferred = useDeferredValue(location);
+    const { pathname, hash } = deferred;
+    const changed = useChanged(pathname);
 
     useEffect(() => {
-        if (hash) {
+        if (!changed) {
             return;
         }
-        if (prevPathname === pathname) {
+        if (hash) {
             return;
         }
 
@@ -26,7 +27,7 @@ const Focus = () => {
         }
 
         current.focus(opts);
-    },  [hash, pathname, prevPathname]);
+    },  [hash, pathname, changed]);
     return null;
 };
 
