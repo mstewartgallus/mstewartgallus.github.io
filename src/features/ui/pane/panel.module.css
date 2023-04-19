@@ -1,79 +1,89 @@
 .disclosure, .wrapper, .content {
     display: flow-root ;
-    contain: layout style ;
 }
 
-.disclosureClient {
-    z-index: 9000 ;
-    position: relative ;
+.disclosure {
+    contain: layout style ;
+}
+.wrapper, .content {
+    contain: layout paint style ;
 }
 
 .wrapper {
     inset-block-start: 0 ;
-    contain: layout paint style ;
     overflow: hidden ;
+
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
 }
 
 @media screen {
-    .disclosureHidden {
-        overflow-anchor: none ;
-        visibility: hidden ;
+    .disclosureClient {
+        z-index: 9000 ;
+        position: relative ;
     }
 
-    /* Clip to a maximum height and squish to use less memory */
+    .disclosureHidden {
+        overflow-anchor: none ;
+    }
+
     .wrapperHidden {
         position: absolute ;
-        opacity: 0 ;
+    }
 
-        max-block-size: calc(10 * var(--line)) ;
+    .wrapperHidden {
+        /* Clip to a maximum size to use less memory */
+        max-block-size: calc(17 * var(--line)) ;
+    }
+
+    .wrapperHidden {
+        opacity: 0 ;
     }
 
     .contentHidden {
-        transform: translateY(-100%) ;
+        transform: translateY(-100%) scaleY(0) ;
     }
-}
 
-.disclosureWillChange {
-    will-change: visibility ;
-}
-.wrapperWillChange {
-    will-change: opacity ;
-}
-.contentWillChange {
-    will-change: transform ;
-}
-
-.disclosureClient, .wrapperClient, .contentClient {
-    transition-timing-function: ease-out;
-}
-.disclosureHidden, .wrapperHidden, .contentHidden {
-    transition-timing-function: ease-in;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .contentClient {
-        transition-property: transform ;
+    .disclosureWillChange {
+        will-change: visibility ;
     }
-}
+    .wrapperWillChange {
+        will-change: opacity ;
+    }
+    .contentWillChange {
+        will-change: transform ;
+    }
 
-.wrapperClient {
-    transition-property: opacity ;
+    .disclosureClient, .wrapperOpen, .contentOpen {
+        transition-timing-function: ease-out;
+    }
+    .disclosureHidden, .wrapperHidden, .contentHidden {
+        transition-timing-function: ease-in;
+    }
 
-}
-.wrapperHidden {
-    transition-property: opacity ;
-}
-.disclosureHidden {
-    transition-property: visibility ;
-}
+    .wrapperClient {
+        transition-property: opacity ;
+    }
 
-.disclosureClient, .wrapperClient, .contentClient {
-    transition-duration: 0.2s ;
-}
-.disclosureHidden, .wrapperHidden, .contentHidden {
-    transition-duration: 0.19s ;
-}
+    @media (prefers-reduced-motion: no-preference) {
+        .contentClient {
+            transition-property: transform ;
+        }
+    }
 
-.disclosureServer, .wrapperServer, .contentServer {
-    transition: unset ;
+    .wrapperOpen, .contentOpen {
+        transition-duration: 0.2s ;
+    }
+    .wrapperHidden, .contentHidden {
+        transition-duration: 0.2s ;
+    }
+
+    .disclosureHiddenSteady {
+        transition: unset ;
+        visibility: hidden ;
+    }
+
+    .disclosureOpen {
+        visibility: visible ;
+    }
 }
