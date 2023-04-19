@@ -1,39 +1,21 @@
-import { useCallback, useEffect, useDeferredValue, useState, useTransition } from "react";
-import { useLocation } from "@gatsbyjs/reach-router";
-import { useOnRouteUpdate } from "./my-location.js";
+import { useEffect } from "react";
+import { usePrevious } from "@features/util";
+import { usePostLocation } from "@features/post-location";
 import { getFocus } from "./focus-ref.js";
 
 // Gatsby already handles scroll, focus-visible for extra emphasis
 const opts = { focusVisible: true, preventScroll: true };
 
-const useFocus = () => {
-    const location = useLocation();
-    const deferredLocation = useDeferredValue(location);
-
-    const [, startTransition] = useTransition();
-    const [prevLocation, setPrevLocation] = useState(deferredLocation);
-    const endNavigate = useCallback(() => {
-        startTransition(() => setPrevLocation(deferredLocation));
-    }, [deferredLocation]);
-
-    const { hash, pathname } = deferredLocation;
-    const { pathname: prevPathname } = prevLocation;
-
-    return { hash, pathname, prevPathname, endNavigate };
-};
-
 const Focus = () => {
-    // Do a silly little dance to update the focus lazily and avoid
-    // forced reflow
-    const { hash, pathname, prevPathname, endNavigate } = useFocus();
-    const isNavigating = prevPathname !== pathname;
+    // FIXME consider useDeferredValue ?
+    const { pathname, hash } = usePostLocation();
+    const prevPathname = usePrevious(pathname);
 
     useEffect(() => {
-        if (pathname === prevPathname) {
+        if (hash) {
             return;
         }
-
-        if (hash) {
+        if (prevPathname === pathname) {
             return;
         }
 
@@ -45,8 +27,7 @@ const Focus = () => {
 
         current.focus(opts);
     },  [hash, pathname, prevPathname]);
-
-    useOnRouteUpdate(endNavigate);
+    return null;
 };
 
 export default Focus;

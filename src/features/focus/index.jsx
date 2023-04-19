@@ -1,6 +1,5 @@
 import { lazy } from "react";
 import { Client } from "@features/util";
-export { onRouteUpdate } from "./my-location.js";
 export { focusRef } from "./focus-ref.js";
 
 // hack around the Gatsby focus wrapper for manual focus management

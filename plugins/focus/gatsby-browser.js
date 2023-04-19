@@ -1,3 +1,3 @@
 import "./focus.css";
 
-export { onInitialClientRender, onRouteUpdate } from "../../src/features/focus";
+export { onInitialClientRender } from "@features/focus";

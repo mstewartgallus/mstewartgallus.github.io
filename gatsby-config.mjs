@@ -136,7 +136,10 @@ const plugins = [
     "focus",
     "layout",
     "root",
-    "view-transition"
+    "view-transition",
+    "pre-location",
+    "post-location",
+    "delayed-location"
 ];
 
 const config = {
