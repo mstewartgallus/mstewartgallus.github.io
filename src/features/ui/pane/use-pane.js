@@ -1,18 +1,27 @@
 import { useReducer, useCallback, useTransition } from "react";
 
+const initial = {
+    prevOpen: null,
+    isTransitioning: false
+};
+
 const reducer = (state, action) => {
-    switch (action) {
-    case "start": return true;
-    case "end": return false;
+    const { type, open } = action;
+    switch (type) {
+    case "start": return { prevOpen: open, isTransitioning: true };
+    case "end": return { prevOpen: open, isTransitioning: false };
     default: return state;
     }
 };
 
-export const usePane = () => {
-    const [,startTransition] = useTransition();
-    const [isTransitioning, dispatch] = useReducer(reducer, false);
-
-    const start = useCallback(() => startTransition(() => dispatch('start')), []);
-    const end = useCallback(() => startTransition(() => dispatch('end')), []);
-    return { isTransitioning, start, end };
+export const usePane = open => {
+    const [, startTransition] = useTransition();
+    const [{ prevOpen, isTransitioning }, dispatch] = useReducer(reducer, initial);
+    if (prevOpen !== open) {
+        dispatch({ type: "start", open });
+    }
+    const endTransition = useCallback(() => {
+        startTransition(() => dispatch({ type: "end", open }));
+    }, [open]);
+    return { isTransitioning, endTransition };
 };

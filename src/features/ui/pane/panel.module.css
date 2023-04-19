@@ -1,12 +1,10 @@
 .disclosure, .wrapper, .content {
     display: flow-root ;
+    contain: layout paint style ;
 }
 
 .disclosure {
-    contain: layout style ;
-}
-.wrapper, .content {
-    contain: layout paint style ;
+    content-visibility: auto ;
 }
 
 .wrapper {
@@ -28,62 +26,47 @@
     }
 
     .wrapperHidden {
-        position: absolute ;
-    }
-
-    .wrapperHidden {
         /* Clip to a maximum size to use less memory */
-        max-block-size: calc(17 * var(--line)) ;
-    }
-
-    .wrapperHidden {
-        opacity: 0 ;
+        max-block-size: calc(14 * var(--line)) ;
     }
 
     .contentHidden {
-        transform: translateY(-100%) scaleY(0) ;
+        transform: translateY(-100%) ;
+        opacity: 0 ;
     }
 
     .disclosureWillChange {
         will-change: visibility ;
     }
-    .wrapperWillChange {
-        will-change: opacity ;
-    }
     .contentWillChange {
-        will-change: transform ;
+        will-change: transform, opacity ;
     }
 
-    .disclosureClient, .wrapperOpen, .contentOpen {
-        transition-timing-function: ease-out;
-    }
-    .disclosureHidden, .wrapperHidden, .contentHidden {
-        transition-timing-function: ease-in;
-    }
-
-    .wrapperClient {
+    .contentClient {
         transition-property: opacity ;
     }
 
     @media (prefers-reduced-motion: no-preference) {
         .contentClient {
-            transition-property: transform ;
+            transition-property: transform, opacity ;
         }
     }
 
-    .wrapperOpen, .contentOpen {
-        transition-duration: 0.2s ;
+
+    .contentOpen {
+        transition-timing-function: ease-out;
     }
-    .wrapperHidden, .contentHidden {
+    .contentHidden {
+        transition-timing-function: ease-in;
+    }
+    .contentClient {
         transition-duration: 0.2s ;
     }
 
+    .wrapperHiddenSteady {
+        position: absolute ;
+    }
     .disclosureHiddenSteady {
-        transition: unset ;
         visibility: hidden ;
-    }
-
-    .disclosureOpen {
-        visibility: visible ;
     }
 }
