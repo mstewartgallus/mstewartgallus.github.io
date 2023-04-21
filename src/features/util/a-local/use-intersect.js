@@ -1,19 +1,15 @@
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+
 // Only prefetch mostly visible links
 const options = {
     threshold: 1
 };
 
-const onNears = new Map();
-const onFars = new Map();
+const callbacks = new Map();
 
 const onObserve = ({ target, isIntersecting, intersectionRatio }) => {
-    if (isIntersecting || intersectionRatio > 0) {
-        const cb = onNears.get(target);
-        cb?.();
-    } else {
-        const cb = onFars.get(target);
-        cb?.();
-    }
+    const cb = callbacks.get(target);
+    cb?.(isIntersecting || intersectionRatio > 0);
 };
 
 const observer = entries => {
@@ -40,39 +36,40 @@ const getPrefetcher = () => {
     return prefetcher;
 };
 
-export const onNearFar = (
-    elem,
-    onNear,
-    onFar,
-    { signal }
-) => {
-    const pre = getPrefetcher();
-    if (!pre) {
-        return;
-    }
-
-    let ignore = false;
-    const onNearWrap = () => {
-        if (ignore) {
+export const useNear = () => {
+    const [,startTransition] = useTransition();
+    const [near, setNear] = useState(false);
+    const nearRef = useRef();
+    useEffect(() => {
+        const pre = getPrefetcher();
+        if (!pre) {
             return;
         }
-        onNear();
-    };
-    const onFarWrap = () => {
-        if (ignore) {
+
+        const { current } = nearRef;
+        if (!current) {
             return;
         }
-        onFar();
-    };
 
-    signal.addEventListener('abort', () => {
-        ignore = true;
-        pre.unobserve(elem);
-        onNears.delete(elem);
-        onFars.delete(elem);
-    }, { passive: true });
+        const abort = new AbortController();
+        const { signal } = abort;
 
-    onNears.set(elem, onNearWrap);
-    onFars.set(elem, onFarWrap);
-    pre.observe(elem);
+        const callback = n => {
+            if (signal.aborted) {
+                return;
+            }
+            startTransition(() => setNear(n));
+        };
+
+        signal.addEventListener('abort', () => {
+            pre.unobserve(current);
+            callbacks.delete(callback);
+        }, { passive: true });
+
+        callbacks.set(current, callback);
+        pre.observe(current);
+        return () => abort.abort();
+    }, []);
+    const ref = useCallback(elem => ref.current = elem, []);
+    return { ref, near };
 };

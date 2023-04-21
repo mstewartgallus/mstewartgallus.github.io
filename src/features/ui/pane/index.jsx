@@ -1,4 +1,3 @@
-import { useDeferredValue } from "react";
 import { useClient } from "@features/util";
 import { usePane } from "./use-pane.js";
 import {
@@ -14,9 +13,7 @@ export const Pane = ({children, willChange, open}) => {
 
     const client = useClient();
 
-    const deferredOpen = useDeferredValue(open);
-    const deferredWillChange = useDeferredValue(willChange);
-    const steadyHidden = !isTransitioning && !deferredOpen;
+    const steadyHidden = !isTransitioning && !open;
 
     const disclosureClass = [
         disclosure,
@@ -24,8 +21,8 @@ export const Pane = ({children, willChange, open}) => {
             [
                 disclosureClient,
                 steadyHidden ? disclosureHiddenSteady : '',
-                deferredWillChange ? disclosureWillChange : '',
-                !deferredOpen ? disclosureHidden  : ''
+                willChange ? disclosureWillChange : '',
+                !open ? disclosureHidden  : ''
             ].join(' ') : ''
     ].join(' ');
     const wrapperClass = [
@@ -33,7 +30,7 @@ export const Pane = ({children, willChange, open}) => {
         client ?
             [
                 steadyHidden ? wrapperHiddenSteady : '',
-                !deferredOpen ? wrapperHidden : ''
+                !open ? wrapperHidden : ''
             ].join(' ') : ''
     ].join(' ');
     const contentClass = [
@@ -41,13 +38,13 @@ export const Pane = ({children, willChange, open}) => {
         client ?
             [
                 contentClient,
-                deferredWillChange ? contentWillChange : '',
-                !deferredOpen ? contentHidden : '',
-                deferredOpen ? contentOpen : ''
+                willChange ? contentWillChange : '',
+                !open ? contentHidden : '',
+                open ? contentOpen : ''
             ].join(' ') : ''
     ].join(' ');
 
-    return <div className={disclosureClass} aria-hidden={deferredOpen ? null : "true"}>
+    return <div className={disclosureClass} aria-hidden={open ? null : "true"}>
                <div className={wrapperClass}>
                    <div className={contentClass} onTransitionEnd={endTransition}>
                        {children}

@@ -7,28 +7,28 @@ import {
 
 const Context = createContext(null);
 
-const Ol = ({children, ...props}, ref) =>
+const Ol = (props, ref) =>
 <ol role="list" className={orderedList} {...props} ref={ref}>
     <Context.Provider value={props.reversed ? 'rol' : 'ol'}>
-        {children}
+        {props.children}
     </Context.Provider>
 </ol>;
 
-const Ul = ({children, ...props}, ref) =>
+const Ul = (props, ref) =>
 <ul role="list" className={unorderedList} {...props} ref={ref}>
     <Context.Provider value='ul'>
-        {children}
+        {props.children}
     </Context.Provider>
 </ul>;
 
-const Menu = ({children, ...props}, ref) =>
+const Menu = (props, ref) =>
 <menu role="list" className={unorderedList} {...props} ref={ref}>
     <Context.Provider value='ul'>
-        {children}
+        {props.children}
     </Context.Provider>
 </menu>;
 
-const Li = ({children, ...props}, ref) => {
+const Li = (props, ref) => {
     const type = useContext(Context);
     const item = {
         'ul': uitem,
@@ -36,7 +36,7 @@ const Li = ({children, ...props}, ref) => {
         'rol': roitem
     }[type];
     return <li role="listitem" className={item} {...props} ref={ref}>
-        <div className={content}>{children}</div>
+        <div className={content}>{props.children}</div>
     </li>;
 };
 

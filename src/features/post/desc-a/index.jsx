@@ -1,20 +1,17 @@
 import { useId, forwardRef } from "react";
-import { A } from "@features/ui";
-import { wrapper, label, clickTrap } from "./desc.module.css";
+import { A, ClickTrap } from "@features/ui";
+import { wrapper } from "./desc.module.css";
 
-const DescA = ({ children, desc, href, ...props }, ref) => {
+const DescA = ({ children, desc, ...props }, ref) => {
     const id = useId();
 
     return <div role="presentation" className={wrapper}>
-               <A aria-describedby={id} href={href} {...props} ref={ref}>
+               <A aria-describedby={id} {...props} ref={ref}>
                    {children}
-                   <span
-                       className={clickTrap}
-                       aria-hidden="true" />
+                   <ClickTrap />
                </A>
                &emsp;
-               <span className={label}
-                     id={id}>
+               <span id={id}>
                    {desc}
                </span>
            </div>;
@@ -22,4 +19,4 @@ const DescA = ({ children, desc, href, ...props }, ref) => {
 
 const DescARef = forwardRef(DescA);
 
-export { DescARef as DescA, DescARef as default };
+export { DescARef as DescA };

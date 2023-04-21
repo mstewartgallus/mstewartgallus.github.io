@@ -1,7 +1,3 @@
-.label {
-    /* position: relative ; */
-    cursor: default ;
-}
 .wrapper {
     position: relative ;
     inline-size: fit-content ;

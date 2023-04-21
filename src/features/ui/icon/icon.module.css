@@ -1,6 +1,3 @@
-.inlineBlock {
-    display: inline-block ;
-}
 .open, .close {
     display: list-item ;
     list-style-position: inside ;
