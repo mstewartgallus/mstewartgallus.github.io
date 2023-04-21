@@ -1,4 +1,4 @@
-import { focusRef } from "@features/focus";
+import { useFocus } from "@features/focus";
 import { A } from "@features/ui";
 import { content } from "./skip-a.module.css";
 
@@ -16,7 +16,8 @@ const onKeyDown = e => {
 };
 
 export const SkipA = props => {
+    const ref = useFocus();
     return <A className={content} id="skip-link" href="#content"
               onKeyDown={onKeyDown}
-              {...props} ref={focusRef} />;
+              {...props} ref={ref} />;
 };

@@ -22,7 +22,7 @@ const onNavigate = (pathname, { signal }) => e => {
     ]));
 };
 
-const ViewTransition = () => {
+export const ViewTransition = () => {
     const { pathname } = useLocation();
     useEffect(() => {
         if (!window.navigation || !document.startViewTransition) {
@@ -36,5 +36,3 @@ const ViewTransition = () => {
     }, [pathname]);
     return null;
 };
-
-export default ViewTransition;
