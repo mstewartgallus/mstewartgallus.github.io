@@ -1,0 +1,16 @@
+.query {
+    display: block ;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.queryContent {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: flex ;
+    column-gap: 1em ;
+    flex-wrap: wrap ;
+    align-items: flex-start ;
+}

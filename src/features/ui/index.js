@@ -2,6 +2,7 @@ export { A } from "./a";
 export { Blockquote } from "./blockquote";
 export { BreadcrumbList, BreadcrumbItem } from "./breadcrumb-list";
 export { Button } from "./button";
+export { ClickTrap } from "./click-trap";
 export { Green } from "./green";
 export { Card } from "./card";
 export { Cite } from "./cite";

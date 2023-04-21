@@ -12,7 +12,7 @@ export const Search = ({heading, children, ...props}) => {
                            {heading}
                        </hgroup>
                    </header>
-                   {children}
                </Card>
+               {children}
            </SearchPf>;
 };

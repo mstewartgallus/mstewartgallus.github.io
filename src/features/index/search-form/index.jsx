@@ -6,12 +6,10 @@ export const SearchForm = ({action, onSubmit}) => {
     const id = useId();
 
     return <form rel="search" action={action} onSubmit={onSubmit}>
-               <Card>
-                   <fieldset className={query}>
-                       <label htmlFor={id}>Query</label>
-                       <Input id={id} name="s" type="search" required />
-                       <Button type="submit">Search</Button>
-                   </fieldset>
-               </Card>
+               <fieldset className={query}>
+                   <label htmlFor={id}>Query</label>
+                   <Input id={id} name="s" type="search" required />
+                   <Button type="submit">Search</Button>
+               </fieldset>
            </form>;
 };

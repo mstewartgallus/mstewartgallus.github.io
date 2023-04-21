@@ -1,9 +1,9 @@
-import { A, Ul, Li } from "@features/ui";
+import { A, ClickTrap, Ul, Li } from "@features/ui";
 
 export const Banner = () =>
 <Ul>
-    <Li><A download="feed.xml" rel="alternate" href="/feed.xml">Subscribe (RSS)</A></Li>
-    <Li><A rel="author" href="/about">About the Author</A></Li>
-    <Li><A href="/README">About this Blog</A></Li>
-    <Li><A rel="nofollow" href="/404">Test 404 Page</A></Li>
+    <Li><A download="feed.xml" rel="alternate" href="/feed.xml">Subscribe (RSS)<ClickTrap /></A></Li>
+    <Li><A rel="author" href="/about">About the Author<ClickTrap /></A></Li>
+    <Li><A href="/README">About this Blog<ClickTrap /></A></Li>
+    <Li><A rel="nofollow" href="/404">Test 404 Page<ClickTrap /></A></Li>
 </Ul>;
