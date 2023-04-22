@@ -1,0 +1,47 @@
+.header {
+    position: fixed ;
+    background: var(--canvas) ;
+
+    box-sizing: border-box ;
+    border-end-start-radius: 0.7ch ;
+    padding-inline: 2em  ;
+
+    padding-block-start: 0 ;
+    padding-block-end: calc(0.2 * var(--line)) ;
+
+    padding-inline: 1em ;
+
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+
+    z-index: 9000 ;
+
+    contain: layout paint style ;
+
+    font-size: 0.8rem ;
+
+    border-width: 1px ;
+    border-color: var(--canvas-text);
+    border-style: none ;
+    border-inline-start-style: dotted ;
+    border-block-end-style: dashed ;
+
+    margin-block-start: var(--t) ;
+    margin-inline-end: var(--t) ;
+
+    inset-block-start: var(--t) ;
+    inset-inline-end: var(--t) ;
+
+    opacity: 90% ;
+}
+
+@media print {
+    .header {
+        display: none ;
+    }
+}
+
+.output {
+    display: flow-root ;
+    min-block-size: var(--line) ;
+}

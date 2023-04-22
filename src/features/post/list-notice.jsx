@@ -5,7 +5,6 @@ export const ListNotice = ({notice}) => {
     const id = useId();
     return <div role="presentation">
         <span id={id}>Notice</span>
-        &emsp;
         <Set aria-labelledby={id}>
             {
                 notice.map(n =>
