@@ -1,7 +1,10 @@
 import { createContext, useContext, useId } from "react";
-import { H2, Pane, Button, Icon } from "@features/ui";
+import { H2, Pane, Button } from "@features/ui";
 import { useClient, Client } from "@features/util";
-import { details, button, insideHeading } from "./disclosure.module.css";
+import {
+    details, insideHeading,
+    open as openClass, close as closeClass
+} from "./disclosure.module.css";
 
 
 const Open = createContext(false);
@@ -17,19 +20,19 @@ export const Summary = props => {
 
     return <H2 tabIndex={client ? null : "-1"} id={client ? null : id}>
                <span className={insideHeading}>
-                   <Client fallback={children}>
+                   <Client>
                        <span className={details}>
                            <Button
                                aria-controls={ariaControls}
                                aria-expanded={String(open)}
                                {...props}>
-                               <Icon open={open}>
-                                   <span className={button}>
-                                       {open ? "Close" : "Open"}
-                                   </span>
-                               </Icon>
+                               <span className={open? openClass : closeClass}>
+                                   {open ? "Close" : "Open"}
+                               </span>
                            </Button>
                        </span>
+                   </Client>
+                   <Client fallback={children}>
                        <label htmlFor={id}>{children}</label>
                    </Client>
                </span>

@@ -13,7 +13,6 @@ export { Footer } from "./footer.jsx";
 export { Green } from "./green";
 export { Header } from "./header.jsx";
 export { Hgroup } from "./hgroup";
-export { Icon } from "./icon";
 export { Row } from "./row";
 export { H1, H2, H3, H4, H5, H6 } from "./heading";
 export { Hr } from "./hr";

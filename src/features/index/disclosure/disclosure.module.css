@@ -3,11 +3,6 @@
     font-weight: normal ;
 }
 
-.button {
-    display: inline-block ;
-    min-inline-size: 5ch ;
-}
-
 @media print {
     .details {
         display: none ;
@@ -20,4 +15,17 @@
     display: flex ;
     flex-wrap: wrap ;
     column-gap: 0.5em ;
+}
+
+.open, .close {
+    min-inline-size: 5ch ;
+    display: list-item ;
+    list-style-position: inside ;
+}
+
+.open {
+    list-style-type: disclosure-open;
+}
+.close {
+    list-style-type: disclosure-closed;
 }

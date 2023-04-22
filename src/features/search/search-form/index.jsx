@@ -1,7 +1,6 @@
-import { useContext, createContext, useId, useCallback, useMemo } from "react";
-import { Card, Column, Hgroup, H2, Input, Button } from "@features/ui";
+import { useCallback, useMemo } from "react";
+import { Card, Column, Hgroup, H2 } from "@features/ui";
 import { Search } from "@features/polyfill";
-import { Legend } from "../legend";
 import { Select, Option } from "../select";
 import { Query } from "../query";
 
