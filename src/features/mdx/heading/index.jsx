@@ -1,24 +1,23 @@
 import {
-    A, Hgroup,
+    SubtleA, Hgroup,
     H1 as UiH1, H2 as UiH2, H3 as UiH3,
     H4 as UiH4, H5 as UiH5, H6 as UiH6
 } from "@features/ui";
-import { heading, autolink } from "./heading.module.css";
+import { heading } from "./heading.module.css";
 
 const createAutoLink = Hn => {
     const name = Hn.displayName || Hn.name || 'Component';
-    const HeadingAutoLink = ({id, children, tabIndex = "-1", ...props}) => {
-        const href = id && `#${id}`;
+    const HeadingAutoLink = props => {
+        const { children, id, tabIndex = "-1" } = props;
+        const href = id ? `#${id}` : null;
         return <header className={heading}>
                    <Hgroup>
                        <Hn {...props} id={id} tabIndex={tabIndex}>
-                           {children}
+                           <SubtleA href={href}>
+                               {children}
+                           </SubtleA>
                        </Hn>
                    </Hgroup>
-                   {
-                       href &&
-                           <A className={autolink} href={href} aria-describedby={id}>#</A>
-                   }
                </header>;
     };
     HeadingAutoLink.displayName = `createAutoLink(${name})`;

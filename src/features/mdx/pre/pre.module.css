@@ -13,15 +13,7 @@
 .figcaption {
     position: sticky ;
     inset-inline-start: 0;
-}
-.title {
     color: var(--emphasis-text);
-}
-
-@media screen {
-    .figure {
-        overflow: auto ;
-    }
 }
 
 .figure {
@@ -34,8 +26,15 @@
     outline-style: solid ;
 }
 
-@media print {
-    .autolink {
-        display: none ;
+.pre {
+    font-variant-numeric: lining-nums tabular-nums;
+    display: flow-root ;
+    margin: 0;
+    padding: 0;
+}
+
+@media screen {
+    .pre {
+        overflow: auto ;
     }
 }

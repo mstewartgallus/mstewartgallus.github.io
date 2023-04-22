@@ -1,0 +1,4 @@
+import { A as UtilA, withClass } from "@features/util";
+import { a } from "./a.module.css";
+
+export const SubtleA = withClass(UtilA, a);

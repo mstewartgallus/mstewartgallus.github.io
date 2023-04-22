@@ -1,4 +1,5 @@
 export { A } from "./a";
+export { SubtleA } from "./subtle-a";
 export { Blockquote } from "./blockquote";
 export { BreadcrumbList, BreadcrumbItem } from "./breadcrumb-list";
 export { Button } from "./button";

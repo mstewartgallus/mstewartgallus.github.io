@@ -1,0 +1,33 @@
+.a {
+    /* more legible hyperlinks */
+    text-underline-position: under ;
+    border-radius: 0.01ch ;
+    box-decoration-break: clone ;
+
+    outline-color: var(--highlight-text) ;
+    outline-width: 0.1rem ;
+    outline-offset: 0.18em ;
+}
+
+.a:focus {
+    outline-style: solid ;
+}
+.a:focus-visible {
+    outline-width: 0.18rem ;
+}
+
+.a:link {
+    color: var(--link-text);
+}
+.a:visited {
+    color: var(--visited-text) ;
+}
+.a:any-link:active {
+    color: var(--active-text) ;
+    transition: color 0.05s ;
+}
+
+.a:not(:focus-within):not(:hover) {
+    color: inherit ;
+    text-decoration: inherit ;
+}
