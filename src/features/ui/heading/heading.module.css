@@ -1,4 +1,6 @@
-.heading {
+.heading, .heading1, .heading2 {
+    display: flow-root ;
+    contain: layout style ;
     break-inside: avoid ;
     break-after: avoid ;
     color: var(--emphasis-text);
@@ -8,31 +10,28 @@
     font-size: inherit ;
     font-style: inherit ;
     font-variant-numeric: proportional-nums lining-nums ;
-    border-radius: 0.01ch ;
+    border-radius: 0.001ch ;
 }
 
-h1.heading {
-    font-size: 1.953125rem ;
+.heading1 {
+    font-size: 1.5625rem ;
 }
 
-h2.heading {
+.heading2 {
     font-size: 1.25rem ;
 }
 
-.heading {
-    outline-color: var(--highlight-text) ;
+.heading, .heading1, .heading2 {
+    outline-color: currentcolor ;
     outline-offset: 0.26em ;
-    outline-width: 0.05ch ;
+    outline-width: 2px ;
 }
 
-.heading:focus {
+.heading:focus, .heading1:focus, .heading2:focus {
+    outline-style: dashed ;
+}
+.heading:focus-visible, .heading1:focus-visible, .heading2:focus-visible {
     outline-style: solid ;
-}
-.heading:focus-visible {
+    outline-color: var(--highlight-text) ;
     outline-width: 0.1ch ;
-}
-
-.heading {
-    display: flow-root ;
-    contain: layout style ;
 }

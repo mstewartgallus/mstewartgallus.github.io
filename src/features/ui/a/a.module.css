@@ -1,19 +1,20 @@
 .a {
+    font: inherit ;
     /* more legible hyperlinks */
     text-underline-position: under ;
     border-radius: 0.01ch ;
     box-decoration-break: clone ;
 
     outline-color: var(--highlight-text) ;
-    outline-width: 0.1rem ;
-    outline-offset: 0.18em ;
+    outline-width: 1px ;
+    outline-offset: 0.24em ;
 }
 
 .a:focus {
     outline-style: solid ;
 }
 .a:focus-visible {
-    outline-width: 0.18rem ;
+    outline-width: 0.14rem ;
 }
 
 .a:link {

@@ -1,19 +1,20 @@
 .a {
-    /* more legible hyperlinks */
-    text-underline-position: under ;
-    border-radius: 0.01ch ;
+    font: inherit ;
+    border-radius: 0.001ch ;
     box-decoration-break: clone ;
+    text-underline-position: under ;
 
-    outline-color: var(--highlight-text) ;
-    outline-width: 0.1rem ;
-    outline-offset: 0.18em ;
+    outline-color: currentcolor ;
+    outline-width: 2px ;
+    outline-offset: 0.2em ;
 }
 
 .a:focus {
-    outline-style: solid ;
+    outline-style: dashed ;
 }
 .a:focus-visible {
-    outline-width: 0.18rem ;
+    outline-color: var(--highlight-text) ;
+    outline-width: 0.1rem ;
 }
 
 .a:link {
@@ -27,7 +28,9 @@
     transition: color 0.05s ;
 }
 
-.a:not(:focus-within):not(:hover) {
+.a:not(:focus-visible):not(:hover) {
     color: inherit ;
+}
+.a:not(:focus):not(:hover) {
     text-decoration: inherit ;
 }

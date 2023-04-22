@@ -1,4 +1,3 @@
-import { useId, useRef } from "react"
 import { SubtleA } from "@features/ui";
 import { figure, figcaption, pre } from "./pre.module.css";
 

@@ -6,7 +6,6 @@ import { SkipA } from "../skip-a";
 export const ViewportPage = ({
     children,
     heading,
-    skipA,
     subheading,
     notice,
     mainbar,
@@ -14,9 +13,6 @@ export const ViewportPage = ({
     breadcrumbs
 }) =>
 <Page
-    header={<>
-                <SkipA href="#content">{heading}</SkipA>
-            </>}
     sidebar={
         <>
             {sidebar}
@@ -32,7 +28,7 @@ export const ViewportPage = ({
         <Card>
             <header>
                 <Hgroup>
-                    <H1 tabIndex="-1" id="content">{heading}</H1>
+                    <H1 tabIndex="-1" id="content"><SkipA>{heading}</SkipA></H1>
                     {subheading}
                 </Hgroup>
                 {notice}

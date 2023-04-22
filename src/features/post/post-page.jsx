@@ -1,5 +1,5 @@
 import { H2, Subheading, Section } from "@features/ui";
-import { ViewportPage, SkipA } from "@features/page";
+import { ViewportPage } from "@features/page";
 import { Comments } from "./comments.jsx";
 import { ListNotice } from "./list-notice";
 import { Metadata } from "./metadata";
@@ -15,7 +15,6 @@ export const PostPage = ({post, children}) => {
             category, subtitle, title, childrenLink
           } = post;
     return <ViewportPage
-               skipA={<SkipA>{title}</SkipA>}
                heading={title}
                subheading={
                    <Subheading>{subtitle}</Subheading>

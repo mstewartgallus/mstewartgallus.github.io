@@ -19,7 +19,7 @@ import {
     Subheading,
 } from "@features/ui";
 import { useSubmit } from "@features/util";
-import { ViewportPage, SkipA } from "@features/page";
+import { ViewportPage } from "@features/page";
 import { JsonLd } from "../components/json-ld.jsx";
 import { SeoBasic } from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -52,7 +52,6 @@ const IndexPage = () => {
     const search = useSearchURL();
     const postsByCategory = usePostList();
     return <ViewportPage
-               skipA={<SkipA>Posts</SkipA>}
                sidebar={
                    <Sidebar
                        search={

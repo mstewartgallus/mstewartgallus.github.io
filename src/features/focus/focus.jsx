@@ -2,8 +2,8 @@ import { createContext, useRef, useContext, useDeferredValue, useEffect } from "
 import { useChanged } from "@features/util";
 import { usePostLocation } from "@features/post-location";
 
-// Gatsby already handles scroll, focus-visible for extra emphasis
-const opts = { focusVisible: true, preventScroll: true };
+// Gatsby already handles scroll
+const opts = { preventScroll: true };
 
 const Context = createContext();
 Context.displayName = 'Focus';

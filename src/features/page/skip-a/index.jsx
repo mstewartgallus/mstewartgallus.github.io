@@ -1,6 +1,5 @@
 import { useFocus } from "@features/focus";
-import { A } from "@features/ui";
-import { content } from "./skip-a.module.css";
+import { SubtleA } from "@features/ui";
 
 const onKeyDown = e => {
     const { target, key, keyCode, isComposing } = e;
@@ -17,7 +16,7 @@ const onKeyDown = e => {
 
 export const SkipA = props => {
     const ref = useFocus();
-    return <A className={content} id="skip-link" href="#content"
+    return <SubtleA href="#content"
               onKeyDown={onKeyDown}
               {...props} ref={ref} />;
 };
