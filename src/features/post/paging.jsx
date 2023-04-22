@@ -20,4 +20,3 @@ export const Paging = ({ previous, next }) =>
           }
       </div>
 </div>;
-

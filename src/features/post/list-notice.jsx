@@ -1,19 +1,13 @@
-import { useId } from "react";
-import { Set, SetItem } from "./set";
+import { Dl, DlDiv, Dt, Dd } from "@features/ui";
 
-export const ListNotice = ({notice}) => {
-    const id = useId();
-    return <div role="presentation">
-               <span id={id}>Notice</span>
-               &emsp;
-               <Set aria-labelledby={id}>
-                   {
-                       notice.map(n =>
-                           <SetItem key={n} aria-describedby={id}>
-                               {n}
-                           </SetItem>
-                       )
-                   }
-               </Set>
-           </div>;
-};
+export const ListNotice = ({notice}) =>
+<Dl>
+    <DlDiv>
+        <Dt>Notice</Dt>
+        {
+            notice.map(n =>
+                <Dd key={n}>{n}</Dd>
+            )
+        }
+    </DlDiv>
+</Dl>;

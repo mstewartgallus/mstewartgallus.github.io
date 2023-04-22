@@ -1,108 +1,82 @@
-import { createContext, useId, useContext } from "react";
 import { useSearchURL } from "@features/route";
-import { A, ClickTrap } from "@features/ui";
-import { DescA } from "./desc-a";
-import { Set, SetItem } from "./set";
-import { time, address, dl, dt } from "./metadata.module.css";
+import { A, Address, Dl, DlDiv, Dd, Dt, Time, ClickTrap } from "@features/ui";
 
-const DescContext = createContext(null);
-DescContext.displayName = 'Desc';
-
-const DescContextProvider = DescContext.Provider;
-
-const Desc = ({desc,children}) => {
-    const id = useId();
-    return <div role="presentation" className={dl}>
-               <div className={dt} id={id}>{desc}</div>
-               <Set aria-labelledby={id}>
-                   <DescContextProvider value={id}>
-                       {children}
-                   </DescContextProvider>
-               </Set>
-           </div>;
-};
-
-const DescItem = ({ children, filter, item, ...props }) => {
-    const id = useContext(DescContext);
+const Item = ({ children, filter, item }) => {
     const href = useSearchURL({ [filter]: [item] });
-    return <SetItem>
-               <A href={href} data-pagefind-filter={filter}
-                  aria-describedby={id} {...props}>
-                   {children}
-                   <ClickTrap />
-               </A>
-           </SetItem>;
+    return <A href={href} data-pagefind-filter={filter}>
+               {children}
+               <ClickTrap />
+           </A>
 };
 
- export const Metadata = ({
+export const Metadata = ({
     dateDisplay, date, author, places, tags, people
-}) => {
-    const id = useId();
-    return <>
-               <div role="presentation">
-                   <span id={id}>Post Date</span>
-                   &emsp;
-                   <time className={time}
-                       aria-describedby={id}
-                       data-pagefind-filter="date[datetime]"
-                       data-pagefind-sort="date[datetime]"
-                       dateTime={date}>
-                       {dateDisplay}
-                   </time>
-               </div>
-               <address className={address}>
-                   <DescA rel="author" href={author.url} desc={author.name}>Author</DescA>
-               </address>
-               {
-                   places && places.length > 0 &&
-                       <Desc desc="Place">
-                           {
-                               places.map(item =>
-                                   <DescItem
-                                       key={item}
-                                       filter="place"
-                                       rel="tag"
-                                       item={item}
-                                   >
-                                       {item}
-                                   </DescItem>
-                               )
-                           }
-                       </Desc>
-               }
-               {
-                   tags && tags.length > 0 &&
-                       <Desc desc="Tag">
-                           {
-                               tags.map(item =>
-                                   <DescItem
-                                       key={item}
-                                       filter="tag"
-                                       rel="tag"
-                                       item={item}
-                                   >
-                                       {item}
-                                   </DescItem>
-                               )
-                           }
-                       </Desc>
-               }
-               {
-                   people && people.length > 0 &&
-                       <Desc desc="Person">
-                           {
-                               people.map(item =>
-                                   <DescItem
-                                       key={item}
-                                       filter="person"
-                                       rel="tag"
-                                       item={item}
-                                   >
-                                       {item}
-                                   </DescItem>
-                               )
-                           }
-                       </Desc>
-               }
-           </>;
-};
+ }) =>
+<Dl>
+    <DlDiv>
+        <Dt>Post Date</Dt>
+        <Dd>
+            <Time data-pagefind-filter="date[datetime]"
+                  data-pagefind-sort="date[datetime]"
+                  dateTime={date}>
+                {dateDisplay}
+            </Time>
+        </Dd>
+    </DlDiv>
+    <DlDiv>
+        <Dt>Author</Dt>
+        <Dd>
+            <Address>
+                <A rel="author" href={author.url}>
+                    {author.name}
+                    <ClickTrap />
+                </A>
+            </Address>
+        </Dd>
+    </DlDiv>
+    {
+        places && places.length > 0 &&
+            <DlDiv>
+                <Dt>Place</Dt>
+                {
+                    places.map(item =>
+                        <Dd>
+                            <Item filter="place" item={item}>
+                                {item}
+                            </Item>
+                        </Dd>
+                    )
+                }
+            </DlDiv>
+    }
+    {
+        tags && tags.length > 0 &&
+            <DlDiv>
+                <Dt>Tags</Dt>
+                {
+                    tags.map(item =>
+                        <Dd>
+                            <Item filter="tag" item={item}>
+                                {item}
+                            </Item>
+                        </Dd>
+                    )
+                }
+            </DlDiv>
+    }
+    {
+        people && people.length > 0 &&
+            <DlDiv>
+                <Dt>Person</Dt>
+                {
+                    people.map(item =>
+                        <Dd>
+                            <Item filter="person" item={item}>
+                                {item}
+                            </Item>
+                        </Dd>
+                    )
+                }
+            </DlDiv>
+    }
+</Dl>;

@@ -1,7 +1,7 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { MDXProvider } from '@mdx-js/react';
 import { A, BreadcrumbList, BreadcrumbItem, ClickTrap } from "@features/ui";
-import { ViewportPage, SkipA } from "@features/page";
+import { ViewportPage } from "@features/page";
 import { theme } from "./theme.jsx";
 
 const Pathname = () => useLocation().pathname;
