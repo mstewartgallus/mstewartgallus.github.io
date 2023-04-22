@@ -1,12 +1,13 @@
 import { createContext, useId, useContext } from "react";
 import { Checkbox } from "../checkbox";
-import { select, option, optionLabel } from "./select.module.css";
+import { label as labelClass, select, option, optionLabel } from "./select.module.css";
 
 const SelectContext = createContext(null);
 SelectContext.displayName = 'Select';
 
-export const Select = ({ name, children, onChange }) =>
+export const Select = ({ name, label, children, onChange }) =>
 <fieldset className={select} onChange={onChange}>
+    <legend className={labelClass}>{label}</legend>
     <SelectContext.Provider value={name}>
         {children}
     </SelectContext.Provider>

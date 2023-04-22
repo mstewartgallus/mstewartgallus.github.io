@@ -1,27 +1,9 @@
 import { useId, useCallback, useMemo } from "react";
-import { Card, Column, Input, Button } from "@features/ui";
+import { Card, Column, Hgroup, H2, Input, Button } from "@features/ui";
+import { Search } from "@features/polyfill";
 import { Legend } from "../legend";
 import { Select, Option } from "../select";
-import { query, queryContent } from "./search-form.module.css";
-
-const Query = ({value, onChange}) => {
-    const id = useId();
-
-    return <fieldset className={query}>
-               <Legend>Basic</Legend>
-               <div className={queryContent}>
-                   <label htmlFor={id}>
-                       Query
-                   </label>
-                   <Input id={id}
-                          name="s" type="search"
-                          value={value}
-                          onChange={onChange}
-                   />
-                   <Button type="submit">Search</Button>
-               </div>
-           </fieldset>;
-};
+import { Query } from "../query";
 
 const Options = ({options, onChange, selected}) => useMemo(() => options.map(option => {
     const checked = selected?.has(option);
@@ -63,12 +45,13 @@ const Selects = ({
     legend,
     selected,
     onChange
-}) => <Card>
-          <Select key={name} name={name}>
-              <Legend>{legend}</Legend>
+}) => <Select key={name} name={name} label={legend}>
+          <Card>
+              <span>{legend}</span>
               <Options options={options} selected={selected} onChange={onChange} />
-          </Select>
-      </Card>);
+          </Card>
+      </Select>
+                          );
 
 const legends = {
     category: 'Category',
@@ -107,15 +90,23 @@ export const SearchForm = ({
         return { name, selected, legend, options };
     });
 
-    return <form rel="search" action={action} onSubmit={onSubmit}>
-               <Column>
-                   <Card>
-                       <Query value={state.s} onChange={onChangeS} />
-                   </Card>
+    return <Search>
+               <form rel="search" action={action} onSubmit={onSubmit}>
+                   <Column>
+                       <header>
+                           <Card>
+                               <Hgroup>
+                                   <H2 tabIndex="-1" id="search">Search</H2>
+                               </Hgroup>
+                           </Card>
+                       </header>
 
-                   <Selects state={theState}
-                            onChange={onChangeSelect}
-                   />
-               </Column>
-           </form>;
+                       <Query value={state.s} onChange={onChangeS} />
+
+                       <Selects state={theState}
+                                onChange={onChangeSelect}
+                       />
+                   </Column>
+               </form>
+           </Search>;
 };

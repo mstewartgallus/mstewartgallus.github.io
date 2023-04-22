@@ -1,7 +1,7 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "@features/search";
-import { A, ClickTrap, H2, BreadcrumbList, BreadcrumbItem, Search } from "@features/ui";
+import { A, ClickTrap, BreadcrumbList, BreadcrumbItem } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { useSubmit } from "@features/util";
 import { useTitle } from "../components/title.jsx";
@@ -123,16 +123,14 @@ const SearchPage = () => {
 
     return <ViewportPage
                sidebar={
-                   <Search heading={<H2 tabIndex="-1" id="search">Search</H2>}>
-                       <SearchForm action="/search"
-                                   onSubmit={onSubmit}
+                   <SearchForm action="/search"
+                               onSubmit={onSubmit}
 
-                                   tags={tags}
-                                   set={setter}
+                               tags={tags}
+                               set={setter}
 
-                                   state={state}
-                       />
-                   </Search>
+                               state={state}
+                   />
                }
                breadcrumbs={
                    <BreadcrumbList>

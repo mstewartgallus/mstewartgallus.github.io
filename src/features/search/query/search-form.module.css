@@ -14,3 +14,15 @@
     flex-wrap: wrap ;
     align-items: flex-start ;
 }
+
+.legend {
+    position: absolute ;
+    white-space: nowrap ;
+    position: absolute ;
+    left: -10000px ;
+    top: auto ;
+    width: 1px ;
+    height: 1px ;
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px) ;
+    overflow: hidden ;
+}

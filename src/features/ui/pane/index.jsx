@@ -44,7 +44,7 @@ export const Pane = ({children, willChange, open}) => {
             ].join(' ') : ''
     ].join(' ');
 
-    return <div className={disclosureClass} aria-hidden={open ? null : "true"}>
+    return <div className={disclosureClass} aria-hidden={(client || open) ? null : "true"}>
                <div className={wrapperClass}>
                    <div className={contentClass} onTransitionEnd={endTransition}>
                        {children}
