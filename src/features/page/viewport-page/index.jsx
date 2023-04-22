@@ -28,7 +28,9 @@ export const ViewportPage = ({
         <Card>
             <header>
                 <Hgroup>
-                    <H1 tabIndex="-1" id="content"><SkipA>{heading}</SkipA></H1>
+                    <H1 tabIndex="-1" id="content">
+                        <SkipA href="#content">{heading}</SkipA>
+                    </H1>
                     {subheading}
                 </Hgroup>
                 {notice}

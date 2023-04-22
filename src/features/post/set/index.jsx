@@ -11,6 +11,5 @@ export const Set = ({children, ...props}) =>
 
 export const SetItem = ({children, ...props}) =>
 <li role="listitem" className={item} {...props}>
-    &emsp;
     {children}
 </li>;

@@ -10,13 +10,11 @@
     padding: 0 ;
 }
 
-.dl, .dt {
-    margin-block: 0;
-}
 .dt {
-    display: contents ;
+    display: block ;
 }
 .dl {
-    display: flow-root ;
-    contain: layout ;
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 0.5em ;
 }

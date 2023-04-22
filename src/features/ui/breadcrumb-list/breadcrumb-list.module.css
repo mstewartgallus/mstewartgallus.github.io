@@ -27,6 +27,7 @@
 }
 
 .breadcrumb {
+    position: relative ;
     list-style: breadcrumb ;
     list-style-position: inside ;
 }

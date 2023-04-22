@@ -1,6 +1,6 @@
 import { createContext, useId, useContext } from "react";
 import { useSearchURL } from "@features/route";
-import { A } from "@features/ui";
+import { A, ClickTrap } from "@features/ui";
 import { DescA } from "./desc-a";
 import { Set, SetItem } from "./set";
 import { time, address, dl, dt } from "./metadata.module.css";
@@ -27,7 +27,10 @@ const DescItem = ({ children, filter, item, ...props }) => {
     const href = useSearchURL({ [filter]: [item] });
     return <SetItem>
                <A href={href} data-pagefind-filter={filter}
-                  aria-describedby={id} {...props}>{children}</A>
+                  aria-describedby={id} {...props}>
+                   {children}
+                   <ClickTrap />
+               </A>
            </SetItem>;
 };
 

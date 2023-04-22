@@ -9,7 +9,7 @@
     }
 }
 
-.header, .footer, .mainbar, .sidebar {
+.footer, .mainbar, .sidebar {
     box-sizing: border-box ;
     max-inline-size: 100% ;
 }
@@ -41,32 +41,10 @@
 }
 
 @media print {
-    .header, .footer {
+    .footer {
         display: none ;
     }
 }
-
-/* FIXME consider fadeout over time???? */
-/* would have to review WCAG guidelines on fading */
-.header {
-    display: flow-root ;
-    inline-size: fit-content ;
-    max-inline-size: 100% ;
-    z-index: 9000 ;
-    padding-inline: 0.7em ;
-    margin-inline-start: calc(0.2 * var(--t))  ;
-}
-.header:focus-within {
-    position: sticky ;
-    inset-block-start: 0 ;
-    padding-block: calc(0.3 * var(--line) ) ;
-    margin-block: calc(-0.3 * var(--line) ) ;
-    background: var(--canvas);
-    opacity: 90% ;
-    border-end-start-radius: 0.8ch ;
-    border-end-end-radius: 0.8ch ;
-}
-
 
 .layout {
     max-inline-size: calc(1.8 * var(--main-width));

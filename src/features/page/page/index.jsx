@@ -1,6 +1,6 @@
 import { A, Card, Column, Row } from "@features/ui";
 import {
-    layout, header as headerClass, footer,
+    layout, footer,
     mainbar as mainbarClass, sidebar as sidebarClass
 } from "./page.module.css";
 

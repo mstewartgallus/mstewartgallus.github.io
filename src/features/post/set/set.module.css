@@ -4,9 +4,15 @@
 }
 
 .set {
-    display: contents ;
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 0.25em ;
 }
 
 .item {
-    display: contents ;
+    display: block ;
+    padding: 0;
+    margin: 0;
+    position: relative ;
+    padding-inline: 0.75em ;
 }
