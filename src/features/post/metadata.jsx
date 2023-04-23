@@ -9,9 +9,24 @@ const Item = ({ children, filter, item }) => {
            </A>
 };
 
+const Items = ({ filter, items }) =>
+      items.map(item =>
+          <Dd>
+              <Item filter={filter} item={item}>
+                  {item}
+              </Item>
+          </Dd>);
+
+const ItemList = ({ label, filter, items }) =>
+      items && items.length > 0 &&
+    <DlDiv>
+        <Dt>{label}</Dt>
+        <Items filter={filter} items={items} />
+    </DlDiv>;
+
 export const Metadata = ({
     dateDisplay, date, author, places, tags, people
- }) =>
+}) =>
 <Dl>
     <DlDiv>
         <Dt>Post Date</Dt>
@@ -34,49 +49,7 @@ export const Metadata = ({
             </Address>
         </Dd>
     </DlDiv>
-    {
-        places && places.length > 0 &&
-            <DlDiv>
-                <Dt>Place</Dt>
-                {
-                    places.map(item =>
-                        <Dd>
-                            <Item filter="place" item={item}>
-                                {item}
-                            </Item>
-                        </Dd>
-                    )
-                }
-            </DlDiv>
-    }
-    {
-        tags && tags.length > 0 &&
-            <DlDiv>
-                <Dt>Tags</Dt>
-                {
-                    tags.map(item =>
-                        <Dd>
-                            <Item filter="tag" item={item}>
-                                {item}
-                            </Item>
-                        </Dd>
-                    )
-                }
-            </DlDiv>
-    }
-    {
-        people && people.length > 0 &&
-            <DlDiv>
-                <Dt>Person</Dt>
-                {
-                    people.map(item =>
-                        <Dd>
-                            <Item filter="person" item={item}>
-                                {item}
-                            </Item>
-                        </Dd>
-                    )
-                }
-            </DlDiv>
-    }
+    <ItemList label="Place" filter="place" items={places} />
+    <ItemList label="Tag" filter="tag" items={tags} />
+    <ItemList label="Person" filter="person" items={people} />
 </Dl>;
