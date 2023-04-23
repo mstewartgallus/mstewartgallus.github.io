@@ -1,7 +1,8 @@
 import { forwardRef, createContext, useContext } from "react";
 import {
     orderedList, unorderedList,
-    uitem, oitem, roitem,
+    item,
+    marker,
     content
 } from "./list.module.css";
 
@@ -30,14 +31,12 @@ const Menu = (props, ref) =>
 
 const Li = (props, ref) => {
     const type = useContext(Context);
-    const item = {
-        'ul': uitem,
-        'ol': oitem,
-        'rol': roitem
-    }[type];
     return <li role="listitem" className={item} {...props} ref={ref}>
-        <div className={content}>{props.children}</div>
-    </li>;
+               <div role="presentation" className={marker} />
+               <div className={content}>
+                   {props.children}
+               </div>
+           </li>;
 };
 
 const OlRef = forwardRef(Ol);

@@ -1,3 +1,15 @@
+@counter-style nodot {
+  system: numeric  ;
+  symbols: "0"  "1" "2" "3" "4" "5" "6" "7" "8" "9" ;
+  suffix: "";
+}
+
+@counter-style bullet {
+  system: cyclic;
+  symbols: "\2043";
+  suffix: "";
+}
+
 .orderedList {
     list-style-type: nodot ;
 }
@@ -7,13 +19,14 @@
 
 .unorderedList, .orderedList {
     display: block ;
+    padding: 0;
+    margin: 0;
     inline-size: fit-content ;
     max-inline-size: 100% ;
-    padding: 0;
     margin-block: var(--line) ;
 }
 
-.uitem, .oitem, .roitem {
+.item {
     position: relative ;
     display: flex ;
     inline-size: fit-content ;
@@ -21,31 +34,16 @@
     column-gap: 0.75em ;
 }
 
-.uitem::before, .oitem::before, .roitem::before {
-    display: block ;
+.marker {
+    display: list-item ;
+    list-style-position: inside ;
+    flex-basis: 1.25em ;
     min-inline-size: 1.25em ;
     font-weight: bold ;
     font-variant-numeric: lining-nums tabular-nums;
     color: var(--emphasis-text);
-}
 
-.uitem::before {
-    text-align: center ;
-    flex-basis: 1.25em ;
-    content: "\2043";
-}
-
-.oitem::before, .roitem::before {
     text-align: end ;
-    flex-basis: 1.25em ;
-    content: counter(list-item);
-}
-
-.oitem::before {
-    counter-increment: list-item ;
-}
-.roitem::before {
-    counter-increment: list-item -1;
 }
 
 .content {
@@ -53,4 +51,13 @@
     max-inline-size: 100% ;
     flex-grow: 2 ;
     display: block ;
+}
+
+.unorderedList, .orderedList {
+    display: grid ;
+    column-gap: 0.75em ;
+    grid-template-columns: 1.25em 1fr ;
+}
+.item {
+    display: contents ;
 }
