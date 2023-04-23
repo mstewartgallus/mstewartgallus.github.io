@@ -1,3 +1,7 @@
 import "./focus.css";
 
-export { onInitialClientRender } from "@features/focus";
+// hack around the Gatsby focus wrapper for manual focus management
+// after hydration
+export const onInitialClientRender = () => {
+    document.getElementById('gatsby-focus-wrapper')?.removeAttribute('tabIndex');
+};

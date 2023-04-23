@@ -1,6 +1,20 @@
 import { useEffect } from "react";
 import { useLocation } from "@gatsbyjs/reach-router";
-import { routeUpdate, routeUpdateDelayed } from "./listeners.js";
+import { routeUpdates, routeDelays } from "./listeners.js";
+
+const routeUpdate = ({ signal }) => new Promise(r => {
+    signal.addEventListener('abort', () => {
+        routeUpdates.delete(r);
+    });
+    routeUpdates.add(r);
+});
+
+const routeUpdateDelayed = ({ signal }) => new Promise(r => {
+    signal.addEventListener('abort', () => {
+        routeDelays.delete(r);
+    });
+    routeDelays.add(r);
+});
 
 const onNavigate = (pathname, { signal }) => e => {
     const { destination, canIntercept, downloadRequest } = e;

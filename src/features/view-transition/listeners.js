@@ -1,5 +1,5 @@
-let routeUpdates = new Set();
-let routeDelays = new Set();
+export let routeUpdates = new Set();
+export let routeDelays = new Set();
 
 export const onRouteUpdate = () => {
     const cbs = routeDelays;
@@ -16,17 +16,3 @@ export const onRouteUpdateDelayed = () => {
         cb('delayed');
     }
 };
-
-export const routeUpdate = ({ signal }) => new Promise(r => {
-    signal.addEventListener('abort', () => {
-        routeUpdates.delete(r);
-    });
-    routeUpdates.add(r);
-});
-
-export const routeUpdateDelayed = ({ signal }) => new Promise(r => {
-    signal.addEventListener('abort', () => {
-        routeDelays.delete(r);
-    });
-    routeDelays.add(r);
-});
