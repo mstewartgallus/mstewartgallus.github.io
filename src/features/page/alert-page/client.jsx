@@ -1,7 +1,6 @@
 import { useCallback, useRef, useEffect } from "react";
 import { navigate } from "gatsby";
-import { Theme, Button, Card, Hgroup } from "@features/ui";
-import { H1 } from "../h1.jsx";
+import { H1, Theme, Button, Card, Hgroup } from "@features/ui";
 import { dialog, header } from "./alert.module.css";
 
 const Dialog = ({children, ...props}) => {

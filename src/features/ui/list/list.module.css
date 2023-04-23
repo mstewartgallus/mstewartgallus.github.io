@@ -57,7 +57,12 @@
     display: grid ;
     column-gap: 0.75em ;
     grid-template-columns: 1.25em 1fr ;
+    position: relative ;
 }
 .item {
     display: contents ;
+}
+
+.content {
+    position: relative ;
 }

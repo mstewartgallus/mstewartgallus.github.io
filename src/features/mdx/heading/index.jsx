@@ -7,13 +7,12 @@ import { heading } from "./heading.module.css";
 
 const createAutoLink = Hn => {
     const name = Hn.displayName || Hn.name || 'Component';
-    const HeadingAutoLink = props => {
-        const { children, id, tabIndex = "-1" } = props;
+    const HeadingAutoLink = ({ children, id, ...props }) => {
         const href = id ? `#${id}` : null;
         return <header className={heading}>
                    <Hgroup>
-                       <Hn {...props} id={id} tabIndex={tabIndex}>
-                           <SubtleA href={href}>
+                       <Hn {...props}>
+                           <SubtleA id={id} href={href}>
                                {children}
                            </SubtleA>
                        </Hn>

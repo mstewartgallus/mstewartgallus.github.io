@@ -27,7 +27,7 @@ export const PostPage = ({post, children}) => {
                         />}
                mainbar={
                    comments &&
-                       <Section heading={<H2 tabIndex="-1" id="comments">Comments</H2>}>
+                       <Section heading={<H2>Comments</H2>}>
                            <Comments host={comments.host} id={comments.id} />
                        </Section>
                }

@@ -95,7 +95,7 @@ export const SearchForm = ({
                        <header>
                            <Card>
                                <Hgroup>
-                                   <H2 tabIndex="-1" id="search">Search</H2>
+                                   <H2>Search</H2>
                                </Hgroup>
                            </Card>
                        </header>

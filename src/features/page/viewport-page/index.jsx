@@ -17,7 +17,7 @@ export const ViewportPage = ({
         <>
             {sidebar}
             <ScreenOnly>
-                <Nav heading={<H2 tabIndex="-1" id="breadcrumbs">Breadcrumbs</H2>}>
+                <Nav heading={<H2>Breadcrumbs</H2>}>
                     {breadcrumbs}
                 </Nav>
             </ScreenOnly>
@@ -28,8 +28,8 @@ export const ViewportPage = ({
         <Card>
             <header>
                 <Hgroup>
-                    <H1 tabIndex="-1" id="content">
-                        <SkipA href="#content">{heading}</SkipA>
+                    <H1>
+                        <SkipA id="content" href="#content">{heading}</SkipA>
                     </H1>
                     {subheading}
                 </Hgroup>

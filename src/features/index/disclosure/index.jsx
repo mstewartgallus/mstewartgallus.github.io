@@ -18,7 +18,7 @@ export const Summary = props => {
     const ariaControls = useContext(Controls);
     const client = useClient();
 
-    return <H2 tabIndex={client ? null : "-1"} id={client ? null : id}>
+    return <H2>
                <span className={insideHeading}>
                    <Client>
                        <span className={details}>

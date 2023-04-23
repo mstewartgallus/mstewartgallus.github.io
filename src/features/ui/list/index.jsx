@@ -33,7 +33,7 @@ const Li = (props, ref) => {
     const type = useContext(Context);
     return <li role="listitem" className={item} {...props} ref={ref}>
                <div role="presentation" className={marker} />
-               <div className={content}>
+               <div role="presentation" className={content}>
                    {props.children}
                </div>
            </li>;
