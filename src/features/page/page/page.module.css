@@ -9,11 +9,6 @@
     }
 }
 
-.footer, .mainbar, .sidebar {
-    box-sizing: border-box ;
-    max-inline-size: 100% ;
-}
-
 @media print {
     .layout {
         padding-block: 1.5in ;
@@ -28,53 +23,9 @@
 
     widows: 2 ;
     orphans: 2 ;
-}
 
-.layout {
     isolation: isolate ;
     contain: paint style ;
-}
 
-.footer {
-    display: flex ;
-    justify-content: center ;
-}
-
-@media print {
-    .footer {
-        display: none ;
-    }
-}
-
-.layout {
     max-inline-size: calc(1.8 * var(--main-width));
 }
-
-.mainbar {
-    flex-basis: var(--main-width) ;
-}
-.sidebar {
-    flex-basis: calc(0.7 * var(--measure)) ;
-}
-.mainbar {
-    flex-grow: 3 ;
-    flex-shrink: 2 ;
-}
-.sidebar {
-    flex-grow: 2 ;
-    flex-shrink: 3 ;
-}
-
-/* Place main page above footer */
-/* .page { */
-/*     z-index: 1000 ; */
-/* } */
-/* Place main compositing layers above the sidebar */
-.mainbar {
-    z-index: 1000 ;
-}
-
-/* .sidebar { */
-/*      background: linear-gradient(grey, Canvas); */
-/*      background-size: 100% var(--line) ; */
-/* } */

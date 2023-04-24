@@ -1,7 +1,7 @@
 export { A } from "./a";
 export { Address } from "./address";
 export { Blockquote } from "./blockquote";
-export { BreadcrumbList, BreadcrumbItem } from "./breadcrumb-list";
+export { BreadcrumbList, BreadcrumbItem, BreadcrumbA } from "./breadcrumb-list";
 export { Button } from "./button";
 export { ClickTrap } from "./click-trap";
 export { Dl, DlDiv, Dt, Dd } from "./dl";

@@ -1,15 +1,11 @@
 import { useSearchURL } from "@features/route";
-import { A, BreadcrumbList, BreadcrumbItem, ClickTrap, Cite } from "@features/ui";
+import { BreadcrumbList, BreadcrumbItem, BreadcrumbA, Cite } from "@features/ui";
 
 export const PostBreadcrumbs = ({category, title}) => {
     const cat = useSearchURL({ category: [category] });
     return <BreadcrumbList>
-               <BreadcrumbItem>
-                   <A href="/">Home<ClickTrap /></A>
-               </BreadcrumbItem>
-               <BreadcrumbItem>
-                   <A rel="tag" href={cat}>{category}<ClickTrap /></A>
-               </BreadcrumbItem>
+               <BreadcrumbA href="/">Home</BreadcrumbA>
+               <BreadcrumbA rel="tag" href={cat}>{category}</BreadcrumbA>
                <BreadcrumbItem>
                    <Cite aria-current="page">{title}</Cite>
                </BreadcrumbItem>

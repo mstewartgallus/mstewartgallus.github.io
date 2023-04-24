@@ -81,26 +81,25 @@ const IndexPage = () => {
                    <Accordion>
                        {
                            Object.entries(postsByCategory).map(([category, p]) =>
-                               <nav
-                                   key={category}
-                                   aria-labelledby={category}>
-                                       <AccordionPanel
-                                           value={category}
-                                           summary={
-                                               <Card>
-                                                   <header>
-                                                       <Hgroup>
-                                                           <AccordionSummary id={category}>
-                                                               {category}
-                                                           </AccordionSummary>
-                                                       </Hgroup>
-                                                   </header>
-                                               </Card>
-                                           }>
+                               <nav key={category}
+                                    aria-labelledby={category}>
+                                   <AccordionPanel
+                                       value={category}
+                                       summary={
                                            <Card>
-                                               <PostList posts={p} />
+                                               <header>
+                                                   <Hgroup>
+                                                       <AccordionSummary id={category}>
+                                                           {category}
+                                                       </AccordionSummary>
+                                                   </Hgroup>
+                                               </header>
                                            </Card>
-                                       </AccordionPanel>
+                                       }>
+                                       <Card>
+                                           <PostList posts={p} />
+                                       </Card>
+                                   </AccordionPanel>
                                </nav>
                            )
                        }

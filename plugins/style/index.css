@@ -58,6 +58,10 @@ abbr {
     background-color: var(--canvas) ;
 }
 
+:root {
+    scroll-snap-type: block mandatory;
+}
+
 @keyframes slideout {
     to {
         transform: translateY(-1px) ;

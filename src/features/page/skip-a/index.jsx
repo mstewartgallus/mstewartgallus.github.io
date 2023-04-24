@@ -16,7 +16,5 @@ const onKeyDown = e => {
 
 export const SkipA = props => {
     const ref = useFocus();
-    return <SubtleA href="#content"
-              onKeyDown={onKeyDown}
-              {...props} ref={ref} />;
+    return <SubtleA onKeyDown={onKeyDown} {...props} ref={ref} />;
 };

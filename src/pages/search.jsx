@@ -1,7 +1,7 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { useTransition, useReducer, useState, useEffect, useMemo, useCallback } from "react";
 import { ResultList, SearchForm, useSearch, usePostTags } from "@features/search";
-import { A, ClickTrap, BreadcrumbList, BreadcrumbItem } from "@features/ui";
+import { BreadcrumbList, BreadcrumbItem, BreadcrumbA } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { useSubmit } from "@features/util";
 import { useTitle } from "../components/title.jsx";
@@ -134,9 +134,7 @@ const SearchPage = () => {
                }
                breadcrumbs={
                    <BreadcrumbList>
-                       <BreadcrumbItem>
-                           <A href="/">Home<ClickTrap /></A>
-                       </BreadcrumbItem>
+                       <BreadcrumbA href="/">Home</BreadcrumbA>
                        <BreadcrumbItem>
                            <span aria-current="page">
                                Search

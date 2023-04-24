@@ -1,22 +1,17 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import { MDXProvider } from '@mdx-js/react';
-import { A, BreadcrumbList, BreadcrumbItem, ClickTrap } from "@features/ui";
+import { BreadcrumbList, BreadcrumbItem, BreadcrumbA } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { theme } from "./theme.jsx";
 
 const Pathname = () => useLocation().pathname;
 
-export const Layout = ({
-    children,
-    pageContext
-}) => {
+export const Layout = ({ children, pageContext }) => {
     const title = pageContext?.frontmatter?.title ?? <Pathname />;
     return <ViewportPage
                breadcrumbs={
                    <BreadcrumbList>
-                       <BreadcrumbItem>
-                           <A href="/">Home<ClickTrap /></A>
-                       </BreadcrumbItem>
+                       <BreadcrumbA href="/">Home</BreadcrumbA>
                        <BreadcrumbItem>
                            <span aria-current="page">{title}</span>
                        </BreadcrumbItem>

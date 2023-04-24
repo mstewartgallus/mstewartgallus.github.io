@@ -1,0 +1,13 @@
+.footer {
+    display: flex ;
+    justify-content: center ;
+
+    box-sizing: border-box ;
+    max-inline-size: 100% ;
+}
+
+@media print {
+    .footer {
+        display: none ;
+    }
+}

@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { Input, Button, Card } from "@features/ui";
+import { Input, Button } from "@features/ui";
 import { query } from "./search-form.module.css";
 
 export const SearchForm = ({action, onSubmit}) => {
