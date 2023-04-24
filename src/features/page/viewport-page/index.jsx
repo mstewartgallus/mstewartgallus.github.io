@@ -19,31 +19,33 @@ export const ViewportPage = ({
         <Column>
             <SidebarLayout
                 sidebar={
-                    <>
+                    <Column>
                         {sidebar}
                         <ScreenOnly>
                             <Nav heading={<H2>Breadcrumbs</H2>}>
                                 {breadcrumbs}
                             </Nav>
                         </ScreenOnly>
-                    </>
+                    </Column>
                 }
             >
-                <main data-pagefind-body="" aria-describedby="content">
-                    <Card>
-                        <header>
-                            <Hgroup>
-                                <H1>
-                                    <SkipA id="content" href="#content">{heading}</SkipA>
-                                </H1>
-                                {subheading}
-                            </Hgroup>
-                            {notice}
-                        </header>
-                        {children}
-                    </Card>
-                </main>
-                {mainbar}
+                <Column>
+                    <main data-pagefind-body="" aria-describedby="content">
+                        <Card>
+                            <header>
+                                <Hgroup>
+                                    <H1>
+                                        <SkipA id="content" href="#content">{heading}</SkipA>
+                                    </H1>
+                                    {subheading}
+                                </Hgroup>
+                                {notice}
+                            </header>
+                            {children}
+                        </Card>
+                    </main>
+                    {mainbar}
+                </Column>
             </SidebarLayout>
             <div className={footerClass}>
                 <Card>

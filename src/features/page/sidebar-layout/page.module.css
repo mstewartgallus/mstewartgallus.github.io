@@ -1,44 +1,30 @@
-.footer, .mainbar, .sidebar {
-    box-sizing: border-box ;
-    max-inline-size: 100% ;
+.layout, .mainbar, .sidebar {
+    contain: layout style;
+}
+.mainbar, .sidebar {
+    display: flow-root;
+    max-inline-size: 100%;
 }
 
-.footer {
-    display: flex ;
-    justify-content: center ;
-}
-
-@media print {
-    .footer {
-        display: none ;
-    }
+.layout {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    column-gap: 1em;
+    row-gap: var(--line);
 }
 
 .mainbar {
-    flex-basis: var(--main-width) ;
+    flex-basis: var(--main-width);
+    flex-shrink: 2;
 }
 .sidebar {
-    flex-basis: calc(0.7 * var(--measure)) ;
-}
-.mainbar {
-    flex-grow: 3 ;
-    flex-shrink: 2 ;
-}
-.sidebar {
-    flex-grow: 2 ;
-    flex-shrink: 3 ;
+    flex-basis: 30%;
+    flex-grow: 1;
+    flex-shrink: 3;
 }
 
-/* Place main page above footer */
-/* .page { */
-/*     z-index: 1000 ; */
-/* } */
 /* Place main compositing layers above the sidebar */
 .mainbar {
-    z-index: 1000 ;
+    z-index: 1000;
 }
-
-/* .sidebar { */
-/*      background: linear-gradient(grey, Canvas); */
-/*      background-size: 100% var(--line) ; */
-/* } */

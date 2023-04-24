@@ -1,31 +1,33 @@
+.layout {
+    box-sizing: border-box;
+    display: flow-root;
+
+    box-decoration-break: clone;
+    widows: 2;
+    orphans: 2;
+
+    contain: paint layout style;
+    position: relative;
+}
+
 @media screen {
     .layout {
-        padding-block: var(--line) calc(3 * var(--line)) ;
-        margin-block: calc(1.5 * var(--t)) ;
-    }
-
-    .layout {
-        margin-inline: calc(7 * var(--t)) ;
+        padding-block: var(--line) calc(3 * var(--line));
+        margin-block: calc(1.5 * var(--t));
+        margin-inline: calc(7 * var(--t));
+        max-inline-size: calc(1.8 * var(--main-width));
     }
 }
 
 @media print {
     .layout {
-        padding-block: 1.5in ;
-        padding-inline: 1.5in 0 ;
+        padding-block: 1.5in;
+        padding-inline: 1.5in 0;
     }
 }
 
-.layout {
-    position: relative ;
 
-    box-decoration-break: clone ;
-
-    widows: 2 ;
-    orphans: 2 ;
-
-    isolation: isolate ;
-    contain: paint style ;
-
-    max-inline-size: calc(1.8 * var(--main-width));
-}
+/* .layout { */
+/*      background: linear-gradient(grey, Canvas); */
+/*      background-size: 100% var(--line) ; */
+/* } */

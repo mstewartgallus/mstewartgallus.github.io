@@ -1,16 +1,11 @@
-import { Column, Row } from "@features/ui";
-import { mainbar as mainbarClass, sidebar as sidebarClass } from "./page.module.css";
+import { layout, mainbar as mainbarClass, sidebar as sidebarClass } from "./page.module.css";
 
 export const SidebarLayout = ({ children, sidebar }) =>
-<Row>
+<div className={layout}>
     <div className={mainbarClass}>
-        <Column>
-            {children}
-        </Column>
+        {children}
     </div>
     <div className={sidebarClass}>
-        <Column>
-            {sidebar}
-        </Column>
+        {sidebar}
     </div>
-</Row>;
+</div>;
