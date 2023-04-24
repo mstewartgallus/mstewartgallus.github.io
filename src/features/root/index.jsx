@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { ClientProvider } from "@features/util";
+import { ClientProvider } from "@features/client";
 
 export const Root = ({ children }) =>
 <StrictMode>

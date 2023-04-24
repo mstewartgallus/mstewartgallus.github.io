@@ -1,10 +1,14 @@
+import { lazy, Suspense } from "react";
 import { FocusProvider } from "@features/focus";
-import { ViewTransition } from "@features/view-transition";
+
+const ViewTransition = lazy(() => import("./view-transition.jsx"));
 
 export const Layout = ({ children }) =>
 <>
     <FocusProvider>
         {children}
     </FocusProvider>
-    <ViewTransition />
+    <Suspense>
+        <ViewTransition />
+    </Suspense>
 </>;
