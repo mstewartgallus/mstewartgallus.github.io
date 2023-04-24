@@ -1,1 +1,3 @@
-export { wrapPageElement } from "@features/layout";
+import { Layout } from "@features/layout";
+
+export const wrapPageElement = ({ element }) => <Layout>{element}</Layout>;

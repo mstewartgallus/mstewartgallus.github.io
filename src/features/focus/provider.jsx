@@ -1,9 +1,7 @@
-import { createContext, useRef, useContext, useDeferredValue, useEffect } from "react";
+import { useDeferredValue } from "react";
 import { useLocation } from "@gatsbyjs/reach-router";
 import { useChanged } from "@features/util";
-
-export const Context = createContext();
-Context.displayName = 'Focus';
+import { Context } from "./context.js";
 
 const { Provider } = Context;
 

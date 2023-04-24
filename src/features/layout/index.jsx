@@ -1,13 +1,10 @@
 import { FocusProvider } from "@features/focus";
 import { ViewTransition } from "@features/view-transition";
-import { Theme } from "@features/ui";
 
-export const wrapPageElement = ({ element }) =>
+export const Layout = ({ children }) =>
 <>
     <FocusProvider>
-        <Theme>
-            {element}
-        </Theme>
+        {children}
     </FocusProvider>
     <ViewTransition />
 </>;

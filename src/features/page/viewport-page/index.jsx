@@ -1,5 +1,5 @@
 import { ScreenOnly } from "@features/util";
-import { Card, H1, H2, Hgroup, Nav } from "@features/ui";
+import { Card, H1, H2, Hgroup, Nav, Theme } from "@features/ui";
 import { Page } from "../page";
 import { SkipA } from "../skip-a";
 
@@ -12,31 +12,34 @@ export const ViewportPage = ({
     sidebar,
     breadcrumbs
 }) =>
-<Page
-    sidebar={
-        <>
-            {sidebar}
-            <ScreenOnly>
-                <Nav heading={<H2>Breadcrumbs</H2>}>
-                    {breadcrumbs}
-                </Nav>
-            </ScreenOnly>
-        </>
-    }
->
-    <main data-pagefind-body="" aria-describedby="content">
-        <Card>
-            <header>
-                <Hgroup>
-                    <H1>
-                        <SkipA id="content" href="#content">{heading}</SkipA>
-                    </H1>
-                    {subheading}
-                </Hgroup>
-                {notice}
-            </header>
-            {children}
-        </Card>
-    </main>
-    {mainbar}
-</Page>;
+<Theme>
+    <Page
+        sidebar={
+            <>
+                {sidebar}
+                <ScreenOnly>
+                    <Nav heading={<H2>Breadcrumbs</H2>}>
+                        {breadcrumbs}
+                    </Nav>
+                </ScreenOnly>
+            </>
+        }
+    >
+        <main data-pagefind-body="" aria-describedby="content">
+            <Card>
+                <header>
+                    <Hgroup>
+                        <H1>
+                            <SkipA id="content" href="#content">{heading}</SkipA>
+                        </H1>
+                        {subheading}
+                    </Hgroup>
+                    {notice}
+                </header>
+                {children}
+            </Card>
+        </main>
+        {mainbar}
+    </Page>
+</Theme>
+;
