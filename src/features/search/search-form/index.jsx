@@ -63,13 +63,19 @@ export const SearchForm = ({
     action,
     onSubmit,
     tags,
-    state,
+    s,
+    tag,
+    category,
+    place,
+    person,
     set
 }) => {
-    const onChangeS = useCallback(event => set('s', event.target.value), [set]);
+    const onChangeS = useCallback(e => set('s', e.target.value), [set]);
 
-    const onChangeSelect = useCallback((event, option, checked, name) => {
-        const old = state[name];
+    const selects = useMemo(() => ({ category, place, person, tag }), [category, place, person, tag]);
+
+    const onChangeSelect = useCallback((e, option, checked, name) => {
+        const old = selects[name];
 
         const next = new Set(old);
         if (checked) {
@@ -79,9 +85,7 @@ export const SearchForm = ({
         }
 
         set(name, next);
-    }, [set, state]);
-
-    const selects = (({ category, place, tag, person }) => ({ category, place, person, tag }))(state);
+    }, [set, selects]);
 
     const theState = Object.entries(selects).map(([name, selected]) => {
         const legend = legends[name];
@@ -100,7 +104,7 @@ export const SearchForm = ({
                            </Card>
                        </header>
 
-                       <Query value={state.s} onChange={onChangeS} />
+                       <Query value={s} onChange={onChangeS} />
 
                        <Selects state={theState}
                                 onChange={onChangeSelect}

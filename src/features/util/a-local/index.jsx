@@ -64,7 +64,7 @@ const ALocal = (props, theRef) => {
 
     const { ref: prefetchRef, near } = useNear();
 
-    const ref = useCallback(elem => elem => {
+    const ref = useCallback(elem => {
         prefetchRef(elem);
         if (theRef) {
             theRef.current = elem;
