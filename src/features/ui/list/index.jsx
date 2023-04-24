@@ -1,4 +1,4 @@
-import { forwardRef, createContext, useContext } from "react";
+import { forwardRef } from "react";
 import {
     orderedList, unorderedList,
     item,
@@ -6,38 +6,28 @@ import {
     content
 } from "./list.module.css";
 
-const Context = createContext(null);
-
 const Ol = (props, ref) =>
 <ol role="list" className={orderedList} {...props} ref={ref}>
-    <Context.Provider value={props.reversed ? 'rol' : 'ol'}>
-        {props.children}
-    </Context.Provider>
+    {props.children}
 </ol>;
 
 const Ul = (props, ref) =>
 <ul role="list" className={unorderedList} {...props} ref={ref}>
-    <Context.Provider value='ul'>
-        {props.children}
-    </Context.Provider>
+    {props.children}
 </ul>;
 
 const Menu = (props, ref) =>
 <menu role="list" className={unorderedList} {...props} ref={ref}>
-    <Context.Provider value='ul'>
-        {props.children}
-    </Context.Provider>
+    {props.children}
 </menu>;
 
-const Li = (props, ref) => {
-    const type = useContext(Context);
-    return <li role="listitem" className={item} {...props} ref={ref}>
-               <div role="presentation" className={marker} />
-               <div role="presentation" className={content}>
-                   {props.children}
-               </div>
-           </li>;
-};
+const Li = (props, ref) =>
+<li role="listitem" className={item} {...props} ref={ref}>
+    <div role="presentation" className={marker} />
+    <div role="presentation" className={content}>
+        {props.children}
+    </div>
+</li>;
 
 const OlRef = forwardRef(Ol);
 const UlRef = forwardRef(Ul);

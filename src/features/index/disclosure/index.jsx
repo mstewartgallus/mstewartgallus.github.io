@@ -1,6 +1,6 @@
 import { createContext, useContext, useId } from "react";
 import { H2, Pane, Button } from "@features/ui";
-import { useClient, Client } from "@features/util";
+import { Client } from "@features/util";
 import {
     details, insideHeading,
     open as openClass, close as closeClass
@@ -16,7 +16,6 @@ export const Summary = props => {
     const { children, id } = props;
     const open = useContext(Open);
     const ariaControls = useContext(Controls);
-    const client = useClient();
 
     return <H2>
                <span className={insideHeading}>
