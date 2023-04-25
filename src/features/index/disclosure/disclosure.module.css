@@ -18,7 +18,7 @@
 }
 
 .open, .close {
-    min-inline-size: 5ch ;
+    min-inline-size: 6ch ;
     display: list-item ;
     list-style-position: inside ;
 }
