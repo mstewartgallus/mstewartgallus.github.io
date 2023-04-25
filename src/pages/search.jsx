@@ -1,11 +1,11 @@
-import { useLocation } from "@gatsbyjs/reach-router";
 import { useDeferredValue, useEffect, useMemo } from "react";
+import { useLocation } from "@gatsbyjs/reach-router";
 import {
     ResultList, SearchForm,
     useSearch, usePostTags, useFormState,
     useSearchState
 } from "@features/search";
-import { BreadcrumbList, BreadcrumbItem, BreadcrumbA } from "@features/ui";
+import { BreadcrumbList, BreadcrumbItem, BreadcrumbA, Theme } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { useSubmit, useClient } from "@features/util";
 import { useTitle } from "../components/title.jsx";
@@ -96,26 +96,28 @@ const SearchPage = () => {
     const deferredSearch = useDeferredValue(search);
     const { s = '' } = new URLSearchParams(deferredSearch);
 
-    return <ViewportPage
-               sidebar={<Form onSubmit={onSubmit} search={deferredSearch} />}
-               breadcrumbs={
-                   <BreadcrumbList>
-                       <BreadcrumbA href="/">Home</BreadcrumbA>
-                       <BreadcrumbItem>
-                           <span aria-current="page">
-                               Search
-                           </span>
-                       </BreadcrumbItem>
-                   </BreadcrumbList>
-               }
-               heading={
-                   s === '' ?
-                       <>Results</> :
-                       <>{s}{separator}Results</>
-               }
-           >
-               <Searcher search={deferredSearch} />
-           </ViewportPage>;
+    return <Theme>
+               <ViewportPage
+                   support={<Form onSubmit={onSubmit} search={deferredSearch} />}
+                   breadcrumbs={
+                       <BreadcrumbList>
+                           <BreadcrumbA href="/">Home</BreadcrumbA>
+                           <BreadcrumbItem>
+                               <span aria-current="page">
+                                   Search
+                               </span>
+                           </BreadcrumbItem>
+                       </BreadcrumbList>
+                   }
+                   heading={
+                       s === '' ?
+                           <>Results</> :
+                           <>{s}{separator}Results</>
+                   }
+               >
+                   <Searcher search={deferredSearch} />
+               </ViewportPage>
+           </Theme>;
 };
 
 export default SearchPage;

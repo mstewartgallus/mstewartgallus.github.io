@@ -1,7 +1,6 @@
 import { useLocation } from "@gatsbyjs/reach-router";
 import {
     SearchForm,
-    Sidebar,
     Banner,
     Accordion,
     AccordionPanel,
@@ -17,9 +16,11 @@ import {
     Header,
     Hgroup,
     Subheading,
+    Theme
 } from "@features/ui";
-import { useSubmit } from "@features/util";
+import { ScreenOnly, useSubmit } from "@features/util";
 import { ViewportPage } from "@features/page";
+import { Search } from "@features/polyfill";
 import { JsonLd } from "../components/json-ld.jsx";
 import { SeoBasic } from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -51,13 +52,9 @@ const IndexPage = () => {
     const onSubmit = useSubmit();
     const search = useSearchURL();
     const postsByCategory = usePostList();
-    return <ViewportPage
-               sidebar={
-                   <Sidebar
-                       search={
-                           <SearchForm action={search} onSubmit={onSubmit} />
-                       }
-                   >
+    return <Theme>
+               <ViewportPage
+                   support={
                        <Header
                            heading={
                                <>
@@ -68,48 +65,62 @@ const IndexPage = () => {
                        >
                            <Banner />
                        </Header>
-                   </Sidebar>
-               }
-               breadcrumbs={
-                   <BreadcrumbList>
-                       <BreadcrumbItem>
-                           <span aria-current="page">Home</span>
-                       </BreadcrumbItem>
-                   </BreadcrumbList>
-               }
-               mainbar={
-                   <Accordion>
-                       {
-                           Object.entries(postsByCategory).map(([category, p]) =>
-                               <nav key={category}
-                                    aria-labelledby={category}>
-                                   <AccordionPanel
-                                       value={category}
-                                       summary={
+                   }
+                   navigation={
+                       <ScreenOnly>
+                           <Search aria-describedby="search">
+                               <Card>
+                                   <header>
+                                       <Hgroup>
+                                           <H2>Search</H2>
+                                       </Hgroup>
+                                   </header>
+                                   <SearchForm action={search} onSubmit={onSubmit} />
+                               </Card>
+                           </Search>
+                       </ScreenOnly>
+                   }
+                   breadcrumbs={
+                       <BreadcrumbList>
+                           <BreadcrumbItem>
+                               <span aria-current="page">Home</span>
+                           </BreadcrumbItem>
+                       </BreadcrumbList>
+                   }
+                   mainbar={
+                       <Accordion>
+                           {
+                               Object.entries(postsByCategory).map(([category, p]) =>
+                                   <nav key={category}
+                                        aria-labelledby={category}>
+                                       <AccordionPanel
+                                           value={category}
+                                           summary={
+                                               <Card>
+                                                   <header>
+                                                       <Hgroup>
+                                                           <AccordionSummary id={category}>
+                                                               {category}
+                                                           </AccordionSummary>
+                                                       </Hgroup>
+                                                   </header>
+                                               </Card>
+                                           }>
                                            <Card>
-                                               <header>
-                                                   <Hgroup>
-                                                       <AccordionSummary id={category}>
-                                                           {category}
-                                                       </AccordionSummary>
-                                                   </Hgroup>
-                                               </header>
+                                               <PostList posts={p} />
                                            </Card>
-                                       }>
-                                       <Card>
-                                           <PostList posts={p} />
-                                       </Card>
-                                   </AccordionPanel>
-                               </nav>
-                           )
-                       }
-                   </Accordion>
-               }
+                                       </AccordionPanel>
+                                   </nav>
+                               )
+                           }
+                       </Accordion>
+                   }
 
-               heading="Posts"
-           >
-               <PostList posts={posts} />
-           </ViewportPage>;
+                   heading="Posts"
+               >
+                   <PostList posts={posts} />
+               </ViewportPage>
+           </Theme>;
 };
 
 

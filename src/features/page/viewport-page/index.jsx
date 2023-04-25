@@ -1,7 +1,6 @@
-import { ScreenOnly } from "@features/util";
-import { Card, Column, H1, H2, Hgroup, Nav, Theme } from "@features/ui";
+import { Card, H1, Hgroup } from "@features/ui";
 import { Page } from "../page";
-import { SidebarLayout } from "../sidebar-layout";
+import { StandardLayout } from "../standard-layout";
 import { SkipA } from "../skip-a";
 
 export const ViewportPage = ({
@@ -10,40 +9,30 @@ export const ViewportPage = ({
     subheading,
     notice,
     mainbar,
-    sidebar,
+    support,
+    navigation,
     breadcrumbs
 }) =>
-<Theme>
-    <Page>
-        <SidebarLayout
-            sidebar={
-                <Column>
-                    {sidebar}
-                    <ScreenOnly>
-                        <Nav heading={<H2>Breadcrumbs</H2>}>
-                            {breadcrumbs}
-                        </Nav>
-                    </ScreenOnly>
-                </Column>
-            }
-        >
-            <Column>
-                <main data-pagefind-body="" aria-describedby="content">
-                    <Card>
-                        <header>
-                            <Hgroup>
-                                <H1>
-                                    <SkipA id="content" href="#content">{heading}</SkipA>
-                                </H1>
-                                {subheading}
-                            </Hgroup>
-                            {notice}
-                        </header>
-                        {children}
-                    </Card>
-                </main>
-                {mainbar}
-            </Column>
-        </SidebarLayout>
-    </Page>
-</Theme>;
+<Page>
+    <StandardLayout
+        support={support}
+        navigation={navigation}
+        breadcrumbs={breadcrumbs}
+    >
+        <main data-pagefind-body="" aria-describedby="content">
+            <Card>
+                <header>
+                    <Hgroup>
+                        <H1>
+                            <SkipA id="content" href="#content">{heading}</SkipA>
+                        </H1>
+                        {subheading}
+                    </Hgroup>
+                    {notice}
+                </header>
+                {children}
+            </Card>
+        </main>
+        {mainbar}
+    </StandardLayout>
+</Page>;
