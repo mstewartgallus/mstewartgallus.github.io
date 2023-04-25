@@ -1,6 +1,18 @@
+import { useId } from "react";
 import { ScreenOnly } from "@features/util";
-import { H2, Nav, Column } from "@features/ui";
+import { A, Column, Card, H2, Nav, Set, SetItem } from "@features/ui";
 import { SupportLayout } from "../support-layout";
+import { common } from "./standard.module.css";
+
+const Common = ({children, heading}) => {
+    const id = useId();
+    return <header aria-describedby={id}>
+               <Card>
+                   <span id={id} className={common}>{heading}</span>
+                   {children}
+               </Card>
+           </header>;
+};
 
 export const StandardLayout = ({
     children,
@@ -14,13 +26,13 @@ export const StandardLayout = ({
             <>
                 {navigation}
                 {support}
+                <ScreenOnly>
+                    <Nav heading={<H2>Breadcrumbs</H2>}>
+                        {breadcrumbs}
+                    </Nav>
+                </ScreenOnly>
             </>
         }>
         {children}
     </SupportLayout>
-    <ScreenOnly>
-        <Nav heading={<H2>Breadcrumbs</H2>}>
-            {breadcrumbs}
-        </Nav>
-    </ScreenOnly>
 </Column>;

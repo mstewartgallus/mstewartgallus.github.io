@@ -1,0 +1,15 @@
+.set, .item {
+    margin: 0;
+    padding: 0;
+}
+
+.set {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1em;
+}
+
+.item {
+    position: relative;
+    display: block;
+}

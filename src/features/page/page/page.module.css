@@ -14,8 +14,8 @@
     .layout {
         padding-block: var(--line) calc(3 * var(--line));
         margin-block: calc(1.5 * var(--t));
-        margin-inline: calc(7 * var(--t));
-        max-inline-size: calc(1.8 * var(--main-width));
+        margin-inline-start: calc(7 * var(--t));
+        max-inline-size: calc(2 * var(--main-width));
     }
 }
 

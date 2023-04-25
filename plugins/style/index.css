@@ -59,7 +59,7 @@ abbr {
 }
 
 :root {
-    scroll-snap-type: block mandatory;
+    scroll-snap-type: block proximity;
 }
 
 @keyframes slideout {

@@ -18,6 +18,7 @@ export { H1, H2, H3, H4, H5, H6 } from "./heading";
 export { Hr } from "./hr";
 export { Input } from "./input";
 export { Li, Ol, Ul, Menu } from "./list";
+export { Set, SetItem } from "./set";
 export { Nav } from "./nav.jsx";
 export { Pane } from "./pane";
 export { P } from "./p";
