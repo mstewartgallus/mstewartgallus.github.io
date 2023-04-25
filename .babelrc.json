@@ -1,0 +1,12 @@
+{
+    "plugins": [],
+    "presets": [
+        [
+            "babel-preset-gatsby",
+            {
+                "reactRuntime": "automatic",
+                "bugfixes": true
+            }
+        ]
+    ]
+}
