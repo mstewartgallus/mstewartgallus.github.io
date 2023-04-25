@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "@gatsbyjs/reach-router";
+import { useLocation } from "@features/location";
 import { routeUpdates, routeDelays } from "./listeners.js";
 
 const routeUpdate = ({ signal }) => new Promise(r => {

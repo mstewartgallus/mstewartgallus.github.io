@@ -11,7 +11,7 @@ const Item = ({ children, filter, item }) => {
 
 const Items = ({ filter, items }) =>
       items.map(item =>
-          <Dd>
+          <Dd key={item}>
               <Item filter={filter} item={item}>
                   {item}
               </Item>

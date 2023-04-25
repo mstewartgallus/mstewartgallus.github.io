@@ -5,3 +5,8 @@
     contain: layout style ;
     flex-wrap: wrap ;
 }
+.row > * {
+    flex-basis: 40% ;
+    flex-shrink: 1 ;
+    flex-grow: 1 ;
+}

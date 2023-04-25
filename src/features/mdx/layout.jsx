@@ -1,5 +1,5 @@
-import { useLocation } from "@gatsbyjs/reach-router";
 import { MDXProvider } from '@mdx-js/react';
+import { useLocation } from "@features/location";
 import { BreadcrumbList, BreadcrumbItem, BreadcrumbA, Theme } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { theme } from "./theme.jsx";
