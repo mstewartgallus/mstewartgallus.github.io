@@ -8,11 +8,24 @@ const HeadComponents = [
 ];
 
 export const onRenderBody = ({
+    pathname,
     setHeadComponents,
     setHtmlAttributes
 }) => {
     setHtmlAttributes({
         lang: "en"
     });
-    setHeadComponents(HeadComponents);
+
+    let p = pathname;
+    if (p === '/') {
+        p = '/index/';
+    }
+    const pageData =
+        <link
+            rel="preload"
+            href={`/page-data${p}page-data.json`}
+            as="fetch"
+            crossOrigin="anonymous" />;
+
+    setHeadComponents([pageData, ...HeadComponents]);
 };
