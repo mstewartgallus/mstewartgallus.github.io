@@ -1,0 +1,28 @@
+.menubar, .item {
+    margin: 0;
+    padding: 0;
+}
+
+.menubar {
+    padding-block: calc(0.5 * var(--line));
+    margin-block: calc(0.5 * var(--line));
+    padding-inline: 0.82rem ;
+
+    display: flex;
+    column-gap: 1em ;
+    /* FIXME i18n */
+    overflow-x: auto ;
+
+    scroll-snap-type: inline mandatory;
+}
+
+.item {
+    position: relative;
+    display: inline-block;
+
+    scroll-snap-stop: always;
+    scroll-snap-align: center;
+}
+
+.hr {
+}

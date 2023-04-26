@@ -1,12 +1,8 @@
 .row {
     display: flex ;
+    flex-direction: row ;
     row-gap: var(--line) ;
     column-gap: 1em ;
-    contain: layout style ;
+    contain: style ;
     flex-wrap: wrap ;
-}
-.row > * {
-    flex-basis: 40% ;
-    flex-shrink: 1 ;
-    flex-grow: 1 ;
 }

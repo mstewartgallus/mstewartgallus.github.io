@@ -16,6 +16,7 @@ import {
     Header,
     Hgroup,
     Subheading,
+    SubtleA,
     Theme
 } from "@features/ui";
 import { ScreenOnly, useSubmit } from "@features/util";
@@ -58,7 +59,7 @@ const IndexPage = () => {
                        <Header
                            heading={
                                <>
-                                   <H2>{title}</H2>
+                                   <H2><SubtleA id="common" href="#common">{title}</SubtleA></H2>
                                    <Subheading>{description}</Subheading>
                                </>
                            }
@@ -72,7 +73,7 @@ const IndexPage = () => {
                                <Card>
                                    <header>
                                        <Hgroup>
-                                           <H2>Search</H2>
+                                           <H2><SubtleA id="search" href="#search">Search</SubtleA></H2>
                                        </Hgroup>
                                    </header>
                                    <SearchForm action={search} onSubmit={onSubmit} />

@@ -6,16 +6,16 @@
     widows: 2;
     orphans: 2;
 
-    contain: paint layout style;
+    contain: layout paint style;
     position: relative;
 }
 
 @media screen {
     .layout {
-        padding-block: var(--line) calc(3 * var(--line));
+        padding-block: 0 calc(3 * var(--line));
         margin-block: calc(1.5 * var(--t));
         margin-inline-start: calc(7 * var(--t));
-        max-inline-size: calc(2 * var(--main-width));
+        max-inline-size: calc(2.4 * var(--main-width));
     }
 }
 

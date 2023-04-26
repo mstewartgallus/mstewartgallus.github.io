@@ -1,4 +1,4 @@
-import { Footer, Nav, H2, Subheading, Section, Theme } from "@features/ui";
+import { Footer, Nav, H2, Menubar, MenuA, Subheading, Section, SubtleA, Theme } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { ScreenOnly } from "@features/util";
 import { Comments } from "./comments.jsx";
@@ -9,6 +9,14 @@ import { PostPaging } from "./post-paging.jsx";
 
 const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
+
+const Skip = () =>
+<>
+     <MenuA href="#content" aria-describedby="content">Content</MenuA>
+     <MenuA href="#metadata">Metadata</MenuA>
+     <MenuA href="#paging">Paging</MenuA>
+     <MenuA href="#breadcrumbs">Breadcrumbs</MenuA>
+</>;
 
 export const PostPage = ({post, children}) => {
     const { comments, notice,
@@ -23,20 +31,37 @@ export const PostPage = ({post, children}) => {
                    notice={<Notice notice={notice} />}
                    navigation={
                        <ScreenOnly>
-                           <Nav heading={<H2>Paging</H2>}>
+                           <Nav heading={
+                                    <H2>
+                                        <SubtleA id="paging" href="#paging">
+                                            Paging
+                                        </SubtleA>
+                                    </H2>
+                                }>
                                <PostPaging childrenLink={childrenLink} />
                            </Nav>
                        </ScreenOnly>
                    }
+                   menubar={<Skip />}
                    breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
                    support={
-                       <Footer heading={<H2>Metadata</H2>}>
+                       <Footer heading={
+                                   <H2>
+                                       <SubtleA id="metadata" href="#metadata">
+                                           Metadata
+                                       </SubtleA>
+                                   </H2
+                                    >}>
                            {<Metadata {...post} />}
                        </Footer>
                    }
                    mainbar={
                        comments &&
-                           <Section heading={<H2>Comments</H2>}>
+                           <Section heading={
+                                        <H2>
+                                            <SubtleA id="comments" href="#comments">Comments</SubtleA>
+                                        </H2>
+                                    }>
                                <Comments host={comments.host} id={comments.id} />
                            </Section>
                    }

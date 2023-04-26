@@ -8,6 +8,7 @@ export const ViewportPage = ({
     heading,
     subheading,
     notice,
+    menubar,
     mainbar,
     support,
     navigation,
@@ -15,6 +16,7 @@ export const ViewportPage = ({
 }) =>
 <Page>
     <StandardLayout
+        menubar={menubar}
         support={support}
         navigation={navigation}
         breadcrumbs={breadcrumbs}
