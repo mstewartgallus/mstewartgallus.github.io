@@ -8,7 +8,7 @@ tags:
 - Accessibility
 ---
 
-import { Cite } from "@features/ui";
+import { Abbr, Cite } from "@features/ui";
 
 Common poetry markup is inaccessible, unsemantic and doesn't display
 well. I am not skilled in accessibility and I don't have good
@@ -54,7 +54,7 @@ And so are you.</p>
 an ordered list must be manually tracked through.  As well <q>line
 <var>m</var> of <var>n</var></q> is repeated for every line of
 [<Cite>Markup A</Cite>](#markupa).  You can use the `presentation`
-ARIA role as in [<Cite>Markup A</Cite>](#markupa2) and [<Cite>Markup
+<Abbr>ARIA</Abbr> role as in [<Cite>Markup A</Cite>](#markupa2) and [<Cite>Markup
 A3</Cite>](#markupa3) to ameliorate the problem.  By the spec using
 the `presentation` role in a list item for a list already marked with
 a `presentation` role doesn't do much, but such markup can reduce
@@ -122,7 +122,7 @@ In some setups [<Cite>Markup B</Cite>](#markupb) sounds yucky.  Ending
 and starting words in separate lines like <i>red</i> and
 <i>Violets</i> run together.  You might include extra punctuation
 annotated with a screen-reader-only class as with [<Cite>Markup
-B HTML</Cite>](#markupb2) and [<Cite>Markup B CSS</Cite>](#markupb3) to work around this issue.
+B <Abbr>HTML</Abbr></Cite>](#markupb2) and [<Cite>Markup B <Abbr>CSS</Abbr></Cite>](#markupb3) to work around this issue.
 However, on Firefox this hack breaks up lines into separate areas to
 track through.
 
@@ -174,7 +174,7 @@ layout for overlong lines is to align the first line ragged right and
 all other lines ragged left.
 
 You can approximate a poetry layout with a hanging indent layout
-something like [<Cite>Indent CSS</Cite>](#indentcss).  However, a
+something like [<Cite>Indent <Abbr>CSS</Abbr></Cite>](#indentcss).  However, a
 hanging indent layout is not really correct.
 
 ```css id="indentcss" title="Indent CSS"
@@ -187,7 +187,7 @@ hanging indent layout is not really correct.
 You can approximate a poetry layout on the web by aligning every line
 block to the left but aligning the last line of the text *within* the
 line block to the right.  Something like [<Cite>Align Last
-CSS</Cite>](#alignlastcss) almost works for a poetry layout.  However,
+<Abbr>CSS</Abbr></Cite>](#alignlastcss) almost works for a poetry layout.  However,
 even this layout fails when you overflow multiple lines.
 
 ```css id="alignlastcss" title="Align Last CSS"
@@ -246,15 +246,9 @@ started with screen readers but they might be a little old.
 
 ## And One More Thing
 
-As of this blog post, the [<Cite>CSS Speech
+As of this blog post, the [<Cite><Abbr>CSS</Abbr> Speech
 Module</Cite>](https://www.w3.org/TR/css-speech-1/) has never really
 gone anywhere.  Perhaps in the future the `voice-stress`,
 `voice-duration` (for long syllables), `voice-pitch` (for pitch
 accent) and `pause` properties would solve these sort of accessibility
 problems.
-
-*[HTML]: HyperText Markup Language
-
-*[CSS]: Cascading Style Sheets
-
-*[ARIA]: Accessible Rich Internet Applications
