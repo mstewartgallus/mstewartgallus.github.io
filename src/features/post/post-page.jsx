@@ -52,7 +52,9 @@ export const PostPage = ({post, children}) => {
                                        </SubtleA>
                                    </H2
                                     >}>
-                           {<Metadata {...post} />}
+                           {
+                               <Metadata {...post} />
+                           }
                        </Footer>
                    }
                    mainbar={

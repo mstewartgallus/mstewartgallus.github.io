@@ -1,49 +1,58 @@
 import {
     Children, forwardRef, createContext, useContext, useCallback,
-    useEffect, useReducer, useRef,
-    useTransition
+    useMemo,
+    useEffect, useReducer, useRef
 } from "react";
 import { A, useChanged } from "@features/util";
+import { ClickTrap } from "../click-trap";
 import { link, menubar, item } from "./list.module.css";
 
-const reducer = length => (selection, action) => {
-    const { type } = action;
-    switch (type) {
-    case 'left':
-        if (selection === 0) {
-            return length - 1;
+const reducer = keys => {
+    const { length } = keys;
+    return (selection, action) => {
+        const { type } = action;
+        let ix = keys.indexOf(selection);
+        if (ix < 0) {
+            ix = 0;
+            selection = keys[0];
         }
-        return selection - 1;
+        switch (type) {
+        case 'left':
+            if (ix === 0) {
+                return keys[length - 1];
+            }
+            return keys[ix - 1];
 
-    case 'right':
-        if (selection >= length - 1) {
-            return 0;
+        case 'right':
+            if (ix >= length - 1) {
+                return keys[0];
+            }
+            return keys[ix + 1];
+
+        case 'home':
+            return keys[0];
+
+        case 'end':
+            return keys[length - 1];
+
+        case 'select':
+            return action.key;
+
+        default:
+            return selection;
         }
-        return selection + 1;
-
-    case 'home':
-        return 0;
-
-    case 'end':
-        return length - 1;
-
-    case 'select':
-        return action.index;
-
-    default:
-        return selection;
-    }
+    };
 };
 
-export const useMenubar = length => {
-    const [,startTransition] = useTransition();
-    const [selection, dispatch] = useReducer(reducer(length), 0);
+export const useMenubar = keys => {
+    const r = useMemo(() => reducer(keys), [keys]);
+    const [selection, dispatch] = useReducer(r, null, () => keys[0]);
     const changed = useChanged(selection);
-    const left = useCallback(() => startTransition(() => dispatch({ type: 'left'})), []);
-    const right = useCallback(() => startTransition(() => dispatch({ type: 'right'})), []);
-    const home = useCallback(() => startTransition(() => dispatch({ type: 'home' })), []);
-    const end = useCallback(() => startTransition(() => dispatch({ type: 'end' })), []);
-    const select = useCallback(index => startTransition(() => dispatch({ type: 'select', index })), []);
+    const left = useCallback(() => dispatch({ type: 'left'}), []);
+    const right = useCallback(() => dispatch({ type: 'right'}), []);
+    const home = useCallback(() => dispatch({ type: 'home' }), []);
+    const end = useCallback(() => dispatch({ type: 'end' }), []);
+    const select = useCallback(key => dispatch({ type: 'select', key }), []);
     return { changed, selection, left, right, home, end, select };
 };
 
@@ -58,14 +67,12 @@ Item.displayName = 'MenuItem';
 const { Provider: ItemProvider } = Item;
 
 // Not actually totally sure I want the menu roles/behaviour
-const Menubar = (props, ref) => {
-    const { children } = props;
-    const childs = Children.toArray(children);
-    const { length } = childs;
+const MenubarPrim = (props, ref) => {
+    const { children, keys } = props;
     const {
         changed, selection,
         home, end, left, right, select
-    } = useMenubar(length);
+    } = useMenubar(keys);
 
     const onKeyDown = useCallback(e => {
         const { key, altKey, ctrlKey, metaKey, shiftKey } = e;
@@ -91,48 +98,74 @@ const Menubar = (props, ref) => {
             e.preventDefault();
             right();
             break;
+
+        default:
+            break;
         }
     }, [left, right, home, end]);
+
     return <ul onKeyDown={onKeyDown} role="menubar" className={menubar} {...props} ref={ref}>
                <Provider value={{changed, selection, select }}>
-                   {
-                       childs.map((child, ix) =>
-                           <ItemProvider value={ix}>{child}</ItemProvider>
-                       )
-                   }
+                   {children}
                </Provider>
            </ul>;
 };
 
-const MenuA = (props, ref) => {
-    const theRef = useRef();
-    const { selection, changed, select } = useContext(Context);
-    const num = useContext(Item);
-    const refs = useCallback(elem => {
-        theRef.current = elem;
-        if (ref) {
-            ref.current = elem;
-        }
-    }, [ref]);
+const MenubarPrimRef = forwardRef(MenubarPrim);
 
-    const selected = selection === num;
+const MenuItems = ({children}) => children.map(item =>
+    <ItemProvider key={item.key} value={item.key}>
+        {item}
+    </ItemProvider>);
+
+
+const Menubar = (props, ref) => {
+    const { children } = props;
+    const childs = useMemo(() => Children.toArray(children), [children]);
+    const keys = useMemo(() => childs.map(child => child.key), [childs]);
+
+    return <MenubarPrimRef {...props} keys={keys} ref={ref}>
+               <MenuItems>{childs}</MenuItems>
+           </MenubarPrimRef>;
+};
+
+const MenuA = (props, ref) => {
+    const { selection, changed, select } = useContext(Context);
+    const key = useContext(Item);
+
+    const selected = selection === key;
+
+    const theRef = useRef(null);
     useEffect(() => {
         if (!selected || !changed) {
             return;
         }
         const { current } = theRef;
-        current.scrollIntoView({ inline: 'center', block: 'center' });
         current.focus({ preventScroll: true, focusVisible: true });
+        current.scrollIntoView({ inline: 'center', block: 'center' });
     }, [changed, selected]);
 
     const onFocus = useCallback(e => {
-        select(num);
-    }, [select, num]);
+        select(key);
+    }, [select, key]);
+
+    const refs = useCallback(e => {
+        theRef.current = e;
+        if (ref) {
+            ref.current = e;
+        }
+    }, [ref]);
 
     const { children } = props;
     return <li role="presentation" className={item}>
-               <A role="menuitem" className={link} tabIndex={selected ? null : "-1"} onFocus={onFocus} {...props} ref={refs}>
+               <A role="menuitem"
+                  className={link}
+                  tabIndex={selected ? null : "-1"}
+                  onFocus={onFocus}
+                  {...props}
+                  ref={refs}>
                    {children}
+                   <ClickTrap />
                </A>
            </li>;
 };

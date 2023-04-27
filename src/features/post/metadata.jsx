@@ -3,25 +3,24 @@ import { A, Address, Dl, DlDiv, Dd, Dt, Time, ClickTrap } from "@features/ui";
 
 const Item = ({ children, filter, item }) => {
     const href = useSearchURL({ [filter]: [item] });
-    return <A href={href} data-pagefind-filter={filter}>
-               {children}
-               <ClickTrap />
-           </A>
+    return <Dd>
+               <A href={href} data-pagefind-filter={filter}>
+                   {children}
+               </A>
+           </Dd>;
 };
-
-const Items = ({ filter, items }) =>
-      items.map(item =>
-          <Dd key={item}>
-              <Item filter={filter} item={item}>
-                  {item}
-              </Item>
-          </Dd>);
 
 const ItemList = ({ label, filter, items }) =>
       items && items.length > 0 &&
     <DlDiv>
         <Dt>{label}</Dt>
-        <Items filter={filter} items={items} />
+        {
+            items.map(item =>
+                <Item key={item} filter={filter} item={item}>
+                    {item}
+                </Item>
+            )
+        }
     </DlDiv>;
 
 export const Metadata = ({
