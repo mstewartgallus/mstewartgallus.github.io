@@ -17,31 +17,29 @@ export const StandardLayout = ({
     breadcrumbs,
     menubar
 }) =>
-<Column>
-    <ScreenOnly>
-        <Skip>
-            {menubar}
-        </Skip>
-    </ScreenOnly>
-    <SupportLayout
-        support={
-            <>
-                {support}
-                {navigation}
-                <ScreenOnly>
-                    <Nav heading={
-                             <H2>
-                                 <SubtleA id="breadcrumbs" href="#breadcrumbs">
-                                     Breadcrumbs
-                                 </SubtleA>
-                             </H2>}>
-                        {breadcrumbs}
-                    </Nav>
-                </ScreenOnly>
-            </>
-        }>
-        <Column>
-            {children}
-        </Column>
-    </SupportLayout>
-</Column>;
+<SupportLayout
+    support={
+        <>
+            {support}
+            {navigation}
+            <ScreenOnly>
+                <Nav heading={
+                         <H2>
+                             <SubtleA id="breadcrumbs" href="#breadcrumbs">
+                                 Breadcrumbs
+                             </SubtleA>
+                         </H2>}>
+                    {breadcrumbs}
+                </Nav>
+            </ScreenOnly>
+        </>
+    }>
+    <Column>
+        <ScreenOnly>
+            <Skip>
+                {menubar}
+            </Skip>
+        </ScreenOnly>
+        {children}
+    </Column>
+</SupportLayout>;

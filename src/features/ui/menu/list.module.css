@@ -7,14 +7,10 @@
     outline-width: 1px;
     outline-color: var(--highlight-text);
 }
-.menubar:focus {
-    outline-style: solid;
-}
 
 .menubar {
     border-radius: 0.01ch ;
     display: flow-root;
-    inline-size: fit-content;
     /* FIXME i18n */
     overflow-x: auto;
 
@@ -24,6 +20,7 @@
 
 .list {
     display: flex;
+    inline-size: fit-content;
 }
 
 .item {
@@ -45,9 +42,7 @@
     outline-color: var(--highlight-text);
     outline-width: 2px;
     outline-offset: 0.1em;
-}
-.link:focus {
-    outline-style: solid;
+    outline-style: none;
 }
 
 .link:any-link {
@@ -74,4 +69,14 @@
 
 .menubar {
     margin-inline-start:-0.42rem;
+}
+
+
+.link:focus {
+    outline-style: solid;
+}
+.menubar:focus {
+    outline-style: solid;
+}
+.select {
 }

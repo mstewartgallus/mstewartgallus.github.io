@@ -4,7 +4,6 @@ import {
     useEffect, useReducer, useRef
 } from "react";
 import { A, useChanged } from "@features/util";
-import { Button } from "../button";
 import { ClickTrap } from "../click-trap";
 import { link, select as selectClass, menubar, list, item } from "./list.module.css";
 
@@ -133,10 +132,8 @@ const MenubarPrim = (props, ref) => {
 
     const selected = null === selection;
     // Menubar or toolbar roles would be misleading here
-                   // <li className={item} role="presentation">
-                   //     <Button tabIndex="-1" type="button" onClick={right}>Next</Button>
-                   // </li>
-    return <article
+    return <div
+               role="group"
                className={menubar}
                onKeyDown={onKeyDown}
                onBlur={onBlur}
@@ -147,7 +144,7 @@ const MenubarPrim = (props, ref) => {
                        {children}
                    </Provider>
                </menu>
-           </article>;
+           </div>;
 };
 
 const MenubarPrimRef = forwardRef(MenubarPrim);
@@ -205,7 +202,7 @@ const useMenuItem = ref => {
         select(key);
     }, [select, key, selected]);
 
-    return { tabIndex: selected ? null : "-1", onKeyDown, onFocus, ref: myref };
+    return { tabIndex: selected ? "0" : "-1", onKeyDown, onFocus, ref: myref };
 };
 
 
@@ -218,9 +215,9 @@ const MenuA = (props, ref) => {
 
     const { children } = props;
 
-    const className = [link, selected ? selectClass : ''].join(' ');
-    return <li className={item}>
-               <A className={className} {...props} {...menu}>
+    const className = [item, selected ? selectClass : ''].join(' ');
+    return <li className={className}>
+               <A className={link} {...props} {...menu}>
                    {children}
                    <ClickTrap />
                </A>
