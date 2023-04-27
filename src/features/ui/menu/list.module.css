@@ -1,23 +1,29 @@
-.menubar, .item {
+.menubar, .list, .item {
     margin: 0;
     padding: 0;
 }
 
 .menubar {
-    outline-width: 1px ;
-    outline-color: var(--highlight-text) ;
+    outline-width: 1px;
+    outline-color: var(--highlight-text);
 }
 .menubar:focus {
-    outline-style: solid ;
+    outline-style: solid;
 }
 
 .menubar {
-    display: flex;
+    border-radius: 0.01ch ;
+    display: flow-root;
+    inline-size: fit-content;
     /* FIXME i18n */
-    overflow-x: auto ;
+    overflow-x: auto;
 
     scroll-snap-type: inline mandatory;
-    scroll-behavior: smooth ;
+    scroll-behavior: smooth;
+}
+
+.list {
+    display: flex;
 }
 
 .item {
@@ -31,12 +37,14 @@
 .link {
     font: inherit ;
     text-underline-position: under ;
-    border-radius: 0.01ch ;
     box-decoration-break: clone ;
+}
 
+.link {
+    border-radius: 0.01ch ;
     outline-color: var(--highlight-text);
     outline-width: 2px;
-    outline-offset: 0.4em;
+    outline-offset: 0.1em;
 }
 .link:focus {
     outline-style: solid;
@@ -51,25 +59,19 @@
 .link:active {
     color: var(--active-text);
 }
-.link:any-link[tabIndex="-1"]:not(:active) {
-    text-decoration: inherit;
-}
-
 
 .item {
-    padding-block: var(--line) calc(0.75 * var(--line));
-}
-.menubar {
-    margin-block: 0 calc(0.25 * var(--line));
-}
-
-.item {
+    white-space: nowrap;
     padding-inline: 0.5em;
 }
 
 .item:first-child {
-    padding-inline-start: 0.82rem;
+    padding-inline-start: 0.42rem;
 }
 .item:last-child {
-    padding-inline-end: 0.82rem;
+    padding-inline-end: 0;
+}
+
+.menubar {
+    margin-inline-start:-0.42rem;
 }

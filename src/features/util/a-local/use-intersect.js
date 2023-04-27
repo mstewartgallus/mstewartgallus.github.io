@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 // Only prefetch mostly visible links
 const options = {
@@ -36,17 +36,16 @@ const getPrefetcher = () => {
     return prefetcher;
 };
 
-export const useNear = () => {
+export const useNear = ref => {
     const [,startTransition] = useTransition();
     const [near, setNear] = useState(false);
-    const nearRef = useRef();
     useEffect(() => {
         const pre = getPrefetcher();
         if (!pre) {
             return;
         }
 
-        const { current } = nearRef;
+        const { current } = ref;
         if (!current) {
             return;
         }
@@ -69,7 +68,6 @@ export const useNear = () => {
         callbacks.set(current, callback);
         pre.observe(current);
         return () => abort.abort();
-    }, []);
-    const ref = useCallback(elem => ref.current = elem, []);
-    return { ref, near };
+    }, [ref]);
+    return near;
 };

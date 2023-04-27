@@ -19,7 +19,7 @@ export { Hr } from "./hr";
 export { Input } from "./input";
 export { Li, Ol, Ul, Menu } from "./list";
 export { Mark } from "./mark";
-export { Menubar, MenuA } from "./menu";
+export { Menubar, MenuA, MenuItem } from "./menu";
 export { Nav } from "./nav.jsx";
 export { Pane } from "./pane";
 export { P } from "./p";

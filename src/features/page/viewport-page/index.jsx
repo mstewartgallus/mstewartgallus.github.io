@@ -4,7 +4,7 @@ import { StandardLayout } from "../standard-layout";
 import { SkipA } from "../skip-a";
 
 const DefaultSkip = () =>
-<Menubar>
+<Menubar aria-label="skip">
     <MenuA href="#content" aria-describedby="content">Content</MenuA>
     <MenuA href="#breadcrumbs">Breadcrumbs</MenuA>
 </Menubar>;

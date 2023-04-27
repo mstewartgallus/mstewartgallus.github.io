@@ -11,7 +11,7 @@ const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
 
 const Skip = () =>
-<Menubar>
+<Menubar aria-label="Skip">
     <MenuA href="#content" aria-describedby="content">Content</MenuA>
     <MenuA href="#metadata">Metadata</MenuA>
     <MenuA href="#paging">Paging</MenuA>
@@ -50,8 +50,8 @@ export const PostPage = ({post, children}) => {
                                        <SubtleA id="metadata" href="#metadata">
                                            Metadata
                                        </SubtleA>
-                                   </H2
-                                    >}>
+                                   </H2>
+                               }>
                            {
                                <Metadata {...post} />
                            }

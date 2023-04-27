@@ -1,4 +1,4 @@
-import { forwardRef, useCallback } from "react";
+import { forwardRef, useCallback, useImperativeHandle, useRef } from "react";
 import { navigate } from "gatsby";
 import { useA } from "./use-a";
 import { useHover } from "./use-hover";
@@ -44,7 +44,10 @@ const useOnBlur = (blur, onBlur) => useCallback(e => {
     onBlur?.(e);
 }, [onBlur, blur]);
 
-const ALocal = (props, theRef) => {
+const ALocal = (props, ref) => {
+    const myref = useRef(null);
+    useImperativeHandle(ref, () => myref.current, []);
+
     const {
         href,
         onClick,
@@ -62,14 +65,7 @@ const ALocal = (props, theRef) => {
 
     useHover(hover ? href : null);
 
-    const { ref: prefetchRef, near } = useNear();
-
-    const ref = useCallback(elem => {
-        prefetchRef(elem);
-        if (theRef) {
-            theRef.current = elem;
-        }
-    }, [theRef, prefetchRef]);
+    const near = useNear(myref);
 
     usePrefetchPathname((near || hover) ? href : null);
 
@@ -79,7 +75,7 @@ const ALocal = (props, theRef) => {
               onMouseOut={onMouseOutWrap}
               onFocus={onFocusWrap}
               onBlur={onBlurWrap}
-              ref={ref} />;
+              ref={myref} />;
 };
 
 const ARef = forwardRef(ALocal);
