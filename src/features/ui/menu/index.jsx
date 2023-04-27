@@ -66,9 +66,9 @@ const Item = createContext(-1);
 Item.displayName = 'MenuItem';
 const { Provider: ItemProvider } = Item;
 
-// Not actually totally sure I want the menu roles/behaviour
+// Not "that kind of menu"
 const MenubarPrim = (props, ref) => {
-    const { children, keys } = props;
+    const { children, tabIndex = "-1", keys } = props;
     const {
         changed, selection,
         home, end, left, right, select
@@ -104,7 +104,8 @@ const MenubarPrim = (props, ref) => {
         }
     }, [left, right, home, end]);
 
-    return <ul onKeyDown={onKeyDown} role="menubar" className={menubar} {...props} ref={ref}>
+    return <ul onKeyDown={onKeyDown} className={menubar} {...props}
+               tabIndex={tabIndex} ref={ref}>
                <Provider value={{changed, selection, select }}>
                    {children}
                </Provider>
@@ -157,9 +158,8 @@ const MenuA = (props, ref) => {
     }, [ref]);
 
     const { children } = props;
-    return <li role="presentation" className={item}>
-               <A role="menuitem"
-                  className={link}
+    return <li className={item}>
+               <A className={link}
                   tabIndex={selected ? null : "-1"}
                   onFocus={onFocus}
                   {...props}
