@@ -12,7 +12,5 @@ export const SupportLayout = ({
         </Column>
     }
 >
-    <Column>
-        {children}
-    </Column>
+    {children}
 </SidebarLayout>;

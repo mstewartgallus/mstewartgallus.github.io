@@ -1,14 +1,20 @@
-import { Card, H1, Hgroup } from "@features/ui";
+import { Card, H1, Hgroup, Menubar, MenuA } from "@features/ui";
 import { Page } from "../page";
 import { StandardLayout } from "../standard-layout";
 import { SkipA } from "../skip-a";
+
+const DefaultSkip = () =>
+<Menubar>
+    <MenuA href="#content" aria-describedby="content">Content</MenuA>
+    <MenuA href="#breadcrumbs">Breadcrumbs</MenuA>
+</Menubar>;
 
 export const ViewportPage = ({
     children,
     heading,
     subheading,
     notice,
-    menubar,
+    menubar = <DefaultSkip />,
     mainbar,
     support,
     navigation,

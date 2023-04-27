@@ -11,12 +11,12 @@ const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
 
 const Skip = () =>
-<>
-     <MenuA href="#content" aria-describedby="content">Content</MenuA>
-     <MenuA href="#metadata">Metadata</MenuA>
-     <MenuA href="#paging">Paging</MenuA>
-     <MenuA href="#breadcrumbs">Breadcrumbs</MenuA>
-</>;
+<Menubar>
+    <MenuA href="#content" aria-describedby="content">Content</MenuA>
+    <MenuA href="#metadata">Metadata</MenuA>
+    <MenuA href="#paging">Paging</MenuA>
+    <MenuA href="#breadcrumbs">Breadcrumbs</MenuA>
+</Menubar>;
 
 export const PostPage = ({post, children}) => {
     const { comments, notice,

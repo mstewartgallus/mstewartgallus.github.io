@@ -4,16 +4,20 @@
 }
 
 .menubar {
-    padding-block: calc(0.5 * var(--line));
-    margin-block: calc(0.5 * var(--line));
-    padding-inline: 0.82rem ;
+    outline-width: 1px ;
+    outline-color: var(--highlight-text) ;
+}
+.menubar:focus {
+    outline-style: solid ;
+}
 
+.menubar {
     display: flex;
-    column-gap: 1em ;
     /* FIXME i18n */
     overflow-x: auto ;
 
     scroll-snap-type: inline mandatory;
+    scroll-behavior: smooth ;
 }
 
 .item {
@@ -24,5 +28,48 @@
     scroll-snap-align: center;
 }
 
-.hr {
+.link {
+    font: inherit ;
+    text-underline-position: under ;
+    border-radius: 0.01ch ;
+    box-decoration-break: clone ;
+
+    outline-color: var(--highlight-text);
+    outline-width: 2px;
+    outline-offset: 0.4em;
+}
+.link:focus {
+    outline-style: solid;
+}
+
+.link:any-link {
+    color: var(--link-text);
+}
+.link:visited {
+    color: var(--visited-text);
+}
+.link:active {
+    color: var(--active-text);
+}
+.link:any-link[tabIndex="-1"]:not(:active) {
+    text-decoration: inherit;
+}
+
+
+.item {
+    padding-block: var(--line) calc(0.75 * var(--line));
+}
+.menubar {
+    margin-block: 0 calc(0.25 * var(--line));
+}
+
+.item {
+    padding-inline: 0.5em;
+}
+
+.item:first-child {
+    padding-inline-start: 0.82rem;
+}
+.item:last-child {
+    padding-inline-end: 0.82rem;
 }
