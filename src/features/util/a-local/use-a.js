@@ -1,16 +1,16 @@
 import { useCallback, useReducer, useTransition} from "react";
 
 const initState = {
-    mouseover: false,
+    mouseenter: false,
     focus: false
 };
 
 const reducer = (state, action) => {
     switch (action) {
-    case 'mouseover':
-        return { ...state, mouseover: true };
-    case 'mouseout':
-        return { ...state, mouseover: false };
+    case 'mouseenter':
+        return { ...state, mouseenter: true };
+    case 'mouseleave':
+        return { ...state, mouseenter: false };
 
     case 'focus':
         return { ...state, focus: true };
@@ -24,18 +24,18 @@ const reducer = (state, action) => {
 export const useA = () => {
     const [, startTransition] = useTransition();
     const [{
-        mouseover: hasMouseOver,
+        mouseenter: hasMouseenter,
         focus: hasFocus,
     }, dispatch] = useReducer(reducer, initState);
 
-    const mouseOver = useCallback(() => startTransition(() => dispatch('mouseover')), []);
-    const mouseOut = useCallback(() => startTransition(() => dispatch('mouseout')), []);
+    const mouseEnter = useCallback(() => startTransition(() => dispatch('mouseenter')), []);
+    const mouseLeave = useCallback(() => startTransition(() => dispatch('mouseleave')), []);
     const focus = useCallback(() => startTransition(() => dispatch('focus')), []);
     const blur = useCallback(() => startTransition(() => dispatch('blur')), []);
 
-    const hover = hasMouseOver || hasFocus;
+    const hover = hasMouseenter || hasFocus;
     return {
         hover,
-        mouseOver, mouseOut, focus, blur
+        mouseEnter, mouseLeave, focus, blur
     };
 };

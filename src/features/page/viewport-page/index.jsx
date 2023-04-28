@@ -1,10 +1,10 @@
-import { Card, H1, Hgroup, Menubar, MenuA } from "@features/ui";
+import { Card, H1, Header, Hgroup, Menubar, MenuA } from "@features/ui";
 import { Page } from "../page";
 import { StandardLayout } from "../standard-layout";
 import { SkipA } from "../skip-a";
 
 const DefaultSkip = () =>
-<Menubar aria-label="skip">
+<Menubar heading="Skip">
     <MenuA href="#content" aria-describedby="content">Content</MenuA>
     <MenuA href="#breadcrumbs">Breadcrumbs</MenuA>
 </Menubar>;
@@ -29,7 +29,7 @@ export const ViewportPage = ({
     >
         <main data-pagefind-body="" aria-describedby="content">
             <Card>
-                <header>
+                <Header>
                     <Hgroup>
                         <H1>
                             <SkipA id="content" href="#content">{heading}</SkipA>
@@ -37,7 +37,7 @@ export const ViewportPage = ({
                         {subheading}
                     </Hgroup>
                     {notice}
-                </header>
+                </Header>
                 {children}
             </Card>
         </main>

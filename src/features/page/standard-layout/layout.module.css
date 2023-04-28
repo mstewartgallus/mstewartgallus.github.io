@@ -1,3 +1,9 @@
 .skip {
     display: flow-root ;
+    z-index: 1000;
+}
+@media print {
+    .skip {
+        display: none;
+    }
 }

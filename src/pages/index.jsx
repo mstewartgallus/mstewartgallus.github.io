@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { useLocation } from "@gatsbyjs/reach-router";
 import {
     SearchForm,
@@ -53,29 +54,29 @@ const IndexPage = () => {
     const onSubmit = useSubmit();
     const search = useSearchURL();
     const postsByCategory = usePostList();
+    const id = useId();
     return <Theme>
                <ViewportPage
                    support={
-                       <Header
-                           heading={
-                               <>
+                       <header aria-describedby={id}>
+                           <Card>
+                               <Hgroup id={id}>
                                    <H2><SubtleA id="common" href="#common">{title}</SubtleA></H2>
                                    <Subheading>{description}</Subheading>
-                               </>
-                           }
-                       >
-                           <Banner />
-                       </Header>
+                               </Hgroup>
+                               <Banner />
+                           </Card>
+                       </header>
                    }
                    navigation={
                        <ScreenOnly>
                            <Search aria-describedby="search">
                                <Card>
-                                   <header>
+                                   <Header>
                                        <Hgroup>
                                            <H2><SubtleA id="search" href="#search">Search</SubtleA></H2>
                                        </Hgroup>
-                                   </header>
+                                   </Header>
                                    <SearchForm action={search} onSubmit={onSubmit} />
                                </Card>
                            </Search>
@@ -92,20 +93,19 @@ const IndexPage = () => {
                        <Accordion>
                            {
                                Object.entries(postsByCategory).map(([category, p]) =>
-                                   <nav key={category}
-                                        aria-labelledby={category}>
+                                   <nav aria-labelledby={category}>
                                        <AccordionPanel
                                            value={category}
                                            summary={
-                                               <Card>
-                                                   <header>
+                                               <header>
+                                                   <Card>
                                                        <Hgroup>
                                                            <AccordionSummary id={category}>
                                                                {category}
                                                            </AccordionSummary>
                                                        </Hgroup>
-                                                   </header>
-                                               </Card>
+                                                   </Card>
+                                               </header>
                                            }>
                                            <Card>
                                                <PostList posts={p} />

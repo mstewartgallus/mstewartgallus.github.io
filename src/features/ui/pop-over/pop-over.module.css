@@ -1,0 +1,48 @@
+.insideHeading {
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+    display: flex ;
+    flex-wrap: wrap ;
+    column-gap: 0.5em ;
+}
+
+.open, .close {
+    min-inline-size: 6ch ;
+    display: list-item ;
+    list-style-position: inside ;
+}
+
+.open {
+    list-style-type: disclosure-open;
+}
+.close {
+    list-style-type: disclosure-closed;
+}
+
+.dialog {
+    color: var(--canvas-text);
+    background-color: var(--canvas);
+    border-style: none;
+
+    outline-style: solid;
+    outline-width: 1px;
+    border-radius: 0.1ch;
+
+}
+
+.dialog {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    inset-block-start: 0;
+}
+.wrapper {
+    position: relative;
+}
+.dialog[data-preview] {
+    display: flow-root;
+}
+
+.dialog[data-preview]:not([open]) {
+    opacity: 94%;
+}

@@ -1,6 +1,5 @@
 .card {
-    display: flow-root ;
-    contain: layout style ;
+    contain: style ;
 
     scroll-snap-align: start ;
     scroll-margin-block: calc(1.37 * var(--line)) ;

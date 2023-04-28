@@ -1,15 +1,14 @@
 import {
-    SubtleA, Hgroup,
+    SubtleA, Header, Hgroup,
     H1 as UiH1, H2 as UiH2, H3 as UiH3,
     H4 as UiH4, H5 as UiH5, H6 as UiH6
 } from "@features/ui";
-import { heading } from "./heading.module.css";
 
 const createAutoLink = Hn => {
     const name = Hn.displayName || Hn.name || 'Component';
     const HeadingAutoLink = ({ children, id, ...props }) => {
         const href = id ? `#${id}` : null;
-        return <header className={heading}>
+        return <Header>
                    <Hgroup>
                        <Hn {...props}>
                            <SubtleA id={id} href={href}>
@@ -17,7 +16,7 @@ const createAutoLink = Hn => {
                            </SubtleA>
                        </Hn>
                    </Hgroup>
-               </header>;
+               </Header>;
     };
     HeadingAutoLink.displayName = `createAutoLink(${name})`;
     return HeadingAutoLink;

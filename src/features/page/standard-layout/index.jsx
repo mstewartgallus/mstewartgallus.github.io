@@ -35,11 +35,9 @@ export const StandardLayout = ({
         </>
     }>
     <Column>
-        <ScreenOnly>
-            <Skip>
-                {menubar}
-            </Skip>
-        </ScreenOnly>
+        <Skip>
+            {menubar}
+        </Skip>
         {children}
     </Column>
 </SupportLayout>;

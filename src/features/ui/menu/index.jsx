@@ -224,11 +224,7 @@ const MenuA = (props, ref) => {
            </li>;
 };
 
-const MenuItem = (props, ref) =>
-<li className={item} {...props} ref={ref}/>;
-
 const MenuARef = forwardRef(MenuA);
-const MenuItemRef = forwardRef(MenuItem);
 
 const MenuItems = ({children}) => children.map(item => {
     const { menuLabel } = item.props;
@@ -258,4 +254,4 @@ const Menubar = (props, ref) => {
 
 const MenubarRef = forwardRef(Menubar);
 
-export { MenubarRef as Menubar, MenuARef as MenuA, MenuItemRef as MenuItem };
+export { MenubarRef as Menubar, MenuARef as MenuA };

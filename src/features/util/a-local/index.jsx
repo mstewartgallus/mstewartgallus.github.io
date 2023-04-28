@@ -24,15 +24,15 @@ const useOnClick = (href, onClick) => useCallback(async e => {
     await navigate(href);
 }, [onClick, href]);
 
-const useOnMouseOver = (mouseOver, onMouseOver) => useCallback(e => {
-    mouseOver();
+const useOnMouseOver = (mouseEnter, onMouseOver) => useCallback(e => {
+    mouseEnter();
     onMouseOver?.(e);
-}, [onMouseOver, mouseOver]);
+}, [onMouseOver, mouseEnter]);
 
-const useOnMouseOut = (mouseOut, onMouseOut) => useCallback(e => {
-    mouseOut();
-    onMouseOut?.(e);
-}, [onMouseOut, mouseOut]);
+const useOnMouseleave = (mouseLeave, onMouseLeave) => useCallback(e => {
+    mouseLeave();
+    onMouseLeave?.(e);
+}, [onMouseLeave, mouseLeave]);
 
 const useOnFocus = (focus, onFocus) => useCallback(e => {
     focus();
@@ -52,14 +52,14 @@ const ALocal = (props, ref) => {
         href,
         onClick,
         onFocus, onBlur,
-        onMouseOver, onMouseOut
+        onMouseEnter, onMouseLeave
     } = props;
 
-    const { hover, focus, blur, mouseOver, mouseOut } = useA();
+    const { hover, focus, blur, mouseEnter, mouseLeave } = useA();
 
     const onClickWrap = useOnClick(href, onClick);
-    const onMouseOverWrap = useOnMouseOver(mouseOver, onMouseOver);
-    const onMouseOutWrap = useOnMouseOut(mouseOut, onMouseOut);
+    const onMouseOverWrap = useOnMouseOver(mouseEnter, onMouseEnter);
+    const onMouseLeaveWrap = useOnMouseleave(mouseLeave, onMouseLeave);
     const onFocusWrap = useOnFocus(focus, onFocus);
     const onBlurWrap = useOnBlur(blur, onBlur);
 
@@ -71,8 +71,8 @@ const ALocal = (props, ref) => {
 
     return <a {...props}
               onClick={onClickWrap}
-              onMouseOver={onMouseOverWrap}
-              onMouseOut={onMouseOutWrap}
+              onMouseEnter={onMouseOverWrap}
+              onMouseLeave={onMouseLeaveWrap}
               onFocus={onFocusWrap}
               onBlur={onBlurWrap}
               ref={myref} />;

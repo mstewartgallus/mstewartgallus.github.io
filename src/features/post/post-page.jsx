@@ -11,7 +11,7 @@ const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
 
 const Skip = () =>
-<Menubar aria-label="Skip">
+<Menubar heading="Skip">
     <MenuA href="#content" aria-describedby="content">Content</MenuA>
     <MenuA href="#metadata">Metadata</MenuA>
     <MenuA href="#paging">Paging</MenuA>
