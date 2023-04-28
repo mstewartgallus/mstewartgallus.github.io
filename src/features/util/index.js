@@ -1,4 +1,4 @@
-export { A } from "./a.jsx";
+export { A } from "./a";
 export { Assistive } from "./assistive";
 export { ScreenOnly } from "./screen-only";
 export { useClient, Client } from "@features/client";
