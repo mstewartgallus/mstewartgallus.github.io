@@ -9,6 +9,7 @@ export { Cite } from "./cite";
 export { ClickTrap } from "./click-trap";
 export { Code } from "./code";
 export { Column } from "./column";
+export { Disclosure, DisclosureSummary } from "./disclosure";
 export { Dl, DlDiv, Dt, Dd } from "./dl";
 export { Footer } from "./footer.jsx";
 export { Green } from "./green";

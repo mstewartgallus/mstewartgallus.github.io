@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext } from "react";
+import { Disclosure, DisclosureSummary } from "@features/ui";
 import { useNear } from "./use-near";
 import { useAccordion } from "./use-accordion";
-import { Disclosure, Summary } from "../disclosure";
 import { accordion } from "./accordion.module.css";
 
 const Click = createContext(() => {});
@@ -28,7 +28,7 @@ export const AccordionSummary = props => {
 
     const onClick = useCallback(() => click(value), [click, value]);
 
-    return <Summary
+    return <DisclosureSummary
                onClick={onClick}
                onMouseOver={mouseOver}
                onMouseOut={mouseOut}

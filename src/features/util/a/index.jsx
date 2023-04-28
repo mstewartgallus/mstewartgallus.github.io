@@ -1,8 +1,8 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import { useLocal } from "./use-local.js";
 import { useClick } from "./use-click";
-import { useFocus } from "./use-focus";
-import { useHover } from "./use-hover";
+import { useFocus } from "../use-focus";
+import { useHover } from "../use-hover";
 import { useHovering } from "./use-hovering";
 import { useNear } from "./use-intersect";
 import { usePrefetchPathname } from "./use-prefetch-pathname";

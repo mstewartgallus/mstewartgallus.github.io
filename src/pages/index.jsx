@@ -100,9 +100,11 @@ const IndexPage = () => {
                                                <header>
                                                    <Card>
                                                        <Hgroup>
-                                                           <AccordionSummary id={category}>
-                                                               {category}
-                                                           </AccordionSummary>
+                                                           <H2>
+                                                               <AccordionSummary id={category}>
+                                                                   {category}
+                                                               </AccordionSummary>
+                                                           </H2>
                                                        </Hgroup>
                                                    </Card>
                                                </header>
