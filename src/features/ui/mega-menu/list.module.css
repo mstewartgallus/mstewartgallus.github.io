@@ -1,4 +1,5 @@
 .menu {
+    background: var(--canvas);
     column-count: 2;
     column-gap: 1em;
     padding-inline: 1em;

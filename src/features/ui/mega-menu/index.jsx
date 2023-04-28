@@ -1,12 +1,8 @@
 import {
     forwardRef, createContext, useContext, useCallback, useState,
     useImperativeHandle,
-    useId,
     useRef
 } from "react";
-import { A } from "../a";
-import { Menu, Li } from "../list";
-import { ClickTrap } from "../click-trap";
 import { PopOver, PopOverSummary } from "../pop-over";
 import {
     menu as menuClass
@@ -17,11 +13,15 @@ Context.displayName = 'Open';
 
 const { Provider } = Context;
 
-// Not "that kind of menu"
-// More like a miny carousel if anything ?
-const Menubar = ({ children, heading, ...props}, ref) => {
-    const myref = useRef();
-    useImperativeHandle(ref, () => myref.current, []);
+const MegaMenuSummary = (props, ref) => {
+    const { children } = props;
+    const { onClick } = useContext(Context);
+    return <PopOverSummary {...props} onClick={onClick}>{children}</PopOverSummary>;
+};
+
+const MegaMenu = ({ children, summary, ...props}, ref) => {
+    const popoverRef = useRef();
+    useImperativeHandle(ref, () => popoverRef.current, []);
 
     const [open, setOpen] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -34,7 +34,6 @@ const Menubar = ({ children, heading, ...props}, ref) => {
     const onFocus = useCallback(() => {
         setFocus(true);
     }, []);
-    const popoverRef = useRef();
     const onBlur = useCallback(e => {
         const { relatedTarget } = e;
         const { current } = popoverRef;
@@ -83,7 +82,6 @@ const Menubar = ({ children, heading, ...props}, ref) => {
 
     const preview = hover || focus;
 
-    const id = useId();
     return <PopOver
                ref={popoverRef}
                onFocus={onFocus}
@@ -94,36 +92,19 @@ const Menubar = ({ children, heading, ...props}, ref) => {
                open={open}
                preview={preview}
                summary={
-                   <PopOverSummary
-                       id={id}
-                       onClick={onClick}>
-                       {heading}
-                   </PopOverSummary>
+                   <Provider value={{ open, onClick }}>
+                       {summary}
+                   </Provider>
                }>
                <div className={menuClass}
                     onFocus={onFocusWithin}
                     onClick={onClickWithin}>
-                   <Menu>
-                       <Provider value={open}>
-                           {children}
-                       </Provider>
-                   </Menu>
+                   {children}
                </div>
            </PopOver>;
 };
 
+const MegaMenuRef = forwardRef(MegaMenu);
+const MegaMenuSummaryRef = forwardRef(MegaMenuSummary);
 
-const MenuA = (props, ref) => {
-    const open = useContext(Context);
-    return <Li>
-               <A {...props} tabIndex={open ? null : "-1"}>
-                   {props.children}
-                   <ClickTrap />
-               </A>
-           </Li>;
-};
-
-const MenuARef = forwardRef(MenuA);
-const MenubarRef = forwardRef(Menubar);
-
-export { MenubarRef as Menubar, MenuARef as MenuA };
+export { MegaMenuRef as MegaMenu, MegaMenuSummaryRef as MegaMenuSummary };

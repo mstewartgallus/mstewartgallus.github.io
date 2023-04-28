@@ -20,6 +20,7 @@ export { Hr } from "./hr";
 export { Input } from "./input";
 export { Li, Ol, Ul, Menu } from "./list";
 export { Mark } from "./mark";
+export { MegaMenu, MegaMenuSummary } from "./mega-menu";
 export { Menubar, MenuA } from "./menu";
 export { Nav } from "./nav.jsx";
 export { Pane } from "./pane";

@@ -1,0 +1,42 @@
+.wrapper {
+    z-index: 10000;
+    position: relative;
+}
+
+.dialog {
+    z-index: 10000;
+    color: var(--canvas-text);
+    background-color: var(--canvas);
+    border-style: none;
+
+    outline-style: solid;
+    outline-width: 1px;
+    border-radius: 0.1ch;
+
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    inset-block-start: 0;
+}
+
+.close {
+    display: none;
+    visibility: hidden;
+    opacity: 0%;
+}
+
+.open {
+    display: flow-root;
+    visibility: visible;
+    opacity: 100%;
+}
+.close.preview {
+    display: flow-root;
+    visibility: visible;
+    opacity: 95%;
+}
+
+.dialog {
+    transition-property: opacity, visibility ;
+    transition-duration: 0.3s ;
+}

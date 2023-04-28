@@ -1,13 +1,9 @@
-import {
-    createContext, forwardRef, useContext, useEffect,
-    useId, useRef
-} from "react";
-import { Button } from "@features/ui";
+import { createContext, forwardRef, useContext, useId } from "react";
 import { Client } from "@features/util";
+import { Button } from "../button";
+import { Dialog } from "../dialog";
 import {
     popover,
-    wrapper,
-    dialog,
     open as openClass, close as closeClass
 } from "./pop-over.module.css";
 
@@ -25,31 +21,12 @@ const PopOverSummary = (props, ref) => {
                    aria-controls={id}
                    aria-expanded={String(open)}
                    aria-haspopup="dialog"
-                   tabIndex={open ? "-1" : "0"}
                    {...props}>
                    <span className={open ? openClass : closeClass}>
                        {children}
                    </span>
                </Button>
            </Client>;
-};
-
-const Dialog = ({ open, ...props}) => {
-    const ref = useRef();
-    useEffect(() => {
-        const { current } = ref;
-        if (open) {
-            current.show();
-        } else {
-            current.open = false;
-        }
-        return () => {
-            if (current.open) {
-                current.open = false;
-            }
-        };
-    }, [open]);
-    return <dialog {...props} ref={ref} />;
 };
 
 const PopOver = ({
@@ -64,14 +41,9 @@ const PopOver = ({
                <Provider value={{id, open}}>
                    {summary}
                </Provider>
-               <div className={wrapper}>
-                   <Dialog className={dialog}
-                           id={id}
-                           open={open}
-                           data-preview={preview ? "preview" : null}>
-                       {children}
-                   </Dialog>
-               </div>
+               <Dialog id={id} open={open} preview={preview}>
+                   {children}
+               </Dialog>
            </div>;
 };
 
