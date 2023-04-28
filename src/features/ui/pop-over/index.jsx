@@ -9,8 +9,13 @@ import {
 
 const Context = createContext({ open: false, id: null });
 Context.displayName = 'PopOver';
-
 const { Provider } = Context;
+
+const Open = createContext(false);
+Open.displayName = 'Open';
+const { Provider: OpenProvider } = Open;
+
+export const usePopOverOpen = () => useContext(Open);
 
 const PopOverSummary = (props, ref) => {
     const { children } = props;
@@ -21,6 +26,7 @@ const PopOverSummary = (props, ref) => {
                    aria-controls={id}
                    aria-expanded={String(open)}
                    aria-haspopup="dialog"
+                   tabIndex={open ? "-1": "0"}
                    {...props}>
                    <span className={open ? openClass : closeClass}>
                        {children}
@@ -34,15 +40,21 @@ const PopOver = ({
     summary,
     open,
     preview,
+    onCancel,
+    onClose,
     ...props
 }, ref) => {
     const id = useId();
-    return <div className={popover} {...props} ref={ref}>
+    return <div className={popover} {...props}>
                <Provider value={{id, open}}>
                    {summary}
                </Provider>
-               <Dialog id={id} open={open} preview={preview}>
-                   {children}
+               <Dialog id={id} open={open} preview={preview} ref={ref}
+                       onCancel={onCancel}
+                       onClose={onClose}>
+                   <OpenProvider value={open}>
+                       {children}
+                   </OpenProvider>
                </Dialog>
            </div>;
 };

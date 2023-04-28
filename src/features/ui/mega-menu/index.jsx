@@ -3,7 +3,8 @@ import {
     useImperativeHandle,
     useRef
 } from "react";
-import { PopOver, PopOverSummary } from "../pop-over";
+import { Button } from "../button";
+import { PopOver, PopOverSummary, usePopOverOpen } from "../pop-over";
 import {
     menu as menuClass
 } from "./list.module.css";
@@ -17,6 +18,15 @@ const MegaMenuSummary = (props, ref) => {
     const { children } = props;
     const { onClick } = useContext(Context);
     return <PopOverSummary {...props} onClick={onClick}>{children}</PopOverSummary>;
+};
+
+const CloseButton = props => {
+    const open = usePopOverOpen();
+    return <form method="dialog">
+               <Button
+                   type="submit"
+                   tabIndex={open ? "0" : "-1"} {...props} />
+           </form>;
 };
 
 const MegaMenu = ({ children, summary, ...props}, ref) => {
@@ -59,6 +69,11 @@ const MegaMenu = ({ children, summary, ...props}, ref) => {
         setOpen(true);
     }, []);
 
+    const onCancel = useCallback(e => {
+        e.preventDefault();
+        setOpen(false);
+    }, []);
+
     const onKeyDown = useCallback(e => {
         const { key, altKey, ctrlKey, metaKey, shiftKey } = e;
 
@@ -89,6 +104,7 @@ const MegaMenu = ({ children, summary, ...props}, ref) => {
                onMouseEnter={onMouseEnter}
                onMouseLeave={onMouseLeave}
                onKeyDown={onKeyDown}
+               onCancel={onCancel}
                open={open}
                preview={preview}
                summary={
@@ -97,8 +113,9 @@ const MegaMenu = ({ children, summary, ...props}, ref) => {
                    </Provider>
                }>
                <div className={menuClass}
-                    onFocus={onFocusWithin}
-                    onClick={onClickWithin}>
+                    onClick={onClickWithin}
+                    onFocus={onFocusWithin}>
+                   <CloseButton>Escape</CloseButton>
                    {children}
                </div>
            </PopOver>;

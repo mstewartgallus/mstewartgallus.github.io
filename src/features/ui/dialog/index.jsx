@@ -1,42 +1,70 @@
-import { forwardRef, useImperativeHandle, useEffect, useRef } from "react";
+import { forwardRef, useImperativeHandle, useCallback, useState, useTransition, useEffect, useRef } from "react";
 import { useClient } from "@features/util";
-import { wrapper, dialog, open as openClass, close as closeClass,
-         preview as previewClass } from "./dialog.module.css";
+import {
+    wrapper, dialog, inner,
+    open as openClass, close as closeClass,
+    closeSteady as closeSteadyClass,
+    preview as previewClass
+} from "./dialog.module.css";
+
+const useDialog = open => {
+    const [, startTransition] = useTransition();
+    const [prevOpen, setPrevOpen] = useState(open);
+    const endTransition = useCallback(() => {
+        startTransition(() => setPrevOpen(open));
+    }, [open]);
+    const isTransitioning = prevOpen !== open;
+    return { isTransitioning, endTransition };
+};
 
 const Dialog = ({ open, preview, ...props}, ref) => {
-
     let { className } = props;
+
     const myref = useRef();
     useImperativeHandle(ref, () => myref.current, []);
 
-    const anyOpen = open || preview;
     useEffect(() => {
         const { current } = myref;
-        if (anyOpen) {
-            current.show();
-        } else {
-            current.open = false;
-        }
-        return () => {
-            if (current.open) {
-                current.open = false;
+        if (open) {
+            if (!current.open) {
+                current.show();
             }
-        };
-    }, [anyOpen]);
+        } else {
+            if (current.open) {
+                current.close();
+            }
+        }
+    }, [open]);
+
+    const client = useClient();
+
+    const visible = open || preview;
+    const { isTransitioning, endTransition } = useDialog(visible);
+
+    const steadyClose = !visible && !isTransitioning;
+
+    const wrapperClass = [
+        wrapper,
+        steadyClose ? closeSteadyClass : ''
+    ].join(' ');
+
     className = [
         className,
-        dialog,
-        open ? openClass : closeClass,
-        preview ? previewClass : ''
+        inner,
+        open ? openClass : '',
+        !visible ? closeClass : '',
+        !open && preview ? previewClass : ''
     ].join(' ');
-    const client = useClient();
-    return <div className={wrapper}>
-               <dialog {...props}
-                       aria-hidden={(client || open || preview) ? null : "true"}
-                       open={client ? "open" : null}
-                       className={className}
-                       ref={myref}
-               />
+
+    const { children } = props;
+    return <div className={wrapperClass}>
+               <dialog {...props} className={dialog} ref={myref}>
+                   <div aria-hidden={(client || open || preview) ? null : "true"}
+                       onTransitionEnd={endTransition}
+                       className={className}>
+                       {children}
+                   </div>
+               </dialog>
            </div>;
 };
 
