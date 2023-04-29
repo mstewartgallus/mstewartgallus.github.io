@@ -49,13 +49,13 @@ const PopOver = ({
                <Provider value={{id, open}}>
                    {summary}
                </Provider>
-               <Dialog id={id} open={open} preview={preview} ref={ref}
-                       onCancel={onCancel}
-                       onClose={onClose}>
-                   <OpenProvider value={open}>
+               <OpenProvider value={open}>
+                   <Dialog id={id} open={open} preview={preview} ref={ref}
+                           onCancel={onCancel}
+                           onClose={onClose}>
                        {children}
-                   </OpenProvider>
-               </Dialog>
+                   </Dialog>
+               </OpenProvider>
            </div>;
 };
 

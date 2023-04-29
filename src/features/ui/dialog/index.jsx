@@ -1,5 +1,4 @@
 import { forwardRef, useImperativeHandle, useCallback, useState, useTransition, useEffect, useRef } from "react";
-import { useClient } from "@features/util";
 import {
     wrapper, dialog, inner,
     open as openClass, close as closeClass,
@@ -36,8 +35,6 @@ const Dialog = ({ open, preview, ...props}, ref) => {
         }
     }, [open]);
 
-    const client = useClient();
-
     const visible = open || preview;
     const { isTransitioning, endTransition } = useDialog(visible);
 
@@ -59,9 +56,9 @@ const Dialog = ({ open, preview, ...props}, ref) => {
     const { children } = props;
     return <div className={wrapperClass}>
                <dialog {...props} className={dialog} ref={myref}>
-                   <div aria-hidden={(client || open || preview) ? null : "true"}
-                       onTransitionEnd={endTransition}
-                       className={className}>
+                   <div aria-hidden={visible ? null : "true"}
+                        onTransitionEnd={endTransition}
+                        className={className}>
                        {children}
                    </div>
                </dialog>
