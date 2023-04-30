@@ -1,21 +1,12 @@
 import { ScreenOnly } from "@features/util";
-import { Card, Column, H2, Nav, SubtleA } from "@features/ui";
+import { Column, H2, Nav, SubtleA } from "@features/ui";
 import { SupportLayout } from "../support-layout";
-import { skip } from "./layout.module.css";
-
-const Skip = ({children}) =>
-<nav aria-label="Skip" className={skip}>
-    <Card>
-        {children}
-    </Card>
-</nav>;
 
 export const StandardLayout = ({
     children,
     support,
     navigation,
-    breadcrumbs,
-    menubar
+    breadcrumbs
 }) =>
 <SupportLayout
     support={
@@ -35,9 +26,6 @@ export const StandardLayout = ({
         </>
     }>
     <Column>
-        <Skip>
-            {menubar}
-        </Skip>
         {children}
     </Column>
 </SupportLayout>;

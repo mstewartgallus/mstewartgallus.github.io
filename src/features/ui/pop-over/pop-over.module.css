@@ -1,11 +1,3 @@
-.insideHeading {
-    inline-size: fit-content ;
-    max-inline-size: 100% ;
-    display: flex ;
-    flex-wrap: wrap ;
-    column-gap: 0.5em ;
-}
-
 .open, .close {
     min-inline-size: 6ch ;
     display: list-item ;

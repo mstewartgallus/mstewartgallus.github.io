@@ -2,10 +2,7 @@ import { createContext, forwardRef, useContext, useId } from "react";
 import { Client } from "@features/util";
 import { Button } from "../button";
 import { Dialog } from "../dialog";
-import {
-    popover,
-    open as openClass, close as closeClass
-} from "./pop-over.module.css";
+import { open as openClass, close as closeClass } from "./pop-over.module.css";
 
 const Context = createContext({ open: false, id: null });
 Context.displayName = 'PopOver';
@@ -45,7 +42,7 @@ const PopOver = ({
     ...props
 }, ref) => {
     const id = useId();
-    return <div className={popover} {...props}>
+    return <div {...props}>
                <Provider value={{id, open}}>
                    {summary}
                </Provider>

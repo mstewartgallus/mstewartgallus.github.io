@@ -1,0 +1,7 @@
+.dialog {
+    border-width: 2px;
+    color: var(--canvas-text);
+    background-color: var(--canvas);
+    top: 0;
+    right: 0;
+}

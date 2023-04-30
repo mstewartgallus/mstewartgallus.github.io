@@ -1,4 +1,4 @@
-import { Footer, Nav, H2, Menubar, MenuA, Subheading, Section, SubtleA, Theme } from "@features/ui";
+import { Footer, Nav, H2, Subheading, Section, SubtleA, Theme } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { ScreenOnly } from "@features/util";
 import { Comments } from "./comments.jsx";
@@ -9,14 +9,6 @@ import { PostPaging } from "./post-paging.jsx";
 
 const Notice = ({notice}) =>
       notice && notice.length > 0 && <ListNotice notice={notice} />;
-
-const Skip = () =>
-<Menubar heading="Skip">
-    <MenuA href="#content" aria-describedby="content">Content</MenuA>
-    <MenuA href="#metadata">Metadata</MenuA>
-    <MenuA href="#paging">Paging</MenuA>
-    <MenuA href="#breadcrumbs">Breadcrumbs</MenuA>
-</Menubar>;
 
 export const PostPage = ({post, children}) => {
     const { comments, notice,
@@ -42,7 +34,6 @@ export const PostPage = ({post, children}) => {
                            </Nav>
                        </ScreenOnly>
                    }
-                   menubar={<Skip />}
                    breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
                    support={
                        <Footer heading={

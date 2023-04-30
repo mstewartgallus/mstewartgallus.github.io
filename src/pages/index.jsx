@@ -3,14 +3,12 @@ import { useLocation } from "@gatsbyjs/reach-router";
 import {
     SearchForm,
     Banner,
-    Accordion,
-    AccordionPanel,
-    AccordionSummary,
     PostList,
     usePostList, usePosts, useWebsite
 } from "@features/index";
 import { useSearchURL } from "@features/route";
 import {
+    A,
     BreadcrumbList, BreadcrumbItem,
     Card,
     H2,
@@ -18,7 +16,9 @@ import {
     Hgroup,
     Subheading,
     SubtleA,
-    Theme
+    Theme,
+    Ul,
+    Li
 } from "@features/ui";
 import { ScreenOnly, useSubmit } from "@features/util";
 import { ViewportPage } from "@features/page";
@@ -55,6 +55,7 @@ const IndexPage = () => {
     const search = useSearchURL();
     const postsByCategory = usePostList();
     const id = useId();
+    const navId = useId();
     return <Theme>
                <ViewportPage
                    support={
@@ -90,37 +91,37 @@ const IndexPage = () => {
                        </BreadcrumbList>
                    }
                    mainbar={
-                       <Accordion>
-                           {
-                               Object.entries(postsByCategory).map(([category, p]) =>
-                                   <nav aria-labelledby={category}>
-                                       <AccordionPanel
-                                           value={category}
-                                           summary={
-                                               <header>
-                                                   <Card>
-                                                       <Hgroup>
-                                                           <H2>
-                                                               <AccordionSummary id={category}>
-                                                                   {category}
-                                                               </AccordionSummary>
-                                                           </H2>
-                                                       </Hgroup>
-                                                   </Card>
-                                               </header>
-                                           }>
-                                           <Card>
-                                               <PostList posts={p} />
-                                           </Card>
-                                       </AccordionPanel>
-                                   </nav>
-                               )
-                           }
-                       </Accordion>
+                       Object.entries(postsByCategory).map(([category, p]) =>
+                           <nav key={category} aria-labelledby={category}>
+                               <Card>
+                                   <header>
+                                       <Hgroup>
+                                           <H2>
+                                               <SubtleA id={category} href={'#' + category}>
+                                                   {category}
+                                               </SubtleA>
+                                           </H2>
+                                       </Hgroup>
+                                   </header>
+                                   <PostList posts={p} />
+                               </Card>
+                           </nav>
+                       )
                    }
 
                    heading="Posts"
                >
+                   <nav aria-labelledby={navId}>
+                       <span id={navId}>Categories</span>
+                       <Ul>
+                           {
+                               Object.keys(postsByCategory).map(category =>
+                                   <Li key={category}>
+                                       <A href={`#` + category}>{category}</A>
+                                   </Li>)
+                           }
+                       </Ul>
+                   </nav>
                    <PostList posts={posts} />
                </ViewportPage>
            </Theme>;

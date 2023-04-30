@@ -11,6 +11,7 @@ export { Code } from "./code";
 export { Column } from "./column";
 export { Disclosure, DisclosureSummary } from "./disclosure";
 export { Dl, DlDiv, Dt, Dd } from "./dl";
+export { FocusSkip } from "./focus-skip";
 export { Footer } from "./footer.jsx";
 export { Green } from "./green";
 export { H1, H2, H3, H4, H5, H6 } from "./heading";
