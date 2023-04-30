@@ -12,6 +12,10 @@
 
 @media screen {
     .layout {
+        /* FIXME awkward */
+        --t: clamp(0rem,
+                   (1600vw - var(--min-width) * 1rem) / var(--width-delta),
+                   1rem);
         padding-block: var(--line) calc(3 * var(--line));
         margin-block: calc(1.5 * var(--t));
         margin-inline-start: calc(7 * var(--t));

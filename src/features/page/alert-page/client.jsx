@@ -1,6 +1,6 @@
 import { useCallback, useRef, useEffect } from "react";
 import { navigate } from "gatsby";
-import { H1, Theme, Button, Card, Hgroup } from "@features/ui";
+import { H1, RootScroller, Button, Card, Hgroup } from "@features/ui";
 import { dialog, header } from "./alert.module.css";
 
 const Dialog = ({children, ...props}) => {
@@ -34,7 +34,7 @@ const Dialog = ({children, ...props}) => {
 };
 
 const AlertPageClient = ({children, heading}) =>
-<Theme>
+<RootScroller>
     <main aria-labelledby="content">
         <Dialog role="alertdialog"
                 aria-labelledby="content">
@@ -51,6 +51,6 @@ const AlertPageClient = ({children, heading}) =>
             </Card>
         </Dialog>
     </main>
-</Theme>;
+</RootScroller>;
 
 export default AlertPageClient;

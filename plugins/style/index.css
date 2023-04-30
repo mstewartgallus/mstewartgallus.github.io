@@ -5,20 +5,10 @@
     margin: 0 0 ;
 }
 
-::selection {
-    background-color: var(--selected-item);
-    color: var(--selected-item-text);
-}
-
 :root, body {
     margin: 0;
     padding: 0;
     display: flow-root;
-}
-:root {
-    --t: clamp(0rem,
-               (1600vw - var(--min-width) * 1rem) / var(--width-delta),
-               1rem) ;
 }
 
 @media print {
@@ -29,6 +19,10 @@
 
 @media screen {
     :root {
+        /* FIXME awkward */
+        --t: clamp(0rem,
+                   (1600vw - var(--min-width) * 1rem) / var(--width-delta),
+                   1rem) ;
         /* default ratio on browsers is 1rem = 16px */
         font-size:
             calc(
@@ -38,11 +32,5 @@
     }
 }
 
-/* avoid a flash of unstyled background :( */
-:root {
-    background-color: var(--canvas) ;
-}
-
-@import "./_transition.css";
+@import "./_global.css";
 @import "./_property.css";
-@import "./_vars.css";

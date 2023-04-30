@@ -28,6 +28,7 @@ export { Pane } from "./pane";
 export { P } from "./p";
 export { Pre } from "./pre";
 export { Q } from "./q";
+export { RootScroller } from "./root-scroller";
 export { Row } from "./row";
 export { Search } from "./search.jsx";
 export { Section } from "./section.jsx";

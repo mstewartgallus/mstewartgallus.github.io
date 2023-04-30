@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "@features/location";
 import { routeUpdates, routeDelays } from "./listeners.js";
+import "./transition.css";
 
 const routeUpdate = ({ signal }) => new Promise(r => {
     signal.addEventListener('abort', () => {

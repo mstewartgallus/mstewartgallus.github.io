@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwords_to_kick_your_teeth_out=self.webpackChunkwords_to_kick_your_teeth_out||[]).push([[929],{2929:function(t,e,u){u.r(e);var _=u(2616);e.default=_.sS}}]);
+//# sourceMappingURL=929-3ff079f336a97e9c6b10.js.map

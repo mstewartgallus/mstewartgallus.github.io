@@ -1,0 +1,1 @@
+{"version":3,"file":"929-3ff079f336a97e9c6b10.js","mappings":"sKAEA,UAAeA,EAAc,E","sources":["webpack://words-to-kick-your-teeth-out/./src/features/layout/view-transition.jsx"],"sourcesContent":["import { ViewTransition } from \"@features/view-transition\";\n\nexport default ViewTransition;\n"],"names":["ViewTransition"],"sourceRoot":""}
