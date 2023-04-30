@@ -20,17 +20,10 @@
 @media screen {
     :root {
         /* FIXME awkward */
-        --t: clamp(0rem,
-                   (1600vw - var(--min-width) * 1rem) / var(--width-delta),
-                   1rem) ;
+        --t: clamp(0rem, (1600vw - 320rem) / 1500, 1rem);
         /* default ratio on browsers is 1rem = 16px */
-        font-size:
-            calc(
-                (var(--min-font-size) * 1rem
-                 + var(--t) * (var(--max-font-size) - var(--min-font-size))) / 16
-            ) ;
+        font-size: calc(0.0625 * (19rem + var(--t) * 5));
     }
 }
 
-@import "./_global.css";
 @import "./_property.css";

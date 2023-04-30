@@ -11,11 +11,6 @@
         initial-value:20px;
         inherits: true;
     }
-    @property --max-width {
-        syntax: "<length-percentage>";
-        initial-value:100%;
-        inherits: true;
-    }
     @property --measure {
         syntax: "<length>";
         initial-value:400px;
@@ -24,26 +19,6 @@
     @property --main-width {
         syntax: "<length>";
         initial-value:500px;
-        inherits: true;
-    }
-    @property --min-width {
-        syntax: "<number>";
-        initial-value:300;
-        inherits: true;
-    }
-    @property --width-delta {
-        syntax: "<number>";
-        initial-value:1500;
-        inherits: true;
-    }
-    @property --min-font-size {
-        syntax: "<number>";
-        initial-value:16;
-        inherits: true;
-    }
-    @property --max-font-size {
-        syntax: "<number>";
-        initial-value:30;
         inherits: true;
     }
     @property --canvas {
