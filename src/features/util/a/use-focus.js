@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { hovering } from "./hovering.js";
 
 export const useFocus = ({
