@@ -1,11 +1,9 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { componentName } from "../component-name.js";
 import { withPrefetch } from "./with-prefetch.jsx";
 import { useLocal } from "./use-local.js";
 import { useClick } from "./use-click";
-import { useFocus } from "../use-focus";
-import { useHover } from "../use-hover";
-import { useHovering } from "./use-hovering";
+import { useFocus } from "./use-focus";
 
 const withClick = Component => {
     const WithClick = forwardRef((props, ref) => {
@@ -18,13 +16,9 @@ const withClick = Component => {
 
 const withHovering = Component => {
     const WithHovering = forwardRef((props, ref) => {
-        const { href } = props;
-        const {focus, onFocus, onBlur} = useFocus(props);
-        const {hover, onMouseEnter, onMouseLeave} = useHover(props);
-        useHovering((focus || hover) ? href : null);
+        const { onFocus, onMouseEnter } = useFocus(props);
         return <Component {...props}
-                          onFocus={onFocus} onBlur={onBlur}
-                          onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
+                          onFocus={onFocus} onMouseEnter={onMouseEnter}
                           ref={ref} />;
     });
     WithHovering.displayName = `Hovering(${componentName(Component)})`;
