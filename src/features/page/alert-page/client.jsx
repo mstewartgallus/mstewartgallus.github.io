@@ -1,5 +1,5 @@
 import { useCallback, useRef, useEffect } from "react";
-import { navigate } from "gatsby";
+import { navigate } from "@features/util";
 import { H1, RootScroller, Button, Card, Hgroup } from "@features/ui";
 import { dialog, header } from "./alert.module.css";
 

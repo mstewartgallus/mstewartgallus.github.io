@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from "react";
+import { forwardRef } from "react";
 import { componentName } from "../component-name.js";
 import { withPrefetch } from "./with-prefetch.jsx";
 import { useLocal } from "./use-local.js";

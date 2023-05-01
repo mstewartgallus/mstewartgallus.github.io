@@ -1,6 +1,7 @@
 export { A } from "./a";
 export { Assistive } from "./assistive";
 export { componentName } from "./component-name.js";
+export { navigate } from "./navigate.js";
 export { ScreenOnly } from "./screen-only";
 export { useClient, Client } from "@features/client";
 export { useChanged, usePrevious } from "./use-previous";

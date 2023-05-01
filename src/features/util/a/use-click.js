@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { navigate } from "gatsby";
+import { navigate } from "../navigate.js";
 
 export const useClick = ({ href, onClick }) => useCallback(async e => {
     onClick?.(e);
