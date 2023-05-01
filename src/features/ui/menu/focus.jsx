@@ -123,7 +123,7 @@ const useFocusGroup = keys => {
     ];
 };
 
-const FocusGroup = (props, ref) => {
+export const FocusGroup = forwardRef((props, ref) => {
     const { children, keys } = props;
     const [focusGroupProps, focusProps] = useFocusGroup(keys);
     return <div role="group" {...props} {...focusGroupProps} ref={ref}>
@@ -131,7 +131,8 @@ const FocusGroup = (props, ref) => {
                    {children}
                </Provider>
            </div>;
-};
+});
+FocusGroup.displayName = `FocusGroup`;
 
 export const useFocusItem = (ref, key) => {
     const myref = useRef(null);
@@ -151,7 +152,3 @@ export const useFocusItem = (ref, key) => {
 
     return { ref: myref, ...props };
 };
-
-const FocusGroupRef = forwardRef(FocusGroup);
-
-export { FocusGroupRef as FocusGroup };

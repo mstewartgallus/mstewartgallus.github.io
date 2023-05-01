@@ -11,9 +11,15 @@ const Item = createContext(-1);
 Item.displayName = 'MenuItem';
 const { Provider: ItemProvider } = Item;
 
+const MenuItems = ({children}) => children.map(item =>
+    <ItemProvider key={item.key} value={item.key}>
+        {item}
+    </ItemProvider>
+);
+
 // Not "that kind of menu"
 // More like a miny carousel if anything ?
-const Menubar = (props, ref) => {
+export const Menubar = forwardRef((props, ref) => {
     const { children } = props;
     const childs = useMemo(() => Children.toArray(children), [children]);
     const keys = useMemo(() => childs.map(child => child.key), [childs]);
@@ -23,11 +29,10 @@ const Menubar = (props, ref) => {
                    <MenuItems>{childs}</MenuItems>
                </menu>
            </FocusGroup>;
-};
+});
+Menubar.displayName = `Menubar`;
 
-const MenubarRef = forwardRef(Menubar);
-
-const MenuA = (props, ref) => {
+export const MenuA = forwardRef((props, ref) => {
     const key = useContext(Item);
     const menu = useFocusItem(ref, key);
 
@@ -39,14 +44,5 @@ const MenuA = (props, ref) => {
                    <ClickTrap />
                </A>
            </li>;
-};
-
-const MenuARef = forwardRef(MenuA);
-
-const MenuItems = ({children}) => children.map(item =>
-    <ItemProvider key={item.key} value={item.key}>
-        {item}
-    </ItemProvider>
-);
-
-export { MenubarRef as Menubar, MenuARef as MenuA };
+});
+MenuA.displayName = `MenuA`;

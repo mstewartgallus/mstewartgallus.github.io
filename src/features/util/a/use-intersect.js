@@ -1,4 +1,4 @@
-import { useEffect, useState, useTransition } from "react";
+import { useDeferredValue, useSyncExternalStore, useRef } from "react";
 
 // Only prefetch mostly visible links
 const options = {
@@ -37,9 +37,8 @@ const getPrefetcher = () => {
 };
 
 export const useNear = ref => {
-    const [,startTransition] = useTransition();
-    const [near, setNear] = useState(false);
-    useEffect(() => {
+    const nearRef = useRef(false);
+    const near = useSyncExternalStore(cb => {
         const pre = getPrefetcher();
         if (!pre) {
             return;
@@ -57,7 +56,8 @@ export const useNear = ref => {
             if (signal.aborted) {
                 return;
             }
-            startTransition(() => setNear(n));
+            nearRef.current = n;
+            cb();
         };
 
         signal.addEventListener('abort', () => {
@@ -68,6 +68,6 @@ export const useNear = ref => {
         callbacks.set(current, callback);
         pre.observe(current);
         return () => abort.abort();
-    }, [ref]);
-    return near;
+    }, () => nearRef.current, () => nearRef.current);
+    return useDeferredValue(near);
 };

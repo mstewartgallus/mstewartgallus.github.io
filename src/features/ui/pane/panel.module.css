@@ -9,7 +9,7 @@
 
 .wrapper {
     inset-block-start: 0 ;
-    overflow: hidden ;
+    overflow: clip ;
 
     inline-size: fit-content ;
     max-inline-size: 100% ;

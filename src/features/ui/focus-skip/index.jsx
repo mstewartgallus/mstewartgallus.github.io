@@ -1,4 +1,4 @@
-import { useCallback, useRef, useId } from "react";
+import { useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Client, Assistive } from "@features/util";
 import { Theme } from "../theme";
@@ -36,7 +36,7 @@ export const FocusSkip = ({id, children}) => {
     }, []);
 
     const onKeyDownContent = useCallback(e => {
-        const { target, key } = e;
+        const { key } = e;
         switch (key) {
         case 'Escape':
             top.current.focus({ focusVisible: true });

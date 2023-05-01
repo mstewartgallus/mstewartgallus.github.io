@@ -14,7 +14,7 @@ const { Provider: OpenProvider } = Open;
 
 export const usePopOverOpen = () => useContext(Open);
 
-const PopOverSummary = (props, ref) => {
+export const PopOverSummary = forwardRef((props, ref) => {
     const { children } = props;
     const { open, id } = useContext(Context);
 
@@ -30,9 +30,10 @@ const PopOverSummary = (props, ref) => {
                    </span>
                </Button>
            </Client>;
-};
+});
+PopOverSummary.displayName = `PopOverSummary`;
 
-const PopOver = ({
+export const PopOver = forwardRef(({
     children,
     summary,
     open,
@@ -54,9 +55,5 @@ const PopOver = ({
                    </Dialog>
                </OpenProvider>
            </div>;
-};
-
-const PopOverRef = forwardRef(PopOver);
-const PopOverSummaryRef = forwardRef(PopOverSummary);
-
-export { PopOverRef as PopOver, PopOverSummaryRef as PopOverSummary };
+});
+PopOver.displayName = `PopOver`;

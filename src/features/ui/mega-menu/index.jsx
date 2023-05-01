@@ -14,11 +14,12 @@ Context.displayName = 'Open';
 
 const { Provider } = Context;
 
-const MegaMenuSummary = (props, ref) => {
+export const MegaMenuSummary = forwardRef((props, ref) => {
     const { children } = props;
     const { onClick } = useContext(Context);
     return <PopOverSummary {...props} onClick={onClick}>{children}</PopOverSummary>;
-};
+});
+MegaMenuSummary.displayName = `MegaMenuSummary`;
 
 const CloseButton = props => {
     const open = usePopOverOpen();
@@ -29,7 +30,7 @@ const CloseButton = props => {
            </form>;
 };
 
-const MegaMenu = ({ children, summary, ...props}, ref) => {
+export const MegaMenu = forwardRef(({ children, summary, ...props}, ref) => {
     const popoverRef = useRef();
     useImperativeHandle(ref, () => popoverRef.current, []);
 
@@ -119,9 +120,5 @@ const MegaMenu = ({ children, summary, ...props}, ref) => {
                    {children}
                </div>
            </PopOver>;
-};
-
-const MegaMenuRef = forwardRef(MegaMenu);
-const MegaMenuSummaryRef = forwardRef(MegaMenuSummary);
-
-export { MegaMenuRef as MegaMenu, MegaMenuSummaryRef as MegaMenuSummary };
+});
+MegaMenu.displayName = `MegaMenu`;

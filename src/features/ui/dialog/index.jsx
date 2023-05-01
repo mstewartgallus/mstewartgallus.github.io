@@ -16,7 +16,7 @@ const useDialog = open => {
     return { isTransitioning, endTransition };
 };
 
-const Dialog = ({ open, preview, ...props}, ref) => {
+export const Dialog = forwardRef(({ open, preview, ...props}, ref) => {
     let { className } = props;
 
     const myref = useRef();
@@ -63,8 +63,5 @@ const Dialog = ({ open, preview, ...props}, ref) => {
                    </div>
                </dialog>
            </div>;
-};
-
-const DialogRef = forwardRef(Dialog);
-
-export { DialogRef as Dialog };
+});
+Dialog.displayName = `Dialog`;

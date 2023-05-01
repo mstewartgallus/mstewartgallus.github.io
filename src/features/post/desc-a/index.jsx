@@ -2,7 +2,7 @@ import { useId, forwardRef } from "react";
 import { A, ClickTrap } from "@features/ui";
 import { wrapper } from "./desc.module.css";
 
-const DescA = ({ children, desc, ...props }, ref) => {
+export const DescA = forwardRef(({ children, desc, ...props }, ref) => {
     const id = useId();
 
     return <div role="presentation" className={wrapper}>
@@ -15,8 +15,5 @@ const DescA = ({ children, desc, ...props }, ref) => {
                    {desc}
                </span>
            </div>;
-};
-
-const DescARef = forwardRef(DescA);
-
-export { DescARef as DescA };
+});
+DescA.displayName = `DescA`;
