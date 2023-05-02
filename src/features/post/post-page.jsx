@@ -1,4 +1,4 @@
-import { Footer, Nav, H2, Subheading, Section, SubtleA, Theme } from "@features/ui";
+import { Footer, Nav, H2, Subheading, Section, SubtleA } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { ScreenOnly } from "@features/util";
 import { Comments } from "./comments.jsx";
@@ -14,52 +14,50 @@ export const PostPage = ({post, children}) => {
     const { comments, notice,
             category, subtitle, title, childrenLink
           } = post;
-    return <Theme>
-               <ViewportPage
-                   heading={title}
-                   subheading={
-                       <Subheading>{subtitle}</Subheading>
-                   }
-                   notice={<Notice notice={notice} />}
-                   navigation={
-                       <ScreenOnly>
-                           <Nav heading={
+    return <ViewportPage
+               heading={title}
+               subheading={
+                   <Subheading>{subtitle}</Subheading>
+               }
+               notice={<Notice notice={notice} />}
+               navigation={
+                   <ScreenOnly>
+                       <Nav heading={
+                                <H2>
+                                    <SubtleA id="paging" href="#paging">
+                                        Paging
+                                    </SubtleA>
+                                </H2>
+                            }>
+                           <PostPaging childrenLink={childrenLink} />
+                       </Nav>
+                   </ScreenOnly>
+               }
+               breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
+               support={
+                   <Footer heading={
+                               <H2>
+                                   <SubtleA id="metadata" href="#metadata">
+                                       Metadata
+                                   </SubtleA>
+                               </H2>
+                           }>
+                       {
+                           <Metadata {...post} />
+                       }
+                   </Footer>
+               }
+               mainbar={
+                   comments &&
+                       <Section heading={
                                     <H2>
-                                        <SubtleA id="paging" href="#paging">
-                                            Paging
-                                        </SubtleA>
+                                        <SubtleA id="comments" href="#comments">Comments</SubtleA>
                                     </H2>
                                 }>
-                               <PostPaging childrenLink={childrenLink} />
-                           </Nav>
-                       </ScreenOnly>
-                   }
-                   breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
-                   support={
-                       <Footer heading={
-                                   <H2>
-                                       <SubtleA id="metadata" href="#metadata">
-                                           Metadata
-                                       </SubtleA>
-                                   </H2>
-                               }>
-                           {
-                               <Metadata {...post} />
-                           }
-                       </Footer>
-                   }
-                   mainbar={
-                       comments &&
-                           <Section heading={
-                                        <H2>
-                                            <SubtleA id="comments" href="#comments">Comments</SubtleA>
-                                        </H2>
-                                    }>
-                               <Comments host={comments.host} id={comments.id} />
-                           </Section>
-                   }
-               >
-                   {children}
-               </ViewportPage>
-           </Theme>;
+                           <Comments host={comments.host} id={comments.id} />
+                       </Section>
+               }
+           >
+               {children}
+           </ViewportPage>;
 };

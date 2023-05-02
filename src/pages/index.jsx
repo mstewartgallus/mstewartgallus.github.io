@@ -16,7 +16,6 @@ import {
     Hgroup,
     Subheading,
     SubtleA,
-    Theme,
     Ul,
     Li
 } from "@features/ui";
@@ -56,75 +55,73 @@ const IndexPage = () => {
     const postsByCategory = usePostList();
     const id = useId();
     const navId = useId();
-    return <Theme>
-               <ViewportPage
-                   support={
-                       <header aria-describedby={id}>
+    return <ViewportPage
+               support={
+                   <header aria-describedby={id}>
+                       <Card>
+                           <Hgroup id={id}>
+                               <H2><SubtleA id="common" href="#common">{title}</SubtleA></H2>
+                               <Subheading>{description}</Subheading>
+                           </Hgroup>
+                           <Banner />
+                       </Card>
+                   </header>
+               }
+               navigation={
+                   <ScreenOnly>
+                       <Search aria-describedby="search">
                            <Card>
-                               <Hgroup id={id}>
-                                   <H2><SubtleA id="common" href="#common">{title}</SubtleA></H2>
-                                   <Subheading>{description}</Subheading>
-                               </Hgroup>
-                               <Banner />
+                               <Header>
+                                   <Hgroup>
+                                       <H2><SubtleA id="search" href="#search">Search</SubtleA></H2>
+                                   </Hgroup>
+                               </Header>
+                               <SearchForm action={search} onSubmit={onSubmit} />
                            </Card>
-                       </header>
-                   }
-                   navigation={
-                       <ScreenOnly>
-                           <Search aria-describedby="search">
-                               <Card>
-                                   <Header>
-                                       <Hgroup>
-                                           <H2><SubtleA id="search" href="#search">Search</SubtleA></H2>
-                                       </Hgroup>
-                                   </Header>
-                                   <SearchForm action={search} onSubmit={onSubmit} />
-                               </Card>
-                           </Search>
-                       </ScreenOnly>
-                   }
-                   breadcrumbs={
-                       <BreadcrumbList>
-                           <BreadcrumbItem>
-                               <span aria-current="page">Home</span>
-                           </BreadcrumbItem>
-                       </BreadcrumbList>
-                   }
-                   mainbar={
-                       Object.entries(postsByCategory).map(([category, p]) =>
-                           <nav key={category} aria-labelledby={category}>
-                               <Card>
-                                   <header>
-                                       <Hgroup>
-                                           <H2>
-                                               <SubtleA id={category} href={'#' + category}>
-                                                   {category}
-                                               </SubtleA>
-                                           </H2>
-                                       </Hgroup>
-                                   </header>
-                                   <PostList posts={p} />
-                               </Card>
-                           </nav>
-                       )
-                   }
+                       </Search>
+                   </ScreenOnly>
+               }
+               breadcrumbs={
+                   <BreadcrumbList>
+                       <BreadcrumbItem>
+                           <span aria-current="page">Home</span>
+                       </BreadcrumbItem>
+                   </BreadcrumbList>
+               }
+               mainbar={
+                   Object.entries(postsByCategory).map(([category, p]) =>
+                       <nav key={category} aria-labelledby={category}>
+                           <Card>
+                               <header>
+                                   <Hgroup>
+                                       <H2>
+                                           <SubtleA id={category} href={'#' + category}>
+                                               {category}
+                                           </SubtleA>
+                                       </H2>
+                                   </Hgroup>
+                               </header>
+                               <PostList posts={p} />
+                           </Card>
+                       </nav>
+                   )
+               }
 
-                   heading="Posts"
-               >
-                   <nav aria-labelledby={navId}>
-                       <span id={navId}>Categories</span>
-                       <Ul>
-                           {
-                               Object.keys(postsByCategory).map(category =>
-                                   <Li key={category}>
-                                       <A href={`#` + category}>{category}</A>
-                                   </Li>)
-                           }
-                       </Ul>
-                   </nav>
-                   <PostList posts={posts} />
-               </ViewportPage>
-           </Theme>;
+               heading="Posts"
+           >
+               <nav aria-labelledby={navId}>
+                   <span id={navId}>Categories</span>
+                   <Ul>
+                       {
+                           Object.keys(postsByCategory).map(category =>
+                               <Li key={category}>
+                                   <A href={`#` + category}>{category}</A>
+                               </Li>)
+                       }
+                   </Ul>
+               </nav>
+               <PostList posts={posts} />
+           </ViewportPage>;
 };
 
 
