@@ -8,7 +8,7 @@ export const navigate = async pathname => {
     }
 
     const transition = document.startViewTransition(async () => {
-        await Promise.race([gatsbyNavigate(pathname), timeout(1000)]);
+        await Promise.race([gatsbyNavigate(pathname), timeout(2000)]);
     });
 
     return await transition.updateCallbackDone;

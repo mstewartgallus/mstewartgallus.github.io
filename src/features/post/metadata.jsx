@@ -11,7 +11,7 @@ const Item = ({ children, filter, item }) => {
 
 const Items = ({ label, filter, items }) =>
 <DlDiv>
-    <Dt role="presentation">{label}</Dt>
+    <Dt>{label}</Dt>
     {
         items.map(item =>
             <Item key={item} filter={filter} item={item}>

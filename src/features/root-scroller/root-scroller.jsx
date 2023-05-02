@@ -1,10 +1,25 @@
-import { useContext, useCallback, useEffect, useRef } from "react";
+import { useContext, useCallback, useLayoutEffect, useRef } from "react";
 import { useLocationContext } from "@features/location";
 import { Context } from "./context.js";
 import { scroller } from "./scroller.module.css";
 
+const useThrottle = () => {
+    const dirty = useRef(false);
+    return useCallback((ival, cb) => {
+        if (dirty.current) {
+            return;
+        }
+        dirty.current = true;
+
+        setTimeout(() => {
+            cb();
+            dirty.current = false;
+        }, ival);
+    }, []);
+};
+
 export const RootScroller = ({children}) => {
-    const { scroll, setScroll } = useContext(Context);
+    const { scroll: [x, y], setScroll } = useContext(Context);
 
     const { location, prevLocation } = useLocationContext();
 
@@ -14,31 +29,23 @@ export const RootScroller = ({children}) => {
 
     const ref = useRef(null);
 
-    // Throttle scroll measurement
-    const dirty = useRef(false);
+    const throttle = useThrottle();
     const onScroll = useCallback(() => {
-        if (dirty.current) {
-            return;
-        }
-        dirty.current = true;
-
-        setTimeout(() => {
+        throttle(100, () => {
             const { current } = ref;
             if (!current) {
                 return;
             }
-            setScroll([0, current.scrollTop]);
-            dirty.current = false;
-        }, 100);
-    }, [setScroll]);
+            setScroll(0, current.scrollTop);
+        });
+    }, [throttle, setScroll]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!changed || hash) {
             return;
         }
-        const [x, y] = scroll;
         ref.current.scrollTo(x, y);
-    }, [scroll, changed, hash]);
+    }, [x, y, changed, hash]);
 
     return <div className={scroller} onScroll={onScroll} ref={ref}>
                {children}
