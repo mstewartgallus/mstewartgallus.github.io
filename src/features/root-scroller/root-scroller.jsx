@@ -14,8 +14,22 @@ export const RootScroller = ({children}) => {
 
     const ref = useRef(null);
 
+    // Throttle scroll measurement
+    const dirty = useRef(false);
     const onScroll = useCallback(() => {
-        setScroll([0, ref.current.scrollTop]);
+        if (dirty.current) {
+            return;
+        }
+        dirty.current = true;
+
+        setTimeout(() => {
+            const { current } = ref;
+            if (!current) {
+                return;
+            }
+            setScroll([0, current.scrollTop]);
+            dirty.current = false;
+        }, 100);
     }, [setScroll]);
 
     useEffect(() => {
