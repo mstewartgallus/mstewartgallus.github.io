@@ -26,12 +26,3 @@
     outline-offset: 0.26em ;
     outline-width: 2px ;
 }
-
-.heading:focus, .heading1:focus, .heading2:focus {
-    outline-style: dashed ;
-}
-.heading:focus-visible, .heading1:focus-visible, .heading2:focus-visible {
-    outline-style: solid ;
-    outline-color: var(--highlight-text) ;
-    outline-width: 0.1ch ;
-}
