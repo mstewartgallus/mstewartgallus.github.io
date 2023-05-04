@@ -1,4 +1,4 @@
-import { useContext, useCallback, useLayoutEffect, useRef } from "react";
+import { useContext, useCallback, useEffect, useRef } from "react";
 import { useLocationContext } from "@features/location";
 import { Context } from "./context.js";
 import { scroller } from "./scroller.module.css";
@@ -36,15 +36,15 @@ export const RootScroller = ({children}) => {
             if (!current) {
                 return;
             }
-            setScroll(0, current.scrollTop);
+            setScroll(current.scrollLeft, current.scrollTop);
         });
     }, [throttle, setScroll]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (!changed || hash) {
             return;
         }
-        ref.current.scrollTo(x, y);
+        ref.current?.scrollTo(x, y);
     }, [x, y, changed, hash]);
 
     return <div className={scroller} onScroll={onScroll} ref={ref}>

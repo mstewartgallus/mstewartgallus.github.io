@@ -20,12 +20,7 @@ export const useFocus = () => {
             return;
         }
 
-        const { current } = ref;
-        if (!current) {
-            return;
-        }
-
-        current.focus(opts);
+        ref.current?.focus(opts);
     },  [hash, pathname, changed]);
     return ref;
 };
