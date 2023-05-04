@@ -1,5 +1,5 @@
 import { useContext, useCallback, useLayoutEffect, useRef } from "react";
-import { useLocationContext } from "@features/location";
+import { useLocation } from "@features/location";
 import { Context } from "./context.js";
 import { scroller } from "./scroller.module.css";
 
@@ -19,15 +19,11 @@ const useThrottle = () => {
 };
 
 export const RootScroller = ({children}) => {
-    const { scroll: [x, y], setScroll } = useContext(Context);
-
-    const { location, prevLocation } = useLocationContext();
-
-    const { pathname, hash } = location;
-    const { pathname: prevPathname } = prevLocation;
-    const changed = pathname !== prevPathname;
+    const { scroll: [left, top], setScroll } = useContext(Context);
+    const { hash } = useLocation();
 
     const ref = useRef(null);
+    const scrollRef = useRef({ left, top, hash });
 
     const throttle = useThrottle();
     const onScroll = useCallback(() => {
@@ -41,11 +37,13 @@ export const RootScroller = ({children}) => {
     }, [throttle, setScroll]);
 
     useLayoutEffect(() => {
-        if (!changed || hash) {
+        // FIXME hash?
+        const {left, top, hash} = scrollRef.current;
+        if (hash) {
             return;
         }
-        ref.current?.scrollTo(x, y);
-    }, [x, y, changed, hash]);
+        ref.current?.scrollTo({ left, top, behaviour: 'instant' });
+    }, []);
 
     return <div className={scroller} onScroll={onScroll} ref={ref}>
                {children}
