@@ -1,4 +1,4 @@
-import { useContext, useCallback, useEffect, useRef } from "react";
+import { useContext, useCallback, useLayoutEffect, useRef } from "react";
 import { useLocationContext } from "@features/location";
 import { Context } from "./context.js";
 import { scroller } from "./scroller.module.css";
@@ -40,7 +40,7 @@ export const RootScroller = ({children}) => {
         });
     }, [throttle, setScroll]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!changed || hash) {
             return;
         }
