@@ -10,7 +10,7 @@
 }
 
 .a:focus {
-    outline-style: dashed ;
+    outline-style: solid ;
 }
 .a:focus-visible {
     outline-color: var(--highlight-text) ;

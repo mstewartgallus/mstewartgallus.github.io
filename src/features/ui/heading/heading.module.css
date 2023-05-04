@@ -20,9 +20,3 @@
 .heading2 {
     font-size: 1.25rem ;
 }
-
-.heading, .heading1, .heading2 {
-    outline-color: currentcolor ;
-    outline-offset: 0.26em ;
-    outline-width: 2px ;
-}

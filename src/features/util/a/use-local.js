@@ -1,25 +1,13 @@
-import { useMemo } from "react";
-import { graphql, useStaticQuery } from "gatsby";
-
-const useSiteMetadataRaw = () => useStaticQuery(graphql`
-query {
-  site {
-    siteMetadata {
-      siteUrl
-    }
-  }
-}`);
+import { useOrigin } from "./use-origin.js";
 
 export const useLocal = ({ href, target, download }) => {
-    const metadata = useSiteMetadataRaw();
-    const siteUrl = metadata.site.siteMetadata.siteUrl;
-    return useMemo(() => {
-        const { origin, hash } = new URL(href ?? '', siteUrl);
-
-        if (hash || target || download) {
-            return false;
-        }
-
-        return href && origin === siteUrl;
-    }, [siteUrl, href, target, download]);
+    const siteUrl = useOrigin();
+    if (!href || target || download) {
+        return null;
+    }
+    const { origin, pathname, hash, search } = new URL(href, siteUrl);
+    if (origin !== siteUrl) {
+        return null;
+    }
+    return `${pathname}${search}${hash}`;
 };
