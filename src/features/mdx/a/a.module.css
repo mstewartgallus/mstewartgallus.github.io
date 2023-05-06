@@ -1,0 +1,10 @@
+@media print {
+    .a {
+        text-decoration: inherit ;
+    }
+
+    .a:not([href^="/"]):not([href^="#"])::after {
+        content: "\2003" attr(href) ;
+        white-space: nowrap ;
+    }
+}

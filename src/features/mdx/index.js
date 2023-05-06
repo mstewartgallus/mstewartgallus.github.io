@@ -1,3 +1,4 @@
+export { A } from "./a";
 export { Layout } from "./layout.jsx";
 export { theme } from "./theme.jsx";
 export { Pre } from "./pre";

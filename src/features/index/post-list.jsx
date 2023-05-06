@@ -1,7 +1,12 @@
-import { A, ClickTrap, Ol, Li } from "@features/ui";
+import { BlockA, ClickTrap, Ol, Li } from "@features/ui";
 
 const Entry = ({href, children}) =>
-<Li><A href={href}>{children}<ClickTrap /></A></Li>;
+<Li>
+    <BlockA href={href}>
+        {children}
+        <ClickTrap />
+    </BlockA>
+</Li>;
 
 const Posts = ({posts}) => posts.map(({ slug, title }) =>
     <Entry key={slug} href={slug}>{title}</Entry>

@@ -1,12 +1,14 @@
 import { useSearchURL } from "@features/route";
-import { A, Address, Dl, DlDiv, Dd, Dt, Time, ClickTrap } from "@features/ui";
+import { BlockA, Address, Dl, DlDiv, Dd, Dt, Time, ClickTrap } from "@features/ui";
 
 const Item = ({ children, filter, item }) => {
     const href = useSearchURL({ [filter]: [item] });
-    return <Dd><A href={href} data-pagefind-filter={filter}>
+    return <Dd>
+               <BlockA href={href} data-pagefind-filter={filter}>
                    {children}
                    <ClickTrap />
-           </A></Dd>;
+               </BlockA>
+           </Dd>;
 };
 
 const Items = ({ label, filter, items }) =>
@@ -42,10 +44,10 @@ export const Metadata = ({
         <Dt>Author</Dt>
         <Dd>
             <Address>
-                <A rel="author" href={author.url}>
+                <BlockA rel="author" href={author.url}>
                     {author.name}
                     <ClickTrap />
-                </A>
+                </BlockA>
             </Address>
         </Dd>
     </DlDiv>

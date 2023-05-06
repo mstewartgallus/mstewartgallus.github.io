@@ -1,6 +1,7 @@
 export { A } from "./a";
 export { Abbr } from "./abbr";
 export { Address } from "./address";
+export { BlockA } from "./block-a";
 export { Blockquote } from "./blockquote";
 export { BreadcrumbList, BreadcrumbItem, BreadcrumbA } from "./breadcrumb-list";
 export { Button } from "./button";

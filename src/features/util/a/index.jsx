@@ -31,7 +31,7 @@ export const A = forwardRef((props, ref) => {
     const local = useLocal(props);
 
     if (local) {
-        return <ALocal {...props} href={local} ref={ref} />;
+        return <ALocal {...props} ref={ref} />;
     }
     return <a {...props} ref={ref} />;
 });

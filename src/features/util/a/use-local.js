@@ -9,5 +9,8 @@ export const useLocal = ({ href, target, download }) => {
     if (origin !== siteUrl) {
         return null;
     }
+    if (hash) {
+        return null;
+    }
     return `${pathname}${search}${hash}`;
 };

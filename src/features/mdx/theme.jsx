@@ -1,11 +1,11 @@
 import {
-    A,
     Blockquote,
     Code,
     Ul, Ol, Menu, Li,
     Hr,
     P
 } from "@features/ui";
+import { A } from "./a";
 import { H1, H2, H3, H4, H5, H6, } from "./heading";
 import { Pre } from "./pre";
 

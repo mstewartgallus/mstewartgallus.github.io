@@ -2,18 +2,19 @@
     font: inherit ;
     /* more legible hyperlinks */
     text-underline-position: under ;
-    border-radius: 0.01ch ;
+    border-radius: 0.001ch ;
     box-decoration-break: clone ;
 
     outline-color: var(--highlight-text) ;
-    outline-width: 1px ;
-    outline-offset: 0.24em ;
+    outline-width: 0.1rem ;
+    outline-offset: 0.2em ;
 }
 
 .a:focus {
     outline-style: solid ;
 }
 .a:focus-visible {
+    outline-offset: 0.24em ;
     outline-width: 0.14rem ;
 }
 
@@ -25,21 +26,4 @@
 }
 .a:any-link:active {
     color: var(--active-text) ;
-    transition: color 0.05s ;
-}
-
-@media print {
-    .a {
-        text-decoration: inherit ;
-    }
-
-    /* Hide bookmark links? */
-    .a[rel~="bookmark"] {
-        display: none ;
-    }
-
-    .a:not([href^="/"]):not([href^="#"])::after {
-        content: "\2003" attr(href) ;
-        white-space: nowrap ;
-    }
 }
