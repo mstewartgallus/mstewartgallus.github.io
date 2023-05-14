@@ -1,5 +1,5 @@
 import { ScreenOnly } from "@features/util";
-import { Column, H2, Nav, SubtleA } from "@features/ui";
+import { Column, H2A, Nav } from "@features/ui";
 import { SupportLayout } from "../support-layout";
 
 export const StandardLayout = ({
@@ -15,11 +15,9 @@ export const StandardLayout = ({
             {navigation}
             <ScreenOnly>
                 <Nav heading={
-                         <H2>
-                             <SubtleA id="breadcrumbs" href="#breadcrumbs">
-                                 Breadcrumbs
-                             </SubtleA>
-                         </H2>}>
+                         <H2A id="breadcrumbs">
+                             Breadcrumbs
+                         </H2A>}>
                     {breadcrumbs}
                 </Nav>
             </ScreenOnly>

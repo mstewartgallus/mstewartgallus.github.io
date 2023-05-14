@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Footer, Nav, H2, Subheading, SubtleA } from "@features/ui";
+import { Footer, Nav, H2A, Subheading } from "@features/ui";
 import { ViewportPage } from "@features/page";
 import { ScreenOnly } from "@features/util";
 import { ListNotice } from "./list-notice";
@@ -25,11 +25,9 @@ export const PostPage = ({post, children}) => {
                navigation={
                    <ScreenOnly>
                        <Nav heading={
-                                <H2>
-                                    <SubtleA id="paging" href="#paging">
-                                        Paging
-                                    </SubtleA>
-                                </H2>
+                                <H2A id="paging">
+                                    Paging
+                                </H2A>
                             }>
                            <PostPaging childrenLink={childrenLink} />
                        </Nav>
@@ -38,15 +36,11 @@ export const PostPage = ({post, children}) => {
                breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
                support={
                    <Footer heading={
-                               <H2>
-                                   <SubtleA id="metadata" href="#metadata">
-                                       Metadata
-                                   </SubtleA>
-                               </H2>
+                               <H2A id="metadata">
+                                   Metadata
+                               </H2A>
                            }>
-                       {
-                           <Metadata {...post} />
-                       }
+                       <Metadata {...post} />
                    </Footer>
                }
                mainbar={

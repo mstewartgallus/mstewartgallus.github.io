@@ -1,30 +1,24 @@
+import { forwardRef } from "react";
 import {
-    SubtleA, Header, Hgroup,
-    H1 as UiH1, H2 as UiH2, H3 as UiH3,
-    H4 as UiH4, H5 as UiH5, H6 as UiH6
+    Header, Hgroup,
+    H1A, H2A, H3A, H4A, H5A, H6A
 } from "@features/ui";
 
-const createAutoLink = Hn => {
+const wrap = Hn => {
     const name = Hn.displayName || Hn.name || 'Component';
-    const HeadingAutoLink = ({ children, id, ...props }) => {
-        const href = id ? `#${id}` : null;
-        return <Header>
-                   <Hgroup>
-                       <Hn {...props}>
-                           <SubtleA id={id} href={href}>
-                               {children}
-                           </SubtleA>
-                       </Hn>
-                   </Hgroup>
-               </Header>;
-    };
-    HeadingAutoLink.displayName = `createAutoLink(${name})`;
+    const HeadingAutoLink = forwardRef((props, ref) =>
+        <Header>
+            <Hgroup>
+                <Hn {...props} ref={ref}/>
+            </Hgroup>
+        </Header>);
+    HeadingAutoLink.displayName = `wrap(${name})`;
     return HeadingAutoLink;
 };
 
-export const H1 = UiH1;
-export const H2 = createAutoLink(UiH2);
-export const H3 = createAutoLink(UiH3);
-export const H4 = createAutoLink(UiH4);
-export const H5 = createAutoLink(UiH5);
-export const H6 = createAutoLink(UiH6);
+export const H1 = wrap(H1A);
+export const H2 = wrap(H2A);
+export const H3 = wrap(H3A);
+export const H4 = wrap(H4A);
+export const H5 = wrap(H5A);
+export const H6 = wrap(H6A);

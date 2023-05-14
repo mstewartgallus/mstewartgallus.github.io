@@ -11,11 +11,10 @@ import {
     A,
     BreadcrumbList, BreadcrumbItem,
     Card,
-    H2,
+    H2A,
     Header,
     Hgroup,
     Subheading,
-    SubtleA,
     Ul,
     Li
 } from "@features/ui";
@@ -60,7 +59,7 @@ const IndexPage = () => {
                    <header aria-describedby={id}>
                        <Card>
                            <Hgroup id={id}>
-                               <H2><SubtleA id="common" href="#common">{title}</SubtleA></H2>
+                               <H2A id="common">{title}</H2A>
                                <Subheading>{description}</Subheading>
                            </Hgroup>
                            <Banner />
@@ -73,7 +72,7 @@ const IndexPage = () => {
                            <Card>
                                <Header>
                                    <Hgroup>
-                                       <H2><SubtleA id="search" href="#search">Search</SubtleA></H2>
+                                       <H2A id="search">Search</H2A>
                                    </Hgroup>
                                </Header>
                                <SearchForm action={search} onSubmit={onSubmit} />
@@ -94,11 +93,9 @@ const IndexPage = () => {
                            <Card>
                                <header>
                                    <Hgroup>
-                                       <H2>
-                                           <SubtleA id={category} href={'#' + category}>
-                                               {category}
-                                           </SubtleA>
-                                       </H2>
+                                       <H2A id={category}>
+                                           {category}
+                                       </H2A>
                                    </Hgroup>
                                </header>
                                <PostList posts={p} />

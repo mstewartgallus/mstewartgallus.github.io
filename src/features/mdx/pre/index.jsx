@@ -1,11 +1,13 @@
-import { SubtleA } from "@features/ui";
+import { withA } from "@features/ui";
 import { figure, figcaption, pre } from "./pre.module.css";
+
+const Figcaption = withA('figcaption');
 
 export const Pre = ({children, id, title}) =>
 <figure className={figure}>
-    <figcaption className={figcaption}>
-        <SubtleA id={id} href={`#${id}`}>{title}</SubtleA>
-    </figcaption>
+    <Figcaption className={figcaption} id={id}>
+        {title}
+    </Figcaption>
     <pre className={pre}>
         {children}
     </pre>

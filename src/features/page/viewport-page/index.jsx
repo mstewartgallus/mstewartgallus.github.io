@@ -1,8 +1,8 @@
-import { Card, H1, Header, Hgroup, Theme } from "@features/ui";
+import { Card, Header, Hgroup, Theme } from "@features/ui";
 import { RootScroller } from "@features/root-scroller";
 import { Page } from "../page";
 import { StandardLayout } from "../standard-layout";
-import { SkipA } from "../skip-a";
+import { SkipH1 } from "../skip-h1";
 
 export const ViewportPage = ({
     children,
@@ -26,9 +26,7 @@ export const ViewportPage = ({
                     <Card>
                         <Header>
                             <Hgroup>
-                                <H1>
-                                    <SkipA id="content" href="#content">{heading}</SkipA>
-                                </H1>
+                                <SkipH1 id="content">{heading}</SkipH1>
                                 {subheading}
                             </Hgroup>
                             {notice}
