@@ -1,7 +1,15 @@
 .dl, .div, .dt, .dd {
-    display: block ;
     margin: 0;
     padding: 0;
+}
+
+.div, .dt, .dd {
+    display: block ;
+}
+
+.dl {
+    display: flow-root;
+    contain: layout style;
 }
 
 .div {

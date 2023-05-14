@@ -4,16 +4,14 @@ import { Context } from "./context.js";
 const { Provider } = Context;
 
 const useThrottle = () => {
-    const dirty = useRef(false);
+    const dirty = useRef(null);
     return useCallback((ival, cb) => {
         if (dirty.current) {
-            return;
+            clearTimeout(dirty.current);
         }
-        dirty.current = true;
-
-        setTimeout(() => {
+        dirty.current = setTimeout(() => {
+            dirty.current = null;
             cb();
-            dirty.current = false;
         }, ival);
     }, []);
 };

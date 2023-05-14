@@ -3,8 +3,8 @@
     display: flex ;
     inline-size: fit-content ;
     max-inline-size: 100% ;
-    column-gap: 0.5em ;
     position: relative;
+    column-gap: 0.5em;
 }
 
 .marker {
@@ -19,5 +19,5 @@
     inline-size: fit-content ;
     max-inline-size: 100% ;
     flex-grow: 2 ;
-    display: block ;
+    display: flow-root;
 }
