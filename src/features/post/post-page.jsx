@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Footer, Nav, H2A, Subheading } from "@features/ui";
 import { ViewportPage } from "@features/page";
-import { ScreenOnly } from "@features/util";
 import { ListNotice } from "./list-notice";
 import { Metadata } from "./metadata";
 import { PostBreadcrumbs } from "./post-breadcrumbs.jsx";
@@ -23,15 +22,13 @@ export const PostPage = ({post, children}) => {
                }
                notice={<Notice notice={notice} />}
                navigation={
-                   <ScreenOnly>
-                       <Nav heading={
-                                <H2A id="paging">
-                                    Paging
-                                </H2A>
-                            }>
-                           <PostPaging childrenLink={childrenLink} />
-                       </Nav>
-                   </ScreenOnly>
+                   <Nav heading={
+                            <H2A id="paging">
+                                Paging
+                            </H2A>
+                        }>
+                       <PostPaging childrenLink={childrenLink} />
+                   </Nav>
                }
                breadcrumbs={<PostBreadcrumbs category={category} title={title} />}
                support={

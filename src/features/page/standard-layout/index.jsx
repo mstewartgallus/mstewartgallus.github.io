@@ -12,8 +12,8 @@ export const StandardLayout = ({
     support={
         <>
             {support}
-            {navigation}
             <ScreenOnly>
+                {navigation}
                 <Nav heading={
                          <H2A id="breadcrumbs">
                              Breadcrumbs
