@@ -1,4 +1,4 @@
-import { useContext, useCallback, useLayoutEffect, useRef } from "react";
+import { useContext, useCallback, useRef } from "react";
 import { useLocation } from "@features/location";
 import { Context } from "./context.js";
 import { scroller } from "./scroller.module.css";
