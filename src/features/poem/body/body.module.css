@@ -1,0 +1,6 @@
+.body {
+    contain: layout paint style;
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--line);
+}
