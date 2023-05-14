@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
-import { unorderedList } from "./list.module.css";
+import { ul } from "./ul.module.css";
 
 export const Menu = forwardRef((props, ref) =>
-    <menu role="list" className={unorderedList} {...props} ref={ref} />);
+    <menu role="list" className={ul} {...props} ref={ref} />);
 Menu.displayName = `Menu`;

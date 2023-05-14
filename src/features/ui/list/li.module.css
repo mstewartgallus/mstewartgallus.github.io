@@ -1,4 +1,4 @@
-.item {
+.li {
     display: flex ;
     inline-size: fit-content ;
     max-inline-size: 100% ;
@@ -14,7 +14,6 @@
     font-weight: bold ;
     font-variant-numeric: lining-nums tabular-nums;
     color: var(--emphasis-text);
-
     text-align: end ;
 }
 

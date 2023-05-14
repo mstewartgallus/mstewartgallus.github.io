@@ -1,29 +1,8 @@
 import { forwardRef } from "react";
-import { componentName } from "../component-name.js";
+import { withClick } from "./with-click.jsx";
+import { withHovering } from "./with-hovering.jsx";
 import { withPrefetch } from "./with-prefetch.jsx";
 import { useLocal } from "./use-local.js";
-import { useClick } from "./use-click";
-import { useFocus } from "./use-focus";
-
-const withClick = Component => {
-    const WithClick = forwardRef((props, ref) => {
-        const onClick = useClick(props);
-        return <Component {...props} onClick={onClick} ref={ref} />;
-    });
-    WithClick.displayName = `Click(${componentName(Component)})`;
-    return WithClick;
-};
-
-const withHovering = Component => {
-    const WithHovering = forwardRef((props, ref) => {
-        const { onFocus, onMouseEnter } = useFocus(props);
-        return <Component {...props}
-                          onFocus={onFocus} onMouseEnter={onMouseEnter}
-                          ref={ref} />;
-    });
-    WithHovering.displayName = `Hovering(${componentName(Component)})`;
-    return WithHovering;
-};
 
 const ALocal = withClick(withHovering(withPrefetch('a')));
 

@@ -1,10 +1,9 @@
-import { withClass } from "@features/util";
 import { BlockA } from "../block-a";
 import { ClickTrap } from "../click-trap";
-import { breadcrumblist, breadcrumb } from "./breadcrumb-list.module.css";
+import { BreadcrumbItem } from "./breadcrumb-item.jsx";
 
-export const BreadcrumbList = withClass('ol', breadcrumblist);
-export const BreadcrumbItem = withClass('li', breadcrumb);
+export { BreadcrumbList } from "./breadcrumb-list.jsx";
+export { BreadcrumbItem } from "./breadcrumb-item.jsx";
 
 export const BreadcrumbA = props =>
 <BreadcrumbItem>

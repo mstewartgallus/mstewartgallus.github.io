@@ -36,16 +36,17 @@ export const RootScroller = ({children}) => {
         });
     }, [throttle, setScroll]);
 
-    useLayoutEffect(() => {
+    const cb = useCallback(elem => {
+        ref.current = elem;
         // FIXME hash?
         const {left, top, hash} = scrollRef.current;
         if (hash) {
             return;
         }
-        ref.current?.scrollTo({ left, top, behaviour: 'instant' });
+        elem?.scrollTo({ left, top, behaviour: 'instant' });
     }, []);
 
-    return <div className={scroller} onScroll={onScroll} ref={ref}>
+    return <div className={scroller} onScroll={onScroll} ref={cb}>
                {children}
            </div>;
 };

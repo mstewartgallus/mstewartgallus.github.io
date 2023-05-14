@@ -1,0 +1,23 @@
+.item {
+    all: unset;
+    display: flex ;
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+    column-gap: 0.75em ;
+    position: relative;
+}
+
+.marker {
+    display: list-item ;
+    list-style-position: inside ;
+    font-weight: bold ;
+    font-variant-numeric: lining-nums tabular-nums;
+    color: var(--emphasis-text);
+}
+
+.content {
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+    flex-grow: 2 ;
+    display: block ;
+}

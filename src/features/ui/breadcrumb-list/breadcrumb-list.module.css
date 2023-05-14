@@ -1,3 +1,9 @@
+@counter-style breadcrumb {
+  system: cyclic;
+  symbols: "/";
+  suffix: "  ";
+}
+
 .breadcrumblist {
     all: unset ;
     padding: 0 ;
@@ -10,28 +16,5 @@
 
     inline-size: fit-content ;
     max-inline-size: 100% ;
-}
-
-.breadcrumb {
-    all: unset ;
-}
-
-.breadcrumb {
-    display: list-item ;
-}
-
-@counter-style breadcrumb {
-  system: cyclic;
-  symbols: "/";
-  suffix: "  ";
-}
-
-.breadcrumb {
-    position: relative ;
     list-style: breadcrumb ;
-    list-style-position: inside ;
-}
-.breadcrumb::marker {
-    color: var(--emphasis-text);
-    font-weight: bold ;
 }

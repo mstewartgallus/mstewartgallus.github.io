@@ -11,12 +11,9 @@ export const useFocus = () => {
     const { pathname: prevPathname } = prevLocation;
     const changed = pathname !== prevPathname;
 
-    const ref = useRef();
+    const ref = useRef(null);
     useEffect(() => {
-        if (!changed) {
-            return;
-        }
-        if (hash) {
+        if (!changed || hash) {
             return;
         }
 

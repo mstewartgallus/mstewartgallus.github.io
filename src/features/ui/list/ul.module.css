@@ -1,0 +1,17 @@
+@counter-style bullet {
+  system: cyclic;
+  symbols: "\2043";
+  suffix: "";
+}
+
+.ul {
+    list-style-type: bullet ;
+    box-decoration-break: clone ;
+    display: block ;
+    padding: 0;
+    margin: 0;
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+    margin-block: var(--line) ;
+    position: relative ;
+}
