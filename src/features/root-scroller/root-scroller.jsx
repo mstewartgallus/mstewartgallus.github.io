@@ -19,11 +19,11 @@ const useThrottle = () => {
 };
 
 export const RootScroller = ({children}) => {
-    const { scroll: [left, top], setScroll } = useContext(Context);
+    const { scroll, setScroll } = useContext(Context);
     const { hash } = useLocation();
 
     const ref = useRef(null);
-    const scrollRef = useRef({ left, top, hash });
+    const scrollRef = useRef({ scroll, hash });
 
     const throttle = useThrottle();
     const onScroll = useCallback(() => {
@@ -39,11 +39,12 @@ export const RootScroller = ({children}) => {
     const cb = useCallback(elem => {
         ref.current = elem;
         // FIXME hash?
-        const {left, top, hash} = scrollRef.current;
-        if (hash) {
+        const {scroll, hash} = scrollRef.current;
+        if (hash || !scroll || !elem) {
             return;
         }
-        elem?.scrollTo({ left, top, behaviour: 'instant' });
+        const { left, top } = scroll;
+        elem.scrollTo({ left, top, behaviour: 'instant' });
     }, []);
 
     return <div className={scroller} onScroll={onScroll} ref={cb}>
