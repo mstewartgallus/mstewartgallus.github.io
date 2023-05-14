@@ -44,7 +44,8 @@ export const RootScroller = ({children}) => {
             return;
         }
         const { left, top } = scroll;
-        elem.scrollTo({ left, top, behaviour: 'instant' });
+        queueMicrotask(() =>
+            elem.scrollTo({ left, top, behaviour: 'instant' }));
     }, []);
 
     return <div className={scroller} onScroll={onScroll} ref={cb}>

@@ -1,4 +1,4 @@
-import Stats from '../../../public/webpack.stats.json';
+import { readFileSync } from 'fs';
 
 // We might also consider preloading 'polyfill' but it isn't always used
 const chunkNames = ['app', 'commons'];
@@ -7,7 +7,8 @@ export const onRenderBody = ({
     pathname,
     setHeadComponents
 }) => {
-    const { assetsByChunkName } = Stats;
+    // Not sure how to make compatible with incremental builds
+    const { assetsByChunkName } = JSON.parse(readFileSync('./public/webpack.stats.json'));
 
     const chunks = chunkNames.flatMap(name => assetsByChunkName[name] ?? []);
     const scripts = chunks.filter(name => name.endsWith('.js'));
