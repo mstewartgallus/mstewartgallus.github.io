@@ -1,0 +1,63 @@
+@counter-style nodot {
+  system: numeric  ;
+  symbols: "0"  "1" "2" "3" "4" "5" "6" "7" "8" "9" ;
+  suffix: "";
+}
+
+@counter-style bullet {
+  system: cyclic;
+  symbols: "\2043";
+  suffix: "";
+}
+
+.ul {
+    all: unset;
+    contain: style;
+}
+.ol {
+    margin: 0;
+    padding: 0;
+}
+.ol, .ul {
+    box-decoration-break: clone;
+    display: flex;
+    flex-direction: column;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    margin-block: var(--line);
+    position: relative;
+}
+
+.ul {
+    list-style: bullet;
+}
+
+.ol {
+    list-style: nodot;
+}
+
+.li {
+    all: unset;
+    display: flex;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    column-gap: 0.75em;
+    position: relative;
+}
+
+.content {
+    inline-size: fit-content ;
+    max-inline-size: 100% ;
+    flex-grow: 2 ;
+    display: block ;
+}
+
+.marker, .omarker {
+    display: list-item;
+    list-style-position: inside;
+    min-inline-size: 1.25em;
+    font-weight: bold;
+    font-variant-numeric: lining-nums tabular-nums;
+    color: var(--emphasis-text);
+    text-align: end;
+}
