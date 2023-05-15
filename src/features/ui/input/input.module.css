@@ -1,11 +1,8 @@
 .input {
-    appearance: none ;
-    border: unset ;
-    margin: unset ;
-    display: block ;
+    all: unset;
 
-    border-style: solid ;
-    padding-inline: 0.5em ;
+    border-style: solid;
+    padding-inline: 0.5em;
 
     inline-size: 20ch;
     max-inline-size: 100%;
@@ -14,22 +11,21 @@
     border-color: var(--button);
     color: var(--field-text);
 
-    font: inherit ;
     font-variant-numeric: lining-nums tabular-nums;
 
-    box-sizing: border-box ;
-    block-size: var(--line) ;
+    box-sizing: border-box;
+    block-size: var(--line);
 
-    border-radius: 0.1ch ;
+    border-radius: 0.1ch;
     border-width: calc(max(1px, 0.07em));
 }
 
 .input {
-    outline-color: var(--highlight-text) ;
-    outline-width: 0.18rem ;
-    outline-offset: 0.23em ;
+    outline-color: var(--highlight-text);
+    outline-width: 0.18rem;
+    outline-offset: 0.23em;
 }
 
 .input:focus-visible {
-    outline-style: solid ;
+    outline-style: solid;
 }

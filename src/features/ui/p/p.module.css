@@ -1,10 +1,12 @@
 .p {
-    contain: style ;
+    all: unset;
+    display: block;
+    contain: style;
 
     margin-block: var(--line);
-    inline-size: var(--measure) ;
-    max-inline-size: 100% ;
-    hyphens: auto ;
+    inline-size: var(--measure);
+    max-inline-size: 100%;
+    hyphens: auto;
 }
 
 @media screen {

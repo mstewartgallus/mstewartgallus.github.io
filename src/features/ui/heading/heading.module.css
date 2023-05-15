@@ -1,22 +1,18 @@
 .heading, .heading1, .heading2 {
-    display: flow-root ;
-    contain: layout style ;
-    break-inside: avoid ;
-    break-after: avoid ;
+    all: unset;
+    display: flow-root;
+    contain: layout style;
+    break-inside: avoid;
+    break-after: avoid;
     color: var(--emphasis-text);
-    margin-block: 0 ;
-    font: inherit ;
-    font-weight: inherit ;
-    font-size: inherit ;
-    font-style: inherit ;
-    font-variant-numeric: proportional-nums lining-nums ;
-    border-radius: 0.001ch ;
+    font-variant-numeric: proportional-nums lining-nums;
+    border-radius: 0.001ch;
 }
 
 .heading1 {
-    font-size: 1.5625rem ;
+    font-size: 1.5625rem;
 }
 
 .heading2 {
-    font-size: 1.25rem ;
+    font-size: 1.25rem;
 }

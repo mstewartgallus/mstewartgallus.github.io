@@ -1,10 +1,9 @@
 .dl, .div, .dt, .dd {
-    margin: 0;
-    padding: 0;
+    all: unset;
 }
 
 .div, .dt, .dd {
-    display: block ;
+    display: block;
 }
 
 .dl {
@@ -13,16 +12,16 @@
 }
 
 .div {
-    display: flex ;
-    flex-wrap: wrap ;
-    column-gap: 1em ;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1em;
 }
 
 .dt, .dd {
-    position: relative ;
+    position: relative;
 }
 
 .dd {
-    padding-inline: 1em ;
-    margin-inline: -1em ;
+    padding-inline: 1em;
+    margin-inline: -1em;
 }

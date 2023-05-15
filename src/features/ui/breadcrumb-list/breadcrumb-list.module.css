@@ -1,20 +1,18 @@
 @counter-style breadcrumb {
   system: cyclic;
   symbols: "/";
-  suffix: "  ";
+  suffix: "";
 }
 
 .breadcrumblist {
-    all: unset ;
-    padding: 0 ;
-    margin: 0;
+    all: unset;
 
-    contain: layout style ;
-    display: flex ;
-    flex-wrap: wrap ;
-    column-gap: 0.5em ;
+    contain: layout style;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.5em;
 
-    inline-size: fit-content ;
-    max-inline-size: 100% ;
-    list-style: breadcrumb ;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    list-style: breadcrumb;
 }

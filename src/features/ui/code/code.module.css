@@ -1,3 +1,5 @@
 .code {
+    all: unset;
+    font-family: monospace;
     font-variant-numeric: lining-nums tabular-nums;
 }

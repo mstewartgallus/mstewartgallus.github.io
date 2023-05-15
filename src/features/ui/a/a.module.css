@@ -1,29 +1,32 @@
 .a {
-    font: inherit ;
-    /* more legible hyperlinks */
-    text-underline-position: under ;
-    border-radius: 0.001ch ;
-    box-decoration-break: clone ;
+    all: unset;
 
-    outline-color: var(--highlight-text) ;
-    outline-width: 0.1rem ;
-    outline-offset: 0.2em ;
+    /* more legible hyperlinks */
+    text-underline-position: under;
+    border-radius: 0.001ch;
+    box-decoration-break: clone;
+
+    outline-color: var(--highlight-text);
+    outline-width: 0.1rem;
+    outline-offset: 0.2em;
 }
 
 .a:focus {
-    outline-style: solid ;
+    outline-style: solid;
 }
 .a:focus-visible {
-    outline-offset: 0.24em ;
-    outline-width: 0.14rem ;
+    outline-offset: 0.24em;
+    outline-width: 0.14rem;
 }
 
 .a:link {
+    cursor: pointer;
+    text-decoration: underline;
     color: var(--link-text);
 }
 .a:visited {
-    color: var(--visited-text) ;
+    color: var(--visited-text);
 }
 .a:any-link:active {
-    color: var(--active-text) ;
+    color: var(--active-text);
 }

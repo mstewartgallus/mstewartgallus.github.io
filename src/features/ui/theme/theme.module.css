@@ -1,11 +1,11 @@
 .theme {
     display: contents;
 
-    line-height: var(--line) ;
-    font-size-adjust: var(--ex-height) ;
+    line-height: var(--line);
+    font-size-adjust: var(--ex-height);
 
-    font-family: sans-serif ;
-    font-variant-numeric: proportional-nums oldstyle-nums ;
+    font-family: sans-serif;
+    font-variant-numeric: proportional-nums oldstyle-nums;
 
     text-size-adjust: none ;
 

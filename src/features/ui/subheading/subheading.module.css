@@ -1,4 +1,4 @@
 .p {
-    margin: 0;
+    all: unset;
     font-style: italic;
 }

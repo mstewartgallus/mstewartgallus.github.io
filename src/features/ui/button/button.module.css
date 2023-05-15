@@ -1,23 +1,15 @@
 .button {
-    appearance: none ;
-    padding: 0;
-    margin: 0;
-
-    font: inherit ;
-    border: unset ;
-    background: unset ;
-    color: inherit ;
-
+    all: unset;
     font-variant-numeric: lining-nums tabular-nums;
 
     background-color: var(--button-face);
     color: var(--button-text);
     border-color: var(--button-border);
 
-    border-style: solid ;
-    padding-inline: 0.5em ;
+    border-style: solid;
+    padding-inline: 0.5em;
 
-    border-radius: 0.17ch ;
+    border-radius: 0.17ch;
     border-width: calc(max(1px, 0.07em));
 
     outline-color: var(--highlight-text) ;

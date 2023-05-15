@@ -1,11 +1,11 @@
 .a {
+    all: unset;
     display: inline-block;
-    font: inherit ;
     border-radius: 0.001ch ;
-    box-decoration-break: clone ;
-    text-underline-position: under ;
+    box-decoration-break: clone;
+    text-underline-position: under;
 
-    outline-color: currentcolor ;
+    outline-color: currentcolor;
     outline-width: 0.1rem;
     outline-offset: 0.2em;
 }
@@ -18,18 +18,15 @@
 }
 
 .a:link {
+    cursor: pointer;
+}
+.a:is(:focus-visible, :hover):link {
+    text-decoration: underline;
     color: var(--link-text);
 }
-.a:visited {
-    color: var(--visited-text) ;
+.a:is(:focus-visible, :hover):visited {
+    color: var(--visited-text);
 }
-.a:any-link:active {
-    color: var(--active-text) ;
-}
-
-.a:not(:focus-visible):not(:hover) {
-    color: inherit ;
-}
-.a:not(:focus):not(:hover) {
-    text-decoration: inherit ;
+.a:is(:focus-visible, :hover):any-link:active {
+    color: var(--active-text);
 }

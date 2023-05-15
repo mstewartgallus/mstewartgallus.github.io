@@ -1,4 +1,4 @@
 .abbr {
-    text-decoration: inherit ;
-    font-variant-caps: all-small-caps ;
+    all: unset;
+    font-variant-caps: all-small-caps;
 }

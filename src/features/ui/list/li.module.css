@@ -1,9 +1,10 @@
 .li {
-    display: flex ;
-    inline-size: fit-content ;
-    max-inline-size: 100% ;
-    column-gap: 0.75em ;
-    position: relative ;
+    all: unset;
+    display: flex;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    column-gap: 0.75em;
+    position: relative;
 }
 
 .marker {

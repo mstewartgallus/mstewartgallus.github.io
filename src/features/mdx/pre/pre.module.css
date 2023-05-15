@@ -1,13 +1,13 @@
 .figure {
-    display: flow-root ;
-    margin: 0;
-    margin-block: var(--line) ;
-    break-inside: avoid ;
+    all: unset;
+    display: flow-root;
+    contain: layout style;
 
-    contain: layout style ;
+    margin-block: var(--line);
+    break-inside: avoid;
 
-    scroll-snap-align: start ;
-    scroll-margin-block: calc(0.25 * var(--line)) ;
+    scroll-snap-align: start;
+    scroll-margin-block: calc(0.25 * var(--line));
 }
 
 .figcaption {
@@ -27,10 +27,10 @@
 }
 
 .pre {
+    all: unset;
     font-variant-numeric: lining-nums tabular-nums;
-    display: flow-root ;
-    margin: 0;
-    padding: 0;
+    display: flow-root;
+    white-space: pre;
 }
 
 @media screen {

@@ -1,0 +1,9 @@
+.marker {
+    display: list-item ;
+    list-style-position: inside;
+    min-inline-size: 1.25em;
+    font-weight: bold;
+    font-variant-numeric: lining-nums tabular-nums;
+    color: var(--emphasis-text);
+    text-align: end;
+}
