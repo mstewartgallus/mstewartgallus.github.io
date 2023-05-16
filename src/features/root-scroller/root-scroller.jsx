@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useLayoutEffect, useRef } from "react";
 import { Context } from "./context.js";
 import { scroller } from "./scroller.module.css";
 
@@ -8,7 +8,7 @@ const Scroller = ({
     const ref = useRef(null);
     const scroll = useRef({ scrollLeft, scrollTop });
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const { current: { scrollLeft, scrollTop } } = scroll;
         ref.current.scrollTo({
             left: scrollLeft,
