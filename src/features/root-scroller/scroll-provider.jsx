@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useTransition } from "react";
+import { useCallback, useRef, useEffect, useState, useTransition } from "react";
 import { Context } from "./context.js";
 
 const { Provider } = Context;
@@ -33,6 +33,11 @@ export const ScrollProvider = ({children}) => {
             startTransition(() => set({scrollLeft, scrollTop}));
         });
     }, [throttle]);
+
+    useEffect(() => {
+        window.history.scrollRestoration = 'manual';
+        return () => window.history.scrollRestoration = 'auto';
+    }, []);
 
     return <Provider value={{ scrollLeft, scrollTop, onScroll }}>
                {children}
