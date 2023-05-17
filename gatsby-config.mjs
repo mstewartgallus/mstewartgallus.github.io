@@ -133,6 +133,7 @@ const plugins = [
     "transformer-link",
     "publish",
     "style",
+    "rmannoounce",
     "focus",
     "layout",
     "root",
