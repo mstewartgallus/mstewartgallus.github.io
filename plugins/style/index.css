@@ -26,4 +26,9 @@
     }
 }
 
+/* Avoid silly layout reflow on announcement */
+#gatsby-announcer {
+    contain: strict;
+}
+
 @import "./_property.css";
