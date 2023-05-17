@@ -17,7 +17,8 @@ export const useFocus = () => {
             return;
         }
 
-        ref.current?.focus(opts);
+        queueMicrotask(() =>
+            ref.current?.focus(opts));
     },  [hash, pathname, changed]);
     return ref;
 };
