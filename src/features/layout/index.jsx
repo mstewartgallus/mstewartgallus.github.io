@@ -1,14 +1,12 @@
-import { useRef } from "react";
 import { RouteAnnouncer } from "@features/announce";
-import { Client } from "@features/client";
 import { LocationProvider } from "@features/location";
-import { PerLocation } from "./per-location.jsx";
+import { ScrollProvider } from "@features/root-scroller";
 
 export const Layout = ({ children, location }) =>
 <RouteAnnouncer>
-    <LocationProvider location={location}>
-        <PerLocation pathname={location.pathname}>
+    <ScrollProvider pathname={location.pathname}>
+        <LocationProvider location={location}>
             {children}
-        </PerLocation>
-    </LocationProvider>
+        </LocationProvider>
+    </ScrollProvider>
 </RouteAnnouncer>;
