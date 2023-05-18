@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useTransition } from "react";
+import { useRef, useLayoutEffect, useState, useTransition } from "react";
 import { Context } from "../context.js";
 import { announcer } from "./route-announcer.module.css";
 
@@ -9,7 +9,7 @@ export const RouteAnnouncer = ({children}) => {
     const [elem, setElem] = useState(null);
     const ref = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const { current } = ref;
         startTransition(() => setElem(current));
     }, []);
