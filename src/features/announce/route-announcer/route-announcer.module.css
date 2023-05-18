@@ -1,0 +1,12 @@
+.announcer {
+    display: flow-root;
+    contain: strict;
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
