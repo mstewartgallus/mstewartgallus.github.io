@@ -17,8 +17,14 @@ export const useFocus = () => {
             return;
         }
 
-        queueMicrotask(() =>
-            ref.current?.focus(opts));
+        let abort = false;
+        window.requestAnimationFrame(() => {
+            if (abort) {
+                return;
+            }
+            ref.current?.focus(opts);
+        });
+        return () => abort = true;
     },  [hash, pathname, changed]);
     return ref;
 };

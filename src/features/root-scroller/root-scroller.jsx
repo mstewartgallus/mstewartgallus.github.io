@@ -10,12 +10,11 @@ const Scroller = ({
 
     useLayoutEffect(() => {
         const { current: { scrollLeft, scrollTop } } = scroll;
-        queueMicrotask(() =>
-            ref.current.scrollTo({
-                left: scrollLeft,
-                top: scrollTop,
-                behaviour: 'instant'
-            }));
+        ref.current.scrollTo({
+            left: scrollLeft,
+            top: scrollTop,
+            behaviour: 'instant'
+        });
     }, []);
 
     return <div className={scroller} onScroll={onScroll} ref={ref}>
