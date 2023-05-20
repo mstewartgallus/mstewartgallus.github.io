@@ -11,26 +11,22 @@
 }
 
 .figcaption {
-    position: sticky ;
-    inset-inline-start: 0;
     color: var(--emphasis-text);
-}
-
-.figure {
-    outline-color: var(--highlight-text, HighlightText) ;
-    outline-offset: 0.1em ;
-    outline-width: 0.1em ;
-}
-
-.figure:focus {
-    outline-style: solid ;
 }
 
 .pre {
     all: unset;
     font-variant-numeric: lining-nums tabular-nums;
+    contain: layout;
     display: flow-root;
     white-space: pre;
+
+    outline-color: var(--highlight-text, HighlightText) ;
+    outline-offset: 0.1em ;
+    outline-width: 0.1em ;
+}
+.pre:focus {
+    outline-style: solid ;
 }
 
 @media screen {
