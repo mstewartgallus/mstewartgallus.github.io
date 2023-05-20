@@ -1,9 +1,15 @@
 import { Announce } from "@features/announce";
 import { Card, Header, Hgroup, Theme } from "@features/ui";
+import { useLocationContext } from "@features/location";
 import { RootScroller } from "@features/root-scroller";
 import { Page } from "../page";
 import { StandardLayout } from "../standard-layout";
 import { SkipH1 } from "../skip-h1";
+
+const AnnounceHeading = ({children}) => {
+    const { location, prevLocation } = useLocationContext();
+    return location !== prevLocation && <Announce>Navigated to {children}</Announce>;
+};
 
 export const ViewportPage = ({
     children,
@@ -16,7 +22,7 @@ export const ViewportPage = ({
     breadcrumbs
 }) =>
 <>
-    <Announce>Navigated to {heading}</Announce>
+    <AnnounceHeading>{heading}</AnnounceHeading>
     <Theme>
         <RootScroller>
             <Page>
