@@ -4,18 +4,16 @@ import {
     SearchForm,
     useWebsite
 } from "@features/index";
+import Index from "@content/meta/index"
 import { useSearchURL } from "@features/route";
+import { theme } from "@features/mdx";
 import {
-    BlockA,
     BreadcrumbList, BreadcrumbItem,
     Card,
-    ClickTrap,
     H2A,
     Header,
     Hgroup,
     Subheading,
-    Ul,
-    Li
 } from "@features/ui";
 import { ScreenOnly, useSubmit } from "@features/util";
 import { ViewportPage } from "@features/page";
@@ -44,15 +42,6 @@ export const Head = () => {
                <JsonLd srcdoc={json} />
            </>;
 };
-
-const Banner = () =>
-<Ul>
-    <Li><BlockA href="/portfolio/">Portfolio<ClickTrap /></BlockA></Li>
-    <Li><BlockA href="/blog/">Blog<ClickTrap /></BlockA></Li>
-    <Li><BlockA download="feed.xml" rel="alternate" href="/feed.xml">Subscribe (RSS)<ClickTrap /></BlockA></Li>
-    <Li><BlockA rel="author" href="/about/">About the Author<ClickTrap /></BlockA></Li>
-    <Li><BlockA href="/README">About this Blog<ClickTrap /></BlockA></Li>
-</Ul>;
 
 const IndexPage = () => {
     const { title, description } = useSiteMetadata();
@@ -84,7 +73,7 @@ const IndexPage = () => {
                heading={title}
                subheading={<Subheading>{description}</Subheading>}
            >
-               <Banner />
+               <Index components={theme} />
            </ViewportPage>;
 };
 
