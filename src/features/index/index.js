@@ -1,4 +1,3 @@
-export { Banner } from "./banner.jsx";
 export { Accordion, AccordionPanel, AccordionSummary } from "./accordion";
 export { PostList } from "./post-list.jsx";
 export { SearchForm } from "./search-form";

@@ -2,15 +2,14 @@ import { useId } from "react";
 import { useLocation } from "@gatsbyjs/reach-router";
 import {
     SearchForm,
-    Banner,
-    PostList,
-    usePostList, usePosts, useWebsite
+    useWebsite
 } from "@features/index";
 import { useSearchURL } from "@features/route";
 import {
-    A,
+    BlockA,
     BreadcrumbList, BreadcrumbItem,
     Card,
+    ClickTrap,
     H2A,
     Header,
     Hgroup,
@@ -27,7 +26,7 @@ import { useTitle } from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
 import { useSiteMetadata } from "../hooks/use-site-metadata.js";
 
-const title = "Posts";
+const title = "Site";
 
 const Seo = () => {
     const { pathname } = useLocation();
@@ -46,26 +45,21 @@ export const Head = () => {
            </>;
 };
 
+const Banner = () =>
+<Ul>
+    <Li><BlockA href="/portfolio/">Portfolio<ClickTrap /></BlockA></Li>
+    <Li><BlockA href="/blog/">Blog<ClickTrap /></BlockA></Li>
+    <Li><BlockA download="feed.xml" rel="alternate" href="/feed.xml">Subscribe (RSS)<ClickTrap /></BlockA></Li>
+    <Li><BlockA rel="author" href="/about/">About the Author<ClickTrap /></BlockA></Li>
+    <Li><BlockA href="/README">About this Blog<ClickTrap /></BlockA></Li>
+</Ul>;
+
 const IndexPage = () => {
-    const posts = usePosts();
     const { title, description } = useSiteMetadata();
     const onSubmit = useSubmit();
     const search = useSearchURL();
-    const postsByCategory = usePostList();
     const id = useId();
-    const navId = useId();
     return <ViewportPage
-               support={
-                   <header aria-describedby={id}>
-                       <Card>
-                           <Hgroup id={id}>
-                               <H2A id="common">{title}</H2A>
-                               <Subheading>{description}</Subheading>
-                           </Hgroup>
-                           <Banner />
-                       </Card>
-                   </header>
-               }
                navigation={
                    <ScreenOnly>
                        <Search aria-describedby="search">
@@ -87,37 +81,10 @@ const IndexPage = () => {
                        </BreadcrumbItem>
                    </BreadcrumbList>
                }
-               mainbar={
-                   Object.entries(postsByCategory).map(([category, p]) =>
-                       <nav key={category} aria-labelledby={category}>
-                           <Card>
-                               <header>
-                                   <Hgroup>
-                                       <H2A id={category}>
-                                           {category}
-                                       </H2A>
-                                   </Hgroup>
-                               </header>
-                               <PostList posts={p} />
-                           </Card>
-                       </nav>
-                   )
-               }
-
-               heading="Posts"
+               heading={title}
+               subheading={<Subheading>{description}</Subheading>}
            >
-               <nav aria-labelledby={navId}>
-                   <span id={navId}>Categories</span>
-                   <Ul>
-                       {
-                           Object.keys(postsByCategory).map(category =>
-                               <Li key={category}>
-                                   <A href={`#` + category}>{category}</A>
-                               </Li>)
-                       }
-                   </Ul>
-               </nav>
-               <PostList posts={posts} />
+               <Banner />
            </ViewportPage>;
 };
 

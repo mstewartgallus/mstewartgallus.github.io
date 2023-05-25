@@ -20,24 +20,10 @@
     caret-color: var(--highlight-text) ;
 }
 
-/* Make root scroller (FIXME factor out) */
-@media screen {
-    .theme {
-        position: fixed;
-        left:0;
-        right:0;
-        top:0;
-        bottom:0;
-        contain: layout style paint size;
-        overflow: auto;
-    }
-}
-
 .theme ::selection {
     background-color: var(--selected-item);
     color: var(--selected-item-text);
 }
-
 
 .theme {
     /* Noto Sans x height :( */

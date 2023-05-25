@@ -1,5 +1,7 @@
-import { AlertPage } from "@features/page";
-import { P } from "@features/ui";
+import { ViewportPage } from "@features/page";
+import { BreadcrumbList, BreadcrumbItem, BreadcrumbA } from "@features/ui";
+import { theme } from "@features/mdx";
+import NotFound from "@content/meta/404";
 import { SeoBasic } from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
@@ -16,8 +18,17 @@ export const Head = ({location: {pathname}}) => {
 };
 
 const NotFoundPage = () =>
-<AlertPage heading="Page Not Found">
-    <P>Sorry the page you requested could not be found.</P>
-</AlertPage>;
+<ViewportPage
+    breadcrumbs={
+        <BreadcrumbList>
+            <BreadcrumbA href="/">Home</BreadcrumbA>
+            <BreadcrumbItem>
+                <span aria-current="page">{title}</span>
+            </BreadcrumbItem>
+        </BreadcrumbList>
+    }
+    heading={title}>
+    <NotFound components={theme} />
+</ViewportPage>;
 
 export default NotFoundPage;

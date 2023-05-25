@@ -8,5 +8,4 @@ export const onInitialClientRender = () => {
        return;
     }
     wrapper.removeAttribute('tabIndex');
-    wrapper.removeAttribute('id');
 };
