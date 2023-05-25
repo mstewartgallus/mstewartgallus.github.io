@@ -24,7 +24,7 @@ import { useTitle } from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
 import { useSiteMetadata } from "../hooks/use-site-metadata.js";
 
-const title = "Site";
+const title = "Home";
 
 const Seo = () => {
     const { pathname } = useLocation();

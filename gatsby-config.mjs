@@ -110,7 +110,10 @@ const plugins = [
         options: {
             extensions: ['.mdx'],
             mdxOptions: {
-                remarkPlugins: [RemarkGfm, RemarkMdxCodeMeta],
+                remarkPlugins: [
+                    RemarkGfm,
+                    RemarkMdxCodeMeta
+                ],
                 rehypePlugins: [RehypeSlug],
             }
         }

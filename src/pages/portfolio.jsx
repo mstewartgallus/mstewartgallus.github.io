@@ -1,12 +1,14 @@
 import { ViewportPage } from "@features/page";
-import { BreadcrumbList, BreadcrumbItem, BreadcrumbA } from "@features/ui";
+import { BreadcrumbList, BreadcrumbItem, BreadcrumbA, Subheading } from "@features/ui";
 import { theme } from "@features/mdx";
-import Portfolio from "@content/meta/portfolio";
+import { default as Portfolio } from "@content/meta/portfolio";
+import * as Mod from "@content/meta/portfolio";
 import { SeoBasic } from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
 
-const title = "Portfolio";
+const title = "Molly Stewart-Gallus";
+const subtitle = "Poet, webdev, hacker";
 
 export const Head = ({location: {pathname}}) => {
     const url = useAbsolute(pathname);
@@ -27,7 +29,8 @@ const PortfolioPage = () =>
             </BreadcrumbItem>
         </BreadcrumbList>
     }
-    heading={title}>
+    heading={title}
+    subheading={<Subheading>{subtitle}</Subheading>}>
     <Portfolio components={theme} />
 </ViewportPage>;
 
