@@ -1,4 +1,6 @@
 import RemarkMdxCodeMeta from 'remark-mdx-code-meta';
+import RemarkDefinitionList from 'remark-definition-list';
+import RemarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import RemarkGfm from 'remark-gfm';
 import RehypeSlug from 'rehype-slug';
 import { mkResolve } from "./src/utils/resolve.mjs";
@@ -112,7 +114,9 @@ const plugins = [
             mdxOptions: {
                 remarkPlugins: [
                     RemarkGfm,
-                    RemarkMdxCodeMeta
+                    RemarkMdxCodeMeta,
+                    RemarkDefinitionList,
+                    RemarkMdxFrontmatter
                 ],
                 rehypePlugins: [RehypeSlug],
             }

@@ -1,7 +1,7 @@
 import { ViewportPage } from "@features/page";
 import { BreadcrumbList, BreadcrumbItem, BreadcrumbA, Subheading } from "@features/ui";
 import { theme } from "@features/mdx";
-import { default as Portfolio } from "@content/meta/portfolio";
+import Portfolio from "@content/meta/portfolio";
 import * as Mod from "@content/meta/portfolio";
 import { SeoBasic } from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
@@ -19,19 +19,21 @@ export const Head = ({location: {pathname}}) => {
            </>;
 };
 
-const PortfolioPage = () =>
-<ViewportPage
-    breadcrumbs={
-        <BreadcrumbList>
-            <BreadcrumbA href="/">Home</BreadcrumbA>
-            <BreadcrumbItem>
-                <span aria-current="page">{title}</span>
-            </BreadcrumbItem>
-        </BreadcrumbList>
-    }
-    heading={title}
-    subheading={<Subheading>{subtitle}</Subheading>}>
-    <Portfolio components={theme} />
-</ViewportPage>;
+const PortfolioPage = () => {
+    console.log(Mod);
+    return <ViewportPage
+               breadcrumbs={
+                   <BreadcrumbList>
+                       <BreadcrumbA href="/">Home</BreadcrumbA>
+                       <BreadcrumbItem>
+                           <span aria-current="page">{title}</span>
+                       </BreadcrumbItem>
+                   </BreadcrumbList>
+               }
+               heading={title}
+               subheading={<Subheading>{subtitle}</Subheading>}>
+               <Portfolio components={theme} />
+           </ViewportPage>;
+};
 
 export default PortfolioPage;
