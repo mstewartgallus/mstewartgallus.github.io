@@ -1,4 +1,3 @@
-import { useId } from "react";
 import { useLocation } from "@gatsbyjs/reach-router";
 import {
     SearchForm,
@@ -43,24 +42,26 @@ export const Head = () => {
            </>;
 };
 
+const SearchCard = ({ action, onSubmit }) =>
+<Search aria-describedby="search">
+    <Card>
+        <Header>
+            <Hgroup>
+                <H2A id="search">Search</H2A>
+            </Hgroup>
+        </Header>
+        <SearchForm action={action} onSubmit={onSubmit} />
+    </Card>
+</Search>;
+
 const IndexPage = () => {
     const { title, description } = useSiteMetadata();
     const onSubmit = useSubmit();
     const search = useSearchURL();
-    const id = useId();
     return <ViewportPage
                navigation={
                    <ScreenOnly>
-                       <Search aria-describedby="search">
-                           <Card>
-                               <Header>
-                                   <Hgroup>
-                                       <H2A id="search">Search</H2A>
-                                   </Hgroup>
-                               </Header>
-                               <SearchForm action={search} onSubmit={onSubmit} />
-                           </Card>
-                       </Search>
+                       <SearchCard action={search} onSubmit={onSubmit} />
                    </ScreenOnly>
                }
                breadcrumbs={
