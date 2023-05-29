@@ -2,21 +2,9 @@
 title: Molly Stewart-Gallus
 subtitle: Poet, webdev, hacker
 ---
-import { A, Abbr, Dl, Dt, Dd, DlDiv } from "@features/ui";
+import { Address, A, Abbr, Dl, Dt, Dd, DlDiv, Time } from "@features/ui";
 
-- [I'm Looking For](#im-looking-for)
-- [My Interests](#my-interests)
-- [I'm Currently Learning](#im-currently-learning)
-  + [GatsbyJS](#gatsbyjs)
-  + [MDX](#mdx)
-  + [A11y](#a11y)
-  + [Category Theory](#category-theory)
-  + [Programming Language Theory](#programming-language-theory)
-  + [JVM](#jvm)
-  + [Lock Free Programming](#lock-free-programming)
-  + [Ada <Abbr>SPARK</Abbr>](#ada-spark)
-- [Addendum](#addendum)
-
+<Address>
 <Dl>
 <DlDiv>
 <Dt><A href="mailto:mollystewartgallus@gmail.com">Email</A></Dt>
@@ -39,31 +27,45 @@ import { A, Abbr, Dl, Dt, Dd, DlDiv } from "@features/ui";
 <Dd>mstewartgallus</Dd>
 </DlDiv>
 </Dl>
+</Address>
 
+I have most professional experience in web development
+(<Abbr>PHP</Abbr>, JavaScript, <Abbr>HTML</Abbr>, <Abbr>CSS</Abbr>),
+system administration, advertising and analytics.
 
-I have personal interests in formal methods but mostly have
-professional experience in web development. I'm most looking for
-stability and flexible work hours in job positions.
+I have personal interests in web development, security, formal
+methods, programming language theory.
 
-## I'm Looking For
+I'm most looking for stability and flexible work hours in job
+positions.  I strongly value flexible work hours or part time
+positions.  I prioritise stability and work-life balance.  I don't
+want to go home on Friday and get a call on the weekend that something
+is broken.
 
-I have a personal interest in formal methods but mostly have
-professional experience in web development, system administration,
-advertising and analytics.  I would strongly value flexible work hours
-or part time positions and would also prioritise stability and
-work-life balance.  I don't want to go home on Friday and get a call
-on the weekend that something is broken.
+- [<Time>2023</Time>](#2023)
+  + [GatsbyJS](#gatsbyjs)
+  + [MDX](#mdx)
+  + [Jekyll](#jekyll)
+  + [A11y](#a11y)
+- [<Time>2021</Time>](#2021)
+  + [Category Theory](#category-theory)
+  + [Programming Language Theory](#programming-language-theory)
+- [<Time>2019</Time>](#2019)
+  + [Java Virtual Machine](#java-virtual-machine)
+- [<Time>2017</Time>](#2017)
+  + [Lock-Free Programming](#lock-free-programming)
+- [<Time>2015</Time>](#2015)
+  + [Ada <Abbr>SPARK</Abbr>](#ada-spark)
+- [Addendum](#addendum)
 
-## My Interests
-
-Web development, security, formal methods, programming language
-theory.
-
-## I'm Currently Learning
+## <Time>2023</Time>
 
 ### GatsbyJS
 
-In 2023 I have ported over my poetry blog to [Gatsby](gatsbyjs.com).
+- [Gatsby](gatsbyjs.com).
+- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
+
+In 2023 I ported over my poetry blog to [Gatsby](gatsbyjs.com).
 Mostly things have been smooth but I have found the biggest problems
 to be Gatsby's lack of documentation.  I can implement missing
 features I know about.  I can't work around bugs that have not been
@@ -82,9 +84,13 @@ I suspect I ultimately want something like a headless <Abbr>CMS</Abbr>
 but very reduced in scale.  A pile of Markdown and <Abbr>YAML</Abbr>
 files just isn't doing it anymore and I need a bit more structure.
 
-Also I am interested in possibly porting my blog to NextJS.
+Also I am interested in possibly porting my blog to
+[NextJS](https://nextjs.org/).
 
 ### React
+
+- [React](https://react.dev)
+- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
 
 I have found [React](https://react.dev) components to be less
 problematic than I initially expected.  I expected lots of weird
@@ -97,6 +103,9 @@ making reusable components but not really a full framework.
 
 ### MDX
 
+- [<Abbr>MDX</Abbr>](https://mdxjs.com/)
+- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
+
 [<Abbr>MDX</Abbr>](https://mdxjs.com/), a Markdown derivative which
 lets you insert React components into Markdown, is interesting but has
 some major caveats that make it a little awkward sometimess.  In
@@ -104,23 +113,39 @@ particular, while <Abbr>MDX</Abbr> is probably well suited to writing
 ad-hoc websites and landing pages <Abbr>MDX</Abbr> is a little less
 useful for highly structured content like blog posts.
 
-### My Blog
+<Abbr>MDX</Abbr> Pros
 
-In 2022 I was have been mostly working on [my bizarro poetry
+- Good for ad-hoc page content with more control required. 
+
+<Abbr>MDX</Abbr> Cons
+
+- Bad for structured content blog posts. 
+- Requires Compiling
+
+### Jekyll
+
+- [Jekyll](https://jekyllrb.com/)
+- [Pagefind](pagefind.app)
+- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
+
+In 2022 I mostly worked on [my bizarro poetry
 blog](https://github.com/mstewartgallus/mstewartgallus.github.io) and
-relearning modern web development.  I have found using
+relearned modern web development.  I have found using
 [Jekyll](https://jekyllrb.com/) to be very copacetic.  The biggest
 hiccup was figuring out how to implement a search page which I solved
-by integrating [pagefind](pagefind.app]) into my blog.
+by integrating [Pagefind](https://pagefind.app/) into my blog.
 
 It has been really fun learning about fluid web typography and other
 advanced techniques.  Fonts are definitely a headache online though.
 
 ### A11y
 
+- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
+
 I'm a bit of a perfectionist so my special interest for 2022 has been
 accessibility.  Learning how to use a screenreader has been eye
-opening.  I found it easiest to get started with Android TalkBack.
+opening.  I found it easiest to get started with [Android
+TalkBack](https://www.a11yproject.com/posts/getting-started-talkback/).
 Accessibility is very fiddly but makes for satisfying design problems
 to tetris in the most amount of information with the least amount of
 noise.
@@ -134,7 +159,12 @@ worse the words can.  In the other direction, marking up a poem as an
 ordered list might lead to a lot of noise.  Hearing "line m of n"
 every single line of a poem might be a little messy.
 
+## <Time>2021</Time>
+
 ### Category Theory
+
+- [Coq](https://coq.inria.fr/)
+- [Code](https://github.com/mstewartgallus/category-fun)
 
 Basically I have found category theory stuff to be highly useful for
 compiler and type theory stuff, less so for everything else.
@@ -182,6 +212,11 @@ solutions.
 
 ### Programming Language Theory
 
+- [<Abbr>PLT</Abbr> Redex](https://redex.racket-lang.org/) 
+- [Makam](http://astampoulis.github.io/makam/) 
+- [Lambda Prolog](https://www.lix.polytechnique.fr/~dale/lProlog/)
+- [code](https://github.com/mstewartgallus/playground/blob/master/coexp.rkt)
+
 I've also been playing with technologies like [<Abbr>PLT</Abbr>
 Redex](https://redex.racket-lang.org/) and
 [Makam](http://astampoulis.github.io/makam/) (a dialect of [Lambda
@@ -204,6 +239,9 @@ https://github.com/mstewartgallus/compiler-2
 
 ### GraalVM
 
+- [GraalVM](https://www.graalvm.org/)
+- [Code](https://github.com/mstewartgallus/peacod)
+
 I also played a [little bit](https://github.com/mstewartgallus/peacod)
 with [GraalVM](https://www.graalvm.org/) but I found it too
 complicated for initial experimentation.  Also GraalVM had troubles
@@ -212,15 +250,27 @@ functional languages.  [Cadenza](https://github.com/ekmett/cadenza)
 for example went through hoops I didn't want to bother with to
 optimize tail calls.
 
-### JVM
+## <Time>2019</Time>
 
-I got heavily into low-level details of the <Abbr>JVM</Abbr> for a
+### Java Virtual Machine
+
+- [Java Virtual Machine Instruction Set](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html)
+- [invokedynamic](https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic)
+- [Code](https://github.com/mstewartgallus/heaps)
+ 
+I got heavily into low-level details of the Java Virtual Machine for a
 while.  I learned to [use](https://github.com/mstewartgallus/heaps)
 [ByteBuddy](https://bytebuddy.net/) and
 [invokedynamic](https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic)
 to insert dynamically optimizable spots into a Java program.
 
-### Lock Free Programming
+## <Time>2017</Time>
+
+### Lock-Free Programming
+
+- [<Abbr>MCS</Abbr> Locks](https://lwn.net/Articles/590243/)
+- [<Abbr>TLA+</Abbr>](https://lamport.azurewebsites.net/tla/high-level-view.html)
+- [Code](https://github.com/mstewartgallus/stacklock)
 
 I got heavily into lock-free programming for a while and
 [played](https://github.com/mstewartgallus/stacklock) with making a
@@ -229,7 +279,12 @@ Locks that uses a stack instead of a queue. I also tried formalizing a
 little bit of it in
 [<Abbr>TLA+</Abbr>](https://lamport.azurewebsites.net/tla/high-level-view.html).
 
+## <Time>2015</Time>
+
 ### Ada <Abbr>SPARK</Abbr>
+
+- [Ada <Abbr>SPARK</Abbr>](https://www.adacore.com/about-spark)
+- [Code](https://github.com/mstewartgallus/linted/tree/master)
 
 In the past I got into hard real-time and safety critical stuff for a
 while. I
