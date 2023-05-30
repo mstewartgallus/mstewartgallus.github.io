@@ -20,6 +20,7 @@ export { Hgroup } from "./hgroup";
 export { Hr } from "./hr";
 export { Input } from "./input";
 export { Li, Ol, Ul, Menu } from "./list";
+export { Table, Thead, Tfoot, Tbody, Tr, Th, Td, Colgroup, Col, Caption } from "./table";
 export { Mark } from "./mark";
 export { Nav } from "./nav.jsx";
 export { P } from "./p";

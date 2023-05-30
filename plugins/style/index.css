@@ -30,26 +30,4 @@
     contain: strict;
 }
 
-table {
-    font-variant-numeric: lining-nums tabular-nums;
-    border-collapse: collapse;
-    margin-block: var(--line);
-}
-
-thead {
-    border-width: 1px;
-    border-style: solid none solid none;
-}
-
-th, td {
-    vertical-align: top;
-}
-th, td, caption {
-    text-align: start;
-}
-
-th, td {
-    padding-inline: 0.25em;
-}
-
 @import "./_property.css";

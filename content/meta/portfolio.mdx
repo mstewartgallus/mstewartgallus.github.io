@@ -2,7 +2,10 @@
 title: Molly Stewart-Gallus
 subtitle: Poet, webdev, hacker
 ---
-import { Address, A, Abbr, Dl, Dt, Dd, DlDiv, Time } from "@features/ui";
+import {
+    Address, A, Abbr, Dl, Dt, Dd, DlDiv, Time,
+    Table, Thead, Tfoot, Tbody, Tr, Th, Td, Colgroup, Col, Caption
+} from "@features/ui";
 
 <Address>
 <Dl>
@@ -42,74 +45,77 @@ positions.  I prioritise stability and work-life balance.  I don't
 want to go home on Friday and get a call on the weekend that something
 is broken.
 
-<table>
-  <caption>Timeline</caption>
-  <colgroup>
-    <col></col>
-    <col></col>
-    <col></col>
-  </colgroup>
-  <thead>
-    <tr>
-      <th scope="col">Time</th>
-      <th scope="col">Interests</th>
-      <th scope="col">Employment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row" rowSpan="0">[<Time>2023</Time>](#2023)</th>
-      <td>[GatsbyJS](#gatsbyjs)</td>
-      <td rowSpan="0">N/A</td>
-    </tr>
-    <tr>
-      <td>[<Abbr>MDX</Abbr>](#mdx)</td>
-    </tr>
-    <tr>
-      <td>[Jekyll](#jekyll)</td>
-    </tr>
-    <tr>
-      <td>[A11y](#a11y)</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <th scope="row" rowSpan="0">[<Time>2021</Time>](#2021)</th>
-      <td>[Category Theory](#category-theory)</td>
-      <td rowSpan="0">[Ruckify](#ruckify)</td>
-    </tr>
-    <tr>
-      <td>[Programming Language Theory](#programming-language-theory)</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <th scope="row"><Time>2020</Time></th>
-      <td></td>
-      <td rowSpan="0">GV English</td>
-    </tr>
-    <tr> 
-      <th>[<Time>2019</Time>](#2019)</th>
-      <td>[Java Virtual Machine](#java-virtual-machine)</td>
-    </tr>
-    <tr>
-      <th scope="row"><Time>2018</Time></th>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">[<Time>2017</Time>](#2017)</th>
-      <td>[Lock-Free Programming](#lock-free-programming)</td>
-    </tr>
-    <tr>
-      <th scope="row"><Time>2016</Time></th>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">[<Time>2015</Time>](#2015)</th>
-      <td>[Ada <Abbr>SPARK</Abbr>](#ada-spark)</td>
-    </tr>
-  </tbody>
-</table>
+<Table>
+  <Caption>Timeline</Caption>
+  <Colgroup>
+    <Col></Col>
+    <Col></Col>
+    <Col></Col>
+  </Colgroup>
+  <Thead>
+    <Tr>
+      <Th scope="col">Time</Th>
+      <Th scope="col">Interests</Th>
+      <Th scope="col">Employment</Th>
+    </Tr>
+  </Thead>
+  <Tbody>
+    <Tr>
+      <Th scope="row" rowSpan="4">[<Time>2023</Time>](#2023)</Th>
+      <Td>[GatsbyJS](#gatsbyjs)</Td>
+      <Td rowSpan="0">N/A</Td>
+    </Tr>
+    <Tr>
+      <Td>[<Abbr>MDX</Abbr>](#mdx)</Td>
+    </Tr>
+    <Tr>
+      <Td>[Jekyll](#jekyll)</Td>
+    </Tr>
+    <Tr>
+      <Td>[A11y](#a11y)</Td>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2022</Time></Th>
+    </Tr>
+  </Tbody>
+  <Tbody>
+    <Tr>
+      <Th scope="row" rowSpan="0">[<Time>2021</Time>](#2021)</Th>
+      <Td>[Category Theory](#category-theory)</Td>
+      <Td rowSpan="0">[Ruckify](#ruckify)</Td>
+    </Tr>
+    <Tr>
+      <Td>[Programming Language Theory](#programming-language-theory)</Td>
+    </Tr>
+  </Tbody>
+  <Tbody>
+    <Tr>
+      <Th scope="row"><Time>2020</Time></Th>
+      <Td></Td>
+      <Td rowSpan="0">GV English</Td>
+    </Tr>
+    <Tr> 
+      <Th>[<Time>2019</Time>](#2019)</Th>
+      <Td>[Java Virtual Machine](#java-virtual-machine)</Td>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2018</Time></Th>
+      <Td></Td>
+    </Tr>
+    <Tr>
+      <Th scope="row">[<Time>2017</Time>](#2017)</Th>
+      <Td>[Lock-Free Programming](#lock-free-programming)</Td>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2016</Time></Th>
+      <Td></Td>
+    </Tr>
+    <Tr>
+      <Th scope="row">[<Time>2015</Time>](#2015)</Th>
+      <Td>[Ada <Abbr>SPARK</Abbr>](#ada-spark)</Td>
+    </Tr>
+  </Tbody>
+</Table>
 
 ## <Time>2023</Time>
 

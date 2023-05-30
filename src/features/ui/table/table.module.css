@@ -1,0 +1,35 @@
+.table, .thead, .tfoot, .tbody, .tr, .th, .td, .colgroup, .col, .caption {
+}
+
+.table {
+    margin-block: var(--line);
+    border-collapse: collapse;
+}
+
+.thead :is(.th, .td) {
+    border-width: 1px;
+    border-style: none none solid none;
+}
+
+.th {
+    font-weight: inherit;
+}
+
+.th, .td {
+    font-variant-numeric: lining-nums tabular-nums;
+    vertical-align: top;
+}
+.th, .td, .caption {
+    text-align: start;
+}
+
+.th, .td {
+    padding-inline-end: 1em;
+}
+
+.tbody .tr:first-child :is(.td,.th) {
+    padding-block-start: var(--line);
+}
+.caption {
+    color: var(--emphasis-text);
+}
