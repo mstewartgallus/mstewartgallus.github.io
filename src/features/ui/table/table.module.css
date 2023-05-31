@@ -1,8 +1,12 @@
-.table, .thead, .tfoot, .tbody, .tr, .th, .td, .colgroup, .col, .caption {
+.wrapper, .table, .thead, .tfoot, .tbody, .tr, .th, .td, .colgroup, .col, .caption {
+    box-sizing: border-box;
 }
 
-.table {
+.wrapper {
     margin-block: var(--line);
+    overflow: auto;
+}
+.table {
     border-collapse: collapse;
 }
 
@@ -27,9 +31,6 @@
     padding-inline-end: 1em;
 }
 
-.tbody .tr:first-child :is(.td,.th) {
-    padding-block-start: var(--line);
-}
 .caption {
     color: var(--emphasis-text);
 }

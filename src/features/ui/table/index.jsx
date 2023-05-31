@@ -1,9 +1,11 @@
 import { forwardRef } from "react";
 import { withClass } from "@features/util";
-import { table, thead, tfoot, tbody, tr, th, td, colgroup, col, caption } from "./table.module.css";
+import { wrapper, table, thead, tfoot, tbody, tr, th, td, colgroup, col, caption } from "./table.module.css";
 
 export const Table = forwardRef((props, ref) =>
-    <table role="table" className={table} {...props} ref={ref} />
+    <div className={wrapper}>
+        <table role="table" className={table} {...props} ref={ref} />
+    </div>
 );
 Table.displayName = `Table`;
 

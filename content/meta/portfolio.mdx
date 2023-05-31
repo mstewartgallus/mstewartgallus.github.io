@@ -46,7 +46,10 @@ want to go home on Friday and get a call on the weekend that something
 is broken.
 
 <Table>
-  <Caption>Timeline</Caption>
+  <Caption>Personal History</Caption>
+  <Colgroup>
+    <Col></Col>
+  </Colgroup>
   <Colgroup>
     <Col></Col>
     <Col></Col>
@@ -54,65 +57,111 @@ is broken.
   </Colgroup>
   <Thead>
     <Tr>
-      <Th scope="col">Time</Th>
-      <Th scope="col">Interests</Th>
-      <Th scope="col">Employment</Th>
+      <Th scope="colgroup">Year</Th>
+      <Th colspan="3" scope="colgroup">Interests</Th>
     </Tr>
   </Thead>
   <Tbody>
     <Tr>
-      <Th scope="row" rowSpan="4">[<Time>2023</Time>](#2023)</Th>
+      <Th scope="row">[<Time>2023</Time>](#2023)</Th>
       <Td>[GatsbyJS](#gatsbyjs)</Td>
-      <Td rowSpan="0">N/A</Td>
-    </Tr>
-    <Tr>
       <Td>[<Abbr>MDX</Abbr>](#mdx)</Td>
-    </Tr>
-    <Tr>
-      <Td>[Jekyll](#jekyll)</Td>
-    </Tr>
-    <Tr>
       <Td>[A11y](#a11y)</Td>
     </Tr>
     <Tr>
-      <Th scope="row"><Time>2022</Time></Th>
+      <Th scope="row">[<Time>2022</Time>](#2022)</Th>
+      <Td>[Jekyll](#jekyll)</Td>
+      <Td />
     </Tr>
-  </Tbody>
-  <Tbody>
     <Tr>
-      <Th scope="row" rowSpan="0">[<Time>2021</Time>](#2021)</Th>
+      <Th scope="row">[<Time>2021</Time>](#2021)</Th>
       <Td>[Category Theory](#category-theory)</Td>
-      <Td rowSpan="0">[Ruckify](#ruckify)</Td>
-    </Tr>
-    <Tr>
       <Td>[Programming Language Theory](#programming-language-theory)</Td>
+      <Td />
     </Tr>
-  </Tbody>
-  <Tbody>
     <Tr>
       <Th scope="row"><Time>2020</Time></Th>
-      <Td></Td>
-      <Td rowSpan="0">GV English</Td>
+      <Td />
+      <Td />
+      <Td />
     </Tr>
     <Tr> 
       <Th>[<Time>2019</Time>](#2019)</Th>
       <Td>[Java Virtual Machine](#java-virtual-machine)</Td>
+      <Td />
+      <Td />
     </Tr>
     <Tr>
       <Th scope="row"><Time>2018</Time></Th>
-      <Td></Td>
+      <Td />
+      <Td />
+      <Td />
     </Tr>
     <Tr>
       <Th scope="row">[<Time>2017</Time>](#2017)</Th>
       <Td>[Lock-Free Programming](#lock-free-programming)</Td>
+      <Td />
+      <Td />
     </Tr>
     <Tr>
       <Th scope="row"><Time>2016</Time></Th>
-      <Td></Td>
+      <Td />
+      <Td />
+      <Td />
     </Tr>
     <Tr>
       <Th scope="row">[<Time>2015</Time>](#2015)</Th>
       <Td>[Ada <Abbr>SPARK</Abbr>](#ada-spark)</Td>
+      <Td />
+      <Td />
+    </Tr>
+  </Tbody>
+</Table>
+
+<Table>
+  <Caption>Employment History</Caption>
+  <Colgroup>
+    <Col></Col>
+  </Colgroup>
+  <Colgroup>
+    <Col></Col>
+  </Colgroup>
+  <Thead>
+    <Tr>
+      <Th scope="colgroup">Year</Th>
+      <Th scope="colgroup">Employment</Th>
+    </Tr>
+  </Thead>
+  <Tbody>
+    <Tr>
+      <Th scope="row">[<Time>2023</Time>](#2023)</Th>
+      <Td rowSpan="1">N/A</Td>
+    </Tr>
+    <Tr>
+      <Th scope="row">[<Time>2022</Time>](#2022)</Th>
+    </Tr>
+    <Tr>
+      <Th scope="row">[<Time>2021</Time>](#2021)</Th>
+      <Td>[Ruckify](#ruckify)</Td>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2020</Time></Th>
+      <Td rowSpan="0">GV English</Td>
+    </Tr>
+    <Tr> 
+      <Th>[<Time>2019</Time>](#2019)</Th>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2018</Time></Th>
+    </Tr>
+    <Tr>
+      <Th scope="row">[<Time>2017</Time>](#2017)</Th>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2016</Time></Th>
+    </Tr>
+    <Tr>
+      <Th scope="row">[<Time>2015</Time>](#2015)</Th>
     </Tr>
   </Tbody>
 </Table>
@@ -181,22 +230,6 @@ useful for highly structured content like blog posts.
 - Bad for structured content blog posts. 
 - Requires Compiling
 
-### Jekyll
-
-- [Jekyll](https://jekyllrb.com/)
-- [Pagefind](pagefind.app)
-- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
-
-In 2022 I mostly worked on [my bizarro poetry
-blog](https://github.com/mstewartgallus/mstewartgallus.github.io) and
-relearned modern web development.  I have found using
-[Jekyll](https://jekyllrb.com/) to be very copacetic.  The biggest
-hiccup was figuring out how to implement a search page which I solved
-by integrating [Pagefind](https://pagefind.app/) into my blog.
-
-It has been really fun learning about fluid web typography and other
-advanced techniques.  Fonts are definitely a headache online though.
-
 ### A11y
 
 - [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
@@ -217,6 +250,24 @@ careful with the markup the lines of the poem can run together or
 worse the words can.  In the other direction, marking up a poem as an
 ordered list might lead to a lot of noise.  Hearing "line m of n"
 every single line of a poem might be a little messy.
+
+## <Time>2022</Time>
+
+### Jekyll
+
+- [Jekyll](https://jekyllrb.com/)
+- [Pagefind](pagefind.app)
+- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
+
+In 2022 I mostly worked on [my bizarro poetry
+blog](https://github.com/mstewartgallus/mstewartgallus.github.io) and
+relearned modern web development.  I have found using
+[Jekyll](https://jekyllrb.com/) to be very copacetic.  The biggest
+hiccup was figuring out how to implement a search page which I solved
+by integrating [Pagefind](https://pagefind.app/) into my blog.
+
+It has been really fun learning about fluid web typography and other
+advanced techniques.  Fonts are definitely a headache online though.
 
 ## <Time>2021</Time>
 
