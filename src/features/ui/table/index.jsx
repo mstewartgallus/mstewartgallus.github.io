@@ -30,8 +30,8 @@ Tr.displayName = `Tr`;
 export const Th = forwardRef((props, ref) => {
     const { scope } = props;
     const role =
-          scope === 'row' ? 'columnheader' :
-          scope === 'col' ? 'rowheader' :
+          scope === 'row' ? 'rowheader' :
+          scope === 'col' ? 'columnheader' :
           null;
     return <th role={role} className={th} {...props} ref={ref} />;
 });
@@ -46,6 +46,6 @@ export const Colgroup = withClass('colgroup', colgroup);
 export const Col = withClass('col', col);
 
 export const Caption = forwardRef((props, ref) =>
-    <caption role="cell" className={caption} {...props} ref={ref} />
+    <caption role="caption" className={caption} {...props} ref={ref} />
 );
 Caption.displayName = `Caption`;
