@@ -1,4 +1,4 @@
-.wrapper, .table, .thead, .tfoot, .tbody, .tr, .th, .td, .colgroup, .col, .caption {
+.wrapper, .table, .thead, .tfoot, .tbody, .tr, .th, .td, .colgroup, .col, .caption, .cell {
     box-sizing: border-box;
 }
 
@@ -7,17 +7,41 @@
     overflow: auto;
 }
 .table {
+    border-spacing: 0;
     border-collapse: collapse;
 }
+.td, .th {
+    position: relative;
+}
 
-.thead :is(.th, .td) {
+.td .cell::after {
+    margin-block-end: calc(0.25 * var(--line));
+
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block: 0 0;
+    content: " ";
+    inline-size: 1px;
+    border-width: 2px;
+    border-style: none;
+    border-inline-start-style: dotted;
+}
+
+.th[scope="row"] {
     border-width: 1px;
-    border-style: none none solid none;
+    border-style: none;
+    border-inline-end-style: solid;
+}
+.th[scope="colgroup"] {
+    border-width: 1px;
+    border-style: none;
+    border-block-end-style: solid;
 }
 
 .th {
     font-weight: inherit;
 }
+
 
 .th, .td {
     font-variant-numeric: lining-nums tabular-nums;
@@ -27,10 +51,11 @@
     text-align: start;
 }
 
-.th, .td {
-    padding-inline-end: 1em;
-}
-
 .caption {
     color: var(--emphasis-text);
+}
+
+
+.cell {
+    margin-inline: 0.5em;
 }

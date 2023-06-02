@@ -16,12 +16,18 @@
 
 .mainbar {
     flex-basis: var(--main-width);
-    flex-shrink: 2;
 }
 .sidebar {
-    flex-basis: 30%;
-    flex-grow: 1;
+    flex-basis: 34%;
+}
+
+.mainbar {
+    flex-grow: 6;
     flex-shrink: 3;
+}
+.sidebar {
+    flex-grow: 5;
+    flex-shrink: 4;
 }
 
 /* Place main compositing layers above the sidebar */

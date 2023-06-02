@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { withClass } from "@features/util";
-import { wrapper, table, thead, tfoot, tbody, tr, th, td, colgroup, col, caption } from "./table.module.css";
+import { wrapper, table, thead, tfoot, tbody, tr, th, td, colgroup, col, caption, cell } from "./table.module.css";
 
 export const Table = forwardRef((props, ref) =>
     <div className={wrapper}>
@@ -35,12 +35,16 @@ export const Th = forwardRef((props, ref) => {
           scope === 'row' ? 'rowheader' :
           scope === 'col' ? 'columnheader' :
           null;
-    return <th role={role} className={th} {...props} ref={ref} />;
+    return <th role={role} className={th} {...props} ref={ref} >
+               <div className={cell}>{props.children}</div>
+           </th>;
 });
 Th.displayName = 'Th';
 
 export const Td = forwardRef((props, ref) =>
-    <td role="cell" className={td} {...props} ref={ref} />
+    <td role="cell" className={td} {...props} ref={ref}>
+        <div className={cell}>{props.children}</div>
+    </td>
 );
 Td.displayName = `Td`;
 

@@ -4,7 +4,8 @@ subtitle: Poet, webdev, hacker
 ---
 import {
     Address, A, Abbr, Dl, Dt, Dd, DlDiv, Time,
-    Table, Thead, Tfoot, Tbody, Tr, Th, Td, Colgroup, Col, Caption
+    Table, Thead, Tfoot, Tbody, Tr, Th, Td, Colgroup, Col, Caption,
+    SubtleA
 } from "@features/ui";
 
 <Address>
@@ -33,8 +34,8 @@ import {
 </Address>
 
 I have professional experience in web development (<Abbr>PHP</Abbr>,
-JavaScript, <Abbr>HTML</Abbr>, <Abbr>CSS</Abbr>), system
-administration, advertising and analytics.
+JavaScript, <Abbr>HTML</Abbr>, <Abbr>CSS</Abbr>), advertising and
+analytics.
 
 I have personal interests in web development, security, formal
 methods, programming language theory.
@@ -45,8 +46,61 @@ positions.  I prioritise stability and work-life balance.  I don't
 want to go home on Friday and get a call on the weekend that something
 is broken.
 
+
 <Table>
-  <Caption>Personal History</Caption>
+  <Caption>Work</Caption>
+  <Colgroup>
+    <Col></Col>
+  </Colgroup>
+  <Colgroup>
+    <Col></Col>
+  </Colgroup>
+  <Thead>
+    <Tr>
+      <Th scope="colgroup">Year</Th>
+      <Th scope="colgroup">Employment</Th>
+    </Tr>
+  </Thead>
+  <Tbody>
+    <Tr>
+      <Th scope="row"><Time>2023</Time></Th>
+      <Td rowSpan="2">Unemployed</Td>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2022</Time></Th>
+    </Tr>
+  </Tbody>
+  <Tbody>
+    <Tr>
+      <Th scope="row"><Time>2021</Time></Th>
+      <Td>[Ruckify](#ruckify)</Td>
+    </Tr>
+  </Tbody>
+  <Tbody>
+    <Tr>
+      <Th scope="row"><Time>2020</Time></Th>
+      <Td rowSpan="0">[Global Village English Marketing](#global-village-english-marketing)</Td>
+    </Tr>
+    <Tr> 
+      <Th scope="row"><Time>2019</Time></Th>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2018</Time></Th>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2017</Time></Th>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2016</Time></Th>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2015</Time></Th>
+    </Tr>
+  </Tbody>
+</Table>
+
+<Table>
+  <Caption>Play</Caption>
   <Colgroup>
     <Col></Col>
   </Colgroup>
@@ -66,119 +120,101 @@ is broken.
       <Th scope="row">[<Time>2023</Time>](#2023)</Th>
       <Td>[GatsbyJS](#gatsbyjs)</Td>
       <Td>[<Abbr>MDX</Abbr>](#mdx)</Td>
-      <Td>[A11y](#a11y)</Td>
+      <Td>[Accessibility](#accessibility)</Td>
     </Tr>
+  </Tbody>
+  <Tbody>
     <Tr>
       <Th scope="row">[<Time>2022</Time>](#2022)</Th>
       <Td>[Jekyll](#jekyll)</Td>
-      <Td />
     </Tr>
     <Tr>
       <Th scope="row">[<Time>2021</Time>](#2021)</Th>
       <Td>[Category Theory](#category-theory)</Td>
       <Td>[Programming Language Theory](#programming-language-theory)</Td>
-      <Td />
     </Tr>
+  </Tbody>
+  <Tbody>
     <Tr>
       <Th scope="row"><Time>2020</Time></Th>
-      <Td />
-      <Td />
-      <Td />
     </Tr>
     <Tr> 
-      <Th>[<Time>2019</Time>](#2019)</Th>
+      <Th scope="row">[<Time>2019</Time>](#2019)</Th>
       <Td>[Java Virtual Machine](#java-virtual-machine)</Td>
-      <Td />
-      <Td />
     </Tr>
+  </Tbody>
+  <Tbody>
     <Tr>
       <Th scope="row"><Time>2018</Time></Th>
-      <Td />
-      <Td />
-      <Td />
     </Tr>
+  </Tbody>
+  <Tbody>
     <Tr>
       <Th scope="row">[<Time>2017</Time>](#2017)</Th>
       <Td>[Lock-Free Programming](#lock-free-programming)</Td>
-      <Td />
-      <Td />
-    </Tr>
-    <Tr>
-      <Th scope="row"><Time>2016</Time></Th>
-      <Td />
-      <Td />
-      <Td />
-    </Tr>
-    <Tr>
-      <Th scope="row">[<Time>2015</Time>](#2015)</Th>
-      <Td>[Ada <Abbr>SPARK</Abbr>](#ada-spark)</Td>
-      <Td />
-      <Td />
     </Tr>
   </Tbody>
-</Table>
-
-<Table>
-  <Caption>Employment History</Caption>
-  <Colgroup>
-    <Col></Col>
-  </Colgroup>
-  <Colgroup>
-    <Col></Col>
-  </Colgroup>
-  <Thead>
-    <Tr>
-      <Th scope="colgroup">Year</Th>
-      <Th scope="colgroup">Employment</Th>
-    </Tr>
-  </Thead>
   <Tbody>
     <Tr>
-      <Th scope="row">[<Time>2023</Time>](#2023)</Th>
-      <Td rowSpan="1">N/A</Td>
-    </Tr>
-    <Tr>
-      <Th scope="row">[<Time>2022</Time>](#2022)</Th>
-    </Tr>
-    <Tr>
-      <Th scope="row">[<Time>2021</Time>](#2021)</Th>
-      <Td>[Ruckify](#ruckify)</Td>
-    </Tr>
-    <Tr>
-      <Th scope="row"><Time>2020</Time></Th>
-      <Td rowSpan="0">GV English</Td>
-    </Tr>
-    <Tr> 
-      <Th>[<Time>2019</Time>](#2019)</Th>
-    </Tr>
-    <Tr>
-      <Th scope="row"><Time>2018</Time></Th>
-    </Tr>
-    <Tr>
-      <Th scope="row">[<Time>2017</Time>](#2017)</Th>
-    </Tr>
-    <Tr>
       <Th scope="row"><Time>2016</Time></Th>
+      <Td />
+      <Td />
+      <Td />
     </Tr>
+  </Tbody>
+  <Tbody>
     <Tr>
       <Th scope="row">[<Time>2015</Time>](#2015)</Th>
+      <Td rowSpan="3">[Ada <Abbr>SPARK</Abbr>](#ada-spark)</Td>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2014</Time></Th>
+    </Tr>
+    <Tr>
+      <Th scope="row"><Time>2013</Time></Th>
     </Tr>
   </Tbody>
 </Table>
 
-## <Time>2023</Time>
+## Work
 
-### Gatsby
+### <Time>2021</Time>
 
-- [Gatsby](gatsbyjs.com)
+#### Ruckify
+
+- <Abbr>HTML</Abbr>
+- <Abbr>CSS</Abbr>
+- JavaScript
+- [Angular](https://angular.io/)
+
+#### Global Village English Marketing
+
+- <Abbr>HTML</Abbr>
+- <Abbr>CSS</Abbr>
+- JavaScript
+- <Abbr>PHP</Abbr>
+- Google Analytics
+
+## Play
+
+### <Time>2023</Time>
+
+#### Gatsby
+
+- [Gatsby](https://www.gatsbyjs.com/)
+- [GraphQL](https://graphql.org/)
+- [React](https://react.dev/)
 - [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
 
-In 2023 I ported over my poetry blog to [Gatsby](gatsbyjs.com).
+In <Time>2023</Time> I ported over my poetry blog to [Gatsby](gatsbyjs.com).
 Mostly things have been smooth but I have found the biggest problems
 to be Gatsby's lack of documentation.  I can implement missing
 features I know about.  I can't work around bugs that have not been
-documented.  I'm not a fan of GraphQL per se but I can see the
-advantages of a unified abstraction over different data sources.
+documented.
+
+I'm not a fan of GraphQL per se but I can see the advantages of a
+unified abstraction over different data sources.  Personally I would
+go for an abstraction along the lines of Datalog.
 
 Also the tutorial documentation for Gatsby gives oversimplified and
 fragile designs for cases like blogging.  The suggested designs don't
@@ -195,7 +231,7 @@ files just isn't doing it anymore and I need a bit more structure.
 Also I am interested in possibly porting my blog to
 [NextJS](https://nextjs.org/).
 
-### React
+#### React
 
 - [React](https://react.dev)
 - [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
@@ -209,7 +245,7 @@ although my website is relatively simple.
 I think I need more structure to my project.  React is great for
 making reusable components but not really a full framework.
 
-### MDX
+#### <Abbr>MDX</Abbr>
 
 - [<Abbr>MDX</Abbr>](https://mdxjs.com/)
 - [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
@@ -230,7 +266,7 @@ useful for highly structured content like blog posts.
 - Bad for structured content blog posts. 
 - Requires Compiling
 
-### A11y
+#### Accesibility
 
 - [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
 
@@ -251,15 +287,16 @@ worse the words can.  In the other direction, marking up a poem as an
 ordered list might lead to a lot of noise.  Hearing "line m of n"
 every single line of a poem might be a little messy.
 
-## <Time>2022</Time>
+### <Time>2022</Time>
 
-### Jekyll
+#### Jekyll
 
 - [Jekyll](https://jekyllrb.com/)
+- [Ruby](https://www.ruby-lang.org/en/)
 - [Pagefind](pagefind.app)
-- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io)
+- [Code](https://github.com/mstewartgallus/mstewartgallus.github.io/tree/ec7ef6af9b3aad70b0f389753109c8e27fefa465)
 
-In 2022 I mostly worked on [my bizarro poetry
+In <Time>2022</Time> I mostly worked on [my bizarro poetry
 blog](https://github.com/mstewartgallus/mstewartgallus.github.io) and
 relearned modern web development.  I have found using
 [Jekyll](https://jekyllrb.com/) to be very copacetic.  The biggest
@@ -269,18 +306,9 @@ by integrating [Pagefind](https://pagefind.app/) into my blog.
 It has been really fun learning about fluid web typography and other
 advanced techniques.  Fonts are definitely a headache online though.
 
-## <Time>2021</Time>
+### <Time>2021</Time>
 
-### Ruckify
-
-- HTML
-- CSS
-- JavaScript
-- Angular
-
-
-
-### Category Theory
+#### Category Theory
 
 - [Coq](https://coq.inria.fr/)
 - [Code](https://github.com/mstewartgallus/category-fun)
@@ -329,7 +357,7 @@ around with in an actual theorem prover.  I'm not sure if these
 problems are fundamental or someone smarter than me can come up with
 solutions.
 
-### Programming Language Theory
+#### Programming Language Theory
 
 - [<Abbr>PLT</Abbr> Redex](https://redex.racket-lang.org/) 
 - [Makam](http://astampoulis.github.io/makam/) 
@@ -356,7 +384,7 @@ bit with effect systems like Call-By-Push-Value (basically
 https://github.com/mstewartgallus/hs-callbypushvalue
 https://github.com/mstewartgallus/compiler-2
 
-### GraalVM
+#### GraalVM
 
 - [GraalVM](https://www.graalvm.org/)
 - [Code](https://github.com/mstewartgallus/peacod)
@@ -369,9 +397,9 @@ functional languages.  [Cadenza](https://github.com/ekmett/cadenza)
 for example went through hoops I didn't want to bother with to
 optimize tail calls.
 
-## <Time>2019</Time>
+### <Time>2019</Time>
 
-### Java Virtual Machine
+#### Java Virtual Machine
 
 - [Java Virtual Machine Instruction Set](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html)
 - [invokedynamic](https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic)
@@ -383,9 +411,9 @@ while.  I learned to [use](https://github.com/mstewartgallus/heaps)
 [invokedynamic](https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic)
 to insert dynamically optimizable spots into a Java program.
 
-## <Time>2017</Time>
+### <Time>2017</Time>
 
-### Lock-Free Programming
+#### Lock-Free Programming
 
 - [<Abbr>MCS</Abbr> Locks](https://lwn.net/Articles/590243/)
 - [<Abbr>TLA+</Abbr>](https://lamport.azurewebsites.net/tla/high-level-view.html)
@@ -398,9 +426,9 @@ Locks that uses a stack instead of a queue. I also tried formalizing a
 little bit of it in
 [<Abbr>TLA+</Abbr>](https://lamport.azurewebsites.net/tla/high-level-view.html).
 
-## <Time>2015</Time>
+### <Time>2015</Time>
 
-### Ada <Abbr>SPARK</Abbr>
+#### Ada <Abbr>SPARK</Abbr>
 
 - [Ada <Abbr>SPARK</Abbr>](https://www.adacore.com/about-spark)
 - [Code](https://github.com/mstewartgallus/linted/tree/master)
@@ -414,7 +442,7 @@ verifiable in a safe dialect of [Ada
 lock-free queue is probably broken.  I didn't really get how Ada
 <Abbr>SPARK</Abbr> was meant to handle concurrency.
 
-## Addendum
+## Note
 
 I am a trans woman. I used to use a different name and email. These
 details may pop up in older work.  I do not use the name or email
