@@ -15,16 +15,17 @@
 }
 
 .td .cell::after {
-    margin-block-end: calc(0.25 * var(--line));
+  margin-block: calc(0.1 * var(--line)) calc(0.2 * var(--line));
 
-    position: absolute;
-    inset-inline-end: 0;
-    inset-block: 0 0;
-    content: " ";
-    inline-size: 1px;
-    border-width: 2px;
-    border-style: none;
-    border-inline-start-style: dotted;
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block: 0 0;
+  content: " ";
+  inline-size: 0.25em;
+  border-width: 1px;
+  border-style: none;
+  border-inline-end-style: solid;
+  border-radius: 8em;
 }
 
 .th[scope="row"] {
