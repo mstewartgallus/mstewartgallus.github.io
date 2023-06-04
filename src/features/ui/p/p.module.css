@@ -11,7 +11,8 @@
 
 @media screen {
     .p {
-        margin-inline-start: calc(2 * var(--s));
+        margin-inline-start: calc(1.5 * var(--s));
+        margin-inline-end: calc(0.5 * var(--s));
     }
 }
 
