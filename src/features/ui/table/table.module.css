@@ -33,7 +33,7 @@
     border-style: none;
     border-inline-end-style: solid;
 }
-.th[scope="colgroup"] {
+.th:is([scope="colgroup"], [scope="col"]) {
     border-width: 1px;
     border-style: none;
     border-block-end-style: solid;
