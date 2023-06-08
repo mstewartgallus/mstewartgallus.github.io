@@ -122,6 +122,9 @@ const plugins = [
             }
         }
     },
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-image",
     "gatsby-transformer-yaml",
     ...sources.map(([name, path]) => ({
         resolve: "gatsby-source-filesystem",

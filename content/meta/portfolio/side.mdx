@@ -1,6 +1,10 @@
+import { StaticImage } from "gatsby-plugin-image"
 import { Aside, Nav, H2A } from "@features/ui";
+import { Molly } from "./molly.jsx";
 
-<Nav heading={<H2A>Table of contents</H2A>}>
+<Molly />
+
+<Nav heading={<H2A id="table-of-contents">Table of contents</H2A>}>
 
 - [Molly Stewart-Gallus](#contact)
   + [Contact](#contact)
@@ -17,7 +21,7 @@ import { Aside, Nav, H2A } from "@features/ui";
 
 </Nav>
 
-<Aside heading={<H2A>Note</H2A>}>
+<Aside heading={<H2A id="note">Note</H2A>}>
 
 I am a trans woman. I used to use a different name and email. These
 details may pop up in older work.  I do not use the name or email

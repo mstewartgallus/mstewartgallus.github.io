@@ -1,0 +1,13 @@
+.molly {
+    display: flex;
+    justify-content: center;
+    max-inline-size:100%;
+}
+
+.img {
+    height: auto;
+    aspect-ratio: 1;
+    width:100%;
+
+    max-width: 400px;
+}
