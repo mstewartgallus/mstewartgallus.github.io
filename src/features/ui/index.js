@@ -13,6 +13,7 @@ export { Code } from "./code";
 export { Column } from "./column";
 export { DescA } from "./desc-a";
 export { Dl, DlDiv, Dt, Dd } from "./dl";
+export { Figure, Figcaption } from "./figure";
 export { Footer } from "./footer.jsx";
 export { Green } from "./green";
 export { H1, H2, H3, H4, H5, H6 } from "./heading";
