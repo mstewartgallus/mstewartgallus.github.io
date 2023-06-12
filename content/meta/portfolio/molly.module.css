@@ -5,6 +5,7 @@
 }
 
 .img {
+    border-radius:0.4em;
     height: auto;
     aspect-ratio: 1;
     width:100%;
