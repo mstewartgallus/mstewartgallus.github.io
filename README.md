@@ -2,5 +2,5 @@
 
 A small blog where I post my personal poetry.
 
-See [./src/pages/README.mdx](./src/pages/README.mdx) for more
+See [./IndexApp/src/pages/README.mdx](./IndexApp/src/pages/README.mdx) for more
 information.

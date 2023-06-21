@@ -1,0 +1,28 @@
+.sr-only {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+
+.checklist {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+.unchecked {
+    all: unset;
+    display: block;
+    inline-size: 100%;
+}
+.checked {
+    all: unset;
+    display: list-item;
+    list-style-position: inside;
+}
+.checked::marker {
+    content: "✓ ";
+}

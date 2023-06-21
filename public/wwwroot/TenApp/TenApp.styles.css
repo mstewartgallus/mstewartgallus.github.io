@@ -1,0 +1,140 @@
+/* TenApp/Pages/Index.razor.rz.scp.css */
+.sr-only[b-47951k38dm] {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+
+.checklist[b-47951k38dm] {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+.unchecked[b-47951k38dm] {
+    all: unset;
+    display: block;
+    inline-size: 100%;
+}
+.checked[b-47951k38dm] {
+    all: unset;
+    display: list-item;
+    list-style-position: inside;
+}
+.checked[b-47951k38dm]::marker {
+    content: "✓ ";
+}
+/* TenApp/Shared/MainLayout.razor.rz.scp.css */
+.page[b-bs9xgykyal] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-bs9xgykyal] {
+    flex: 1;
+}
+
+.sidebar[b-bs9xgykyal] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-bs9xgykyal] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-bs9xgykyal]  a, .top-row .btn-link[b-bs9xgykyal] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-bs9xgykyal] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-bs9xgykyal] {
+        display: none;
+    }
+
+    .top-row.auth[b-bs9xgykyal] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-bs9xgykyal], .top-row .btn-link[b-bs9xgykyal] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-bs9xgykyal] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-bs9xgykyal] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-bs9xgykyal] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row[b-bs9xgykyal], article[b-bs9xgykyal] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* TenApp/Shared/Todo.razor.rz.scp.css */
+.button[b-r7i328801m] {
+    display: flex;
+    flex-direction: column;
+    inline-size: fit-content;
+    align-items: center;
+}
+.button button[b-r7i328801m] {
+    all: unset;
+    padding-inline: 0.5em;
+}
+.button label[b-r7i328801m] {
+    font-size: 0.8rem;
+}
+.button button:focus[b-r7i328801m] {
+    outline-style: solid;
+    outline-width: 3px;
+}
+
+.title[b-r7i328801m] {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.controls[b-r7i328801m] {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+    justify-content: start;
+}
+
+.controls > li[b-r7i328801m] {
+    display: block;
+}
+
+.todo[b-r7i328801m] {
+    inline-size: fit-content;
+}

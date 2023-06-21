@@ -1,0 +1,72 @@
+﻿@page "/"
+
+<PageTitle>10</PageTitle>
+
+<h1>10</h1>
+
+<ul role="list" class="checklist">
+  @for (int ii = 0; ii < 10; ++ii)
+  {
+      var index = ii;
+      var id = fresh[index];
+      var todo = todos[id];
+      <li @key="@id" class="unchecked" role="listitem">
+         <Todo Model="@todo" />
+      </li>
+  }
+</ul>
+
+<h2>Archive</h2>
+<ul>
+@foreach (var id in archived)
+{
+var todo = todos[id];
+<li @key="@id">
+  @todo.Title
+</li>
+}
+</ul>
+
+@code {
+    private readonly List<Guid> fresh = new();
+    private readonly List<Guid> archived = new();
+    private readonly Dictionary<Guid, TodoModel> todos = new();
+
+    public Index()
+    {
+      for (var ii = 0; ii < 10; ++ii) {
+          var id = Guid.NewGuid();
+          fresh.Add(id);
+          todos.Add(id, new());
+       }
+    }
+
+    private void Archive(int ii)
+    {
+      var freshId = Guid.NewGuid();
+      todos.Add(freshId, new());
+
+      var oldId = fresh[ii];
+      fresh[ii] = freshId;
+
+      archived.Add(oldId);
+    }
+
+     private void KeyDown(KeyboardEventArgs args)
+     {
+       if (args.AltKey || args.CtrlKey || args.MetaKey || args.ShiftKey)
+       {
+          return;
+       }
+
+       switch (args.Code)
+       {
+       case "ArrowLeft":
+          Console.WriteLine("focus left");
+          break;
+       case "ArrowRight":
+          Console.WriteLine("focus right");
+          break;
+       }
+     }
+}

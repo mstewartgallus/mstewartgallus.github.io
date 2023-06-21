@@ -1,0 +1,39 @@
+.button {
+    display: flex;
+    flex-direction: column;
+    inline-size: fit-content;
+    align-items: center;
+}
+.button button {
+    all: unset;
+    padding-inline: 0.5em;
+}
+.button label {
+    font-size: 0.8rem;
+}
+.button button:focus {
+    outline-style: solid;
+    outline-width: 3px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.controls {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+    justify-content: start;
+}
+
+.controls > li {
+    display: block;
+}
+
+.todo {
+    inline-size: fit-content;
+}
