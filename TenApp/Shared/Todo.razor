@@ -1,35 +1,37 @@
 ﻿<div class="todo">
-  <InputText @bind-Value="@Model.Title" />
+  <div class="typical">
+    <InputText class="input" @bind-Value="@Model.Title" />
+    <div>
+      <!-- FIXME make disclosure widget -->
+      <div class="wrap">
+        <button class="button" type="button" id="@id-details">
+          <span aria-hidden="true">▶</span>
+        </button>
+        <label class="label" for="@id-details">Details</label>
+      </div>
 
-  <!-- FIXME control tabbing  -->
-  <div @onkeydown="KeyDown">
-    <ul class="controls">
-      <li role="presentation">
-        <div class="button">
-          <button type="button" id="@id-details">
-            <span aria-hidden="true">▶</span>
-          </button>
-          <label for="@id-details">Details</label>
-        </div>
-      </li>
-      <li>
-        <div class="button">
-          <button type="button" id="@id-archive" tabindex="-1"
-                  @onkeydown="Archive">
-            <span aria-hidden="true">✓</span>
-          </button>
-          <label for="@id-archive">Archive</label>
-        </div>
-      </li>
-      <li>
-        <div class="button">
-          <button type="button" id="@id-foo" tabindex="-1">
-            <span aria-hidden="true">✓</span>
-          </button>
-          <label for="@id-foo">Foo</label>
-        </div>
-      </li>
-    </ul>
+      <div class="menu">
+        <ul class="controls">
+          <li>
+            <div class="wrap">
+              <button class="button" type="button" id="@id-archive" tabindex="-1"
+                      @onkeydown="Archive">
+                <span aria-hidden="true">✓</span>
+              </button>
+              <label class="label" for="@id-archive">Archive</label>
+            </div>
+          </li>
+          <li>
+            <div class="wrap">
+              <button class="button" type="button" id="@id-foo" tabindex="-1">
+                <span aria-hidden="true">✓</span>
+              </button>
+              <label class="label" for="@id-foo">Foo</label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -44,23 +46,5 @@
 
   private void Archive(EventArgs args)
   {
-  }
-
-  private void KeyDown(KeyboardEventArgs args)
-  {
-       if (args.AltKey || args.CtrlKey || args.MetaKey || args.ShiftKey)
-       {
-          return;
-       }
-
-       switch (args.Code)
-       {
-       case "ArrowLeft":
-          Console.WriteLine("focus left");
-          break;
-       case "ArrowRight":
-          Console.WriteLine("focus right");
-          break;
-       }
   }
 }

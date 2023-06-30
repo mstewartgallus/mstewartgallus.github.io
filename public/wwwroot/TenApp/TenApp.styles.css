@@ -99,35 +99,62 @@ main[b-bs9xgykyal] {
     }
 }
 /* TenApp/Shared/Todo.razor.rz.scp.css */
-.button[b-r7i328801m] {
+[b-r7i328801m] .typical {
+    display: flex;
+    gap: 0.5em;
+    inline-size: fit-content;
+    align-items: end;
+}
+
+[b-r7i328801m] .input {
+    all: unset;
+    padding-inline-start: 0.25em;
+    padding-inline-end: 0.5em;
+    border-width: 2px;
+    border-block-end-style: solid;
+}
+[b-r7i328801m] .input:focus {
+    outline-style: solid;
+    outline-width: 1px;
+}
+
+[b-r7i328801m] .wrap {
     display: flex;
     flex-direction: column;
     inline-size: fit-content;
     align-items: center;
 }
-.button button[b-r7i328801m] {
+[b-r7i328801m] .button {
     all: unset;
     padding-inline: 0.5em;
 }
-.button label[b-r7i328801m] {
+
+[b-r7i328801m] .label {
     font-size: 0.8rem;
 }
-.button button:focus[b-r7i328801m] {
+[b-r7i328801m] .button:focus {
     outline-style: solid;
-    outline-width: 3px;
+    outline-width: 2px;
 }
 
-.title[b-r7i328801m] {
+[b-r7i328801m] .title {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.controls[b-r7i328801m] {
+[b-r7i328801m] .menu {
+    position: relative;
+}
+[b-r7i328801m] .controls {
+    background: Canvas;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    position: absolute;
     display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 0;
-    gap: 1.5rem;
     justify-content: start;
 }
 
@@ -135,6 +162,6 @@ main[b-bs9xgykyal] {
     display: block;
 }
 
-.todo[b-r7i328801m] {
+[b-r7i328801m] .todo {
     inline-size: fit-content;
 }

@@ -1,32 +1,59 @@
-.button {
+::deep .typical {
+    display: flex;
+    gap: 0.5em;
+    inline-size: fit-content;
+    align-items: end;
+}
+
+::deep .input {
+    all: unset;
+    padding-inline-start: 0.25em;
+    padding-inline-end: 0.5em;
+    border-width: 2px;
+    border-block-end-style: solid;
+}
+::deep .input:focus {
+    outline-style: solid;
+    outline-width: 1px;
+}
+
+::deep .wrap {
     display: flex;
     flex-direction: column;
     inline-size: fit-content;
     align-items: center;
 }
-.button button {
+::deep .button {
     all: unset;
     padding-inline: 0.5em;
 }
-.button label {
+
+::deep .label {
     font-size: 0.8rem;
 }
-.button button:focus {
+::deep .button:focus {
     outline-style: solid;
-    outline-width: 3px;
+    outline-width: 2px;
 }
 
-.title {
+::deep .title {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.controls {
+::deep .menu {
+    position: relative;
+}
+::deep .controls {
+    background: Canvas;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    position: absolute;
     display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 0;
-    gap: 1.5rem;
     justify-content: start;
 }
 
@@ -34,6 +61,6 @@
     display: block;
 }
 
-.todo {
+::deep .todo {
     inline-size: fit-content;
 }
