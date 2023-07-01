@@ -11,7 +11,7 @@
       var id = fresh[index];
       var todo = todos[id];
       <li @key="@id" class="unchecked" role="listitem">
-         <Todo Model="@todo" />
+         <Todo Model="@todo" OnArchive="e => Archive(index)" />
       </li>
   }
 </ul>

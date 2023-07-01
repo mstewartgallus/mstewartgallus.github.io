@@ -1,0 +1,18 @@
+::deep {
+    display: flex;
+    flex-direction: column;
+    inline-size: fit-content;
+    align-items: center;
+}
+::deep .button {
+    all: unset;
+    padding-inline: 0.5em;
+}
+
+::deep .label {
+    font-size: 0.8rem;
+}
+::deep .button:focus {
+    outline-style: solid;
+    outline-width: 2px;
+}

@@ -1,4 +1,4 @@
-::deep .typical {
+::deep {
     display: flex;
     gap: 0.5em;
     inline-size: fit-content;
@@ -17,50 +17,16 @@
     outline-width: 1px;
 }
 
-::deep .wrap {
-    display: flex;
-    flex-direction: column;
-    inline-size: fit-content;
-    align-items: center;
-}
-::deep .button {
-    all: unset;
-    padding-inline: 0.5em;
-}
-
-::deep .label {
-    font-size: 0.8rem;
-}
-::deep .button:focus {
-    outline-style: solid;
-    outline-width: 2px;
-}
-
-::deep .title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-::deep .menu {
-    position: relative;
-}
 ::deep .controls {
-    background: Canvas;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    position: absolute;
     display: flex;
     flex-direction: column;
     padding: 0;
     margin: 0;
     justify-content: start;
+    align-items: center;
 }
 
-.controls > li {
+::deep .controls > li {
     display: block;
 }
 
-::deep .todo {
-    inline-size: fit-content;
-}

@@ -27,6 +27,59 @@
 .checked[b-47951k38dm]::marker {
     content: "✓ ";
 }
+/* TenApp/Shared/Button.razor.rz.scp.css */
+[b-te8k64j5ds] {
+    display: flex;
+    flex-direction: column;
+    inline-size: fit-content;
+    align-items: center;
+}
+[b-te8k64j5ds] .button {
+    all: unset;
+    padding-inline: 0.5em;
+}
+
+[b-te8k64j5ds] .label {
+    font-size: 0.8rem;
+}
+[b-te8k64j5ds] .button:focus {
+    outline-style: solid;
+    outline-width: 2px;
+}
+/* TenApp/Shared/Disclosure.razor.rz.scp.css */
+[b-o7polqf14d] .summary {
+    display: flex;
+    column-gap: 0.25rem;
+    inline-size: fit-content;
+}
+
+[b-o7polqf14d] button {
+    all: unset;
+    padding-inline: 0.5em;
+}
+
+[b-o7polqf14d] label {
+    font-size: 0.8rem;
+}
+[b-o7polqf14d] button:focus {
+    outline-style: solid;
+    outline-width: 2px;
+}
+
+[b-o7polqf14d] .menu {
+    all:unset;
+    position: relative;
+    inline-size: 100%;
+}
+[b-o7polqf14d] .content {
+    position: absolute;
+    background: Canvas;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    border-style: solid;
+    border-width: 1px;
+    padding-inline: 0.5em;
+}
 /* TenApp/Shared/MainLayout.razor.rz.scp.css */
 .page[b-bs9xgykyal] {
     position: relative;
@@ -99,7 +152,7 @@ main[b-bs9xgykyal] {
     }
 }
 /* TenApp/Shared/Todo.razor.rz.scp.css */
-[b-r7i328801m] .typical {
+[b-r7i328801m] {
     display: flex;
     gap: 0.5em;
     inline-size: fit-content;
@@ -118,50 +171,16 @@ main[b-bs9xgykyal] {
     outline-width: 1px;
 }
 
-[b-r7i328801m] .wrap {
-    display: flex;
-    flex-direction: column;
-    inline-size: fit-content;
-    align-items: center;
-}
-[b-r7i328801m] .button {
-    all: unset;
-    padding-inline: 0.5em;
-}
-
-[b-r7i328801m] .label {
-    font-size: 0.8rem;
-}
-[b-r7i328801m] .button:focus {
-    outline-style: solid;
-    outline-width: 2px;
-}
-
-[b-r7i328801m] .title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-[b-r7i328801m] .menu {
-    position: relative;
-}
 [b-r7i328801m] .controls {
-    background: Canvas;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    position: absolute;
     display: flex;
     flex-direction: column;
     padding: 0;
     margin: 0;
     justify-content: start;
+    align-items: center;
 }
 
-.controls > li[b-r7i328801m] {
+[b-r7i328801m] .controls > li {
     display: block;
 }
 
-[b-r7i328801m] .todo {
-    inline-size: fit-content;
-}

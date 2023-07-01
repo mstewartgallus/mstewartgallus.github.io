@@ -1,0 +1,38 @@
+﻿<div>
+  <div class="summary">
+    <button
+      id="@id-summary" @onclick="@Click"
+      aria-controls="@id-group"
+      aria-expanded="@Open.ToString()">
+      <span aria-hidden="true">
+        @(Open ? "▼" : "▶")
+      </span>
+    </button>
+    <label id="@id-label" for="@id-summary">
+      @Summary
+    </label>
+  </div>
+  <fieldset class="menu" id="@id-group" aria-labelledby="@id-label">
+    @if (Open) {
+      <div class="content">
+        @ChildContent
+      </div>
+    }
+  </fieldset>
+</div>
+
+@code {
+  [Parameter]
+  public RenderFragment Summary { get; set; }
+  [Parameter]
+  public RenderFragment ChildContent { get; set; }
+
+  private bool Open { get; set; } = false;
+  
+  private readonly Guid id = Guid.NewGuid();
+
+  private void Click()
+  {
+    Open = !Open;
+  }
+}
