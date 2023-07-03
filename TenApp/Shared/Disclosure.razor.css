@@ -1,11 +1,18 @@
+::deep {
+    display: flow-root;
+}
+
 ::deep .summary {
     display: flex;
+    flex-direction: column;
     column-gap: 0.25rem;
     inline-size: fit-content;
+    align-items: center;
 }
 
 ::deep button {
     all: unset;
+    display: flow-root;
     padding-inline: 0.5em;
 }
 
@@ -18,11 +25,13 @@
 }
 
 ::deep .menu {
-    all:unset;
+    all: unset;
     position: relative;
     inline-size: 100%;
+    display: flow-root;
 }
 ::deep .content {
+    display: flow-root;
     position: absolute;
     background: Canvas;
     inset-block-start: 0;

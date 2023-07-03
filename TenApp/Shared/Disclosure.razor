@@ -12,13 +12,13 @@
       @Summary
     </label>
   </div>
+  @if (Open) {
   <fieldset class="menu" id="@id-group" aria-labelledby="@id-label">
-    @if (Open) {
-      <div class="content">
-        @ChildContent
-      </div>
-    }
+    <div class="content">
+      @ChildContent
+    </div>
   </fieldset>
+    }
 </div>
 
 @code {

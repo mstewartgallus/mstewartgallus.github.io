@@ -2,25 +2,81 @@
 
 <PageTitle>10</PageTitle>
 
+
 <h1>10</h1>
 
 <ul role="list" class="checklist">
   @for (int ii = 0; ii < 10; ++ii)
   {
       var index = ii;
-      var id = fresh[index];
-      var todo = todos[id];
+      var id = model.Fresh[index];
+      var todo = model.Todos[id];
       <li @key="@id" class="unchecked" role="listitem">
-         <Todo Model="@todo" OnArchive="e => Archive(index)" />
+        <ul class="todo" role="list">
+          <li role="presentation">
+            <div class="todo-title">
+              @(string.IsNullOrEmpty(todo.Title) ? "..." : todo.Title)
+            </div>
+          </li>
+          <li role="listitem">
+            <Disclosure>
+              <Summary>
+                Edit
+              </Summary>
+              <ChildContent>
+                <EditForm Model="@todo">
+                  <DataAnnotationsValidator />
+                  <ValidationSummary />
+                  <div class="edit">
+                    <InputText class="input" @bind-Value="@todo.Title" />
+                    <Button>
+                      <Icon>✓</Icon>
+                      <ChildContent>
+                        Submit
+                      </ChildContent>
+                    </Button>
+                  </div>
+                </EditForm>
+              </ChildContent>
+            </Disclosure>
+          </li>
+          <li role="presentation">
+            <Disclosure>
+              <Summary>
+                Other
+              </Summary>
+              <ChildContent>
+                <ul class="controls">
+                  <li role="listitem">
+                    <Button type="submit" value="@ii">
+                      <Icon>✓</Icon>
+                      <ChildContent>
+                        Archive
+                      </ChildContent>
+                    </Button>
+                  </li>
+                  <li role="listitem">
+                    <Button>
+                      <Icon>X</Icon>
+                      <ChildContent>
+                        Stuff
+                      </ChildContent>
+                    </Button>
+                  </li>
+                </ul>
+              </ChildContent>
+            </Disclosure>
+          </li>
+        </ul>
       </li>
   }
 </ul>
 
 <h2>Archive</h2>
 <ul>
-@foreach (var id in archived)
+@foreach (var id in model.Archived)
 {
-var todo = todos[id];
+var todo = model.Todos[id];
 <li @key="@id">
   @todo.Title
 </li>
@@ -28,31 +84,14 @@ var todo = todos[id];
 </ul>
 
 @code {
-    private readonly List<Guid> fresh = new();
-    private readonly List<Guid> archived = new();
-    private readonly Dictionary<Guid, TodoModel> todos = new();
+    private readonly TodoListModel model = new();
 
-    public Index()
+    private void ValidSubmit(EditContext context)
     {
-      for (var ii = 0; ii < 10; ++ii) {
-          var id = Guid.NewGuid();
-          fresh.Add(id);
-          todos.Add(id, new());
-       }
+          Console.WriteLine("submit");
     }
 
-    private void Archive(int ii)
-    {
-      var freshId = Guid.NewGuid();
-      todos.Add(freshId, new());
-
-      var oldId = fresh[ii];
-      fresh[ii] = freshId;
-
-      archived.Add(oldId);
-    }
-
-     private void KeyDown(KeyboardEventArgs args)
+    private void KeyDown(KeyboardEventArgs args)
      {
        if (args.AltKey || args.CtrlKey || args.MetaKey || args.ShiftKey)
        {

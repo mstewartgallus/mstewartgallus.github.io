@@ -16,7 +16,7 @@
 }
 .unchecked[b-47951k38dm] {
     all: unset;
-    display: block;
+    display: flow-root;
     inline-size: 100%;
 }
 .checked[b-47951k38dm] {
@@ -26,6 +26,51 @@
 }
 .checked[b-47951k38dm]::marker {
     content: "✓ ";
+}
+
+
+[b-47951k38dm] .controls {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    justify-content: start;
+    align-items: center;
+}
+
+[b-47951k38dm] .controls > li {
+    display: block;
+}
+
+[b-47951k38dm] .todo-title {
+    min-inline-size: 10em;
+}
+[b-47951k38dm] .todo {
+    all:unset;
+    display: flex;
+    column-gap: 0.5em;
+    align-items: end;
+}
+[b-47951k38dm] .todo > li {
+    display: block;
+}
+
+[b-47951k38dm] .input {
+    all: unset;
+    padding-inline-start: 0.25em;
+    padding-inline-end: 0.5em;
+    border-width: 2px;
+    border-block-end-style: solid;
+}
+[b-47951k38dm] .input:focus {
+    outline-style: solid;
+    outline-width: 1px;
+}
+
+[b-47951k38dm] .edit {
+    display: flex;
+    column-gap: 0.5em;
+    align-items: center;
 }
 /* TenApp/Shared/Button.razor.rz.scp.css */
 [b-te8k64j5ds] {
@@ -47,14 +92,21 @@
     outline-width: 2px;
 }
 /* TenApp/Shared/Disclosure.razor.rz.scp.css */
+[b-o7polqf14d] {
+    display: flow-root;
+}
+
 [b-o7polqf14d] .summary {
     display: flex;
+    flex-direction: column;
     column-gap: 0.25rem;
     inline-size: fit-content;
+    align-items: center;
 }
 
 [b-o7polqf14d] button {
     all: unset;
+    display: flow-root;
     padding-inline: 0.5em;
 }
 
@@ -67,11 +119,13 @@
 }
 
 [b-o7polqf14d] .menu {
-    all:unset;
+    all: unset;
     position: relative;
     inline-size: 100%;
+    display: flow-root;
 }
 [b-o7polqf14d] .content {
+    display: flow-root;
     position: absolute;
     background: Canvas;
     inset-block-start: 0;
@@ -151,36 +205,3 @@ main[b-bs9xgykyal] {
         padding-right: 1.5rem !important;
     }
 }
-/* TenApp/Shared/Todo.razor.rz.scp.css */
-[b-r7i328801m] {
-    display: flex;
-    gap: 0.5em;
-    inline-size: fit-content;
-    align-items: end;
-}
-
-[b-r7i328801m] .input {
-    all: unset;
-    padding-inline-start: 0.25em;
-    padding-inline-end: 0.5em;
-    border-width: 2px;
-    border-block-end-style: solid;
-}
-[b-r7i328801m] .input:focus {
-    outline-style: solid;
-    outline-width: 1px;
-}
-
-[b-r7i328801m] .controls {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    justify-content: start;
-    align-items: center;
-}
-
-[b-r7i328801m] .controls > li {
-    display: block;
-}
-
