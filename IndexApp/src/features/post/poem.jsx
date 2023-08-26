@@ -8,8 +8,8 @@ const Line = ({ line }) =>
           </>);
 
 const Stanza = ({ stanza }) =>
-      stanza.map(line =>
-          <L>
+      stanza.map((line, ix) =>
+          <L index={ix}>
               <Line line={line} />
           </L>);
 
@@ -18,7 +18,7 @@ export const Poem = ({ poem }) =>
 <Body>
     {
         poem.map(stanza =>
-            <Lg>
+            <Lg count={stanza.length}>
                 <Stanza stanza={stanza} />
             </Lg>)
     }
