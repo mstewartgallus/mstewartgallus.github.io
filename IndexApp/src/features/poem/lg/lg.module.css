@@ -1,6 +1,6 @@
 .lg {
-    contain: layout paint style ;
-    display: flow-root ;
+    contain: layout style;
+    display: flow-root;
     margin-block: 0;
     hyphens: manual;
 }
