@@ -7,7 +7,7 @@ import { SeoBasic } from "../components/seo-basic.jsx";
 import { useTitle } from "../components/title.jsx";
 import { useAbsolute } from "../hooks/use-absolute.js";
 
-const title = "Molly Stewart-Gallus";
+const title = "Ms. Molly Stewart-Gallus";
 const subtitle = "Poet, webdev, hacker";
 
 export const Head = ({location: {pathname}}) => {
