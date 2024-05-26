@@ -9,16 +9,9 @@ import {
     SubtleA
 } from "@features/ui";
 
-I am Ms. Molly Stewart-Gallus a software developer.
+## About Molly
 
 See my [resume.](/resume.pdf)
-
-Priorities in a position:
-
-- Stability
-- Flexible
-- Part-time work hours
-- Good communication
 
 ### Links
 
@@ -42,20 +35,20 @@ Priorities in a position:
 
 </Address>
 
-### Interests
+### Priorities in a Position
 
-- Web development
-- Security
-- Formal methods
-- Programming language theory
+- Stability
+- Flexible
+- Part-time work hours
+- Good communication
 
-### Skills
+### Key Skills
 
 - Web development
 - Advertising
 - Marketing analytics
 
-### Technology
+### Key Technologies
 
 - <Abbr>PHP</Abbr>
 - JavaScript
@@ -136,6 +129,8 @@ Maria Paula managed Molly directly<br />
 
 ### Ruckify
 
+Contract web development.
+
 Technology:
 
 - <Abbr>HTML</Abbr>
@@ -144,9 +139,9 @@ Technology:
 - <Abbr>PHP</Abbr>
 - [Angular](https://angular.io/)
 
-Contract web development.
+### Global Village English Marketing
 
-### Global village english marketing
+Marketing Technician.
 
 Technology:
 
@@ -157,8 +152,6 @@ Technology:
 - MySQL
 - [Salesforce](https://www.salesforce.com/ca/)
 - Google Analytics
-
-Marketing Technician.
 
 ## Projects
 
@@ -175,7 +168,7 @@ Marketing Technician.
   <Thead>
     <Tr>
       <Th scope="colgroup">Year</Th>
-      <Th colSpan="3" scope="colgroup">Interests</Th>
+      <Th colSpan="3" scope="colgroup">Projects</Th>
     </Tr>
   </Thead>
   <Tbody>
@@ -189,6 +182,166 @@ Marketing Technician.
       <Th scope="row"><Time>2022</Time></Th>
       <Td>[Jekyll Blog](#jekyll-blog)</Td>
     </Tr>
+  </Tbody>
+</Table>
+
+#### Gatsby Blog
+
+[Gatsby blog](https://github.com/mstewartgallus/mstewartgallus.github.io)
+
+Technology:
+
+- [Gatsby](https://www.gatsbyjs.com/)
+- [<Abbr>MDX</Abbr>](https://mdxjs.com/)
+- [GraphQL](https://graphql.org/)
+- [React](https://react.dev/)
+- JavaScript
+- <Abbr>CSS</Abbr>
+- <Abbr>HTML</Abbr>
+
+In <Time>2023</Time>, I ported my poetry blog to
+[Gatsby](gatsbyjs.com).  Mostly the project was smooth, but I found
+the biggest problems to be Gatsby's lack of documentation.  I can
+implement missing features I know about.  I cannot work around bugs
+that have not been documented.
+
+I am not a fan of GraphQL per se, but I can see the advantages of a
+unified abstraction over different data sources.
+
+Also the tutorial documentation for Gatsby gives oversimplified and
+fragile designs for cases like blogging.  The suggested designs don't
+work for cases like multiple source formats.  Just as a Markdown
+plugin might process file nodes into Markdown nodes you want to
+implement your own code processing Markdown nodes into a custom type
+of nodes.  This isn't really a flaw with Gatsby that the tutorials
+give the simplest but most fragile examples.
+
+I suspect that I need something like a headless <Abbr>CMS</Abbr>.  I
+need more structure than a pile of Markdown and <Abbr>YAML</Abbr>
+files.
+
+I am also interested in porting my blog to
+[NextJS](https://nextjs.org/).
+
+### Jekyll Blog
+
+[Jekyll blog](https://github.com/mstewartgallus/mstewartgallus.github.io/tree/ec7ef6af9b3aad70b0f389753109c8e27fefa465)
+
+Technology:
+
+- [Jekyll](https://jekyllrb.com/)
+- [Liquid template language](https://shopify.github.io/liquid/)
+- [<Abbr>SASS</Abbr>](https://sass-lang.com/)
+- [Ruby](https://www.ruby-lang.org/en/)
+- [Structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
+- [Pagefind](https://pagefind.app)
+- JavaScript
+- <Abbr>CSS</Abbr>
+- <Abbr>HTML</Abbr>
+
+In <Time>2022</Time>, I mostly worked on my poetry blog, and relearned
+modern web development.  I found using [Jekyll](https://jekyllrb.com/)
+to be copacetic.  My biggest struggle was figuring out how to
+implement a search page which I solved by integrating
+[Pagefind](https://pagefind.app/) into my blog.
+
+I had a lot of fun learning about fluid web typography and other
+advanced techniques.
+
+## Technology
+
+#### React
+
+I have found [React](https://react.dev) components to be less
+problematic than I initially expected.  I expected lots of weird
+problems due to the abstraction over top the native architecture of
+the web.  I haven't really found such problems to be the case so far
+although my website is relatively simple.
+
+I think I need more structure to my project.  React is great for
+making reusable components but not really a full framework.
+
+React Pros
+
+- Good for simple reusable components
+
+React Cons
+
+- Not suitable for state management (use something like Reduc)
+- Not a full framework
+
+#### <Abbr>MDX</Abbr>
+
+[<Abbr>MDX</Abbr>](https://mdxjs.com/), a Markdown derivative which
+lets you insert React components into Markdown, is interesting but has
+some major caveats that make it a little awkward sometimess.
+
+<Abbr>MDX</Abbr> Pros
+
+- Good for ad-hoc page content with more control required. 
+
+<Abbr>MDX</Abbr> Cons
+
+- Bad for extremely structured content like blog posts
+- Requires compiling
+
+
+### GraalVM
+
+[Code](https://github.com/mstewartgallus/peacod)
+
+I also played a [little bit](https://github.com/mstewartgallus/peacod)
+with [GraalVM](https://www.graalvm.org/) but I found it too
+complicated for initial experimentation.  Also GraalVM had troubles
+with tail recursion at the time which made it hard to implement
+functional languages.  [Cadenza](https://github.com/ekmett/cadenza)
+for example went through hoops I didn't want to bother with to
+optimize tail calls.
+
+### Java Virtual Machine
+
+[Code](https://github.com/mstewartgallus/heaps)
+
+Technology:
+
+- [Java Virtual Machine Instruction Set](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html)
+- [invokedynamic](https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic)
+ 
+I got heavily into low-level details of the Java Virtual Machine for a
+while.  I learned to [use](https://github.com/mstewartgallus/heaps)
+[ByteBuddy](https://bytebuddy.net/) and
+[invokedynamic](https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic)
+to insert dynamically optimizable spots into a Java program.
+
+## Special Interests
+
+- Web development
+- Security
+- Formal methods
+- Programming language theory
+- Lock-free programming
+- Programming language theory
+- Political psychology
+- Mythology and religion
+
+
+<Table>
+  <Caption>Timeline</Caption>
+  <Colgroup>
+    <Col></Col>
+  </Colgroup>
+  <Colgroup>
+    <Col></Col>
+    <Col></Col>
+    <Col></Col>
+  </Colgroup>
+  <Thead>
+    <Tr>
+      <Th scope="colgroup">Year</Th>
+      <Th colSpan="3" scope="colgroup">Special Interests</Th>
+    </Tr>
+  </Thead>
+  <Tbody>
     <Tr>
       <Th scope="row"><Time>2021</Time></Th>
       <Td>[Category Theory](#category-theory)</Td>
@@ -234,127 +387,54 @@ Marketing Technician.
   </Tbody>
 </Table>
 
-#### Gatsby blog
+### Lock-Free Programming
 
-[Gatsby blog](https://github.com/mstewartgallus/mstewartgallus.github.io)
-
-Technology:
-
-- [Gatsby](https://www.gatsbyjs.com/)
-- [<Abbr>MDX</Abbr>](https://mdxjs.com/)
-- [GraphQL](https://graphql.org/)
-- [React](https://react.dev/)
-- JavaScript
-- <Abbr>CSS</Abbr>
-- <Abbr>HTML</Abbr>
-
-In <Time>2023</Time> I ported my poetry blog to
-[Gatsby](gatsbyjs.com).  Mostly the project was smooth but I found the
-biggest problems to be Gatsby's lack of documentation.  I can
-implement missing features I know about.  I can't work around bugs
-that have not been documented.
-
-I'm not a fan of GraphQL per se but I can see the advantages of a
-unified abstraction over different data sources.  Personally I would
-go for an abstraction along the lines of Datalog.
-
-Also the tutorial documentation for Gatsby gives oversimplified and
-fragile designs for cases like blogging.  The suggested designs don't
-work for cases like multiple source formats.  Just as a Markdown
-plugin might process file nodes into Markdown nodes you want to
-implement your own code processing Markdown nodes into a custom type
-of nodes.  This isn't really a flaw with Gatsby that the tutorials
-give the simplest but most fragile examples.
-
-I suspect I ultimately want something like a headless <Abbr>CMS</Abbr>
-but very reduced in scale.  A pile of Markdown and <Abbr>YAML</Abbr>
-files just isn't doing it anymore and I need a bit more structure.
-
-Also I am interested in possibly porting my blog to
-[NextJS](https://nextjs.org/).
-
-
-#### React
-
-I have found [React](https://react.dev) components to be less
-problematic than I initially expected.  I expected lots of weird
-problems due to the abstraction over top the native architecture of
-the web.  I haven't really found such problems to be the case so far
-although my website is relatively simple.
-
-I think I need more structure to my project.  React is great for
-making reusable components but not really a full framework.
-
-React Pros
-
-- Good for simple reusable components
-
-React Cons
-
-- Not suitable for state management (use something like Reduc)
-- Not a full framework
-
-#### <Abbr>MDX</Abbr>
-
-[<Abbr>MDX</Abbr>](https://mdxjs.com/), a Markdown derivative which
-lets you insert React components into Markdown, is interesting but has
-some major caveats that make it a little awkward sometimess.
-
-<Abbr>MDX</Abbr> Pros
-
-- Good for ad-hoc page content with more control required. 
-
-<Abbr>MDX</Abbr> Cons
-
-- Bad for extremely structured content like blog posts
-- Requires compiling
-
-#### Accessibility
-
-I'm a bit of a perfectionist so my special interest for 2022 has been
-accessibility.  Learning how to use a screenreader has been eye
-opening.  I found it easiest to get started with [Android
-TalkBack](https://www.a11yproject.com/posts/getting-started-talkback/).
-Accessibility is very fiddly but makes for satisfying design problems
-to tetris in the most amount of information with the least amount of
-noise.
-
-Most of my blog problems were fairly typical except for figuring out
-how to markup poetry appropriately.  A fair bit of hacks were required
-to obtain the appropriate sort of hanging indent presentation and to
-obtain the appropriate pauses between sentences.  If you're not
-careful with the markup the lines of the poem can run together or
-worse the words can.  In the other direction, marking up a poem as an
-ordered list might lead to a lot of noise.  Hearing "line m of n"
-every single line of a poem might be a little messy.
-
-### Jekyll blog
-
-[Jekyll blog](https://github.com/mstewartgallus/mstewartgallus.github.io/tree/ec7ef6af9b3aad70b0f389753109c8e27fefa465)
+[Code](https://github.com/mstewartgallus/stacklock)
 
 Technology:
 
-- [Jekyll](https://jekyllrb.com/)
-- [Liquid template language](https://shopify.github.io/liquid/)
-- [<Abbr>SASS</Abbr>](https://sass-lang.com/)
-- [Ruby](https://www.ruby-lang.org/en/)
-- [Structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
-- [Pagefind](https://pagefind.app)
-- JavaScript
-- <Abbr>CSS</Abbr>
-- <Abbr>HTML</Abbr>
+- [<Abbr>MCS</Abbr> Locks](https://lwn.net/Articles/590243/)
+- [<Abbr>TLA+</Abbr>](https://lamport.azurewebsites.net/tla/high-level-view.html)
 
-In <Time>2022</Time> I mostly worked on [my bizarro poetry
-blog](https://github.com/mstewartgallus/mstewartgallus.github.io) and
-relearned modern web development.  I have found using
-[Jekyll](https://jekyllrb.com/) to be very copacetic.  The biggest
-hiccup was figuring out how to implement a search page which I solved
-by integrating [Pagefind](https://pagefind.app/) into my blog.
+I got heavily into lock-free programming for a while and
+[played](https://github.com/mstewartgallus/stacklock) with making a
+more efficient unfair lock implementation based on <Abbr>MCS</Abbr>
+Locks that uses a stack instead of a queue. I also tried formalizing a
+little bit of it in
+[<Abbr>TLA+</Abbr>](https://lamport.azurewebsites.net/tla/high-level-view.html).
 
-It has been really fun learning about fluid web typography and other
-advanced techniques.  Fonts are definitely a headache online though.
+### Programming Language Theory
 
-### Category theory
+[Code](https://github.com/mstewartgallus/playground/blob/master/coexp.rkt)
+
+Technology:
+
+- [Coq](https://coq.inria.fr/)
+- [<Abbr>PLT</Abbr> Redex](https://redex.racket-lang.org/)
+- [Makam](http://astampoulis.github.io/makam/) 
+- [Lambda Prolog](https://www.lix.polytechnique.fr/~dale/lProlog/)
+
+I've also been playing with technologies like [<Abbr>PLT</Abbr>
+Redex](https://redex.racket-lang.org/) and
+[Makam](http://astampoulis.github.io/makam/) (a dialect of [Lambda
+Prolog](https://www.lix.polytechnique.fr/~dale/lProlog/)) for rapid
+prototyping of programming language interpreters.
+
+You can see a tiny demo language in <Abbr>PLT</Abbr> Redex
+[here](https://github.com/mstewartgallus/playground/blob/master/coexp.rkt)
+
+A little language in Makam
+[here](https://github.com/mstewartgallus/coc-makam) . Makam works
+great for simply typed languages but full dependent types are **way
+too** complicated in any implementation.
+
+I got interested in compilers and interpreters for a while. I played a
+bit with effect systems like Call-By-Push-Value (basically
+<Abbr>ANF</Abbr>) and simple functional optimizations:
+https://github.com/mstewartgallus/hs-callbypushvalue
+https://github.com/mstewartgallus/compiler-2
+
+### Category Theory
 
 [Category theory experiments](https://github.com/mstewartgallus/category-fun)
 
@@ -407,38 +487,6 @@ around with in an actual theorem prover.  I'm not sure if these
 problems are fundamental or someone smarter than me can come up with
 solutions.
 
-### Programming language theory
-
-[Code](https://github.com/mstewartgallus/playground/blob/master/coexp.rkt)
-
-Technology:
-
-- [Coq](https://coq.inria.fr/)
-- [<Abbr>PLT</Abbr> Redex](https://redex.racket-lang.org/)
-- [Makam](http://astampoulis.github.io/makam/) 
-- [Lambda Prolog](https://www.lix.polytechnique.fr/~dale/lProlog/)
-
-I've also been playing with technologies like [<Abbr>PLT</Abbr>
-Redex](https://redex.racket-lang.org/) and
-[Makam](http://astampoulis.github.io/makam/) (a dialect of [Lambda
-Prolog](https://www.lix.polytechnique.fr/~dale/lProlog/)) for rapid
-prototyping of programming language interpreters.
-
-You can see a tiny demo language in <Abbr>PLT</Abbr> Redex
-[here](https://github.com/mstewartgallus/playground/blob/master/coexp.rkt)
-
-A little language in Makam
-[here](https://github.com/mstewartgallus/coc-makam) . Makam works
-great for simply typed languages but full dependent types are **way
-too** complicated in any implementation.
-
-I got interested in compilers and interpreters for a while. I played a
-bit with effect systems like Call-By-Push-Value (basically
-<Abbr>ANF</Abbr>) and simple functional optimizations:
-https://github.com/mstewartgallus/hs-callbypushvalue
-https://github.com/mstewartgallus/compiler-2
-
-
 ### Coq
 
 Coq Pros:
@@ -449,49 +497,6 @@ Coq Pros:
 Coq Cons:
 
 - Highly tied to specific foundations
-
-### GraalVM
-
-[Code](https://github.com/mstewartgallus/peacod)
-
-I also played a [little bit](https://github.com/mstewartgallus/peacod)
-with [GraalVM](https://www.graalvm.org/) but I found it too
-complicated for initial experimentation.  Also GraalVM had troubles
-with tail recursion at the time which made it hard to implement
-functional languages.  [Cadenza](https://github.com/ekmett/cadenza)
-for example went through hoops I didn't want to bother with to
-optimize tail calls.
-
-### Java virtual machine
-
-[Code](https://github.com/mstewartgallus/heaps)
-
-Technology:
-
-- [Java Virtual Machine Instruction Set](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html)
-- [invokedynamic](https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic)
- 
-I got heavily into low-level details of the Java Virtual Machine for a
-while.  I learned to [use](https://github.com/mstewartgallus/heaps)
-[ByteBuddy](https://bytebuddy.net/) and
-[invokedynamic](https://blogs.oracle.com/javamagazine/post/understanding-java-method-invocation-with-invokedynamic)
-to insert dynamically optimizable spots into a Java program.
-
-### Lock-free programming
-
-[Code](https://github.com/mstewartgallus/stacklock)
-
-Technology:
-
-- [<Abbr>MCS</Abbr> Locks](https://lwn.net/Articles/590243/)
-- [<Abbr>TLA+</Abbr>](https://lamport.azurewebsites.net/tla/high-level-view.html)
-
-I got heavily into lock-free programming for a while and
-[played](https://github.com/mstewartgallus/stacklock) with making a
-more efficient unfair lock implementation based on <Abbr>MCS</Abbr>
-Locks that uses a stack instead of a queue. I also tried formalizing a
-little bit of it in
-[<Abbr>TLA+</Abbr>](https://lamport.azurewebsites.net/tla/high-level-view.html).
 
 ### Ada <Abbr>SPARK</Abbr>
 
@@ -506,62 +511,9 @@ verifiable in a safe dialect of [Ada
 
 ## Hobbies
 
-<Table>
-  <Caption>Timeline</Caption>
-  <Colgroup>
-    <Col></Col>
-  </Colgroup>
-  <Colgroup>
-    <Col></Col>
-    <Col></Col>
-    <Col></Col>
-  </Colgroup>
-  <Thead>
-    <Tr>
-      <Th scope="colgroup">Year</Th>
-      <Th scope="colgroup" colSpan="3">Hobby</Th>
-    </Tr>
-  </Thead>
-  <Tbody>
-    <Tr>
-      <Th scope="row"><Time>2023</Time></Th>
-      <Td rowSpan="0">Mythology and Religion</Td>
-      <Td rowSpan="0">Poetry</Td>
-      <Td rowSpan="5">Meditation</Td>
-    </Tr>
-    <Tr>
-      <Th scope="row"><Time>2022</Time></Th>
-    </Tr>
-    <Tr>
-      <Th scope="row"><Time>2021</Time></Th>
-    </Tr>
-    <Tr>
-      <Th scope="row"><Time>2020</Time></Th>
-    </Tr>
-    <Tr> 
-      <Th scope="row"><Time>2019</Time></Th>
-    </Tr>
-    <Tr> 
-      <Th scope="row"><Time>2018</Time></Th>
-    </Tr>
-  </Tbody>
-</Table>
+- Knitting
+- Poetry and writing
+- Playing the guitar
+- Meditation
 
-### Mythology and Religion
 
-I have had a lifelong interest in mythology and religion.
-
-### Poetry
-
-[See This Blog](/blog/)
-
-In <Time>2018</Time> I began a personal journey with poetry.  Most of
-my <Time>2018</Time> work was not what I hoped.  However, over time I
-got better. And overtime I found poetry helped me a lot in other ways.
-
-### Meditation
-
-In <Time>2019</Time> I began seriously practicing meditation.  I
-started with the book <Cite>Mindfulness in Plain English</Cite> by
-Henepola Gunaratana which I recommend.  However, I do wish the book
-had been even plainer.  I also recommend in investing in good padding.
