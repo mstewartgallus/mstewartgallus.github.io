@@ -1,8 +1,8 @@
-import { useSearchURL } from "@features/route";
+import { useCategoryURL } from "@features/route";
 import { BreadcrumbList, BreadcrumbItem, BreadcrumbA, Cite } from "@features/ui";
 
 export const PostBreadcrumbs = ({category, title}) => {
-    const cat = useSearchURL({ category: [category] });
+    const cat = useCategoryURL(category);
     return <BreadcrumbList>
                <BreadcrumbA href="/blog">Blog</BreadcrumbA>
                <BreadcrumbA rel="tag" href={cat}>{category}</BreadcrumbA>
