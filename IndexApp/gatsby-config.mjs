@@ -8,8 +8,8 @@ import { mkResolve } from "./src/utils/resolve.mjs";
 const resolve = mkResolve(import.meta);
 
 const siteMetadata = {
-    title: "Words to Kick Your Teeth Out",
-    description: "weird stories and poetry, some webdev",
+    title: "Constant Circuits",
+    description: "some webdev, concurrency",
     siteUrl: "https://mstewartgallus.github.io"
 };
 
@@ -72,14 +72,10 @@ const sitemap = {
 
 const sources = [
     ['Pages', './src/pages'],
-    ['Content', './content/meta'],
-
-    ['Prose', './content/blog/prose'],
-    ['Poem', './content/blog/poem'],
-    ['Web', './content/blog/web']
+    ['Content', './content/meta']
 ];
 
-const posts = ['Prose', 'Poem', 'Web'];
+const posts = ['Web'];
 
 const jsxRuntime = "automatic";
 
@@ -99,14 +95,14 @@ const plugins = [
             onlyRemoveTypeImports: true,
         }
     },
-    {
-        resolve: "gatsby-plugin-sitemap",
-        options: sitemap
-    },
-    {
-        resolve: "gatsby-plugin-feed",
-        options: feed
-    },
+    // {
+    //     resolve: "gatsby-plugin-sitemap",
+    //     options: sitemap
+    // },
+    // {
+    //     resolve: "gatsby-plugin-feed",
+    //     options: feed
+    // },
     {
         resolve: "gatsby-plugin-mdx",
         options: {
