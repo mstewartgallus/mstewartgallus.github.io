@@ -43,6 +43,7 @@
 
 ::deep .todo-title {
     min-inline-size: 10em;
+    display: inline-block;
 }
 ::deep .todo {
     all:unset;

@@ -9,8 +9,14 @@
   @for (int ii = 0; ii < 10; ++ii)
   {
       var index = ii;
-      var id = model.Fresh[index];
+      var edit = model.Edits[index];
+      var id = edit.Id;
       var todo = model.Todos[id];
+
+      var editId = "edit" + ii;
+      var otherId = "other" + ii;
+
+      var editTodo = edit.Todo;
       <li @key="@id" class="unchecked" role="listitem">
         <ul class="todo" role="list">
           <li role="presentation">
@@ -19,17 +25,20 @@
             </div>
           </li>
           <li role="listitem">
-            <Disclosure>
+            <Disclosure
+              Id = "@editId"
+              Open="@(editTodo is not null)"
+              OnClick="@(() => model.EditClick(index))">
               <Summary>
                 Edit
               </Summary>
               <ChildContent>
-                <EditForm Model="@todo">
+                <EditForm Model="@edit" OnValidSubmit="@(() => model.Edit(index))">
                   <DataAnnotationsValidator />
                   <ValidationSummary />
                   <div class="edit">
-                    <InputText class="input" @bind-Value="@todo.Title" />
-                    <Button>
+                    <InputText class="input" @bind-Value="@editTodo.Title"/>
+                    <Button type="submit">
                       <Icon>✓</Icon>
                       <ChildContent>
                         Submit
@@ -41,14 +50,17 @@
             </Disclosure>
           </li>
           <li role="presentation">
-            <Disclosure>
+            <Disclosure
+              Id = "@otherId"
+              Open="@(edit.OtherOpen)"
+              OnClick="@(() => model.OtherClick(index))">
               <Summary>
                 Other
               </Summary>
               <ChildContent>
                 <ul class="controls">
                   <li role="listitem">
-                    <Button type="submit" value="@ii">
+                    <Button OnClick="@(() => model.Archive(index))">
                       <Icon>✓</Icon>
                       <ChildContent>
                         Archive
@@ -69,7 +81,7 @@
           </li>
         </ul>
       </li>
-  }
+      }
 </ul>
 
 <h2>Archive</h2>
@@ -85,11 +97,6 @@ var todo = model.Todos[id];
 
 @code {
     private readonly TodoListModel model = new();
-
-    private void ValidSubmit(EditContext context)
-    {
-          Console.WriteLine("submit");
-    }
 
     private void KeyDown(KeyboardEventArgs args)
      {

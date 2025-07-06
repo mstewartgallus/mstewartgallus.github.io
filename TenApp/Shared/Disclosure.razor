@@ -1,19 +1,19 @@
 ﻿<div>
   <div class="summary">
     <button
-      id="@id-summary" @onclick="@Click"
-      aria-controls="@id-group"
+      id="@Id" @onclick="@OnClick"
+      aria-controls="@Id-group"
       aria-expanded="@Open.ToString()">
       <span aria-hidden="true">
         @(Open ? "▼" : "▶")
       </span>
     </button>
-    <label id="@id-label" for="@id-summary">
+    <label id="@Id-label" for="@Id">
       @Summary
     </label>
   </div>
   @if (Open) {
-  <fieldset class="menu" id="@id-group" aria-labelledby="@id-label">
+  <fieldset class="menu" id="@Id-group" aria-labelledby="@Id-label">
     <div class="content">
       @ChildContent
     </div>
@@ -23,16 +23,16 @@
 
 @code {
   [Parameter]
-  public RenderFragment Summary { get; set; }
+  public RenderFragment? Summary { get; set; }
   [Parameter]
-  public RenderFragment ChildContent { get; set; }
+  public RenderFragment? ChildContent { get; set; }
 
-  private bool Open { get; set; } = false;
-  
-  private readonly Guid id = Guid.NewGuid();
+  [Parameter]
+  public bool Open { get; set; } = false;
+  [Parameter]
+  public EventCallback OnClick { get; set; }
 
-  private void Click()
-  {
-    Open = !Open;
-  }
+  [Parameter]
+  public string Id { get; set; }
+
 }

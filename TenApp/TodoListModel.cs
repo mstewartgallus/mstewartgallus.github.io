@@ -2,26 +2,55 @@ using System.ComponentModel.DataAnnotations;
 
 public class TodoListModel
 {
-    public readonly List<Guid> Fresh = new();
     public readonly List<Guid> Archived = new();
+
     public readonly Dictionary<Guid, TodoModel> Todos = new();
+
+    public readonly List<EditModel> Edits = new();
 
     public TodoListModel()
     {
         for (var ii = 0; ii < 10; ++ii) {
             var id = Guid.NewGuid();
-            Fresh.Add(id);
             Todos.Add(id, new());
+            Edits.Add(new(id));
         }
     }
 
-    public void Archive(int ii)
+    public void Edit(int index)
     {
-        var freshId = Guid.NewGuid();
-        Todos.Add(freshId, new());
+         var edit = Edits[index];
+         Todos[edit.Id].Title = edit.Todo.Title;
+         edit.Todo = null;
+    }
 
-        var oldId = Fresh[ii];
-        Fresh[ii] = freshId;
+    public void EditClick(int index)
+    {
+         var edit = Edits[index];
+         var id = edit.Id;
+         if (edit.Todo is null) {
+             TodoModel todo = new();
+             todo.Title = Todos[id].Title;
+             edit.Todo = todo;
+         } else {
+             edit.Todo = null;
+         }
+    }
+
+    public void OtherClick(int index)
+    {
+         var edit = Edits[index];
+         edit.OtherOpen = !edit.OtherOpen;
+    }
+
+    public void Archive(int index)
+    {
+        var newId = Guid.NewGuid();
+        Todos.Add(newId, new());
+
+        var edit = Edits[index];
+        var oldId = edit.Id;
+        edit.Id = newId;
 
         Archived.Add(oldId);
     }
