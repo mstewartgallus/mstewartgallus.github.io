@@ -20,9 +20,9 @@
       <li @key="@id" class="unchecked" role="listitem">
         <ul class="todo" role="list">
           <li role="presentation">
-            <div class="todo-title">
+            <a class="todo-title" href="#@editId">
               @(string.IsNullOrEmpty(todo.Title) ? "..." : todo.Title)
-            </div>
+            </a>
           </li>
           <li role="listitem">
             <Disclosure
