@@ -1,7 +1,3 @@
-.entry {
-    position: absolute;
-}
-
 .title {
     /* position: relative; */
     display: inline-block;
@@ -9,7 +5,12 @@
     /* margin-inline: 1em; */
 }
 
-.itemset {
+
+.itemContent {
+    position: absolute;
+}
+
+.itemContentInner {
     position: relative;
     left: 0em;
     top: -1em;
