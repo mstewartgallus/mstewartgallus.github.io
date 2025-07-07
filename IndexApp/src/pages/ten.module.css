@@ -1,0 +1,39 @@
+.entry {
+    position: absolute;
+}
+
+.title {
+    /* position: relative; */
+    display: inline-block;
+    /* all: unset; */
+    /* margin-inline: 1em; */
+}
+
+.itemset {
+    position: relative;
+    left: 0em;
+    top: -1em;
+    margin-left: 8em;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 4px;
+    padding-inline: 0.25em;
+    padding-block: 0.5em;
+}
+.items, .item {
+    /* all: unset; */
+}
+.items {
+    /* display: flex; */
+    /* flex-direction: column */
+}
+
+.skip:not(:focus) {
+    /* position: absolute; */
+    /* top: auto; */
+    /* left: -999px; */
+    /* overflow: hidden; */
+    /* width: 1px; */
+    /* height: 1px; */
+}
