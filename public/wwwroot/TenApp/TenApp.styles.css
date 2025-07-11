@@ -44,6 +44,7 @@
 
 [b-47951k38dm] .todo-title {
     min-inline-size: 10em;
+    display: inline-block;
 }
 [b-47951k38dm] .todo {
     all:unset;

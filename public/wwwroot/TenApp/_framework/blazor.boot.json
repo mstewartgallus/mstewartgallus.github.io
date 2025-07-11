@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "Microsoft.AspNetCore.Components.dll": "sha256-JNxAvAdwb8pxEKX1i6lBaki7WoXVJT+psCp4h55GDzg=",
+      "Microsoft.AspNetCore.Components.dll": "sha256-BCWIcuQddZCmuB3EKOH+YHGCP9VYWOSQKn17C8Sk8gg=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-XljovVttqW\/s1RZxE9FTGqkA09nDM3dSAL14bHkOgd0=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-7\/lxNUYaP0Nvlvdk44WMKZ5EcGJEXPrQcC4iGfPjWO8=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-PTSKKTHwdz5fL0+3rx9EsDSIbwi8jHHDx2mIx2Rxavo=",
@@ -44,7 +44,7 @@
       "System.Runtime.InteropServices.JavaScript.dll": "sha256-nzb06W95+fs92qDFZtsOCf4GhAohytTZB1kS9XkHIJg=",
       "System.Text.Encodings.Web.dll": "sha256-d2KyUrvcwKoW1p2fFbn+9S8MAFFWpDvA\/McxgmUYZq0=",
       "System.Text.Json.dll": "sha256-\/bmML7rCeBi4T3O5JL3gZWB70Huwo8xQDldh1ikRH4E=",
-      "TenApp.dll": "sha256-iZEaiUyBTu69yWZVWimd7RGpT\/0nEuuUqFKcxZNvsTc="
+      "TenApp.dll": "sha256-mVoysK8iTvKo\/JP1087yydenmjd4sTb4nLRTLxXrtQQ="
     },
     "extensions": null,
     "lazyAssembly": null,
