@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+type Id = number;
+
 export interface TenSliceState {
     entries: (string | null)[],
-    fresh: number[]
-    archived: number[]
+    freshId: Id[],
+    archivedId: Id[]
 };
 
 const initialState: TenSliceState = (() => {
     const entries = Array(10).fill(null);
-    const fresh = entries.map((v, ix) => ix);
+    const freshId = entries.map((v, ix) => ix);
     return {
         entries,
-        fresh,
-        archived: []
+        freshId,
+        archivedId: []
     };
 })();
 
@@ -21,39 +23,46 @@ export const tenSlice = createSlice({
 
     initialState,
 
-    reducers: (create) => ({
-        edit: create.reducer((state, { payload: { index, value } }) => {
-            state.entries[state.fresh[index]] = value;
+    reducers: create => ({
+        edit: create.reducer((state, { payload: { id, value } }) => {
+            state.entries[id] = value;
         }),
 
-        archive: create.reducer((state, { payload: { index }}) => {
-            const id = state.fresh[index];
+        archive: create.reducer((state, { payload: { index } }) => {
+            const id = state.freshId[index];
 
-            state.fresh[index] = state.entries.length;
+            state.freshId[index] = state.entries.length;
             state.entries.push(null);
 
-            state.archived = [id, ...state.archived];
+            state.archivedId = [id, ...state.archivedId];
         }),
 
-        up: create.reducer((state, { payload: { index }}) => {
+        up: create.reducer((state, { payload: { index } }) => {
             const nextIndex = (10 + index - 1) % 10;
-            const value = state.fresh[index];
-            state.fresh[index] = state.fresh[nextIndex];
-            state.fresh[nextIndex] = value;
+            const value = state.freshId[index];
+            state.freshId[index] = state.freshId[nextIndex];
+            state.freshId[nextIndex] = value;
         }),
 
-        down: create.reducer((state, {payload: { index }}) => {
+        down: create.reducer((state, { payload: { index } }) => {
             const nextIndex = (index + 1) % 10;
-            const value = state.fresh[index];
-            state.fresh[index] = state.fresh[nextIndex];
-            state.fresh[nextIndex] = value;
+            const value = state.freshId[index];
+            state.freshId[index] = state.freshId[nextIndex];
+            state.freshId[nextIndex] = value;
         })
     }),
 
     selectors: {
-        selectEntries: (ten) => ten.entries,
-        selectFresh: (ten) => ten.fresh,
-        selectArchived: (ten) => ten.archived
+        selectFresh: ten =>
+            ten.freshId.map(id => ({
+                id,
+                value: ten.entries[id]
+            })),
+        selectArchived: ten =>
+            ten.archivedId.map(id => ({
+                id,
+                value: ten.entries[id]
+            })),
     },
 });
 
@@ -65,5 +74,5 @@ export const {
 } = tenSlice.actions;
 
 export const {
-    selectEntries, selectFresh, selectArchived
+    selectFresh, selectArchived
 } = tenSlice.selectors;
