@@ -1,0 +1,20 @@
+.editForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    min-inline-size: 8em;
+}
+
+.entry {
+    position: relative;
+    display: flex;
+}
+.editMenu {
+   position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}

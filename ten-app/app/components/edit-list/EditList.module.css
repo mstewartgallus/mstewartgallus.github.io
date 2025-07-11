@@ -1,0 +1,6 @@
+.editList, .editItem {
+    all: unset;
+}
+.editList {
+    display: flex;
+}

@@ -1,0 +1,9 @@
+.button {
+    order: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.editFormWrapper {
+    display: flex;
+}
