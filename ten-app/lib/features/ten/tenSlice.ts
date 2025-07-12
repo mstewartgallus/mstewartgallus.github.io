@@ -3,7 +3,7 @@ import type { Id } from "@/types/ten";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface EditAction {
-    readonly id: Id;
+    readonly index: Id;
     readonly value: string;
 }
 interface ArchiveAction {
@@ -38,8 +38,8 @@ export const tenSlice = createSlice({
     initialState,
 
     reducers: create => ({
-        edit: create.reducer((state, { payload: { id, value } }: PayloadAction<EditAction>) => {
-            state.entries[id] = value;
+        edit: create.reducer((state, { payload: { index, value } }: PayloadAction<EditAction>) => {
+            state.entries[state.freshId[index]] = value;
         }),
 
         archive: create.reducer((state, { payload: { index } }: PayloadAction<ArchiveAction>) => {
