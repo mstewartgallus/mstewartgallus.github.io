@@ -1,21 +1,36 @@
+import type { FormEvent } from "react";
+
 import { useState, useCallback } from "react";
 import { If } from "../If";
 import { Input } from "../input/Input";
 import { EditList, EditItem } from "../edit-list/EditList";
 import styles from "./EntryForm.module.css";
 
+interface Props {
+    readonly value?: string;
+    readonly onChange: (value: string) => void;
+    readonly open: boolean;
+
+    readonly onArchive: () => void;
+    readonly onUp: () => void;
+    readonly onDown: () => void;
+
+    readonly controlId: string;
+    readonly buttonId: string;
+}
+
 export const EntryForm = ({
     value, onChange,
     open,
     onArchive, onUp, onDown,
     controlId, buttonId
-}) => {
+}: Props) => {
     const [editValue, setEditValue] = useState(value ?? '');
 
-    const onChangeEdit = useCallback(v => setEditValue(v), []);
+    const onChangeEdit = useCallback((v: string) => setEditValue(v), []);
 
-    const onSubmit = useCallback(e => {
-        const value = e.nativeEvent.submitter.value;
+    const onSubmit = useCallback((e: FormEvent) => {
+        const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
         switch (value) {
         case 'edit':
         case 'archive':

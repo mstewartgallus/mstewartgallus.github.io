@@ -1,11 +1,16 @@
+import type { ReactNode } from "react";
 import styles from "./EditList.module.css";
 
-export const EditList = ({children, ...props}) =>
-    <ul className={styles.editList} {...props}>
+interface Props {
+  readonly children: ReactNode;
+}
+
+export const EditList = ({children}: Props) =>
+    <ul className={styles.editList}>
     {children}
 </ul>;
 
-export const EditItem = ({children, ...props}) =>
-    <li className={styles.editItem} {...props}>
+export const EditItem = ({children}: Props) =>
+    <li className={styles.editItem}>
     {children}
 </li>;

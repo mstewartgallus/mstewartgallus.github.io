@@ -1,11 +1,17 @@
 "use client";
+import type { ChangeEvent } from "react";
 import { useCallback, useState } from 'react';
 import styles from "./Input.module.css";
 
-export const Input = ({ value, onChange }) => {
+interface Props {
+    readonly value?: string;
+    readonly onChange: (value: string) => void;
+}
+
+export const Input = ({ value, onChange }: Props) => {
     const [editValue, setEditValue] = useState(value);
 
-    const onChangeCb = useCallback(e => {
+    const onChangeCb = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         const { value } = e.target;
         setEditValue(value);
@@ -13,7 +19,7 @@ export const Input = ({ value, onChange }) => {
     }, [onChange]);
 
     return <input className={styles.editInput}
-            required="required"
+            required={true}
             onChange={onChangeCb}
             value={editValue ?? ''} />;
 };

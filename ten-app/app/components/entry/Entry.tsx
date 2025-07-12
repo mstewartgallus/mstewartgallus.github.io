@@ -1,20 +1,29 @@
 "use client";
 
+import type { PointerEvent } from "react";
 import { useCallback, useId } from "react";
 import { EntryForm } from "../entry-form/EntryForm";
 import styles from './Entry.module.css';
 
-const iff = (cond, value) => cond ? value : undefined;
+interface Props {
+    readonly value?: string;
+    readonly onChange: (value: string) => void;
+    readonly open: boolean;
+    readonly onArchive: () => void;
+    readonly onDown: () => void;
+    readonly onUp: () => void;
+    readonly onToggle: () => void;
+}
 
 export const Entry = ({
     value, onChange,
     open, onToggle,
     onArchive, onUp, onDown
-}) => {
+}: Props) => {
     const controlId = useId();
     const buttonId = useId();
 
-    const onToggleClick = useCallback(e => {
+    const onToggleClick = useCallback((e: PointerEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         onToggle();

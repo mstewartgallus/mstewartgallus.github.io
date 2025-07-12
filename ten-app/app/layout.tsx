@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { StoreProvider } from "./StoreProvider";
 import { Nav } from "./components/Nav";

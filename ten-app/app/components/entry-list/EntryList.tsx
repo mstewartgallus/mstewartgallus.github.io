@@ -1,29 +1,54 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState, useCallback } from 'react';
+import type { ReactNode } from "react";
+import type { Id } from "@/types/ten";
+import { createContext, useContext, useMemo, useCallback } from 'react';
 import { Entry } from "../entry/Entry";
 import styles from './EntryList.module.css';
 
-const iff = (cond, value) => cond ? value : undefined;
+interface Props {
+    readonly index: number;
+    readonly id: Id;
+    readonly value?: string;
+    readonly selected: boolean;
+}
 
-const EntryContext = createContext({
+interface ListProps {
+    readonly children: ReactNode;
+    readonly onEditId: (id: Id, value: string) => void;
+    readonly onSelectId: (id: Id) => void;
+    readonly onArchiveIndex: (index: number) => void;
+    readonly onUpIndex: (index: number) => void;
+    readonly onDownIndex: (index: number) => void;
+}
+
+interface Context {
+    readonly onSelectId: (id: Id) => void;
+    readonly onEditId: (id: Id, value: string) => void;
+
+    readonly onArchiveIndex: (index: number) => void;
+    readonly onUpIndex: (index: number) => void;
+    readonly onDownIndex: (index: number) => void;
+}
+
+const EntryContext = createContext<Context>({
     onSelectId: () => {},
     onEditId: () => {},
     onArchiveIndex: () => {},
     onUpIndex: () => {},
-    onDownIndex: () => {},
+    onDownIndex: () => {}
 });
 EntryContext.displayName = 'EntryContext';
 
-export const EntryItem = ({ index, id, value, selected }) => {
+export const EntryItem = ({ index, id, value, selected }: Props) => {
     const {
         onEditId, onArchiveIndex, onUpIndex, onDownIndex, onSelectId
     } = useContext(EntryContext);
 
     const onToggleEntry = useCallback(() => onSelectId(id),
                                       [id, onSelectId]);
-    const onEditEntry = useCallback(edit =>
-        onEditId(id, edit),
+    const onEditEntry = useCallback((value: string) =>
+        onEditId(id, value),
         [id, onEditId]);
     const onArchiveEntry = useCallback(() =>
         onArchiveIndex(index),
@@ -50,7 +75,7 @@ export const EntryItem = ({ index, id, value, selected }) => {
 export const EntryList = ({
     children,
     onEditId, onArchiveIndex, onDownIndex, onUpIndex, onSelectId
-}) => {
+}: ListProps) => {
     const handler = useMemo(() => ({
         onSelectId,
         onEditId,

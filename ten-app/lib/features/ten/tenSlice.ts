@@ -1,6 +1,20 @@
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { Id } from "@/types/ten";
 import { createSlice } from "@reduxjs/toolkit";
 
-type Id = number;
+interface EditAction {
+    readonly id: Id;
+    readonly value: string;
+}
+interface ArchiveAction {
+    readonly index: number;
+}
+interface UpAction {
+    readonly index: number;
+}
+interface DownAction {
+    readonly index: number;
+}
 
 export interface TenSliceState {
     entries: (string | null)[],
@@ -24,11 +38,11 @@ export const tenSlice = createSlice({
     initialState,
 
     reducers: create => ({
-        edit: create.reducer((state, { payload: { id, value } }) => {
+        edit: create.reducer((state, { payload: { id, value } }: PayloadAction<EditAction>) => {
             state.entries[id] = value;
         }),
 
-        archive: create.reducer((state, { payload: { index } }) => {
+        archive: create.reducer((state, { payload: { index } }: PayloadAction<ArchiveAction>) => {
             const id = state.freshId[index];
 
             state.freshId[index] = state.entries.length;
@@ -37,14 +51,14 @@ export const tenSlice = createSlice({
             state.archivedId = [id, ...state.archivedId];
         }),
 
-        up: create.reducer((state, { payload: { index } }) => {
+        up: create.reducer((state, { payload: { index } }: PayloadAction<UpAction>) => {
             const nextIndex = (10 + index - 1) % 10;
             const value = state.freshId[index];
             state.freshId[index] = state.freshId[nextIndex];
             state.freshId[nextIndex] = value;
         }),
 
-        down: create.reducer((state, { payload: { index } }) => {
+        down: create.reducer((state, { payload: { index } }: PayloadAction<DownAction>) => {
             const nextIndex = (index + 1) % 10;
             const value = state.freshId[index];
             state.freshId[index] = state.freshId[nextIndex];
