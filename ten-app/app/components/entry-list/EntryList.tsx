@@ -21,6 +21,7 @@ interface ItemProps {
 
 interface ListProps {
     readonly children: ReactNode;
+    readonly length: number;
     readonly onEditIndex: (index: number, value: string) => void;
     readonly onArchiveIndex: (index: number) => void;
     readonly onUpIndex: (index: number) => void;
@@ -31,6 +32,7 @@ interface ListContext {
     readonly selectedIndex?: number;
     readonly onDeselect: () => void;
     readonly onSelectIndex: (index: number) => void;
+    readonly length: number;
     readonly onEditIndex: (index: number, value: string) => void;
     readonly onArchiveIndex: (index: number) => void;
     readonly onUpIndex: (index: number) => void;
@@ -43,11 +45,12 @@ interface ItemContext {
     readonly onSelect: () => void;
     readonly onEdit: (value: string) => void;
     readonly onArchive: () => void;
-    readonly onUp: () => void;
-    readonly onDown: () => void;
+    readonly onUp?: () => void;
+    readonly onDown?: () => void;
 }
 
 const EntryListContext = createContext<ListContext>({
+    length: 0,
     onDeselect: () => {},
     onSelectIndex: () => {},
     onEditIndex: () => {},
@@ -118,11 +121,15 @@ export const EntryForm = ({ value }: FormProps) => {
             break;
 
         case 'up':
-            onUp();
+            if (onUp) {
+                onUp();
+            }
             break;
 
         case 'down':
-            onDown();
+            if (onDown) {
+                onDown();
+            }
             break;
 
         default:
@@ -188,13 +195,16 @@ export const EntryItem = ({ children, index }: ItemProps) => {
         selectedIndex,
         onDeselect,
         onSelectIndex,
+        length,
         onEditIndex,
         onArchiveIndex,
         onUpIndex,
         onDownIndex
     } = useContext(EntryListContext);
 
-    const selected = useMemo(() => selectedIndex == index, [selectedIndex, index]);
+    const selected = useMemo(() =>
+        selectedIndex == index,
+        [index, selectedIndex]);
     const onSelect = useCallback(() =>
         onSelectIndex(index),
         [index, onSelectIndex]);
@@ -211,22 +221,25 @@ export const EntryItem = ({ children, index }: ItemProps) => {
         onUpIndex(index),
         [index, onUpIndex]);
 
+    const maybeOnUp = index > 0 ? onUp : undefined;
+    const maybeOnDown = index < length ? onDown : undefined;
+
     const handler = useMemo(() => ({
         selected,
         onDeselect,
         onSelect,
         onEdit,
         onArchive,
-        onUp,
-        onDown
+        onUp: maybeOnUp,
+        onDown: maybeOnDown
     }), [
         selected,
         onDeselect,
         onSelect,
         onEdit,
         onArchive,
-        onUp,
-        onDown
+        maybeOnUp,
+        maybeOnDown
     ]);
 
     return <li className={styles.entryItem}>
@@ -238,6 +251,7 @@ export const EntryItem = ({ children, index }: ItemProps) => {
 
 export const EntryList = ({
     children,
+    length,
     onEditIndex, onArchiveIndex, onDownIndex, onUpIndex
 }: ListProps) => {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -249,6 +263,7 @@ export const EntryList = ({
         selectedIndex: selectedIndex ?? undefined,
         onDeselect,
         onSelectIndex,
+        length,
         onEditIndex,
         onArchiveIndex,
         onUpIndex,
@@ -257,6 +272,7 @@ export const EntryList = ({
         selectedIndex,
         onDeselect,
         onSelectIndex,
+        length,
         onEditIndex,
         onArchiveIndex,
         onUpIndex,

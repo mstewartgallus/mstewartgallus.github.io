@@ -37,6 +37,7 @@ export const Ten = () => {
                <section>
                    <h1>Ten Things</h1>
                    <EntryList
+                       length={fresh.length}
                        onEditIndex={onEditIndex}
                        onArchiveIndex={onArchiveIndex}
                        onDownIndex={onDownIndex}

@@ -1,6 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Id } from "@/types/ten";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 interface EditAction {
     readonly index: Id;
@@ -31,6 +31,10 @@ const initialState: TenSliceState = (() => {
         archivedId: []
     };
 })();
+
+const selectEntries = (ten: TenSliceState) => ten.entries;
+const selectFreshId = (ten: TenSliceState) => ten.freshId;
+const selectArchiveId = (ten: TenSliceState) => ten.archivedId;
 
 export const tenSlice = createSlice({
     name: "ten",
@@ -67,16 +71,20 @@ export const tenSlice = createSlice({
     }),
 
     selectors: {
-        selectFresh: ten =>
-            ten.freshId.map(id => ({
-                id,
-                value: ten.entries[id]
-            })),
-        selectArchived: ten =>
-            ten.archivedId.map(id => ({
-                id,
-                value: ten.entries[id]
-            })),
+        selectFresh: createSelector(
+            [selectEntries, selectFreshId],
+            (entries, freshId) =>
+                freshId.map(id => ({
+                    id,
+                    value: entries[id]
+                }))),
+        selectArchived: createSelector(
+            [selectEntries, selectArchiveId],
+            (entries, archivedId) =>
+                archivedId.map(id => ({
+                    id,
+                    value: entries[id]
+                })))
     },
 });
 
