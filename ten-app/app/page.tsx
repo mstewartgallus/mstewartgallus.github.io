@@ -6,5 +6,5 @@ const IndexPage = () => <Ten />;
 export default IndexPage;
 
 export const metadata: Metadata = {
-  title: "TenApp"
+  title: "Ten Things"
 };

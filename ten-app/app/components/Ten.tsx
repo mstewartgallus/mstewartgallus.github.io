@@ -11,7 +11,8 @@ import {
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback } from 'react';
-import { EntryForm, EntryItem, EntryList } from './entry-list/EntryList';
+import { EntryItem, EntryList } from './entry-list/EntryList';
+import { EntryForm } from './entry-form/EntryForm';
 
 export const Ten = () => {
     const dispatch = useAppDispatch();
@@ -19,23 +20,24 @@ export const Ten = () => {
     const fresh = useAppSelector(selectFresh);
     const archived = useAppSelector(selectArchived);
 
-    const onEditIndex = useCallback((index: number, value: string) => {
-        dispatch(edit({ index, value }));
-    }, [dispatch]);
+    const onEditIndex = useCallback((index: number, value: string) =>
+        dispatch(edit({ index, value })),
+        [dispatch]);
+    const onArchiveIndex = useCallback((index: number) =>
+        dispatch(archive({ index })),
+        [dispatch]);
+    const onUpIndex = useCallback((index: number) =>
+        dispatch(up({ index })),
+        [dispatch]);
+    const onDownIndex = useCallback((index: number) =>
+        dispatch(down({ index })),
+        [dispatch]);
 
-    const onArchiveIndex = useCallback((index: number) => {
-        dispatch(archive({ index }));
-    }, [dispatch]);
-    const onUpIndex = useCallback((index: number) => {
-        dispatch(up({ index }));
-    }, [dispatch]);
-    const onDownIndex = useCallback((index: number) => {
-        dispatch(down({ index }));
-    }, [dispatch]);
+    const count = fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0);
 
-    return <div>
+    return <>
                <section>
-                   <h1>Ten Things</h1>
+                   <h1>{count} / 10</h1>
                    <EntryList
                        length={fresh.length}
                        onEditIndex={onEditIndex}
@@ -60,5 +62,5 @@ export const Ten = () => {
                        }
                    </ul>
                </section>
-           </div>;
+           </>;
 };

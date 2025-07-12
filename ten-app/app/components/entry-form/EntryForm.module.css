@@ -18,3 +18,13 @@
     right: 0;
     z-index: 1000;
 }
+
+.button {
+    order: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.editFormWrapper {
+    display: flex;
+}

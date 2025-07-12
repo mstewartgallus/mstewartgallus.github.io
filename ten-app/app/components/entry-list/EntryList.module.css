@@ -1,6 +1,6 @@
 .entryList {
+    all: unset;
 }
 .entryItem {
-    display: flex;
+    all: unset;
 }
-
