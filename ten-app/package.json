@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "next",
         "build": "next build",
-        "start": "next start",
+        "serve": "npx serve out",
         "lint": "next lint",
         "tsc": "tsc"
     },
