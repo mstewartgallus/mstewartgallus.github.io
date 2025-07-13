@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import styles from "./EditList.module.css";
 
 interface Props {
-  readonly children: ReactNode;
+    readonly children: ReactNode;
 }
 
 export const EditList = ({children}: Props) =>
