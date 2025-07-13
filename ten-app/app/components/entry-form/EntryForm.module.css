@@ -1,36 +1,63 @@
-.button {
-    order: 1;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: center;
-}
-
-.editFormWrapper {
-    display: flex;
-}
-
 .editForm {
     display: flex;
     flex-direction: column;
 }
 
-.entry {
-    position: relative;
+.entryForm {
     display: flex;
+    flex-direction: column;
+}
+.options {
+    display: flex;
+}
+
+.editButton {
+    inline-size: 2em;
+    block-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.editFormWrapper {
+    display: flex;
+}
+
+
+.editableTitle {
+    display: flex;
+}
+
+.titleAndInput {
+    position: relative;
 }
 
 .title {
     min-inline-size: 8em;
-}
-.title:hover {
-    background:grey;
+    anchor-name: --title;
 }
 
-.editMenu {
+.inputWrapper {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    max-inline-size: 100%;
+}
+
+.menuWrapper {
+    position: relative;
+}
+.editMenu {
+    position: absolute;
     z-index: 1000;
 }

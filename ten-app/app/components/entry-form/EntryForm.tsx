@@ -1,13 +1,151 @@
 "use client";
 
-import type { FormEvent, PointerEvent } from "react";
-import { useCallback, useId, useRef, useState } from 'react';
+import type { ChangeEvent, FormEvent, PointerEvent } from "react";
+import { useCallback, useId, useState } from 'react';
 import { If } from "../If";
-import { Input } from "../input/Input";
 import { EditList, EditItem } from "../edit-list/EditList";
 import { useEntryItem } from "../entry-list/EntryList";
 
 import styles from "./EntryForm.module.css";
+
+interface EditFormProps {
+    value?: string;
+    onChange: (value: string) => void;
+    selected: boolean;
+    onSelect: () => void;
+    onDeselect: () => void;
+}
+
+interface SecondaryFormProps {
+    onArchive?: () => void;
+    onUp?: () => void;
+    onDown?: () => void;
+}
+
+const SecondaryForm = ({ onArchive, onUp, onDown }: SecondaryFormProps) => {
+    const [open, setOpen] = useState(false);
+    const onToggle = useCallback((e: PointerEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        setOpen(o => !o);
+    }, []);
+
+    const onSubmit = useCallback((e: FormEvent) => {
+        const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
+        switch (value) {
+        case 'archive':
+            if (onArchive) {
+                e.preventDefault();
+                onArchive();
+            }
+            break;
+
+        case 'up':
+            if (onUp) {
+                e.preventDefault();
+                onUp();
+            }
+            break;
+
+        case 'down':
+            if (onDown) {
+                e.preventDefault();
+                onDown();
+            }
+            break;
+
+        default:
+            return;
+        }
+    }, [onArchive, onUp, onDown]);
+
+    return <div className={styles.options}>
+             <button onClick={onToggle}>
+                {open ? <>+</> : <>-</>}
+             </button>
+        <If cond={open}>
+            <form action="#" onSubmit={onSubmit}>
+                <EditList>
+                    <EditItem>
+                        <button disabled={!onArchive} value="archive">
+                            Archive
+                        </button>
+                    </EditItem>
+                    <EditItem>
+                        <button disabled={!onUp} value="up">
+                            ↑
+                        </button>
+                    </EditItem>
+                    <EditItem>
+                        <button disabled={!onDown} value="down">
+                            ↓
+                        </button>
+                    </EditItem>
+                </EditList>
+             </form>
+        </If>
+        </div>;
+};
+
+const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormProps) => {
+    const formId = useId();
+    const controlId = useId();
+    const buttonId = useId();
+
+    const onToggleClick = useCallback((e: PointerEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        if (selected) {
+            onDeselect();
+        } else {
+            onSelect();
+        }
+    }, [onSelect, onDeselect, selected]);
+
+    const [editValue, setEditValue] = useState(value ?? '');
+
+    const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        const { target } = e;
+        if (!target) {
+            return;
+        }
+        e.preventDefault();
+        setEditValue((target as HTMLInputElement).value);
+    }, []);
+
+    const onSubmit = useCallback((e: FormEvent) => {
+        e.preventDefault();
+        onChange(editValue);
+        onDeselect();
+    }, [onDeselect, onChange, editValue]);
+
+    return <div className={styles.editForm}>
+        <div className={styles.editableTitle}>
+            <button
+                className={styles.editButton}
+                id={buttonId}
+                onClick={onToggleClick}
+                aria-expanded={selected}
+                aria-controls={controlId}>
+                {selected ? <>+</> : <>✎</>}
+            </button>
+            <div id={controlId} className={styles.titleAndInput}>
+                <div className={styles.title}>{value ?? '...'}</div>
+                <If cond={selected}>
+                    <div className={styles.inputWrapper}>
+                        <input className={styles.input} form={formId} value={value} onChange={onChangeInput} />
+                    </div>
+                </If>
+            </div>
+        </div>
+        <div className={styles.menuWrapper}>
+            <form className={styles.editMenu} id={formId} action="#" onSubmit={onSubmit}>
+               <If cond={selected}>
+                   <button>Finish Edit</button>
+                </If>
+            </form>
+        </div>
+    </div>;
+};
 
 interface Props {
     readonly value?: string;
@@ -24,116 +162,9 @@ export const EntryForm = ({ value }: Props) => {
         onDown
     } = useEntryItem();
 
-    const formId = useId();
-    const controlId = useId();
-    const buttonId = useId();
-
-    const buttonRef = useRef<HTMLButtonElement>(null);
-
-    const onToggleClick = useCallback((e: PointerEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-
-        if (selected) {
-            onDeselect();
-        } else {
-            onSelect();
-        }
-    }, [onSelect, onDeselect, selected]);
-
-    const onClickTitle = useCallback((e: PointerEvent<HTMLDivElement>) => {
-        e.preventDefault();
-
-        const button = buttonRef.current;
-        if (button) {
-            button.click();
-        }
-    }, []);
-
-    const [editValue, setEditValue] = useState(value ?? '');
-
-    const onChangeEdit = useCallback((v: string) => setEditValue(v), []);
-
-    const onSubmit = useCallback((e: FormEvent) => {
-        const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
-        switch (value) {
-        case 'edit':
-        case 'archive':
-        case 'up':
-        case 'down':
-            e.preventDefault();
-            onEdit(editValue);
-            onDeselect();
-            break;
-        }
-
-        switch (value) {
-        case 'archive':
-            onArchive();
-            break;
-
-        case 'up':
-            if (onUp) {
-                onUp();
-            }
-            break;
-
-        case 'down':
-            if (onDown) {
-                onDown();
-            }
-            break;
-
-        default:
-            return;
-        }
-    }, [onDeselect, onEdit, editValue, onArchive, onUp, onDown]);
-
-    return <div className={styles.editFormWrapper}>
-        <div className={styles.button}>
-            <button ref={buttonRef}
-                id={buttonId}
-                onClick={onToggleClick}
-                aria-expanded={selected}
-                aria-controls={controlId}>
-                {selected ? <>+</> : <>-</>}
-            </button>
-            <label htmlFor={buttonId}>Edit</label>
-        </div>
-        <div id={controlId} className={styles.editForm}>
-            <div className={styles.entry}>
-                <div onClick={onClickTitle} className={styles.title}>{value ?? '...'}</div>
-                <If cond={selected}>
-                    <form id={formId} action="#" onSubmit={onSubmit}>
-                        <Input value={value} onChange={onChangeEdit} />
-                    </form>
-                </If>
-            </div>
-            <div className={styles.entry}>
-                <If cond={selected}>
-                    <div className={styles.editMenu}>
-                        <EditList>
-                            <EditItem>
-                                <button form={formId} value="edit">Edit</button>
-                            </EditItem>
-                            <EditItem>
-                                <button form={formId} disabled={!onArchive} value="archive">
-                                    Archive
-                                </button>
-                            </EditItem>
-                            <EditItem>
-                                <button form={formId} disabled={!onUp} value="up">
-                                    Up
-                                </button>
-                            </EditItem>
-                            <EditItem>
-                                <button form={formId} disabled={!onDown} value="down">
-                                    Down
-                                </button>
-                            </EditItem>
-                        </EditList>
-                    </div>
-                </If>
-            </div>
-        </div>
-    </div>;
+    return <div className={styles.entryForm}>
+        <EditForm selected={selected} value={value} onChange={onEdit}
+               onSelect={onSelect} onDeselect={onDeselect} />
+        <SecondaryForm onArchive={value ? onArchive : undefined} onDown={onDown} onUp={onUp} />
+     </div>;
 };

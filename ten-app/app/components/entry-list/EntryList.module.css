@@ -3,4 +3,28 @@
 }
 .entryItem {
     all: unset;
+    display: flex;
+}
+
+.grabberWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.grabber {
+    all: unset;
+    cursor: grab;
+
+    margin-inline: 0.5em;
+    padding-inline: 0.4em;
+    padding-block: 0.5em;
+    max-block-size: 1.5em;
+
+    border-color: grey;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.6em;
+}
+.grabber:hover {
+    background-color: darkgrey;
 }

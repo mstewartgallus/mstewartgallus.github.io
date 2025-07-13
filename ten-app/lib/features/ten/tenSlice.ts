@@ -1,9 +1,9 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction, Selector } from "@reduxjs/toolkit";
 import type { Id } from "@/types/ten";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 interface EditAction {
-    readonly index: Id;
+    readonly index: number;
     readonly value: string;
 }
 interface ArchiveAction {
@@ -14,6 +14,10 @@ interface UpAction {
 }
 interface DownAction {
     readonly index: number;
+}
+interface SwapAction {
+    readonly leftIndex: number;
+    readonly rightIndex: number;
 }
 
 export interface TenSliceState {
@@ -32,9 +36,11 @@ const initialState: TenSliceState = (() => {
     };
 })();
 
-const selectEntries = (ten: TenSliceState) => ten.entries;
-const selectFreshId = (ten: TenSliceState) => ten.freshId;
-const selectArchiveId = (ten: TenSliceState) => ten.archivedId;
+type TenSelector<T> = Selector<TenSliceState, T>;
+
+const selectEntries: TenSelector<readonly (string | null)[]> = (ten: TenSliceState) => ten.entries;
+const selectFreshId: TenSelector<readonly Id[]> = (ten: TenSliceState) => ten.freshId;
+const selectArchiveId: TenSelector<readonly Id[]> = (ten: TenSliceState) => ten.archivedId;
 
 export const tenSlice = createSlice({
     name: "ten",
@@ -53,6 +59,12 @@ export const tenSlice = createSlice({
             state.entries.push(null);
 
             state.archivedId = [id, ...state.archivedId];
+        }),
+
+        swap: create.reducer((state, { payload: { leftIndex, rightIndex } }: PayloadAction<SwapAction>) => {
+            const id = state.freshId[leftIndex];
+            state.freshId[leftIndex] = state.freshId[rightIndex];
+            state.freshId[rightIndex] = id;
         }),
 
         up: create.reducer((state, { payload: { index } }: PayloadAction<UpAction>) => {
@@ -91,6 +103,7 @@ export const tenSlice = createSlice({
 export const {
     edit,
     archive,
+    swap,
     up,
     down
 } = tenSlice.actions;

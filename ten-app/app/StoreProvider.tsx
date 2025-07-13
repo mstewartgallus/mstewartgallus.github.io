@@ -38,7 +38,9 @@ export const StoreProvider = ({ children }: Props) => {
     return <Provider store={storeRef.current}>
         {
             persistor !== null ?
-                <PersistGate loading={null} persistor={persistor}>{children}</PersistGate> : null
+                <PersistGate loading={null} persistor={persistor}>
+                    {children}
+                </PersistGate> : null
         }
     </Provider>;
 };

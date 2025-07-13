@@ -3,6 +3,7 @@
 import {
     edit,
     archive,
+    swap,
     up,
     down,
     selectFresh,
@@ -10,7 +11,7 @@ import {
 } from "@/lib/features/ten/tenSlice";
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { EntryItem, EntryList } from './entry-list/EntryList';
 import { EntryForm } from './entry-form/EntryForm';
 
@@ -26,6 +27,9 @@ export const Ten = () => {
     const onArchiveIndex = useCallback((index: number) =>
         dispatch(archive({ index })),
         [dispatch]);
+    const onSwapIndex = useCallback((leftIndex: number, rightIndex: number) =>
+        dispatch(swap({ leftIndex, rightIndex })),
+        [dispatch]);
     const onUpIndex = useCallback((index: number) =>
         dispatch(up({ index })),
         [dispatch]);
@@ -33,7 +37,8 @@ export const Ten = () => {
         dispatch(down({ index })),
         [dispatch]);
 
-    const count = fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0);
+    const count = useMemo(() => fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0),
+                          [fresh]);
 
     return <>
                <section>
@@ -42,14 +47,17 @@ export const Ten = () => {
                        length={fresh.length}
                        onEditIndex={onEditIndex}
                        onArchiveIndex={onArchiveIndex}
+                       onSwapIndex={onSwapIndex}
                        onDownIndex={onDownIndex}
                        onUpIndex={onUpIndex}
                    >
                        {
                            fresh.map(({ id, value }, index) =>
-                               <EntryItem key={id} index={index}>
-                                    <EntryForm value={value ?? undefined} />
-                               </EntryItem>)
+                               <div key={id}>
+                                   <EntryItem index={index}>
+                                        <EntryForm value={value ?? undefined} />
+                                   </EntryItem>
+                               </div>)
                        }
                    </EntryList>
                </section>

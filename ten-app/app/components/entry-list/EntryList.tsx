@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { DragEvent, ReactNode } from "react";
 import { createContext, useContext, useMemo, useCallback, useState } from 'react';
 
 import styles from './EntryList.module.css';
@@ -17,6 +17,7 @@ interface ListProps {
     readonly onArchiveIndex: (index: number) => void;
     readonly onUpIndex: (index: number) => void;
     readonly onDownIndex: (index: number) => void;
+    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
 }
 
 interface ListContext {
@@ -28,6 +29,7 @@ interface ListContext {
     readonly onArchiveIndex: (index: number) => void;
     readonly onUpIndex: (index: number) => void;
     readonly onDownIndex: (index: number) => void;
+    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
 }
 
 interface ItemContext {
@@ -47,7 +49,8 @@ const EntryListContext = createContext<ListContext>({
     onEditIndex: () => {},
     onArchiveIndex: () => {},
     onUpIndex: () => {},
-   onDownIndex: () => {}
+    onDownIndex: () => {},
+    onSwapIndex: () => {}
 });
 EntryListContext.displayName = 'EntryList';
 
@@ -72,6 +75,7 @@ export const EntryItem = ({ children, index }: ItemProps) => {
         length,
         onEditIndex,
         onArchiveIndex,
+        onSwapIndex,
         onUpIndex,
         onDownIndex
     } = useContext(EntryListContext);
@@ -116,7 +120,56 @@ export const EntryItem = ({ children, index }: ItemProps) => {
         maybeOnDown
     ]);
 
-    return <li className={styles.entryItem}>
+    const onDragStart = useCallback((e: DragEvent) => {
+        const { dataTransfer } = e;
+        if (!dataTransfer) {
+            return;
+        }
+
+        dataTransfer.dropEffect = 'move';
+        dataTransfer.effectAllowed = 'move';
+        dataTransfer.setData('text/plain', String(index));
+    }, [index]);
+
+    const onDragOver = useCallback((e: DragEvent) => {
+        const { dataTransfer } = e;
+        if (!dataTransfer) {
+            return;
+        }
+
+        if (dataTransfer.dropEffect !== 'move') {
+            return;
+        }
+
+        const startIndex = parseInt(dataTransfer.getData('text/plain'));
+        if (Number.isNaN(startIndex)) {
+            return;
+        }
+
+        e.preventDefault();
+    },[]);
+
+    const onDragDrop = useCallback((e: DragEvent<HTMLLIElement>) => {
+        const { dataTransfer } = e;
+        if (!dataTransfer) {
+            return;
+        }
+
+        e.preventDefault();
+
+        const startIndex = parseInt(dataTransfer.getData('text/plain'));
+        onSwapIndex(startIndex, index);
+    }, [index, onSwapIndex]);
+
+    // FIXME grabber maybe shouldn't be a button
+    return <li className={styles.entryItem}
+               onDragStart={onDragStart}
+               onDragOver={onDragOver}
+               onDrop={onDragDrop}>
+        <div className={styles.grabberWrapper}>
+            <button className={styles.grabber} draggable="true" tabIndex={-1}>::</button>
+        </div>
+
         <EntryItemContext.Provider value={handler}>
             {children}
         </EntryItemContext.Provider>
@@ -126,7 +179,8 @@ export const EntryItem = ({ children, index }: ItemProps) => {
 export const EntryList = ({
     children,
     length,
-    onEditIndex, onArchiveIndex, onDownIndex, onUpIndex
+    onEditIndex, onArchiveIndex,
+    onSwapIndex, onDownIndex, onUpIndex
 }: ListProps) => {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -140,6 +194,7 @@ export const EntryList = ({
         length,
         onEditIndex,
         onArchiveIndex,
+        onSwapIndex,
         onUpIndex,
         onDownIndex
     }), [
@@ -149,6 +204,7 @@ export const EntryList = ({
         length,
         onEditIndex,
         onArchiveIndex,
+        onSwapIndex,
         onUpIndex,
         onDownIndex
     ]);
