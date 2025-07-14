@@ -176,8 +176,8 @@ export const EntryList = ({
                       onSelectIndex={onSelectIndex}
                       onEditIndex={onEditIndex}
                       onArchiveIndex={onArchiveIndex}
-                      onDownIndex={index > 0 ? onDownIndex : undefined}
-                      onUpIndex={index <= fresh.length ? onUpIndex : undefined}
+                      onDownIndex={index < fresh.length ? onDownIndex : undefined}
+                      onUpIndex={index > 0 ? onUpIndex : undefined}
                 >{children}</EntryItem>)
         }
            </ul>;
