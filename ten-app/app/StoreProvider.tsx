@@ -8,25 +8,11 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { createContext, useContext, useEffect, useRef } from "react";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
-import { PersistGate as ReduxPersistGate } from "redux-persist/integration/react";
+import { PersistGate } from "redux-persist/integration/react";
 
-const PersistorContext = createContext<Persistor | null>(null);
+const BootstrappedContext = createContext<boolean>(false);
 
-interface PersistProps {
-  readonly children: ReactNode;
-  readonly loading: ReactNode;
-}
-
-export const PersistGate = ({ children, loading }: PersistProps) => {
-    const persistor = useContext(PersistorContext);
-    if (!persistor) {
-        return null;
-    }
-
-    return <ReduxPersistGate loading={loading} persistor={persistor}>
-        {children}
-    </ReduxPersistGate>;
-};
+export const usePersistBootstrapped = () => useContext(BootstrappedContext);
 
 interface Props {
   readonly children: ReactNode;
@@ -62,8 +48,13 @@ export const StoreProvider = ({ children }: Props) => {
     }
 
     return <Provider store={state.store}>
-        <PersistorContext.Provider value={state.persistor}>
-            {children}
-        </PersistorContext.Provider>
+        <PersistGate persistor={state.persistor}>
+        {
+            bootstrapped =>
+                <BootstrappedContext.Provider value={bootstrapped}>
+                   {children}
+                </BootstrappedContext.Provider>
+        }
+        </PersistGate>
     </Provider>;
 };

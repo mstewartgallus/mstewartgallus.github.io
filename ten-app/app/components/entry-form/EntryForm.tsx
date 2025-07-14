@@ -12,7 +12,7 @@ import styles from "./EntryForm.module.css";
 
 interface EditFormProps {
     readonly value?: string;
-    readonly onChange: (value: string) => void;
+    readonly onChange?: (value: string) => void;
     readonly selected: boolean;
     readonly onSelect: () => void;
     readonly onDeselect: () => void;
@@ -105,10 +105,34 @@ const SecondaryForm = ({ onArchive, onUp, onDown }: SecondaryFormProps) => {
         </div>;
 };
 
+interface FormButtonProps {
+    value: string;
+    id: string;
+    onChange?: (value: string) => void;
+    onDeselect?: () => void;
+}
+
+const FormButton = ({ value, id, onChange, onDeselect }: FormButtonProps) => {
+    const onSubmit = useCallback((e: FormEvent) => {
+        if (!onChange || !onDeselect) {
+            return;
+        }
+        e.preventDefault();
+        onChange(value);
+        onDeselect();
+    }, [onDeselect, onChange, value]);
+
+    return <form className={styles.editMenu} id={id} action="#" onSubmit={onSubmit}>
+        <Button disabled={!onChange}>Finish Edit</Button>
+        </form>;
+};
+
 const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormProps) => {
     const formId = useId();
     const controlId = useId();
     const buttonId = useId();
+
+    const [editValue, setEditValue] = useState(value ?? '');
 
     const onToggleClick = useCallback((e: PointerEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -116,11 +140,10 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
         if (selected) {
             onDeselect();
         } else {
+            setEditValue(value ?? '');
             onSelect();
         }
-    }, [onSelect, onDeselect, selected]);
-
-    const [editValue, setEditValue] = useState(value ?? '');
+    }, [onSelect, onDeselect, selected, value]);
 
     const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const { target } = e;
@@ -131,25 +154,14 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
         setEditValue((target as HTMLInputElement).value);
     }, []);
 
-    const onSubmit = useCallback((e: FormEvent) => {
-        e.preventDefault();
-        onChange(editValue);
-        onDeselect();
-    }, [onDeselect, onChange, editValue]);
-
-    return <div className={styles.editForm}>
+    const icon = selected ? '-' : value ? '✎' : '+';
+    return <>
         <div className={styles.editableTitle}>
             <Button id={buttonId}
                     onClick={onToggleClick}
                     aria-expanded={selected}
                     aria-controls={controlId}>
-        <Icon>{
-            selected ?
-                <>-</> :
-            value ?
-                <>✎</> :
-                <>+</>
-        }</Icon>
+                <Icon>{icon}</Icon>
             </Button>
             <div id={controlId} className={styles.titleAndInput}>
                 <div className={styles.title}>{value ?? '...'}</div>
@@ -161,13 +173,11 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
             </div>
         </div>
         <div className={styles.menuWrapper}>
-            <form className={styles.editMenu} id={formId} action="#" onSubmit={onSubmit}>
-               <If cond={selected}>
-                   <Button>Finish Edit</Button>
-                </If>
-            </form>
+           <If cond={selected}>
+               <FormButton value={editValue} id={formId} onChange={onChange} onDeselect={onDeselect} />
+           </If>
         </div>
-    </div>;
+    </>;
 };
 
 interface Props {
@@ -175,8 +185,8 @@ interface Props {
     readonly selected: boolean;
     readonly onDeselect: () => void;
     readonly onSelect: () => void;
-    readonly onEdit: (value: string) => void;
-    readonly onArchive: () => void;
+    readonly onEdit?: (value: string) => void;
+    readonly onArchive?: () => void;
     readonly onUp?: () => void;
     readonly onDown?: () => void;
 }
@@ -192,6 +202,8 @@ export const EntryForm = ({
     onDown
 }: Props) =>
     <div className={styles.entryForm}>
-        <EditForm selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
-        <SecondaryForm onArchive={value ? onArchive : undefined} onDown={onDown} onUp={onUp} />
+       <div className={styles.editForm}>
+          <EditForm selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
+       </div>
+       <SecondaryForm onArchive={onArchive} onDown={onDown} onUp={onUp} />
     </div>;

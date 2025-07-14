@@ -7,8 +7,8 @@ import styles from './EntryList.module.css';
 
 interface CloseProps {
     readonly onSelect: () => void;
-    readonly onEdit: (value: string) => void;
-    readonly onArchive: () => void;
+    readonly onEdit?: (value: string) => void;
+    readonly onArchive?: () => void;
     readonly onUp?: () => void;
     readonly onDown?: () => void;
 }
@@ -24,63 +24,55 @@ export type EntryItemProps = CloseProps & ExtraProps;
 type ItemProps = ExtraProps & {
     readonly children: ComponentType<EntryItemProps>;
     readonly index: number;
-    readonly length: number;
-    readonly draggingIndex: number | null;
+    readonly draggingIndex?: number;
     readonly onDragIndex: (index: number | null) => void;
-    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
     readonly onSelectIndex: (index: number) => void;
-    readonly onEditIndex: (index: number, value: string) => void;
-    readonly onArchiveIndex: (index: number) => void;
-    readonly onUpIndex: (index: number) => void;
-    readonly onDownIndex: (index: number) => void;
+
+    readonly onSwapIndex?: (leftIndex: number, rightIndex: number) => void;
+    readonly onEditIndex?: (index: number, value: string) => void;
+    readonly onArchiveIndex?: (index: number) => void;
+    readonly onUpIndex?: (index: number) => void;
+    readonly onDownIndex?: (index: number) => void;
 }
 
 interface Props {
     readonly children: ComponentType<EntryItemProps>;
     readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
-    readonly onEditIndex: (index: number, value: string) => void;
-    readonly onArchiveIndex: (index: number) => void;
-    readonly onUpIndex: (index: number) => void;
-    readonly onDownIndex: (index: number) => void;
-    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
+    readonly onEditIndex?: (index: number, value: string) => void;
+    readonly onArchiveIndex?: (index: number) => void;
+    readonly onUpIndex?: (index: number) => void;
+    readonly onDownIndex?: (index: number) => void;
+    readonly onSwapIndex?: (leftIndex: number, rightIndex: number) => void;
 }
+
+const useBind = (f: undefined | ((index: number) => void), index: number) => {
+    const bf = useCallback(() => f!(index), [f, index]);
+    return f && bf;
+};
+
 
 const EntryItem = ({
     children,
+    index,
     selected,
     value,
     draggingIndex,
     onDragIndex,
     onDeselect,
-    index,
-    length,
     onSwapIndex,
     onSelectIndex,
     onEditIndex, onArchiveIndex,
     onDownIndex, onUpIndex
 }: ItemProps) => {
     const dragging = draggingIndex === index;
-    const anyDragging = draggingIndex !== null;
+    const anyDragging = draggingIndex !== undefined;
     const otherDragging = anyDragging && !dragging;
 
-    const onSelect = useCallback(() =>
-        onSelectIndex(index),
-        [index, onSelectIndex]);
-    const onEdit = useCallback((value: string) =>
-        onEditIndex(index, value),
-        [index, onEditIndex]);
-    const onArchive = useCallback(() =>
-        onArchiveIndex(index),
-        [index, onArchiveIndex]);
-    const onDown = useCallback(() =>
-        onDownIndex(index),
-        [index, onDownIndex]);
-    const onUp = useCallback(() =>
-        onUpIndex(index),
-        [index, onUpIndex]);
+    const onSelect = useCallback(() => onSelectIndex(index), [index, onSelectIndex]);
 
-    const maybeOnUp = index > 0 ? onUp : undefined;
-    const maybeOnDown = index < length ? onDown : undefined;
+    const onArchive = useBind(onArchiveIndex, index);
+    const onDown = useBind(onDownIndex, index);
+    const onUp = useBind(onUpIndex, index);
 
     const onMouseDown = useCallback((e: MouseEvent<HTMLDivElement>) => {
         if (e.button !== 0) {
@@ -93,23 +85,38 @@ const EntryItem = ({
 
     // Still need to figure this out for why it doesn't work on mobile
     // in Chrome simulator
-    const onMouseUp = useCallback((e: MouseEvent<HTMLElement>) => {
-        if (e.button !== 0) {
-            return;
-        }
+    let onMouseUp: undefined | ((event: MouseEvent<HTMLElement>) => void);
+    {
+        const partialOnMouseUp = useCallback((e: MouseEvent<HTMLElement>) => {
+            if (e.button !== 0) {
+                return;
+            }
 
-        if (draggingIndex === null || index === null || draggingIndex === index) {
-            return;
-        }
+            if (draggingIndex === undefined || draggingIndex === index) {
+                return;
+            }
 
-        onSwapIndex(draggingIndex, index);
-    }, [index, draggingIndex, onSwapIndex]);
+            onSwapIndex!(draggingIndex, index);
+        }, [index, draggingIndex, onSwapIndex]);
+        if (onSwapIndex) {
+            onMouseUp = partialOnMouseUp;
+        }
+    }
+
+    let onEdit: undefined | ((value: string) => void);
+    {
+        const partialOnEdit = useCallback((value: string) => onEditIndex!(index, value),
+                                 [index, onEditIndex]);
+        if (onEditIndex) {
+            onEdit = partialOnEdit;
+        }
+    }
 
     const Child = children;
     return <li className={styles.entryItem}
              data-otherdragging={otherDragging}
 
-             onMouseUp={onMouseUp}
+             onMouseUp={onSwapIndex && onMouseUp}
         >
         <div className={styles.grabberWrapper}>
             <div className={styles.grabber} onMouseDown={onMouseDown} data-dragging={dragging}>
@@ -124,8 +131,8 @@ const EntryItem = ({
              onSelect={onSelect}
              onEdit={onEdit}
              onArchive={onArchive}
-             onUp={maybeOnUp}
-             onDown={maybeOnDown}
+             onUp={onUp}
+             onDown={onDown}
            />
        </li>;
 };
@@ -144,8 +151,6 @@ export const EntryList = ({
 
     const onDragIndex = useCallback((index: number | null) => setDragIndex(index), []);
 
-    const length = fresh.length;
-
     const onMouseUp = useCallback((e: MouseEvent<HTMLElement>) => {
         if (e.button !== 0) {
             return;
@@ -162,18 +167,17 @@ export const EntryList = ({
             fresh.map(({ id, value }, index) =>
                 <EntryItem key={id}
                       index={index}
-                      length={length}
                       value={value ?? undefined}
                       selected={selectedIndex === index}
-                      draggingIndex={draggingIndex}
-                      onDragIndex={onDragIndex}
+                      draggingIndex={draggingIndex ?? undefined}
+                      onDragIndex={onDragIndex ?? undefined}
                       onSwapIndex={onSwapIndex}
                       onDeselect={onDeselect}
                       onSelectIndex={onSelectIndex}
                       onEditIndex={onEditIndex}
                       onArchiveIndex={onArchiveIndex}
-                      onDownIndex={onDownIndex}
-                      onUpIndex={onUpIndex}
+                      onDownIndex={index > 0 ? onDownIndex : undefined}
+                      onUpIndex={index <= fresh.length ? onUpIndex : undefined}
                 >{children}</EntryItem>)
         }
            </ul>;

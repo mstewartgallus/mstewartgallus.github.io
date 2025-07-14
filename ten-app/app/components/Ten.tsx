@@ -14,7 +14,62 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useMemo } from 'react';
 import { EntryList } from './entry-list/EntryList';
 import { EntryForm } from './entry-form/EntryForm';
-import { PersistGate } from '../StoreProvider';
+import { usePersistBootstrapped } from '../StoreProvider';
+
+interface Props {
+    readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
+    readonly archived: readonly { readonly id: number, readonly value: string | null }[];
+    readonly onEditIndex?: (index: number, value: string) => void;
+    readonly onArchiveIndex?: (index: number) => void;
+    readonly onUpIndex?: (index: number) => void;
+    readonly onDownIndex?: (index: number) => void;
+    readonly onSwapIndex?: (leftIndex: number, rightIndex: number) => void;
+}
+
+const TenImpl = ({
+    fresh, archived,
+    onEditIndex, onArchiveIndex, onSwapIndex, onUpIndex, onDownIndex
+}: Props) => {
+    const count = useMemo(() => fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0),
+                          [fresh]);
+    return <>
+               <section>
+                   <h1>{count} / 10</h1>
+                   <EntryList
+                       fresh={fresh}
+                       onEditIndex={onEditIndex}
+                       onArchiveIndex={onArchiveIndex}
+                       onSwapIndex={onSwapIndex}
+                       onDownIndex={onDownIndex}
+                       onUpIndex={onUpIndex}
+                     >
+                      {EntryForm}
+                   </EntryList>
+               </section>
+               <section>
+                   <h2>Archived</h2>
+                   <ul>
+                       {
+                           archived.map(({ id, value }) =>
+                               <li key={id}>{value}</li>)
+                       }
+                   </ul>
+               </section>
+           </>;
+};
+
+const mock = [
+    { id: 0, value: null },
+    { id: 1, value: null },
+    { id: 2, value: null },
+    { id: 3, value: null },
+    { id: 4, value: null },
+    { id: 5, value: null },
+    { id: 6, value: null },
+    { id: 7, value: null },
+    { id: 8, value: null },
+    { id: 9, value: null }
+];
 
 export const Ten = () => {
     const dispatch = useAppDispatch();
@@ -38,57 +93,15 @@ export const Ten = () => {
     const fresh = useAppSelector(selectFresh);
     const archived = useAppSelector(selectArchived);
 
-    const count = useMemo(() => fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0),
-                          [fresh]);
+    const bootstrapped = usePersistBootstrapped();
 
-    return <>
-               <section>
-                   <h1>
-                       <PersistGate loading={<>&nbsp;</>}>
-                           {count}
-                       </PersistGate> / 10
-                   </h1>
-                   <PersistGate loading={null}>
-                   <EntryList
-                       fresh={fresh}
-                       onEditIndex={onEditIndex}
-                       onArchiveIndex={onArchiveIndex}
-                       onSwapIndex={onSwapIndex}
-                       onDownIndex={onDownIndex}
-                       onUpIndex={onUpIndex}>
-                   {
-                       ({ value,
-                          selected,
-                          onDeselect,
-                          onSelect,
-                          onEdit,
-                          onArchive,
-                          onUp,
-                          onDown }) =>
-                            <EntryForm
-                                value={value}
-                                selected={selected}
-                                onDeselect={onDeselect}
-                                onSelect={onSelect}
-                                onEdit={onEdit}
-                                onArchive={onArchive}
-                                onUp={onUp}
-                                onDown={onDown}
-                            />
-                   }
-                   </EntryList>
-                   </PersistGate>
-               </section>
-               <section>
-                   <h2>Archived</h2>
-                   <ul>
-                       <PersistGate loading={null}>
-                       {
-                           archived.map(({ id, value }) =>
-                               <li key={id}>{value}</li>)
-                       }
-                       </PersistGate>
-                   </ul>
-               </section>
-           </>;
+    return <TenImpl
+        fresh={bootstrapped ? fresh : mock}
+        archived={bootstrapped ? archived : []}
+        onEditIndex={bootstrapped ? onEditIndex : undefined}
+        onArchiveIndex={bootstrapped ? onArchiveIndex : undefined}
+        onSwapIndex={bootstrapped ? onSwapIndex : undefined}
+        onDownIndex={bootstrapped ? onDownIndex : undefined}
+        onUpIndex={bootstrapped ? onUpIndex : undefined}
+        />;
 };
