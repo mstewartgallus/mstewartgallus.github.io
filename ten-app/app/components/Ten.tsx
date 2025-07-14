@@ -10,9 +10,11 @@ import {
     selectArchived,
 } from "@/lib/features/ten/tenSlice";
 
+import type { EntryItemProps } from './entry-list/EntryList';
+
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useMemo } from 'react';
-import { EntryItem, EntryList } from './entry-list/EntryList';
+import { EntryList } from './entry-list/EntryList';
 import { EntryForm } from './entry-form/EntryForm';
 
 export const Ten = () => {
@@ -44,7 +46,7 @@ export const Ten = () => {
                <section>
                    <h1>{count} / 10</h1>
                    <EntryList
-                       length={fresh.length}
+                       fresh={fresh}
                        onEditIndex={onEditIndex}
                        onArchiveIndex={onArchiveIndex}
                        onSwapIndex={onSwapIndex}
@@ -52,12 +54,25 @@ export const Ten = () => {
                        onUpIndex={onUpIndex}
                    >
                        {
-                           fresh.map(({ id, value }, index) =>
-                               <div key={id}>
-                                   <EntryItem index={index}>
-                                        <EntryForm value={value ?? undefined} />
-                                   </EntryItem>
-                               </div>)
+                           ({
+                               value, selected,
+                               onDeselect,
+                               onSelect,
+                               onEdit,
+                               onArchive,
+                               onUp,
+                               onDown
+                           }: EntryItemProps) =>
+                               <EntryForm
+                                  value={value ?? undefined}
+                                  selected={selected}
+                                  onDeselect={onDeselect}
+                                  onSelect={onSelect}
+                                  onEdit={onEdit}
+                                  onArchive={onArchive}
+                                  onUp={onUp}
+                                  onDown={onDown}
+                               />
                        }
                    </EntryList>
                </section>

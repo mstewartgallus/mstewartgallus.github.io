@@ -4,22 +4,21 @@ import type { ChangeEvent, FormEvent, PointerEvent } from "react";
 import { useCallback, useId, useState } from 'react';
 import { If } from "../If";
 import { EditList, EditItem } from "../edit-list/EditList";
-import { useEntryItem } from "../entry-list/EntryList";
 
 import styles from "./EntryForm.module.css";
 
 interface EditFormProps {
-    value?: string;
-    onChange: (value: string) => void;
-    selected: boolean;
-    onSelect: () => void;
-    onDeselect: () => void;
+    readonly value?: string;
+    readonly onChange: (value: string) => void;
+    readonly selected: boolean;
+    readonly onSelect: () => void;
+    readonly onDeselect: () => void;
 }
 
 interface SecondaryFormProps {
-    onArchive?: () => void;
-    onUp?: () => void;
-    onDown?: () => void;
+    readonly onArchive?: () => void;
+    readonly onUp?: () => void;
+    readonly onDown?: () => void;
 }
 
 const SecondaryForm = ({ onArchive, onUp, onDown }: SecondaryFormProps) => {
@@ -132,7 +131,7 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
                 <div className={styles.title}>{value ?? '...'}</div>
                 <If cond={selected}>
                     <div className={styles.inputWrapper}>
-                        <input className={styles.input} form={formId} value={value} onChange={onChangeInput} />
+                        <input className={styles.input} form={formId} value={editValue} onChange={onChangeInput} />
                     </div>
                 </If>
             </div>
@@ -149,22 +148,27 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
 
 interface Props {
     readonly value?: string;
+    readonly selected: boolean;
+    readonly onDeselect: () => void;
+    readonly onSelect: () => void;
+    readonly onEdit: (value: string) => void;
+    readonly onArchive: () => void;
+    readonly onUp?: () => void;
+    readonly onDown?: () => void;
 }
 
-export const EntryForm = ({ value }: Props) => {
-    const {
-        selected,
-        onDeselect,
-        onSelect,
-        onEdit,
-        onArchive,
-        onUp,
-        onDown
-    } = useEntryItem();
-
-    return <div className={styles.entryForm}>
-        <EditForm selected={selected} value={value} onChange={onEdit}
-               onSelect={onSelect} onDeselect={onDeselect} />
-        <SecondaryForm onArchive={value ? onArchive : undefined} onDown={onDown} onUp={onUp} />
-     </div>;
-};
+export const EntryForm = ({
+    value,
+    selected,
+    onDeselect,
+    onSelect,
+    onEdit,
+    onArchive,
+    onUp,
+    onDown
+}: Props) =>
+    <div className={styles.entryForm}>
+    <EditForm selected={selected} value={value} onChange={onEdit}
+onSelect={onSelect} onDeselect={onDeselect} />
+    <SecondaryForm onArchive={value ? onArchive : undefined} onDown={onDown} onUp={onUp} />
+    </div>;

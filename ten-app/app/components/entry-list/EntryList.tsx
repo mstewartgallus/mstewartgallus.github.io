@@ -1,40 +1,11 @@
 "use client";
 
-import type { DragEvent, ReactNode } from "react";
-import { createContext, useContext, useMemo, useCallback, useState } from 'react';
+import type { ComponentType, DragEvent } from "react";
+import { useCallback, useState } from 'react';
 
 import styles from './EntryList.module.css';
 
-interface ItemProps {
-    readonly children: ReactNode;
-    readonly index: number;
-}
-
-interface ListProps {
-    readonly children: ReactNode;
-    readonly length: number;
-    readonly onEditIndex: (index: number, value: string) => void;
-    readonly onArchiveIndex: (index: number) => void;
-    readonly onUpIndex: (index: number) => void;
-    readonly onDownIndex: (index: number) => void;
-    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
-}
-
-interface ListContext {
-    readonly selectedIndex?: number;
-    readonly onDeselect: () => void;
-    readonly onSelectIndex: (index: number) => void;
-    readonly length: number;
-    readonly onEditIndex: (index: number, value: string) => void;
-    readonly onArchiveIndex: (index: number) => void;
-    readonly onUpIndex: (index: number) => void;
-    readonly onDownIndex: (index: number) => void;
-    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
-}
-
-interface ItemContext {
-    readonly selected: boolean;
-    readonly onDeselect: () => void;
+interface CloseProps {
     readonly onSelect: () => void;
     readonly onEdit: (value: string) => void;
     readonly onArchive: () => void;
@@ -42,47 +13,46 @@ interface ItemContext {
     readonly onDown?: () => void;
 }
 
-const EntryListContext = createContext<ListContext>({
-    length: 0,
-    onDeselect: () => {},
-    onSelectIndex: () => {},
-    onEditIndex: () => {},
-    onArchiveIndex: () => {},
-    onUpIndex: () => {},
-    onDownIndex: () => {},
-    onSwapIndex: () => {}
-});
-EntryListContext.displayName = 'EntryList';
+interface ExtraProps {
+    readonly onDeselect: () => void;
+    readonly value?: string;
+    readonly selected: boolean;
+}
 
-const EntryItemContext = createContext<ItemContext>({
-    selected: false,
-    onDeselect: () => {},
-    onSelect: () => {},
-    onEdit: () => {},
-    onArchive: () => {},
-    onUp: () => {},
-    onDown: () => {}
-});
-EntryItemContext.displayName = 'EntryItem';
+export type EntryItemProps = CloseProps & ExtraProps;
 
-export const useEntryItem = () => useContext(EntryItemContext);
+interface ItemProps {
+    readonly children: ComponentType<CloseProps>;
+    readonly index: number;
+    readonly length: number;
+    readonly onSelectIndex: (index: number) => void;
+    readonly onEditIndex: (index: number, value: string) => void;
+    readonly onArchiveIndex: (index: number) => void;
+    readonly onUpIndex: (index: number) => void;
+    readonly onDownIndex: (index: number) => void;
+    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
+}
 
-export const EntryItem = ({ children, index }: ItemProps) => {
-    const {
-        selectedIndex,
-        onDeselect,
-        onSelectIndex,
-        length,
-        onEditIndex,
-        onArchiveIndex,
-        onSwapIndex,
-        onUpIndex,
-        onDownIndex
-    } = useContext(EntryListContext);
+interface Props {
+    readonly children: ComponentType<EntryItemProps>;
+    readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
+    readonly onEditIndex: (index: number, value: string) => void;
+    readonly onArchiveIndex: (index: number) => void;
+    readonly onUpIndex: (index: number) => void;
+    readonly onDownIndex: (index: number) => void;
+    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
+}
 
-    const selected = useMemo(() =>
-        selectedIndex == index,
-        [index, selectedIndex]);
+const EntryItem = ({
+    children,
+    index,
+    length,
+    onSelectIndex,
+    onEditIndex, onArchiveIndex,
+    onSwapIndex, onDownIndex, onUpIndex
+}: ItemProps) => {
+    const Child = children;
+
     const onSelect = useCallback(() =>
         onSelectIndex(index),
         [index, onSelectIndex]);
@@ -102,25 +72,8 @@ export const EntryItem = ({ children, index }: ItemProps) => {
     const maybeOnUp = index > 0 ? onUp : undefined;
     const maybeOnDown = index < length ? onDown : undefined;
 
-    const handler = useMemo(() => ({
-        selected,
-        onDeselect,
-        onSelect,
-        onEdit,
-        onArchive,
-        onUp: maybeOnUp,
-        onDown: maybeOnDown
-    }), [
-        selected,
-        onDeselect,
-        onSelect,
-        onEdit,
-        onArchive,
-        maybeOnUp,
-        maybeOnDown
-    ]);
-
-    const onDragStart = useCallback((e: DragEvent) => {
+    // FIXME drag and drop is broken on Chrome
+    const onDragStart = useCallback((e: DragEvent<HTMLLIElement>) => {
         const { dataTransfer } = e;
         if (!dataTransfer) {
             return;
@@ -131,7 +84,7 @@ export const EntryItem = ({ children, index }: ItemProps) => {
         dataTransfer.setData('text/plain', String(index));
     }, [index]);
 
-    const onDragOver = useCallback((e: DragEvent) => {
+    const onDragOver = useCallback((e: DragEvent<HTMLLIElement>) => {
         const { dataTransfer } = e;
         if (!dataTransfer) {
             return;
@@ -170,47 +123,59 @@ export const EntryItem = ({ children, index }: ItemProps) => {
             <button className={styles.grabber} draggable="true" tabIndex={-1}>::</button>
         </div>
 
-        <EntryItemContext.Provider value={handler}>
-            {children}
-        </EntryItemContext.Provider>
+        <Child
+             onSelect={onSelect}
+             onEdit={onEdit}
+             onArchive={onArchive}
+             onUp={maybeOnUp}
+             onDown={maybeOnDown}
+           />
        </li>;
 };
 
 export const EntryList = ({
     children,
-    length,
+    fresh,
     onEditIndex, onArchiveIndex,
     onSwapIndex, onDownIndex, onUpIndex
-}: ListProps) => {
+}: Props) => {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
     const onSelectIndex = useCallback((index: number) => setSelectedIndex(index), []);
     const onDeselect = useCallback(() => setSelectedIndex(null), []);
 
-    const handler = useMemo(() => ({
-        selectedIndex: selectedIndex ?? undefined,
-        onDeselect,
-        onSelectIndex,
-        length,
-        onEditIndex,
-        onArchiveIndex,
-        onSwapIndex,
-        onUpIndex,
-        onDownIndex
-    }), [
-        selectedIndex,
-        onDeselect,
-        onSelectIndex,
-        length,
-        onEditIndex,
-        onArchiveIndex,
-        onSwapIndex,
-        onUpIndex,
-        onDownIndex
-    ]);
+    const length = fresh.length;
+    const Item = children;
     return <ul className={styles.entryList}>
-               <EntryListContext.Provider value={handler}>
-                   {children}
-               </EntryListContext.Provider>
+        {
+            fresh.map(({ id, value }, index) =>
+                <EntryItem key={id}
+                      index={index}
+                      length={length}
+                      onSelectIndex={onSelectIndex}
+                      onEditIndex={onEditIndex}
+                      onArchiveIndex={onArchiveIndex}
+                      onSwapIndex={onSwapIndex}
+                      onDownIndex={onDownIndex}
+                      onUpIndex={onUpIndex}>{
+                          ({
+                              onSelect,
+                              onEdit,
+                              onArchive,
+                              onUp,
+                              onDown
+                           }) =>
+                              <Item
+                                  value={value ?? undefined}
+                                  selected={selectedIndex === index}
+                                  onDeselect={onDeselect}
+                                  onSelect={onSelect}
+                                  onEdit={onEdit}
+                                  onArchive={onArchive}
+                                  onUp={onUp}
+                                  onDown={onDown}
+                              />
+                      }</EntryItem>)
+        }
            </ul>;
 };
