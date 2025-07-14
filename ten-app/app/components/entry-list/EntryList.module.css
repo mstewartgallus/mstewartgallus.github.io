@@ -14,6 +14,7 @@
 .grabber {
     all: unset;
     user-select: none;
+    touch-action: none;
 
     margin-inline: 0.5em;
     padding-inline: 0.4em;
