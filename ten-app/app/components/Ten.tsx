@@ -44,7 +44,7 @@ export const Ten = () => {
     return <>
                <section>
                    <h1>
-                       <PersistGate loading={null}>
+                       <PersistGate loading={<>&nbsp;</>}>
                            {count}
                        </PersistGate> / 10
                    </h1>

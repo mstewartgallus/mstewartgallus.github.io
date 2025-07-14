@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentType, DragEvent } from "react";
+import type { ComponentType, PointerEvent } from "react";
 import { useCallback, useState } from 'react';
 
 import styles from './EntryList.module.css';
@@ -25,12 +25,15 @@ type ItemProps = ExtraProps & {
     readonly children: ComponentType<EntryItemProps>;
     readonly index: number;
     readonly length: number;
+    readonly anyDragging: boolean;
+    readonly dragging: boolean;
+    readonly onDragIndex: (index: number | null) => void;
+    readonly onDropIndex: (index: number | null) => void;
     readonly onSelectIndex: (index: number) => void;
     readonly onEditIndex: (index: number, value: string) => void;
     readonly onArchiveIndex: (index: number) => void;
     readonly onUpIndex: (index: number) => void;
     readonly onDownIndex: (index: number) => void;
-    readonly onSwapIndex: (leftIndex: number, rightIndex: number) => void;
 }
 
 interface Props {
@@ -47,13 +50,19 @@ const EntryItem = ({
     children,
     selected,
     value,
+    anyDragging,
+    dragging,
+    onDragIndex,
+    onDropIndex,
     onDeselect,
     index,
     length,
     onSelectIndex,
     onEditIndex, onArchiveIndex,
-    onSwapIndex, onDownIndex, onUpIndex
+    onDownIndex, onUpIndex
 }: ItemProps) => {
+    const otherDragging = anyDragging && !dragging;
+
     const onSelect = useCallback(() =>
         onSelectIndex(index),
         [index, onSelectIndex]);
@@ -73,56 +82,31 @@ const EntryItem = ({
     const maybeOnUp = index > 0 ? onUp : undefined;
     const maybeOnDown = index < length ? onDown : undefined;
 
-    // FIXME drag and drop is broken on Chrome
-    const onDragStart = useCallback((e: DragEvent<HTMLLIElement>) => {
-        const { dataTransfer } = e;
-        if (!dataTransfer) {
-            return;
-        }
 
-        dataTransfer.dropEffect = 'move';
-        dataTransfer.effectAllowed = 'move';
-        dataTransfer.setData('text/plain', String(index));
-    }, [index]);
-
-    const onDragOver = useCallback((e: DragEvent<HTMLLIElement>) => {
-        const { dataTransfer } = e;
-        if (!dataTransfer) {
-            return;
-        }
-
-        if (dataTransfer.dropEffect !== 'move') {
-            return;
-        }
-
-        const startIndex = parseInt(dataTransfer.getData('text/plain'));
-        if (Number.isNaN(startIndex)) {
-            return;
-        }
-
+    const onPointerDown = useCallback((e: PointerEvent<HTMLDivElement>) => {
         e.preventDefault();
-    },[]);
+        onDragIndex(index);
+    }, [index, onDragIndex]);
 
-    const onDragDrop = useCallback((e: DragEvent<HTMLLIElement>) => {
-        const { dataTransfer } = e;
-        if (!dataTransfer) {
-            return;
-        }
-
+    const onPointerEnter = useCallback((e: PointerEvent<HTMLLIElement>) => {
         e.preventDefault();
+        onDropIndex(index);
+    }, [index, onDropIndex]);
+    const onPointerLeave = useCallback((e: PointerEvent<HTMLLIElement>) => {
+        e.preventDefault();
+        onDropIndex(null);
+    }, [onDropIndex]);
 
-        const startIndex = parseInt(dataTransfer.getData('text/plain'));
-        onSwapIndex(startIndex, index);
-    }, [index, onSwapIndex]);
-
-    // FIXME grabber maybe shouldn't be a button
     const Child = children;
     return <li className={styles.entryItem}
-               onDragStart={onDragStart}
-               onDragOver={onDragOver}
-               onDrop={onDragDrop}>
+             data-otherdragging={otherDragging}
+             onPointerEnter={onPointerEnter}
+             onPointerLeave={onPointerLeave}
+        >
         <div className={styles.grabberWrapper}>
-            <button className={styles.grabber} draggable="true" tabIndex={-1}>::</button>
+        <div className={styles.grabber}
+             onPointerDown={onPointerDown}
+             data-dragging={dragging}>::</div>
         </div>
 
         <Child
@@ -145,27 +129,54 @@ export const EntryList = ({
     onSwapIndex, onDownIndex, onUpIndex
 }: Props) => {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+    const [draggingIndex, setDragIndex] = useState<number | null>(null);
+    const [dropIndex, setDropIndex] = useState<number | null>(null);
 
     const onSelectIndex = useCallback((index: number) => setSelectedIndex(index), []);
     const onDeselect = useCallback(() => setSelectedIndex(null), []);
 
+    const onDragIndex = useCallback((index: number | null) => setDragIndex(index), []);
+    const onDropIndex = useCallback((index: number | null) => setDropIndex(index), []);
+
     const length = fresh.length;
 
-    return <ul className={styles.entryList}>
+    const onPointerCancel = useCallback(() => {
+        setDragIndex(null);
+        setDropIndex(null);
+    }, []);
+
+    const onPointerUp = useCallback((e: PointerEvent<HTMLElement>) => {
+        if (draggingIndex === null || dropIndex === null || draggingIndex === dropIndex) {
+            return;
+        }
+        e.preventDefault();
+
+        onSwapIndex(draggingIndex, dropIndex);
+        setDragIndex(null);
+        setDropIndex(null);
+    }, [onSwapIndex, draggingIndex, dropIndex]);
+
+    return <ul className={styles.entryList} data-anydragging={draggingIndex !== null}
+        onPointerCancel={onPointerCancel}
+        onPointerUp={onPointerUp}
+        >
         {
             fresh.map(({ id, value }, index) =>
                 <EntryItem key={id}
                       index={index}
                       length={length}
+                      value={value ?? undefined}
+                      selected={selectedIndex === index}
+                      anyDragging={draggingIndex !== null}
+                      dragging={draggingIndex === index}
+                      onDragIndex={onDragIndex}
+                      onDropIndex={onDropIndex}
                       onDeselect={onDeselect}
                       onSelectIndex={onSelectIndex}
                       onEditIndex={onEditIndex}
                       onArchiveIndex={onArchiveIndex}
-                      onSwapIndex={onSwapIndex}
                       onDownIndex={onDownIndex}
                       onUpIndex={onUpIndex}
-                      value={value ?? undefined}
-                      selected={selectedIndex === index}
                 >{children}</EntryItem>)
         }
            </ul>;

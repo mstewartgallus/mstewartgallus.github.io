@@ -13,6 +13,7 @@
 }
 .grabber {
     all: unset;
+    user-select: none;
     cursor: grab;
 
     margin-inline: 0.5em;
@@ -25,6 +26,20 @@
     border-width: 1px;
     border-radius: 0.6em;
 }
-.grabber:hover {
+
+.entryList[data-anydragging="true"] {
+    cursor: grabbing;
+}
+.grabber[data-dragging="true"] {
+    cursor: grabbing;
+}
+
+.grabber[data-dragging="true"] {
+    background-color: grey;
+}
+.grabber[data-dragging="false"]:hover {
     background-color: darkgrey;
+}
+.entryItem[data-otherdragging="true"]:hover {
+    background: grey;
 }
