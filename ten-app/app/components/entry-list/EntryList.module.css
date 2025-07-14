@@ -14,7 +14,6 @@
 .grabber {
     all: unset;
     user-select: none;
-    cursor: grab;
 
     margin-inline: 0.5em;
     padding-inline: 0.4em;
@@ -27,10 +26,10 @@
     border-radius: 0.6em;
 }
 
-.entryList[data-anydragging="true"] {
-    cursor: grabbing;
+.entryList[data-anydragging="false"] .grabber {
+    cursor: grab;
 }
-.grabber[data-dragging="true"] {
+.entryList[data-anydragging="true"] {
     cursor: grabbing;
 }
 
