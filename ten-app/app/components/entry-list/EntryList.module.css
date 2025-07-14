@@ -16,15 +16,22 @@
     user-select: none;
     touch-action: none;
 
-    margin-inline: 0.5em;
-    padding-inline: 0.4em;
-    padding-block: 0.5em;
-    max-block-size: 1.5em;
-
-    border-color: grey;
+    border-color: darkgrey;
     border-style: solid;
     border-width: 1px;
-    border-radius: 0.6em;
+    border-radius: 1em;
+
+    margin-block: 0.1em;
+    margin-inline: 0.3em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.grabberIcon {
+    font-size: 1.4em;
+    margin-block: 0.1em;
+    margin-inline: 0.5em;
 }
 
 .entryList[data-anydragging="false"] .grabber {

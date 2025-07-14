@@ -3,4 +3,5 @@
 }
 .editList {
     display: flex;
+    align-items: center;
 }

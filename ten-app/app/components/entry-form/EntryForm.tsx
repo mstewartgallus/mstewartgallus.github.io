@@ -1,6 +1,9 @@
 "use client";
 
-import type { ChangeEvent, FormEvent, PointerEvent } from "react";
+import type {
+    ReactNode,
+    DetailedHTMLProps, ButtonHTMLAttributes, ChangeEvent, FormEvent, PointerEvent
+} from "react";
 import { useCallback, useId, useState } from 'react';
 import { If } from "../If";
 import { EditList, EditItem } from "../edit-list/EditList";
@@ -20,6 +23,23 @@ interface SecondaryFormProps {
     readonly onUp?: () => void;
     readonly onDown?: () => void;
 }
+
+type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+
+const Button = ({children, ...props}: ButtonProps) =>
+    <div className={styles.editButtonWrapper}>
+        <button {...props} className={styles.editButton}>
+            {children}
+        </button>
+    </div>;
+
+interface IconProps {
+    readonly children: ReactNode;
+}
+const Icon = ({children}: IconProps) =>
+    <div className={styles.editButtonIcon}>
+       {children}
+    </div>;
 
 const SecondaryForm = ({ onArchive, onUp, onDown }: SecondaryFormProps) => {
     const [open, setOpen] = useState(false);
@@ -58,26 +78,26 @@ const SecondaryForm = ({ onArchive, onUp, onDown }: SecondaryFormProps) => {
     }, [onArchive, onUp, onDown]);
 
     return <div className={styles.options}>
-             <button onClick={onToggle}>
-                {open ? <>+</> : <>-</>}
-             </button>
+        <Button onClick={onToggle}>
+            <Icon>{open ? <>▼</> : <>▶</>}</Icon>
+        </Button>
         <If cond={open}>
             <form action="#" onSubmit={onSubmit}>
                 <EditList>
                     <EditItem>
-                        <button disabled={!onArchive} value="archive">
+                        <Button disabled={!onArchive} value="archive">
                             Archive
-                        </button>
+                        </Button>
                     </EditItem>
                     <EditItem>
-                        <button disabled={!onUp} value="up">
-                            ↑
-                        </button>
+                        <Button disabled={!onUp} value="up">
+                            <Icon>⇑</Icon>
+                        </Button>
                     </EditItem>
                     <EditItem>
-                        <button disabled={!onDown} value="down">
-                            ↓
-                        </button>
+                        <Button disabled={!onDown} value="down">
+                            <Icon>⇓</Icon>
+                        </Button>
                     </EditItem>
                 </EditList>
              </form>
@@ -119,14 +139,18 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
 
     return <div className={styles.editForm}>
         <div className={styles.editableTitle}>
-            <button
-                className={styles.editButton}
-                id={buttonId}
-                onClick={onToggleClick}
-                aria-expanded={selected}
-                aria-controls={controlId}>
-                {selected ? <>+</> : <>✎</>}
-            </button>
+            <Button id={buttonId}
+                    onClick={onToggleClick}
+                    aria-expanded={selected}
+                    aria-controls={controlId}>
+        <Icon>{
+            selected ?
+                <>-</> :
+            value ?
+                <>✎</> :
+                <>+</>
+        }</Icon>
+            </Button>
             <div id={controlId} className={styles.titleAndInput}>
                 <div className={styles.title}>{value ?? '...'}</div>
                 <If cond={selected}>
@@ -139,7 +163,7 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
         <div className={styles.menuWrapper}>
             <form className={styles.editMenu} id={formId} action="#" onSubmit={onSubmit}>
                <If cond={selected}>
-                   <button>Finish Edit</button>
+                   <Button>Finish Edit</Button>
                 </If>
             </form>
         </div>
@@ -168,7 +192,6 @@ export const EntryForm = ({
     onDown
 }: Props) =>
     <div className={styles.entryForm}>
-    <EditForm selected={selected} value={value} onChange={onEdit}
-onSelect={onSelect} onDeselect={onDeselect} />
-    <SecondaryForm onArchive={value ? onArchive : undefined} onDown={onDown} onUp={onUp} />
+        <EditForm selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
+        <SecondaryForm onArchive={value ? onArchive : undefined} onDown={onDown} onUp={onUp} />
     </div>;

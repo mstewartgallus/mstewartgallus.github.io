@@ -11,12 +11,45 @@
     display: flex;
 }
 
-.editButton {
-    inline-size: 2em;
-    block-size: 2em;
+.editButtonWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.editButton {
+    all: unset;
+
+    background: Canvas;
+
+    margin-block: 0.3em;
+    margin-inline: 0.4em;
+
+    border-color: CanvasText;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3em;
+
+    padding-inline: 0.3em;
+    padding-block: 0.2em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.editButtonIcon {
+    user-select: none;
+    font-size: 1.3em;
+    inline-size: 1.1em;
+    block-size: 1.1em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editButton:focus {
+    outline-width: 2px;
+    outline-style: solid;
 }
 
 
@@ -31,6 +64,10 @@
 
 .titleAndInput {
     position: relative;
+}
+.title, .titleAndInput {
+    display: flex;
+    align-items: center;
 }
 
 .title {

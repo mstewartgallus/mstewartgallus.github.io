@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentType, MouseEvent } from "react";
+import type { ComponentType, MouseEvent } from 'react';
 import { useCallback, useState } from 'react';
 
 import styles from './EntryList.module.css';
@@ -82,7 +82,6 @@ const EntryItem = ({
     const maybeOnUp = index > 0 ? onUp : undefined;
     const maybeOnDown = index < length ? onDown : undefined;
 
-
     const onMouseDown = useCallback((e: MouseEvent<HTMLDivElement>) => {
         if (e.button !== 0) {
             return;
@@ -113,9 +112,9 @@ const EntryItem = ({
              onMouseUp={onMouseUp}
         >
         <div className={styles.grabberWrapper}>
-        <div className={styles.grabber}
-             onMouseDown={onMouseDown}
-             data-dragging={dragging}>::</div>
+            <div className={styles.grabber} onMouseDown={onMouseDown} data-dragging={dragging}>
+                <div className={styles.grabberIcon}>::</div>
+            </div>
         </div>
 
         <Child
@@ -156,7 +155,9 @@ export const EntryList = ({
     }, []);
 
     return <ul className={styles.entryList} data-anydragging={draggingIndex !== null}
-            onMouseUp={onMouseUp}>
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+        >
         {
             fresh.map(({ id, value }, index) =>
                 <EntryItem key={id}
