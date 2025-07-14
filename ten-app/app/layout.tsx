@@ -12,7 +12,9 @@ const RootLayout = ({ children }: Props) =>
 <html lang="en">
     <body>
         <StoreProvider>
-           <main className={styles.main}>{children}</main>
+             <main className={styles.main}>
+                 {children}
+             </main>
         </StoreProvider>
     </body>
 </html>;

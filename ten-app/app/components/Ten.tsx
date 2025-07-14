@@ -14,12 +14,10 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useMemo } from 'react';
 import { EntryList } from './entry-list/EntryList';
 import { EntryForm } from './entry-form/EntryForm';
+import { PersistGate } from '../StoreProvider';
 
 export const Ten = () => {
     const dispatch = useAppDispatch();
-
-    const fresh = useAppSelector(selectFresh);
-    const archived = useAppSelector(selectArchived);
 
     const onEditIndex = useCallback((index: number, value: string) =>
         dispatch(edit({ index, value })),
@@ -37,29 +35,59 @@ export const Ten = () => {
         dispatch(down({ index })),
         [dispatch]);
 
+    const fresh = useAppSelector(selectFresh);
+    const archived = useAppSelector(selectArchived);
+
     const count = useMemo(() => fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0),
                           [fresh]);
 
     return <>
                <section>
-                   <h1>{count} / 10</h1>
+                   <h1>
+                       <PersistGate loading={null}>
+                           {count}
+                       </PersistGate> / 10
+                   </h1>
+                   <PersistGate loading={null}>
                    <EntryList
                        fresh={fresh}
                        onEditIndex={onEditIndex}
                        onArchiveIndex={onArchiveIndex}
                        onSwapIndex={onSwapIndex}
                        onDownIndex={onDownIndex}
-                       onUpIndex={onUpIndex}
-                    >{EntryForm}
+                       onUpIndex={onUpIndex}>
+                   {
+                       ({ value,
+                          selected,
+                          onDeselect,
+                          onSelect,
+                          onEdit,
+                          onArchive,
+                          onUp,
+                          onDown }) =>
+                            <EntryForm
+                                value={value}
+                                selected={selected}
+                                onDeselect={onDeselect}
+                                onSelect={onSelect}
+                                onEdit={onEdit}
+                                onArchive={onArchive}
+                                onUp={onUp}
+                                onDown={onDown}
+                            />
+                   }
                    </EntryList>
+                   </PersistGate>
                </section>
                <section>
                    <h2>Archived</h2>
                    <ul>
+                       <PersistGate loading={null}>
                        {
                            archived.map(({ id, value }) =>
                                <li key={id}>{value}</li>)
                        }
+                       </PersistGate>
                    </ul>
                </section>
            </>;

@@ -1,46 +1,69 @@
 "use client";
+
 import type { AppStore } from "@/lib/store";
 import type { Persistor } from "redux-persist";
 import type { ReactNode } from "react";
 import { makeStore } from "@/lib/store";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
-import { PersistGate } from "redux-persist/integration/react";
+import { PersistGate as ReduxPersistGate } from "redux-persist/integration/react";
+
+const PersistorContext = createContext<Persistor | null>(null);
+
+interface PersistProps {
+  readonly children: ReactNode;
+  readonly loading: ReactNode;
+}
+
+export const PersistGate = ({ children, loading }: PersistProps) => {
+    const persistor = useContext(PersistorContext);
+    if (!persistor) {
+        return null;
+    }
+
+    return <ReduxPersistGate loading={loading} persistor={persistor}>
+        {children}
+    </ReduxPersistGate>;
+};
 
 interface Props {
   readonly children: ReactNode;
 }
 
+interface StoreState {
+    store: AppStore;
+    persistor: Persistor;
+}
 export const StoreProvider = ({ children }: Props) => {
-    const storeRef = useRef<AppStore | null>(null);
-    const persistorRef = useRef<Persistor | null>(null);
+    const ref = useRef<StoreState | null>(null);
 
-    if (!storeRef.current) {
+    if (!ref.current) {
         // Create the store instance the first time this renders
         const store = makeStore();
-        storeRef.current = store;
-        persistorRef.current = persistStore(store);
+        const persistor = persistStore(store);
+        ref.current = { store, persistor };
     }
 
     useEffect(() => {
-        if (storeRef.current != null) {
-            // configure listeners using the provided defaults
-            // optional, but required for `refetchOnFocus`/`refetchOnReconnect` behaviors
-            const unsubscribe = setupListeners(storeRef.current.dispatch);
-            return unsubscribe;
+        const state = ref.current;
+        if (!state) {
+            return;
         }
+        // configure listeners using the provided defaults
+        // optional, but required for `refetchOnFocus`/`refetchOnReconnect` behaviors
+        return setupListeners(state.store.dispatch);
     }, []);
 
-    const persistor = persistorRef.current;
+    const state = ref.current;
+    if (!state) {
+        return null;
+    }
 
-    return <Provider store={storeRef.current}>
-        {
-            persistor !== null ?
-                <PersistGate loading={null} persistor={persistor}>
-                    {children}
-                </PersistGate> : null
-        }
+    return <Provider store={state.store}>
+        <PersistorContext.Provider value={state.persistor}>
+            {children}
+        </PersistorContext.Provider>
     </Provider>;
 };
