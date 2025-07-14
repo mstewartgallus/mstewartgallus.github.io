@@ -21,8 +21,8 @@ interface ExtraProps {
 
 export type EntryItemProps = CloseProps & ExtraProps;
 
-interface ItemProps {
-    readonly children: ComponentType<CloseProps>;
+type ItemProps = ExtraProps & {
+    readonly children: ComponentType<EntryItemProps>;
     readonly index: number;
     readonly length: number;
     readonly onSelectIndex: (index: number) => void;
@@ -45,14 +45,15 @@ interface Props {
 
 const EntryItem = ({
     children,
+    selected,
+    value,
+    onDeselect,
     index,
     length,
     onSelectIndex,
     onEditIndex, onArchiveIndex,
     onSwapIndex, onDownIndex, onUpIndex
 }: ItemProps) => {
-    const Child = children;
-
     const onSelect = useCallback(() =>
         onSelectIndex(index),
         [index, onSelectIndex]);
@@ -115,6 +116,7 @@ const EntryItem = ({
     }, [index, onSwapIndex]);
 
     // FIXME grabber maybe shouldn't be a button
+    const Child = children;
     return <li className={styles.entryItem}
                onDragStart={onDragStart}
                onDragOver={onDragOver}
@@ -124,6 +126,9 @@ const EntryItem = ({
         </div>
 
         <Child
+             value={value}
+             selected={selected}
+             onDeselect={onDeselect}
              onSelect={onSelect}
              onEdit={onEdit}
              onArchive={onArchive}
@@ -145,37 +150,23 @@ export const EntryList = ({
     const onDeselect = useCallback(() => setSelectedIndex(null), []);
 
     const length = fresh.length;
-    const Item = children;
+
     return <ul className={styles.entryList}>
         {
             fresh.map(({ id, value }, index) =>
                 <EntryItem key={id}
                       index={index}
                       length={length}
+                      onDeselect={onDeselect}
                       onSelectIndex={onSelectIndex}
                       onEditIndex={onEditIndex}
                       onArchiveIndex={onArchiveIndex}
                       onSwapIndex={onSwapIndex}
                       onDownIndex={onDownIndex}
-                      onUpIndex={onUpIndex}>{
-                          ({
-                              onSelect,
-                              onEdit,
-                              onArchive,
-                              onUp,
-                              onDown
-                           }) =>
-                              <Item
-                                  value={value ?? undefined}
-                                  selected={selectedIndex === index}
-                                  onDeselect={onDeselect}
-                                  onSelect={onSelect}
-                                  onEdit={onEdit}
-                                  onArchive={onArchive}
-                                  onUp={onUp}
-                                  onDown={onDown}
-                              />
-                      }</EntryItem>)
+                      onUpIndex={onUpIndex}
+                      value={value ?? undefined}
+                      selected={selectedIndex === index}
+                >{children}</EntryItem>)
         }
            </ul>;
 };

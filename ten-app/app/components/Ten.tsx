@@ -10,8 +10,6 @@ import {
     selectArchived,
 } from "@/lib/features/ten/tenSlice";
 
-import type { EntryItemProps } from './entry-list/EntryList';
-
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useMemo } from 'react';
 import { EntryList } from './entry-list/EntryList';
@@ -52,28 +50,7 @@ export const Ten = () => {
                        onSwapIndex={onSwapIndex}
                        onDownIndex={onDownIndex}
                        onUpIndex={onUpIndex}
-                   >
-                       {
-                           ({
-                               value, selected,
-                               onDeselect,
-                               onSelect,
-                               onEdit,
-                               onArchive,
-                               onUp,
-                               onDown
-                           }: EntryItemProps) =>
-                               <EntryForm
-                                  value={value ?? undefined}
-                                  selected={selected}
-                                  onDeselect={onDeselect}
-                                  onSelect={onSelect}
-                                  onEdit={onEdit}
-                                  onArchive={onArchive}
-                                  onUp={onUp}
-                                  onDown={onDown}
-                               />
-                       }
+                    >{EntryForm}
                    </EntryList>
                </section>
                <section>
