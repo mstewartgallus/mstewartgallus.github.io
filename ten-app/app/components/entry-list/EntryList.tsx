@@ -2,36 +2,36 @@
 
 import type { ComponentType, MouseEvent } from 'react';
 import { useCallback, useMemo, useState } from 'react';
+import { EntryItem } from "../entry-item/EntryItem";
 
 import styles from './EntryList.module.css';
 
-interface CloseProps {
+const useBind = (f: undefined | ((index: number) => void), index: number) =>
+    useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
+
+export interface EntryItemProps {
+    readonly value?: string;
+
+    readonly selected: boolean;
     readonly onSelect: () => void;
+    readonly onDeselect: () => void;
+
     readonly onEdit?: (value: string) => void;
     readonly onArchive?: () => void;
-    readonly onUp?: () => void;
-    readonly onDown?: () => void;
-}
+};
 
-interface ExtraProps {
-    readonly onDeselect: () => void;
-    readonly value?: string;
-    readonly selected: boolean;
-}
-
-export type EntryItemProps = CloseProps & ExtraProps;
-
-type ItemProps = ExtraProps & {
+interface AdaptorProps {
     readonly children: ComponentType<EntryItemProps>;
+    readonly value?: string;
     readonly index: number;
+    readonly length: number;
 
-    readonly dragging: boolean;
-    readonly anyDragging: boolean;
-
-    readonly onDragStartIndex: (index: number) => void;
-    readonly onDragEnd: (index: number) => void;
+    readonly selectionIndex?: number;
     readonly onSelectIndex: (index: number) => void;
     readonly onDeselect: () => void;
+
+    readonly dragIndex?: number;
+    readonly onDragStartIndex: (index: number) => void;
 
     readonly onEditIndex?: (index: number, value: string) => void;
     readonly onSwapIndex?: (index: number) => void;
@@ -40,67 +40,33 @@ type ItemProps = ExtraProps & {
     readonly onDownIndex?: (index: number) => void;
 }
 
-const useBind = (f: undefined | ((index: number) => void), index: number) =>
-    useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
-
-const EntryItem = ({
+const EntryItemAdaptor = ({
     children,
-    index,
     value,
+    index, length,
 
-    selected,
+    selectionIndex,
     onSelectIndex, onDeselect,
 
-    dragging,
-    anyDragging,
-
+    dragIndex,
     onDragStartIndex,
 
     onEditIndex,
     onSwapIndex, onArchiveIndex,
     onDownIndex, onUpIndex
-}: ItemProps) => {
-    const otherDragging = anyDragging && !dragging;
+}: AdaptorProps) => {
+    onSwapIndex = index === dragIndex ? undefined : onSwapIndex;
+    onDownIndex = index < length - 1 ? onDownIndex : undefined;
+    onUpIndex = index > 0 ? onUpIndex : undefined;
 
     const onSwap = useBind(onSwapIndex, index);
 
-    const onDragStart = useBind(onDragStartIndex, index);
+    const onDragStart = useCallback(() => onDragStartIndex(index), [index, onDragStartIndex]);
     const onSelect = useCallback(() => onSelectIndex(index), [index, onSelectIndex]);
 
     const onArchive = useBind(onArchiveIndex, index);
     const onDown = useBind(onDownIndex, index);
     const onUp = useBind(onUpIndex, index);
-
-    const onMouseDown = useMemo(() => {
-        if (!onDragStart) {
-            return;
-        }
-
-        return (e: MouseEvent<HTMLDivElement>) => {
-            if (e.button !== 0) {
-                return;
-            }
-
-            e.preventDefault();
-            onDragStart();
-        };
-    }, [onDragStart]);
-
-    // Still need to figure this out for why it doesn't work on mobile
-    // in Chrome simulator
-    const onMouseUp = useMemo(() => {
-        if (!onSwap) {
-            return;
-        }
-
-        return (e: MouseEvent<HTMLElement>) => {
-            if (e.button !== 0) {
-                return;
-            }
-
-            onSwap();
-        };
-    }, [onSwap]);
 
     const onEdit = useMemo(() => {
         if (!onEditIndex) {
@@ -110,28 +76,24 @@ const EntryItem = ({
     }, [index, onEditIndex]);
 
     const Child = children;
-    return <li className={styles.entryItem}
-             data-otherdragging={otherDragging}
+    return <EntryItem
+             dragging={dragIndex === index}
+             anyDragging={dragIndex !== undefined}
+             onDragStart={onDragStart}
 
-             onMouseUp={onMouseUp}
-        >
-        <div className={styles.grabberWrapper}>
-            <div className={styles.grabber} onMouseDown={onMouseDown} data-dragging={dragging}>
-                <div className={styles.grabberIcon}>::</div>
-            </div>
-        </div>
-
+             onSwap={onSwap}
+             onUp={onUp}
+             onDown={onDown}
+           >
         <Child
              value={value}
-             selected={selected}
+             selected={selectionIndex === index}
              onDeselect={onDeselect}
              onSelect={onSelect}
              onEdit={onEdit}
-             onArchive={onArchive}
-             onUp={onUp}
-             onDown={onDown}
+             onArchive={value === undefined ? undefined : onArchive}
            />
-       </li>;
+       </EntryItem>;
 };
 
 interface Props {
@@ -181,30 +143,31 @@ const EntryListStateless = ({
         onDragEnd();
     }, [onDragEnd]);
 
+    const length = fresh.length;
+
     return <ul className={styles.entryList} data-anydragging={dragIndex !== undefined}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
         >
         {
             fresh.map(({ id, value }, index) =>
-                <EntryItem key={id}
+                <EntryItemAdaptor key={id}
                       index={index}
+                      length={length}
                       value={value ?? undefined}
 
-                      dragging={dragIndex === index}
-                      anyDragging={dragIndex !== undefined}
-                      onDragStartIndex={onDragStartIndex} onDragEnd={onDragEnd}
+                      dragIndex={dragIndex}
+                      onDragStartIndex={onDragStartIndex}
 
-                      selected={selectionIndex === index}
+                      selectionIndex={selectionIndex}
                       onDeselect={onDeselect} onSelectIndex={onSelectIndex}
 
-                      onSwapIndex={index === dragIndex ? undefined : onSwapIndex}
-
+                      onSwapIndex={onSwapIndex}
                       onEditIndex={onEditIndex}
                       onArchiveIndex={onArchiveIndex}
-                      onDownIndex={index < fresh.length - 1 ? onDownIndex : undefined}
-                      onUpIndex={index > 0 ? onUpIndex : undefined}
-                >{children}</EntryItem>)
+                      onDownIndex={onDownIndex}
+                      onUpIndex={onUpIndex}
+                >{children}</EntryItemAdaptor>)
         }
            </ul>;
 };

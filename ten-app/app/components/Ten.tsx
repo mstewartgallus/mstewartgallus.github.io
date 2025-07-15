@@ -11,45 +11,10 @@ import {
 } from "@/lib/features/ten/tenSlice";
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useState, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { EntryList } from './entry-list/EntryList';
 import { EntryForm } from './entry-form/EntryForm';
 import { usePersistBootstrapped } from '../StoreProvider';
-
-interface AdaptProps {
-    readonly value?: string;
-
-    readonly selected: boolean;
-    readonly onDeselect: () => void;
-    readonly onSelect: () => void;
-
-    readonly onEdit?: (value: string) => void;
-    readonly onArchive?: () => void;
-    readonly onUp?: () => void;
-    readonly onDown?: () => void;
-}
-
-const Adapt = ({
-    value,
-
-    selected,
-    onDeselect, onSelect,
-
-    onEdit,
-    onArchive, onUp, onDown
-}: AdaptProps) => {
-    const [open, setOpen] = useState(false);
-    const onToggle = useCallback(() => {
-        setOpen(o => !o);
-    }, []);
-    return <EntryForm
-            value={value} selected={selected}
-            onDeselect={onDeselect} onSelect={onSelect}
-            open={open} onToggle={onToggle}
-            onEdit={onEdit}
-            onArchive={onArchive} onUp={onUp} onDown={onDown}
-            />;
-};
 
 interface Props {
     readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
@@ -77,7 +42,7 @@ const TenImpl = ({
                        onSwapIndices={onSwapIndices}
                        onDownIndex={onDownIndex}
                        onUpIndex={onUpIndex}
-        >{Adapt}</EntryList>
+        >{EntryForm}</EntryList>
                </section>
                <section>
                    <h2>Archived</h2>

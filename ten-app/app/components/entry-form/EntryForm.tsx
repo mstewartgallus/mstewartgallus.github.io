@@ -1,12 +1,10 @@
 "use client";
 
-import type {
-    ReactNode,
-    DetailedHTMLProps, ButtonHTMLAttributes, ChangeEvent, FormEvent, PointerEvent
-} from "react";
+import type { ChangeEvent, FormEvent, PointerEvent } from "react";
 import { useCallback, useId, useState } from 'react';
 import { If } from "../If";
-import { EditList, EditItem } from "../edit-list/EditList";
+import { Button } from "../button/Button";
+import { Icon } from "../icon/Icon";
 
 import styles from "./EntryForm.module.css";
 
@@ -17,40 +15,11 @@ interface EditFormProps {
     readonly onSelect: () => void;
     readonly onDeselect: () => void;
 }
-
 interface SecondaryFormProps {
-    readonly open: boolean;
-    readonly onToggle: () => void;
     readonly onArchive?: () => void;
-    readonly onUp?: () => void;
-    readonly onDown?: () => void;
 }
 
-type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
-
-const Button = ({children, ...props}: ButtonProps) =>
-    <div className={styles.editButtonWrapper}>
-        <button {...props} className={styles.editButton}>
-            {children}
-        </button>
-    </div>;
-
-interface IconProps {
-    readonly children: ReactNode;
-}
-const Icon = ({children}: IconProps) =>
-    <div className={styles.editButtonIcon}>
-       {children}
-    </div>;
-
-const SecondaryForm = ({ open,
-                         onToggle,
-                         onArchive, onUp, onDown }: SecondaryFormProps) => {
-    const onClick = useCallback((e: PointerEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        onToggle();
-    }, [onToggle]);
-
+const SecondaryForm = ({ onArchive }: SecondaryFormProps) => {
     const onSubmit = useCallback((e: FormEvent) => {
         const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
         switch (value) {
@@ -61,51 +30,16 @@ const SecondaryForm = ({ open,
             }
             break;
 
-        case 'up':
-            if (onUp) {
-                e.preventDefault();
-                onUp();
-            }
-            break;
-
-        case 'down':
-            if (onDown) {
-                e.preventDefault();
-                onDown();
-            }
-            break;
-
         default:
             return;
         }
-    }, [onArchive, onUp, onDown]);
+    }, [onArchive]);
 
-    return <div className={styles.options}>
-        <Button onClick={onClick} aria-expanded={open}>
-            <Icon>{open ? <>▼</> : <>▶</>}</Icon>
-        </Button>
-        <If cond={open}>
-            <form action="#" onSubmit={onSubmit}>
-                <EditList>
-                    <EditItem>
-                        <Button disabled={!onArchive} value="archive">
-                            Archive
-                        </Button>
-                    </EditItem>
-                    <EditItem>
-                        <Button disabled={!onUp} value="up">
-                            <Icon>⇑</Icon>
-                        </Button>
-                    </EditItem>
-                    <EditItem>
-                        <Button disabled={!onDown} value="down">
-                            <Icon>⇓</Icon>
-                        </Button>
-                    </EditItem>
-                </EditList>
-             </form>
-        </If>
-        </div>;
+    return <form action="#" onSubmit={onSubmit}>
+            <Button disabled={!onArchive} value="archive">
+            Archive
+            </Button>
+        </form>;
 };
 
 interface FormButtonProps {
@@ -126,7 +60,7 @@ const FormButton = ({ value, id, onChange, onDeselect }: FormButtonProps) => {
     }, [onDeselect, onChange, value]);
 
     return <form className={styles.editMenu} id={id} action="#" onSubmit={onSubmit}>
-        <Button disabled={!onChange}>Finish Edit</Button>
+        <Button disabled={!onChange}><Icon>✔</Icon></Button>
         </form>;
 };
 
@@ -157,7 +91,7 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
         setEditValue((target as HTMLInputElement).value);
     }, []);
 
-    const icon = selected ? '-' : value ? '✎' : '+';
+    const icon = selected ? 'X' : value ? '✎' : '+';
     return <>
         <div className={styles.editableTitle}>
             <Button id={buttonId}
@@ -190,9 +124,6 @@ interface Props {
     readonly onDeselect: () => void;
     readonly onSelect: () => void;
 
-    readonly open: boolean;
-    readonly onToggle: () => void;
-
     readonly onEdit?: (value: string) => void;
     readonly onArchive?: () => void;
     readonly onUp?: () => void;
@@ -202,18 +133,14 @@ interface Props {
 export const EntryForm = ({
     value,
     selected,
-    open,
-    onToggle,
     onDeselect,
     onSelect,
     onEdit,
-    onArchive,
-    onUp,
-    onDown
+    onArchive
 }: Props) =>
     <div className={styles.entryForm}>
        <div className={styles.editForm}>
           <EditForm selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
        </div>
-       <SecondaryForm open={open} onToggle={onToggle} onArchive={onArchive} onDown={onDown} onUp={onUp} />
+       <SecondaryForm onArchive={onArchive} />
     </div>;

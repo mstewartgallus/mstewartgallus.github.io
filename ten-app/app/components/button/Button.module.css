@@ -1,0 +1,35 @@
+.editButtonWrapper {
+}
+.editButton {
+    all: unset;
+
+    background: Canvas;
+
+    margin-block: 0.3em;
+    margin-inline: 0.4em;
+
+    border-color: CanvasText;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3em;
+
+    padding-inline: 0.3em;
+    padding-block: 0.2em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.editButton[aria-expanded="true"] {
+    background: lightgrey;
+}
+.editButton[disabled] {
+    background: lightgrey;
+    border-color: grey;
+    color: #333;
+}
+
+.editButton:focus {
+    outline-width: 2px;
+    outline-style: solid;
+}
