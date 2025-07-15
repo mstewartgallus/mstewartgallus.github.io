@@ -24,73 +24,73 @@ export type EntryItemProps = CloseProps & ExtraProps;
 type ItemProps = ExtraProps & {
     readonly children: ComponentType<EntryItemProps>;
     readonly index: number;
-    readonly draggingIndex?: number;
-    readonly onDragIndex: (index: number | null) => void;
+
+    readonly dragging: boolean;
+    readonly anyDragging: boolean;
+
+    readonly onDragStartIndex: (index: number) => void;
+    readonly onDragEnd: (index: number) => void;
     readonly onSelectIndex: (index: number) => void;
+    readonly onDeselect: () => void;
 
-    readonly onSwapIndex?: (leftIndex: number, rightIndex: number) => void;
     readonly onEditIndex?: (index: number, value: string) => void;
+    readonly onSwapIndex?: (index: number) => void;
     readonly onArchiveIndex?: (index: number) => void;
     readonly onUpIndex?: (index: number) => void;
     readonly onDownIndex?: (index: number) => void;
 }
 
-interface Props {
-    readonly children: ComponentType<EntryItemProps>;
-    readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
-    readonly onEditIndex?: (index: number, value: string) => void;
-    readonly onArchiveIndex?: (index: number) => void;
-    readonly onUpIndex?: (index: number) => void;
-    readonly onDownIndex?: (index: number) => void;
-    readonly onSwapIndex?: (leftIndex: number, rightIndex: number) => void;
-}
-
-const useBind = (f: undefined | ((index: number) => void), index: number) => {
-    return useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
-};
-
+const useBind = (f: undefined | ((index: number) => void), index: number) =>
+    useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
 
 const EntryItem = ({
     children,
     index,
-    selected,
     value,
-    draggingIndex,
-    onDragIndex,
-    onDeselect,
-    onSwapIndex,
-    onSelectIndex,
-    onEditIndex, onArchiveIndex,
+
+    selected,
+    onSelectIndex, onDeselect,
+
+    dragging,
+    anyDragging,
+
+    onDragStartIndex,
+
+    onEditIndex,
+    onSwapIndex, onArchiveIndex,
     onDownIndex, onUpIndex
 }: ItemProps) => {
-    const dragging = draggingIndex === index;
-    const anyDragging = draggingIndex !== undefined;
     const otherDragging = anyDragging && !dragging;
 
+    const onSwap = useBind(onSwapIndex, index);
+
+    const onDragStart = useBind(onDragStartIndex, index);
     const onSelect = useCallback(() => onSelectIndex(index), [index, onSelectIndex]);
 
     const onArchive = useBind(onArchiveIndex, index);
     const onDown = useBind(onDownIndex, index);
     const onUp = useBind(onUpIndex, index);
 
-    const onMouseDown = useCallback((e: MouseEvent<HTMLDivElement>) => {
-        if (e.button !== 0) {
+    const onMouseDown = useMemo(() => {
+        if (!onDragStart) {
             return;
         }
 
-        e.preventDefault();
-        onDragIndex(index);
-    }, [index, onDragIndex]);
+        return (e: MouseEvent<HTMLDivElement>) => {
+            if (e.button !== 0) {
+                return;
+            }
+
+            e.preventDefault();
+            onDragStart();
+        };
+    }, [onDragStart]);
 
     // Still need to figure this out for why it doesn't work on mobile
     // in Chrome simulator
     const onMouseUp = useMemo(() => {
-        if (!onSwapIndex) {
+        if (!onSwap) {
             return;
-        }
-
-        if (draggingIndex === undefined || draggingIndex === index) {
-            return undefined;
         }
 
         return (e: MouseEvent<HTMLElement>) => {
@@ -98,9 +98,9 @@ const EntryItem = ({
                 return;
             }
 
-            onSwapIndex(draggingIndex, index);
+            onSwap();
         };
-    }, [index, draggingIndex, onSwapIndex]);
+    }, [onSwap]);
 
     const onEdit = useMemo(() => {
         if (!onEditIndex) {
@@ -134,29 +134,54 @@ const EntryItem = ({
        </li>;
 };
 
-export const EntryList = ({
+interface Props {
+    readonly children: ComponentType<EntryItemProps>;
+    readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
+    readonly onEditIndex?: (index: number, value: string) => void;
+    readonly onArchiveIndex?: (index: number) => void;
+    readonly onUpIndex?: (index: number) => void;
+    readonly onDownIndex?: (index: number) => void;
+}
+
+type StatefulProps = Props & {
+    onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
+};
+
+type StatelessProps = Props & {
+    dragIndex?: number;
+
+    onDragStartIndex: (index: number) => void;
+    onDragEnd: () => void;
+
+    selectionIndex?: number;
+
+    onSelectIndex: (index: number) => void;
+    onDeselect: () => void;
+
+    onSwapIndex?: (index: number) => void;
+}
+
+const EntryListStateless = ({
     children,
     fresh,
     onEditIndex, onArchiveIndex,
-    onSwapIndex, onDownIndex, onUpIndex
-}: Props) => {
-    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-    const [draggingIndex, setDragIndex] = useState<number | null>(null);
+    onSwapIndex, onDownIndex, onUpIndex,
 
-    const onSelectIndex = useCallback((index: number) => setSelectedIndex(index), []);
-    const onDeselect = useCallback(() => setSelectedIndex(null), []);
+    dragIndex,
+    onDragStartIndex, onDragEnd,
 
-    const onDragIndex = useCallback((index: number | null) => setDragIndex(index), []);
-
+    selectionIndex,
+    onSelectIndex, onDeselect
+}: StatelessProps) => {
     const onMouseUp = useCallback((e: MouseEvent<HTMLElement>) => {
         if (e.button !== 0) {
             return;
         }
 
-        setDragIndex(null);
-    }, []);
+        onDragEnd();
+    }, [onDragEnd]);
 
-    return <ul className={styles.entryList} data-anydragging={draggingIndex !== null}
+    return <ul className={styles.entryList} data-anydragging={dragIndex !== undefined}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
         >
@@ -165,13 +190,16 @@ export const EntryList = ({
                 <EntryItem key={id}
                       index={index}
                       value={value ?? undefined}
-                      selected={selectedIndex === index}
-                      draggingIndex={draggingIndex ?? undefined}
-                      onDragIndex={onDragIndex ?? undefined}
-                      onSwapIndex={onSwapIndex}
 
-                      onDeselect={onDeselect}
-                      onSelectIndex={onSelectIndex}
+                      dragging={dragIndex === index}
+                      anyDragging={dragIndex !== undefined}
+                      onDragStartIndex={onDragStartIndex} onDragEnd={onDragEnd}
+
+                      selected={selectionIndex === index}
+                      onDeselect={onDeselect} onSelectIndex={onSelectIndex}
+
+                      onSwapIndex={index === dragIndex ? undefined : onSwapIndex}
+
                       onEditIndex={onEditIndex}
                       onArchiveIndex={onArchiveIndex}
                       onDownIndex={index < fresh.length - 1 ? onDownIndex : undefined}
@@ -179,4 +207,44 @@ export const EntryList = ({
                 >{children}</EntryItem>)
         }
            </ul>;
+};
+
+export const EntryList = ({
+    children,
+    fresh,
+    onEditIndex, onArchiveIndex,
+    onSwapIndices, onDownIndex, onUpIndex
+}: StatefulProps) => {
+    const [selectionIndex, setSelectedIndex] = useState<number | null>(null);
+    const [dragIndex, setDragIndex] = useState<number | null>(null);
+
+    const onSelectIndex = useCallback((index: number) => setSelectedIndex(index), []);
+    const onDeselect = useCallback(() => setSelectedIndex(null), []);
+
+    const onDragStartIndex = useCallback((index: number) => setDragIndex(index), []);
+    const onDragEnd = useCallback(() => setDragIndex(null), []);
+
+    const onSwapIndex = useMemo(() => {
+        if (!onSwapIndices) {
+            return;
+        }
+        if (dragIndex === null) {
+            return;
+        }
+
+        return (index: number) => onSwapIndices(dragIndex, index);
+    }, [dragIndex, onSwapIndices]);
+
+    return <EntryListStateless
+       fresh={fresh}
+       onEditIndex={onEditIndex}
+       onArchiveIndex={onArchiveIndex}
+       onSwapIndex={onSwapIndex} onDownIndex={onDownIndex} onUpIndex={onUpIndex}
+
+       selectionIndex={selectionIndex ?? undefined}
+       onSelectIndex={onSelectIndex} onDeselect={onDeselect}
+
+       dragIndex={dragIndex ?? undefined}
+       onDragStartIndex={onDragStartIndex} onDragEnd={onDragEnd}
+        >{children}</EntryListStateless>;
 };

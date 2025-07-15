@@ -29,6 +29,28 @@ interface AdaptProps {
     readonly onDown?: () => void;
 }
 
+const Adapt = ({
+    value,
+
+    selected,
+    onDeselect, onSelect,
+
+    onEdit,
+    onArchive, onUp, onDown
+}: AdaptProps) => {
+    const [open, setOpen] = useState(false);
+    const onToggle = useCallback(() => {
+        setOpen(o => !o);
+    }, []);
+    return <EntryForm
+            value={value} selected={selected}
+            onDeselect={onDeselect} onSelect={onSelect}
+            open={open} onToggle={onToggle}
+            onEdit={onEdit}
+            onArchive={onArchive} onUp={onUp} onDown={onDown}
+            />;
+};
+
 interface Props {
     readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
     readonly archived: readonly { readonly id: number, readonly value: string | null }[];
@@ -36,12 +58,12 @@ interface Props {
     readonly onArchiveIndex?: (index: number) => void;
     readonly onUpIndex?: (index: number) => void;
     readonly onDownIndex?: (index: number) => void;
-    readonly onSwapIndex?: (leftIndex: number, rightIndex: number) => void;
+    readonly onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
 }
 
 const TenImpl = ({
     fresh, archived,
-    onEditIndex, onArchiveIndex, onSwapIndex, onUpIndex, onDownIndex
+    onEditIndex, onArchiveIndex, onSwapIndices, onUpIndex, onDownIndex
 }: Props) => {
     const count = useMemo(() => fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0),
                           [fresh]);
@@ -52,33 +74,10 @@ const TenImpl = ({
                        fresh={fresh}
                        onEditIndex={onEditIndex}
                        onArchiveIndex={onArchiveIndex}
-                       onSwapIndex={onSwapIndex}
+                       onSwapIndices={onSwapIndices}
                        onDownIndex={onDownIndex}
                        onUpIndex={onUpIndex}
-        >{
-            function Adapt({
-                value,
-
-                selected,
-                onDeselect, onSelect,
-
-                onEdit,
-                onArchive, onUp, onDown
-            }: AdaptProps) {
-                const [open, setOpen] = useState(false);
-                const onToggle = useCallback(() => {
-                    setOpen(o => !o);
-                }, []);
-                return <EntryForm
-                    value={value} selected={selected}
-                    onDeselect={onDeselect} onSelect={onSelect}
-                    open={open} onToggle={onToggle}
-                    onEdit={onEdit}
-                    onArchive={onArchive} onUp={onUp} onDown={onDown}
-                    />;
-            }
-        }
-                   </EntryList>
+        >{Adapt}</EntryList>
                </section>
                <section>
                    <h2>Archived</h2>
@@ -114,7 +113,7 @@ export const Ten = () => {
     const onArchiveIndex = useCallback((index: number) =>
         dispatch(archive({ index })),
         [dispatch]);
-    const onSwapIndex = useCallback((leftIndex: number, rightIndex: number) =>
+    const onSwapIndices = useCallback((leftIndex: number, rightIndex: number) =>
         dispatch(swap({ leftIndex, rightIndex })),
         [dispatch]);
     const onUpIndex = useCallback((index: number) =>
@@ -134,7 +133,7 @@ export const Ten = () => {
         archived={bootstrapped ? archived : []}
         onEditIndex={bootstrapped ? onEditIndex : undefined}
         onArchiveIndex={bootstrapped ? onArchiveIndex : undefined}
-        onSwapIndex={bootstrapped ? onSwapIndex : undefined}
+        onSwapIndices={bootstrapped ? onSwapIndices : undefined}
         onDownIndex={bootstrapped ? onDownIndex : undefined}
         onUpIndex={bootstrapped ? onUpIndex : undefined}
         />;
