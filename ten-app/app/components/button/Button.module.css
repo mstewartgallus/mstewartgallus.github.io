@@ -3,6 +3,7 @@
 .editButton {
     all: unset;
 
+    cursor: default;
     background: Canvas;
 
     margin-block: 0.3em;

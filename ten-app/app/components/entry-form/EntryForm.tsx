@@ -15,32 +15,6 @@ interface EditFormProps {
     readonly onSelect: () => void;
     readonly onDeselect: () => void;
 }
-interface SecondaryFormProps {
-    readonly onArchive?: () => void;
-}
-
-const SecondaryForm = ({ onArchive }: SecondaryFormProps) => {
-    const onSubmit = useCallback((e: FormEvent) => {
-        const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
-        switch (value) {
-        case 'archive':
-            if (onArchive) {
-                e.preventDefault();
-                onArchive();
-            }
-            break;
-
-        default:
-            return;
-        }
-    }, [onArchive]);
-
-    return <form action="#" onSubmit={onSubmit}>
-            <Button disabled={!onArchive} value="archive">
-            Archive
-            </Button>
-        </form>;
-};
 
 interface FormButtonProps {
     value: string;
@@ -125,7 +99,6 @@ interface Props {
     readonly onSelect: () => void;
 
     readonly onEdit?: (value: string) => void;
-    readonly onArchive?: () => void;
     readonly onUp?: () => void;
     readonly onDown?: () => void;
 }
@@ -135,12 +108,10 @@ export const EntryForm = ({
     selected,
     onDeselect,
     onSelect,
-    onEdit,
-    onArchive
+    onEdit
 }: Props) =>
     <div className={styles.entryForm}>
        <div className={styles.editForm}>
           <EditForm selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
        </div>
-       <SecondaryForm onArchive={onArchive} />
     </div>;

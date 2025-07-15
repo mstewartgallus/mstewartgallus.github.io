@@ -1,5 +1,7 @@
 "use client";
 
+import type { Id } from "@/types/ten";
+
 import {
     edit,
     archive,
@@ -11,15 +13,51 @@ import {
 } from "@/lib/features/ten/tenSlice";
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { EntryList } from './entry-list/EntryList';
+import { EntryItem } from './entry-item/EntryItem';
 import { EntryForm } from './entry-form/EntryForm';
 import { usePersistBootstrapped } from '../StoreProvider';
+
+interface AdaptorProps {
+    readonly id: Id;
+    readonly value?: string;
+
+    readonly selectionId?: Id;
+
+    readonly onEditId?: (id: Id, value: string) => void;
+    readonly onSelectId: (id: Id) => void;
+    readonly onDeselect: () => void;
+}
+
+const EntryFormAdaptor = ({
+    id, value, selectionId,
+
+    onEditId,
+    onSelectId, onDeselect
+}: AdaptorProps) => {
+    const selected = selectionId === id;
+
+    const onSelect = useCallback(() => onSelectId(id), [id, onSelectId]);
+
+    const onEdit = useMemo(() => {
+        if (!onEditId) {
+            return;
+        }
+        return (value: string) => onEditId(id, value);
+    }, [id, onEditId]);
+
+    return <EntryForm value={value} selected={selected}
+        onSelect={onSelect} onDeselect={onDeselect} onEdit={onEdit}
+        />;
+};
 
 interface Props {
     readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
     readonly archived: readonly { readonly id: number, readonly value: string | null }[];
-    readonly onEditIndex?: (index: number, value: string) => void;
+
+    readonly onEditId?: (id: Id, value: string) => void;
+
     readonly onArchiveIndex?: (index: number) => void;
     readonly onUpIndex?: (index: number) => void;
     readonly onDownIndex?: (index: number) => void;
@@ -28,8 +66,13 @@ interface Props {
 
 const TenImpl = ({
     fresh, archived,
-    onEditIndex, onArchiveIndex, onSwapIndices, onUpIndex, onDownIndex
+    onEditId, onArchiveIndex, onSwapIndices, onUpIndex, onDownIndex
 }: Props) => {
+    const [selectionId, setSelectionId] = useState<Id | null>(null);
+
+    const onSelectId = useCallback((id: Id) => setSelectionId(id), []);
+    const onDeselect = useCallback(() => setSelectionId(null), []);
+
     const count = useMemo(() => fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0),
                           [fresh]);
     return <>
@@ -37,12 +80,22 @@ const TenImpl = ({
                    <h1>{count} / 10</h1>
                    <EntryList
                        fresh={fresh}
-                       onEditIndex={onEditIndex}
                        onArchiveIndex={onArchiveIndex}
                        onSwapIndices={onSwapIndices}
                        onDownIndex={onDownIndex}
                        onUpIndex={onUpIndex}
-        >{EntryForm}</EntryList>
+        >{
+            ({ id, value, ...props}) =>
+                <EntryItem {...props}>
+                    <EntryFormAdaptor
+                       selectionId={selectionId ?? undefined}
+                       onEditId={onEditId}
+                       id={id} value={value}
+                       onSelectId={onSelectId}
+                       onDeselect={onDeselect}
+                    />
+                </EntryItem>
+        }</EntryList>
                </section>
                <section>
                    <h2>Archived</h2>
@@ -72,8 +125,8 @@ const mock = [
 export const Ten = () => {
     const dispatch = useAppDispatch();
 
-    const onEditIndex = useCallback((index: number, value: string) =>
-        dispatch(edit({ index, value })),
+    const onEditId = useCallback((id: Id, value: string) =>
+        dispatch(edit({ id, value })),
         [dispatch]);
     const onArchiveIndex = useCallback((index: number) =>
         dispatch(archive({ index })),
@@ -96,7 +149,7 @@ export const Ten = () => {
     return <TenImpl
         fresh={bootstrapped ? fresh : mock}
         archived={bootstrapped ? archived : []}
-        onEditIndex={bootstrapped ? onEditIndex : undefined}
+        onEditId={bootstrapped ? onEditId : undefined}
         onArchiveIndex={bootstrapped ? onArchiveIndex : undefined}
         onSwapIndices={bootstrapped ? onSwapIndices : undefined}
         onDownIndex={bootstrapped ? onDownIndex : undefined}

@@ -3,50 +3,8 @@
 }
 .entryItem {
     all: unset;
-    display: flex;
 }
 
-.grabberWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.grabber {
-    all: unset;
-    user-select: none;
-    touch-action: none;
-
-    border-style: solid;
-    border-width: 0 1px 0 1px;
-    border-radius: 0.3em 0.5em;
-
-    margin-block: 0.1em;
-    margin-inline: 0.3em;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.grabberIcon {
-    font-size: 2.2em;
-    margin-block: 0.05em;
-    margin-inline: 0.2em;
-}
-
-.entryList[data-anydragging="false"] .grabber {
-    cursor: grab;
-}
 .entryList[data-anydragging="true"] {
     cursor: grabbing;
-}
-
-.entryList[data-anydragging="false"] .grabber:hover {
-    background-color: lightgrey;
-}
-.grabber[data-dragging="true"] {
-    background-color: darkgrey;
-}
-
-.entryItem[data-otherdragging="true"]:hover {
-    background: lightgrey;
 }

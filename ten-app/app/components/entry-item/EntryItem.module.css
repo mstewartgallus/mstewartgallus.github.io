@@ -35,10 +35,10 @@
     outline-size: 2px;
 }
 
-.grabber[data-anydragging="false"] {
+.grabber[data-otherdragging="false"] {
     cursor: grab;
 }
-.grabber[data-anydragging="false"]:hover {
+.grabber[data-otherdragging="false"]:hover {
     background-color: lightgrey;
 }
 
