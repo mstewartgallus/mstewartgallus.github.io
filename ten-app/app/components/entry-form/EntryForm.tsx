@@ -11,14 +11,16 @@ import { EditList, EditItem } from "../edit-list/EditList";
 import styles from "./EntryForm.module.css";
 
 interface EditFormProps {
+    readonly selected: boolean;
     readonly value?: string;
     readonly onChange?: (value: string) => void;
-    readonly selected: boolean;
     readonly onSelect: () => void;
     readonly onDeselect: () => void;
 }
 
 interface SecondaryFormProps {
+    readonly open: boolean;
+    readonly onToggle: () => void;
     readonly onArchive?: () => void;
     readonly onUp?: () => void;
     readonly onDown?: () => void;
@@ -41,12 +43,13 @@ const Icon = ({children}: IconProps) =>
        {children}
     </div>;
 
-const SecondaryForm = ({ onArchive, onUp, onDown }: SecondaryFormProps) => {
-    const [open, setOpen] = useState(false);
-    const onToggle = useCallback((e: PointerEvent<HTMLButtonElement>) => {
+const SecondaryForm = ({ open,
+                         onToggle,
+                         onArchive, onUp, onDown }: SecondaryFormProps) => {
+    const onClick = useCallback((e: PointerEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        setOpen(o => !o);
-    }, []);
+        onToggle();
+    }, [onToggle]);
 
     const onSubmit = useCallback((e: FormEvent) => {
         const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
@@ -78,7 +81,7 @@ const SecondaryForm = ({ onArchive, onUp, onDown }: SecondaryFormProps) => {
     }, [onArchive, onUp, onDown]);
 
     return <div className={styles.options}>
-        <Button onClick={onToggle}>
+        <Button onClick={onClick} aria-expanded={open}>
             <Icon>{open ? <>▼</> : <>▶</>}</Icon>
         </Button>
         <If cond={open}>
@@ -182,9 +185,14 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
 
 interface Props {
     readonly value?: string;
+
     readonly selected: boolean;
     readonly onDeselect: () => void;
     readonly onSelect: () => void;
+
+    readonly open: boolean;
+    readonly onToggle: () => void;
+
     readonly onEdit?: (value: string) => void;
     readonly onArchive?: () => void;
     readonly onUp?: () => void;
@@ -194,6 +202,8 @@ interface Props {
 export const EntryForm = ({
     value,
     selected,
+    open,
+    onToggle,
     onDeselect,
     onSelect,
     onEdit,
@@ -205,5 +215,5 @@ export const EntryForm = ({
        <div className={styles.editForm}>
           <EditForm selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
        </div>
-       <SecondaryForm onArchive={onArchive} onDown={onDown} onUp={onUp} />
+       <SecondaryForm open={open} onToggle={onToggle} onArchive={onArchive} onDown={onDown} onUp={onUp} />
     </div>;

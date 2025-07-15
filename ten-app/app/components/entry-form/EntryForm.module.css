@@ -36,6 +36,14 @@
     justify-content: center;
     align-items: center;
 }
+.editButton[aria-expanded="true"] {
+    background: lightgrey;
+}
+.editButton[disabled] {
+    background: lightgrey;
+    border-color: grey;
+    color: #333;
+}
 .editButtonIcon {
     user-select: none;
     font-size: 1.3em;

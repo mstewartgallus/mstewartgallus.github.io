@@ -1,7 +1,7 @@
 "use client";
 
 import type { ComponentType, MouseEvent } from 'react';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import styles from './EntryList.module.css';
 
@@ -46,8 +46,7 @@ interface Props {
 }
 
 const useBind = (f: undefined | ((index: number) => void), index: number) => {
-    const bf = useCallback(() => f!(index), [f, index]);
-    return f && bf;
+    return useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
 };
 
 
@@ -85,38 +84,36 @@ const EntryItem = ({
 
     // Still need to figure this out for why it doesn't work on mobile
     // in Chrome simulator
-    let onMouseUp: undefined | ((event: MouseEvent<HTMLElement>) => void);
-    {
-        const partialOnMouseUp = useCallback((e: MouseEvent<HTMLElement>) => {
+    const onMouseUp = useMemo(() => {
+        if (!onSwapIndex) {
+            return;
+        }
+
+        if (draggingIndex === undefined || draggingIndex === index) {
+            return undefined;
+        }
+
+        return (e: MouseEvent<HTMLElement>) => {
             if (e.button !== 0) {
                 return;
             }
 
-            if (draggingIndex === undefined || draggingIndex === index) {
-                return;
-            }
+            onSwapIndex(draggingIndex, index);
+        };
+    }, [index, draggingIndex, onSwapIndex]);
 
-            onSwapIndex!(draggingIndex, index);
-        }, [index, draggingIndex, onSwapIndex]);
-        if (onSwapIndex) {
-            onMouseUp = partialOnMouseUp;
+    const onEdit = useMemo(() => {
+        if (!onEditIndex) {
+            return;
         }
-    }
-
-    let onEdit: undefined | ((value: string) => void);
-    {
-        const partialOnEdit = useCallback((value: string) => onEditIndex!(index, value),
-                                 [index, onEditIndex]);
-        if (onEditIndex) {
-            onEdit = partialOnEdit;
-        }
-    }
+        return (value: string) => onEditIndex(index, value);
+    }, [index, onEditIndex]);
 
     const Child = children;
     return <li className={styles.entryItem}
              data-otherdragging={otherDragging}
 
-             onMouseUp={onSwapIndex && onMouseUp}
+             onMouseUp={onMouseUp}
         >
         <div className={styles.grabberWrapper}>
             <div className={styles.grabber} onMouseDown={onMouseDown} data-dragging={dragging}>
@@ -172,11 +169,12 @@ export const EntryList = ({
                       draggingIndex={draggingIndex ?? undefined}
                       onDragIndex={onDragIndex ?? undefined}
                       onSwapIndex={onSwapIndex}
+
                       onDeselect={onDeselect}
                       onSelectIndex={onSelectIndex}
                       onEditIndex={onEditIndex}
                       onArchiveIndex={onArchiveIndex}
-                      onDownIndex={index < fresh.length ? onDownIndex : undefined}
+                      onDownIndex={index < fresh.length - 1 ? onDownIndex : undefined}
                       onUpIndex={index > 0 ? onUpIndex : undefined}
                 >{children}</EntryItem>)
         }
