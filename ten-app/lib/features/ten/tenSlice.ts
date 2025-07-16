@@ -9,12 +9,6 @@ interface EditAction {
 interface ArchiveAction {
     readonly index: number;
 }
-interface UpAction {
-    readonly index: number;
-}
-interface DownAction {
-    readonly index: number;
-}
 interface SwapAction {
     readonly leftIndex: number;
     readonly rightIndex: number;
@@ -66,20 +60,6 @@ export const tenSlice = createSlice({
             state.freshId[leftIndex] = state.freshId[rightIndex];
             state.freshId[rightIndex] = id;
         }),
-
-        up: create.reducer((state, { payload: { index } }: PayloadAction<UpAction>) => {
-            const nextIndex = (10 + index - 1) % 10;
-            const value = state.freshId[index];
-            state.freshId[index] = state.freshId[nextIndex];
-            state.freshId[nextIndex] = value;
-        }),
-
-        down: create.reducer((state, { payload: { index } }: PayloadAction<DownAction>) => {
-            const nextIndex = (index + 1) % 10;
-            const value = state.freshId[index];
-            state.freshId[index] = state.freshId[nextIndex];
-            state.freshId[nextIndex] = value;
-        })
     }),
 
     selectors: {
@@ -104,8 +84,6 @@ export const {
     edit,
     archive,
     swap,
-    up,
-    down
 } = tenSlice.actions;
 
 export const {

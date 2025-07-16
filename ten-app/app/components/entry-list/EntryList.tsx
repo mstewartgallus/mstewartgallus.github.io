@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentType } from 'react';
+import type { MouseEvent, ComponentType } from 'react';
 import type { Id } from '@/types/ten';
 import { useMemo, useState } from 'react';
 
@@ -18,8 +18,6 @@ export interface EntryItemProps {
     readonly onDrop?: () => void;
 
     readonly onArchive?: () => void;
-    readonly onUp?: () => void;
-    readonly onDown?: () => void;
 };
 
 interface AdaptorProps {
@@ -38,14 +36,12 @@ interface AdaptorProps {
     readonly onDragEnd?: () => void;
 
     readonly onArchiveIndex?: (index: number) => void;
-    readonly onUpIndex?: (index: number) => void;
-    readonly onDownIndex?: (index: number) => void;
 }
 
 const EntryItemAdaptor = ({
     children,
     id, value,
-    index, length,
+    index,
 
     dragIndex,
     onDragStartIndex,
@@ -53,7 +49,7 @@ const EntryItemAdaptor = ({
 
     onDropIndex,
 
-    onArchiveIndex, onDownIndex, onUpIndex
+    onArchiveIndex
 }: AdaptorProps) => {
     const dragging = index === dragIndex;
 
@@ -61,27 +57,22 @@ const EntryItemAdaptor = ({
     onDropIndex = dragging ? undefined : onDropIndex;
 
     onArchiveIndex = value ? onArchiveIndex : undefined;
-    onDownIndex = index < length - 1 ? onDownIndex : undefined;
-    onUpIndex = index > 0 ? onUpIndex : undefined;
 
     const onDragStart = useBind(onDragStartIndex, index);
     const onDrop = useBind(onDropIndex, index);
 
     const onArchive = useBind(onArchiveIndex, index);
-    const onDown = useBind(onDownIndex, index);
-    const onUp = useBind(onUpIndex, index);
 
     const Child = children;
     return <Child
              id={id}
              value={value}
+
              onDragStart={onDragStart}
              onDragEnd={onDragEnd}
              onDrop={onDrop}
 
              onArchive={onArchive}
-             onUp={onUp}
-             onDown={onDown}
            />;
 };
 
@@ -90,8 +81,6 @@ interface Props {
     readonly fresh: readonly { readonly id: Id, readonly value: string | null }[];
 
     readonly onArchiveIndex?: (index: number) => void;
-    readonly onUpIndex?: (index: number) => void;
-    readonly onDownIndex?: (index: number) => void;
 }
 
 type StatefulProps = Props & {
@@ -112,14 +101,28 @@ const EntryListStateless = ({
     fresh,
 
     onArchiveIndex,
-    onDownIndex, onUpIndex,
 
     dragIndex,
     onDragStartIndex, onDropIndex, onDragEnd
 }: StatelessProps) => {
     const length = fresh.length;
 
-    return <ul className={styles.entryList}>
+    const onMouseLeave = useMemo(() => {
+        if (!onDragEnd) {
+            return;
+        }
+        return (e: MouseEvent<HTMLUListElement>) => {
+            if (e.button !== 0) {
+                return;
+            }
+            onDragEnd();
+        };
+    }, [onDragEnd]);
+
+    return <ul className={styles.entryList}
+        onTouchCancel={onDragEnd}
+        onTouchEnd={onDragEnd}
+        onMouseUp={onMouseLeave} onMouseLeave={onMouseLeave}>
         {
             fresh.map(({ id, value }, index) =>
                 <li key={id} className={styles.entryItem}>
@@ -136,8 +139,6 @@ const EntryListStateless = ({
                       onDropIndex={onDropIndex}
 
                       onArchiveIndex={onArchiveIndex}
-                      onDownIndex={onDownIndex}
-                      onUpIndex={onUpIndex}
                 >{children}</EntryItemAdaptor>
                 </li>)
         }
@@ -147,7 +148,7 @@ const EntryListStateless = ({
 export const EntryList = ({
     children,
     fresh,
-    onArchiveIndex, onSwapIndices, onDownIndex, onUpIndex
+    onArchiveIndex, onSwapIndices
 }: StatefulProps) => {
     const [dragIndex, setDragIndex] = useState<number | null>(null);
 
@@ -185,7 +186,7 @@ export const EntryList = ({
 
     return <EntryListStateless
        fresh={fresh}
-       onArchiveIndex={onArchiveIndex} onDownIndex={onDownIndex} onUpIndex={onUpIndex}
+       onArchiveIndex={onArchiveIndex}
        dragIndex={dragIndex ?? undefined}
        onDragStartIndex={onDragStartIndex} onDropIndex={onDropIndex}
        onDragEnd={onDragEnd}

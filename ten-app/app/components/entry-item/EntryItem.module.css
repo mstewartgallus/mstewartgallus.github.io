@@ -16,19 +16,20 @@
 }
 .grabber {
     all: unset;
-    user-select: none;
     touch-action: none;
 
-    margin-block: 0.05em;
+    margin-block: 0.3em;
     margin-inline: 0.3em;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 3px;
 }
 .grabberIcon {
-    font-size: 2.6em;
-    margin-block: 0.05em;
+    user-select: none;
+
+    font-size: 2.3em;
     margin-inline: 0.2em;
 }
 
@@ -49,8 +50,12 @@
     background-color: darkgrey;
 }
 
-.grabber[data-dragging="true"] {
+.grabber[aria-expanded="true"] {
     background-color: yellow;
+}
+.grabber:focus {
+    outline-style: solid;
+    outline-size: 2px;
 }
 
 
@@ -66,21 +71,40 @@
 }
 
 .dropZone {
+    all: unset;
+
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
+    inline-size:100%;
     z-index: 1000;
 
     background: #0001;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.dropZone[data-hover] {
+.dropZone {
+    cursor: grabbing;
+}
+
+.dropZone:focus {
+    outline: solid;
+    outline-size: 2px;
+}
+
+.dropZone:hover {
     background: #0002;
 }
+.dropZone:active {
+    background: #1402;
+}
 
 
-.dropZone[data-disabled] {
+.dropZone[disabled] {
     display: none;
 }

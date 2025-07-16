@@ -6,8 +6,6 @@ import {
     edit,
     archive,
     swap,
-    up,
-    down,
     selectFresh,
     selectArchived,
 } from "@/lib/features/ten/tenSlice";
@@ -20,6 +18,8 @@ import { EntryForm } from './entry-form/EntryForm';
 import { usePersistBootstrapped } from '../StoreProvider';
 
 interface AdaptorProps {
+    readonly disabled: boolean;
+
     readonly id: Id;
     readonly value?: string;
 
@@ -31,6 +31,7 @@ interface AdaptorProps {
 }
 
 const EntryFormAdaptor = ({
+    disabled,
     id, value, selectionId,
 
     onEditId,
@@ -47,7 +48,7 @@ const EntryFormAdaptor = ({
         return (value: string) => onEditId(id, value);
     }, [id, onEditId]);
 
-    return <EntryForm value={value} selected={selected}
+    return <EntryForm disabled={disabled} value={value} selected={selected}
         onSelect={onSelect} onDeselect={onDeselect} onEdit={onEdit}
         />;
 };
@@ -59,14 +60,12 @@ interface Props {
     readonly onEditId?: (id: Id, value: string) => void;
 
     readonly onArchiveIndex?: (index: number) => void;
-    readonly onUpIndex?: (index: number) => void;
-    readonly onDownIndex?: (index: number) => void;
     readonly onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
 }
 
 const TenImpl = ({
     fresh, archived,
-    onEditId, onArchiveIndex, onSwapIndices, onUpIndex, onDownIndex
+    onEditId, onArchiveIndex, onSwapIndices
 }: Props) => {
     const [selectionId, setSelectionId] = useState<Id | null>(null);
 
@@ -82,15 +81,14 @@ const TenImpl = ({
                        fresh={fresh}
                        onArchiveIndex={onArchiveIndex}
                        onSwapIndices={onSwapIndices}
-                       onDownIndex={onDownIndex}
-                       onUpIndex={onUpIndex}
         >{
             ({ id, value, ...props}) =>
                 <EntryItem {...props}>
-                    <EntryFormAdaptor
+                <EntryFormAdaptor
+                       disabled={!!props.onDrop || !props.onDragStart}
+                       id={id} value={value}
                        selectionId={selectionId ?? undefined}
                        onEditId={onEditId}
-                       id={id} value={value}
                        onSelectId={onSelectId}
                        onDeselect={onDeselect}
                     />
@@ -134,12 +132,6 @@ export const Ten = () => {
     const onSwapIndices = useCallback((leftIndex: number, rightIndex: number) =>
         dispatch(swap({ leftIndex, rightIndex })),
         [dispatch]);
-    const onUpIndex = useCallback((index: number) =>
-        dispatch(up({ index })),
-        [dispatch]);
-    const onDownIndex = useCallback((index: number) =>
-        dispatch(down({ index })),
-        [dispatch]);
 
     const fresh = useAppSelector(selectFresh);
     const archived = useAppSelector(selectArchived);
@@ -152,7 +144,5 @@ export const Ten = () => {
         onEditId={bootstrapped ? onEditId : undefined}
         onArchiveIndex={bootstrapped ? onArchiveIndex : undefined}
         onSwapIndices={bootstrapped ? onSwapIndices : undefined}
-        onDownIndex={bootstrapped ? onDownIndex : undefined}
-        onUpIndex={bootstrapped ? onUpIndex : undefined}
         />;
 };

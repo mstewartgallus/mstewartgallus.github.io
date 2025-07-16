@@ -9,6 +9,7 @@ import { Icon } from "../icon/Icon";
 import styles from "./EntryForm.module.css";
 
 interface EditFormProps {
+    readonly disabled: boolean;
     readonly selected: boolean;
     readonly value?: string;
     readonly onChange?: (value: string) => void;
@@ -17,13 +18,14 @@ interface EditFormProps {
 }
 
 interface FormButtonProps {
+    disabled: boolean;
     value: string;
     id: string;
     onChange?: (value: string) => void;
     onDeselect?: () => void;
 }
 
-const FormButton = ({ value, id, onChange, onDeselect }: FormButtonProps) => {
+const FormButton = ({ disabled, value, id, onChange, onDeselect }: FormButtonProps) => {
     const onSubmit = useCallback((e: FormEvent) => {
         if (!onChange || !onDeselect) {
             return;
@@ -34,11 +36,11 @@ const FormButton = ({ value, id, onChange, onDeselect }: FormButtonProps) => {
     }, [onDeselect, onChange, value]);
 
     return <form className={styles.editMenu} id={id} action="#" onSubmit={onSubmit}>
-        <Button disabled={!onChange}><Icon>✔</Icon></Button>
+        <Button disabled={disabled || !onChange}><Icon>✔</Icon></Button>
         </form>;
 };
 
-const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormProps) => {
+const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }: EditFormProps) => {
     const formId = useId();
     const controlId = useId();
     const buttonId = useId();
@@ -68,7 +70,8 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
     const icon = selected ? 'X' : value ? '✎' : '+';
     return <>
         <div className={styles.editableTitle}>
-            <Button id={buttonId}
+             <Button id={buttonId}
+                    disabled={disabled}
                     onClick={onToggleClick}
                     aria-expanded={selected}
                     aria-controls={controlId}>
@@ -78,14 +81,14 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
                 <div className={styles.title}>{value ?? '...'}</div>
                 <If cond={selected}>
                     <div className={styles.inputWrapper}>
-                        <input className={styles.input} form={formId} value={editValue} onChange={onChangeInput} />
+                       <input disabled={disabled} className={styles.input} form={formId} value={editValue} onChange={onChangeInput} />
                     </div>
                 </If>
             </div>
         </div>
         <div className={styles.menuWrapper}>
            <If cond={selected}>
-               <FormButton value={editValue} id={formId} onChange={onChange} onDeselect={onDeselect} />
+               <FormButton disabled={disabled} value={editValue} id={formId} onChange={onChange} onDeselect={onDeselect} />
            </If>
         </div>
     </>;
@@ -93,6 +96,8 @@ const EditForm = ({ value, onChange, selected, onSelect, onDeselect }: EditFormP
 
 interface Props {
     readonly value?: string;
+
+    readonly disabled: boolean;
 
     readonly selected: boolean;
     readonly onDeselect: () => void;
@@ -104,6 +109,7 @@ interface Props {
 }
 
 export const EntryForm = ({
+    disabled,
     value,
     selected,
     onDeselect,
@@ -112,6 +118,6 @@ export const EntryForm = ({
 }: Props) =>
     <div className={styles.entryForm}>
        <div className={styles.editForm}>
-          <EditForm selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
+         <EditForm disabled={disabled} selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
        </div>
     </div>;

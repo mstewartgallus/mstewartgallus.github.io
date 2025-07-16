@@ -1,48 +1,64 @@
 "use client";
 
-import type { FormEvent, DragEvent, ReactNode } from 'react';
-import { useCallback, useMemo, useId, useState } from 'react';
+import type { FormEvent, TouchEvent, MouseEvent, ReactNode } from 'react';
+import { useCallback, useMemo, useId, useRef } from 'react';
 import { Button } from "../button/Button";
-import { Icon } from "../icon/Icon";
 
 import styles from './EntryItem.module.css';
 
 interface GrabberProps {
     readonly onDragStart?: () => void;
     readonly onDragEnd?: () => void;
+    readonly onDrop?: () => void;
 }
 
 const Grabber = ({ onDragStart, onDragEnd }: GrabberProps) => {
-    const dragging = !!onDragEnd;
+    const ref = useRef<HTMLButtonElement | null>(null);
+
     const draggable = !!onDragStart;
 
-    const onDragStartHandler = useMemo(() => {
-        if (!onDragStart) {
-            return;
-        }
-        return (e: DragEvent<HTMLDivElement>) => {
-            e.dataTransfer.effectAllowed = 'move';
-            onDragStart();
-        };
-    }, [onDragStart]);
+    const onToggle = onDragStart || onDragEnd;
 
-    const onDragEndHandler = useMemo(() => {
-        if (!onDragEnd) {
+    const onClick = useMemo(() => {
+        if (!onToggle) {
             return;
         }
-        return (e: DragEvent<HTMLDivElement>) => {
+        return (e: MouseEvent<HTMLButtonElement>) => {
+            if (e.button !== 0) {
+                return;
+            }
             e.preventDefault();
-            onDragEnd();
+            onToggle();
         };
-    }, [onDragEnd]);
+    }, [onToggle]);
 
-    return <div className={styles.grabberWrapper}
-        onDragStart={onDragStartHandler}
-        onDragEnd={onDragEndHandler}>
-            <div className={styles.grabber} draggable={draggable ? true : undefined}
-                data-dragging={dragging}>
-                <div className={styles.grabberIcon}>=</div>
-            </div>
+    const onMouseDown = useMemo(() => {
+        if (!draggable) {
+            return;
+        }
+        return (e: MouseEvent<HTMLButtonElement>) => {
+            if (e.button !== 0) {
+                return;
+            }
+
+            const { current } = ref;
+            if (!current) {
+                return;
+            }
+
+            e.preventDefault();
+            current.click();
+        };
+    }, [draggable]);
+
+    return <div className={styles.grabberWrapper}>
+          <button ref={ref} className={styles.grabber}
+                   aria-expanded={!!onDragEnd}
+                   disabled={onClick ? undefined : true}
+                   onMouseDown={onMouseDown}
+                   onClick={onClick}>
+        <div className={styles.grabberIcon}>=</div>
+        </button>
         </div>;
 };
 
@@ -51,21 +67,20 @@ interface DropProps {
     onDrop?: () => void;
 }
 
-const movable = (effectAllowed: string) =>
-    ['move', 'copyMove', 'linkMove', 'all', 'uninitialized'].includes(effectAllowed);
-
 const DropZone = ({ children, onDrop }: DropProps) => {
     const disabled = !onDrop;
 
+    const ref = useRef<HTMLButtonElement | null>(null);
+
     // Still need to figure this out for why it doesn't work on mobile
     // in Chrome simulator
-    const onDropHandler = useMemo(() => {
+    const onClick = useMemo(() => {
         if (!onDrop) {
             return;
         }
 
-        return (e: DragEvent<HTMLElement>) => {
-            if (e.dataTransfer.dropEffect !== 'move') {
+        return (e: MouseEvent<HTMLElement>) => {
+            if (e.button !== 0) {
                 return;
             }
 
@@ -74,48 +89,49 @@ const DropZone = ({ children, onDrop }: DropProps) => {
         };
     }, [onDrop]);
 
-    const onDragOver = useMemo(() => {
-        if (disabled) {
+    const onMouseUp = useMemo(() => {
+        if (!onDrop) {
             return;
         }
 
-        return (e: DragEvent<HTMLElement>) => {
-            if (!movable(e.dataTransfer.effectAllowed)) {
+        return (e: MouseEvent<HTMLElement>) => {
+            if (e.button !== 0) {
                 return;
             }
+
+            const { current } = ref;
+            if (!current) {
+                return;
+            }
+
             e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
+            current.click();
         };
-    }, [disabled]);
-
-    const [hover, setHover] = useState(false);
-
-    const onDragEnter = useMemo(() => {
-        if (disabled) {
+    }, [onDrop]);
+    const onTouchStart = useMemo(() => {
+        if (!onDrop) {
             return;
         }
 
-        return (e: DragEvent<HTMLElement>) => {
-            if (e.dataTransfer.dropEffect !== 'move') {
+        return (e: TouchEvent<HTMLElement>) => {
+            const { current } = ref;
+            if (!current) {
                 return;
             }
+
             e.preventDefault();
-
-            setHover(true);
+            current.click();
         };
-    }, [disabled]);
-
-    const onDragLeave = useCallback(() => setHover(false), []);
+    }, [onDrop]);
 
     return <div className={styles.dropWrapper}>
-        <div className={styles.dropZone}
-           data-disabled={disabled ? 'disabled' : undefined}
-           data-hover={hover ? 'hover' : undefined}
-           onDrop={onDropHandler}
-           onDragOver={onDragOver}
-           onDragEnter={onDragEnter}
-           onDragLeave={onDragLeave}
-        />
+        <button className={styles.dropZone}
+           ref={ref}
+           disabled={disabled ? true : undefined}
+           onMouseUp={onMouseUp}
+           onTouchStart={onTouchStart}
+           onClick={onClick}
+        ></button>
         {children}
      </div>;
 
@@ -123,12 +139,11 @@ const DropZone = ({ children, onDrop }: DropProps) => {
 
 interface ControlProps {
     readonly id: string;
+
     readonly onDragStart?: () => void;
     readonly onDragEnd?: () => void;
 
     readonly onArchive?: () => void;
-    readonly onUp?: () => void;
-    readonly onDown?: () => void;
 };
 
 const ItemControls = ({
@@ -138,9 +153,9 @@ const ItemControls = ({
     onDragEnd,
 
     onArchive,
-    onUp,
-    onDown
 }: ControlProps) => {
+    const disabled = !onDragStart;
+
     const onSubmit = useCallback((e: FormEvent) => {
         const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
         switch (value) {
@@ -150,34 +165,15 @@ const ItemControls = ({
                 onArchive();
             }
             break;
-        case 'up':
-            if (onUp) {
-                e.preventDefault();
-                onUp();
-            }
-            break;
-
-        case 'down':
-            if (onDown) {
-                e.preventDefault();
-                onDown();
-            }
-            break;
 
         default:
             return;
         }
-    }, [onArchive, onUp, onDown]);
+    }, [onArchive]);
 
     return <form onSubmit={onSubmit} id={id} action="#" className={styles.entryForm}>
         <Grabber onDragStart={onDragStart} onDragEnd={onDragEnd} />
-
-        <div className={styles.moveButtons}>
-            <Button disabled={!onUp} value="up"><Icon>↑</Icon></Button>
-            <Button disabled={!onDown} value="down"><Icon>↓</Icon></Button>
-        </div>
-
-        <Button disabled={!onArchive} value="archive">Archive</Button>
+        <Button disabled={disabled || !onArchive} value="archive">Archive</Button>
      </form>;
 };
 
@@ -189,8 +185,6 @@ interface Props {
     readonly onDrop?: () => void;
 
     readonly onArchive?: () => void;
-    readonly onUp?: () => void;
-    readonly onDown?: () => void;
 }
 
 export const EntryItem = ({
@@ -200,7 +194,7 @@ export const EntryItem = ({
     onDragStart, onDragEnd,
     onDrop,
 
-    onArchive, onUp, onDown
+    onArchive
 }: Props) => {
     // FIXME not sure a form is the right semantics here
     // FIXME rework grabber to integrated into the form system
@@ -215,8 +209,6 @@ export const EntryItem = ({
                onDragEnd={onDragEnd}
 
                onArchive={onArchive}
-               onUp={onUp}
-               onDown={onDown}
            />
           {children}
         </div>
