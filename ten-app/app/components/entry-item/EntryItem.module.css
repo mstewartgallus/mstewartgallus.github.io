@@ -7,6 +7,8 @@
     display: flex;
 }
 
+
+
 .grabberWrapper {
     display: flex;
     align-items: center;
@@ -30,21 +32,20 @@
     margin-inline: 0.2em;
 }
 
-.grabber:focus {
-    outline-style: solid;
-    outline-size: 2px;
-}
-
-.grabber[data-otherdragging="false"] {
+.grabber {
     cursor: grab;
 }
-.grabber[data-dragging="false"][data-otherdragging="false"]:hover {
-    background-color: lightgrey;
+.grabber:active {
+    background-color: darkgrey;
+    cursor: grabbing;
 }
 
+
 .grabber[data-dragging="true"] {
-    background-color: darkgrey;
+    background-color: yellow;
 }
+
+
 
 .moveButtons {
     display: flex;
@@ -56,18 +57,22 @@
     position: relative;
 }
 
-.dropZone[data-disabled] {
-    display: none;
-}
-.dropZone:not([data-disabled]) {
+.dropZone {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: 1000;
+
+    background: #0001;
 }
 
-.dropZone:not([data-disabled]):hover {
-    background: #0001;
+.dropZone[data-hover] {
+    background: #0002;
+}
+
+
+.dropZone[data-disabled] {
+    display: none;
 }

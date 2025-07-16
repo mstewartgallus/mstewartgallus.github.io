@@ -1,7 +1,7 @@
 "use client";
 
-import type { FormEvent, MouseEvent, TouchEvent, ReactNode } from 'react';
-import { useCallback, useMemo, useId } from 'react';
+import type { FormEvent, DragEvent, ReactNode } from 'react';
+import { useCallback, useMemo, useId, useState } from 'react';
 import { Button } from "../button/Button";
 import { Icon } from "../icon/Icon";
 
@@ -9,10 +9,8 @@ import styles from './EntryItem.module.css';
 
 interface ControlProps {
     readonly id: string;
-    readonly onDragStart: () => void;
-
-    readonly dragging: boolean;
-    readonly otherDragging: boolean;
+    readonly onDragStart?: () => void;
+    readonly onDragEnd?: () => void;
 
     readonly onArchive?: () => void;
     readonly onUp?: () => void;
@@ -22,27 +20,43 @@ interface ControlProps {
 const ItemControls = ({
     id,
 
-    dragging,
-
-    otherDragging,
     onDragStart,
+    onDragEnd,
 
     onArchive,
     onUp,
     onDown
 }: ControlProps) => {
-    const onTouchStart = useCallback((e: TouchEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        onDragStart();
-    }, [onDragStart]);
+    const freeToDrag = !!onDragStart;
+    const dragging = !!onDragEnd;
 
-    const onMouseDown = useCallback((e: MouseEvent<HTMLElement>) => {
-        if (e.button !== 0) {
+    const onDragHandler = useMemo(() => {
+        if (!freeToDrag) {
             return;
         }
-        e.preventDefault();
-        onDragStart();
+        return () => {
+        };
+    }, [freeToDrag]);
+
+    const onDragStartHandler = useMemo(() => {
+        if (!onDragStart) {
+            return;
+        }
+        return (e: DragEvent<HTMLDivElement>) => {
+            e.dataTransfer.effectAllowed = 'move';
+            onDragStart();
+        };
     }, [onDragStart]);
+
+    const onDragEndHandler = useMemo(() => {
+        if (!onDragEnd) {
+            return;
+        }
+        return (e: DragEvent<HTMLDivElement>) => {
+            e.preventDefault();
+            onDragEnd();
+        };
+    }, [onDragEnd]);
 
     const onSubmit = useCallback((e: FormEvent) => {
         const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
@@ -74,10 +88,10 @@ const ItemControls = ({
 
     return <form onSubmit={onSubmit} id={id} action="#" className={styles.entryForm}>
         <div className={styles.grabberWrapper}>
-           <div className={styles.grabber}
-              onTouchStart={onTouchStart}
-              onMouseDown={onMouseDown}
-              data-dragging={dragging} data-otherdragging={otherDragging}>
+        <div className={styles.grabber} draggable="true"
+              onDrag={onDragHandler}
+              onDragStart={onDragStartHandler} onDragEnd={onDragEndHandler}
+              data-dragging={dragging} tabIndex={-1}>
               <div className={styles.grabberIcon}>=</div>
            </div>
         </div>
@@ -96,34 +110,66 @@ interface DropProps {
     onDrop?: () => void;
 }
 const DropZone = ({ children, onDrop }: DropProps) => {
+    const disabled = !onDrop;
+
     // Still need to figure this out for why it doesn't work on mobile
     // in Chrome simulator
-    const onTouchEnd = useMemo(() => {
+    const onDropHandler = useMemo(() => {
         if (!onDrop) {
             return;
         }
 
-        return onDrop;
-    }, [onDrop]);
-
-    const onMouseUp = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: MouseEvent<HTMLElement>) => {
-            if (e.button !== 0) {
+        return (e: DragEvent<HTMLElement>) => {
+            if (e.dataTransfer.dropEffect !== 'move') {
                 return;
             }
+
+            e.preventDefault();
             onDrop();
         };
     }, [onDrop]);
 
-    const disabled = !onDrop;
+    const onDragOver = useMemo(() => {
+        if (disabled) {
+            return;
+        }
+
+        return (e: DragEvent<HTMLElement>) => {
+            if (e.dataTransfer.dropEffect !== 'move') {
+                return;
+            }
+
+            e.preventDefault();
+        };
+    }, [disabled]);
+
+    const [hover, setHover] = useState(false);
+
+    const onDragEnter = useMemo(() => {
+        if (disabled) {
+            return;
+        }
+
+        return (e: DragEvent<HTMLElement>) => {
+            if (e.dataTransfer.dropEffect !== 'move') {
+                return;
+            }
+
+            setHover(true);
+        };
+    }, [disabled]);
+
+    const onDragLeave = useCallback(() => setHover(false), []);
+
     return <div className={styles.dropWrapper}>
-        <div className={styles.dropZone} data-disabled={disabled ? "disabled" : undefined}
-           onTouchEnd={onTouchEnd}
-           onMouseUp={onMouseUp}
+        <div className={styles.dropZone}
+           data-disabled={disabled ? 'disabled' : undefined}
+           data-hover={hover ? 'hover' : undefined}
+           onDrop={onDropHandler}
+           onDragOver={onDragOver}
+           onDragEnter={onDragEnter}
+           onDragLeave={onDragLeave}
+           tabIndex={-1}
         />
         {children}
      </div>;
@@ -133,9 +179,8 @@ const DropZone = ({ children, onDrop }: DropProps) => {
 interface Props {
     readonly children: ReactNode;
 
-    readonly dragging: boolean;
-
-    readonly onDragStart: () => void;
+    readonly onDragStart?: () => void;
+    readonly onDragEnd?: () => void;
     readonly onDrop?: () => void;
 
     readonly onArchive?: () => void;
@@ -146,9 +191,9 @@ interface Props {
 export const EntryItem = ({
     children,
 
-    dragging,
 
-    onDragStart, onDrop,
+    onDragStart, onDragEnd,
+    onDrop,
 
     onArchive, onUp, onDown
 }: Props) => {
@@ -161,9 +206,8 @@ export const EntryItem = ({
              <ItemControls
                id={formId}
 
-               dragging={dragging}
-               otherDragging={!!onDrop}
                onDragStart={onDragStart}
+               onDragEnd={onDragEnd}
 
                onArchive={onArchive}
                onUp={onUp}
