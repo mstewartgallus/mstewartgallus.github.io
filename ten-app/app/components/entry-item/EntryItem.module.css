@@ -36,10 +36,18 @@
     cursor: grab;
 }
 .grabber:active {
-    background-color: darkgrey;
     cursor: grabbing;
 }
 
+.grabber {
+    background-color: white;
+}
+.grabber:hover {
+    background-color: lightgrey;
+}
+.grabber:active {
+    background-color: darkgrey;
+}
 
 .grabber[data-dragging="true"] {
     background-color: yellow;

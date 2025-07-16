@@ -21,9 +21,20 @@
     justify-content: center;
     align-items: center;
 }
-.editButton[aria-expanded="true"] {
+
+
+.editButton:hover {
     background: lightgrey;
 }
+
+.editButton[aria-expanded="true"]:not(:active) {
+    background: lightgrey;
+}
+
+.editButton:active {
+    background: darkgrey;
+}
+
 .editButton[disabled] {
     background: lightgrey;
     border-color: grey;

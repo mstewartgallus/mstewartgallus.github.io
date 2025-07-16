@@ -4,7 +4,3 @@
 .entryItem {
     all: unset;
 }
-
-.entryList[data-anydragging="true"] {
-    cursor: grabbing;
-}

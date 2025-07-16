@@ -119,8 +119,7 @@ const EntryListStateless = ({
 }: StatelessProps) => {
     const length = fresh.length;
 
-    return <ul className={styles.entryList} data-anydragging={dragIndex !== undefined}
-        >
+    return <ul className={styles.entryList}>
         {
             fresh.map(({ id, value }, index) =>
                 <li key={id} className={styles.entryItem}>

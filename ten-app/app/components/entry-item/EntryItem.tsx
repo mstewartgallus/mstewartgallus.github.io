@@ -7,36 +7,14 @@ import { Icon } from "../icon/Icon";
 
 import styles from './EntryItem.module.css';
 
-interface ControlProps {
-    readonly id: string;
+interface GrabberProps {
     readonly onDragStart?: () => void;
     readonly onDragEnd?: () => void;
+}
 
-    readonly onArchive?: () => void;
-    readonly onUp?: () => void;
-    readonly onDown?: () => void;
-};
-
-const ItemControls = ({
-    id,
-
-    onDragStart,
-    onDragEnd,
-
-    onArchive,
-    onUp,
-    onDown
-}: ControlProps) => {
-    const freeToDrag = !!onDragStart;
+const Grabber = ({ onDragStart, onDragEnd }: GrabberProps) => {
     const dragging = !!onDragEnd;
-
-    const onDragHandler = useMemo(() => {
-        if (!freeToDrag) {
-            return;
-        }
-        return () => {
-        };
-    }, [freeToDrag]);
+    const draggable = !!onDragStart;
 
     const onDragStartHandler = useMemo(() => {
         if (!onDragStart) {
@@ -58,6 +36,111 @@ const ItemControls = ({
         };
     }, [onDragEnd]);
 
+    return <div className={styles.grabberWrapper}
+        onDragStart={onDragStartHandler}
+        onDragEnd={onDragEndHandler}>
+            <div className={styles.grabber} draggable={draggable ? true : undefined}
+                data-dragging={dragging}>
+                <div className={styles.grabberIcon}>=</div>
+            </div>
+        </div>;
+};
+
+interface DropProps {
+    children: ReactNode;
+    onDrop?: () => void;
+}
+
+const movable = (effectAllowed: string) =>
+    ['move', 'copyMove', 'linkMove', 'all', 'uninitialized'].includes(effectAllowed);
+
+const DropZone = ({ children, onDrop }: DropProps) => {
+    const disabled = !onDrop;
+
+    // Still need to figure this out for why it doesn't work on mobile
+    // in Chrome simulator
+    const onDropHandler = useMemo(() => {
+        if (!onDrop) {
+            return;
+        }
+
+        return (e: DragEvent<HTMLElement>) => {
+            if (e.dataTransfer.dropEffect !== 'move') {
+                return;
+            }
+
+            e.preventDefault();
+            onDrop();
+        };
+    }, [onDrop]);
+
+    const onDragOver = useMemo(() => {
+        if (disabled) {
+            return;
+        }
+
+        return (e: DragEvent<HTMLElement>) => {
+            if (!movable(e.dataTransfer.effectAllowed)) {
+                return;
+            }
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        };
+    }, [disabled]);
+
+    const [hover, setHover] = useState(false);
+
+    const onDragEnter = useMemo(() => {
+        if (disabled) {
+            return;
+        }
+
+        return (e: DragEvent<HTMLElement>) => {
+            if (e.dataTransfer.dropEffect !== 'move') {
+                return;
+            }
+            e.preventDefault();
+
+            setHover(true);
+        };
+    }, [disabled]);
+
+    const onDragLeave = useCallback(() => setHover(false), []);
+
+    return <div className={styles.dropWrapper}>
+        <div className={styles.dropZone}
+           data-disabled={disabled ? 'disabled' : undefined}
+           data-hover={hover ? 'hover' : undefined}
+           onDrop={onDropHandler}
+           onDragOver={onDragOver}
+           onDragEnter={onDragEnter}
+           onDragLeave={onDragLeave}
+        />
+        {children}
+     </div>;
+
+};
+
+interface ControlProps {
+    readonly id: string;
+    readonly onDragStart?: () => void;
+    readonly onDragEnd?: () => void;
+
+    readonly onArchive?: () => void;
+    readonly onUp?: () => void;
+    readonly onDown?: () => void;
+};
+
+const ItemControls = ({
+    id,
+
+    onDragStart,
+    onDragEnd,
+
+    onArchive,
+    onUp,
+    onDown
+}: ControlProps) => {
     const onSubmit = useCallback((e: FormEvent) => {
         const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
         switch (value) {
@@ -87,14 +170,7 @@ const ItemControls = ({
     }, [onArchive, onUp, onDown]);
 
     return <form onSubmit={onSubmit} id={id} action="#" className={styles.entryForm}>
-        <div className={styles.grabberWrapper}>
-        <div className={styles.grabber} draggable="true"
-              onDrag={onDragHandler}
-              onDragStart={onDragStartHandler} onDragEnd={onDragEndHandler}
-              data-dragging={dragging} tabIndex={-1}>
-              <div className={styles.grabberIcon}>=</div>
-           </div>
-        </div>
+        <Grabber onDragStart={onDragStart} onDragEnd={onDragEnd} />
 
         <div className={styles.moveButtons}>
             <Button disabled={!onUp} value="up"><Icon>↑</Icon></Button>
@@ -103,77 +179,6 @@ const ItemControls = ({
 
         <Button disabled={!onArchive} value="archive">Archive</Button>
      </form>;
-};
-
-interface DropProps {
-    children: ReactNode;
-    onDrop?: () => void;
-}
-const DropZone = ({ children, onDrop }: DropProps) => {
-    const disabled = !onDrop;
-
-    // Still need to figure this out for why it doesn't work on mobile
-    // in Chrome simulator
-    const onDropHandler = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: DragEvent<HTMLElement>) => {
-            if (e.dataTransfer.dropEffect !== 'move') {
-                return;
-            }
-
-            e.preventDefault();
-            onDrop();
-        };
-    }, [onDrop]);
-
-    const onDragOver = useMemo(() => {
-        if (disabled) {
-            return;
-        }
-
-        return (e: DragEvent<HTMLElement>) => {
-            if (e.dataTransfer.dropEffect !== 'move') {
-                return;
-            }
-
-            e.preventDefault();
-        };
-    }, [disabled]);
-
-    const [hover, setHover] = useState(false);
-
-    const onDragEnter = useMemo(() => {
-        if (disabled) {
-            return;
-        }
-
-        return (e: DragEvent<HTMLElement>) => {
-            if (e.dataTransfer.dropEffect !== 'move') {
-                return;
-            }
-
-            setHover(true);
-        };
-    }, [disabled]);
-
-    const onDragLeave = useCallback(() => setHover(false), []);
-
-    return <div className={styles.dropWrapper}>
-        <div className={styles.dropZone}
-           data-disabled={disabled ? 'disabled' : undefined}
-           data-hover={hover ? 'hover' : undefined}
-           onDrop={onDropHandler}
-           onDragOver={onDragOver}
-           onDragEnter={onDragEnter}
-           onDragLeave={onDragLeave}
-           tabIndex={-1}
-        />
-        {children}
-     </div>;
-
 };
 
 interface Props {
