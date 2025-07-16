@@ -15,7 +15,7 @@ export interface EntryItemProps {
 
     readonly dragging: boolean;
     readonly onDragStart: () => void;
-    readonly onDragEnd?: () => void;
+    readonly onDrop?: () => void;
 
     readonly onArchive?: () => void;
     readonly onUp?: () => void;
@@ -33,7 +33,7 @@ interface AdaptorProps {
 
     readonly dragIndex?: number;
     readonly onDragStartIndex: (index: number) => void;
-    readonly onDragEndIndex?: (index: number) => void;
+    readonly onDropIndex?: (index: number) => void;
 
     readonly onArchiveIndex?: (index: number) => void;
     readonly onUpIndex?: (index: number) => void;
@@ -47,16 +47,16 @@ const EntryItemAdaptor = ({
 
     dragIndex,
     onDragStartIndex,
-    onDragEndIndex,
+    onDropIndex,
 
     onArchiveIndex, onDownIndex, onUpIndex
 }: AdaptorProps) => {
     onArchiveIndex = value ? onArchiveIndex : undefined;
-    onDragEndIndex = index === dragIndex ? undefined : onDragEndIndex;
+    onDropIndex = index === dragIndex ? undefined : onDropIndex;
     onDownIndex = index < length - 1 ? onDownIndex : undefined;
     onUpIndex = index > 0 ? onUpIndex : undefined;
 
-    const onDragEnd = useBind(onDragEndIndex, index);
+    const onDrop = useBind(onDropIndex, index);
 
     const onArchive = useBind(onArchiveIndex, index);
     const onDown = useBind(onDownIndex, index);
@@ -70,7 +70,7 @@ const EntryItemAdaptor = ({
              value={value}
              dragging={dragIndex === index}
              onDragStart={onDragStart}
-             onDragEnd={onDragEnd}
+             onDrop={onDrop}
 
              onArchive={onArchive}
              onUp={onUp}
@@ -95,9 +95,9 @@ type StatelessProps = Props & {
     dragIndex?: number;
 
     onDragStartIndex: (index: number) => void;
-    onDragEndIndex?: (index: number) => void;
+    onDropIndex?: (index: number) => void;
 
-    onDragAbort: () => void;
+    onDragEnd: () => void;
 }
 
 const EntryListStateless = ({
@@ -108,19 +108,24 @@ const EntryListStateless = ({
     onDownIndex, onUpIndex,
 
     dragIndex,
-    onDragStartIndex, onDragEndIndex, onDragAbort
+    onDragStartIndex, onDropIndex, onDragEnd
 }: StatelessProps) => {
     const onMouseUp = useCallback((e: MouseEvent<HTMLElement>) => {
         if (e.button !== 0) {
             return;
         }
 
-        onDragAbort();
-    }, [onDragAbort]);
+        onDragEnd();
+    }, [onDragEnd]);
+
+    const onTouchCancel = useCallback(() => {
+        onDragEnd();
+    }, [onDragEnd]);
 
     const length = fresh.length;
 
     return <ul className={styles.entryList} data-anydragging={dragIndex !== undefined}
+        onTouchCancel={onTouchCancel}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
         >
@@ -136,7 +141,7 @@ const EntryListStateless = ({
 
                       dragIndex={dragIndex}
                       onDragStartIndex={onDragStartIndex}
-                      onDragEndIndex={onDragEndIndex}
+                      onDropIndex={onDropIndex}
 
                       onArchiveIndex={onArchiveIndex}
                       onDownIndex={onDownIndex}
@@ -155,9 +160,9 @@ export const EntryList = ({
     const [dragIndex, setDragIndex] = useState<number | null>(null);
 
     const onDragStartIndex = useCallback((index: number) => setDragIndex(index), []);
-    const onDragAbort = useCallback(() => setDragIndex(null), []);
+    const onDragEnd = useCallback(() => setDragIndex(null), []);
 
-    const onDragEndIndex = useMemo(() => {
+    const onDropIndex = useMemo(() => {
         if (!onSwapIndices) {
             return;
         }
@@ -176,7 +181,7 @@ export const EntryList = ({
        fresh={fresh}
        onArchiveIndex={onArchiveIndex} onDownIndex={onDownIndex} onUpIndex={onUpIndex}
        dragIndex={dragIndex ?? undefined}
-       onDragStartIndex={onDragStartIndex} onDragEndIndex={onDragEndIndex}
-        onDragAbort={onDragAbort}
+       onDragStartIndex={onDragStartIndex} onDropIndex={onDropIndex}
+        onDragEnd={onDragEnd}
         >{children}</EntryListStateless>;
 };

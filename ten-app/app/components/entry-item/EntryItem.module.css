@@ -38,7 +38,7 @@
 .grabber[data-otherdragging="false"] {
     cursor: grab;
 }
-.grabber[data-otherdragging="false"]:hover {
+.grabber[data-dragging="false"][data-otherdragging="false"]:hover {
     background-color: lightgrey;
 }
 
@@ -46,11 +46,28 @@
     background-color: darkgrey;
 }
 
-.entryItem[data-otherdragging="true"]:hover {
-    background: lightgrey;
-}
-
 .moveButtons {
     display: flex;
     flex-direction: column;
+}
+
+
+.dropWrapper {
+    position: relative;
+}
+
+.dropZone[data-disabled] {
+    display: none;
+}
+.dropZone:not([data-disabled]) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.dropZone:not([data-disabled]):hover {
+    background: #0001;
 }
