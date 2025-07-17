@@ -12,16 +12,14 @@ import {
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useMemo, useState } from 'react';
-import { EntryList } from './entry-list/EntryList';
-import { EntryItem } from './entry-item/EntryItem';
+import { EntryList, EntryItem } from './entry-list/EntryList';
 import { EntryForm } from './entry-form/EntryForm';
 import { usePersistBootstrapped } from '../StoreProvider';
 
 interface AdaptorProps {
-    readonly disabled: boolean;
-
     readonly id: Id;
     readonly value?: string;
+    readonly disabled: boolean;
 
     readonly selectionId?: Id;
 
@@ -31,8 +29,7 @@ interface AdaptorProps {
 }
 
 const EntryFormAdaptor = ({
-    disabled,
-    id, value, selectionId,
+   id, value, disabled, selectionId,
 
     onEditId,
     onSelectId, onDeselect
@@ -63,6 +60,12 @@ interface Props {
     readonly onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
 }
 
+interface Item {
+    readonly id: Id;
+    readonly value?: string;
+    readonly disabled: boolean;
+}
+
 const TenImpl = ({
     fresh, archived,
     onEditId, onArchiveIndex, onSwapIndices
@@ -82,11 +85,12 @@ const TenImpl = ({
                        onArchiveIndex={onArchiveIndex}
                        onSwapIndices={onSwapIndices}
         >{
-            ({ id, value, ...props}) =>
-                <EntryItem {...props}>
-                <EntryFormAdaptor
-                       disabled={!!props.onDrop || !props.onDragStart}
-                       id={id} value={value}
+            ({id, value, disabled}: Item) =>
+                <EntryItem>
+                   <EntryFormAdaptor
+                       id={id}
+                       value={value}
+                       disabled={disabled}
                        selectionId={selectionId ?? undefined}
                        onEditId={onEditId}
                        onSelectId={onSelectId}

@@ -1,194 +1,341 @@
 "use client";
 
-import type { MouseEvent, ComponentType } from 'react';
+import type { ComponentType, DragEvent, MouseEvent, FormEvent, ReactNode } from 'react';
 import type { Id } from '@/types/ten';
-import { useMemo, useState } from 'react';
+import { createContext, useId, useContext, useCallback, useMemo, useState } from 'react';
+import { Button } from "../button/Button";
 
-import styles from './EntryList.module.css';
-
-const useBind = (f: undefined | ((index: number) => void), index: number) =>
-    useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
+import listStyles from './EntryList.module.css';
+import styles from './EntryItem.module.css';
 
 export interface EntryItemProps {
     readonly id: Id;
     readonly value?: string;
+    readonly disabled: boolean;
+};
+
+
+interface ItemContext {
+    readonly anyDragging: boolean;
+    readonly dragging: boolean;
+    readonly index: number;
+}
+
+interface ListContext {
+    readonly dragIndex?: number;
+    readonly onDragStartIndex?: (index: number) => void;
+    readonly onDropIndex?: (index: number) => void;
+    readonly onDragEnd?: () => void;
+
+    readonly onArchiveIndex?: (index: number) => void;
+};
+
+const ItemContext = createContext<ItemContext>({
+    dragging: false,
+    anyDragging: false,
+    index: 0
+});
+ItemContext.displayName = 'ItemContext';
+
+const ListContext = createContext<ListContext>({
+    dragIndex: 0
+});
+ListContext.displayName = 'ListContext';
+
+interface ItemProviderProps {
+    readonly children: ReactNode;
+    readonly index: number;
+}
+
+const ItemProvider = ({
+    children, index
+}: ItemProviderProps) => {
+    const { dragIndex } = useContext(ListContext);
+    const dragging = dragIndex == index;
+    const anyDragging = dragIndex !== undefined;
+    const memo = useMemo(() =>({
+        anyDragging, dragging, index
+    }), [ anyDragging, dragging, index ]);
+    return <ItemContext.Provider value={memo}>{children}</ItemContext.Provider>;
+};
+
+interface GrabberProps {
+    readonly dragging: boolean;
 
     readonly onDragStart?: () => void;
     readonly onDragEnd?: () => void;
+}
+
+const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
+    const onDragStartHandler = useMemo(() => {
+        if (!onDragStart) {
+            return;
+        }
+        return (e: DragEvent<HTMLButtonElement>) => {
+            e.dataTransfer.effectAllowed = 'move';
+            onDragStart();
+        };
+    }, [onDragStart]);
+
+    const onToggle = onDragStart || onDragEnd;
+    const onClick = useMemo(() => {
+        if (!onToggle) {
+            return;
+        }
+        return (e: MouseEvent<HTMLButtonElement>) => {
+            if (e.button !== 0) {
+                return;
+            }
+            e.preventDefault();
+            onToggle();
+        };
+    }, [onToggle]);
+
+    return <div className={styles.grabberWrapper}>
+            <button className={styles.grabber}
+               aria-expanded={dragging}
+               draggable={!!onDragStartHandler}
+               onDragStart={onDragStartHandler} onDragEnd={onDragEnd}
+               onClick={onClick}
+               disabled={onClick ? undefined : true}
+              >
+            <div className={styles.grabberIcon}>=</div>
+            </button>
+        </div>;
+};
+
+interface DropProps {
+    readonly children: ReactNode;
     readonly onDrop?: () => void;
+}
+
+const DropZone = ({ children, onDrop }: DropProps) => {
+    const [isOver, setOver] = useState<boolean>(false);
+
+    const onDragOver = useMemo(() => {
+        if (!onDrop) {
+            return;
+        }
+
+        return (e: DragEvent<HTMLElement>) => {
+            e.preventDefault();
+        };
+    }, [onDrop]);
+
+    const onDragEnter = useMemo(() => {
+        if (!onDrop) {
+            return;
+        }
+
+        return () => setOver(true);
+    }, [onDrop]);
+
+    const onDragLeave = useMemo(() => {
+        if (!onDrop) {
+            return;
+        }
+
+        return () => setOver(false);
+    }, [onDrop]);
+
+    const onDropHandler = useMemo(() => {
+        if (!onDrop) {
+            return;
+        }
+
+        return (e: DragEvent<HTMLElement>) => {
+            e.preventDefault();
+            onDrop();
+        };
+    }, [onDrop]);
+
+    const onClick = useMemo(() => {
+        if (!onDrop) {
+            return;
+        }
+
+        return (e: MouseEvent<HTMLElement>) => {
+            e.preventDefault();
+            onDrop();
+        };
+    }, [onDrop]);
+
+    if (!onDrop && isOver) {
+        setOver(false);
+        return;
+    }
+
+    return <div className={styles.dropWrapper}>
+        <button className={styles.dropZone}
+            onDragEnter={onDragEnter} onDragLeave={onDragLeave}
+            onDragOver={onDragOver} onDrop={onDropHandler}
+            onClick={onClick}
+            disabled={!onDrop ? true : undefined}
+            data-over={isOver ? "true" : undefined}
+        />
+        {children}
+     </div>;
+
+};
+
+interface ControlProps {
+    readonly id: string;
+    readonly dragging: boolean;
+    readonly anyDragging: boolean;
+
+    readonly onDragStart?: () => void;
+    readonly onDragEnd?: () => void;
 
     readonly onArchive?: () => void;
 };
 
-interface AdaptorProps {
-    readonly children: ComponentType<EntryItemProps>;
+const ItemControls = ({
+    id,
 
-    readonly id: Id;
-    readonly value?: string;
-
-    readonly index: number;
-    readonly length: number;
-
-    readonly dragIndex?: number;
-    readonly onDragStartIndex?: (index: number) => void;
-    readonly onDropIndex?: (index: number) => void;
-
-    readonly onDragEnd?: () => void;
-
-    readonly onArchiveIndex?: (index: number) => void;
-}
-
-const EntryItemAdaptor = ({
-    children,
-    id, value,
-    index,
-
-    dragIndex,
-    onDragStartIndex,
+    dragging,
+    onDragStart,
     onDragEnd,
 
-    onDropIndex,
+    onArchive,
+}: ControlProps) => {
+    const disabled = !onDragStart;
 
-    onArchiveIndex
-}: AdaptorProps) => {
-    const dragging = index === dragIndex;
+    const onSubmit = useCallback((e: FormEvent) => {
+        e.preventDefault();
 
-    onDragEnd = dragging ? onDragEnd : undefined;
-    onDropIndex = dragging ? undefined : onDropIndex;
+        const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
+        switch (value) {
+        case 'archive':
+            if (onArchive) {
+                e.preventDefault();
+                onArchive();
+            }
+            break;
 
-    onArchiveIndex = value ? onArchiveIndex : undefined;
+        default:
+            return;
+        }
+    }, [onArchive]);
+
+    return <form id={id} onSubmit={onSubmit} action="#" className={styles.entryForm}>
+        <Grabber
+            dragging={dragging}
+            onDragStart={onDragStart} onDragEnd={onDragEnd} />
+        <Button disabled={disabled || !onArchive} value="archive">Archive</Button>
+     </form>;
+};
+
+interface ItemProps {
+    readonly children: ReactNode;
+}
+const useBind = (f: undefined | ((index: number) => void), index: number) =>
+    useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
+
+export const EntryItem = ({ children }: ItemProps) => {
+    // FIXME not sure a form is the right semantics here
+    // FIXME rework grabber to integrated into the form system
+    const formId = useId();
+
+    const {
+        anyDragging,
+        dragging,
+        index
+    } = useContext(ItemContext);
+    const {
+        onDragStartIndex,
+        onDragEnd,
+        onDropIndex,
+        onArchiveIndex
+    } = useContext(ListContext);
 
     const onDragStart = useBind(onDragStartIndex, index);
     const onDrop = useBind(onDropIndex, index);
-
     const onArchive = useBind(onArchiveIndex, index);
 
-    const Child = children;
-    return <Child
-             id={id}
-             value={value}
+    const otherDragging = anyDragging && !dragging;
 
-             onDragStart={onDragStart}
-             onDragEnd={onDragEnd}
-             onDrop={onDrop}
+    return <DropZone onDrop={otherDragging ? onDrop : undefined}>
+         <div className={styles.entryItem}>
+             <ItemControls
+               id={formId}
+               anyDragging={anyDragging}
+               dragging={dragging}
 
-             onArchive={onArchive}
-           />;
+               onDragStart={dragging ? undefined : onDragStart}
+               onDragEnd={dragging ? onDragEnd : undefined}
+               onArchive={anyDragging ? undefined : onArchive}
+           />
+          {children}
+        </div>
+      </DropZone>;
 };
 
 interface Props {
     readonly children: ComponentType<EntryItemProps>;
     readonly fresh: readonly { readonly id: Id, readonly value: string | null }[];
 
+    readonly onSwapIndices?: (dragIndex: number, dropIndex: number) => void;
     readonly onArchiveIndex?: (index: number) => void;
 }
-
-type StatefulProps = Props & {
-    onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
-};
-
-type StatelessProps = Props & {
-    dragIndex?: number;
-
-    onDragStartIndex?: (index: number) => void;
-    onDropIndex?: (index: number) => void;
-
-    onDragEnd?: () => void;
-}
-
-const EntryListStateless = ({
-    children,
-    fresh,
-
-    onArchiveIndex,
-
-    dragIndex,
-    onDragStartIndex, onDropIndex, onDragEnd
-}: StatelessProps) => {
-    const length = fresh.length;
-
-    const onMouseLeave = useMemo(() => {
-        if (!onDragEnd) {
-            return;
-        }
-        return (e: MouseEvent<HTMLUListElement>) => {
-            if (e.button !== 0) {
-                return;
-            }
-            onDragEnd();
-        };
-    }, [onDragEnd]);
-
-    return <ul className={styles.entryList}
-        onTouchCancel={onDragEnd}
-        onTouchEnd={onDragEnd}
-        onMouseUp={onMouseLeave} onMouseLeave={onMouseLeave}>
-        {
-            fresh.map(({ id, value }, index) =>
-                <li key={id} className={styles.entryItem}>
-                  <EntryItemAdaptor
-                      id={id}
-                      value={value ?? undefined}
-
-                      index={index}
-                      length={length}
-
-                      dragIndex={dragIndex}
-                      onDragStartIndex={onDragStartIndex}
-                      onDragEnd={onDragEnd}
-                      onDropIndex={onDropIndex}
-
-                      onArchiveIndex={onArchiveIndex}
-                >{children}</EntryItemAdaptor>
-                </li>)
-        }
-           </ul>;
-};
 
 export const EntryList = ({
     children,
     fresh,
     onArchiveIndex, onSwapIndices
-}: StatefulProps) => {
+}: Props) => {
     const [dragIndex, setDragIndex] = useState<number | null>(null);
 
-    const dragging = dragIndex != null;
+    const anyDragging = dragIndex !== null;
 
     const onDragStartIndex = useMemo(() => {
-        if (dragging) {
+        if (anyDragging) {
             return;
         }
         return (index: number) => setDragIndex(index);
-    }, [dragging]);
+    }, [anyDragging]);
 
     const onDragEnd = useMemo(() => {
-        if (!dragging) {
+        if (!anyDragging) {
             return;
         }
-
         return () => setDragIndex(null);
-    }, [dragging]);
+    }, [anyDragging]);
 
     const onDropIndex = useMemo(() => {
-        if (!onSwapIndices) {
-            return;
-        }
-
-        if (dragIndex === null) {
+        if (!onSwapIndices || !anyDragging) {
             return;
         }
 
         return (index: number) => {
             onSwapIndices(dragIndex, index);
             setDragIndex(null);
-        };
-    }, [dragIndex, onSwapIndices]);
+        }
+    }, [dragIndex, anyDragging, onSwapIndices]);
 
-    return <EntryListStateless
-       fresh={fresh}
-       onArchiveIndex={onArchiveIndex}
-       dragIndex={dragIndex ?? undefined}
-       onDragStartIndex={onDragStartIndex} onDropIndex={onDropIndex}
-       onDragEnd={onDragEnd}
-        >{children}</EntryListStateless>;
+    const context = useMemo(() => ({
+        dragIndex: dragIndex ?? undefined,
+        onDragStartIndex,
+        onDragEnd,
+        onDropIndex,
+        onArchiveIndex
+    }), [
+        dragIndex,
+        onDragStartIndex, onDragEnd,
+        onDropIndex,
+        onArchiveIndex
+    ]);
+    const Child = children;
+    return <ul className={listStyles.entryList}>
+        <ListContext.Provider value={context}>
+        {
+            fresh.map(({ id, value }, index) =>
+                <li key={id} className={listStyles.entryItem}>
+                    <ItemProvider index={index}>
+                    <Child value={value ?? undefined} id={id} disabled={dragIndex !== null}
+                    />
+                    </ItemProvider>
+                </li>)
+        }
+        </ListContext.Provider>
+    </ul>;
 };
