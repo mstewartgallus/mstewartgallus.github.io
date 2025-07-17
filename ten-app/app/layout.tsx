@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Html } from "./components/Html";
+import { Html } from "./components/html/Html";
 import { StoreProvider } from "./StoreProvider";
 
 import "./styles/globals.css";

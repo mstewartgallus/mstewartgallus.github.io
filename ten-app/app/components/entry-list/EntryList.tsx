@@ -4,7 +4,7 @@ import type { ComponentType, FormEvent, MouseEvent, ReactNode } from 'react';
 import type { Id } from '@/types/ten';
 import { createContext, useId, useContext, useCallback, useMemo, useState } from 'react';
 import { Button } from "../button/Button";
-import { useMouseUp, useMouseLeave } from "../Html";
+import { useCursor, useMouseUp, useMouseLeave } from "../html/Html";
 
 import listStyles from './EntryList.module.css';
 import styles from './EntryItem.module.css';
@@ -102,6 +102,7 @@ const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
 
     useMouseUp(onMouseUp);
     useMouseLeave(onDragEnd);
+    useCursor(dragging ? 'grabbing' : undefined);
 
     return <div className={styles.grabberWrapper}>
             <button className={styles.grabber}

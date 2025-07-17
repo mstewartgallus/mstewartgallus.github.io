@@ -91,10 +91,6 @@
     background: #0001;
 }
 
-/* .dropZone { */
-/*     cursor: grabbing; */
-/* } */
-
 .dropZone:focus {
     outline: solid;
     outline-size: 2px;

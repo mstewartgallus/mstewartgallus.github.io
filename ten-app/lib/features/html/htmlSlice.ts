@@ -2,9 +2,12 @@ import type { PayloadAction, Selector } from "@reduxjs/toolkit";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { MouseEventHandler } from "react";
 
+export type Cursor = 'grabbing';
+
 export interface HtmlSliceState {
     onMouseUpArray: MouseEventHandler<HTMLHtmlElement>[];
     onMouseLeaveArray: MouseEventHandler<HTMLHtmlElement>[];
+    cursor?: Cursor;
 };
 
 const initialState: HtmlSliceState = {
@@ -33,8 +36,8 @@ export type Hook =
     | MouseUpHook
     | MouseLeaveHook;
 
-const selectHook = (hook: Hook, state: HtmlSliceState) => {
-    switch (hook.type) {
+const selectHook = (type: Hook["type"], state: HtmlSliceState) => {
+    switch (type) {
         case 'mouseup':
             return selectOnMouseUpArray(state);
 
@@ -61,30 +64,39 @@ export const htmlSlice = createSlice({
             state: HtmlSliceState,
             { payload }: PayloadAction<Hook>
         ) => {
-            selectHook(payload, state).push(payload.value);
+            selectHook(payload.type, state).push(payload.value);
         }),
 
         removeHook: create.reducer((
             state: HtmlSliceState,
             { payload }: PayloadAction<Hook>
         ) => {
-            const array = selectHook(payload, state);
+            const array = selectHook(payload.type, state);
             const index = array.indexOf(payload.value);
             array.splice(index);
-        })
+        }),
+
+        cursor: create.reducer((
+            state: HtmlSliceState,
+            { payload }: PayloadAction<Cursor | undefined>
+        ) => {
+            state.cursor = payload;
+        }),
     }),
 
     selectors: {
         selectOnMouseUp: createSelector([selectOnMouseUpArray], toHandler),
-        selectOnMouseLeave: createSelector([selectOnMouseLeaveArray], toHandler)
+        selectOnMouseLeave: createSelector([selectOnMouseLeaveArray], toHandler),
+        selectCursor: html => html.cursor
     },
 });
 
 export const {
-    addHook, removeHook
+    addHook, removeHook, cursor
 } = htmlSlice.actions;
 
 export const {
     selectOnMouseUp,
-    selectOnMouseLeave
+    selectOnMouseLeave,
+    selectCursor
 } = htmlSlice.selectors;
