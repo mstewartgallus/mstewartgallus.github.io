@@ -1,48 +1,48 @@
 import type { PayloadAction, Selector } from "@reduxjs/toolkit";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import type { MouseEventHandler } from "react";
+import type { PointerEventHandler } from "react";
 
 export type Cursor = 'grabbing';
 
 export interface HtmlSliceState {
-    onMouseUpArray: MouseEventHandler<HTMLHtmlElement>[];
-    onMouseLeaveArray: MouseEventHandler<HTMLHtmlElement>[];
+    onPointerUpArray: PointerEventHandler<HTMLHtmlElement>[];
+    onPointerLeaveArray: PointerEventHandler<HTMLHtmlElement>[];
     cursor?: Cursor;
 };
 
 const initialState: HtmlSliceState = {
-    onMouseUpArray: [],
-    onMouseLeaveArray: []
+    onPointerUpArray: [],
+    onPointerLeaveArray: []
 };
 
 type HtmlSelector<T> = Selector<HtmlSliceState, T>;
 
-const selectOnMouseUpArray: HtmlSelector<MouseEventHandler<HTMLHtmlElement>[]> =
-    (html: HtmlSliceState) => html.onMouseUpArray;
-const selectOnMouseLeaveArray: HtmlSelector<MouseEventHandler<HTMLHtmlElement>[]> =
-    (html: HtmlSliceState) => html.onMouseLeaveArray;
+const selectOnPointerUpArray: HtmlSelector<PointerEventHandler<HTMLHtmlElement>[]> =
+    (html: HtmlSliceState) => html.onPointerUpArray;
+const selectOnPointerLeaveArray: HtmlSelector<PointerEventHandler<HTMLHtmlElement>[]> =
+    (html: HtmlSliceState) => html.onPointerLeaveArray;
 
-interface MouseUpHook {
-    type: 'mouseup';
-    value: MouseEventHandler<HTMLHtmlElement>;
+interface PointerUpHook {
+    type: 'pointerup';
+    value: PointerEventHandler<HTMLHtmlElement>;
 }
 
-interface MouseLeaveHook {
-    type: 'mouseleave';
-    value: MouseEventHandler<HTMLHtmlElement>;
+interface PointerLeaveHook {
+    type: 'pointerleave';
+    value: PointerEventHandler<HTMLHtmlElement>;
 }
 
 export type Hook =
-    | MouseUpHook
-    | MouseLeaveHook;
+    | PointerUpHook
+    | PointerLeaveHook;
 
 const selectHook = (type: Hook["type"], state: HtmlSliceState) => {
     switch (type) {
-        case 'mouseup':
-            return selectOnMouseUpArray(state);
+        case 'pointerup':
+            return selectOnPointerUpArray(state);
 
-        case 'mouseleave':
-            return selectOnMouseLeaveArray(state);
+        case 'pointerleave':
+            return selectOnPointerLeaveArray(state);
     }
 }
 
@@ -85,8 +85,8 @@ export const htmlSlice = createSlice({
     }),
 
     selectors: {
-        selectOnMouseUp: createSelector([selectOnMouseUpArray], toHandler),
-        selectOnMouseLeave: createSelector([selectOnMouseLeaveArray], toHandler),
+        selectOnPointerUp: createSelector([selectOnPointerUpArray], toHandler),
+        selectOnPointerLeave: createSelector([selectOnPointerLeaveArray], toHandler),
         selectCursor: html => html.cursor
     },
 });
@@ -96,7 +96,7 @@ export const {
 } = htmlSlice.actions;
 
 export const {
-    selectOnMouseUp,
-    selectOnMouseLeave,
+    selectOnPointerUp,
+    selectOnPointerLeave,
     selectCursor
 } = htmlSlice.selectors;

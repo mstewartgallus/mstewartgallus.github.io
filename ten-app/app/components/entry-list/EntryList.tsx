@@ -1,10 +1,12 @@
 "use client";
 
-import type { ComponentType, FormEvent, MouseEvent, ReactNode } from 'react';
+import type {
+    ComponentType, FormEvent, MouseEvent,
+    PointerEvent, ReactNode } from 'react';
 import type { Id } from '@/types/ten';
 import { createContext, useId, useContext, useCallback, useMemo, useState } from 'react';
 import { Button } from "../button/Button";
-import { useCursor, useMouseUp, useMouseLeave } from "../html/Html";
+import { useCursor, usePointerUp, usePointerLeave } from "../html/Html";
 
 import listStyles from './EntryList.module.css';
 import styles from './EntryItem.module.css';
@@ -75,39 +77,40 @@ const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
         e.preventDefault();
     }, []);
 
-    const onMouseDown = useMemo(() => {
+    const onPointerDown = useMemo(() => {
         if (!onDragStart) {
             return;
         }
-        return (e: MouseEvent<HTMLButtonElement>) => {
-            if (e.button !== 0) {
+        return (e: PointerEvent<HTMLButtonElement>) => {
+            if (!e.isPrimary) {
                 return;
             }
-            e.preventDefault();
+            console.log('pointerdown');
             onDragStart()
         };
     }, [onDragStart]);
 
-    const onMouseUp = useMemo(() => {
+    const onPointerUp = useMemo(() => {
         if (!onDragEnd) {
             return;
         }
-        return (e: MouseEvent) => {
-            if (e.button !== 0) {
+        return (e: PointerEvent) => {
+            if (!e.isPrimary) {
                 return;
             }
+            console.log('global pointerup');
             onDragEnd();
         };
     }, [onDragEnd]);
 
-    useMouseUp(onMouseUp);
-    useMouseLeave(onDragEnd);
+    usePointerUp(onPointerUp);
+    usePointerLeave(onDragEnd);
     useCursor(dragging ? 'grabbing' : undefined);
 
     return <div className={styles.grabberWrapper}>
             <button className={styles.grabber}
                aria-expanded={dragging}
-               onMouseDown={onMouseDown}
+               onPointerDown={onPointerDown}
                onClick={onClick}
                tabIndex={-1}
                >
@@ -124,31 +127,44 @@ interface DropProps {
 const DropZone = ({ children, onDrop }: DropProps) => {
     const [isOver, setOver] = useState<boolean>(false);
 
-    const onMouseEnter = useMemo(() => {
+    const onPointerEnter = useMemo(() => {
         if (!onDrop) {
             return;
         }
 
-        return () => setOver(true);
-    }, [onDrop]);
-
-    const onMouseLeave = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return () => setOver(false);
-    }, [onDrop]);
-
-    const onMouseUp = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: MouseEvent<HTMLElement>) => {
-            if (e.button !== 0) {
+        return (e: PointerEvent<HTMLButtonElement>) => {
+            if (!e.isPrimary) {
                 return;
             }
+            console.log('pointerenter');
+            setOver(true);
+        };
+    }, [onDrop]);
+
+    const onPointerLeave = useMemo(() => {
+        if (!onDrop) {
+            return;
+        }
+
+        return (e: PointerEvent<HTMLButtonElement>) => {
+            if (!e.isPrimary) {
+                return;
+            }
+            console.log('pointerleave');
+            setOver(false);
+        };
+    }, [onDrop]);
+
+    const onPointerUp = useMemo(() => {
+        if (!onDrop) {
+            return;
+        }
+
+        return (e: PointerEvent<HTMLButtonElement>) => {
+            if (!e.isPrimary) {
+                return;
+            }
+            console.log('pointerup');
             onDrop();
         };
     }, [onDrop]);
@@ -167,8 +183,8 @@ const DropZone = ({ children, onDrop }: DropProps) => {
 
     return <div className={styles.dropWrapper}>
         <button className={styles.dropZone}
-            onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
-            onMouseUp={onMouseUp}
+            onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}
+            onPointerUp={onPointerUp}
             onClick={onClick}
             disabled={!onDrop ? true : undefined}
             data-over={isOver ? "true" : undefined}

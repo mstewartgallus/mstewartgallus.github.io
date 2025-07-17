@@ -1,7 +1,7 @@
 "use client";
 
 import type {
-    DetailedHTMLProps, HtmlHTMLAttributes, MouseEventHandler
+    DetailedHTMLProps, HtmlHTMLAttributes, PointerEventHandler
 } from "react";
 import type { Hook, Cursor } from "@/lib/features/html/htmlSlice";
 
@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect } from "react";
 import {
     addHook, removeHook, cursor,
-    selectOnMouseUp, selectOnMouseLeave, selectCursor
+    selectOnPointerUp, selectOnPointerLeave, selectCursor
 } from "@/lib/features/html/htmlSlice";
 
 import styles from "./Html.module.css";
@@ -44,20 +44,20 @@ export const useCursor = (value?: Cursor) => {
     }, [value, dispatch]);
 };
 
-export const useMouseUp = (handler?: MouseEventHandler<HTMLHtmlElement>) =>
-    useHook('mouseup',  handler);
-export const useMouseLeave = (handler?: MouseEventHandler<HTMLHtmlElement>) =>
-    useHook('mouseleave', handler);
+export const usePointerUp = (handler?: PointerEventHandler<HTMLHtmlElement>) =>
+    useHook('pointerup',  handler);
+export const usePointerLeave = (handler?: PointerEventHandler<HTMLHtmlElement>) =>
+    useHook('pointerleave', handler);
 
 type Props = DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>;
 
 export const Html = ({ children, ...props }: Props) => {
-    const onMouseUp = useAppSelector(selectOnMouseUp);
-    const onMouseLeave = useAppSelector(selectOnMouseLeave);
+    const onPointerUp = useAppSelector(selectOnPointerUp);
+    const onPointerLeave = useAppSelector(selectOnPointerLeave);
     const cursor = useAppSelector(selectCursor);
 
     return <html className={styles.html}
-        onMouseUp={onMouseUp} onMouseLeave={onMouseLeave}
+        onPointerUp={onPointerUp} onPointerLeave={onPointerLeave}
         data-cursor={cursor} {...props}>
            {children}
         </html>;
