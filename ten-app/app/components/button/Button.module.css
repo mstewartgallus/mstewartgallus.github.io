@@ -1,4 +1,7 @@
 .editButtonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .editButton {
     all: unset;

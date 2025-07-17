@@ -1,9 +1,10 @@
 "use client";
 
-import type { ComponentType, DragEvent, MouseEvent, FormEvent, ReactNode } from 'react';
+import type { ComponentType, FormEvent, MouseEvent, ReactNode } from 'react';
 import type { Id } from '@/types/ten';
 import { createContext, useId, useContext, useCallback, useMemo, useState } from 'react';
 import { Button } from "../button/Button";
+import { useMouseUp, useMouseLeave } from "../Html";
 
 import listStyles from './EntryList.module.css';
 import styles from './EntryItem.module.css';
@@ -67,19 +68,15 @@ interface GrabberProps {
 }
 
 const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
-    const onDragStartHandler = useMemo(() => {
-        if (!onDragStart) {
+    const onClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+        if (e.button !== 0) {
             return;
         }
-        return (e: DragEvent<HTMLButtonElement>) => {
-            e.dataTransfer.effectAllowed = 'move';
-            onDragStart();
-        };
-    }, [onDragStart]);
+        e.preventDefault();
+    }, []);
 
-    const onToggle = onDragStart || onDragEnd;
-    const onClick = useMemo(() => {
-        if (!onToggle) {
+    const onMouseDown = useMemo(() => {
+        if (!onDragStart) {
             return;
         }
         return (e: MouseEvent<HTMLButtonElement>) => {
@@ -87,18 +84,32 @@ const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
                 return;
             }
             e.preventDefault();
-            onToggle();
+            onDragStart()
         };
-    }, [onToggle]);
+    }, [onDragStart]);
+
+    const onMouseUp = useMemo(() => {
+        if (!onDragEnd) {
+            return;
+        }
+        return (e: MouseEvent) => {
+            if (e.button !== 0) {
+                return;
+            }
+            onDragEnd();
+        };
+    }, [onDragEnd]);
+
+    useMouseUp(onMouseUp);
+    useMouseLeave(onDragEnd);
 
     return <div className={styles.grabberWrapper}>
             <button className={styles.grabber}
                aria-expanded={dragging}
-               draggable={!!onDragStartHandler}
-               onDragStart={onDragStartHandler} onDragEnd={onDragEnd}
+               onMouseDown={onMouseDown}
                onClick={onClick}
-               disabled={onClick ? undefined : true}
-              >
+               tabIndex={-1}
+               >
             <div className={styles.grabberIcon}>=</div>
             </button>
         </div>;
@@ -112,17 +123,7 @@ interface DropProps {
 const DropZone = ({ children, onDrop }: DropProps) => {
     const [isOver, setOver] = useState<boolean>(false);
 
-    const onDragOver = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: DragEvent<HTMLElement>) => {
-            e.preventDefault();
-        };
-    }, [onDrop]);
-
-    const onDragEnter = useMemo(() => {
+    const onMouseEnter = useMemo(() => {
         if (!onDrop) {
             return;
         }
@@ -130,7 +131,7 @@ const DropZone = ({ children, onDrop }: DropProps) => {
         return () => setOver(true);
     }, [onDrop]);
 
-    const onDragLeave = useMemo(() => {
+    const onMouseLeave = useMemo(() => {
         if (!onDrop) {
             return;
         }
@@ -138,27 +139,25 @@ const DropZone = ({ children, onDrop }: DropProps) => {
         return () => setOver(false);
     }, [onDrop]);
 
-    const onDropHandler = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: DragEvent<HTMLElement>) => {
-            e.preventDefault();
-            onDrop();
-        };
-    }, [onDrop]);
-
-    const onClick = useMemo(() => {
+    const onMouseUp = useMemo(() => {
         if (!onDrop) {
             return;
         }
 
         return (e: MouseEvent<HTMLElement>) => {
-            e.preventDefault();
+            if (e.button !== 0) {
+                return;
+            }
             onDrop();
         };
     }, [onDrop]);
+
+    const onClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+        if (e.button !== 0) {
+            return;
+        }
+        e.preventDefault();
+    }, []);
 
     if (!onDrop && isOver) {
         setOver(false);
@@ -167,11 +166,12 @@ const DropZone = ({ children, onDrop }: DropProps) => {
 
     return <div className={styles.dropWrapper}>
         <button className={styles.dropZone}
-            onDragEnter={onDragEnter} onDragLeave={onDragLeave}
-            onDragOver={onDragOver} onDrop={onDropHandler}
+            onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
+            onMouseUp={onMouseUp}
             onClick={onClick}
             disabled={!onDrop ? true : undefined}
             data-over={isOver ? "true" : undefined}
+            tabIndex={-1}
         />
         {children}
      </div>;

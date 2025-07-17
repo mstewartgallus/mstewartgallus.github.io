@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Html } from "./components/Html";
 import { StoreProvider } from "./StoreProvider";
 
 import "./styles/globals.css";
@@ -9,14 +10,14 @@ interface Props {
 }
 
 const RootLayout = ({ children }: Props) =>
-<html lang="en">
-    <body>
-        <StoreProvider>
-             <main className={styles.main}>
-                 {children}
-             </main>
-        </StoreProvider>
-    </body>
-</html>;
+    <StoreProvider>
+        <Html lang="en">
+            <body>
+                 <main className={styles.main}>
+                     {children}
+                 </main>
+            </body>
+        </Html>
+    </StoreProvider>;
 
 export default RootLayout;
