@@ -217,7 +217,6 @@ interface ControlProps {
 
 const ItemControls = ({
     id,
-
     onArchive,
 }: ControlProps) => {
     const onSubmit = useCallback((e: FormEvent) => {
@@ -238,7 +237,7 @@ const ItemControls = ({
     }, [onArchive]);
 
     return <form id={id} onSubmit={onSubmit} action="#" className={styles.entryForm}>
-             <Button value="archive">Archive</Button>
+        <Button disabled={!onArchive} value="archive">Archive</Button>
      </form>;
 };
 
@@ -280,10 +279,11 @@ export const EntryItem = ({ children }: ItemProps) => {
              </div>
 
         {
-            !disabled && <ItemControls
+            !disabled &&
+            <ItemControls
                id={formId}
-         onArchive={anyDragging ? undefined : onArchive} />
-            }
+               onArchive={(disabled || anyDragging) ? undefined : onArchive} />
+        }
         </div>
       </DropZone>;
 };
@@ -350,7 +350,7 @@ export const EntryList = ({
                 <li key={id} role="listitem"
                     className={listStyles.entryItem}>
                     <ItemProvider disabled={!value} index={index}>
-                    <Child value={value ?? undefined} id={id} disabled={dragIndex !== null} />
+                        <Child value={value ?? undefined} id={id} disabled={dragIndex !== null} />
                     </ItemProvider>
                 </li>)
         }

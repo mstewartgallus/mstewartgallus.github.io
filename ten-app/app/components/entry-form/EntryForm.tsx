@@ -56,14 +56,6 @@ const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }:
         }
     }, [onSelect, onDeselect, selected, value]);
 
-    const onClickNew = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-        if (e.button !== 0) {
-            return;
-        }
-        setEditValue(value ?? '');
-        onSelect();
-    }, [onSelect, selected, value]);
-
     const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const { target } = e;
         if (!target) {
@@ -73,39 +65,24 @@ const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }:
         setEditValue((target as HTMLInputElement).value);
     }, []);
 
-    return <>
-        <div className={styles.editableTitle}>
-        {
-            value ?
-                <Button aria-label={selected ? 'Cancel' : 'Edit'}
-                    disabled={disabled}
-                    onClick={onToggleClick}
-                    aria-expanded={selected}
-                    aria-controls={controlId}>
-                    <Icon>{selected ? 'X' : '✎'}</Icon>
-                </Button> :
-                <Button aria-label="New"
-                    disabled={disabled}
-                    onClick={onClickNew}
-                    aria-controls={controlId}>
-                    <Icon>+</Icon>
-                </Button>
-            }
+    return <div className={styles.editableTitle}>
+            <Button aria-label={selected ? 'Cancel' : value ? 'Edit' : 'New'}
+                disabled={disabled}
+                onClick={onToggleClick}
+                aria-expanded={selected}
+                aria-controls={controlId}>
+               <Icon>{selected ? 'X' : value ? '✎' : '+'}</Icon>
+            </Button>
             <div id={controlId} className={styles.titleAndInput}>
-                <div className={styles.title}>{value ?? '...'}</div>
+                <If cond={!selected}>
+                    <div className={styles.title}>{value ?? '...'}</div>
+                </If>
                 <If cond={selected}>
-                    <div className={styles.inputWrapper}>
-                       <input disabled={disabled} className={styles.input} form={formId} value={editValue} onChange={onChangeInput} />
-                    </div>
+                    <input disabled={disabled} className={styles.input} form={formId} value={editValue} onChange={onChangeInput} />
+                    <FormButton disabled={disabled} value={editValue} id={formId} onChange={onChange} onDeselect={onDeselect} />
                 </If>
             </div>
-        </div>
-        <div className={styles.menuWrapper}>
-           <If cond={selected}>
-               <FormButton disabled={disabled} value={editValue} id={formId} onChange={onChange} onDeselect={onDeselect} />
-           </If>
-        </div>
-    </>;
+        </div>;
 };
 
 interface Props {

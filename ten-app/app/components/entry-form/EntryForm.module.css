@@ -5,53 +5,15 @@
 .entryForm {
     display: flex;
 }
-.options {
-    display: flex;
-}
-
-
-.editFormWrapper {
-    display: flex;
-}
-
 
 .editableTitle {
     display: flex;
 }
 
 .titleAndInput {
-    position: relative;
+
 }
 .title, .titleAndInput {
     display: flex;
     align-items: center;
-}
-
-.title {
-    min-inline-size: 8em;
-    anchor-name: --title;
-}
-
-.inputWrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.input {
-    max-inline-size: 100%;
-}
-
-.menuWrapper {
-    position: relative;
-}
-.editMenu {
-    position: absolute;
-    z-index: 1000;
 }
