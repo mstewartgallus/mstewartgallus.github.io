@@ -85,7 +85,7 @@ const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
             if (!e.isPrimary) {
                 return;
             }
-            console.log('pointerdown');
+            (e.target as Element).releasePointerCapture(e.pointerId);
             onDragStart()
         };
     }, [onDragStart]);
@@ -98,7 +98,6 @@ const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
             if (!e.isPrimary) {
                 return;
             }
-            console.log('global pointerup');
             onDragEnd();
         };
     }, [onDragEnd]);
@@ -136,7 +135,6 @@ const DropZone = ({ children, onDrop }: DropProps) => {
             if (!e.isPrimary) {
                 return;
             }
-            console.log('pointerenter');
             setOver(true);
         };
     }, [onDrop]);
@@ -150,7 +148,6 @@ const DropZone = ({ children, onDrop }: DropProps) => {
             if (!e.isPrimary) {
                 return;
             }
-            console.log('pointerleave');
             setOver(false);
         };
     }, [onDrop]);
@@ -164,7 +161,6 @@ const DropZone = ({ children, onDrop }: DropProps) => {
             if (!e.isPrimary) {
                 return;
             }
-            console.log('pointerup');
             onDrop();
         };
     }, [onDrop]);
