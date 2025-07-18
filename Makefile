@@ -10,4 +10,4 @@ IndexApp:
 ten-app:
 	cd ten-app && yarn build
 	mkdir -p public/wwwroot/
-	rsync -r ten-app/out/ public/wwwroot/ten
+	rsync -r ten-app/out/ten public/wwwroot/ten

@@ -2,7 +2,8 @@
 const nextConfig = {
     output: 'export',
     reactStrictMode: true,
-    basePath: '/ten'
+    basePath: '/ten',
+    distDir: 'out/ten'
 };
 
 export default nextConfig;
