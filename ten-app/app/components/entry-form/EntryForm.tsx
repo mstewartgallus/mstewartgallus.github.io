@@ -1,7 +1,7 @@
 "use client";
 
 import type { ChangeEvent, FormEvent, MouseEvent } from "react";
-import { useCallback, useId, useState } from 'react';
+import { useCallback, useMemo, useId, useState } from 'react';
 import { If } from "../If";
 import { Button } from "../button/Button";
 import { Icon } from "../icon/Icon";
@@ -11,9 +11,9 @@ import styles from "./EntryForm.module.css";
 interface EditFormProps {
     readonly disabled: boolean;
     readonly selected: boolean;
-    readonly value?: string;
+    readonly value: string;
     readonly onChange?: (value: string) => void;
-    readonly onSelect: () => void;
+    readonly onSelect?: () => void;
     readonly onDeselect: () => void;
 }
 
@@ -36,24 +36,31 @@ const FormButton = ({ disabled, value, id, onChange, onDeselect }: FormButtonPro
     }, [onDeselect, onChange, value]);
 
     return <form className={styles.editMenu} id={id} action="#" onSubmit={onSubmit}>
-        <Button aria-label="Finish Edit" disabled={disabled || !onChange}><Icon>✔</Icon></Button>
+           <Button disabled={disabled || !onChange}>
+            Submit
+          </Button>
         </form>;
 };
 
 const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }: EditFormProps) => {
     const formId = useId();
     const controlId = useId();
-    const [editValue, setEditValue] = useState(value ?? '');
+    const [editValue, setEditValue] = useState(value);
 
-    const onToggleClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-
-        if (selected) {
-            onDeselect();
-        } else {
-            setEditValue(value ?? '');
-            onSelect();
+    const onToggleClick = useMemo(() => {
+        if (!onSelect) {
+            return;
         }
+        return (e: MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault();
+
+            if (selected) {
+                onDeselect();
+            } else {
+                setEditValue(value);
+                onSelect();
+            }
+        };
     }, [onSelect, onDeselect, selected, value]);
 
     const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -66,16 +73,16 @@ const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }:
     }, []);
 
     return <div className={styles.editableTitle}>
-            <Button aria-label={selected ? 'Cancel' : value ? 'Edit' : 'New'}
+          <Button aria-label={selected ? 'Cancel' : 'Edit'}
                 disabled={disabled}
                 onClick={onToggleClick}
                 aria-expanded={selected}
                 aria-controls={controlId}>
-               <Icon>{selected ? 'X' : value ? '✎' : '+'}</Icon>
+                <Icon>{selected ? 'X' : '✎'}</Icon>
             </Button>
             <div id={controlId} className={styles.titleAndInput}>
                 <If cond={!selected}>
-                    <div className={styles.title}>{value ?? '...'}</div>
+                    <div className={styles.title}>{value}</div>
                 </If>
                 <If cond={selected}>
                     <input disabled={disabled} className={styles.input} form={formId} value={editValue} onChange={onChangeInput} />
@@ -92,11 +99,9 @@ interface Props {
 
     readonly selected: boolean;
     readonly onDeselect: () => void;
-    readonly onSelect: () => void;
+    readonly onSelect?: () => void;
 
     readonly onEdit?: (value: string) => void;
-    readonly onUp?: () => void;
-    readonly onDown?: () => void;
 }
 
 export const EntryForm = ({
@@ -106,9 +111,17 @@ export const EntryForm = ({
     onDeselect,
     onSelect,
     onEdit
-}: Props) =>
-    <div className={styles.entryForm}>
+}: Props) => {
+    const hasValue = value !== undefined;
+    return <div className={styles.entryForm}>
        <div className={styles.editForm}>
-         <EditForm disabled={disabled} selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
+        {
+            hasValue &&
+                <EditForm disabled={disabled} selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
+        }
+        {
+           !hasValue && <>...</>
+        }
        </div>
     </div>;
+}

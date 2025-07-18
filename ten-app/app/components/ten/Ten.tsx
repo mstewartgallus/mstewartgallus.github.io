@@ -5,10 +5,11 @@ import type { MouseEvent } from "react";
 
 import {
     edit,
-    archive,
+    create,
+    complete,
     swap,
-    selectFresh,
-    selectArchived,
+    selectEntryFresh,
+    selectEntryComplete,
 } from "@/lib/features/ten/tenSlice";
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -21,7 +22,7 @@ import { usePersistBootstrapped } from '../../StoreProvider';
 import styles from "./Ten.module.css";
 
 interface AdaptorProps {
-    readonly id: Id;
+    readonly id?: Id;
     readonly value?: string;
     readonly disabled: boolean;
 
@@ -38,11 +39,19 @@ const EntryFormAdaptor = ({
     onEditId,
     onSelectId, onDeselect
 }: AdaptorProps) => {
-    const selected = selectionId === id;
+    const selected = id !== null && selectionId === id;
 
-    const onSelect = useCallback(() => onSelectId(id), [id, onSelectId]);
+    const onSelect = useMemo(() => {
+        if (id === undefined) {
+            return;
+        }
+        return () => onSelectId(id);
+    }, [id, onSelectId]);
 
     const onEdit = useMemo(() => {
+        if (id === undefined) {
+            return;
+        }
         if (!onEditId) {
             return;
         }
@@ -56,47 +65,53 @@ const EntryFormAdaptor = ({
 
 interface Entry {
     readonly id: Id;
-    readonly value?: string;
+    readonly value: string;
 }
 
 interface Props {
-    readonly fresh: readonly Entry[];
-    readonly archived: readonly Entry[];
+    readonly fresh: readonly (Entry | null)[];
+    readonly completed: readonly Entry[];
 
     readonly onEditId?: (id: Id, value: string) => void;
 
-    readonly onArchiveIndex?: (index: number) => void;
+    readonly onCreateIndex?: (index: number) => void;
+    readonly onCompleteIndex?: (index: number) => void;
     readonly onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
 }
 
 interface Item {
-    readonly id: Id;
+    readonly id?: Id;
     readonly value?: string;
     readonly disabled: boolean;
 }
 
 interface FreshProps {
-    readonly fresh: readonly Entry[];
+    readonly fresh: readonly (Entry | null)[];
 
     readonly onEditId?: (id: Id, value: string) => void;
-    readonly onArchiveIndex?: (index: number) => void;
+    readonly onCreateIndex?: (index: number) => void;
+    readonly onCompleteIndex?: (index: number) => void;
     readonly onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
 }
 
-const Fresh = ({ fresh, onEditId, onArchiveIndex, onSwapIndices }: FreshProps) => {
+const Fresh = ({
+    fresh, onEditId,
+    onCreateIndex,onCompleteIndex, onSwapIndices
+}: FreshProps) => {
     const [selectionId, setSelectionId] = useState<Id | null>(null);
 
     const onSelectId = useCallback((id: Id) => setSelectionId(id), []);
     const onDeselect = useCallback(() => setSelectionId(null), []);
 
-    const count = useMemo(() => fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0),
+    const count = useMemo(() => fresh.reduce((x, y) => (y != null ? 1 : 0) + x, 0),
                           [fresh]);
 
     return <section>
                    <h1>{count} / 10</h1>
                    <EntryList
                        fresh={fresh}
-                       onArchiveIndex={onArchiveIndex}
+                       onCreateIndex={onCreateIndex}
+                       onCompleteIndex={onCompleteIndex}
                        onSwapIndices={onSwapIndices}
         >{
             ({id, value, disabled}: Item) =>
@@ -115,24 +130,27 @@ const Fresh = ({ fresh, onEditId, onArchiveIndex, onSwapIndices }: FreshProps) =
         </section>;
 }
 
-interface ArchivedProps {
-    readonly archived: readonly Entry[];
+interface CompletedProps {
+    readonly completed: readonly Entry[];
 }
 
-const Archived = ({ archived }: ArchivedProps) =>
+const Completed = ({ completed }: CompletedProps) =>
     <section>
-    <h2>Archived</h2>
+    <h2>Completed</h2>
     <ul>
     {
-        archived.map(({ id, value }) =>
+        completed.map(({ id, value }) =>
             <li key={id}>{value}</li>)
     }
     </ul>
     </section>;
 
 const TenImpl = ({
-    fresh, archived,
-    onEditId, onArchiveIndex, onSwapIndices
+    fresh, completed,
+    onEditId,
+    onCreateIndex,
+    onCompleteIndex,
+    onSwapIndices
 }: Props) => {
     const [tab, setTab] = useState(false);
 
@@ -148,31 +166,22 @@ const TenImpl = ({
     return <>
         <nav className={styles.tabWrapper}>
             <div className={styles.tab}>
-                <div>{tab ? 'Archived' : 'Fresh'}</div>
-                <Button aria-expanded={tab} onClick={onClick}>{tab ? 'Fresh' : 'Archived'}</Button>
+                <div>{tab ? 'Completed' : 'Fresh'}</div>
+                <Button aria-expanded={tab} onClick={onClick}>{tab ? 'Fresh' : 'Completed'}</Button>
             </div>
         </nav>
         {
             tab ?
-                <Archived archived={archived} /> :
+                <Completed completed={completed} /> :
                 <Fresh fresh={fresh}
-            onEditId={onEditId} onArchiveIndex={onArchiveIndex} onSwapIndices={onSwapIndices} /> 
+            onEditId={onEditId}
+            onCreateIndex={onCreateIndex} onCompleteIndex={onCompleteIndex} onSwapIndices={onSwapIndices}
+                />
         }
     </>;
 };
 
-const mock = [
-    { id: 0 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 }
-];
+const mock = Array(10).fill(null);
 
 export const Ten = () => {
     const dispatch = useAppDispatch();
@@ -180,23 +189,27 @@ export const Ten = () => {
     const onEditId = useCallback((id: Id, value: string) =>
         dispatch(edit({ id, value })),
         [dispatch]);
-    const onArchiveIndex = useCallback((index: number) =>
-        dispatch(archive({ index })),
+    const onCompleteIndex = useCallback((index: number) =>
+        dispatch(complete({ index })),
+        [dispatch]);
+    const onCreateIndex = useCallback((index: number) =>
+        dispatch(create({ index })),
         [dispatch]);
     const onSwapIndices = useCallback((leftIndex: number, rightIndex: number) =>
         dispatch(swap({ leftIndex, rightIndex })),
         [dispatch]);
 
-    const fresh = useAppSelector(selectFresh);
-    const archived = useAppSelector(selectArchived);
+    const entryFresh = useAppSelector(selectEntryFresh);
+    const entryComplete = useAppSelector(selectEntryComplete);
 
     const bootstrapped = usePersistBootstrapped();
 
     return <TenImpl
-        fresh={bootstrapped ? fresh : mock}
-        archived={bootstrapped ? archived : []}
+        fresh={bootstrapped ? entryFresh : mock}
+        completed={bootstrapped ? entryComplete : []}
         onEditId={bootstrapped ? onEditId : undefined}
-        onArchiveIndex={bootstrapped ? onArchiveIndex : undefined}
+        onCreateIndex={bootstrapped ? onCreateIndex : undefined}
+        onCompleteIndex={bootstrapped ? onCompleteIndex : undefined}
         onSwapIndices={bootstrapped ? onSwapIndices : undefined}
         />;
 };

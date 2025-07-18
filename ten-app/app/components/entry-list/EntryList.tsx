@@ -6,22 +6,21 @@ import type {
 import type { Id } from '@/types/ten';
 import { createContext, useContext, useCallback, useId, useMemo, useState } from 'react';
 import { Button } from "../button/Button";
+import { Icon } from "../icon/Icon";
 import { useCursor, usePointerUp, usePointerLeave } from "../html/Html";
 
 import listStyles from './EntryList.module.css';
 import styles from './EntryItem.module.css';
 
 export interface EntryItemProps {
-    readonly id: Id;
+    readonly id?: Id;
     readonly value?: string;
     readonly disabled: boolean;
 };
 
 
 interface ItemContext {
-    readonly disabled: boolean;
-    readonly anyDragging: boolean;
-    readonly dragging: boolean;
+    readonly hasItem: boolean;
     readonly index: number;
 }
 
@@ -31,38 +30,33 @@ interface ListContext {
     readonly onDropIndex?: (index: number) => void;
     readonly onDragEnd?: () => void;
 
-    readonly onArchiveIndex?: (index: number) => void;
+    readonly onCreateIndex?: (index: number) => void;
+    readonly onCompleteIndex?: (index: number) => void;
 };
 
 const ItemContext = createContext<ItemContext>({
-    disabled: true,
-    dragging: false,
-    anyDragging: false,
-    index: 0
+    index: 0,
+    hasItem: false
 });
 ItemContext.displayName = 'ItemContext';
 
 const ListContext = createContext<ListContext>({
-    dragIndex: 0
 });
 ListContext.displayName = 'ListContext';
 
 interface ItemProviderProps {
     readonly children: ReactNode;
     readonly index: number;
-    readonly disabled: boolean;
+    readonly hasItem: boolean;
 }
 
 const ItemProvider = ({
-    children, index, disabled
+    children, index, hasItem
 }: ItemProviderProps) => {
-    const { dragIndex } = useContext(ListContext);
-    const dragging = dragIndex == index;
-    const anyDragging = dragIndex !== undefined;
     const memo = useMemo(() =>({
-        disabled,
-        anyDragging, dragging, index
-    }), [ disabled, anyDragging, dragging, index ]);
+        index,
+        hasItem
+    }), [ index, hasItem ]);
     return <ItemContext.Provider value={memo}>{children}</ItemContext.Provider>;
 };
 
@@ -211,33 +205,51 @@ const DropZone = ({ children, onDrop }: DropProps) => {
 };
 
 interface ControlProps {
-    readonly id: string;
-    readonly onArchive?: () => void;
+    id: string;
+    disabled: boolean;
+    onCreate?: () => void;
+    onComplete?: () => void;
 };
 
 const ItemControls = ({
     id,
-    onArchive,
+    disabled,
+    onCreate,
+    onComplete,
 }: ControlProps) => {
     const onSubmit = useCallback((e: FormEvent) => {
         e.preventDefault();
 
         const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
         switch (value) {
-        case 'archive':
-            if (onArchive) {
+        case 'complete':
+            if (onComplete) {
                 e.preventDefault();
-                onArchive();
+                onComplete();
             }
             break;
+
+            case 'create':
+                if (onCreate) {
+                    e.preventDefault();
+                    onCreate();
+                }
+                break;
 
         default:
             return;
         }
-    }, [onArchive]);
+    }, [onComplete, onCreate]);
 
     return <form id={id} onSubmit={onSubmit} action="#" className={styles.entryForm}>
-        <Button disabled={!onArchive} value="archive">Archive</Button>
+        {
+            onCreate &&
+                <Button disabled={disabled} aria-label="Create Task" value="create"><Icon>+</Icon></Button>
+        }
+        {
+            onComplete &&
+                <Button disabled={disabled} aria-label="Complete Task" value="complete"><Icon>✔</Icon></Button>
+        }
      </form>;
 };
 
@@ -252,22 +264,27 @@ export const EntryItem = ({ children }: ItemProps) => {
     // FIXME rework grabber to integrated into the form system
     const formId = useId();
 
+    const { index, hasItem } = useContext(ItemContext);
     const {
-        anyDragging,
-        dragging,
-        index,
-        disabled
-    } = useContext(ItemContext);
-    const {
+        dragIndex,
         onDragStartIndex,
         onDragEnd,
         onDropIndex,
-        onArchiveIndex
+        onCreateIndex,
+        onCompleteIndex
     } = useContext(ListContext);
+
+    const dragging = dragIndex == index;
+    const anyDragging = dragIndex !== undefined;
 
     const onDragStart = useBind(onDragStartIndex, index);
     const onDrop = useBind(onDropIndex, index);
-    const onArchive = useBind(onArchiveIndex, index);
+
+    let onCreate = useBind(onCreateIndex, index);
+    let onComplete = useBind(onCompleteIndex, index);
+
+    onCreate = hasItem ? undefined : onCreate;
+    onComplete = hasItem ? onComplete : undefined;
 
     const otherDragging = anyDragging && !dragging;
 
@@ -277,34 +294,34 @@ export const EntryItem = ({ children }: ItemProps) => {
            <Grabber dragging={dragging} onDragStart={onDragStart} onDragEnd={onDragEnd} />
             {children}
              </div>
-
-        {
-            !disabled &&
             <ItemControls
                id={formId}
-               onArchive={(disabled || anyDragging) ? undefined : onArchive} />
-        }
+               disabled={anyDragging}
+               onCreate={onCreate}
+               onComplete={onComplete} />
         </div>
       </DropZone>;
 };
 
 interface Entry {
     readonly id: Id;
-    readonly value?: string;
+    readonly value: string;
 }
 
 interface Props {
     readonly children: ComponentType<EntryItemProps>;
-    readonly fresh: readonly Entry[];
+    readonly fresh: readonly (Entry | null)[];
 
     readonly onSwapIndices?: (dragIndex: number, dropIndex: number) => void;
-    readonly onArchiveIndex?: (index: number) => void;
+    readonly onCreateIndex?: (index: number) => void;
+    readonly onCompleteIndex?: (index: number) => void;
 }
 
 export const EntryList = ({
     children,
     fresh,
-    onArchiveIndex, onSwapIndices
+    onCreateIndex,
+    onCompleteIndex, onSwapIndices
 }: Props) => {
     const [dragIndex, setDragIndex] = useState<number | null>(null);
 
@@ -340,24 +357,30 @@ export const EntryList = ({
         onDragStartIndex,
         onDragEnd,
         onDropIndex,
-        onArchiveIndex
+        onCreateIndex,
+        onCompleteIndex
     }), [
         dragIndex,
         onDragStartIndex, onDragEnd,
         onDropIndex,
-        onArchiveIndex
+        onCreateIndex,
+        onCompleteIndex
     ]);
     const Child = children;
     return <ul className={listStyles.entryList} role="list">
         <ListContext.Provider value={context}>
         {
-            fresh.map(({ id, value }, index) =>
-                <li key={id} role="listitem"
+            fresh.map((item, index) => {
+                const id = item ? item.id : undefined;
+                const value = item ? item.value : undefined;
+                const key = id ? `id-${id}` : `index-${index}`;
+                return <li key={key} role="listitem"
                     className={listStyles.entryItem}>
-                    <ItemProvider disabled={!value} index={index}>
-                        <Child value={value ?? undefined} id={id} disabled={dragIndex !== null} />
+                    <ItemProvider hasItem={!!item} index={index}>
+                        <Child value={value} id={id} disabled={dragIndex !== null} />
                     </ItemProvider>
-                </li>)
+                    </li>;
+            })
         }
         </ListContext.Provider>
     </ul>;
