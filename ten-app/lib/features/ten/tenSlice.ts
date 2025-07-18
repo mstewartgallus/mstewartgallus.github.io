@@ -36,6 +36,29 @@ const selectEntries: TenSelector<readonly (string | null)[]> = (ten: TenSliceSta
 const selectFreshId: TenSelector<readonly Id[]> = (ten: TenSliceState) => ten.freshId;
 const selectArchiveId: TenSelector<readonly Id[]> = (ten: TenSliceState) => ten.archivedId;
 
+interface Entry {
+    readonly id: Id;
+    readonly value?: string;
+}
+
+const entriesFresh: (
+    entries: readonly (string | null)[],
+    freshId: readonly Id[]
+) => readonly Entry[] = (entries, freshId) =>
+    freshId.map(id => ({
+        id,
+        value: entries[id] ?? undefined
+    }));
+
+const entriesArchives: (
+    entries: readonly (string | null)[],
+    archivedId: readonly Id[]
+) => readonly Entry[] = (entries, archivedId) =>
+    archivedId.map(id => ({
+        id,
+        value: entries[id] ?? undefined
+    }));
+
 export const tenSlice = createSlice({
     name: "ten",
 
@@ -63,20 +86,8 @@ export const tenSlice = createSlice({
     }),
 
     selectors: {
-        selectFresh: createSelector(
-            [selectEntries, selectFreshId],
-            (entries, freshId) =>
-                freshId.map(id => ({
-                    id,
-                    value: entries[id]
-                }))),
-        selectArchived: createSelector(
-            [selectEntries, selectArchiveId],
-            (entries, archivedId) =>
-                archivedId.map(id => ({
-                    id,
-                    value: entries[id]
-                })))
+        selectFresh: createSelector([selectEntries, selectFreshId], entriesFresh),
+        selectArchived: createSelector([selectEntries, selectArchiveId], entriesArchives)
     },
 });
 

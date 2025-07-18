@@ -1,6 +1,7 @@
 "use client";
 
 import type { Id } from "@/types/ten";
+import type { MouseEvent } from "react";
 
 import {
     edit,
@@ -12,9 +13,12 @@ import {
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useMemo, useState } from 'react';
-import { EntryList, EntryItem } from './entry-list/EntryList';
-import { EntryForm } from './entry-form/EntryForm';
-import { usePersistBootstrapped } from '../StoreProvider';
+import { EntryList, EntryItem } from '../entry-list/EntryList';
+import { EntryForm } from '../entry-form/EntryForm';
+import { Button } from '../button/Button';
+import { usePersistBootstrapped } from '../../StoreProvider';
+
+import styles from "./Ten.module.css";
 
 interface AdaptorProps {
     readonly id: Id;
@@ -50,9 +54,14 @@ const EntryFormAdaptor = ({
         />;
 };
 
+interface Entry {
+    readonly id: Id;
+    readonly value?: string;
+}
+
 interface Props {
-    readonly fresh: readonly { readonly id: number, readonly value: string | null }[];
-    readonly archived: readonly { readonly id: number, readonly value: string | null }[];
+    readonly fresh: readonly Entry[];
+    readonly archived: readonly Entry[];
 
     readonly onEditId?: (id: Id, value: string) => void;
 
@@ -66,10 +75,15 @@ interface Item {
     readonly disabled: boolean;
 }
 
-const TenImpl = ({
-    fresh, archived,
-    onEditId, onArchiveIndex, onSwapIndices
-}: Props) => {
+interface FreshProps {
+    readonly fresh: readonly Entry[];
+
+    readonly onEditId?: (id: Id, value: string) => void;
+    readonly onArchiveIndex?: (index: number) => void;
+    readonly onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
+}
+
+const Fresh = ({ fresh, onEditId, onArchiveIndex, onSwapIndices }: FreshProps) => {
     const [selectionId, setSelectionId] = useState<Id | null>(null);
 
     const onSelectId = useCallback((id: Id) => setSelectionId(id), []);
@@ -77,8 +91,8 @@ const TenImpl = ({
 
     const count = useMemo(() => fresh.reduce((x, y) => (y.value != null ? 1 : 0) + x, 0),
                           [fresh]);
-    return <>
-               <section>
+
+    return <section>
                    <h1>{count} / 10</h1>
                    <EntryList
                        fresh={fresh}
@@ -98,30 +112,66 @@ const TenImpl = ({
                     />
                 </EntryItem>
         }</EntryList>
-               </section>
-               <section>
-                   <h2>Archived</h2>
-                   <ul>
-                       {
-                           archived.map(({ id, value }) =>
-                               <li key={id}>{value}</li>)
-                       }
-                   </ul>
-               </section>
-           </>;
+        </section>;
+}
+
+interface ArchivedProps {
+    readonly archived: readonly Entry[];
+}
+
+const Archived = ({ archived }: ArchivedProps) =>
+    <section>
+    <h2>Archived</h2>
+    <ul>
+    {
+        archived.map(({ id, value }) =>
+            <li key={id}>{value}</li>)
+    }
+    </ul>
+    </section>;
+
+const TenImpl = ({
+    fresh, archived,
+    onEditId, onArchiveIndex, onSwapIndices
+}: Props) => {
+    const [tab, setTab] = useState(false);
+
+    const onClick = useCallback((e: MouseEvent<HTMLElement>) => {
+        if (e.button !== 0) {
+            return;
+        }
+        e.preventDefault();
+
+        setTab(o => !o);
+    }, []);
+
+    return <>
+        <nav className={styles.tabWrapper}>
+            <div className={styles.tab}>
+                <div>{tab ? 'Archived' : 'Fresh'}</div>
+                <Button aria-expanded={tab} onClick={onClick}>{tab ? 'Fresh' : 'Archived'}</Button>
+            </div>
+        </nav>
+        {
+            tab ?
+                <Fresh fresh={fresh}
+            onEditId={onEditId} onArchiveIndex={onArchiveIndex} onSwapIndices={onSwapIndices} /> :
+                <Archived archived={archived} />
+        }
+    </>;
 };
 
 const mock = [
-    { id: 0, value: null },
-    { id: 1, value: null },
-    { id: 2, value: null },
-    { id: 3, value: null },
-    { id: 4, value: null },
-    { id: 5, value: null },
-    { id: 6, value: null },
-    { id: 7, value: null },
-    { id: 8, value: null },
-    { id: 9, value: null }
+    { id: 0 },
+    { id: 1 },
+    { id: 2 },
+    { id: 3 },
+    { id: 4 },
+    { id: 5 },
+    { id: 6 },
+    { id: 7 },
+    { id: 8 },
+    { id: 9 }
 ];
 
 export const Ten = () => {

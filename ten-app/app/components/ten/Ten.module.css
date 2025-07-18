@@ -1,0 +1,12 @@
+.tab, .tabWrapper {
+    display: flex;
+    align-items: center;
+}
+.tabWrapper {
+    justify-content: end;
+}
+
+.tab {
+    margin-inline: 1em;
+    margin-block: 1em;
+}

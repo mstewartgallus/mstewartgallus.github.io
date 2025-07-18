@@ -288,9 +288,14 @@ export const EntryItem = ({ children }: ItemProps) => {
       </DropZone>;
 };
 
+interface Entry {
+    readonly id: Id;
+    readonly value?: string;
+}
+
 interface Props {
     readonly children: ComponentType<EntryItemProps>;
-    readonly fresh: readonly { readonly id: Id, readonly value: string | null }[];
+    readonly fresh: readonly Entry[];
 
     readonly onSwapIndices?: (dragIndex: number, dropIndex: number) => void;
     readonly onArchiveIndex?: (index: number) => void;
