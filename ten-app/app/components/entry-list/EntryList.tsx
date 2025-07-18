@@ -4,7 +4,7 @@ import type {
     ComponentType, FormEvent, MouseEvent,
     PointerEvent, ReactNode } from 'react';
 import type { Id } from '@/types/ten';
-import { createContext, useId, useContext, useCallback, useMemo, useState } from 'react';
+import { createContext, useContext, useCallback, useId, useMemo, useState } from 'react';
 import { Button } from "../button/Button";
 import { useCursor, usePointerUp, usePointerLeave } from "../html/Html";
 
@@ -19,6 +19,7 @@ export interface EntryItemProps {
 
 
 interface ItemContext {
+    readonly disabled: boolean;
     readonly anyDragging: boolean;
     readonly dragging: boolean;
     readonly index: number;
@@ -34,6 +35,7 @@ interface ListContext {
 };
 
 const ItemContext = createContext<ItemContext>({
+    disabled: true,
     dragging: false,
     anyDragging: false,
     index: 0
@@ -48,17 +50,19 @@ ListContext.displayName = 'ListContext';
 interface ItemProviderProps {
     readonly children: ReactNode;
     readonly index: number;
+    readonly disabled: boolean;
 }
 
 const ItemProvider = ({
-    children, index
+    children, index, disabled
 }: ItemProviderProps) => {
     const { dragIndex } = useContext(ListContext);
     const dragging = dragIndex == index;
     const anyDragging = dragIndex !== undefined;
     const memo = useMemo(() =>({
+        disabled,
         anyDragging, dragging, index
-    }), [ anyDragging, dragging, index ]);
+    }), [ disabled, anyDragging, dragging, index ]);
     return <ItemContext.Provider value={memo}>{children}</ItemContext.Provider>;
 };
 
@@ -70,12 +74,19 @@ interface GrabberProps {
 }
 
 const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
-    const onClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-        if (e.button !== 0) {
+    const onToggle = onDragStart || onDragEnd;
+    const onClick = useMemo(() => {
+        if (!onToggle) {
             return;
         }
-        e.preventDefault();
-    }, []);
+        return (e: MouseEvent<HTMLButtonElement>) => {
+            if (e.button !== 0) {
+                return;
+            }
+            e.preventDefault();
+            onToggle();
+        };
+    }, [onToggle]);
 
     const onPointerDown = useMemo(() => {
         if (!onDragStart) {
@@ -107,13 +118,15 @@ const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
     useCursor(dragging ? 'grabbing' : undefined);
 
     return <div className={styles.grabberWrapper}>
-            <button className={styles.grabber}
-               aria-expanded={dragging}
-               onPointerDown={onPointerDown}
-               onClick={onClick}
-               tabIndex={-1}
-               >
-            <div className={styles.grabberIcon}>=</div>
+           <button
+                 className={styles.grabber}
+                 aria-label="Reorder"
+                 aria-expanded={dragging}
+                 onPointerDown={onPointerDown}
+                 onClick={onClick}
+                 disabled={!onClick}
+                 >
+                <div className={styles.grabberIcon}>&</div>
             </button>
         </div>;
 };
@@ -165,12 +178,19 @@ const DropZone = ({ children, onDrop }: DropProps) => {
         };
     }, [onDrop]);
 
-    const onClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-        if (e.button !== 0) {
+    const onClick = useMemo(() => {
+        if (!onDrop) {
             return;
         }
-        e.preventDefault();
-    }, []);
+
+        return (e: MouseEvent<HTMLButtonElement>) => {
+            if (e.button !== 0) {
+                return;
+            }
+            e.preventDefault();
+            onDrop();
+        };
+    }, [onDrop]);
 
     if (!onDrop && isOver) {
         setOver(false);
@@ -182,9 +202,8 @@ const DropZone = ({ children, onDrop }: DropProps) => {
             onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}
             onPointerUp={onPointerUp}
             onClick={onClick}
-            disabled={!onDrop ? true : undefined}
-            data-over={isOver ? "true" : undefined}
-            tabIndex={-1}
+            disabled={!onClick ? true : undefined}
+            data-over={isOver ? true : undefined}
         />
         {children}
      </div>;
@@ -193,26 +212,14 @@ const DropZone = ({ children, onDrop }: DropProps) => {
 
 interface ControlProps {
     readonly id: string;
-    readonly dragging: boolean;
-    readonly anyDragging: boolean;
-
-    readonly onDragStart?: () => void;
-    readonly onDragEnd?: () => void;
-
     readonly onArchive?: () => void;
 };
 
 const ItemControls = ({
     id,
 
-    dragging,
-    onDragStart,
-    onDragEnd,
-
     onArchive,
 }: ControlProps) => {
-    const disabled = !onDragStart;
-
     const onSubmit = useCallback((e: FormEvent) => {
         e.preventDefault();
 
@@ -231,10 +238,7 @@ const ItemControls = ({
     }, [onArchive]);
 
     return <form id={id} onSubmit={onSubmit} action="#" className={styles.entryForm}>
-        <Grabber
-            dragging={dragging}
-            onDragStart={onDragStart} onDragEnd={onDragEnd} />
-        <Button disabled={disabled || !onArchive} value="archive">Archive</Button>
+             <Button value="archive">Archive</Button>
      </form>;
 };
 
@@ -252,7 +256,8 @@ export const EntryItem = ({ children }: ItemProps) => {
     const {
         anyDragging,
         dragging,
-        index
+        index,
+        disabled
     } = useContext(ItemContext);
     const {
         onDragStartIndex,
@@ -268,17 +273,17 @@ export const EntryItem = ({ children }: ItemProps) => {
     const otherDragging = anyDragging && !dragging;
 
     return <DropZone onDrop={otherDragging ? onDrop : undefined}>
-         <div className={styles.entryItem}>
-             <ItemControls
-               id={formId}
-               anyDragging={anyDragging}
-               dragging={dragging}
+        <div className={styles.entryItem}>
+           <div className={styles.entryItemInner}>
+           <Grabber dragging={dragging} onDragStart={onDragStart} onDragEnd={onDragEnd} />
+            {children}
+             </div>
 
-               onDragStart={dragging ? undefined : onDragStart}
-               onDragEnd={dragging ? onDragEnd : undefined}
-               onArchive={anyDragging ? undefined : onArchive}
-           />
-          {children}
+        {
+            !disabled && <ItemControls
+               id={formId}
+         onArchive={anyDragging ? undefined : onArchive} />
+            }
         </div>
       </DropZone>;
 };
@@ -338,14 +343,14 @@ export const EntryList = ({
         onArchiveIndex
     ]);
     const Child = children;
-    return <ul className={listStyles.entryList}>
+    return <ul className={listStyles.entryList} role="list">
         <ListContext.Provider value={context}>
         {
             fresh.map(({ id, value }, index) =>
-                <li key={id} className={listStyles.entryItem}>
-                    <ItemProvider index={index}>
-                    <Child value={value ?? undefined} id={id} disabled={dragIndex !== null}
-                    />
+                <li key={id} role="listitem"
+                    className={listStyles.entryItem}>
+                    <ItemProvider disabled={!value} index={index}>
+                    <Child value={value ?? undefined} id={id} disabled={dragIndex !== null} />
                     </ItemProvider>
                 </li>)
         }

@@ -1,6 +1,6 @@
 "use client";
 
-import type { ChangeEvent, FormEvent, PointerEvent } from "react";
+import type { ChangeEvent, FormEvent, MouseEvent } from "react";
 import { useCallback, useId, useState } from 'react';
 import { If } from "../If";
 import { Button } from "../button/Button";
@@ -36,18 +36,16 @@ const FormButton = ({ disabled, value, id, onChange, onDeselect }: FormButtonPro
     }, [onDeselect, onChange, value]);
 
     return <form className={styles.editMenu} id={id} action="#" onSubmit={onSubmit}>
-        <Button disabled={disabled || !onChange}><Icon>✔</Icon></Button>
+        <Button aria-label="Finish Edit" disabled={disabled || !onChange}><Icon>✔</Icon></Button>
         </form>;
 };
 
 const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }: EditFormProps) => {
     const formId = useId();
     const controlId = useId();
-    const buttonId = useId();
-
     const [editValue, setEditValue] = useState(value ?? '');
 
-    const onToggleClick = useCallback((e: PointerEvent<HTMLButtonElement>) => {
+    const onToggleClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         if (selected) {
@@ -58,6 +56,14 @@ const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }:
         }
     }, [onSelect, onDeselect, selected, value]);
 
+    const onClickNew = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+        if (e.button !== 0) {
+            return;
+        }
+        setEditValue(value ?? '');
+        onSelect();
+    }, [onSelect, selected, value]);
+
     const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const { target } = e;
         if (!target) {
@@ -67,16 +73,24 @@ const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }:
         setEditValue((target as HTMLInputElement).value);
     }, []);
 
-    const icon = selected ? 'X' : value ? '✎' : '+';
     return <>
         <div className={styles.editableTitle}>
-             <Button id={buttonId}
+        {
+            value ?
+                <Button aria-label={selected ? 'Cancel' : 'Edit'}
                     disabled={disabled}
                     onClick={onToggleClick}
                     aria-expanded={selected}
                     aria-controls={controlId}>
-                <Icon>{icon}</Icon>
-            </Button>
+                    <Icon>{selected ? 'X' : '✎'}</Icon>
+                </Button> :
+                <Button aria-label="New"
+                    disabled={disabled}
+                    onClick={onClickNew}
+                    aria-controls={controlId}>
+                    <Icon>+</Icon>
+                </Button>
+            }
             <div id={controlId} className={styles.titleAndInput}>
                 <div className={styles.title}>{value ?? '...'}</div>
                 <If cond={selected}>
