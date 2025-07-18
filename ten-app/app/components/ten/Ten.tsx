@@ -154,9 +154,9 @@ const TenImpl = ({
         </nav>
         {
             tab ?
+                <Archived archived={archived} /> :
                 <Fresh fresh={fresh}
-            onEditId={onEditId} onArchiveIndex={onArchiveIndex} onSwapIndices={onSwapIndices} /> :
-                <Archived archived={archived} />
+            onEditId={onEditId} onArchiveIndex={onArchiveIndex} onSwapIndices={onSwapIndices} /> 
         }
     </>;
 };
