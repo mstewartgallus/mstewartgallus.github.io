@@ -4,15 +4,13 @@ import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { tenSlice } from "./features/ten/tenSlice";
-import { htmlSlice } from "./features/html/htmlSlice";
 
 const persistConfig = {
     key: "root10",
-    storage,
-    blacklist: ['html']
+    storage
 };
 
-const rootReducer = persistReducer(persistConfig, combineSlices(tenSlice, htmlSlice));
+const rootReducer = persistReducer(persistConfig, combineSlices(tenSlice));
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -71,10 +69,8 @@ export const makeStore = () =>
         middleware: getDefaultMiddleware => getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [
-                    "persist/PERSIST", "persist/REHYDRATE",
-                    'html/addHook', 'html/removeHook',
-                ],
-                ignoredPaths: ['html']
+                    "persist/PERSIST", "persist/REHYDRATE"
+                ]
             },
         }).prepend(tenValidate)
     });

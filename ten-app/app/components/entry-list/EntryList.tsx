@@ -5,25 +5,11 @@ import type {
     ComponentType, MouseEvent,
     PointerEvent, ReactNode
 } from 'react';
-import { createContext, useContext, useMemo, useState } from 'react';
-import { useCursor, usePointerUp, usePointerLeave } from "../html/Html";
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { useCursor, useIsPrimaryPointerDown } from "../html/Html";
 import { DropButton } from "../drop-button/DropButton";
 
 import styles from './EntryList.module.css';
-
-interface ListContext {
-    readonly dragIndex?: number;
-    readonly onDragStartIndex?: (index: number) => void;
-    readonly onDropIndex?: (index: number) => void;
-    readonly onDragEnd?: () => void;
-};
-
-const ItemContext = createContext<number>(0);
-ItemContext.displayName = 'ItemContext';
-
-const ListContext = createContext<ListContext>({
-});
-ListContext.displayName = 'ListContext';
 
 interface DragButtonProps {
     readonly disabled: boolean;
@@ -34,6 +20,8 @@ interface DragButtonProps {
 }
 
 const DragButton = ({ disabled, dragging, onDragStart, onDragEnd }: DragButtonProps) => {
+    useCursor(dragging ? 'grabbing' : undefined);
+
     const onToggle = disabled ? undefined : (onDragStart || onDragEnd);
     const onClick = useMemo(() => {
         if (!onToggle) {
@@ -61,22 +49,6 @@ const DragButton = ({ disabled, dragging, onDragStart, onDragEnd }: DragButtonPr
         };
     }, [onDragStart]);
 
-    const onPointerUp = useMemo(() => {
-        if (!onDragEnd) {
-            return;
-        }
-        return (e: PointerEvent) => {
-            if (!e.isPrimary) {
-                return;
-            }
-            onDragEnd();
-        };
-    }, [onDragEnd]);
-
-    usePointerUp(onPointerUp);
-    usePointerLeave(onDragEnd);
-    useCursor(dragging ? 'grabbing' : undefined);
-
     return <div className={styles.grabberWrapper}>
            <button
                  className={styles.grabber}
@@ -90,6 +62,20 @@ const DragButton = ({ disabled, dragging, onDragStart, onDragEnd }: DragButtonPr
             </button>
         </div>;
 };
+
+interface ListContext {
+    readonly dragIndex?: number;
+    readonly onDragStartIndex?: (index: number) => void;
+    readonly onDropIndex?: (index: number) => void;
+    readonly onDragEnd?: () => void;
+};
+
+const ItemContext = createContext<number>(0);
+ItemContext.displayName = 'ItemContext';
+
+const ListContext = createContext<ListContext>({
+});
+ListContext.displayName = 'ListContext';
 
 interface ItemProps {
     readonly children: ReactNode;
@@ -143,6 +129,7 @@ export const EntryList = <T,>({
     onSwapIndices
 }: Props<T>) => {
     const [dragIndex, setDragIndex] = useState<number | null>(null);
+    const isPointerDown = useIsPrimaryPointerDown();
 
     const anyDragging = dragIndex !== null;
 
@@ -170,6 +157,13 @@ export const EntryList = <T,>({
             setDragIndex(null);
         }
     }, [dragIndex, anyDragging, onSwapIndices]);
+
+    useEffect(() => {
+        if (isPointerDown) {
+            return;
+        }
+        setDragIndex(null);
+    }, [isPointerDown]);
 
     const context = useMemo(() => ({
         dragIndex: dragIndex ?? undefined,

@@ -1,64 +1,73 @@
 "use client";
 
 import type {
-    DetailedHTMLProps, HtmlHTMLAttributes, PointerEventHandler
+    DetailedHTMLProps, HtmlHTMLAttributes, PointerEvent
 } from "react";
-import type { Hook, Cursor } from "@/lib/features/html/htmlSlice";
 
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useEffect } from "react";
-import {
-    addHook, removeHook, cursor,
-    selectOnPointerUp, selectOnPointerLeave, selectCursor
-} from "@/lib/features/html/htmlSlice";
+import { createContext, useCallback, useContext, useMemo, useEffect, useState } from "react";
 
 import styles from "./Html.module.css";
 
-const useHook = <T extends Hook>(type: T["type"], value?: T["value"]) => {
-    const dispatch = useAppDispatch();
+export type Cursor = 'grabbing';
 
-    useEffect(() => {
-        if (!value) {
-            return;
-        }
-        const hook: Hook = { type, value };
-        dispatch(addHook(hook));
-        return () => {
-            dispatch(removeHook(hook));
-        };
-    }, [type, value, dispatch]);
-};
+
+interface HtmlContext {
+    setCursor: (cursor?: Cursor) => void;
+    isPrimaryPointerDown: boolean;
+}
+
+const HtmlContext = createContext<HtmlContext>({
+    setCursor: () => {},
+    isPrimaryPointerDown: false
+});
+
 
 export const useCursor = (value?: Cursor) => {
-    const dispatch = useAppDispatch();
+    const { setCursor } = useContext(HtmlContext);
 
     useEffect(() => {
         if (!value) {
             return;
         }
         // FIXME do a push and pop thing
-        dispatch(cursor(value));
+        setCursor(value);
         return () => {
-            dispatch(cursor());
+            setCursor();
         };
-    }, [value, dispatch]);
+    }, [value, setCursor]);
 };
 
-export const usePointerUp = (handler?: PointerEventHandler<HTMLHtmlElement>) =>
-    useHook('pointerup',  handler);
-export const usePointerLeave = (handler?: PointerEventHandler<HTMLHtmlElement>) =>
-    useHook('pointerleave', handler);
+export const useIsPrimaryPointerDown = () => useContext(HtmlContext).isPrimaryPointerDown;
 
 type Props = DetailedHTMLProps<HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>;
 
 export const Html = ({ children, ...props }: Props) => {
-    const onPointerUp = useAppSelector(selectOnPointerUp);
-    const onPointerLeave = useAppSelector(selectOnPointerLeave);
-    const cursor = useAppSelector(selectCursor);
+    const [isPrimaryPointerDown, setIsPrimaryPointerDown] = useState(false);
+    const [cursor, setCursor] = useState<Cursor | null>(null);
 
+    const onPointerDown = useCallback((e: PointerEvent<HTMLHtmlElement>) => {
+        if (!e.isPrimary) {
+            return;
+        }
+        setIsPrimaryPointerDown(true);
+    }, []);
+    const onPointerUp = useCallback((e: PointerEvent<HTMLHtmlElement>) => {
+        if (!e.isPrimary) {
+            return;
+        }
+        setIsPrimaryPointerDown(false);
+    }, []);
+
+    const context = useMemo(() => ({
+        isPrimaryPointerDown,
+        setCursor: (cursor?: Cursor) => setCursor(cursor || null)
+    }), [setCursor, isPrimaryPointerDown]);
     return <html className={styles.html}
-        onPointerUp={onPointerUp} onPointerLeave={onPointerLeave}
-        data-cursor={cursor} {...props}>
-           {children}
+        onPointerUp={onPointerUp}
+        onPointerDown={onPointerDown} onPointerLeave={onPointerDown}
+    data-cursor={cursor} {...props}>
+           <HtmlContext.Provider value={context}>
+              {children}
+           </HtmlContext.Provider>
         </html>;
 };
