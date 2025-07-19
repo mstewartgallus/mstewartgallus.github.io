@@ -5,9 +5,9 @@ all: IndexApp ten-app
 IndexApp:
 	cd IndexApp && yarn build
 	mkdir -p public/wwwroot/
-	rsync -r IndexApp/public/ public/wwwroot/
+	rsync -r --delete IndexApp/public/ public/wwwroot/
 
 ten-app:
 	cd ten-app && yarn build
 	mkdir -p public/wwwroot/
-	rsync -r ten-app/out/ten/ public/wwwroot/ten/
+	rsync -r --delete ten-app/out/ten/ public/wwwroot/ten/
