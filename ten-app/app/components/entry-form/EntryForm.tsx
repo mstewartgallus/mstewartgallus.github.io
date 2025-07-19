@@ -99,6 +99,55 @@ const EditForm = ({
             </div>
         </div>;
 };
+interface ControlProps {
+    id: string;
+    disabled: boolean;
+    onCreate?: () => void;
+    onComplete?: () => void;
+};
+
+const ItemControls = ({
+    id,
+    disabled,
+    onCreate,
+    onComplete,
+}: ControlProps) => {
+    const onSubmit = useCallback((e: FormEvent) => {
+        e.preventDefault();
+
+        const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
+        switch (value) {
+        case 'complete':
+            if (onComplete) {
+                e.preventDefault();
+                onComplete();
+            }
+            break;
+
+            case 'create':
+                if (onCreate) {
+                    e.preventDefault();
+                    onCreate();
+                }
+                break;
+
+        default:
+            return;
+        }
+    }, [onComplete, onCreate]);
+
+    return <form id={id} onSubmit={onSubmit} action="#">
+        {
+            onCreate &&
+                <Button disabled={disabled} aria-label="Create Task" value="create"><Icon>+</Icon></Button>
+        }
+        {
+            onComplete &&
+                <Button disabled={disabled} aria-label="Complete Task" value="complete"><Icon>✔</Icon></Button>
+        }
+     </form>;
+};
+
 
 type EntryProps = EntryFresh & {
     disabled: boolean;
@@ -138,6 +187,9 @@ interface Props {
     readonly onSelect?: () => void;
 
     readonly onEdit?: (value: string) => void;
+
+    readonly onCreate?: () => void;
+    readonly onComplete?: () => void;
 }
 
 export const EntryForm = ({
@@ -146,21 +198,30 @@ export const EntryForm = ({
     selected,
     onDeselect,
     onSelect,
-    onEdit
+    onEdit,
+
+    onCreate,
+    onComplete
 }: Props) => {
     const hasItem = item !== undefined;
+    const formId = useId();
     return <div className={styles.entryForm}>
-       <div className={styles.editForm}>
-        {
-            hasItem &&
-                <Entry key={item.id}
-                   {...item}
-                   disabled={disabled} selected={selected}
-                   onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
-        }
-        {
-           !hasItem && <>...</>
-        }
-       </div>
-    </div>;
+        <div className={styles.editForm}>
+         {
+             hasItem &&
+                 <Entry key={item.id}
+                    {...item}
+                    disabled={disabled} selected={selected}
+                    onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect}
+                 />
+         }
+         {
+            !hasItem && <>...</>
+         }
+         </div>
+         <ItemControls id={formId} disabled={disabled}
+             onCreate={hasItem ? undefined : onCreate}
+             onComplete={hasItem ? onComplete : undefined}
+     />
+     </div>;
 }

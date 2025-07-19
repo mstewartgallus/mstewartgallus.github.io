@@ -1,54 +1,29 @@
 "use client";
 
 import type {
-    ComponentType, FormEvent, MouseEvent,
-    PointerEvent, ReactNode } from 'react';
-import type { EntryFresh } from "@/lib/features/ten/tenSlice";
-import { createContext, useContext, useCallback, useId, useMemo, useState } from 'react';
-import { Button } from "../button/Button";
-import { Icon } from "../icon/Icon";
+    Key,
+    ComponentType, MouseEvent,
+    PointerEvent, ReactNode
+} from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 import { useCursor, usePointerUp, usePointerLeave } from "../html/Html";
 
 import listStyles from './EntryList.module.css';
 import styles from './EntryItem.module.css';
-
-interface ItemContext {
-    readonly hasItem: boolean;
-    readonly index: number;
-}
 
 interface ListContext {
     readonly dragIndex?: number;
     readonly onDragStartIndex?: (index: number) => void;
     readonly onDropIndex?: (index: number) => void;
     readonly onDragEnd?: () => void;
-
-    readonly onCreateIndex?: (index: number) => void;
-    readonly onCompleteIndex?: (index: number) => void;
 };
 
-const ItemContext = createContext<ItemContext>({
-    index: 0,
-    hasItem: false
-});
+const ItemContext = createContext<number>(0);
 ItemContext.displayName = 'ItemContext';
 
 const ListContext = createContext<ListContext>({
 });
 ListContext.displayName = 'ListContext';
-
-interface ItemProviderProps {
-    readonly children: ReactNode;
-    readonly index: number;
-    readonly hasItem: boolean;
-}
-
-const ItemProvider = ({
-    children, index, hasItem
-}: ItemProviderProps) => {
-    const memo = useMemo(() =>({ index, hasItem }), [ index, hasItem ]);
-    return <ItemContext.Provider value={memo}>{children}</ItemContext.Provider>;
-};
 
 interface GrabberProps {
     readonly dragging: boolean;
@@ -194,55 +169,6 @@ const DropZone = ({ children, onDrop }: DropProps) => {
 
 };
 
-interface ControlProps {
-    id: string;
-    disabled: boolean;
-    onCreate?: () => void;
-    onComplete?: () => void;
-};
-
-const ItemControls = ({
-    id,
-    disabled,
-    onCreate,
-    onComplete,
-}: ControlProps) => {
-    const onSubmit = useCallback((e: FormEvent) => {
-        e.preventDefault();
-
-        const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
-        switch (value) {
-        case 'complete':
-            if (onComplete) {
-                e.preventDefault();
-                onComplete();
-            }
-            break;
-
-            case 'create':
-                if (onCreate) {
-                    e.preventDefault();
-                    onCreate();
-                }
-                break;
-
-        default:
-            return;
-        }
-    }, [onComplete, onCreate]);
-
-    return <form id={id} onSubmit={onSubmit} action="#" className={styles.entryForm}>
-        {
-            onCreate &&
-                <Button disabled={disabled} aria-label="Create Task" value="create"><Icon>+</Icon></Button>
-        }
-        {
-            onComplete &&
-                <Button disabled={disabled} aria-label="Complete Task" value="complete"><Icon>✔</Icon></Button>
-        }
-     </form>;
-};
-
 interface ItemProps {
     readonly children: ReactNode;
 }
@@ -250,18 +176,12 @@ const useBind = (f: undefined | ((index: number) => void), index: number) =>
     useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
 
 export const EntryItem = ({ children }: ItemProps) => {
-    // FIXME not sure a form is the right semantics here
-    // FIXME rework grabber to integrated into the form system
-    const formId = useId();
-
-    const { index, hasItem } = useContext(ItemContext);
+    const index = useContext(ItemContext);
     const {
         dragIndex,
         onDragStartIndex,
         onDragEnd,
-        onDropIndex,
-        onCreateIndex,
-        onCompleteIndex
+        onDropIndex
     } = useContext(ListContext);
 
     const dragging = dragIndex == index;
@@ -270,54 +190,36 @@ export const EntryItem = ({ children }: ItemProps) => {
     const onDragStart = useBind(onDragStartIndex, index);
     const onDrop = useBind(onDropIndex, index);
 
-    let onCreate = useMemo(() => {
-        if (!onCreateIndex) {
-            return;
-        }
-        return () => onCreateIndex(index);
-    }, [index, onCreateIndex]);
-    let onComplete = useBind(onCompleteIndex, index);
-
-    onCreate = hasItem ? undefined : onCreate;
-    onComplete = hasItem ? onComplete : undefined;
-
     const otherDragging = anyDragging && !dragging;
 
     return <DropZone onDrop={otherDragging ? onDrop : undefined}>
         <div className={styles.entryItem}>
-           <div className={styles.entryItemInner}>
            <Grabber dragging={dragging} onDragStart={onDragStart} onDragEnd={onDragEnd} />
-            {children}
-             </div>
-            <ItemControls
-               id={formId}
-               disabled={anyDragging}
-               onCreate={onCreate}
-               onComplete={onComplete} />
+           {children}
         </div>
       </DropZone>;
 };
 
-export interface EntryItemProps {
-    readonly item?: EntryFresh;
+export interface EntryItemProps<T> {
+    readonly item?: T;
     readonly disabled: boolean;
+    readonly index: number;
 };
 
-interface Props {
-    readonly children: ComponentType<EntryItemProps>;
-    readonly fresh: readonly (EntryFresh | null)[];
+interface Props<T> {
+    keyOf: (x: T, index: number) => Key;
+    children: ComponentType<EntryItemProps<T>>;
+    fresh: readonly T[];
 
-    readonly onSwapIndices?: (dragIndex: number, dropIndex: number) => void;
-    readonly onCreateIndex?: (index: number) => void;
-    readonly onCompleteIndex?: (index: number) => void;
+    onSwapIndices?: (dragIndex: number, dropIndex: number) => void;
 }
 
-export const EntryList = ({
+export const EntryList = <T,>({
     children,
+    keyOf,
     fresh,
-    onCreateIndex,
-    onCompleteIndex, onSwapIndices
-}: Props) => {
+    onSwapIndices
+}: Props<T>) => {
     const [dragIndex, setDragIndex] = useState<number | null>(null);
 
     const anyDragging = dragIndex !== null;
@@ -352,27 +254,22 @@ export const EntryList = ({
         onDragStartIndex,
         onDragEnd,
         onDropIndex,
-        onCreateIndex,
-        onCompleteIndex
     }), [
         dragIndex,
         onDragStartIndex, onDragEnd,
         onDropIndex,
-        onCreateIndex,
-        onCompleteIndex
     ]);
     const Child = children;
     return <ul className={listStyles.entryList} role="list">
         <ListContext.Provider value={context}>
         {
             fresh.map((item, index) => {
-                const id = item ? item.id : undefined;
-                const key = id ? `id-${id}` : `index-${index}`;
+                const key = keyOf(item, index)
                 return <li key={key} role="listitem"
                     className={listStyles.entryItem}>
-                    <ItemProvider hasItem={!!item} index={index}>
-                        <Child item={item || undefined} disabled={dragIndex !== null} />
-                    </ItemProvider>
+                    <ItemContext.Provider value={index}>
+                        <Child item={item || undefined} disabled={dragIndex !== null} index={index} />
+                    </ItemContext.Provider>
                     </li>;
             })
         }

@@ -31,16 +31,36 @@ interface AdaptorProps {
     onEditId?: (id: Id, value: string) => void;
     onSelectId: (id: Id) => void;
     onDeselect: () => void;
+
+    index: number;
+    onCreateIndex?: (index: number) => void;
+    onCompleteIndex?: (index: number) => void;
 }
 
 const EntryFormAdaptor = ({
    item, disabled, selectionId,
 
     onEditId,
-    onSelectId, onDeselect
+    onSelectId, onDeselect,
+
+    index, onCreateIndex, onCompleteIndex
 }: AdaptorProps) => {
     const id = item && item.id;
     const selected = id !== null && selectionId === id;
+
+    const onCreate = useMemo(() => {
+        if (!onCreateIndex) {
+            return;
+        }
+        return () => onCreateIndex(index);
+    }, [index, onCreateIndex]);
+
+    const onComplete = useMemo(() => {
+        if (!onCompleteIndex) {
+            return;
+        }
+        return () => onCompleteIndex(index);
+    }, [index, onCompleteIndex]);
 
     const onSelect = useMemo(() => {
         if (id === undefined) {
@@ -64,6 +84,7 @@ const EntryFormAdaptor = ({
 
     return <EntryForm disabled={disabled} item={item} selected={selected}
         onSelect={onSelect} onDeselect={onDeselect} onEdit={onEdit}
+        onCreate={onCreate} onComplete={onComplete}
         />;
 };
 
@@ -109,20 +130,22 @@ const Fresh = ({
     return <section>
                    <h1>{count} / 10</h1>
                    <EntryList
+                       keyOf={(item, index) => item ? `id-${item.id}` : `index-${index}` }
                        fresh={fresh}
-                       onCreateIndex={onCreateIndex}
-                       onCompleteIndex={onCompleteIndex}
                        onSwapIndices={onSwapIndices}
         >{
-            ({item, disabled}) =>
+            ({item, disabled, index}) =>
                 <EntryItem>
                    <EntryFormAdaptor
-                       item={item}
+                       item={item || undefined}
                        disabled={disabled}
                        selectionId={selectionId ?? undefined}
                        onEditId={onEditId}
                        onSelectId={onSelectId}
                        onDeselect={onDeselect}
+                       index={index}
+                       onCreateIndex={onCreateIndex}
+                       onCompleteIndex={onCompleteIndex}
                     />
                 </EntryItem>
         }</EntryList>

@@ -4,6 +4,8 @@
 
 .entryForm {
     display: flex;
+    justify-content: space-between;
+    min-inline-size: 40em;
 }
 
 .editableTitle {

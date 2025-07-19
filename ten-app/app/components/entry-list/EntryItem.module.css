@@ -2,12 +2,6 @@
     all: unset;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-inline-size: 40em;
-}
-.entryItemInner {
-    display: flex;
-    align-items: center;
 }
 .entryForm {
     display: flex;
@@ -64,7 +58,7 @@
 }
 
 .grabber[aria-expanded="true"] {
-    background-color: \yellow;
+    background-color: yellow;
 }
 .grabber:focus {
     outline-style: solid;
