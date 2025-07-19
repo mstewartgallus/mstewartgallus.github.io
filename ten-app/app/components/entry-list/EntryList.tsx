@@ -1,67 +1,12 @@
 "use client";
 
-import type {
-    Key,
-    ComponentType, MouseEvent,
-    PointerEvent, ReactNode
-} from 'react';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import type { Key, ComponentType, ReactNode } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 import { useCursor, useIsPrimaryPointerDown } from "../html/Html";
+import { DragButton } from "../drag-button/DragButton";
 import { DropButton } from "../drop-button/DropButton";
 
 import styles from './EntryList.module.css';
-
-interface DragButtonProps {
-    readonly disabled: boolean;
-    readonly dragging: boolean;
-
-    readonly onDragStart?: () => void;
-    readonly onDragEnd?: () => void;
-}
-
-const DragButton = ({ disabled, dragging, onDragStart, onDragEnd }: DragButtonProps) => {
-    useCursor(dragging ? 'grabbing' : undefined);
-
-    const onToggle = disabled ? undefined : (onDragStart || onDragEnd);
-    const onClick = useMemo(() => {
-        if (!onToggle) {
-            return;
-        }
-        return (e: MouseEvent<HTMLButtonElement>) => {
-            if (e.button !== 0) {
-                return;
-            }
-            e.preventDefault();
-            onToggle();
-        };
-    }, [onToggle]);
-
-    const onPointerDown = useMemo(() => {
-        if (!onDragStart) {
-            return;
-        }
-        return (e: PointerEvent<HTMLButtonElement>) => {
-            if (!e.isPrimary) {
-                return;
-            }
-            (e.target as Element).releasePointerCapture(e.pointerId);
-            onDragStart()
-        };
-    }, [onDragStart]);
-
-    return <div className={styles.grabberWrapper}>
-           <button
-                 className={styles.grabber}
-                 aria-label="Reorder"
-                 aria-expanded={dragging}
-                 onPointerDown={onPointerDown}
-                 onClick={onClick}
-                 disabled={!onClick}
-                 >
-                <div className={styles.grabberIcon}>&</div>
-            </button>
-        </div>;
-};
 
 interface ListContext {
     readonly dragIndex?: number;
@@ -100,10 +45,13 @@ export const EntryItem = ({ children }: ItemProps) => {
 
     const otherDragging = anyDragging && !dragging;
 
+    const onToggle = otherDragging ? undefined : (onDragStart || onDragEnd);
+
     return <div className={styles.entryItem}>
         <DropButton onDrop={otherDragging ? onDrop : undefined} />
-        <DragButton disabled={otherDragging} dragging={dragging}
-                    onDragStart={onDragStart} onDragEnd={onDragEnd} />
+        <DragButton dragging={dragging} onToggle={onToggle}>
+            <div className={styles.grabberIcon}>&</div>
+        </DragButton>
         {children}
     </div>;
 };
@@ -129,9 +77,9 @@ export const EntryList = <T,>({
     onSwapIndices
 }: Props<T>) => {
     const [dragIndex, setDragIndex] = useState<number | null>(null);
-    const isPointerDown = useIsPrimaryPointerDown();
-
     const anyDragging = dragIndex !== null;
+
+    useCursor(dragIndex !== null ? 'grabbing' : undefined);
 
     const onDragStartIndex = useMemo(() => {
         if (anyDragging) {
@@ -158,13 +106,6 @@ export const EntryList = <T,>({
         }
     }, [dragIndex, anyDragging, onSwapIndices]);
 
-    useEffect(() => {
-        if (isPointerDown) {
-            return;
-        }
-        setDragIndex(null);
-    }, [isPointerDown]);
-
     const context = useMemo(() => ({
         dragIndex: dragIndex ?? undefined,
         onDragStartIndex,
@@ -175,6 +116,14 @@ export const EntryList = <T,>({
         onDragStartIndex, onDragEnd,
         onDropIndex,
     ]);
+
+    const isPrimaryPointerDown = useIsPrimaryPointerDown();
+
+    if (!isPrimaryPointerDown && dragIndex !== null) {
+        setDragIndex(null);
+        return;
+    }
+
     const Child = children;
     return <ul className={styles.entryList} role="list">
         <ListContext.Provider value={context}>

@@ -26,9 +26,10 @@
 .dropZone:hover {
     background: #0002;
 }
-.dropZone:active {
-    background: #1402;
-}
 .dropZone[disabled] {
     display: none;
+}
+
+.dropZone[data-active] {
+    background: #1402;
 }
