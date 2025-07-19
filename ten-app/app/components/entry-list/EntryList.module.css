@@ -1,6 +1,70 @@
 .entryList {
     all: unset;
 }
+.entryItemWrapper {
+    all: unset;
+}
+
 .entryItem {
     all: unset;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+.grabberWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    touch-action: none;
+}
+.grabber {
+    all: unset;
+    user-select: none;
+    touch-action: none;
+
+    margin-block: 0.3em;
+    margin-inline: 0.3em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+.grabberLabel {
+    font-size: 0.4em;
+}
+.grabberIcon {
+    user-select: none;
+    touch-action: none;
+    font-size: 2.9em;
+    margin-inline: 0.2em;
+}
+
+.grabber {
+    cursor: grab;
+}
+.grabber:active {
+    cursor: grabbing;
+}
+
+.grabber {
+    background-color: white;
+}
+.grabber:hover {
+    background-color: lightgrey;
+}
+.grabber:active {
+    background-color: darkgrey;
+}
+
+.grabber[aria-expanded="true"] {
+    background-color: yellow;
+}
+.grabber:focus {
+    outline-style: solid;
+    outline-size: 2px;
 }

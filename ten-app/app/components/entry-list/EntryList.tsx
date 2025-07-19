@@ -7,9 +7,9 @@ import type {
 } from 'react';
 import { createContext, useContext, useMemo, useState } from 'react';
 import { useCursor, usePointerUp, usePointerLeave } from "../html/Html";
+import { DropButton } from "../drop-button/DropButton";
 
-import listStyles from './EntryList.module.css';
-import styles from './EntryItem.module.css';
+import styles from './EntryList.module.css';
 
 interface ListContext {
     readonly dragIndex?: number;
@@ -25,15 +25,16 @@ const ListContext = createContext<ListContext>({
 });
 ListContext.displayName = 'ListContext';
 
-interface GrabberProps {
+interface DragButtonProps {
+    readonly disabled: boolean;
     readonly dragging: boolean;
 
     readonly onDragStart?: () => void;
     readonly onDragEnd?: () => void;
 }
 
-const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
-    const onToggle = onDragStart || onDragEnd;
+const DragButton = ({ disabled, dragging, onDragStart, onDragEnd }: DragButtonProps) => {
+    const onToggle = disabled ? undefined : (onDragStart || onDragEnd);
     const onClick = useMemo(() => {
         if (!onToggle) {
             return;
@@ -90,85 +91,6 @@ const Grabber = ({ dragging, onDragStart, onDragEnd }: GrabberProps) => {
         </div>;
 };
 
-interface DropProps {
-    readonly children: ReactNode;
-    readonly onDrop?: () => void;
-}
-
-const DropZone = ({ children, onDrop }: DropProps) => {
-    const [isOver, setOver] = useState<boolean>(false);
-
-    const onPointerEnter = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: PointerEvent<HTMLButtonElement>) => {
-            if (!e.isPrimary) {
-                return;
-            }
-            setOver(true);
-        };
-    }, [onDrop]);
-
-    const onPointerLeave = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: PointerEvent<HTMLButtonElement>) => {
-            if (!e.isPrimary) {
-                return;
-            }
-            setOver(false);
-        };
-    }, [onDrop]);
-
-    const onPointerUp = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: PointerEvent<HTMLButtonElement>) => {
-            if (!e.isPrimary) {
-                return;
-            }
-            onDrop();
-        };
-    }, [onDrop]);
-
-    const onClick = useMemo(() => {
-        if (!onDrop) {
-            return;
-        }
-
-        return (e: MouseEvent<HTMLButtonElement>) => {
-            if (e.button !== 0) {
-                return;
-            }
-            e.preventDefault();
-            onDrop();
-        };
-    }, [onDrop]);
-
-    if (!onDrop && isOver) {
-        setOver(false);
-        return;
-    }
-
-    return <div className={styles.dropWrapper}>
-        <button className={styles.dropZone}
-            onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}
-            onPointerUp={onPointerUp}
-            onClick={onClick}
-            disabled={!onClick ? true : undefined}
-            data-over={isOver ? true : undefined}
-        />
-        {children}
-     </div>;
-
-};
-
 interface ItemProps {
     readonly children: ReactNode;
 }
@@ -192,12 +114,12 @@ export const EntryItem = ({ children }: ItemProps) => {
 
     const otherDragging = anyDragging && !dragging;
 
-    return <DropZone onDrop={otherDragging ? onDrop : undefined}>
-        <div className={styles.entryItem}>
-           <Grabber dragging={dragging} onDragStart={onDragStart} onDragEnd={onDragEnd} />
-           {children}
-        </div>
-      </DropZone>;
+    return <div className={styles.entryItem}>
+        <DropButton onDrop={otherDragging ? onDrop : undefined} />
+        <DragButton disabled={otherDragging} dragging={dragging}
+                    onDragStart={onDragStart} onDragEnd={onDragEnd} />
+        {children}
+    </div>;
 };
 
 export interface EntryItemProps<T> {
@@ -260,18 +182,16 @@ export const EntryList = <T,>({
         onDropIndex,
     ]);
     const Child = children;
-    return <ul className={listStyles.entryList} role="list">
+    return <ul className={styles.entryList} role="list">
         <ListContext.Provider value={context}>
         {
-            fresh.map((item, index) => {
-                const key = keyOf(item, index)
-                return <li key={key} role="listitem"
-                    className={listStyles.entryItem}>
+            fresh.map((item, index) =>
+                <li key={keyOf(item, index)} role="listitem" className={styles.entryItemWrapper}>
                     <ItemContext.Provider value={index}>
                         <Child item={item || undefined} disabled={dragIndex !== null} index={index} />
                     </ItemContext.Provider>
-                    </li>;
-            })
+               </li>
+            )
         }
         </ListContext.Provider>
     </ul>;
