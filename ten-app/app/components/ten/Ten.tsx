@@ -1,6 +1,6 @@
 "use client";
 
-import type { Id } from "@/types/ten";
+import type { Id, EntryComplete, EntryFresh } from "@/lib/features/ten/tenSlice";
 import type { MouseEvent } from "react";
 
 import {
@@ -8,6 +8,7 @@ import {
     create,
     complete,
     swap,
+    selectNewEntryId,
     selectEntryFresh,
     selectEntryComplete,
 } from "@/lib/features/ten/tenSlice";
@@ -22,31 +23,34 @@ import { usePersistBootstrapped } from '../../StoreProvider';
 import styles from "./Ten.module.css";
 
 interface AdaptorProps {
-    readonly id?: Id;
-    readonly value?: string;
-    readonly disabled: boolean;
+    item?: EntryFresh;
+    disabled: boolean;
 
-    readonly selectionId?: Id;
+    selectionId?: Id;
 
-    readonly onEditId?: (id: Id, value: string) => void;
-    readonly onSelectId: (id: Id) => void;
-    readonly onDeselect: () => void;
+    onEditId?: (id: Id, value: string) => void;
+    onSelectId: (id: Id) => void;
+    onDeselect: () => void;
 }
 
 const EntryFormAdaptor = ({
-   id, value, disabled, selectionId,
+   item, disabled, selectionId,
 
     onEditId,
     onSelectId, onDeselect
 }: AdaptorProps) => {
+    const id = item && item.id;
     const selected = id !== null && selectionId === id;
 
     const onSelect = useMemo(() => {
         if (id === undefined) {
             return;
         }
+        if (selected) {
+            return;
+        }
         return () => onSelectId(id);
-    }, [id, onSelectId]);
+    }, [id, selected, onSelectId]);
 
     const onEdit = useMemo(() => {
         if (id === undefined) {
@@ -58,45 +62,34 @@ const EntryFormAdaptor = ({
         return (value: string) => onEditId(id, value);
     }, [id, onEditId]);
 
-    return <EntryForm disabled={disabled} value={value} selected={selected}
+    return <EntryForm disabled={disabled} item={item} selected={selected}
         onSelect={onSelect} onDeselect={onDeselect} onEdit={onEdit}
         />;
 };
 
-interface Entry {
-    readonly id: Id;
-    readonly value: string;
-}
-
 interface Props {
-    readonly fresh: readonly (Entry | null)[];
-    readonly completed: readonly Entry[];
+    readonly fresh: readonly (EntryFresh | null)[];
+    readonly completed: readonly EntryComplete[];
 
     readonly onEditId?: (id: Id, value: string) => void;
 
-    readonly onCreateIndex?: (index: number) => void;
+    readonly createIndex?: (index: number) => Id;
     readonly onCompleteIndex?: (index: number) => void;
-    readonly onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
-}
-
-interface Item {
-    readonly id?: Id;
-    readonly value?: string;
-    readonly disabled: boolean;
+    readonly onSwapIndices?: (indexLeft: number, indexRight: number) => void;
 }
 
 interface FreshProps {
-    readonly fresh: readonly (Entry | null)[];
+    readonly fresh: readonly (EntryFresh | null)[];
 
     readonly onEditId?: (id: Id, value: string) => void;
-    readonly onCreateIndex?: (index: number) => void;
+    readonly createIndex?: (index: number) => Id;
     readonly onCompleteIndex?: (index: number) => void;
-    readonly onSwapIndices?: (leftIndex: number, rightIndex: number) => void;
+    readonly onSwapIndices?: (indexLeft: number, indexRight: number) => void;
 }
 
 const Fresh = ({
     fresh, onEditId,
-    onCreateIndex,onCompleteIndex, onSwapIndices
+    createIndex, onCompleteIndex, onSwapIndices
 }: FreshProps) => {
     const [selectionId, setSelectionId] = useState<Id | null>(null);
 
@@ -106,6 +99,13 @@ const Fresh = ({
     const count = useMemo(() => fresh.reduce((x, y) => (y != null ? 1 : 0) + x, 0),
                           [fresh]);
 
+    const onCreateIndex = useMemo(() => {
+        if (!createIndex) {
+            return;
+        }
+        return (index: number) => setSelectionId(createIndex(index));
+    }, [createIndex]);
+
     return <section>
                    <h1>{count} / 10</h1>
                    <EntryList
@@ -114,11 +114,10 @@ const Fresh = ({
                        onCompleteIndex={onCompleteIndex}
                        onSwapIndices={onSwapIndices}
         >{
-            ({id, value, disabled}: Item) =>
+            ({item, disabled}) =>
                 <EntryItem>
                    <EntryFormAdaptor
-                       id={id}
-                       value={value}
+                       item={item}
                        disabled={disabled}
                        selectionId={selectionId ?? undefined}
                        onEditId={onEditId}
@@ -130,8 +129,25 @@ const Fresh = ({
         </section>;
 }
 
+interface ItemCompleteProps {
+    value: string;
+    created: number;
+    completed: number;
+}
+
+const ItemComplete = ({ value, created, completed }: ItemCompleteProps) => {
+    const format = useMemo(() => new Intl.DateTimeFormat(undefined, {
+        dateStyle: "short",
+        timeStyle: "short",
+    }), []);
+
+    const createdDate = format.format(new Date(created));
+    const completedDate = format.format(new Date(completed));
+    return <div>{value} {createdDate} {completedDate}</div>;
+};
+
 interface CompletedProps {
-    readonly completed: readonly Entry[];
+    completed: readonly EntryComplete[];
 }
 
 const Completed = ({ completed }: CompletedProps) =>
@@ -139,8 +155,8 @@ const Completed = ({ completed }: CompletedProps) =>
     <h2>Completed</h2>
     <ul>
     {
-        completed.map(({ id, value }) =>
-            <li key={id}>{value}</li>)
+        completed.map(item =>
+            <li key={item.id}><ItemComplete {...item} /></li>)
     }
     </ul>
     </section>;
@@ -148,7 +164,7 @@ const Completed = ({ completed }: CompletedProps) =>
 const TenImpl = ({
     fresh, completed,
     onEditId,
-    onCreateIndex,
+    createIndex,
     onCompleteIndex,
     onSwapIndices
 }: Props) => {
@@ -175,7 +191,7 @@ const TenImpl = ({
                 <Completed completed={completed} /> :
                 <Fresh fresh={fresh}
             onEditId={onEditId}
-            onCreateIndex={onCreateIndex} onCompleteIndex={onCompleteIndex} onSwapIndices={onSwapIndices}
+            createIndex={createIndex} onCompleteIndex={onCompleteIndex} onSwapIndices={onSwapIndices}
                 />
         }
     </>;
@@ -186,21 +202,23 @@ const mock = Array(10).fill(null);
 export const Ten = () => {
     const dispatch = useAppDispatch();
 
-    const onEditId = useCallback((id: Id, value: string) =>
-        dispatch(edit({ id, value })),
-        [dispatch]);
-    const onCompleteIndex = useCallback((index: number) =>
-        dispatch(complete({ index })),
-        [dispatch]);
-    const onCreateIndex = useCallback((index: number) =>
-        dispatch(create({ index })),
-        [dispatch]);
-    const onSwapIndices = useCallback((leftIndex: number, rightIndex: number) =>
-        dispatch(swap({ leftIndex, rightIndex })),
-        [dispatch]);
-
+    const newEntryId = useAppSelector(selectNewEntryId);
     const entryFresh = useAppSelector(selectEntryFresh);
     const entryComplete = useAppSelector(selectEntryComplete);
+
+    const onEditId = useCallback((id: Id, value: string) =>
+        dispatch(edit(id, value)),
+        [dispatch]);
+    const onCompleteIndex = useCallback((index: number) =>
+        dispatch(complete(index)),
+        [dispatch]);
+    const createIndex = useCallback((index: number) => {
+        dispatch(create(index, newEntryId));
+        return newEntryId;
+    }, [newEntryId, dispatch]);
+    const onSwapIndices = useCallback((indexLeft: number, indexRight: number) =>
+        dispatch(swap(indexLeft, indexRight)),
+        [dispatch]);
 
     const bootstrapped = usePersistBootstrapped();
 
@@ -208,7 +226,7 @@ export const Ten = () => {
         fresh={bootstrapped ? entryFresh : mock}
         completed={bootstrapped ? entryComplete : []}
         onEditId={bootstrapped ? onEditId : undefined}
-        onCreateIndex={bootstrapped ? onCreateIndex : undefined}
+        createIndex={bootstrapped ? createIndex : undefined}
         onCompleteIndex={bootstrapped ? onCompleteIndex : undefined}
         onSwapIndices={bootstrapped ? onSwapIndices : undefined}
         />;

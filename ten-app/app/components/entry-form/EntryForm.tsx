@@ -1,5 +1,7 @@
 "use client";
 
+import type { EntryFresh } from "@/lib/features/ten/tenSlice";
+
 import type { ChangeEvent, FormEvent, MouseEvent } from "react";
 import { useCallback, useMemo, useId, useState } from 'react';
 import { If } from "../If";
@@ -8,19 +10,13 @@ import { Icon } from "../icon/Icon";
 
 import styles from "./EntryForm.module.css";
 
-interface EditFormProps {
-    readonly disabled: boolean;
-    readonly selected: boolean;
-    readonly value: string;
-    readonly onChange?: (value: string) => void;
-    readonly onSelect?: () => void;
-    readonly onDeselect: () => void;
-}
 
 interface FormButtonProps {
     disabled: boolean;
-    value: string;
+
     id: string;
+    value: string;
+
     onChange?: (value: string) => void;
     onDeselect?: () => void;
 }
@@ -42,7 +38,19 @@ const FormButton = ({ disabled, value, id, onChange, onDeselect }: FormButtonPro
         </form>;
 };
 
-const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }: EditFormProps) => {
+interface EditFormProps {
+    value: string;
+    disabled: boolean;
+    selected: boolean;
+    onChange?: (value: string) => void;
+    onSelect?: () => void;
+    onDeselect: () => void;
+}
+
+const EditForm = ({
+    value,
+    disabled, onChange, selected, onSelect, onDeselect
+}: EditFormProps) => {
     const formId = useId();
     const controlId = useId();
     const [editValue, setEditValue] = useState(value);
@@ -92,8 +100,36 @@ const EditForm = ({ disabled, value, onChange, selected, onSelect, onDeselect }:
         </div>;
 };
 
+type EntryProps = EntryFresh & {
+    disabled: boolean;
+    selected: boolean;
+    onChange?: (value: string) => void;
+    onSelect?: () => void;
+    onDeselect: () => void;
+}
+
+const Entry = ({
+    created,
+    value,
+    disabled, onChange, selected, onSelect, onDeselect
+}: EntryProps) => {
+    const format = useMemo(() => new Intl.DateTimeFormat(undefined, {
+        dateStyle: "short",
+        timeStyle: "short",
+    }), []);
+
+    const createdDate = format.format(new Date(created));
+
+    return <div>
+        <EditForm value={value}
+           disabled={disabled} selected={selected}
+    onChange={onChange} onSelect={onSelect} onDeselect={onDeselect} />
+        <div>{createdDate}</div>
+        </div>;
+};
+
 interface Props {
-    readonly value?: string;
+    readonly item?: EntryFresh;
 
     readonly disabled: boolean;
 
@@ -106,21 +142,24 @@ interface Props {
 
 export const EntryForm = ({
     disabled,
-    value,
+    item,
     selected,
     onDeselect,
     onSelect,
     onEdit
 }: Props) => {
-    const hasValue = value !== undefined;
+    const hasItem = item !== undefined;
     return <div className={styles.entryForm}>
        <div className={styles.editForm}>
         {
-            hasValue &&
-                <EditForm disabled={disabled} selected={selected} value={value} onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
+            hasItem &&
+                <Entry key={item.id}
+                   {...item}
+                   disabled={disabled} selected={selected}
+                   onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect} />
         }
         {
-           !hasValue && <>...</>
+           !hasItem && <>...</>
         }
        </div>
     </div>;

@@ -1,25 +1,11 @@
 import type { PayloadAction, Selector } from "@reduxjs/toolkit";
-import type { Id } from "@/types/ten";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 
-interface CreateAction {
-    readonly index: number;
-}
-interface EditAction {
-    readonly id: Id;
-    readonly value: string;
-}
-interface CompleteAction {
-    readonly index: number;
-}
-interface SwapAction {
-    readonly leftIndex: number;
-    readonly rightIndex: number;
-}
-
+export type Id = number;
 
 interface Entry {
     value: string;
+    created: number;
 }
 
 interface Fresh {
@@ -28,11 +14,31 @@ interface Fresh {
 
 interface Complete {
     id: Id;
+    completed: number;
 }
 
 export type EntryFresh = Entry & Fresh;
 export type EntryComplete = Entry & Complete;
 
+interface CreateAction {
+    id: Id;
+    index: number;
+    created: number;
+}
+interface EditAction {
+    id: Id;
+    value: string;
+}
+
+interface CompleteAction {
+    index: number;
+    completed: number;
+}
+
+interface SwapAction {
+    indexLeft: number;
+    indexRight: number;
+}
 
 export interface TenSliceState {
     entry: Entry[],
@@ -51,9 +57,9 @@ const initialState: TenSliceState = (() => {
 
 type TenSelector<T> = Selector<TenSliceState, T>;
 
-const selectEntry: TenSelector<readonly Entry[]> = (ten: TenSliceState) => ten.entry;
-const selectFresh: TenSelector<readonly (Fresh | null)[]> = (ten: TenSliceState) => ten.fresh;
-const selectComplete: TenSelector<readonly Complete[]> = (ten: TenSliceState) => ten.complete;
+const selectEntry: TenSelector<readonly Entry[]> = ten => ten.entry;
+const selectFresh: TenSelector<readonly (Fresh | null)[]> = ten => ten.fresh;
+const selectComplete: TenSelector<readonly Complete[]> = ten => ten.complete;
 
 const entryFresh: (
     entry: readonly Entry[],
@@ -75,11 +81,6 @@ const entryComplete: (
         return ({ ...x, ...theEntry });
     });
 
-const completeFresh: (fresh: Fresh) => Complete = (fresh: Fresh) => {
-    const { id } = fresh;
-    return { id };
-};
-
 const checkIndex = <T>(array: readonly T[], index: number) => {
     const { length } = array;
     if (index < 0 || index >= length) {
@@ -92,47 +93,64 @@ export const tenSlice = createSlice({
 
     initialState,
 
-    reducers: {
-        edit: ({ entry }, { payload: { id, value } }: PayloadAction<EditAction>) => {
+    reducers: create => ({
+        edit: create.preparedReducer(
+            (id: Id, value: string) => ({ payload: {id, value } })
+            ,
+            ({ entry }, { payload: { id, value } }: PayloadAction<EditAction>) => {
             checkIndex(entry, id);
 
             entry[id].value = value;
-        },
+        }),
 
-        create: ({ fresh, entry }, { payload: { index } }: PayloadAction<CreateAction>) => {
+        create: create.preparedReducer(
+            (index: number, id: Id) => {
+                const created = Date.now();
+                return { payload: { index, id, created } };
+            }, ({ fresh, entry }, { payload: { id, index, created } }: PayloadAction<CreateAction>) => {
             checkIndex(fresh, index);
             if (fresh[index]) {
                 throw Error(`fresh ${index} is non-empty`);
             }
 
-            const id = entry.length;
-            entry.push({ value: '' });
-            fresh[index] = { id };
-        },
-
-        complete: ({ fresh, complete }, { payload: { index } }: PayloadAction<CompleteAction>) => {
-            checkIndex(fresh, index);
-
-            const oldFresh = fresh[index];
-            if (!oldFresh) {
-                throw Error(`fresh ${index} is empty`);
+            const { length } = entry;
+            if (id !== length) {
+                throw Error(`create id ${id} is not new id ${length}`);
             }
-            fresh[index] = null;
 
-            complete.unshift(completeFresh(oldFresh));
-        },
+            entry.push({ created, value: '' });
+            fresh[index] = { id };
+        }),
 
-        swap: ({ fresh }, { payload: { leftIndex, rightIndex } }: PayloadAction<SwapAction>) => {
-            checkIndex(fresh, leftIndex);
-            checkIndex(fresh, rightIndex);
+        complete: create.preparedReducer(
+            index => {
+                const completed = Date.now();
+                return { payload: { index, completed } };
+            }, ({ fresh, complete }, { payload: { index, completed } }: PayloadAction<CompleteAction>) => {
+                checkIndex(fresh, index);
 
-            const leftFresh = fresh[leftIndex];
-            fresh[leftIndex] = fresh[rightIndex];
-            fresh[rightIndex] = leftFresh;
-        }
-    },
+                const oldFresh = fresh[index];
+                if (!oldFresh) {
+                    throw Error(`fresh ${index} is empty`);
+                }
+                fresh[index] = null;
+                complete.unshift({ ...oldFresh, completed });
+            }),
+
+        swap: create.preparedReducer(
+            (indexLeft: number, indexRight: number) => ({ payload: { indexLeft, indexRight }}),
+            ({ fresh }, { payload: { indexLeft, indexRight } }: PayloadAction<SwapAction>) => {
+                checkIndex(fresh, indexLeft);
+                checkIndex(fresh, indexRight);
+
+                const leftFresh = fresh[indexLeft];
+                fresh[indexLeft] = fresh[indexRight];
+                fresh[indexRight] = leftFresh;
+            })
+    }),
 
     selectors: {
+        selectNewEntryId: ten => ten.entry.length,
         selectEntryFresh: createSelector([selectEntry, selectFresh], entryFresh),
         selectEntryComplete: createSelector([selectEntry, selectComplete], entryComplete)
     },
@@ -146,5 +164,7 @@ export const {
 } = tenSlice.actions;
 
 export const {
-    selectEntryFresh, selectEntryComplete
+    selectNewEntryId,
+    selectEntryFresh,
+    selectEntryComplete
 } = tenSlice.selectors;

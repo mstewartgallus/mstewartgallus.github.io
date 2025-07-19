@@ -3,7 +3,7 @@
 import type {
     ComponentType, FormEvent, MouseEvent,
     PointerEvent, ReactNode } from 'react';
-import type { Id } from '@/types/ten';
+import type { EntryFresh } from "@/lib/features/ten/tenSlice";
 import { createContext, useContext, useCallback, useId, useMemo, useState } from 'react';
 import { Button } from "../button/Button";
 import { Icon } from "../icon/Icon";
@@ -11,13 +11,6 @@ import { useCursor, usePointerUp, usePointerLeave } from "../html/Html";
 
 import listStyles from './EntryList.module.css';
 import styles from './EntryItem.module.css';
-
-export interface EntryItemProps {
-    readonly id?: Id;
-    readonly value?: string;
-    readonly disabled: boolean;
-};
-
 
 interface ItemContext {
     readonly hasItem: boolean;
@@ -53,10 +46,7 @@ interface ItemProviderProps {
 const ItemProvider = ({
     children, index, hasItem
 }: ItemProviderProps) => {
-    const memo = useMemo(() =>({
-        index,
-        hasItem
-    }), [ index, hasItem ]);
+    const memo = useMemo(() =>({ index, hasItem }), [ index, hasItem ]);
     return <ItemContext.Provider value={memo}>{children}</ItemContext.Provider>;
 };
 
@@ -280,7 +270,12 @@ export const EntryItem = ({ children }: ItemProps) => {
     const onDragStart = useBind(onDragStartIndex, index);
     const onDrop = useBind(onDropIndex, index);
 
-    let onCreate = useBind(onCreateIndex, index);
+    let onCreate = useMemo(() => {
+        if (!onCreateIndex) {
+            return;
+        }
+        return () => onCreateIndex(index);
+    }, [index, onCreateIndex]);
     let onComplete = useBind(onCompleteIndex, index);
 
     onCreate = hasItem ? undefined : onCreate;
@@ -303,14 +298,14 @@ export const EntryItem = ({ children }: ItemProps) => {
       </DropZone>;
 };
 
-interface Entry {
-    readonly id: Id;
-    readonly value: string;
-}
+export interface EntryItemProps {
+    readonly item?: EntryFresh;
+    readonly disabled: boolean;
+};
 
 interface Props {
     readonly children: ComponentType<EntryItemProps>;
-    readonly fresh: readonly (Entry | null)[];
+    readonly fresh: readonly (EntryFresh | null)[];
 
     readonly onSwapIndices?: (dragIndex: number, dropIndex: number) => void;
     readonly onCreateIndex?: (index: number) => void;
@@ -372,12 +367,11 @@ export const EntryList = ({
         {
             fresh.map((item, index) => {
                 const id = item ? item.id : undefined;
-                const value = item ? item.value : undefined;
                 const key = id ? `id-${id}` : `index-${index}`;
                 return <li key={key} role="listitem"
                     className={listStyles.entryItem}>
                     <ItemProvider hasItem={!!item} index={index}>
-                        <Child value={value} id={id} disabled={dragIndex !== null} />
+                        <Child item={item || undefined} disabled={dragIndex !== null} />
                     </ItemProvider>
                     </li>;
             })

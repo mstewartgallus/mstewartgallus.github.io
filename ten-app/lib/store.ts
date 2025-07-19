@@ -7,7 +7,7 @@ import { tenSlice } from "./features/ten/tenSlice";
 import { htmlSlice } from "./features/html/htmlSlice";
 
 const persistConfig = {
-    key: "root7",
+    key: "root10",
     storage,
     blacklist: ['html']
 };
