@@ -121,7 +121,6 @@ export const EntryList = <T,>({
 
     if (!isPrimaryPointerDown && dragIndex !== null) {
         setDragIndex(null);
-        return;
     }
 
     const Child = children;

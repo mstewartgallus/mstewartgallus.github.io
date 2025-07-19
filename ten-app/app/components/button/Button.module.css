@@ -26,16 +26,8 @@
 }
 
 
-.editButton:hover {
-    background: lightgrey;
-}
-
 .editButton[aria-expanded="true"]:not(:active) {
     background: lightgrey;
-}
-
-.editButton:active {
-    background: darkgrey;
 }
 
 .editButton[disabled] {
@@ -47,4 +39,12 @@
 .editButton:focus {
     outline-width: 2px;
     outline-style: solid;
+}
+
+.editButton[data-hover] {
+    background: lightblue;
+}
+
+.editButton[data-active] {
+    background: lightgreen;
 }
