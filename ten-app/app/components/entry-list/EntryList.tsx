@@ -104,13 +104,13 @@ interface ItemProps {
 
 export const EntryItem = ({ children }: ItemProps) => {
     const { dragging, onDrop, onToggle } = useEntryItemState();
-    return <div className={styles.entryItem}>
+    return <li role="listitem" className={styles.item}>
         <DropButton onDrop={onDrop} />
         <DragButton dragging={dragging} onToggle={onToggle}>
             <div className={styles.grabberIcon}>&</div>
         </DragButton>
         {children}
-    </div>;
+    </li>;
 };
 
 export const useEntryItem = () => {
@@ -139,15 +139,13 @@ export const EntryList = ({
 }: Props) => {
     const context = useEntryListState(onSwapIndices);
 
-    return <ul className={styles.entryList} role="list">
+    return <ul className={styles.list} role="list">
         <ListContext.Provider value={context}>
         {
             range(length, index =>
-                <li key={keyOf(index)} role="listitem" className={styles.entryItemWrapper}>
-                    <ItemContext.Provider value={index}>
-                       {children}
-                    </ItemContext.Provider>
-                </li>)
+                <ItemContext.Provider key={keyOf(index)} value={index}>
+                    {children}
+                </ItemContext.Provider>)
         }
         </ListContext.Provider>
     </ul>;

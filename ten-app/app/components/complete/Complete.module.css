@@ -1,0 +1,8 @@
+.complete {
+    display: flex;
+    flex-direction: column;
+}
+.dates {
+    display: flex;
+    flex-direction: column;
+}

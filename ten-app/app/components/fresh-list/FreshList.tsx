@@ -105,7 +105,7 @@ export const FreshList = ({
 
     const keyOf = useCallback((index: number) => {
         const item = fresh[index];
-        return item ? `id-${item.id}` : `index-${index}`;
+        return item ? `id-${item.id}` : `indx-${index}`;
     }, [fresh]);
 
     return <EntryList keyOf={keyOf} length={fresh.length} onSwapIndices={onSwapIndices}>

@@ -1,0 +1,11 @@
+.list {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    all: unset;
+    display: flex;
+    margin-block: 0.5em;
+}

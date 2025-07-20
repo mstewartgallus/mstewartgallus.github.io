@@ -1,11 +1,7 @@
-.entryList {
+.list {
     all: unset;
 }
-.entryItemWrapper {
-    all: unset;
-}
-
-.entryItem {
+.item {
     all: unset;
     position: relative;
     display: flex;

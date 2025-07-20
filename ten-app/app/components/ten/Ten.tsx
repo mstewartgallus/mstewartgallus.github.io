@@ -16,7 +16,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useCallback, useMemo, useState } from 'react';
 import { FreshList } from '../fresh-list/FreshList';
-import { Complete } from '../complete/Complete';
+import { CompleteList } from '../complete-list/CompleteList';
 import { Button } from '../button/Button';
 import { usePersistBootstrapped } from '../../StoreProvider';
 
@@ -57,18 +57,12 @@ interface CompletedProps {
     completed: readonly EntryComplete[];
 }
 
-const Completed = ({ completed }: CompletedProps) =>
-    <section>
-    <h2>Completed</h2>
-    <ul>
-    {
-        completed.map(item =>
-            <li key={item.id}>
-                <Complete {...item} />
-            </li>)
-    }
-    </ul>
+const Completed = ({ completed }: CompletedProps) => {
+    return <section>
+        <h2>Completed</h2>
+        <CompleteList completed={completed} />
     </section>;
+};
 
 
 interface Props {

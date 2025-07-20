@@ -217,7 +217,7 @@ export const EntryForm = ({
         <div className={styles.editForm}>
          {
              hasItem &&
-                 <Entry key={item.id}
+                 <Entry
                     {...item}
                     onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect}
                  />
