@@ -1,6 +1,6 @@
 "use client";
 
-import type { Key, ComponentType, ReactNode } from 'react';
+import type { Key, ReactNode } from 'react';
 import { createContext, useContext, useMemo, useState } from 'react';
 import { useCursor, useIsPrimaryPointerDown } from "../html/Html";
 import { DragButton } from "../drag-button/DragButton";
@@ -86,7 +86,7 @@ const useEntryListState = (onSwapIndices?: (dragIndex: number, dropIndex: number
         }
     }, [dragIndex, onSwapIndices, anyDragging]);
 
-    const context =  useMemo(() => ({
+    return useMemo(() => ({
         dragIndex: dragIndex ?? undefined,
         onDragStartIndex,
         onDragEnd,
@@ -96,8 +96,6 @@ const useEntryListState = (onSwapIndices?: (dragIndex: number, dropIndex: number
         onDragStartIndex, onDragEnd,
         onDropIndex,
     ]);
-
-    return { dragIndex, context };
 };
 
 interface ItemProps {
@@ -115,42 +113,41 @@ export const EntryItem = ({ children }: ItemProps) => {
     </div>;
 };
 
-export interface EntryItemProps<T> {
-    readonly item?: T;
-    readonly disabled: boolean;
-    readonly index: number;
-};
+export const useEntryItem = () => {
+    const index = useContext(ItemContext);
+    const { dragIndex } = useContext(ListContext);
+    const disabled = dragIndex !== undefined;
+    return { index, disabled };
+}
 
-interface Props<T> {
-    keyOf: (x: T, index: number) => Key;
-    children: ComponentType<EntryItemProps<T>>;
-    fresh: readonly T[];
+interface Props {
+    keyOf: (index: number) => Key;
+    children: ReactNode;
+    length: number;
 
     onSwapIndices?: (dragIndex: number, dropIndex: number) => void;
 }
 
-export const EntryList = <T,>({
+const range = <T,>(num: number, f: (ii: number) => T) =>
+    Array(num).fill(null).map((x, ii) => f(ii));
+
+export const EntryList = ({
     children,
     keyOf,
-    fresh,
+    length,
     onSwapIndices
-}: Props<T>) => {
-    const {
-        dragIndex,
-        context
-    } = useEntryListState(onSwapIndices);
+}: Props) => {
+    const context = useEntryListState(onSwapIndices);
 
-    const Children = children;
     return <ul className={styles.entryList} role="list">
         <ListContext.Provider value={context}>
         {
-            fresh.map((item, index) =>
-                <li key={keyOf(item, index)} role="listitem" className={styles.entryItemWrapper}>
+            range(length, index =>
+                <li key={keyOf(index)} role="listitem" className={styles.entryItemWrapper}>
                     <ItemContext.Provider value={index}>
-                        <Children item={item || undefined} disabled={dragIndex !== null} index={index} />
+                       {children}
                     </ItemContext.Provider>
-               </li>
-            )
+                </li>)
         }
         </ListContext.Provider>
     </ul>;

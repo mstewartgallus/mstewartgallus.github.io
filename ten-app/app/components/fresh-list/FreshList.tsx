@@ -3,12 +3,11 @@
 import type { Id, EntryFresh } from "@/lib/features/ten/tenSlice";
 
 import { useCallback, useMemo, useState } from 'react';
-import { EntryList, EntryItem } from '../entry-list/EntryList';
+import { EntryList, EntryItem, useEntryItem } from '../entry-list/EntryList';
 import { EntryForm } from '../entry-form/EntryForm';
 
 interface AdaptorProps {
-    item?: EntryFresh;
-    disabled: boolean;
+    fresh: readonly (EntryFresh | null)[];
 
     selectionId?: Id;
 
@@ -16,19 +15,21 @@ interface AdaptorProps {
     onSelectId: (id: Id) => void;
     onDeselect: () => void;
 
-    index: number;
     onCreateIndex?: (index: number) => void;
     onCompleteIndex?: (index: number) => void;
 }
 
 const EntryFormAdaptor = ({
-   item, disabled, selectionId,
+    fresh,
+    selectionId,
 
     onChangeId,
     onSelectId, onDeselect,
 
-    index, onCreateIndex, onCompleteIndex
+    onCreateIndex, onCompleteIndex
 }: AdaptorProps) => {
+    const { index, disabled } = useEntryItem();
+
     const onCreate = useMemo(() => {
         if (!onCreateIndex) {
             return;
@@ -43,11 +44,13 @@ const EntryFormAdaptor = ({
         return () => onCompleteIndex(index);
     }, [index, onCompleteIndex]);
 
-    const id = item && item.id;
+    const item = fresh[index];
+
+    const id = item ? item.id : null;
     const selected = id !== null && selectionId === id;
 
     const onSelect = useMemo(() => {
-        if (id === undefined) {
+        if (id === null) {
             return;
         }
         if (selected) {
@@ -57,7 +60,7 @@ const EntryFormAdaptor = ({
     }, [id, selected, onSelectId]);
 
     const onEdit = useMemo(() => {
-        if (id === undefined) {
+        if (id === null) {
             return;
         }
         if (!onChangeId) {
@@ -66,7 +69,7 @@ const EntryFormAdaptor = ({
         return (value: string) => onChangeId(id, value);
     }, [id, onChangeId]);
 
-    return <EntryForm disabled={disabled} item={item}
+    return <EntryForm disabled={disabled} item={item ?? undefined}
          onSelect={onSelect} onDeselect={selected ? onDeselect : undefined}
          onEdit={onEdit}
         onCreate={onCreate} onComplete={onComplete}
@@ -100,24 +103,22 @@ export const FreshList = ({
         return (index: number) => setSelectionId(createIndex(index));
     }, [createIndex]);
 
-    return <EntryList
-                       keyOf={(item, index) => item ? `id-${item.id}` : `index-${index}` }
-                       fresh={fresh}
-                       onSwapIndices={onSwapIndices}
-        >{
-            ({item, disabled, index}) =>
-                <EntryItem>
-                   <EntryFormAdaptor
-                       item={item || undefined}
-                       disabled={disabled}
-                       selectionId={selectionId ?? undefined}
-                       onChangeId={item ? onChangeId : undefined}
-                       onSelectId={onSelectId}
-                       onDeselect={onDeselect}
-                       index={index}
-                       onCreateIndex={item ? undefined : onCreateIndex}
-                       onCompleteIndex={item ? onCompleteIndex: undefined}
-                    />
-                </EntryItem>
-        }</EntryList>;
+    const keyOf = useCallback((index: number) => {
+        const item = fresh[index];
+        return item ? `id-${item.id}` : `index-${index}`;
+    }, [fresh]);
+
+    return <EntryList keyOf={keyOf} length={fresh.length} onSwapIndices={onSwapIndices}>
+        <EntryItem>
+            <EntryFormAdaptor
+                fresh={fresh}
+                selectionId={selectionId ?? undefined}
+                onChangeId={onChangeId}
+                onSelectId={onSelectId}
+                onDeselect={onDeselect}
+                onCreateIndex={onCreateIndex}
+                onCompleteIndex={onCompleteIndex}
+             />
+         </EntryItem>
+    </EntryList>;
 };
