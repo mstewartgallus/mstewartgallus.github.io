@@ -3,32 +3,23 @@
 import type { Id, EntryFresh } from "@/lib/features/ten/tenSlice";
 
 import { useCallback, useMemo, useState } from 'react';
-import { EntryList, EntryItem, useEntryItem } from '../entry-list/EntryList';
-import { EntryForm } from '../entry-form/EntryForm';
+import { DndList, DndItem, useDndItem } from '../dnd-list/DndList';
+import { SlotControls } from "../slot-controls/SlotControls";
+import { FreshEditMaybe } from "../fresh-edit-maybe/FreshEditMaybe";
 
-interface AdaptorProps {
-    fresh: readonly (EntryFresh | null)[];
+import styles from "./FreshList.module.css";
 
-    selectionId?: Id;
-
-    onChangeId?: (id: Id, value: string) => void;
-    onSelectId: (id: Id) => void;
-    onDeselect: () => void;
-
+interface ControlsItemProps {
+    hasItem: readonly boolean[];
     onCreateIndex?: (index: number) => void;
     onCompleteIndex?: (index: number) => void;
-}
+};
 
-const EntryFormAdaptor = ({
-    fresh,
-    selectionId,
-
-    onChangeId,
-    onSelectId, onDeselect,
-
+const ControlsItem = ({
+    hasItem,
     onCreateIndex, onCompleteIndex
-}: AdaptorProps) => {
-    const { index, disabled } = useEntryItem();
+}: ControlsItemProps) => {
+    const { index, isDragging } = useDndItem();
 
     const onCreate = useMemo(() => {
         if (!onCreateIndex) {
@@ -44,39 +35,34 @@ const EntryFormAdaptor = ({
         return () => onCompleteIndex(index);
     }, [index, onCompleteIndex]);
 
-    const item = fresh[index];
-
-    const id = item ? item.id : null;
-    const selected = id !== null && selectionId === id;
-
-    const onSelect = useMemo(() => {
-        if (id === null) {
-            return;
-        }
-        if (selected) {
-            return;
-        }
-        return () => onSelectId(id);
-    }, [id, selected, onSelectId]);
-
-    const onEdit = useMemo(() => {
-        if (id === null) {
-            return;
-        }
-        if (!onChangeId) {
-            return;
-        }
-        return (value: string) => onChangeId(id, value);
-    }, [id, onChangeId]);
-
-    return <EntryForm disabled={disabled} item={item ?? undefined}
-         onSelect={onSelect} onDeselect={selected ? onDeselect : undefined}
-         onEdit={onEdit}
-        onCreate={onCreate} onComplete={onComplete}
-        />;
+    return <SlotControls disabled={isDragging}
+        onCreate={hasItem[index] ? undefined : onCreate}
+        onComplete={hasItem[index] ? onComplete : undefined} />;
 };
 
-interface FreshListProps {
+interface AdaptorProps {
+    fresh: readonly (EntryFresh | null)[];
+
+    selectionId?: Id;
+
+    onChangeId?: (id: Id, value: string) => void;
+    onSelectId: (id: Id) => void;
+    onDeselect: () => void;
+}
+
+const Adaptor = ({
+    fresh,
+    selectionId,
+
+    onChangeId,
+    onSelectId, onDeselect
+}: AdaptorProps) => {
+    const { index } = useDndItem();
+    return <FreshEditMaybe item={fresh[index] ?? undefined} selectionId={selectionId}
+        onChangeId={onChangeId} onSelectId={onSelectId} onDeselect={onDeselect} />;
+};
+
+interface Props {
     readonly fresh: readonly (EntryFresh | null)[];
 
     readonly createIndex?: (index: number) => Id;
@@ -90,7 +76,7 @@ export const FreshList = ({
     onChangeId,
     createIndex, onCompleteIndex,
     onSwapIndices
-}: FreshListProps) => {
+}: Props) => {
     const [selectionId, setSelectionId] = useState<Id | null>(null);
 
     const onSelectId = useCallback((id: Id) => setSelectionId(id), []);
@@ -108,17 +94,20 @@ export const FreshList = ({
         return item ? `id-${item.id}` : `indx-${index}`;
     }, [fresh]);
 
-    return <EntryList keyOf={keyOf} length={fresh.length} onSwapIndices={onSwapIndices}>
-        <EntryItem>
-            <EntryFormAdaptor
-                fresh={fresh}
+    const hasItem = useMemo(() => fresh.map(x => x !== null), [fresh]);
+
+    return <DndList keyOf={keyOf} length={fresh.length} onSwapIndices={onSwapIndices}>
+        <DndItem>
+            <div className={styles.freshSlot}>
+               <Adaptor
+                    fresh={fresh}
                 selectionId={selectionId ?? undefined}
                 onChangeId={onChangeId}
                 onSelectId={onSelectId}
                 onDeselect={onDeselect}
-                onCreateIndex={onCreateIndex}
-                onCompleteIndex={onCompleteIndex}
              />
-         </EntryItem>
-    </EntryList>;
+              <ControlsItem hasItem={hasItem} onCreateIndex={onCreateIndex} onCompleteIndex={onCompleteIndex} />
+            </div>
+        </DndItem>
+    </DndList>;
 };

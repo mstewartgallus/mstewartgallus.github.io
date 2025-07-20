@@ -4,6 +4,7 @@
 }
 .tabWrapper {
     justify-content: end;
+    max-inline-size: 50em;
 }
 
 .tab {

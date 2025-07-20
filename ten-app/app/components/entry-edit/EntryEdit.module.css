@@ -1,0 +1,15 @@
+.formButton {
+    display: flex;
+}
+
+.editableTitle {
+    display: flex;
+}
+
+.titleAndInput {
+
+}
+.title, .titleAndInput {
+    display: flex;
+    align-items: center;
+}

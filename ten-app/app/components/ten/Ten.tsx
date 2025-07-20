@@ -22,7 +22,7 @@ import { usePersistBootstrapped } from '../../StoreProvider';
 
 import styles from "./Ten.module.css";
 
-interface FreshProps {
+interface FreshSectionProps {
     readonly fresh: readonly (EntryFresh | null)[];
 
     readonly onChangeId?: (id: Id, value: string) => void;
@@ -31,10 +31,10 @@ interface FreshProps {
     readonly onSwapIndices?: (indexLeft: number, indexRight: number) => void;
 }
 
-const Fresh = ({
+const FreshSection = ({
     fresh, onChangeId,
     createIndex, onCompleteIndex, onSwapIndices
-}: FreshProps) => {
+}: FreshSectionProps) => {
     const count = useMemo(() => fresh.reduce((x, y) => (y != null ? 1 : 0) + x, 0),
                           [fresh]);
 
@@ -104,8 +104,8 @@ const TenImpl = ({
         {
             tab ?
                 <Completed completed={completed} /> :
-                <Fresh fresh={fresh}
-                      onChangeId={onEditId}
+                <FreshSection fresh={fresh}
+                     onChangeId={onEditId}
                      createIndex={createIndex} onCompleteIndex={onCompleteIndex} onSwapIndices={onSwapIndices}
                 />
         }

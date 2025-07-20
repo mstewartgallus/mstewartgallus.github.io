@@ -1,14 +1,14 @@
 "use client";
 
-import type { EntryFresh } from "@/lib/features/ten/tenSlice";
+import type { Entry } from "@/lib/features/ten/tenSlice";
 
 import type { ChangeEvent, FormEvent, MouseEvent } from "react";
-import { useCallback, useMemo, useId, useState } from 'react';
+import { useMemo, useId, useState } from 'react';
 import { If } from "../If";
 import { Button } from "../button/Button";
 import { Icon } from "../icon/Icon";
 
-import styles from "./EntryForm.module.css";
+import styles from "./EntryEdit.module.css";
 
 interface FormButtonProps {
     value: string;
@@ -46,10 +46,10 @@ const FormButton = ({ value, onChange }: FormButtonProps) => {
     }, [editValue, onChange]);
 
     return <form className={styles.formButton} id={formId} action="#" onSubmit={onSubmitForm}>
-        <input disabled={!onChangeInput} className={styles.input} value={editValue} onChange={onChangeInput} />
-        <Button disabled={!onSubmitForm}>
-            Submit
-        </Button>
+            <input disabled={!onChangeInput} className={styles.input} value={editValue} onChange={onChangeInput} />
+            <Button disabled={!onSubmitForm}>
+                Submit
+            </Button>
         </form>;
 };
 
@@ -110,69 +110,16 @@ const EditForm = ({
         </div>;
 };
 
-interface ControlProps {
-    id: string;
-    disabled: boolean;
-    onCreate?: () => void;
-    onComplete?: () => void;
-};
-
-const ItemControls = ({
-    id,
-    disabled,
-    onCreate,
-    onComplete,
-}: ControlProps) => {
-    const onSubmit = useCallback((e: FormEvent) => {
-        e.preventDefault();
-
-        const value = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value;
-        switch (value) {
-        case 'complete':
-            if (onComplete) {
-                e.preventDefault();
-                onComplete();
-            }
-            break;
-
-            case 'create':
-                if (onCreate) {
-                    e.preventDefault();
-                    onCreate();
-                }
-                break;
-
-        default:
-            return;
-        }
-    }, [onComplete, onCreate]);
-
-    return <form id={id} onSubmit={onSubmit} action="#">
-        {
-            onCreate &&
-                <Button disabled={disabled} aria-label="Create Task" value="create">
-                    <Icon>+</Icon>
-                </Button>
-        }
-        {
-            onComplete &&
-                <Button disabled={disabled} aria-label="Complete Task" value="complete">
-                    <Icon>✔</Icon>
-                </Button>
-        }
-     </form>;
-};
-
-type EntryProps = EntryFresh & {
+type Props = Entry & {
     onChange?: (value: string) => void;
     onSelect?: () => void;
     onDeselect?: () => void;
 }
 
-const Entry = ({
-    created,
-    value,onChange, onSelect, onDeselect
-}: EntryProps) => {
+export const EntryEdit = ({
+    value, created,
+    onChange, onSelect, onDeselect
+}: Props) => {
     const format = useMemo(() => new Intl.DateTimeFormat(undefined, {
         dateStyle: "short",
         timeStyle: "short",
@@ -183,52 +130,6 @@ const Entry = ({
     return <div>
         <EditForm value={value}
            onChange={onChange} onSelect={onSelect} onDeselect={onDeselect} />
-        <div>{createdDate}</div>
+        <div>Created: {createdDate}</div>
         </div>;
 };
-
-interface Props {
-    readonly item?: EntryFresh;
-
-    readonly disabled: boolean;
-
-    readonly onDeselect?: () => void;
-    readonly onSelect?: () => void;
-
-    readonly onEdit?: (value: string) => void;
-
-    readonly onCreate?: () => void;
-    readonly onComplete?: () => void;
-}
-
-export const EntryForm = ({
-    disabled,
-    item,
-    onDeselect,
-    onSelect,
-    onEdit,
-
-    onCreate,
-    onComplete
-}: Props) => {
-    const hasItem = item !== undefined;
-    const formId = useId();
-    return <div className={styles.entryForm}>
-        <div className={styles.editForm}>
-         {
-             hasItem &&
-                 <Entry
-                    {...item}
-                    onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect}
-                 />
-         }
-         {
-            !hasItem && <>...</>
-         }
-         </div>
-         <ItemControls id={formId} disabled={disabled}
-             onCreate={hasItem ? undefined : onCreate}
-             onComplete={hasItem ? onComplete : undefined}
-     />
-     </div>;
-}

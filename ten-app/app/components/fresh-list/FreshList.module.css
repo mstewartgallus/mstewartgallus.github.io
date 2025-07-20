@@ -1,0 +1,5 @@
+.freshSlot {
+    display: flex;
+    justify-content: space-between;
+    inline-size: 40em;
+}

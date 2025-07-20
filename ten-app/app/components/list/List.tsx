@@ -2,7 +2,6 @@
 
 import type { Key, ReactNode } from 'react';
 import { createContext, useContext } from 'react';
-import { Icon } from '../icon/Icon';
 
 import styles from './List.module.css';
 
@@ -15,7 +14,7 @@ interface ItemProps {
 
 export const Item = ({ children }: ItemProps) =>
     <li role="listitem" className={styles.item}>
-        <Icon>—</Icon>
+        <div className={styles.tick}>—</div>
         <div>
             {children}
         </div>

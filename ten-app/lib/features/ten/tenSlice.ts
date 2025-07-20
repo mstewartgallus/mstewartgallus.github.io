@@ -3,7 +3,7 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 export type Id = number;
 
-interface Entry {
+export interface Entry {
     value: string;
     created: number;
 }
