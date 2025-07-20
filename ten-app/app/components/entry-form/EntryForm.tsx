@@ -10,79 +10,90 @@ import { Icon } from "../icon/Icon";
 
 import styles from "./EntryForm.module.css";
 
-
 interface FormButtonProps {
-    disabled: boolean;
-
-    id: string;
     value: string;
 
     onChange?: (value: string) => void;
-    onDeselect?: () => void;
 }
 
-const FormButton = ({ disabled, value, id, onChange, onDeselect }: FormButtonProps) => {
-    const onSubmit = useCallback((e: FormEvent) => {
-        if (!onChange || !onDeselect) {
+const FormButton = ({ value, onChange }: FormButtonProps) => {
+    const [editValue, setEditValue] = useState(value);
+
+    const formId = useId();
+
+    const onChangeInput = useMemo(() => {
+        if (!onChange) {
             return;
         }
-        e.preventDefault();
-        onChange(value);
-        onDeselect();
-    }, [onDeselect, onChange, value]);
+        return (e: ChangeEvent<HTMLInputElement>) => {
+            const { target } = e;
+            if (!target) {
+                return;
+            }
+            e.preventDefault();
+            setEditValue((target as HTMLInputElement).value);
+        };
+    }, [onChange]);
 
-    return <form className={styles.editMenu} id={id} action="#" onSubmit={onSubmit}>
-           <Button disabled={disabled || !onChange}>
+    const onSubmitForm = useMemo(() => {
+        if (!onChange) {
+            return;
+        }
+        return (e: FormEvent) => {
+            e.preventDefault();
+            onChange(editValue);
+        };
+    }, [editValue, onChange]);
+
+    return <form className={styles.formButton} id={formId} action="#" onSubmit={onSubmitForm}>
+        <input disabled={!onChangeInput} className={styles.input} value={editValue} onChange={onChangeInput} />
+        <Button disabled={!onSubmitForm}>
             Submit
-          </Button>
+        </Button>
         </form>;
 };
 
 interface EditFormProps {
     value: string;
-    disabled: boolean;
-    selected: boolean;
     onChange?: (value: string) => void;
     onSelect?: () => void;
-    onDeselect: () => void;
+    onDeselect?: () => void;
 }
 
 const EditForm = ({
     value,
-    disabled, onChange, selected, onSelect, onDeselect
+    onChange, onSelect, onDeselect
 }: EditFormProps) => {
-    const formId = useId();
+    const selected = !onSelect;
+
+    const onToggle = onSelect || onDeselect;
+
+    const onSubmit = useMemo(() => {
+        if (!onChange || !onDeselect) {
+            return;
+        }
+        return (value: string) => {
+            onChange(value);
+            onDeselect();
+        };
+    }, [onChange, onDeselect]);
+
     const controlId = useId();
-    const [editValue, setEditValue] = useState(value);
 
     const onToggleClick = useMemo(() => {
-        if (!onSelect) {
+        if (!onToggle) {
             return;
         }
         return (e: MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
 
-            if (selected) {
-                onDeselect();
-            } else {
-                setEditValue(value);
-                onSelect();
-            }
+            onToggle();
         };
-    }, [onSelect, onDeselect, selected, value]);
-
-    const onChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        const { target } = e;
-        if (!target) {
-            return;
-        }
-        e.preventDefault();
-        setEditValue((target as HTMLInputElement).value);
-    }, []);
+    }, [onToggle]);
 
     return <div className={styles.editableTitle}>
           <Button aria-label={selected ? 'Cancel' : 'Edit'}
-                disabled={disabled}
+                disabled={!onToggleClick}
                 onClick={onToggleClick}
                 aria-expanded={selected}
                 aria-controls={controlId}>
@@ -93,12 +104,12 @@ const EditForm = ({
                     <div className={styles.title}>{value}</div>
                 </If>
                 <If cond={selected}>
-                    <input disabled={disabled} className={styles.input} form={formId} value={editValue} onChange={onChangeInput} />
-                    <FormButton disabled={disabled} value={editValue} id={formId} onChange={onChange} onDeselect={onDeselect} />
+                   <FormButton value={value} onChange={onSubmit} />
                 </If>
             </div>
         </div>;
 };
+
 interface ControlProps {
     id: string;
     disabled: boolean;
@@ -139,28 +150,28 @@ const ItemControls = ({
     return <form id={id} onSubmit={onSubmit} action="#">
         {
             onCreate &&
-                <Button disabled={disabled} aria-label="Create Task" value="create"><Icon>+</Icon></Button>
+                <Button disabled={disabled} aria-label="Create Task" value="create">
+                    <Icon>+</Icon>
+                </Button>
         }
         {
             onComplete &&
-                <Button disabled={disabled} aria-label="Complete Task" value="complete"><Icon>✔</Icon></Button>
+                <Button disabled={disabled} aria-label="Complete Task" value="complete">
+                    <Icon>✔</Icon>
+                </Button>
         }
      </form>;
 };
 
-
 type EntryProps = EntryFresh & {
-    disabled: boolean;
-    selected: boolean;
     onChange?: (value: string) => void;
     onSelect?: () => void;
-    onDeselect: () => void;
+    onDeselect?: () => void;
 }
 
 const Entry = ({
     created,
-    value,
-    disabled, onChange, selected, onSelect, onDeselect
+    value,onChange, onSelect, onDeselect
 }: EntryProps) => {
     const format = useMemo(() => new Intl.DateTimeFormat(undefined, {
         dateStyle: "short",
@@ -171,8 +182,7 @@ const Entry = ({
 
     return <div>
         <EditForm value={value}
-           disabled={disabled} selected={selected}
-    onChange={onChange} onSelect={onSelect} onDeselect={onDeselect} />
+           onChange={onChange} onSelect={onSelect} onDeselect={onDeselect} />
         <div>{createdDate}</div>
         </div>;
 };
@@ -182,8 +192,7 @@ interface Props {
 
     readonly disabled: boolean;
 
-    readonly selected: boolean;
-    readonly onDeselect: () => void;
+    readonly onDeselect?: () => void;
     readonly onSelect?: () => void;
 
     readonly onEdit?: (value: string) => void;
@@ -195,7 +204,6 @@ interface Props {
 export const EntryForm = ({
     disabled,
     item,
-    selected,
     onDeselect,
     onSelect,
     onEdit,
@@ -211,7 +219,6 @@ export const EntryForm = ({
              hasItem &&
                  <Entry key={item.id}
                     {...item}
-                    disabled={disabled} selected={selected}
                     onChange={onEdit} onSelect={onSelect} onDeselect={onDeselect}
                  />
          }

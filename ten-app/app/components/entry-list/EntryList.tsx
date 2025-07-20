@@ -22,13 +22,10 @@ const ListContext = createContext<ListContext>({
 });
 ListContext.displayName = 'ListContext';
 
-interface ItemProps {
-    readonly children: ReactNode;
-}
 const useBind = (f: undefined | ((index: number) => void), index: number) =>
     useMemo(() => f ? (() => f(index)) : undefined, [f, index]);
 
-export const EntryItem = ({ children }: ItemProps) => {
+const useEntryItemState = () => {
     const index = useContext(ItemContext);
     const {
         dragIndex,
@@ -40,15 +37,77 @@ export const EntryItem = ({ children }: ItemProps) => {
     const dragging = dragIndex == index;
     const anyDragging = dragIndex !== undefined;
 
-    const onDragStart = useBind(onDragStartIndex, index);
-    const onDrop = useBind(onDropIndex, index);
-
     const otherDragging = anyDragging && !dragging;
+
+    const onDragStart = useBind(onDragStartIndex, index);
+    let onDrop = useBind(onDropIndex, index);
+    onDrop = otherDragging ? onDrop : undefined;
 
     const onToggle = otherDragging ? undefined : (onDragStart || onDragEnd);
 
+    return { dragging, onToggle, onDrop };
+};
+
+const useEntryListState = (onSwapIndices?: (dragIndex: number, dropIndex: number) => void) => {
+    const [dragIndex, setDragIndex] = useState<number | null>(null);
+
+    const isPrimaryPointerDown = useIsPrimaryPointerDown();
+
+    if (!isPrimaryPointerDown && dragIndex !== null) {
+        setDragIndex(null);
+    }
+
+    useCursor(dragIndex !== null ? 'grabbing' : undefined);
+
+    const anyDragging = dragIndex !== null;
+
+    const onDragStartIndex = useMemo(() => {
+        if (anyDragging) {
+            return;
+        }
+        return (index: number) => setDragIndex(index);
+    }, [anyDragging]);
+
+    const onDragEnd = useMemo(() => {
+        if (!anyDragging) {
+            return;
+        }
+        return () => setDragIndex(null);
+    }, [anyDragging]);
+
+    const onDropIndex = useMemo(() => {
+        if (!onSwapIndices || !anyDragging) {
+            return;
+        }
+
+        return (index: number) => {
+            onSwapIndices(dragIndex, index);
+            setDragIndex(null);
+        }
+    }, [dragIndex, onSwapIndices, anyDragging]);
+
+    const context =  useMemo(() => ({
+        dragIndex: dragIndex ?? undefined,
+        onDragStartIndex,
+        onDragEnd,
+        onDropIndex,
+    }), [
+        dragIndex,
+        onDragStartIndex, onDragEnd,
+        onDropIndex,
+    ]);
+
+    return { dragIndex, context };
+};
+
+interface ItemProps {
+    readonly children: ReactNode;
+}
+
+export const EntryItem = ({ children }: ItemProps) => {
+    const { dragging, onDrop, onToggle } = useEntryItemState();
     return <div className={styles.entryItem}>
-        <DropButton onDrop={otherDragging ? onDrop : undefined} />
+        <DropButton onDrop={onDrop} />
         <DragButton dragging={dragging} onToggle={onToggle}>
             <div className={styles.grabberIcon}>&</div>
         </DragButton>
@@ -76,61 +135,19 @@ export const EntryList = <T,>({
     fresh,
     onSwapIndices
 }: Props<T>) => {
-    const [dragIndex, setDragIndex] = useState<number | null>(null);
-    const anyDragging = dragIndex !== null;
-
-    useCursor(dragIndex !== null ? 'grabbing' : undefined);
-
-    const onDragStartIndex = useMemo(() => {
-        if (anyDragging) {
-            return;
-        }
-        return (index: number) => setDragIndex(index);
-    }, [anyDragging]);
-
-    const onDragEnd = useMemo(() => {
-        if (!anyDragging) {
-            return;
-        }
-        return () => setDragIndex(null);
-    }, [anyDragging]);
-
-    const onDropIndex = useMemo(() => {
-        if (!onSwapIndices || !anyDragging) {
-            return;
-        }
-
-        return (index: number) => {
-            onSwapIndices(dragIndex, index);
-            setDragIndex(null);
-        }
-    }, [dragIndex, anyDragging, onSwapIndices]);
-
-    const context = useMemo(() => ({
-        dragIndex: dragIndex ?? undefined,
-        onDragStartIndex,
-        onDragEnd,
-        onDropIndex,
-    }), [
+    const {
         dragIndex,
-        onDragStartIndex, onDragEnd,
-        onDropIndex,
-    ]);
+        context
+    } = useEntryListState(onSwapIndices);
 
-    const isPrimaryPointerDown = useIsPrimaryPointerDown();
-
-    if (!isPrimaryPointerDown && dragIndex !== null) {
-        setDragIndex(null);
-    }
-
-    const Child = children;
+    const Children = children;
     return <ul className={styles.entryList} role="list">
         <ListContext.Provider value={context}>
         {
             fresh.map((item, index) =>
                 <li key={keyOf(item, index)} role="listitem" className={styles.entryItemWrapper}>
                     <ItemContext.Provider value={index}>
-                        <Child item={item || undefined} disabled={dragIndex !== null} index={index} />
+                        <Children item={item || undefined} disabled={dragIndex !== null} index={index} />
                     </ItemContext.Provider>
                </li>
             )
