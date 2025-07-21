@@ -8,20 +8,16 @@ export interface Entry {
     created: number;
 }
 
-interface Fresh {
+export interface Fresh {
     id: Id;
 }
 
-interface Complete {
+export interface Complete {
     id: Id;
     completed: number;
 }
 
-export type EntryFresh = Entry & Fresh;
-export type EntryComplete = Entry & Complete;
-
 interface CreateAction {
-    id: Id;
     index: number;
     created: number;
 }
@@ -58,28 +54,6 @@ const initialState: TenSliceState = (() => {
 type TenSelector<T> = Selector<TenSliceState, T>;
 
 const selectEntry: TenSelector<readonly Entry[]> = ten => ten.entry;
-const selectFresh: TenSelector<readonly (Fresh | null)[]> = ten => ten.fresh;
-const selectComplete: TenSelector<readonly Complete[]> = ten => ten.complete;
-
-const entryFresh: (
-    entry: readonly Entry[],
-    fresh: readonly (Fresh | null)[]
-) => readonly (EntryFresh | null)[] = (entry, fresh) =>
-    fresh.map(x => {
-        if (!x) {
-            return null;
-        }
-        return ({ ...x, ...entry[x.id] });
-    });
-
-const entryComplete: (
-    entry: readonly Entry[],
-    complete: readonly Complete[]
-) => readonly EntryComplete[] = (entry, complete) =>
-    complete.map(x => {
-        const theEntry = entry[x.id];
-        return ({ ...x, ...theEntry });
-    });
 
 const checkIndex = <T>(array: readonly T[], index: number) => {
     const { length } = array;
@@ -104,19 +78,16 @@ export const tenSlice = createSlice({
         }),
 
         create: create.preparedReducer(
-            (index: number, id: Id) => {
+            (index: number) => {
                 const created = Date.now();
-                return { payload: { index, id, created } };
-            }, ({ fresh, entry }, { payload: { id, index, created } }: PayloadAction<CreateAction>) => {
+                return { payload: { index, created } };
+            }, ({ fresh, entry }, { payload: { index, created } }: PayloadAction<CreateAction>) => {
             checkIndex(fresh, index);
             if (fresh[index]) {
                 throw Error(`fresh ${index} is non-empty`);
             }
 
-            const { length } = entry;
-            if (id !== length) {
-                throw Error(`create id ${id} is not new id ${length}`);
-            }
+                const id = entry.length;
 
             entry.push({ created, value: '' });
             fresh[index] = { id };
@@ -151,8 +122,11 @@ export const tenSlice = createSlice({
 
     selectors: {
         selectNewEntryId: ten => ten.entry.length,
-        selectEntryFresh: createSelector([selectEntry, selectFresh], entryFresh),
-        selectEntryComplete: createSelector([selectEntry, selectComplete], entryComplete)
+
+        selectEntryAtId: createSelector([selectEntry], entry => (id: Id) => entry[id]),
+
+        selectFresh: ten => ten.fresh,
+        selectComplete: ten => ten.complete
     },
 });
 
@@ -165,6 +139,8 @@ export const {
 
 export const {
     selectNewEntryId,
-    selectEntryFresh,
-    selectEntryComplete
+
+    selectEntryAtId,
+    selectFresh,
+    selectComplete
 } = tenSlice.selectors;

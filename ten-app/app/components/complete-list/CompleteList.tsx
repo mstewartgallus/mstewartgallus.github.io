@@ -1,26 +1,26 @@
-"use client";
-
-import type { EntryComplete } from "@/lib/features/ten/tenSlice";
+import type { Id, Entry, Complete } from "@/lib/features/ten/tenSlice";
 
 import { useCallback } from 'react';
-import { Complete } from '../complete/Complete';
+import { Complete as CompleteComponent } from '../complete/Complete';
 import { List, Item, useItem } from '../list/List';
 
 interface Props {
-    completed: readonly EntryComplete[];
+    complete: readonly Complete[];
+    entryAtId: (id: Id) => Entry;
 }
 
-const CompleteItem = ({ completed }: Props) => {
+const CompleteItem = ({ complete, entryAtId }: Props) => {
     const index = useItem();
-    const item = completed[index];
-    return <Complete {...item} />;
+    const item = complete[index];
+    const entry = entryAtId(item.id);
+    return <CompleteComponent {...entry} completed={item.completed} />;
 };
 
-export const CompleteList = ({ completed }: Props) => {
-    const keyOf = useCallback((index: number) => completed[index].id, [completed]);
-    return <List length={completed.length} keyOf={keyOf}>
+export const CompleteList = ({ complete, entryAtId }: Props) => {
+    const keyOf = useCallback((index: number) => complete[index].id, [complete]);
+    return <List length={complete.length} keyOf={keyOf}>
             <Item>
-                <CompleteItem completed={completed} />
+                <CompleteItem complete={complete} entryAtId={entryAtId} />
             </Item>
         </List>;
 };

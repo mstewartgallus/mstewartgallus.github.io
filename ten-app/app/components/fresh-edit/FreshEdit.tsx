@@ -1,6 +1,6 @@
 "use client";
 
-import type { Id, EntryFresh } from "@/lib/features/ten/tenSlice";
+import type { Id, Entry } from "@/lib/features/ten/tenSlice";
 
 import { useMemo } from 'react';
 
@@ -44,8 +44,10 @@ const useFreshEditState = ({
     };
 };
 
-type Props = EntryFresh & {
+interface Props {
+    id: Id;
     selectionId?: Id;
+    entryAtId: (id: Id) => Entry;
 
     onChangeId?: (id: Id, value: string) => void;
     onSelectId: (id: Id) => void;
@@ -53,10 +55,9 @@ type Props = EntryFresh & {
 }
 
 export const FreshEdit = ({
-    id, value, created,
+    id, selectionId,
 
-    selectionId,
-
+    entryAtId,
     onChangeId,
     onSelectId, onDeselect: onDeselectX
 }: Props) => {
@@ -67,6 +68,8 @@ export const FreshEdit = ({
         onChangeId,
         onSelectId, onDeselect: onDeselectX
     });
+
+    const { value, created } = entryAtId(id);
     return <EntryEdit value={value} created={created}
         onChange={onChange} onSelect={onSelect} onDeselect={onDeselect} />;
 };

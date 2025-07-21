@@ -1,6 +1,6 @@
 "use client";
 
-import type { Id, EntryComplete, EntryFresh } from "@/lib/features/ten/tenSlice";
+import type { Id, Entry, Fresh, Complete } from "@/lib/features/ten/tenSlice";
 import type { MouseEvent } from "react";
 
 import {
@@ -8,9 +8,13 @@ import {
     create,
     complete,
     swap,
+
     selectNewEntryId,
-    selectEntryFresh,
-    selectEntryComplete,
+
+    selectEntryAtId,
+
+    selectFresh,
+    selectComplete,
 } from "@/lib/features/ten/tenSlice";
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -23,17 +27,19 @@ import { usePersistBootstrapped } from '../../StoreProvider';
 import styles from "./Ten.module.css";
 
 interface FreshSectionProps {
-    readonly fresh: readonly (EntryFresh | null)[];
+    fresh: readonly (Fresh | null)[];
+    entryAtId: (id: Id) => Entry;
+    newEntryId: Id;
 
-    readonly onChangeId?: (id: Id, value: string) => void;
-    readonly createIndex?: (index: number) => Id;
-    readonly onCompleteIndex?: (index: number) => void;
-    readonly onSwapIndices?: (indexLeft: number, indexRight: number) => void;
+    onChangeId?: (id: Id, value: string) => void;
+    onCreateIndex?: (index: number) => void;
+    onCompleteIndex?: (index: number) => void;
+    onSwapIndices?: (indexLeft: number, indexRight: number) => void;
 }
 
 const FreshSection = ({
-    fresh, onChangeId,
-    createIndex, onCompleteIndex, onSwapIndices
+    entryAtId, newEntryId, fresh, onChangeId,
+    onCreateIndex, onCompleteIndex, onSwapIndices
 }: FreshSectionProps) => {
     const count = useMemo(() => fresh.reduce((x, y) => (y != null ? 1 : 0) + x, 0),
                           [fresh]);
@@ -41,11 +47,13 @@ const FreshSection = ({
     return <section>
         <h1>{count} / 10</h1>
         <FreshList
+              entryAtId={entryAtId}
               fresh={fresh}
+              newEntryId={newEntryId}
 
               onChangeId={onChangeId}
 
-              createIndex={createIndex}
+              onCreateIndex={onCreateIndex}
               onCompleteIndex={onCompleteIndex}
               onSwapIndices={onSwapIndices}
 
@@ -54,32 +62,36 @@ const FreshSection = ({
 }
 
 interface CompletedProps {
-    completed: readonly EntryComplete[];
+    complete: readonly Complete[];
+    entryAtId: (id: Id) => Entry;
 }
 
-const Completed = ({ completed }: CompletedProps) => {
+const Completed = ({ complete, entryAtId }: CompletedProps) => {
     return <section>
         <h2>Completed</h2>
-        <CompleteList completed={completed} />
+        <CompleteList complete={complete} entryAtId={entryAtId} />
     </section>;
 };
 
 
 interface Props {
-    readonly fresh: readonly (EntryFresh | null)[];
-    readonly completed: readonly EntryComplete[];
+    newEntryId: Id;
+    entryAtId: (id: Id) => Entry;
 
-    readonly onEditId?: (id: Id, value: string) => void;
+    readonly fresh: readonly (Fresh | null)[];
+    readonly complete: readonly Complete[];
 
-    readonly createIndex?: (index: number) => Id;
-    readonly onCompleteIndex?: (index: number) => void;
-    readonly onSwapIndices?: (indexLeft: number, indexRight: number) => void;
+    onChangeId?: (id: Id, value: string) => void;
+
+    onCreateIndex?: (index: number) => void;
+    onCompleteIndex?: (index: number) => void;
+    onSwapIndices?: (indexLeft: number, indexRight: number) => void;
 }
 
 const TenImpl = ({
-    fresh, completed,
-    onEditId,
-    createIndex,
+    entryAtId, newEntryId, fresh, complete,
+    onChangeId,
+    onCreateIndex,
     onCompleteIndex,
     onSwapIndices
 }: Props) => {
@@ -103,45 +115,53 @@ const TenImpl = ({
         </nav>
         {
             tab ?
-                <Completed completed={completed} /> :
+                <Completed complete={complete} entryAtId={entryAtId} /> :
                 <FreshSection fresh={fresh}
-                     onChangeId={onEditId}
-                     createIndex={createIndex} onCompleteIndex={onCompleteIndex} onSwapIndices={onSwapIndices}
+                     entryAtId={entryAtId}
+                     newEntryId={newEntryId}
+                     onCreateIndex={onCreateIndex}
+                     onChangeId={onChangeId}
+                     onCompleteIndex={onCompleteIndex} onSwapIndices={onSwapIndices}
                 />
         }
     </>;
 };
 
 const mock = Array(10).fill(null);
+const err: (id: Id) => Entry = (id: Id) => {
+    throw Error(`index ${id}`);
+};
 
 export const Ten = () => {
     const dispatch = useAppDispatch();
 
-    const newEntryId = useAppSelector(selectNewEntryId);
-    const entryFresh = useAppSelector(selectEntryFresh);
-    const entryComplete = useAppSelector(selectEntryComplete);
-
-    const onEditId = useCallback((id: Id, value: string) =>
+    const onChangeId = useCallback((id: Id, value: string) =>
         dispatch(edit(id, value)),
         [dispatch]);
+    const onCreateIndex = useCallback((index: number) =>
+        dispatch(create(index)), [dispatch]);
     const onCompleteIndex = useCallback((index: number) =>
         dispatch(complete(index)),
         [dispatch]);
-    const createIndex = useCallback((index: number) => {
-        dispatch(create(index, newEntryId));
-        return newEntryId;
-    }, [newEntryId, dispatch]);
     const onSwapIndices = useCallback((indexLeft: number, indexRight: number) =>
         dispatch(swap(indexLeft, indexRight)),
         [dispatch]);
 
+    const newEntryId = useAppSelector(selectNewEntryId);
+    const entryAtId = useAppSelector(selectEntryAtId);
+    const fresh = useAppSelector(selectFresh);
+    const completeArray = useAppSelector(selectComplete);
+
     const bootstrapped = usePersistBootstrapped();
 
     return <TenImpl
-        fresh={bootstrapped ? entryFresh : mock}
-        completed={bootstrapped ? entryComplete : []}
-        onEditId={bootstrapped ? onEditId : undefined}
-        createIndex={bootstrapped ? createIndex : undefined}
+        entryAtId={bootstrapped ? entryAtId : err}
+        fresh={bootstrapped ? fresh : mock}
+        complete={bootstrapped ? completeArray : []}
+        newEntryId={newEntryId}
+
+        onChangeId={bootstrapped ? onChangeId : undefined}
+        onCreateIndex={bootstrapped ? onCreateIndex : undefined}
         onCompleteIndex={bootstrapped ? onCompleteIndex : undefined}
         onSwapIndices={bootstrapped ? onSwapIndices : undefined}
         />;

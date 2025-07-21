@@ -1,24 +1,20 @@
 "use client";
 
-import type { Id, EntryFresh } from "@/lib/features/ten/tenSlice";
+import type { Id, Entry, Fresh } from "@/lib/features/ten/tenSlice";
 
 import { useCallback, useMemo, useState } from 'react';
 import { DndList, DndItem, useDndItem } from '../dnd-list/DndList';
-import { SlotControls } from "../slot-controls/SlotControls";
+import { CreateForm, CompleteForm } from "../slot-controls/SlotControls";
 import { FreshEditMaybe } from "../fresh-edit-maybe/FreshEditMaybe";
 
 import styles from "./FreshList.module.css";
 
-interface ControlsItemProps {
+interface CreateItemProps {
     hasItem: readonly boolean[];
     onCreateIndex?: (index: number) => void;
-    onCompleteIndex?: (index: number) => void;
 };
 
-const ControlsItem = ({
-    hasItem,
-    onCreateIndex, onCompleteIndex
-}: ControlsItemProps) => {
+const CreateItem = ({ hasItem, onCreateIndex }: CreateItemProps) => {
     const { index, isDragging } = useDndItem();
 
     const onCreate = useMemo(() => {
@@ -28,6 +24,25 @@ const ControlsItem = ({
         return () => onCreateIndex(index);
     }, [index, onCreateIndex]);
 
+    if (hasItem[index]) {
+        return;
+    }
+
+    if (!onCreate) {
+        return;
+    }
+
+    return <CreateForm disabled={isDragging} onCreate={onCreate} />;
+};
+
+interface CompleteItemProps {
+    hasItem: readonly boolean[];
+    onCompleteIndex?: (index: number) => void;
+};
+
+const CompleteItem = ({ hasItem, onCompleteIndex }: CompleteItemProps) => {
+    const { index, isDragging } = useDndItem();
+
     const onComplete = useMemo(() => {
         if (!onCompleteIndex) {
             return;
@@ -35,15 +50,21 @@ const ControlsItem = ({
         return () => onCompleteIndex(index);
     }, [index, onCompleteIndex]);
 
-    return <SlotControls disabled={isDragging}
-        onCreate={hasItem[index] ? undefined : onCreate}
-        onComplete={hasItem[index] ? onComplete : undefined} />;
+    if (!hasItem[index]) {
+        return;
+    }
+
+    if (!onComplete) {
+        return;
+    }
+
+    return <CompleteForm disabled={isDragging} onComplete={onComplete} />;
 };
 
 interface AdaptorProps {
-    fresh: readonly (EntryFresh | null)[];
-
+    fresh: readonly (Fresh | null)[];
     selectionId?: Id;
+    entryAtId: (id: Id) => Entry;
 
     onChangeId?: (id: Id, value: string) => void;
     onSelectId: (id: Id) => void;
@@ -53,28 +74,33 @@ interface AdaptorProps {
 const Adaptor = ({
     fresh,
     selectionId,
+    entryAtId,
 
     onChangeId,
     onSelectId, onDeselect
 }: AdaptorProps) => {
     const { index } = useDndItem();
-    return <FreshEditMaybe item={fresh[index] ?? undefined} selectionId={selectionId}
+    return <FreshEditMaybe item={fresh[index] ?? undefined} selectionId={selectionId} entryAtId={entryAtId}
         onChangeId={onChangeId} onSelectId={onSelectId} onDeselect={onDeselect} />;
 };
 
 interface Props {
-    readonly fresh: readonly (EntryFresh | null)[];
+    readonly fresh: readonly (Fresh | null)[];
 
-    readonly createIndex?: (index: number) => Id;
+    readonly entryAtId: (id: Id) => Entry;
+    readonly newEntryId: Id;
+
+    readonly onCreateIndex?: (index: number) => void;
     readonly onChangeId?: (id: Id, value: string) => void;
     readonly onCompleteIndex?: (index: number) => void;
     readonly onSwapIndices?: (indexLeft: number, indexRight: number) => void;
 }
 
 export const FreshList = ({
-    fresh,
+    fresh, entryAtId, newEntryId,
+
     onChangeId,
-    createIndex, onCompleteIndex,
+    onCreateIndex, onCompleteIndex,
     onSwapIndices
 }: Props) => {
     const [selectionId, setSelectionId] = useState<Id | null>(null);
@@ -82,12 +108,15 @@ export const FreshList = ({
     const onSelectId = useCallback((id: Id) => setSelectionId(id), []);
     const onDeselect = useCallback(() => setSelectionId(null), []);
 
-    const onCreateIndex = useMemo(() => {
-        if (!createIndex) {
+    const onCreateIndexSelect = useMemo(() => {
+        if (!onCreateIndex) {
             return;
         }
-        return (index: number) => setSelectionId(createIndex(index));
-    }, [createIndex]);
+        return (index: number) => {
+            onCreateIndex(index);
+            setSelectionId(newEntryId);
+        };
+    }, [newEntryId, onCreateIndex]);
 
     const keyOf = useCallback((index: number) => {
         const item = fresh[index];
@@ -99,14 +128,16 @@ export const FreshList = ({
     return <DndList keyOf={keyOf} length={fresh.length} onSwapIndices={onSwapIndices}>
         <DndItem>
             <div className={styles.freshSlot}>
+               <CreateItem hasItem={hasItem} onCreateIndex={onCreateIndexSelect} />
+
                <Adaptor
-                    fresh={fresh}
-                selectionId={selectionId ?? undefined}
-                onChangeId={onChangeId}
-                onSelectId={onSelectId}
-                onDeselect={onDeselect}
-             />
-              <ControlsItem hasItem={hasItem} onCreateIndex={onCreateIndex} onCompleteIndex={onCompleteIndex} />
+                    fresh={fresh} entryAtId={entryAtId}
+                    selectionId={selectionId ?? undefined}
+                    onChangeId={onChangeId}
+                    onSelectId={onSelectId}
+                    onDeselect={onDeselect}
+        />
+              <CompleteItem hasItem={hasItem} onCompleteIndex={onCompleteIndex} />
             </div>
         </DndItem>
     </DndList>;
