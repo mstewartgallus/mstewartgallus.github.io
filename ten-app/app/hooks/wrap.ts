@@ -1,5 +1,5 @@
-import type { MouseEvent } from "react";
-import {  useCallback, useMemo, useState } from "react";
+import type { PointerEvent } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 interface Wrap {
     hover: boolean;
@@ -24,17 +24,17 @@ export const useWrap = () => {
         setActive(false);
     }
 
-    const onMouseEnter = useCallback(() => setHover(true), []);
-    const onMouseLeave = useCallback(() => setHover(false), []);
+    const onPointerEnter = useCallback(() => setHover(true), []);
+    const onPointerLeave = useCallback(() => setHover(false), []);
 
-    const onMouseDown = useCallback((e: MouseEvent) => {
-        if (e.button !== 0) {
+    const onPointerDown = useCallback((e: PointerEvent) => {
+        if (!e.isPrimary) {
             return;
         }
         setActive(true);
     }, []);
-    const onMouseUp = useCallback((e: MouseEvent) => {
-        if (e.button !== 0) {
+    const onPointerUp = useCallback((e: PointerEvent) => {
+        if (!e.isPrimary) {
             return;
         }
         setActive(false);
@@ -45,9 +45,9 @@ export const useWrap = () => {
     }), [hover, active]);
 
     const hooks = useMemo(() => ({
-        onMouseEnter, onMouseLeave,
-        onMouseUp, onMouseDown
-    }), [onMouseEnter, onMouseLeave, onMouseUp, onMouseDown]);
+        onPointerEnter, onPointerLeave,
+        onPointerUp, onPointerDown
+    }), [onPointerEnter, onPointerLeave, onPointerUp, onPointerDown]);
 
     return { state, hooks } ;
 };

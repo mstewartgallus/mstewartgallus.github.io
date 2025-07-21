@@ -40,12 +40,13 @@ export const DropButton = ({ children, onDrop }: Props) => {
         };
     }, [onDrop]);
 
-    return <button className={styles.dropZone} {...hooks} {...toDataProps(state)}
-            onPointerUp={onPointerUp}
-            onClick={onClick}
-            disabled={!onClick ? true : undefined}
-        >
-        {children}
-     </button>;
+    return <div className={styles.wrapper} {...hooks}>
+            <button className={styles.dropZone} {...toDataProps(state)}
+                onPointerUp={onPointerUp}
+                onClick={onClick}
+                disabled={!onClick ? true : undefined}>
+                {children}
+            </button>
+        </div>;
 
 };

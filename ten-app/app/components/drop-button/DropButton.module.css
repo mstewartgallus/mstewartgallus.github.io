@@ -33,3 +33,7 @@
 .dropZone[data-active] {
     background: #1402;
 }
+
+.wrapper {
+    display: contents;
+}
