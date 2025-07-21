@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Ten } from "./components/ten/Ten";
+import { TenThings } from "./_components/ten-things/TenThings";
 
-const IndexPage = () => <Ten />;
+const IndexPage = () => <TenThings />;
 
 export default IndexPage;
 

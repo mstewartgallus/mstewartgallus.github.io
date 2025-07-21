@@ -1,0 +1,8 @@
+.main {
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    inline-size: 10em;
+}

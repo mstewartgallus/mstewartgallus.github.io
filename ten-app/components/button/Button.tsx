@@ -1,6 +1,6 @@
 import type { DetailedHTMLProps, ButtonHTMLAttributes } from "react";
 
-import { useWrap, toDataProps } from "@/app/hooks/wrap";
+import { useWrap, toDataProps } from "../wrap";
 
 import styles from "./Button.module.css";
 

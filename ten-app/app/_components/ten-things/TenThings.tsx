@@ -1,7 +1,6 @@
 "use client";
 
-import type { Id, Entry, Fresh, Complete } from "@/lib/features/ten/tenSlice";
-import type { MouseEvent } from "react";
+import type { Id, Entry, Fresh } from "@/lib/features/ten/tenSlice";
 
 import {
     edit,
@@ -10,21 +9,14 @@ import {
     swap,
 
     selectNewEntryId,
-
     selectEntryAtId,
-
     selectFresh,
-    selectComplete,
 } from "@/lib/features/ten/tenSlice";
 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useCallback, useMemo, useState } from 'react';
-import { FreshList } from '../fresh-list/FreshList';
-import { CompleteList } from '../complete-list/CompleteList';
-import { Button } from '../button/Button';
-import { usePersistBootstrapped } from '../../StoreProvider';
-
-import styles from "./Ten.module.css";
+import { useCallback, useMemo } from 'react';
+import { FreshList } from '@/components/fresh-list/FreshList';
+import { usePersistBootstrapped } from '../StoreProvider';
 
 interface FreshSectionProps {
     fresh: readonly (Fresh | null)[];
@@ -61,25 +53,11 @@ const FreshSection = ({
         </section>;
 }
 
-interface CompletedProps {
-    complete: readonly Complete[];
-    entryAtId: (id: Id) => Entry;
-}
-
-const Completed = ({ complete, entryAtId }: CompletedProps) => {
-    return <section>
-        <h2>Completed</h2>
-        <CompleteList complete={complete} entryAtId={entryAtId} />
-    </section>;
-};
-
-
 interface Props {
     newEntryId: Id;
     entryAtId: (id: Id) => Entry;
 
     readonly fresh: readonly (Fresh | null)[];
-    readonly complete: readonly Complete[];
 
     onChangeId?: (id: Id, value: string) => void;
 
@@ -89,42 +67,19 @@ interface Props {
 }
 
 const TenImpl = ({
-    entryAtId, newEntryId, fresh, complete,
+    entryAtId, newEntryId, fresh,
     onChangeId,
     onCreateIndex,
     onCompleteIndex,
     onSwapIndices
 }: Props) => {
-    const [tab, setTab] = useState(false);
-
-    const onClick = useCallback((e: MouseEvent<HTMLElement>) => {
-        if (e.button !== 0) {
-            return;
-        }
-        e.preventDefault();
-
-        setTab(o => !o);
-    }, []);
-
-    return <>
-        <nav className={styles.tabWrapper}>
-            <div className={styles.tab}>
-                <div>{tab ? <>Completed Things</> : <>Fresh Things</>}</div>
-                <Button aria-expanded={tab} onClick={onClick}>{tab ? <>Fresh Things</> : <>Completed Things</>}</Button>
-            </div>
-        </nav>
-        {
-            tab ?
-                <Completed complete={complete} entryAtId={entryAtId} /> :
-                <FreshSection fresh={fresh}
+    return <FreshSection fresh={fresh}
                      entryAtId={entryAtId}
                      newEntryId={newEntryId}
                      onCreateIndex={onCreateIndex}
                      onChangeId={onChangeId}
                      onCompleteIndex={onCompleteIndex} onSwapIndices={onSwapIndices}
-                />
-        }
-    </>;
+        />;
 };
 
 const mock = Array(10).fill(null);
@@ -132,7 +87,7 @@ const err: (id: Id) => Entry = (id: Id) => {
     throw Error(`index ${id}`);
 };
 
-export const Ten = () => {
+export const TenThings = () => {
     const dispatch = useAppDispatch();
 
     const onChangeId = useCallback((id: Id, value: string) =>
@@ -150,14 +105,12 @@ export const Ten = () => {
     const newEntryId = useAppSelector(selectNewEntryId);
     const entryAtId = useAppSelector(selectEntryAtId);
     const fresh = useAppSelector(selectFresh);
-    const completeArray = useAppSelector(selectComplete);
 
     const bootstrapped = usePersistBootstrapped();
 
     return <TenImpl
         entryAtId={bootstrapped ? entryAtId : err}
         fresh={bootstrapped ? fresh : mock}
-        complete={bootstrapped ? completeArray : []}
         newEntryId={newEntryId}
 
         onChangeId={bootstrapped ? onChangeId : undefined}

@@ -1,7 +1,7 @@
 import type { MouseEvent, PointerEvent, ReactNode } from 'react';
 import { useMemo } from 'react';
 
-import { useWrap, toDataProps } from "@/app/hooks/wrap";
+import { useWrap, toDataProps } from "../wrap";
 
 import styles from './DropButton.module.css';
 
