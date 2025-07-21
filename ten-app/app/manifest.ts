@@ -10,18 +10,11 @@ const manifest: () => MetadataRoute.Manifest = () => ({
     display: 'standalone',
     background_color: '#FFFFFF',
     theme_color: '#00FFFF',
-    icons: [
-        {
-            src: '/icon/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-        },
-        {
-            src: '/icon/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-        },
-    ]
+    icons: [32, 192, 512].map(size => ({
+        src: `/icon/icon-${size}x${size}.png`,
+        sizes: `${size}x${size}`,
+        type: 'image/png'
+    }))
 });
 
 export default manifest;
