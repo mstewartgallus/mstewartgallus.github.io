@@ -12,7 +12,7 @@ const fontSize = (size: number) => {
         return 160;
     }
 
-    if (size >= 32) {
+    if (size <= 32) {
         return 24;
     }
 
