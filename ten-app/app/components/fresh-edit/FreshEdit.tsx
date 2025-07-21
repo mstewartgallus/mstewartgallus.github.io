@@ -79,9 +79,11 @@ export const FreshEdit = ({
     });
 
     const { value, created } = entryAtId(id);
+
+    const selected = selectionId == id;
     return <>
         <EntryEdit value={value} created={created}
     onChange={onChange} onSelect={onSelect} onDeselect={onDeselect} />
-         <CompleteForm disabled={disabled} onComplete={onComplete} />
+         <CompleteForm disabled={disabled || selected} onComplete={onComplete} />
         </>;
 };
