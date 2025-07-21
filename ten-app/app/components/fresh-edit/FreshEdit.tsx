@@ -4,6 +4,7 @@ import type { Id, Entry } from "@/lib/features/ten/tenSlice";
 
 import { useMemo } from 'react';
 
+import { CompleteForm } from "../slot-controls/SlotControls";
 import { EntryEdit } from "../entry-edit/EntryEdit";
 
 interface FreshEditStateArgs {
@@ -45,6 +46,8 @@ const useFreshEditState = ({
 };
 
 interface Props {
+    disabled: boolean;
+
     id: Id;
     selectionId?: Id;
     entryAtId: (id: Id) => Entry;
@@ -52,14 +55,20 @@ interface Props {
     onChangeId?: (id: Id, value: string) => void;
     onSelectId: (id: Id) => void;
     onDeselect: () => void;
+
+    onComplete?: () => void;
 }
 
 export const FreshEdit = ({
+    disabled,
+
     id, selectionId,
 
     entryAtId,
     onChangeId,
-    onSelectId, onDeselect: onDeselectX
+    onSelectId, onDeselect: onDeselectX,
+
+    onComplete
 }: Props) => {
     const {
         onSelect, onDeselect, onChange
@@ -70,6 +79,9 @@ export const FreshEdit = ({
     });
 
     const { value, created } = entryAtId(id);
-    return <EntryEdit value={value} created={created}
-        onChange={onChange} onSelect={onSelect} onDeselect={onDeselect} />;
+    return <>
+        <EntryEdit value={value} created={created}
+    onChange={onChange} onSelect={onSelect} onDeselect={onDeselect} />
+         <CompleteForm disabled={disabled} onComplete={onComplete} />
+        </>;
 };

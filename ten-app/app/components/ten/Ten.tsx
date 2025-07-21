@@ -45,7 +45,7 @@ const FreshSection = ({
                           [fresh]);
 
     return <section>
-        <h1>{count} / 10</h1>
+        <h1>{count} / 10 Things</h1>
         <FreshList
               entryAtId={entryAtId}
               fresh={fresh}
@@ -109,8 +109,8 @@ const TenImpl = ({
     return <>
         <nav className={styles.tabWrapper}>
             <div className={styles.tab}>
-                <div>{tab ? 'Completed' : 'Fresh'}</div>
-                <Button aria-expanded={tab} onClick={onClick}>{tab ? 'Fresh' : 'Completed'}</Button>
+                <div>{tab ? <>Completed Things</> : <>Fresh Things</>}</div>
+                <Button aria-expanded={tab} onClick={onClick}>{tab ? <>Fresh Things</> : <>Completed Things</>}</Button>
             </div>
         </nav>
         {

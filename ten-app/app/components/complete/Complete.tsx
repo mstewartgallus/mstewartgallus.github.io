@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { Time } from '../time/Time';
 
 import styles from './Complete.module.css';
 
@@ -8,20 +8,11 @@ interface Props {
     completed: number;
 }
 
-export const Complete = ({ value, created, completed }: Props) => {
-    const format = useMemo(() => new Intl.DateTimeFormat(undefined, {
-        dateStyle: "short",
-        timeStyle: "short",
-    }), []);
-
-    const createdDate = format.format(new Date(created));
-    const completedDate = format.format(new Date(completed));
-
-    return <div className={styles.complete}>
+export const Complete = ({ value, created, completed }: Props) =>
+    <div className={styles.complete}>
         {value}
         <div className={styles.dates}>
-            <span>Created: {createdDate}</span>
-            <span>Completed: {completedDate}</span>
+            <span>Created: <Time>{created}</Time></span>
+            <span>Completed: <Time>{completed}</Time></span>
         </div>
     </div>;
-};

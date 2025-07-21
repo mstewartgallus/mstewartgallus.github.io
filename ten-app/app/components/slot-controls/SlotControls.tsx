@@ -1,22 +1,27 @@
 import type { FormEvent } from "react";
-import { useCallback, useId } from 'react';
+import { useMemo, useId } from 'react';
 import { Button } from "../button/Button";
 import { Icon } from "../icon/Icon";
 
 interface CompleteProps {
     disabled: boolean;
-    onComplete: () => void;
+    onComplete?: () => void;
 };
 
 export const CompleteForm = ({ disabled, onComplete }: CompleteProps) => {
-    const onSubmit = useCallback((e: FormEvent) => {
-        e.preventDefault();
-        onComplete();
+    const onSubmit = useMemo(() => {
+        if (!onComplete) {
+            return;
+        }
+        return (e: FormEvent) => {
+            e.preventDefault();
+            onComplete();
+        };
     }, [onComplete]);
 
     const id = useId();
     return <form id={id} onSubmit={onSubmit} action="#">
-        <Button disabled={disabled} aria-label="Complete Task" value="complete">
+        <Button disabled={disabled} aria-label="Complete Thing" value="complete">
             <Icon>✔</Icon>
         </Button>
      </form>;
@@ -24,18 +29,23 @@ export const CompleteForm = ({ disabled, onComplete }: CompleteProps) => {
 
 interface CreateProps {
     disabled: boolean;
-    onCreate: () => void;
+    onCreate?: () => void;
 };
 
 export const CreateForm = ({ disabled, onCreate }: CreateProps) => {
-    const onSubmit = useCallback((e: FormEvent) => {
-        e.preventDefault();
-        onCreate();
+    const onSubmit = useMemo(() => {
+        if (!onCreate) {
+            return;
+        }
+        return (e: FormEvent) => {
+            e.preventDefault();
+            onCreate();
+        };
     }, [onCreate]);
 
     const id = useId();
     return <form id={id} onSubmit={onSubmit} action="#">
-        <Button disabled={disabled} aria-label="Create Task" value="create">
+        <Button disabled={disabled} aria-label="Create Thing" value="create">
             <Icon>+</Icon>
         </Button>
      </form>;
