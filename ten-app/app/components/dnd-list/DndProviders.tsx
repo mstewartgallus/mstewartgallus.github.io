@@ -33,13 +33,15 @@ export const useDndItemState = () => {
 
     const otherDragging = anyDragging && !isDragging;
 
-    const onDragStart = useBind(onDragStartIndex, index);
+    let onDragStart = useBind(onDragStartIndex, index);
     let onDrop = useBind(onDropIndex, index);
+
     onDrop = otherDragging ? onDrop : undefined;
+    onDragStart = anyDragging ? undefined : onDragStart;
 
     const onToggle = otherDragging ? undefined : (onDragStart || onDragEnd);
 
-    return { index, isDragging, onToggle, onDrop };
+    return { index, isDragging, onDragStart, onToggle, onDrop };
 };
 
 export const useDndListState = (onSwapIndices?: (dragIndex: number, dropIndex: number) => void) => {

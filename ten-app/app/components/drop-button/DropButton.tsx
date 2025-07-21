@@ -1,7 +1,7 @@
-"use client";
-
 import type { MouseEvent, PointerEvent, ReactNode } from 'react';
 import { useMemo } from 'react';
+
+import { useWrap, toDataProps } from "@/app/hooks/wrap";
 
 import styles from './DropButton.module.css';
 
@@ -11,6 +11,8 @@ interface Props {
 }
 
 export const DropButton = ({ children, onDrop }: Props) => {
+    const { state, hooks } = useWrap();
+
     const onPointerUp = useMemo(() => {
         if (!onDrop) {
             return;
@@ -38,7 +40,7 @@ export const DropButton = ({ children, onDrop }: Props) => {
         };
     }, [onDrop]);
 
-    return <button className={styles.dropZone}
+    return <button className={styles.dropZone} {...hooks} {...toDataProps(state)}
             onPointerUp={onPointerUp}
             onClick={onClick}
             disabled={!onClick ? true : undefined}

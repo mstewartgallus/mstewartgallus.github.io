@@ -72,9 +72,7 @@ interface AdaptorProps {
 }
 
 const Adaptor = ({
-    fresh,
-    selectionId,
-    entryAtId,
+    fresh, entryAtId, selectionId,
 
     onChangeId,
     onSelectId, onDeselect
@@ -128,16 +126,15 @@ export const FreshList = ({
     return <DndList keyOf={keyOf} length={fresh.length} onSwapIndices={onSwapIndices}>
         <DndItem>
             <div className={styles.freshSlot}>
-               <CreateItem hasItem={hasItem} onCreateIndex={onCreateIndexSelect} />
+                <CreateItem hasItem={hasItem} onCreateIndex={onCreateIndexSelect} />
 
-               <Adaptor
+                <Adaptor
                     fresh={fresh} entryAtId={entryAtId}
                     selectionId={selectionId ?? undefined}
                     onChangeId={onChangeId}
-                    onSelectId={onSelectId}
-                    onDeselect={onDeselect}
-        />
-              <CompleteItem hasItem={hasItem} onCompleteIndex={onCompleteIndex} />
+                    onSelectId={onSelectId} onDeselect={onDeselect} />
+
+                <CompleteItem hasItem={hasItem} onCompleteIndex={onCompleteIndex} />
             </div>
         </DndItem>
     </DndList>;

@@ -9,10 +9,11 @@ interface Props {
     readonly children?: ReactNode;
     readonly dragging: boolean;
 
+    readonly onDragStart?: () => void;
     readonly onToggle?: () => void;
 }
 
-export const DragButton = ({ children, dragging, onToggle }: Props) => {
+export const DragButton = ({ children, dragging, onDragStart, onToggle }: Props) => {
     const onClick = useMemo(() => {
         if (!onToggle) {
             return;
@@ -27,7 +28,7 @@ export const DragButton = ({ children, dragging, onToggle }: Props) => {
     }, [onToggle]);
 
     const onPointerDown = useMemo(() => {
-        if (!onToggle) {
+        if (!onDragStart) {
             return;
         }
         return (e: PointerEvent<HTMLButtonElement>) => {
@@ -35,9 +36,9 @@ export const DragButton = ({ children, dragging, onToggle }: Props) => {
                 return;
             }
             (e.target as Element).releasePointerCapture(e.pointerId);
-            onToggle()
+            onDragStart()
         };
-    }, [onToggle]);
+    }, [onDragStart]);
 
     return <div className={styles.grabberWrapper}>
            <button

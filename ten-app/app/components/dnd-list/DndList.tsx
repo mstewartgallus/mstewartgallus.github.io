@@ -30,11 +30,12 @@ interface ItemProps {
 }
 
 export const DndItem = ({ children }: ItemProps) => {
-    const { index, isDragging, onDrop, onToggle } = useDndItemState();
+    const { index, isDragging, onDrop, onDragStart, onToggle } = useDndItemState();
     const context = useMemo(() => ({ isDragging, index }), [ isDragging, index ]);
     return <li role="listitem" className={styles.item}>
         <DropButton onDrop={onDrop} />
-        <DragButton dragging={isDragging} onToggle={onToggle}>
+        <DragButton dragging={isDragging}
+            onDragStart={onDragStart} onToggle={onToggle}>
             <div className={styles.grabberIcon}>&</div>
         </DragButton>
         <ItemChildrenContext.Provider value={context}>
