@@ -169,6 +169,12 @@ Technology:
   </Thead>
   <Tbody>
     <Tr>
+      <Th scope="row"><Time>2025</Time></Th>
+      <Td>[Ten Thngs (Todo-List App)](#ten-things)</Td>
+    </Tr>
+  </Tbody>
+  <Tbody>
+    <Tr>
       <Th scope="row"><Time>2023</Time></Th>
       <Td>[Gatsby Blog](#gatsby-blog)</Td>
     </Tr>
@@ -181,9 +187,53 @@ Technology:
   </Tbody>
 </Table>
 
+#### Ten Things
+
+- [Ten Things app website](https://mstewartgallus.github.io/ten-things)
+- [Ten Things app repository](https://github.com/mstewartgallus/ten-things)
+
+Technology:
+
+- [Next.js](https://nextjs.org)
+- [Redux](https://redux.js.org)
+- [React](https://react.dev)
+- [TypeScript](https://www.typescriptlang.org)
+- <Abbr>CSS</Abbr>
+- <Abbr>HTML</Abbr>
+
+In <Time>2025</Time>, I decided to work on some demo apps for my
+portfolio. Right now, I am finishing up a minimalist todo list
+webapp. I had a lot of fun but I did run into a few unexpected issues
+along the way.
+
+The biggest problem was the unexpected difficulty of creating a custom
+textbox which allowed content to flow into the editable text of the
+textbox.  Unfortunately, I ended up going down a dead-end path
+attempting to create a form-associated custom element. The impedance
+mismatch of web components with React was too great to make the
+form-associated custom element approach the ideal solution.
+Eventually, I abandoned the custom form-associated custom element
+approach and switched to using plain-old ARIA instead.
+
+The other major issue involved in the project was figuring out the
+precise details of a usable and accessible reorderable drag-and-drop
+list. Figuring out a design that works adequately with keyboard, mouse
+and phonescreen took a lot of reworking.
+
+I also had minor difficulties with figuring out Redux and exactly how
+to divide the application logic up between Redux and the broader
+user-interface code. I think that I need to invest a bit more time
+into learning about Redux.
+
+I alos had some minor probmes figuring out the broader design of the
+webapp. I think in the future, I would put more effort into sketching
+out the design on paper first.
+
+
 #### Gatsby Blog
 
-[Gatsby blog](https://github.com/mstewartgallus/mstewartgallus.github.io)
+[Gatsby
+blog](https://github.com/mstewartgallus/mstewartgallus.github.io)
 
 Technology:
 
