@@ -1,5 +1,5 @@
 import { ScreenOnly } from "@/features/util";
-import { Column, H2A, Nav } from "@/features/ui";
+import { Column, H2A, Nav } from "@/ui";
 import { SupportLayout } from "../support-layout";
 
 export const StandardLayout = ({

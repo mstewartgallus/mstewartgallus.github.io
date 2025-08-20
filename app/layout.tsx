@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Page } from "@/features/page";
-import { Body } from "@/features/ui";
+import { Body } from "@/ui";
 
 import "./_ui/styles/globals.css";
 

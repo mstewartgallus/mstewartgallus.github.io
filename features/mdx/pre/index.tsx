@@ -1,5 +1,5 @@
 import type { ReactNode, JSX } from "react";
-import { withA } from "@/features/ui";
+import { withA } from "@/ui";
 import styles from "./pre.module.css";
 
 const Figcaption = withA<JSX.IntrinsicElements['figcaption']>('figcaption');

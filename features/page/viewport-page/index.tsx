@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 // import { Announce } from "@/features/announce";
-import { Card, Header, Hgroup } from "@/features/ui";
+import { Card, Header, Hgroup } from "@/ui";
 // import { useLocationContext } from "@/features/location";
 // import { RootScroller } from "@/features/root-scroller";
 import { StandardLayout } from "../standard-layout";

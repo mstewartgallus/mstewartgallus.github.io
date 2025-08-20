@@ -2,7 +2,7 @@ import type { ComponentType, JSX } from "react";
 import {
     Header, Hgroup,
     H1A, H2A, H3A, H4A, H5A, H6A
-} from "@/features/ui";
+} from "@/ui";
 
 const wrap = <P extends JSX.IntrinsicAttributes,>(Hn: ComponentType<P>) => {
     const name = Hn.displayName || Hn.name || 'Component';

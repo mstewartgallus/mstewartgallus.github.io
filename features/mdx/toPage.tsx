@@ -1,7 +1,7 @@
 import type { ComponentType, ReactNode } from "react";
 import type { MDXProps } from 'mdx/types';
 import type { Metadata as NextMetadata } from "next";
-import { Subheading } from "@/features/ui";
+import { Subheading } from "@/ui";
 import { ViewportPage } from "@/features/page";
 
 export interface Metadata {

@@ -1,5 +1,5 @@
 // import { useFocus } from "@/features/focus";
-import { SubtleA } from "@/features/ui";
+import { SubtleA } from "@/ui";
 
 export const SkipA = props => {
     // const ref = useFocus();

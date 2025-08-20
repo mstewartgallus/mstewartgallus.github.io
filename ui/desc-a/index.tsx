@@ -1,6 +1,6 @@
 import type { ReactNode, Ref } from "react";
 import { useId } from "react";
-import { BlockA, ClickTrap } from "@/features/ui";
+import { BlockA, ClickTrap } from "@/ui";
 import styles from "./desc.module.css";
 
 interface Props {
