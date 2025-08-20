@@ -1,0 +1,36 @@
+.layout, .mainbar, .sidebar {
+    contain: layout style;
+}
+.mainbar, .sidebar {
+    display: flow-root;
+    max-inline-size: 100%;
+}
+
+.layout {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    column-gap: 1em;
+    row-gap: var(--line);
+}
+
+.mainbar {
+    flex-basis: var(--main-width);
+}
+.sidebar {
+    flex-basis: 34%;
+}
+
+.mainbar {
+    flex-grow: 6;
+    flex-shrink: 3;
+}
+.sidebar {
+    flex-grow: 5;
+    flex-shrink: 4;
+}
+
+/* Place main compositing layers above the sidebar */
+.mainbar {
+    z-index: 1000;
+}

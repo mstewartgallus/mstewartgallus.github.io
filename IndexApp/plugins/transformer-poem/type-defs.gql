@@ -1,5 +1,0 @@
-type Poem implements Node @childOf(types: ["File"]) {
-  id: ID!
-  frontmatter: Frontmatter
-  content: [[[String!]!]!]!
-}

@@ -1,0 +1,121 @@
+html,
+body {
+    display: block;
+    padding: 0;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* FIXME... */
+/* Traditional Block comments are too large */
+p {
+    margin: 0;
+}
+body {
+    display: flex ;
+    row-gap: var(--line);
+    flex-direction: column ;
+}
+
+:root,body {
+    margin: 0;
+}
+
+:root {
+    background: Canvas ;
+}
+
+:root {
+    background: #FFF4F1 ;
+    color: black ;
+}
+:link {
+    color: #0024CD ;
+}
+:visited {
+    color: #5F1B4E ;
+}
+:any-link:active {
+    color: hsl(0deg 100% 50%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        background: #1A1F19 ;
+        color: #FFEFCC ;
+    }
+    :link {
+        color: #CBBCF2 ;
+    }
+    :visited {
+        color: #FFA8E3 ;
+    }
+    :any-link:active {
+        color: hsl(346deg 100% 59%);
+    }
+}
+
+:root {
+    /* Noto Sans x height :( */
+    --ex-height: 0.536 ;
+
+    /* Compute legible line height in terms of rems */
+    /* https://www.smashingmagazine.com/2020/07/css-techniques-legibility/ */
+    --line-height: calc(var(--ex-height) / 0.32) ;
+    --line: calc(var(--line-height) * 1rem) ;
+
+}
+
+:root {
+    line-height: var(--line) ;
+    font-size-adjust: var(--ex-height) ;
+
+    /* more legible hyperlinks */
+    -webkit-text-underline-position: under ;
+    text-underline-position: under ;
+
+    font-family: sans-serif ;
+    font-variant-numeric: proportional-nums oldstyle-nums ;
+
+    -moz-text-size-adjust: none ;
+    -webkit-text-size-adjust: none ;
+    text-size-adjust: none ;
+
+    color-scheme: dark light ;
+
+    /* Make the caret seeable with caret browsing?  Need to figure out */
+    /* a better UX here/experiment on different platforms */
+    caret-color: Highlight ;
+}
+
+:root {
+    --t: clamp(0rem,
+               (1600vw - var(--min-width) * 1rem) / var(--width-delta),
+               1rem) ;
+    --ratio-2: calc(var(--ratio-1) * var(--ratio-1)) ;
+}
+
+:root {
+    /* default ratio on browsers is 1rem = 16px */
+    font-size:
+        calc(
+            (var(--min-font-size) * 1rem
+             + var(--t) * (var(--max-font-size) - var(--min-font-size))) / 16
+        ) ;
+}
+
+:root {
+    --min-width: 320 ;
+    /* to work around weird CSS silliness with division
+     * we need a <number>
+     */
+    --width-delta: 1500 ;
+    --max-width: calc(var(--min-width) + var(--width-delta)) ;
+
+    --min-font-size: 19 ;
+    --max-font-size: 24 ;
+}
