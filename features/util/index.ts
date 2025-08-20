@@ -1,4 +1,4 @@
-export { A } from "./a";
+export { A } from "./A";
 export { componentName } from "./component-name";
-export { ScreenOnly } from "./screen-only";
+export { default as ScreenOnly } from "./ScreenOnly";
 export { withClass, elementWithClass } from "./with-class";

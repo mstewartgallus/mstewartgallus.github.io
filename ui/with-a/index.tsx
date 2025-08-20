@@ -13,7 +13,7 @@ export const withA = <P extends JSX.IntrinsicAttributes,>(Component: ElementType
     const name = componentName(Component);
     const AutoLink = (props: Props & P) => {
         const { children, id, ref } = props;
-        const href = id ? `#${id}` : null;
+        const href = id ? `#${id}` : undefined;
         return createElement(Component, props,
                    <SubtleA id={id} href={href} ref={ref}>
                        {children}
