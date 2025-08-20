@@ -4,7 +4,10 @@ import createMDX from '@next/mdx';
 const nextConfig: NextConfig = {
     output: 'export',
     basePath: process.env.PAGES_BASE_PATH,
-    productionBrowserSourceMaps: true
+    productionBrowserSourceMaps: true,
+    images: {
+        unoptimized: true
+    }
 };
 
 const withMDX = createMDX({
