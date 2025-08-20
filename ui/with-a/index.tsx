@@ -1,7 +1,7 @@
 import type { ReactNode, Ref, ElementType, ComponentType, JSX } from "react";
 import { createElement } from "react";
 import { componentName } from "@/features/util";
-import SubtleA from "../subtle-a";
+import SubtleA from "../SubtleA";
 
 interface Props {
     children?: ReactNode;

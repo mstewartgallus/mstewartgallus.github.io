@@ -1,5 +1,5 @@
 import { useId } from "react";
-import Card from "./card";
+import Card from "./Card";
 
 import type { JSX, ReactNode } from "react";
 

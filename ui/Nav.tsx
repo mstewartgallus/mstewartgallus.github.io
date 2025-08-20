@@ -1,6 +1,6 @@
 import { useId } from "react";
-import Card from "./card";
-import Hgroup from "./hgroup";
+import Card from "./Card";
+import Hgroup from "./Hgroup";
 
 import type { JSX, ReactNode } from "react";
 

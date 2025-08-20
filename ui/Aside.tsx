@@ -1,8 +1,8 @@
 import type { ReactNode, JSX } from "react";
 
 import { useId } from "react";
-import Card from "./card";
-import Hgroup from "./hgroup";
+import Card from "./Card";
+import Hgroup from "./Hgroup";
 
 type Props = JSX.IntrinsicElements["aside"] & {
     heading?: ReactNode;

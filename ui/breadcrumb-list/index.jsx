@@ -1,9 +1,9 @@
-import BlockA from "../block-a";
-import ClickTrap from "../click-trap";
-import { BreadcrumbItem } from "./breadcrumb-item";
+import BlockA from "../BlockA";
+import ClickTrap from "../ClickTrap";
+import BreadcrumbItem from "./BreadcrumbItem";
 
-export { BreadcrumbList } from "./breadcrumb-list";
-export { BreadcrumbItem } from "./breadcrumb-item";
+export { default as BreadcrumbList } from "./BreadcrumbList";
+export { default as BreadcrumbItem } from "./BreadcrumbItem";
 
 export const BreadcrumbA = props =>
 <BreadcrumbItem>

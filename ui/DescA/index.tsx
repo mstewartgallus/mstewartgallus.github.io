@@ -9,7 +9,7 @@ interface Props {
     ref?: Ref<HTMLAnchorElement>;
 }
 
-export const DescA = ({ children, desc, ref, ...props }: Readonly<Props>) => {
+const DescA = ({ children, desc, ref, ...props }: Readonly<Props>) => {
     const id = useId();
 
     return <div role="presentation" className={styles.wrapper}>
@@ -23,3 +23,5 @@ export const DescA = ({ children, desc, ref, ...props }: Readonly<Props>) => {
                </span>
            </div>;
 };
+
+export default DescA;
