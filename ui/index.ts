@@ -10,6 +10,7 @@ export { default as Cite } from "./Cite";
 export { default as ClickTrap } from "./ClickTrap";
 export { default as Code } from "./Code";
 export { default as Column } from "./Column";
+export { default as Comment } from "./Comment";
 export { default as DescA } from "./DescA";
 export { Dl, DlDiv, Dt, Dd } from "./dl";
 export { Figure, Figcaption } from "./figure";
